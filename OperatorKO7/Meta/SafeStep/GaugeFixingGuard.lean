@@ -1,7 +1,6 @@
 import OperatorKO7.Kernel
 import OperatorKO7.Meta.SafeStep_Core
 import OperatorKO7.Meta.Confluence_Safe
-import OperatorKO7.Meta.BoundaryOperator.TypedRefusalCompleteness
 
 /-!
 # Meta-Level Gauge-Fixing Guard for SafeStep
@@ -25,12 +24,6 @@ critical pair never re-emerges under SafeStep. The
 condition. The `ExternalGaugeChoice` structure packages a decision of which arm
 of the `eqW a a` vs. `eqW a b` disjunction applies.
 
-This module is the SafeStep-side bridge to
-`OperatorKO7.Meta.BoundaryOperator.TypedRefusalCompleteness`: the
-meta-halt theorem used by the typed-refusal partition. The bridge lemma
-`safestep_is_meta_halt` re-exports the upstream theorem at the SafeStep
-namespace level.
-
 No `sorry`. No new `axiom`. The only new structure is
 `ExternalGaugeChoice`, which is a record (Prop / Type), not an
 `axiom` declaration.
@@ -38,7 +31,6 @@ No `sorry`. No new `axiom`. The only new structure is
 
 open OperatorKO7 Trace
 open MetaSN_KO7
-open OperatorKO7.Meta.BoundaryOperator
 
 namespace OperatorKO7.Meta.SafeStep.GaugeFixingGuard
 
@@ -60,22 +52,5 @@ theorem safestep_guard_restores_local_confluence
     {a b : Trace} (g : SafeStepGuard a b) :
     LocalJoinSafe (eqW a b) :=
   localJoin_eqW_ne a b g.disequality
-
-/-- The SafeStep relation inherits the boundary-operator typed-refusal meta-halt
-theorem. Given a boundary-operator carrier and a classification, the
-typed-refusal completeness theorem is inherited verbatim. -/
-theorem safestep_is_meta_halt
-    {X : Type u} {Y : Type v}
-    (B : BoundaryOperator X Y)
-    (C : TypedRefusalClassification Y) :
-    (∃ (Y_typed : Set Y) (refusal_classification : Y → RefusalType),
-        Y_typed = Set.univ ∧
-        ∀ y, refusal_classification y ∈ refusalTypeSupport)
-    ∧
-    (∀ y : Y, C.classify y = RefusalType.Y
-              ∨ C.classify y = RefusalType.N
-              ∨ C.classify y = RefusalType.U
-              ∨ C.classify y = RefusalType.H) :=
-  TypedRefusalCompleteness_procedure_grade B C
 
 end OperatorKO7.Meta.SafeStep.GaugeFixingGuard

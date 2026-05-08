@@ -1,15 +1,19 @@
 import OperatorKO7.Meta.GenericConfessionMove
 import OperatorKO7.Meta.ConfessionMethod_Family
-import OperatorKO7.Meta.Physics.LandauerHeatBound
 
 /-!
 # Information-Theoretic Confession
 
 This module does not claim a fully mechanized measure-theoretic account of
 confession moves. Instead it exposes an honest theorem boundary: abstract
-information carriers, explicit conditional data for the universal-property and
-cost-floor statements, and named theorems that project exactly the data the
-current artifact can support.
+information carriers, explicit conditional data for the universal-property
+statement, and named theorems that project exactly the data the current
+artifact can support.
+
+The thermodynamic cost-floor coupling between this layer and the
+record-formation infrastructure is defined in a separate non-public layer of
+the formalization. The theorems below are stated entirely in the abstract
+information-carrier language and do not depend on that coupling.
 -/
 
 namespace OperatorKO7.Meta.InformationTheoreticConfession
@@ -19,8 +23,6 @@ open OperatorKO7.CompositionalImpossibility
 open OperatorKO7.ConfessionMethodFamily
 open OperatorKO7.Meta.GenericConfessionMove
 open OperatorKO7.Meta.GenericConfessionMove.GenericConfessionMove
-open OperatorKO7.Meta.Physics.RecordFormation
-open OperatorKO7.Meta.Physics.LandauerHeatBound
 
 universe u v w z r
 
@@ -47,22 +49,6 @@ structure UniversalConfessionCharacterizationData
     (canonical : GenericConfessionMove X P License)
     (candidate : GenericConfessionMove X P License) where
   factorization : GenericConfessionMove.Refines candidate canonical
-
-/-- Conditional data for the confession-cost-floor theorem. -/
-structure ConfessionCostFloorData
-    {X : Type u}
-    {P : X → Prop}
-    {License : Type v}
-    {M : GenericConfessionMove X P License}
-    (I : InformationTheoreticConfession M) where
-  event : RecordFormationEvent
-  kB : ℝ
-  temperature : ℝ
-  releasedHeat : ℝ
-  applicable : LandauerApplicable event temperature
-  heatLaw : LandauerHeatLaw event kB temperature releasedHeat
-  canonicalDiscardedBits_eq_reliableRecordBits :
-    I.canonicalDiscardedBits = reliableRecordBitCount event
 
 /-- Structural convergence surface used by the information-theoretic wrapper. -/
 abbrev ConfessionConverges
@@ -246,22 +232,6 @@ theorem universal_confession_characterization
       ko7CanonicalConfessionMove := by
   exact universal_confession_characterization_of_data
     (ko7MethodUniversalCharacterizationData method (family_rank_agreement method hMethod))
-
-/-- Theorem surface: once a confession move is tied to an explicit stage-2
-record-formation event and a Landauer payload, the canonical discarded-bit
-count inherits the existing per-bit thermodynamic floor. -/
-theorem confession_cost_floor
-    {X : Type u}
-    {P : X → Prop}
-    {License : Type v}
-    {M : GenericConfessionMove X P License}
-    {I : InformationTheoreticConfession M}
-    (h : ConfessionCostFloorData I) :
-    h.releasedHeat ≥
-      landauerPerBitCost h.kB h.temperature * (I.canonicalDiscardedBits : ℝ) := by
-  have hFloor := landauer_per_bit_floor h.applicable h.heatLaw
-  rw [landauerLowerBound] at hFloor
-  simpa [h.canonicalDiscardedBits_eq_reliableRecordBits] using hFloor
 
 /-- Theorem surface: the information-theoretic convergence predicate is exactly
 H-equivalence on confession moves. -/
