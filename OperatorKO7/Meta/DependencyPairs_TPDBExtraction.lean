@@ -1,4 +1,5 @@
 import OperatorKO7.Meta.DependencyPairs_ExtractedCallGraph
+import OperatorKO7.Meta.TPDB_Export
 
 /-!
 # Dependency-Pair Call-Graph Extraction from TPDB Rules
@@ -91,16 +92,26 @@ def ko7FullStepExtractedCallGraph : FiniteExtractedCallGraph String :=
 
 theorem ko7_full_step_extracted_node_count :
     ko7FullStepExtractedNodes.size = 8 := by
-  native_decide
+  decide
 
 theorem ko7_full_step_defined_heads :
     tpdbDefinedHeads ko7FullStepTpdbRules.toArray =
       ({ "integrate", "merge", "recD", "eqW" } : Finset String) := by
-  native_decide
+  decide
 
+/-- Existential search over `.toList` combined with `Finset` equality.
+The kernel `decide` reducer cannot normalize `Finset.instDecidableEq`
+on multiset-quotient witnesses within the existential body; the
+compiled-code reducer (`native_decide`) does. Trust slot: build-time
+only; no Paper A theorem depends on this row beyond the audit ledger.
+The complete axiom dependence of this theorem is recorded in the
+`#print axioms` attestation in
+`OperatorKO7.Meta.NativeDecideAuditGate.keptNativeDecideTheorems`. -/
 theorem ko7_full_step_has_recD_successor :
     ∃ n ∈ ko7FullStepExtractedNodes.toList,
       n.nodeKey = "recD" ∧ n.succKeys = ({ "recD" } : Finset String) := by
   native_decide
+-- #print axioms ko7_full_step_has_recD_successor
+-- depends on axioms: [propext, Classical.choice, Lean.ofReduceBool, Quot.sound]
 
 end OperatorKO7.DependencyPairsFragment
