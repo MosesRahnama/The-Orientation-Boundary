@@ -23,11 +23,11 @@ The files below are included in this public Lean release for inspection of the t
 
 | Group | Included paths |
 |---|---:|
-| Orientation Boundary Lean files | 255 |
+| Orientation Boundary Lean files | 256 |
 | Operational Inexpressibility Lean files | 96 |
 | Shared Lean infrastructure | 6 |
 | External proof artifacts | 12 |
-| Reviewer NDA Lean files for Orientation Boundary | 142 |
+| Reviewer NDA Lean files for Orientation Boundary | 141 |
 | Reviewer NDA Lean files for Operational Inexpressibility | 48 |
 
 ## Paper A Lean Files
@@ -60,6 +60,7 @@ The files below are included in this public Lean release for inspection of the t
 | `OperatorKO7\Meta\DependencyPairs_ExtractedCallGraph.lean` |
 | `OperatorKO7\Meta\DependencyPairs_FiniteCarrierView.lean` |
 | `OperatorKO7\Meta\DependencyPairs_FiniteGraph.lean` |
+| `OperatorKO7\Meta\DependencyPairs_FirstOrderEngine.lean` |
 | `OperatorKO7\Meta\DependencyPairs_FirstOrderExtraction.lean` |
 | `OperatorKO7\Meta\DependencyPairs_FirstOrderFrontend.lean` |
 | `OperatorKO7\Meta\DependencyPairs_Fragment.lean` |
@@ -433,7 +434,6 @@ The following Lean files are handled through reviewer NDA access. These are the 
 | `OperatorKO7\Meta\ConstructionRouteCatalog_Audit.lean` |
 | `OperatorKO7\Meta\ConstructionRouteCatalog_Exactness.lean` |
 | `OperatorKO7\Meta\ConstructionRouteCatalog_Partition.lean` |
-| `OperatorKO7\Meta\DependencyPairs_FirstOrderEngine.lean` |
 | `OperatorKO7\Meta\FBI_AdequacyBoundary.lean` |
 | `OperatorKO7\Meta\FBI_Classification.lean` |
 | `OperatorKO7\Meta\FBI_FinalCatalog.lean` |
