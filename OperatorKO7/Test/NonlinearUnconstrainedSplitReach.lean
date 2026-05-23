@@ -1,0 +1,61 @@
+import OperatorKO7.Meta.NonlinearUnconstrainedSplit
+
+namespace NonlinearUnconstrainedSplitReach
+
+open OperatorKO7.ConstructionMethodClassification
+open OperatorKO7.NonlinearResidualTaxonomy
+open OperatorKO7.NonlinearDominanceCriteria
+open OperatorKO7.NonlinearUnconstrainedSplit
+
+#check NonlinearUnconstrainedRow
+#check NonlinearUnconstrainedStatus
+#check nonlinearUnconstrainedRows
+#check nonlinearUnconstrainedStatuses
+#check nonlinearUnconstrainedRowStatus
+#check NonlinearUnconstrainedRowSupported
+#check nonlinearUnconstrainedRows_nodup
+#check nonlinearUnconstrainedRows_length
+#check nonlinearUnconstrainedRows_complete_exact
+#check nonlinearUnconstrainedStatuses_nodup
+#check nonlinearUnconstrainedStatuses_length
+#check nonlinearUnconstrainedStatuses_complete_exact
+#check nonlinearUnconstrainedRow_has_listed_status
+#check transparentWithDominanceConditional_supported
+#check crossCoupledGlobalWitness_supported
+#check unsupportedArbitraryRelation_supported
+#check transparentWithDominanceConditional_not_licensedEscape
+#check crossCoupledGlobalWitness_not_conditionallyBlocked
+#check unsupportedArbitraryRelation_not_conditionallyBlocked
+#check unsupportedArbitraryRelation_not_licensedEscape
+#check NonlinearUnconstrainedSplitCatalog
+#check nonlinear_unconstrained_split_catalog
+#check NonlinearUnconstrainedSplitCertificate
+#check nonlinear_unconstrained_split_certificate
+#check nonlinear_unconstrained_split_certificate_projects_parent_status
+#check nonlinear_unconstrained_split_certificate_projects_split_catalog
+
+example : NonlinearUnconstrainedRow :=
+  .transparentWithDominanceConditional
+
+example : nonlinearUnconstrainedRowStatus .transparentWithDominanceConditional =
+    .conditionallyBlockedByDominance := by
+  rfl
+
+example : nonlinearUnconstrainedRowStatus .crossCoupledGlobalWitness =
+    .licensedEscape .W1 := by
+  rfl
+
+example : nonlinearUnconstrainedRowStatus .unsupportedArbitraryRelation =
+    .openUnsupportedBoundary := by
+  rfl
+
+example : NonlinearUnconstrainedRowSupported .crossCoupledGlobalWitness := by
+  exact crossCoupledGlobalWitness_supported
+
+example : nonlinearResidualStatus .unconstrainedNonlinearDirect = .openResidualClass :=
+  nonlinear_unconstrained_split_certificate_projects_parent_status
+
+example : NonlinearUnconstrainedSplitCatalog :=
+  nonlinear_unconstrained_split_certificate_projects_split_catalog
+
+end NonlinearUnconstrainedSplitReach

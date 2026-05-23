@@ -1,0 +1,89 @@
+import OperatorKO7.Meta.LCELLiteralSubstrate
+
+namespace LCELLiteralSubstrateReach
+
+open OperatorKO7
+open OperatorKO7.LCELSubstrateMathematics
+open OperatorKO7.LCELLiteralSubstrate
+open OperatorKO7.LCELMathematical
+
+example : LiteralBaseReversibility OperatorKO7.LCELSchema.godel1931LCELInstance :=
+  godel1931LiteralBaseReversibility
+
+example : LiteralBaseReversibility OperatorKO7.LCELSchema.benchmarkTransportLCELInstance :=
+  benchmarkTransportLiteralBaseReversibility
+
+example : LiteralBaseReversibility OperatorKO7.LCELDpInstance.dpEmitterLCELInstance :=
+  dpEmitterLiteralBaseReversibility
+
+example : LiteralLicenseIrreversibility OperatorKO7.LCELSchema.godel1931LCELInstance :=
+  godel1931LiteralLicenseIrreversibility
+
+example : LiteralLicenseIrreversibility OperatorKO7.LCELSchema.benchmarkTransportLCELInstance :=
+  benchmarkTransportLiteralLicenseIrreversibility
+
+example : LiteralLicenseIrreversibility OperatorKO7.LCELDpInstance.dpEmitterLCELInstance :=
+  dpEmitterLiteralLicenseIrreversibility
+
+example : LiteralReimportReversibility OperatorKO7.LCELSchema.godel1931LCELInstance :=
+  godel1931LiteralReimportReversibility
+
+example : LiteralReimportReversibility OperatorKO7.LCELSchema.benchmarkTransportLCELInstance :=
+  benchmarkTransportLiteralReimportReversibility
+
+example : LiteralReimportReversibility OperatorKO7.LCELDpInstance.dpEmitterLCELInstance :=
+  dpEmitterLiteralReimportReversibility
+
+example : SentenceLevelBoundaryFactorization OperatorKO7.LCELSchema.godel1931LCELInstance :=
+  godel1931SentenceLevelBoundaryFactorization
+
+example : SentenceLevelBoundaryFactorization OperatorKO7.LCELSchema.benchmarkTransportLCELInstance :=
+  benchmarkTransportSentenceLevelBoundaryFactorization
+
+example : SentenceLevelBoundaryFactorization OperatorKO7.LCELDpInstance.dpEmitterLCELInstance :=
+  dpEmitterSentenceLevelBoundaryFactorization
+
+example :
+    godel1931BoundaryFactorizationTheorem.sensitive.blockedSentence
+      = godel1931BoundaryFactorizationTheorem.visible.importedSentence :=
+  BoundaryFactorizationTheorem.sensitiveBlocked_eq_visibleImported
+    godel1931BoundaryFactorizationTheorem
+
+example :
+    OperatorKO7.LCELSchema.godel1931LCELInstance.comparison.obstructionContent.blockedBy
+        OperatorKO7.LCELSchema.godel1931LCELInstance.comparison.obstructionContent.witness
+      = godel1931BoundaryFactorizationTheorem.visible.importedSentence :=
+  BoundaryFactorizationTheorem.obstructionBlocked_eq_visibleImported
+    godel1931BoundaryFactorizationTheorem
+
+example : LiteralBaseReversibility OperatorKO7.LCELSchema.godel1931LCELInstance :=
+  sourceLiteralBaseReversibility godel_dp_lcelMathematicalSupportWitness
+
+example : LiteralBaseReversibility OperatorKO7.LCELDpInstance.dpEmitterLCELInstance :=
+  targetLiteralBaseReversibility godel_dp_lcelMathematicalSupportWitness
+
+example : LiteralBaseReversibility OperatorKO7.LCELDpInstance.dpEmitterLCELInstance :=
+  transportedTargetLiteralBaseReversibility godel_dp_lcelMathematicalSupportWitness
+
+example : LiteralLicenseIrreversibility OperatorKO7.LCELSchema.godel1931LCELInstance :=
+  sourceLiteralLicenseIrreversibility godel_dp_lcelMathematicalSupportWitness
+
+example : LiteralLicenseIrreversibility OperatorKO7.LCELDpInstance.dpEmitterLCELInstance :=
+  transportedTargetLiteralLicenseIrreversibility godel_dp_lcelMathematicalSupportWitness
+
+example : LiteralReimportReversibility OperatorKO7.LCELSchema.godel1931LCELInstance :=
+  sourceLiteralReimportReversibility godel_dp_lcelMathematicalSupportWitness
+
+example : LiteralReimportReversibility OperatorKO7.LCELDpInstance.dpEmitterLCELInstance :=
+  transportedTargetLiteralReimportReversibility godel_dp_lcelMathematicalSupportWitness
+
+example : SentenceLevelBoundaryFactorization OperatorKO7.LCELSchema.godel1931LCELInstance :=
+  sourceSentenceLevelBoundaryFactorization godel_dp_lcelMathematicalSupportWitness
+
+example : SentenceLevelBoundaryFactorization OperatorKO7.LCELDpInstance.dpEmitterLCELInstance :=
+  targetSentenceLevelBoundaryFactorization godel_dp_lcelMathematicalSupportWitness
+
+example : SentenceLevelBoundaryFactorization OperatorKO7.LCELDpInstance.dpEmitterLCELInstance :=
+  transportedTargetSentenceLevelBoundaryFactorization godel_dp_lcelMathematicalSupportWitness
+
+end LCELLiteralSubstrateReach

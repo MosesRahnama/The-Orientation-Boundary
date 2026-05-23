@@ -22,16 +22,10 @@ import OperatorKO7.Meta.MatrixBarrierArbitrary_Schema
 import OperatorKO7.Meta.MatrixBarrierArcticTropical_Schema
 import OperatorKO7.Meta.ScalarProjectionBarrier
 import OperatorKO7.Meta.ProjectedPrimaryBarrier
-import OperatorKO7.Meta.MatrixProjectionCoverage_Schema
 import OperatorKO7.Meta.SymbolicComparatorBarrier_Schema
 import OperatorKO7.Meta.KBO_Impossible_Schema
 import OperatorKO7.Meta.PumpedBarrierClasses_Schema
 import OperatorKO7.Meta.StandardPumpLemmas
-import OperatorKO7.Meta.BarrierWitness
-import OperatorKO7.Meta.BarrierWitness_Extended
-import OperatorKO7.Meta.BarrierWitness_Budgets
-import OperatorKO7.Meta.SynthesisOracle
-import OperatorKO7.Meta.BarrierClass_Classification
 import OperatorKO7.Meta.MutualDuplication_Schema
 import OperatorKO7.Meta.MutualDuplication_SchemaBarrier
 import OperatorKO7.Meta.MutualDuplication_FiniteSchema
@@ -51,8 +45,6 @@ import OperatorKO7.Meta.MutualDuplication_Preserving_KNode
 import OperatorKO7.Meta.MutualDuplication_Preserving_Abstract
 import OperatorKO7.Meta.MutualDuplication_Preserving_Transparent
 import OperatorKO7.Meta.MutualDuplication_PacketGraph
-import OperatorKO7.Meta.MutualDuplication_FiniteSchema_API
-import OperatorKO7.Meta.HigherOrderSharingBoundary_API
 import OperatorKO7.Meta.EscapeTrichotomy_Schema
 
 /-!

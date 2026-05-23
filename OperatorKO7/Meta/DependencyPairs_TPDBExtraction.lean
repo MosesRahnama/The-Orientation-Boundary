@@ -1,5 +1,4 @@
 import OperatorKO7.Meta.DependencyPairs_ExtractedCallGraph
-import OperatorKO7.Meta.TPDB_Export
 
 /-!
 # Dependency-Pair Call-Graph Extraction from TPDB Rules

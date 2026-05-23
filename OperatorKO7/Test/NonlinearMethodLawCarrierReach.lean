@@ -1,0 +1,45 @@
+import OperatorKO7.Meta.NonlinearMethodLawCarrier
+import OperatorKO7.Meta.NonlinearUnconstrainedSplit
+
+namespace NonlinearMethodLawCarrierReach
+
+open OperatorKO7.Trace
+open OperatorKO7.ConstructionMethodClassification
+open OperatorKO7.NonlinearMethodLawCarrier
+open OperatorKO7.NonlinearUnconstrainedSplit
+
+#check NonlinearRelation
+#check NonlinearMethodLaw
+#check nonlinearMethodLawRoute
+#check nonlinearMethodLawRoute_exact
+#check NonlinearMethodLawLicensedEscape
+#check NonlinearMethodLawCarrier
+#check directWholeTerm_supported
+#check importedWholeLicensedEscape_supported
+#check directWholeTermCarrier
+#check importedWholeLicensedEscapeCarrier
+#check nonlinearMethodLawCarrier_relation_eq_step
+#check relation_has_licensed_escape
+#check relation_has_direct_first_order_method
+#check importedWholeLicensedEscapeCarrier_projects_escape
+#check unsupported_arbitrary_relation_dichotomy
+#check unsupported_arbitrary_relation_no_first_order_method_or_licensed_escape
+#check unsupported_arbitrary_relation_supported_unconditional
+
+example : nonlinearMethodLawRoute .directWholeTerm = .W0 := by
+  exact directWholeTerm_is_w0
+
+example : nonlinearMethodLawRoute .importedWholeLicensedEscape = .W1 := by
+  exact importedWholeLicensedEscape_is_w1
+
+example : relation_has_licensed_escape OperatorKO7.Step .W1 := by
+  exact importedWholeLicensedEscapeCarrier_projects_escape
+
+example :
+    unsupported_arbitrary_relation_boundary OperatorKO7.Step := by
+  exact unsupported_arbitrary_relation_no_first_order_method_or_licensed_escape OperatorKO7.Step
+
+example : NonlinearUnconstrainedRowSupported .unsupportedArbitraryRelation := by
+  exact unsupported_arbitrary_relation_supported_unconditional
+
+end NonlinearMethodLawCarrierReach

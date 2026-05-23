@@ -3,8 +3,6 @@ import OperatorKO7.Kernel
 import OperatorKO7.PrimitiveSchemaAPI
 import OperatorKO7.SchemaAPI
 import OperatorKO7.SchemaExtendedAPI
-import OperatorKO7.OrientationBoundaryAPI
-import OperatorKO7.ResidualMethodAPI
 import OperatorKO7.CrossPaperAPI
 
 /-!

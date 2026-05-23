@@ -10,10 +10,9 @@ information carriers, explicit conditional data for the universal-property
 statement, and named theorems that project exactly the data the current
 artifact can support.
 
-The thermodynamic cost-floor coupling between this layer and the
-record-formation infrastructure is defined in a separate non-public layer of
-the formalization. The theorems below are stated entirely in the abstract
-information-carrier language and do not depend on that coupling.
+The cost-floor coupling between this layer and any external accounting
+infrastructure is not part of this public artifact. The theorems below are
+stated entirely in the abstract information-carrier language.
 -/
 
 namespace OperatorKO7.Meta.InformationTheoreticConfession

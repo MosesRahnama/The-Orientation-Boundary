@@ -1,5 +1,4 @@
 import OperatorKO7.Meta.ComputationalLayerCrossing
-import OperatorKO7.Meta.RecordStorageForm
 
 /-!
 # Projection-Transaction Dynamics

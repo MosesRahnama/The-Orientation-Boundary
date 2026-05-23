@@ -1,4 +1,3 @@
-import OperatorKO7.Meta.DependencyPairs_FirstOrderProcedure
 
 /-!
 # Minimal Head/Call-Head View for DP Extraction
@@ -14,6 +13,17 @@ contradiction surface.
 -/
 
 namespace OperatorKO7.DependencyPairsFragment
+
+abbrev FiniteFirstOrderProcedure := FiniteFirstOrderEngine
+
+namespace HasFiniteFirstOrderView
+
+abbrev toFiniteFirstOrderProcedure {ε σ ν : Type} [DecidableEq σ]
+    [HasFiniteFirstOrderView ε σ ν] (E : ε) :
+    FiniteFirstOrderProcedure σ ν :=
+  toFiniteFirstOrderEngine E
+
+end HasFiniteFirstOrderView
 
 /-- Minimal interface needed for dependency-pair call-head extraction from an internal term
 syntax. -/

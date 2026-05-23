@@ -33,15 +33,6 @@ import OperatorKO7.Meta.MatrixBarrierArcticTropical
 import OperatorKO7.Meta.MatrixBarrierArcticTropical_Instances
 import OperatorKO7.Meta.ScalarProjectionBarrier
 import OperatorKO7.Meta.ProjectedPrimaryBarrier
-import OperatorKO7.Meta.MatrixProjectionCoverage
-import OperatorKO7.Meta.MatrixToolSearchMapping
-import OperatorKO7.Meta.ToolSearchFragmentCoverage
-import OperatorKO7.Meta.ToolSearchFragmentCoverage_Status
-import OperatorKO7.Meta.ToolSearchFragmentCoverage_PerFamily
-import OperatorKO7.Meta.ToolSearchFragmentCoverage_ListAudit
-import OperatorKO7.Meta.ToolSearchFragmentCoverage_Exactness
-import OperatorKO7.Meta.ToolSearchFragmentCoverage_ResidualBoundary
-import OperatorKO7.Meta.ToolSearchFragmentCoverage_FinalCatalog
 
 -- Symbolic comparator barriers
 import OperatorKO7.Meta.SymbolicComparatorBarrier
@@ -55,28 +46,11 @@ import OperatorKO7.Meta.StandardPumpLemmas
 import OperatorKO7.Meta.TextbookDupInstance
 
 -- Executable boundary tooling
-import OperatorKO7.Meta.BarrierWitness
-import OperatorKO7.Meta.BarrierWitness_Extended
-import OperatorKO7.Meta.BarrierWitness_Budgets
-import OperatorKO7.Meta.SynthesisOracle
-import OperatorKO7.Meta.BarrierClass_Classification
 
 -- Confession method family (escape side)
 import OperatorKO7.Meta.ConfessionMethod
-import OperatorKO7.Meta.ConfessionMethod_RouteEvidence
-import OperatorKO7.Meta.ConfessionMethod_UsableRules
-import OperatorKO7.Meta.ConfessionMethod_UsableRulesConcrete
-import OperatorKO7.Meta.ConfessionMethod_UniversalUsableRules
-import OperatorKO7.Meta.ConfessionMethod_UsableRulesBridgeAttempt
-import OperatorKO7.Meta.ConfessionMethod_UsableRulesFinalStatus
 import OperatorKO7.Meta.ConfessionMethod_Family
 import OperatorKO7.Meta.TransformedCallClassification
-import OperatorKO7.Meta.ConstructionRouteCatalog
-import OperatorKO7.Meta.ConstructionRouteCatalog_Payload
-import OperatorKO7.Meta.ConstructionRouteCatalog_Certificate
-import OperatorKO7.Meta.ConstructionRouteCatalog_Audit
-import OperatorKO7.Meta.ConstructionRouteCatalog_Exactness
-import OperatorKO7.Meta.ConstructionRouteCatalog_Partition
 
 -- Reusable DP fragment (schema-level rank / SCC descent)
 import OperatorKO7.Meta.DependencyPairs_Fragment
@@ -113,7 +87,6 @@ import OperatorKO7.Meta.EscapeTrichotomy_Schema
 -- Cross-manuscript-capable schema interfaces
 import OperatorKO7.Meta.BenchmarkedPrimitiveRecursionFamily
 import OperatorKO7.Meta.OperationalIncompleteness
-import OperatorKO7.Meta.RecordStorageForm
 import OperatorKO7.Meta.ExternalizedTraceStorage
 import OperatorKO7.Meta.ProjectionTransactionDynamics
 
@@ -202,7 +175,6 @@ Executable boundary tooling:
 - Computable barrier-witness extractors (`additive_witness`, etc.)
 - Extended witness extractors for quadratic, max-plus, and projected matrix families
 - Canonical witness-budget theorems for the current extractor layer
-- Synthesis-oracle interface
 - Decidable coefficient-table classification
 
 Named schema instances:

@@ -1,5 +1,4 @@
 import OperatorKO7.Kernel
-import OperatorKO7.Meta.SafeStep.GaugeFixingGuard
 import OperatorKO7.Meta.SafeStep.SigmaFreeAlgebra
 
 /-!
@@ -38,6 +37,16 @@ open OperatorKO7 Trace
 namespace OperatorKO7.Meta.SafeStep.SyntacticNonDerivability
 
 open OperatorKO7.Meta.SafeStep.SigmaFreeAlgebra
+
+/-- The public SafeStep disequality guard used by the syntactic
+non-derivability surface. -/
+structure SafeStepGuard (a b : Trace) : Prop where
+  disequality : a ≠ b
+
+/-- A packaged decision of whether the diagonal or off-diagonal `eqW` arm
+applies. -/
+structure ExternalGaugeChoice (a b : Trace) where
+  decide : a ≠ b ∨ a = b
 
 /-- Negative witness: there exist two distinct closed Σ-terms
 (`void` and `delta void`) that any constant-collapse function
@@ -189,7 +198,7 @@ theorem disequality_not_sigma_expressible :
 witness for the guarded off-diagonal rule. -/
 theorem safestep_guard_carries_disequality
     {a b : Trace}
-    (g : OperatorKO7.Meta.SafeStep.GaugeFixingGuard.SafeStepGuard a b) :
+    (g : SafeStepGuard a b) :
     a ≠ b :=
   g.disequality
 

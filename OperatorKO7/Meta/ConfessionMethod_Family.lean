@@ -1,5 +1,4 @@
 import OperatorKO7.Meta.ConfessionMethod
-import OperatorKO7.Meta.ConfessionMethod_RouteEvidence
 import OperatorKO7.Meta.OperationalIncompleteness
 import OperatorKO7.Meta.DependencyPairs_Works
 import OperatorKO7.Meta.PolyInterpretation_FullStep

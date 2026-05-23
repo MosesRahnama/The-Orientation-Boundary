@@ -1,0 +1,92 @@
+import OperatorKO7.Meta.NonlinearDominanceCriteria
+import OperatorKO7.Meta.NonlinearUnconstrainedSplit
+import OperatorKO7.Meta.NonlinearTransparentProjection
+import OperatorKO7.Meta.NonlinearDirectBoundary
+
+namespace NonlinearDirectBoundaryReach
+
+open OperatorKO7.NonlinearDominanceCriteria
+open OperatorKO7.NonlinearResidualTaxonomy
+open OperatorKO7.NonlinearDirectBoundary
+open OperatorKO7.NonlinearTransparentProjection
+open OperatorKO7.NonlinearUnconstrainedSplit
+
+#check NonlinearResidualFamily
+#check NonlinearResidualStatus
+#check nonlinearResidualFamilies
+#check nonlinearResidualStatuses
+#check nonlinearResidualStatus
+#check nonlinearResidualStatus_exact
+#check nonlinearResidualFamilies_nodup
+#check nonlinearResidualFamilies_length
+#check nonlinearResidualFamilies_complete_exact
+#check nonlinearResidualStatuses_nodup
+#check nonlinearResidualStatuses_length
+#check nonlinearResidualStatuses_complete_exact
+#check NonlinearResidualStatusCatalog
+#check nonlinear_residual_status_catalog
+#check NonlinearDirectBoundarySupported
+#check boundedDegreeDirectTransparentPolynomial_requires_projection
+#check TransparentPolynomialProjectionBoundaryCatalog
+#check transparent_polynomial_projection_boundary_catalog
+#check TransparentPolynomialDominanceCriteriaCatalog
+#check TransparentPolynomialConditionalClosureCatalog
+#check transparent_polynomial_dominance_criteria_catalog
+#check transparent_polynomial_conditional_closure_catalog
+#check boundedCrossTermQuadratic_blocked
+#check boundedMultilinear_blocked
+#check wpoPolynomialBranch_blocked
+#check maxPlusDirectFragment_blocked
+#check globalCrossCoupledWitness_licensed_escape
+#check unconstrainedNonlinearDirect_remains_open
+#check NonlinearUnconstrainedSplitCatalog
+#check nonlinear_unconstrained_split_catalog
+#check NonlinearUnconstrainedSplitCertificate
+#check nonlinear_unconstrained_split_certificate
+#check nonlinear_unconstrained_split_certificate_projects_parent_status
+#check nonlinear_unconstrained_split_certificate_projects_split_catalog
+#check NonlinearDirectBoundaryProjectionCatalog
+#check nonlinear_direct_boundary_projection_catalog
+#check NonlinearDirectBoundaryCertificate
+#check nonlinear_direct_boundary_certificate
+#check nonlinear_direct_boundary_certificate_projects_status_catalog
+#check nonlinear_direct_boundary_certificate_projects_projection_catalog
+
+example : NonlinearResidualFamily :=
+  .boundedCrossTermQuadratic
+
+example : nonlinearResidualStatus .boundedDegreeDirectTransparentPolynomial =
+    .requiresExistingTheoremProjection := by
+  rfl
+
+example : NonlinearDirectBoundarySupported .boundedDegreeDirectTransparentPolynomial := by
+  exact boundedDegreeDirectTransparentPolynomial_requires_projection
+
+example : TransparentPolynomialProjectionBoundaryCatalog :=
+  transparent_polynomial_projection_boundary_catalog
+
+example : TransparentPolynomialConditionalClosureCatalog :=
+  transparent_polynomial_conditional_closure_catalog
+
+example : nonlinearResidualStatus .boundedCrossTermQuadratic = .blockedByExistingTheorem := by
+  rfl
+
+example : nonlinearResidualStatus .globalCrossCoupledWitness = .licensedEscape .W1 := by
+  rfl
+
+example : nonlinearResidualStatus .unconstrainedNonlinearDirect = .openResidualClass := by
+  rfl
+
+example : NonlinearDirectBoundarySupported .globalCrossCoupledWitness := by
+  exact globalCrossCoupledWitness_licensed_escape
+
+example : NonlinearDirectBoundarySupported .unconstrainedNonlinearDirect := by
+  exact unconstrainedNonlinearDirect_remains_open
+
+example : NonlinearUnconstrainedSplitCatalog :=
+  nonlinear_unconstrained_split_certificate_projects_split_catalog
+
+example : NonlinearDirectBoundaryProjectionCatalog :=
+  nonlinear_direct_boundary_certificate.projectionCatalog
+
+end NonlinearDirectBoundaryReach

@@ -1,0 +1,15 @@
+import OperatorKO7.Meta.Recursor.PayloadGrowthBlindness
+
+namespace RecursorPayloadGrowthBlindnessReach
+
+open OperatorKO7 Trace
+open OperatorKO7.Meta.Recursor.PayloadGrowthBlindness
+
+#check @PayloadGrowthRate
+#check @CounterDropRate
+#check @MassIndistinguishable
+#check @recursor_payload_grows_linearly_while_counter_drops_linearly
+#check @direct_measure_cannot_separate_growing_payload_from_circular_growth
+#check @operational_inexpressibility_at_step_duplicator
+
+end RecursorPayloadGrowthBlindnessReach
