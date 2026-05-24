@@ -1,4 +1,3 @@
-import OperatorKO7.Meta.BarrierWitness
 
 /-!
 # Textbook Step-Duplicating TRS Instance

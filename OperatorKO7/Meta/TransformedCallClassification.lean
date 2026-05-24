@@ -1,4 +1,3 @@
-import OperatorKO7.Meta.ConfessionMethod_RouteEvidence
 import OperatorKO7.Meta.ConstructionMethodClassification
 import OperatorKO7.Meta.BenchmarkedPrimitiveRecursionFamily
 import OperatorKO7.Meta.RecCore
