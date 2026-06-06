@@ -18,3 +18,5 @@ Thumbs.db
 # Local logs and scratch
 *.log
 tmp_*
+
+.tmp.driveupload/
