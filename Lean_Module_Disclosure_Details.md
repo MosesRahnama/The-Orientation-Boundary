@@ -2,12 +2,13 @@
 
 **Date:** 2026-05-23
 
-This repository is the public companion artifact for two manuscripts:
+This repository is the public companion artifact for three manuscripts:
 
 - *The Orientation Boundary for Step-Duplicating Recursors: Mechanized Impossibility, Escape, and Certification.*
 - *Operational Inexpressibility at the Primitive-Recursion Orientation Boundary.*
+- *The Confluence-Preservation Boundary for Diagonal Identity Queries: Non-Left-Linearity, Signature Inexpressibility, and External Guarding.*
 
-The files below are included in this public Lean release for inspection of the theorem surfaces used by those two manuscripts. Reviewer-NDA modules are the runtime-consumed classifier, oracle, coverage-ledger, audit, route-ledger, universal-API, plug-intake, and bridge surfaces that the supervisory engine product depends on at run time; they are released to qualified reviewers under NDA, not in this public tree.
+The files below are included in this public Lean release for inspection of the theorem surfaces used by those three manuscripts. The first two papers trace the termination axis of the boundary; the third traces the confluence axis, contributing a generic first-order Critical Pair Lemma library, the equality-witness diagonal fork with its global-confluence and guarded-repair results, and a metatheoretic-strength calibration in reverse mathematics. Reviewer-NDA modules are the runtime-consumed classifier, oracle, coverage-ledger, audit, route-ledger, universal-API, plug-intake, and bridge surfaces that the supervisory engine product depends on at run time; they are released to qualified reviewers under NDA, not in this public tree.
 
 ## Release Contents
 
@@ -25,10 +26,12 @@ The files below are included in this public Lean release for inspection of the t
 |---|---:|
 | Orientation Boundary Lean files | 256 |
 | Operational Inexpressibility Lean files | 96 |
+| Confluence-Preservation Boundary Lean files | 73 |
 | Shared Lean infrastructure | 6 |
 | External proof artifacts | 12 |
 | Reviewer NDA Lean files for Orientation Boundary | 141 |
 | Reviewer NDA Lean files for Operational Inexpressibility | 48 |
+| Reviewer NDA Lean files for Confluence-Preservation Boundary | 23 |
 
 ## Paper A Lean Files
 
@@ -392,6 +395,86 @@ The files below are included in this public Lean release for inspection of the t
 | `OperatorKO7\Test\SafeStepSmugglingUndecidabilityReach.lean` |
 | `OperatorKO7\Test\SchemaLCELRoadmapCloseoutReach.lean` |
 
+## Confluence-Preservation Boundary (Paper C) Lean Files
+
+These are the public theorem surfaces for *The Confluence-Preservation Boundary for Diagonal Identity Queries*: the generic first-order rewriting and Critical Pair Lemma library (`Meta\Rewriting`), the KO7 equality-witness diagonal fork with its global-confluence and guarded-repair results (`Meta\DistinctionBoundary`, `Meta\SafeStep`), the informational-incompleteness and Landauer readings of the fork (`Meta\InformationalIncompleteness`, `Meta\Physics`), and the reverse-mathematics strength calibration (`Meta\ReverseMath`). The engine-coupled modules of this paper are listed separately under reviewer NDA below.
+
+| Path |
+|---|
+| `OperatorKO7\Meta\BoundaryGeneral\DiagonalMirror.lean` |
+| `OperatorKO7\Meta\BoundaryGeneral\DistinctionRecord.lean` |
+| `OperatorKO7\Meta\BoundaryOperator.lean` |
+| `OperatorKO7\Meta\ComparatorNecessity.lean` |
+| `OperatorKO7\Meta\ComparatorNecessityPartial.lean` |
+| `OperatorKO7\Meta\DistinctionBoundary\CriticalPairCompleteness.lean` |
+| `OperatorKO7\Meta\DistinctionBoundary\CriticalPairLemmaKO7.lean` |
+| `OperatorKO7\Meta\DistinctionBoundary\GlobalConfluence.lean` |
+| `OperatorKO7\Meta\DistinctionBoundary\RepairRoutes.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\ArchitecturalOrigin.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\AxisGrowthSeparation.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\CarrierBurden.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\CertFragmentWitness.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\CertificateInterface.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\ComparisonAsymmetry.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\ConditionalEntropy.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\DiagonalEntropy.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\DiagonalInert.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\EqWDiagonalDeficit.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\GradedDeficit.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\LicensedChannelDeficit.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\LicensedCollapseDeficit.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\MemoryDistinction.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\ParticipatoryQuery.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\PropagationResidual.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\QueryInterface.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\ShannonFinite.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\WitnessChannelBoundary.lean` |
+| `OperatorKO7\Meta\Physics\ConfessionLandauerExact.lean` |
+| `OperatorKO7\Meta\Physics\ConfessionLandauerSplit.lean` |
+| `OperatorKO7\Meta\Physics\LandauerErasureFinite.lean` |
+| `OperatorKO7\Meta\Physics\LandauerHeatBound.lean` |
+| `OperatorKO7\Meta\Physics\RecordFormation.lean` |
+| `OperatorKO7\Meta\QuantumBoundary\CategoricalLandauer.lean` |
+| `OperatorKO7\Meta\RepShift_BottleneckPredicate.lean` |
+| `OperatorKO7\Meta\RepShift_LayeredSemanticsTower.lean` |
+| `OperatorKO7\Meta\ReverseMath\Complexity.lean` |
+| `OperatorKO7\Meta\ReverseMath\ConfluenceOrderType.lean` |
+| `OperatorKO7\Meta\ReverseMath\Language.lean` |
+| `OperatorKO7\Meta\ReverseMath\NewmanComplexity.lean` |
+| `OperatorKO7\Meta\ReverseMath\NewmanRCA0Upper.lean` |
+| `OperatorKO7\Meta\ReverseMath\RCA0.lean` |
+| `OperatorKO7\Meta\ReverseMath\StandardModel.lean` |
+| `OperatorKO7\Meta\Rewriting\Commutation.lean` |
+| `OperatorKO7\Meta\Rewriting\ConfluenceDecision.lean` |
+| `OperatorKO7\Meta\Rewriting\CriticalPair.lean` |
+| `OperatorKO7\Meta\Rewriting\CriticalPairComplete.lean` |
+| `OperatorKO7\Meta\Rewriting\CriticalPairLemma.lean` |
+| `OperatorKO7\Meta\Rewriting\Match.lean` |
+| `OperatorKO7\Meta\Rewriting\Orthogonality.lean` |
+| `OperatorKO7\Meta\Rewriting\ParallelReduction.lean` |
+| `OperatorKO7\Meta\Rewriting\ParallelReductionConfluence.lean` |
+| `OperatorKO7\Meta\Rewriting\ParallelReductionDiamond.lean` |
+| `OperatorKO7\Meta\Rewriting\Position.lean` |
+| `OperatorKO7\Meta\Rewriting\Reach.lean` |
+| `OperatorKO7\Meta\Rewriting\Rewrite.lean` |
+| `OperatorKO7\Meta\Rewriting\Subst.lean` |
+| `OperatorKO7\Meta\Rewriting\Term.lean` |
+| `OperatorKO7\Meta\Rewriting\TerminationCriterion.lean` |
+| `OperatorKO7\Meta\Rewriting\Unify.lean` |
+| `OperatorKO7\Meta\Rewriting\UnifyCorrect.lean` |
+| `OperatorKO7\Meta\SafeStep\BoundaryBundle.lean` |
+| `OperatorKO7\Meta\SafeStep\BoundaryDuality.lean` |
+| `OperatorKO7\Meta\SafeStep\BranchEntropy.lean` |
+| `OperatorKO7\Meta\SafeStep\BranchEntropyGeneral.lean` |
+| `OperatorKO7\Meta\SafeStep\DiagonalForkClassicInstance.lean` |
+| `OperatorKO7\Meta\SafeStep\DistinctionControls.lean` |
+| `OperatorKO7\Meta\SafeStep\DistinctionWitnessBoundary.lean` |
+| `OperatorKO7\Meta\SafeStep\DynamicalBoundaryFunctor.lean` |
+| `OperatorKO7\Meta\SafeStep\FaithfulnessNoGo.lean` |
+| `OperatorKO7\Meta\SafeStep\GenericDiagonalFork.lean` |
+| `OperatorKO7\Meta\SafeStep\NonlinearityDichotomy.lean` |
+| `OperatorKO7\Meta\SafeStep\SafeStepInterpreter.lean` |
+
 ## Shared Lean Infrastructure
 
 | Path |
@@ -622,6 +705,36 @@ The following Lean files are handled through reviewer NDA access. These are the 
 | `OperatorKO7\Test\RecursorTRSEquivalenceReach.lean` |
 | `OperatorKO7\Test\UniversalFirstOrderDichotomyReach.lean` |
 | `OperatorKO7\Test\UsableRulesBridgeReach.lean` |
+
+### Confluence-Preservation Boundary Reviewer NDA Files
+
+These Confluence-Preservation Boundary modules reuse runtime-consumed engine surfaces (the META-HALT typed-output algebra, the confession-method universal-API instances, and the semantic method classifier) and are released to qualified reviewers under NDA alongside the public theorem surface above.
+
+| Path |
+|---|
+| `OperatorKO7\Meta\BoundaryOperator\TypedRefusalCompleteness.lean` |
+| `OperatorKO7\Meta\DistinctionBoundary\Pillar.lean` |
+| `OperatorKO7\Meta\DistinctionBoundary\SharedRoot.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\CarrierCapacity.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\ConfluenceForcedTrilemma.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\ForcedTrilemma.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\LicensedFactorisation.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\RecursorPayloadErasure.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\SemanticWitnessBridge.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\SharpnessCounterexample.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\UnivDeficitViaChar.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\UniversalDeficit.lean` |
+| `OperatorKO7\Meta\RDRSSemanticArbitraryClassifier.lean` |
+| `OperatorKO7\Meta\RDRSSemanticNormalizedRawSyntax.lean` |
+| `OperatorKO7\Meta\SafeStep\BranchTransaction.lean` |
+| `OperatorKO7\Meta\SafeStep\DistinctionAscentProfile.lean` |
+| `OperatorKO7\Meta\SafeStep\DistinctionInexpressible.lean` |
+| `OperatorKO7\Meta\SafeStep\GaugeFixingGuard.lean` |
+| `OperatorKO7\Meta\SafeStep\GuardNecessity.lean` |
+| `OperatorKO7\Meta\SafeStep\RefusalLoad.lean` |
+| `OperatorKO7\Test\DistinctionBoundaryPillarReach.lean` |
+| `OperatorKO7\Test\DistinctionBoundaryReach.lean` |
+| `OperatorKO7\Test\InformationalIncompletenessReach.lean` |
 
 ## Build Check
 

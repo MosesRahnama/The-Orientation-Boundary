@@ -1,0 +1,100 @@
+import OperatorKO7.Meta.SafeStep.DynamicalBoundaryFunctor
+
+set_option autoImplicit false
+
+/-!
+# The faithfulness no-go for dynamical boundary functors
+
+`DynamicalBoundaryFunctor` exhibits collapse-preserving dynamical functors from the
+full kernel `Step` and the guarded `SafeStep` into the distinction and orientation
+boundaries, and proves one such functor non-faithful. This module turns that single
+non-faithfulness fact into a general impossibility theorem and closes the last open
+question of the duality program.
+
+The bridge is the boundary-operator `payloadDiscarding` law. A dynamical functor is
+*payload-faithful* when the boundary verdict recovers the discarded payload over the
+functor's object image. The no-go theorem shows that a functor whose object map
+covers the boundary domain can never be payload-faithful, because a recovery over the
+image extends to a recovery over the whole domain, which is exactly what
+`payloadDiscarding` forbids. Since `payloadDiscarding` is a defining field of every
+`BoundaryOperator`, no payload-discarding boundary admits a faithful dynamical functor
+with covering object map. The distinction and orientation collapse functors are
+concrete instances.
+
+It contains no `sorry`, no new `axiom`, no `native_decide`, and no `@[csimp]`; the
+public theorems are spot-checked with `#print axioms` (baseline whitelist
+`{propext, Classical.choice, Quot.sound}`).
+-/
+
+open OperatorKO7 Trace
+open OperatorKO7.Meta.BoundaryOperator
+open OperatorKO7.Meta.SafeStep.BoundaryDuality
+open OperatorKO7.Meta.SafeStep.DynamicalBoundaryFunctor
+
+namespace OperatorKO7.Meta.SafeStep.FaithfulnessNoGo
+
+/-- A dynamical boundary functor is *payload-faithful* when the boundary verdict
+recovers the discarded payload over the functor's object image. -/
+def PayloadFaithful {R : Trace → Trace → Prop}
+    {B : BoundaryOperator (Option Trace) Trace}
+    (F : RewriteBoundaryFunctor R B) : Prop :=
+  ∃ recover : Trace → B.Payload,
+    ∀ t : Trace,
+      recover (B.apply (F.mapObj t) (F.mapObj_domain t)) = B.payload_extract (F.mapObj t)
+
+/-- THE FAITHFULNESS NO-GO (general). A dynamical boundary functor whose object map
+covers the boundary domain is never payload-faithful: a verdict-to-payload recovery
+over the image would extend to a recovery over the whole domain, contradicting the
+boundary-operator `payloadDiscarding` law. Since `payloadDiscarding` holds for every
+`BoundaryOperator`, no payload-discarding boundary admits a covering payload-faithful
+dynamical functor. -/
+theorem not_payloadFaithful_of_covers
+    {R : Trace → Trace → Prop}
+    {B : BoundaryOperator (Option Trace) Trace}
+    (F : RewriteBoundaryFunctor R B)
+    (hcov : ∀ xh : {x : Option Trace // B.domain x}, ∃ t : Trace, F.mapObj t = xh.1) :
+    ¬ PayloadFaithful F := by
+  rintro ⟨recover, hrec⟩
+  apply B.payloadDiscarding
+  refine ⟨recover, ?_⟩
+  rintro ⟨x, hx⟩
+  obtain ⟨t, ht⟩ := hcov ⟨x, hx⟩
+  subst ht
+  exact hrec t
+
+/-- The full-kernel distinction dynamical functor is not payload-faithful: the eqW
+collapse to `void` cannot be inverted to its source payload. -/
+theorem distinction_no_faithful_dynamical_functor :
+    ¬ PayloadFaithful step_distinction_dynamical_boundary_functor := by
+  apply not_payloadFaithful_of_covers
+  rintro ⟨x, hx⟩
+  cases x with
+  | none => exact absurd rfl hx
+  | some t => exact ⟨t, rfl⟩
+
+/-- The full-kernel orientation dynamical functor is not payload-faithful: the
+carrier collapse cannot be inverted to its source payload. -/
+theorem orientation_no_faithful_dynamical_functor :
+    ¬ PayloadFaithful step_orientation_dynamical_boundary_functor := by
+  apply not_payloadFaithful_of_covers
+  rintro ⟨x, hx⟩
+  cases x with
+  | none => exact absurd rfl hx
+  | some t => exact ⟨t, rfl⟩
+
+/-- The guarded distinction dynamical functor is not payload-faithful either, so the
+obstruction is not an artifact of the unguarded relation. -/
+theorem safeStep_distinction_no_faithful_dynamical_functor :
+    ¬ PayloadFaithful safeStep_distinction_dynamical_boundary_functor := by
+  apply not_payloadFaithful_of_covers
+  rintro ⟨x, hx⟩
+  cases x with
+  | none => exact absurd rfl hx
+  | some t => exact ⟨t, rfl⟩
+
+#print axioms not_payloadFaithful_of_covers
+#print axioms distinction_no_faithful_dynamical_functor
+#print axioms orientation_no_faithful_dynamical_functor
+#print axioms safeStep_distinction_no_faithful_dynamical_functor
+
+end OperatorKO7.Meta.SafeStep.FaithfulnessNoGo
