@@ -8,7 +8,7 @@ set_option autoImplicit false
 # RDRS Semantic Projection Transaction (Milestone S4)
 
 Roadmap source:
-`OperatorKO7-private/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
+`OperatorKO7/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
 Milestone S4 -- Semantic Projection Transactions.
 
 S4 closes the semantic projection branch of the universal payload-

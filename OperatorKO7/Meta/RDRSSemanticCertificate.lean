@@ -6,7 +6,7 @@ import OperatorKO7.Meta.RDRSSemanticPayloadSensitivity
 # RDRS Semantic Certificate (Milestone S2/S3 bridge)
 
 Roadmap source:
-`OperatorKO7-private/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
+`OperatorKO7/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
 
 Packages semantic direct measures with orientation and payload-
 sensitivity certificates. Three certificate strata:

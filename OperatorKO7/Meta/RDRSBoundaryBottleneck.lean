@@ -7,7 +7,7 @@ set_option autoImplicit false
 /-!
 # RDRS Boundary-Relative Witness Order and Bottleneck Theorem (Milestone U5, file 1/2)
 
-Roadmap source: `OperatorKO7-private/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
+Roadmap source: `OperatorKO7/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
 Milestone U5 -- boundary-relative bottleneck.
 
 ## Audit slots (Lean Development Bible W8 / R4)

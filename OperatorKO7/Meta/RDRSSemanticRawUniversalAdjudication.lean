@@ -6,7 +6,7 @@ import OperatorKO7.Meta.RDRSSemanticDirectMeasure
 
 Lean adjudication of the naive raw semantic universal claim.
 
-Roadmap source: `OperatorKO7-private/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
+Roadmap source: `OperatorKO7/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
 Milestone S0: Adjudicate the naive raw semantic universal statement.
 
 ## The claim under adjudication

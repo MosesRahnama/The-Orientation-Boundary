@@ -15,7 +15,7 @@ set_option autoImplicit false
 # RDRS Semantic Projection-Transaction Hardening Audit (Milestone S6.5)
 
 Roadmap source:
-`OperatorKO7-private/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
+`OperatorKO7/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
 Milestone S6.5 -- Projection-Transaction Hardening.
 
 This module hardens the S4 `SemanticProjectionTransactionEscape` surface

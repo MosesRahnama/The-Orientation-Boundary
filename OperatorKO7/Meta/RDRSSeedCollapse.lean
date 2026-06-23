@@ -3,7 +3,7 @@ set_option autoImplicit false
 /-!
 # RDRS Seed-Collapse Carrier Factorization (Milestone U1, Sprint U1.5)
 
-Roadmap source: `OperatorKO7-private/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
+Roadmap source: `OperatorKO7/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
 Milestone U1, file `Meta/RDRSSeedCollapse.lean`.
 
 Syntactic seed-collapse carrier factorization interface. The roadmap's

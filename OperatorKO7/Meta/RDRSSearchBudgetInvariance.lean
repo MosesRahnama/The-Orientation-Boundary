@@ -6,7 +6,7 @@ set_option autoImplicit false
 /-!
 # RDRS Search-Budget Invariance Inside Fixed W0 (Milestone U5, file 2/2)
 
-Roadmap source: `OperatorKO7-private/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
+Roadmap source: `OperatorKO7/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
 Milestone U5 -- search-budget invariance inside fixed W0.
 
 ## Audit slots (Lean Development Bible W8 / R4)

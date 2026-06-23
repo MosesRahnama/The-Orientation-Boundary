@@ -7,7 +7,7 @@ import OperatorKO7.Meta.RDRSSemanticCertificate
 # RDRS Semantic Lens-Pump Barrier (Milestone S3)
 
 Roadmap source:
-`OperatorKO7-private/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
+`OperatorKO7/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
 Milestone S3.
 
 Universal semantic lens-pump barrier theorem: any semantic measure data

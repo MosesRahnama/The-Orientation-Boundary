@@ -4,7 +4,7 @@
 B-parametric descent-lens interface for the universal payload-sensitive
 direct-measure project.
 
-Roadmap source: `OperatorKO7-private/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
+Roadmap source: `OperatorKO7/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
 Milestone U1, Sprint U1, file `Meta/RDRSDescentLens.lean`.
 
 Bible compliance:

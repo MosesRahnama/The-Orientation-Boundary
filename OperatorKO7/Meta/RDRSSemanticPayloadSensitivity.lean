@@ -5,7 +5,7 @@ import OperatorKO7.Meta.RDRSSemanticDirectMeasure
 # RDRS Semantic Payload Sensitivity (Milestone S2)
 
 Roadmap source:
-`OperatorKO7-private/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
+`OperatorKO7/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
 Milestone S2.
 
 Provides the semantic payload-observable, payload-lens, raw/decisive

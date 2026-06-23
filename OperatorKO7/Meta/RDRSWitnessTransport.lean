@@ -6,7 +6,7 @@ set_option autoImplicit false
 /-!
 # RDRS DP Witness Transport (Milestone U3)
 
-Roadmap source: `OperatorKO7-private/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
+Roadmap source: `OperatorKO7/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
 Milestone U3 -- DP projection / projection-transaction reconciliation.
 
 ## Audit slots (Lean Development Bible W8 / R4)

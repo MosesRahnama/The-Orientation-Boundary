@@ -10,7 +10,7 @@ interface is inhabited (`trivialStep` on `Unit`).
 Bible compliance:
 - W2: `set_option autoImplicit false` set below.
 - This is a reach / smoke test, not a release-facing theorem module.
-  Per `OperatorKO7-private/Paper/Rahnama_The_Orientation_Boundary.tex`
+  Per `OperatorKO7/Paper/Rahnama_The_Orientation_Boundary.tex`
   appendix line 1635, `OperatorKO7/Test/` files "remain artifact and
   CI infrastructure rather than paper-scoped theorem modules".
 - W8 docstrings on `theorem reach_*` declarations follow the
