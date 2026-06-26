@@ -26,12 +26,12 @@ The files below are included in this public Lean release for inspection of the t
 |---|---:|
 | Orientation Boundary Lean files | 256 |
 | Operational Inexpressibility Lean files | 96 |
-| Confluence-Preservation Boundary Lean files | 73 |
+| Confluence-Preservation Boundary Lean files | 85 |
 | Shared Lean infrastructure | 6 |
 | External proof artifacts | 12 |
 | Reviewer NDA Lean files for Orientation Boundary | 141 |
 | Reviewer NDA Lean files for Operational Inexpressibility | 48 |
-| Reviewer NDA Lean files for Confluence-Preservation Boundary | 23 |
+| Reviewer NDA Lean files for Confluence-Preservation Boundary | 14 |
 
 ## The Orientation Boundary (Paper A) Lean Files
 
@@ -409,7 +409,9 @@ These are the public theorem surfaces for *The Confluence-Preservation Boundary 
 | `OperatorKO7\Meta\DistinctionBoundary\CriticalPairCompleteness.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\CriticalPairLemmaKO7.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\GlobalConfluence.lean` |
+| `OperatorKO7\Meta\DistinctionBoundary\Pillar.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\RepairRoutes.lean` |
+| `OperatorKO7\Meta\DistinctionBoundary\SharedRoot.lean` |
 | `OperatorKO7\Meta\InformationalIncompleteness\ArchitecturalOrigin.lean` |
 | `OperatorKO7\Meta\InformationalIncompleteness\AxisGrowthSeparation.lean` |
 | `OperatorKO7\Meta\InformationalIncompleteness\CarrierBurden.lean` |
@@ -417,6 +419,7 @@ These are the public theorem surfaces for *The Confluence-Preservation Boundary 
 | `OperatorKO7\Meta\InformationalIncompleteness\CertificateInterface.lean` |
 | `OperatorKO7\Meta\InformationalIncompleteness\ComparisonAsymmetry.lean` |
 | `OperatorKO7\Meta\InformationalIncompleteness\ConditionalEntropy.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\ConfluenceForcedTrilemma.lean` |
 | `OperatorKO7\Meta\InformationalIncompleteness\DiagonalEntropy.lean` |
 | `OperatorKO7\Meta\InformationalIncompleteness\DiagonalInert.lean` |
 | `OperatorKO7\Meta\InformationalIncompleteness\EqWDiagonalDeficit.lean` |
@@ -466,14 +469,23 @@ These are the public theorem surfaces for *The Confluence-Preservation Boundary 
 | `OperatorKO7\Meta\SafeStep\BoundaryDuality.lean` |
 | `OperatorKO7\Meta\SafeStep\BranchEntropy.lean` |
 | `OperatorKO7\Meta\SafeStep\BranchEntropyGeneral.lean` |
+| `OperatorKO7\Meta\SafeStep\BranchTransaction.lean` |
 | `OperatorKO7\Meta\SafeStep\DiagonalForkClassicInstance.lean` |
+| `OperatorKO7\Meta\SafeStep\DistinctionAscentProfile.lean` |
 | `OperatorKO7\Meta\SafeStep\DistinctionControls.lean` |
+| `OperatorKO7\Meta\SafeStep\DistinctionInexpressible.lean` |
 | `OperatorKO7\Meta\SafeStep\DistinctionWitnessBoundary.lean` |
 | `OperatorKO7\Meta\SafeStep\DynamicalBoundaryFunctor.lean` |
+| `OperatorKO7\Meta\SafeStep\EqualityWitnessGeneralization.lean` |
 | `OperatorKO7\Meta\SafeStep\FaithfulnessNoGo.lean` |
+| `OperatorKO7\Meta\SafeStep\GaugeFixingGuard.lean` |
 | `OperatorKO7\Meta\SafeStep\GenericDiagonalFork.lean` |
+| `OperatorKO7\Meta\SafeStep\GuardNecessity.lean` |
 | `OperatorKO7\Meta\SafeStep\NonlinearityDichotomy.lean` |
+| `OperatorKO7\Meta\SafeStep\RefusalLoad.lean` |
 | `OperatorKO7\Meta\SafeStep\SafeStepInterpreter.lean` |
+| `OperatorKO7\Test\DistinctionBoundaryClaimLiveness.lean` |
+| `OperatorKO7\Test\DistinctionBoundaryPillarReach.lean` |
 
 ## Shared Lean Infrastructure
 
@@ -713,10 +725,7 @@ These Confluence-Preservation Boundary modules reuse runtime-consumed engine sur
 | Path |
 |---|
 | `OperatorKO7\Meta\BoundaryOperator\TypedRefusalCompleteness.lean` |
-| `OperatorKO7\Meta\DistinctionBoundary\Pillar.lean` |
-| `OperatorKO7\Meta\DistinctionBoundary\SharedRoot.lean` |
 | `OperatorKO7\Meta\InformationalIncompleteness\CarrierCapacity.lean` |
-| `OperatorKO7\Meta\InformationalIncompleteness\ConfluenceForcedTrilemma.lean` |
 | `OperatorKO7\Meta\InformationalIncompleteness\ForcedTrilemma.lean` |
 | `OperatorKO7\Meta\InformationalIncompleteness\LicensedFactorisation.lean` |
 | `OperatorKO7\Meta\InformationalIncompleteness\RecursorPayloadErasure.lean` |
@@ -726,13 +735,7 @@ These Confluence-Preservation Boundary modules reuse runtime-consumed engine sur
 | `OperatorKO7\Meta\InformationalIncompleteness\UniversalDeficit.lean` |
 | `OperatorKO7\Meta\RDRSSemanticArbitraryClassifier.lean` |
 | `OperatorKO7\Meta\RDRSSemanticNormalizedRawSyntax.lean` |
-| `OperatorKO7\Meta\SafeStep\BranchTransaction.lean` |
-| `OperatorKO7\Meta\SafeStep\DistinctionAscentProfile.lean` |
-| `OperatorKO7\Meta\SafeStep\DistinctionInexpressible.lean` |
-| `OperatorKO7\Meta\SafeStep\GaugeFixingGuard.lean` |
-| `OperatorKO7\Meta\SafeStep\GuardNecessity.lean` |
-| `OperatorKO7\Meta\SafeStep\RefusalLoad.lean` |
-| `OperatorKO7\Test\DistinctionBoundaryPillarReach.lean` |
+| `OperatorKO7\Meta\SafeStep\GaugeFixingGuardMetaHalt.lean` |
 | `OperatorKO7\Test\DistinctionBoundaryReach.lean` |
 | `OperatorKO7\Test\InformationalIncompletenessReach.lean` |
 
