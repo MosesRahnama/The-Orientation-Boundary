@@ -33,7 +33,7 @@ The files below are included in this public Lean release for inspection of the t
 | Reviewer NDA Lean files for Operational Inexpressibility | 48 |
 | Reviewer NDA Lean files for Confluence-Preservation Boundary | 23 |
 
-## Paper A Lean Files
+## The Orientation Boundary (Paper A) Lean Files
 
 | Path |
 |---|
