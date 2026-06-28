@@ -1,0 +1,64 @@
+import OperatorKO7.PrimitiveSchemaAPI
+
+-- Broader reusable barrier and tooling layer
+import OperatorKO7.Meta.QuadraticBarrier_Schema
+import OperatorKO7.Meta.QuadraticCrossTermBarrier_Schema
+import OperatorKO7.Meta.MultilinearBarrier_Schema
+import OperatorKO7.Meta.PolynomialBarrierGeneral_Schema
+import OperatorKO7.Meta.WPO_PolynomialBarrier_Schema
+import OperatorKO7.Meta.MaxBarrier_Schema
+import OperatorKO7.Meta.ArcticBarrier_Schema
+import OperatorKO7.Meta.TropicalBarrier_Schema
+import OperatorKO7.Meta.DepthBarrier_Schema
+import OperatorKO7.Meta.AffineThresholdSharpness
+import OperatorKO7.Meta.MatrixBarrier2_Schema
+import OperatorKO7.Meta.MatrixBarrierD_Schema
+import OperatorKO7.Meta.MatrixBarrierLex_Schema
+import OperatorKO7.Meta.MatrixBarrierLexD_Schema
+import OperatorKO7.Meta.MatrixBarrierLexPermD_Schema
+import OperatorKO7.Meta.MatrixBarrierMix2_Schema
+import OperatorKO7.Meta.MatrixBarrierFunctional_Schema
+import OperatorKO7.Meta.MatrixBarrierArbitrary_Schema
+import OperatorKO7.Meta.MatrixBarrierArcticTropical_Schema
+import OperatorKO7.Meta.ScalarProjectionBarrier
+import OperatorKO7.Meta.ProjectedPrimaryBarrier
+import OperatorKO7.Meta.SymbolicComparatorBarrier_Schema
+import OperatorKO7.Meta.KBO_Impossible_Schema
+import OperatorKO7.Meta.PumpedBarrierClasses_Schema
+import OperatorKO7.Meta.StandardPumpLemmas
+import OperatorKO7.Meta.MutualDuplication_Schema
+import OperatorKO7.Meta.MutualDuplication_SchemaBarrier
+import OperatorKO7.Meta.MutualDuplication_FiniteSchema
+import OperatorKO7.Meta.MutualDuplication_SchemaProjection
+import OperatorKO7.Meta.MutualDuplication_General
+import OperatorKO7.Meta.MutualDuplication_CycleFlow
+import OperatorKO7.Meta.MutualDuplication_KNode
+import OperatorKO7.Meta.MutualDuplication_KNode_Abstract
+import OperatorKO7.Meta.MutualDuplication_GraphCycle
+import OperatorKO7.Meta.MutualDuplication_Transparent
+import OperatorKO7.Meta.MutualDuplication_RelationalGraph
+import OperatorKO7.Meta.MutualDuplication_CallGraph
+import OperatorKO7.Meta.MutualDuplication_ExtractedCallGraph
+import OperatorKO7.Meta.MutualDuplication_PayloadFlow
+import OperatorKO7.Meta.MutualDuplication_Preserving
+import OperatorKO7.Meta.MutualDuplication_Preserving_KNode
+import OperatorKO7.Meta.MutualDuplication_Preserving_Abstract
+import OperatorKO7.Meta.MutualDuplication_Preserving_Transparent
+import OperatorKO7.Meta.MutualDuplication_PacketGraph
+import OperatorKO7.Meta.EscapeTrichotomy_Schema
+
+/-!
+# Schema Extended API
+
+Reusable public root above `PrimitiveSchemaAPI`.
+
+This file adds the broader barrier library, executable tooling, and reusable
+SCC-level schema extensions. It is intentionally broader than the primitive
+root, but it excludes KO7-facing and trace-facing packaging. In particular, the
+tool-search governance catalogs and the record-emission / externalized-trace
+layers stay on `SchemaAPI`, not on this stricter split root. The
+current import closure is audited by `scripts/audit_schema_extended_api.py`.
+
+It still exposes the extracted schema half of the escape-trichotomy
+development via `Meta/EscapeTrichotomy_Schema.lean`.
+-/

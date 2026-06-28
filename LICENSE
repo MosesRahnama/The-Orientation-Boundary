@@ -1,0 +1,237 @@
+OperatorKO7: Source-Available License
+(Academic Research / Departmental Academic / Commercial Tiers)
+
+Copyright (c) 2024-2026 Moses Rahnama / Mina Analytics
+All rights reserved.
+
+This is a strict source-available license. The Licensed Material is
+published solely to enable scholarly inspection, verification, and
+reproduction of the results stated in the accompanying papers. It is NOT
+an open-source license.
+
+Three tiers govern use:
+
+    1. ACADEMIC RESEARCH BY INDIVIDUALS         FREE
+    2. DEPARTMENTAL ACADEMIC USE                PAID LICENSE REQUIRED
+    3. COMMERCIAL USE                           PAID LICENSE REQUIRED
+
+For paid licensing or any inquiry, contact:
+
+    info@minaanalytics.com
+
+================================================================
+1. DEFINITIONS
+================================================================
+
+"Licensed Material" means the Lean 4 source code, theorem statements,
+proof scripts, build configuration files, documentation, and any other
+files contained in this repository.
+
+"You" or "Licensee" means the natural person or legal entity exercising
+rights under this License.
+
+"Academic Research" means use of the Licensed Material by a natural
+person, including a student, postdoctoral researcher, faculty member, or
+independent scholar, for any of the following purposes:
+
+    (a) scholarly study and reading;
+    (b) verification of proofs stated in the accompanying papers;
+    (c) reproduction of results stated in the accompanying papers;
+    (d) individual scientific investigation that does not produce
+        institutional deliverables;
+    (e) citation in the individual's own scholarly publications.
+
+Academic Research includes use by an individual who is employed by or
+affiliated with an academic institution, provided that the use is for
+the individual's own scholarly understanding and is not part of any of
+the activities described under Departmental Academic Use.
+
+"Departmental Academic Use" means any use of the Licensed Material by,
+on behalf of, or with the resources of an academic department,
+university, research group, laboratory, research center, institute, or
+other academic organization, including but not limited to:
+
+    (a) integration into instructional materials for courses, seminars,
+        or tutorials;
+    (b) use in funded research projects, grant deliverables, or
+        contracted research;
+    (c) use in supervised student work that is part of an institutional
+        program;
+    (d) deployment as part of departmental, laboratory, or institutional
+        infrastructure;
+    (e) use in collaborative or joint research that produces
+        deliverables attributed to one or more institutions;
+    (f) any use that benefits an institution beyond an individual
+        scholar's personal study.
+
+"Commercial Use" means any use of the Licensed Material in connection
+with a commercial product, a commercial service, the internal business
+operations of a for-profit entity, or any activity from which commercial
+value is derived, whether directly or indirectly. Commercial Use
+includes but is not limited to:
+
+    (a) any use within for-profit entities, of any size;
+    (b) use by government contractors or paid consultants in delivering
+        contracted work;
+    (c) use in software products, services, platforms, or APIs offered
+        for sale, subscription, or any form of commercial distribution;
+    (d) training, fine-tuning, evaluating, benchmarking, or otherwise
+        developing any commercial machine-learning model, system, or
+        service;
+    (e) integration into a commercial product or service, whether
+        shipped, hosted, embedded, or otherwise provided to third
+        parties;
+    (f) any use intended to produce commercial revenue, competitive
+        advantage, or market positioning for any entity.
+
+================================================================
+2. GRANT FOR ACADEMIC RESEARCH (FREE)
+================================================================
+
+Subject to Section 5 (Attribution), Section 6 (Restrictions), and
+Section 7 (Termination), You are granted a worldwide, royalty-free,
+non-exclusive, non-transferable, non-sublicensable license to use,
+reproduce, and modify the Licensed Material solely for Academic
+Research, and to publish results derived from such use with the
+attribution required in Section 5.
+
+================================================================
+3. DEPARTMENTAL ACADEMIC USE REQUIRES A PAID LICENSE
+================================================================
+
+Departmental Academic Use is NOT permitted under this License. Any
+Departmental Academic Use requires a separate, written, paid license
+from Mina Analytics. There is no grace period, no exemption, and no
+implied license for Departmental Academic Use.
+
+To request a paid license for Departmental Academic Use, contact:
+
+    info@minaanalytics.com
+
+Engaging in Departmental Academic Use without first obtaining such a
+paid license is a material breach of this License and infringes the
+copyright in the Licensed Material.
+
+================================================================
+4. COMMERCIAL USE REQUIRES A PAID LICENSE
+================================================================
+
+Commercial Use is NOT permitted under this License. Period.
+
+Any Commercial Use requires a separate, written, paid license from
+Mina Analytics. There is no grace period, no de minimis exception, no
+internal-use exemption, no proof-of-concept exception, and no implied
+license for Commercial Use.
+
+To request a paid license for Commercial Use, contact:
+
+    info@minaanalytics.com
+
+Engaging in Commercial Use without first obtaining such a paid license
+is a material breach of this License and infringes the copyright in the
+Licensed Material. Mina Analytics reserves all legal and equitable
+remedies available against unauthorized Commercial Use, including
+without limitation injunctive relief, statutory damages, actual
+damages, disgorgement of profits, and recovery of attorney's fees and
+costs.
+
+================================================================
+5. ATTRIBUTION
+================================================================
+
+Any publication, presentation, technical report, blog post, derivative
+work, or other public disclosure that incorporates, cites, or relies
+upon the Licensed Material must cite the originating papers and this
+repository:
+
+    Rahnama, M. "The Orientation Boundary for Step-Duplicating
+      Recursors: Mechanized Impossibility, Escape, and
+      Certification." (preprint)
+
+        Rahnama, M. "Operational Inexpressibility at the Primitive-Recursion
+      Orientation Boundary." (preprint)
+
+        https://github.com/MosesRahnama/The-Orientation-Boundary
+
+================================================================
+6. RESTRICTIONS
+================================================================
+
+Whether You hold rights under Section 2 (Academic Research) or under a
+separate paid license obtained pursuant to Section 3 or Section 4, You
+may NOT:
+
+    (a) redistribute the Licensed Material, in whole or in part, in
+        modified or unmodified form, except as part of a derivative
+        work that itself fully complies with this License and bears a
+        clear notice naming this License and this repository;
+
+    (b) sublicense, sell, lend, lease, or transfer the Licensed
+        Material;
+
+    (c) remove, obscure, or alter any copyright notice, license notice,
+        or attribution notice present in the Licensed Material;
+
+    (d) use the Licensed Material to train, fine-tune, evaluate, or
+        benchmark any commercial machine-learning model, system, or
+        service, except under a paid license expressly authorizing
+        such use;
+
+    (e) use the Licensed Material in violation of any applicable law,
+        regulation, or third-party right.
+
+================================================================
+7. TERMINATION
+================================================================
+
+This License terminates automatically and without notice upon any
+breach of its terms. Upon termination You must immediately cease all
+use of the Licensed Material and destroy or delete all copies in Your
+possession or control. Sections 5 (Attribution), 6 (Restrictions), 8
+(No Warranty), 9 (Limitation of Liability), and 10 (Reservation of
+Rights) survive termination of this License.
+
+================================================================
+8. NO WARRANTY
+================================================================
+
+THE LICENSED MATERIAL IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NONINFRINGEMENT,
+ACCURACY, OR CORRECTNESS OF MATHEMATICAL CONTENT.
+
+================================================================
+9. LIMITATION OF LIABILITY
+================================================================
+
+IN NO EVENT SHALL THE AUTHORS, COPYRIGHT HOLDERS, OR MINA ANALYTICS BE
+LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF, OR IN
+CONNECTION WITH THE LICENSED MATERIAL OR THE USE OR OTHER DEALINGS IN
+THE LICENSED MATERIAL.
+
+================================================================
+10. RESERVATION OF RIGHTS
+================================================================
+
+All rights not expressly granted in this License are reserved by Mina
+Analytics. No rights are granted by implication, estoppel, exhaustion,
+or otherwise. This License does not grant any rights in trademarks,
+service marks, or logos of Mina Analytics or the author.
+
+================================================================
+11. CONTACT
+================================================================
+
+For paid licensing (Departmental Academic Use, Commercial Use,
+redistribution permission, partnership, or any use not covered by
+Section 2), or for any other licensing inquiry:
+
+    info@minaanalytics.com
+
+================================================================
+
+This is a custom license. It is not OSI-approved and is not an
+open-source license. If You require an open-source license to use the
+Licensed Material, You must obtain a separate license from Mina
+Analytics by contacting info@minaanalytics.com.

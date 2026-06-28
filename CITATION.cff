@@ -1,0 +1,68 @@
+cff-version: 1.2.0
+message: "If you use this artifact, please cite the repository and the associated manuscripts."
+title: "The Orientation Boundary: Lean Companion Artifact for the Orientation Boundary, Operational Inexpressibility, and Distinction Boundary Manuscripts"
+type: software
+authors:
+  - family-names: "Rahnama"
+    given-names: "Moses"
+    email: "info@minaanalytics.com"
+    affiliation: "Mina Analytics"
+    orcid: "https://orcid.org/0009-0009-0922-483X"
+repository-code: "https://github.com/MosesRahnama/The-Orientation-Boundary"
+url: "https://github.com/MosesRahnama/The-Orientation-Boundary"
+license: "LicenseRef-OperatorKO7-Source-Available"
+keywords:
+  - lean4
+  - formal-verification
+  - theorem-proving
+  - termination
+  - rewrite-systems
+  - term-rewriting
+  - proof-assistant
+  - orientation-boundary
+  - primitive-recursion
+  - dependency-pairs
+  - confluence
+  - critical-pairs
+abstract: |
+  This repository contains the source-available Lean 4 companion artifact for
+  three manuscripts by Moses Rahnama: "The Orientation Boundary for
+  Step-Duplicating Recursors: Mechanized Impossibility, Escape, and
+  Certification," "Operational Inexpressibility at the Primitive-Recursion
+  Orientation Boundary," and "The Confluence-Preservation Boundary for Diagonal
+  Identity Queries: Non-Left-Linearity, Signature Inexpressibility, and External
+  Guarding."
+
+  The public package exposes selected Lean API roots, the transitive source
+  closure needed by those roots, external TTT2 and CeTA artifacts, and
+  reproducibility metadata for public inspection of the formal theorem surface.
+references:
+  - type: article
+    title: "The Orientation Boundary for Step-Duplicating Recursors: Mechanized Impossibility, Escape, and Certification"
+    authors:
+      - family-names: "Rahnama"
+        given-names: "Moses"
+        orcid: "https://orcid.org/0009-0009-0922-483X"
+    year: 2026
+    repository-code: "https://github.com/MosesRahnama/The-Orientation-Boundary"
+    notes: "Preprint"
+  - type: article
+    title: "Operational Inexpressibility at the Primitive-Recursion Orientation Boundary"
+    authors:
+      - family-names: "Rahnama"
+        given-names: "Moses"
+        orcid: "https://orcid.org/0009-0009-0922-483X"
+    year: 2026
+    repository-code: "https://github.com/MosesRahnama/The-Orientation-Boundary"
+    notes: "Preprint"
+  - type: article
+    title: "The Confluence-Preservation Boundary for Diagonal Identity Queries: Non-Left-Linearity, Signature Inexpressibility, and External Guarding"
+    authors:
+      - family-names: "Rahnama"
+        given-names: "Moses"
+        orcid: "https://orcid.org/0009-0009-0922-483X"
+    year: 2026
+    repository-code: "https://github.com/MosesRahnama/The-Orientation-Boundary"
+    notes: "Preprint"
+version: "2026.06.28"
+date-released: "2026-06-28"
