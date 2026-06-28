@@ -1,6 +1,6 @@
 # Public Lean Release Note
 
-**Date:** 2026-05-23
+**Date:** 2026-06-28
 
 This repository is the public companion artifact for three manuscripts:
 
@@ -8,7 +8,7 @@ This repository is the public companion artifact for three manuscripts:
 - *Operational Inexpressibility at the Primitive-Recursion Orientation Boundary.*
 - *The Confluence-Preservation Boundary for Diagonal Identity Queries: Non-Left-Linearity, Signature Inexpressibility, and External Guarding.*
 
-The files below are included in this public Lean release for inspection of the theorem surfaces used by those three manuscripts. The first two papers trace the termination axis of the boundary; the third traces the confluence axis, contributing a generic first-order Critical Pair Lemma library, the equality-witness diagonal fork with its global-confluence, guarded-repair, and SafeStep-maximality results, and a metatheoretic-strength calibration in reverse mathematics. Reviewer-NDA modules are the runtime-consumed classifier, oracle, coverage-ledger, audit, route-ledger, universal-API, plug-intake, and bridge surfaces that the supervisory engine product depends on at run time; they are released to qualified reviewers under NDA, not in this public tree.
+The files below are included in this public Lean release for inspection of the theorem surfaces used by those three manuscripts. The first two papers trace the termination axis of the boundary; the third traces the confluence axis, contributing a generic first-order Critical Pair Lemma library, the equality-witness diagonal fork with its global-confluence, guarded-repair, and SafeStep-maximality results, and a metatheoretic-strength calibration in reverse mathematics. Reviewer-NDA modules are the runtime-consumed classifier, oracle, coverage-ledger, audit, route-ledger, universal-API, plug-intake, bridge, and canonical `OperatorKO7\SupervisoryEngine\*.lean` surfaces that the supervisory engine product depends on at run time; they are released to qualified reviewers under NDA, not in this public tree.
 
 ## Release Contents
 
@@ -25,10 +25,12 @@ The files below are included in this public Lean release for inspection of the t
 | Group | Included paths |
 |---|---:|
 | Orientation Boundary Lean files | 215 |
-| Operational Inexpressibility Lean files | 78 |
+| Operational Inexpressibility Lean files | 94 |
 | Confluence-Preservation Boundary Lean files | 75 |
 | Shared Lean infrastructure | 4 |
 | External proof artifacts | 12 |
+| Direct Supervisory Engine Lean files withheld under NDA | 22 |
+| Supervisory Engine import and bridge dependencies withheld under NDA | 5 |
 | Reviewer NDA Lean files for Orientation Boundary | 141 |
 | Reviewer NDA Lean files for Operational Inexpressibility | 48 |
 | Reviewer NDA Lean files for Confluence-Preservation Boundary | 14 |
@@ -313,6 +315,22 @@ The files below are included in this public Lean release for inspection of the t
 | `OperatorKO7\Meta\ReflectionSchema.lean` |
 | `OperatorKO7\Meta\ReverseMathFramework.lean` |
 | `OperatorKO7\Meta\ReverseMathSupport.lean` |
+| `OperatorKO7\Meta\ReverseMath\Substitution.lean` |
+| `OperatorKO7\Meta\ReverseMath\ArtsGieslPi02.lean` |
+| `OperatorKO7\Meta\ReverseMath\DeductionFO.lean` |
+| `OperatorKO7\Meta\ReverseMath\DeductionH.lean` |
+| `OperatorKO7\Meta\ReverseMathOmega3WellOrdering.lean` |
+| `OperatorKO7\Meta\ReverseMath\ArtsGieslFaithful.lean` |
+| `OperatorKO7\Meta\ReverseMath\ArtsGieslKO7Bridge.lean` |
+| `OperatorKO7\Meta\ReverseMath\ArtsGieslUpperSemantic.lean` |
+| `OperatorKO7\Meta\ReverseMath\ArtsGieslProduct.lean` |
+| `OperatorKO7\Meta\ReverseMath\ArtsGieslUpperSyntactic.lean` |
+| `OperatorKO7\Meta\ReverseMath\ArtsGieslProductFull.lean` |
+| `OperatorKO7\Meta\BoundaryGeneral\ProvenanceLicense.lean` |
+| `OperatorKO7\Meta\BoundaryGeneral\C4Classifier.lean` |
+| `OperatorKO7\Meta\BoundaryGeneral\WholeTermIndistinguishability.lean` |
+| `OperatorKO7\Meta\BoundaryGeneral\WitnessFirst.lean` |
+| `OperatorKO7\Meta\BoundaryGeneral\EndogenousProvenance.lean` |
 | `OperatorKO7\Meta\SafeStep\EqWVoidAnomaly.lean` |
 | `OperatorKO7\Meta\SafeStep\SmugglingUndecidability.lean` |
 | `OperatorKO7\Meta\SchemaCanonicalTrace.lean` |
@@ -446,7 +464,48 @@ These are the public theorem surfaces for *The Confluence-Preservation Boundary 
 
 ## Reviewer NDA Lean Files
 
-The following Lean files are handled through reviewer NDA access. These are the runtime-consumed engine surface (classifier, oracle, coverage-ledger, audit, route-ledger, universal-API, plug-intake, certificate-replay bridge, tool-search mapping, P4C closeout cluster, FBI-method carrier, W1/W2 method carrier, higher-order policy-audit cluster, mutual-duplication algorithmic-search cluster, SafeTrace audit-log bridge cluster), released to qualified reviewers on request.
+The following Lean files are handled through reviewer NDA access. These are the runtime-consumed engine surface (canonical supervisory-engine bridge files, classifier, oracle, coverage-ledger, audit, route-ledger, universal-API, plug-intake, certificate-replay bridge, tool-search mapping, P4C closeout cluster, FBI-method carrier, W1/W2 method carrier, higher-order policy-audit cluster, mutual-duplication algorithmic-search cluster, SafeTrace audit-log bridge cluster), released to qualified reviewers on request.
+
+### Direct Supervisory Engine Reviewer NDA Files
+
+These files live in the private `OperatorKO7\SupervisoryEngine` tree and are directly used by the supervisory engine project. They are not part of this public repository.
+
+| Path |
+|---|
+| `OperatorKO7\SupervisoryEngine\ClassifyBarrier.lean` |
+| `OperatorKO7\SupervisoryEngine\ClassifyGrammarMeasure.lean` |
+| `OperatorKO7\SupervisoryEngine\ClassifyMetaBarrier.lean` |
+| `OperatorKO7\SupervisoryEngine\ClassifyMutualDuplication.lean` |
+| `OperatorKO7\SupervisoryEngine\ClassifyUniversal.lean` |
+| `OperatorKO7\SupervisoryEngine\ConfluenceSurface.lean` |
+| `OperatorKO7\SupervisoryEngine\CrossRunDedup.lean` |
+| `OperatorKO7\SupervisoryEngine\DistinctionGate.lean` |
+| `OperatorKO7\SupervisoryEngine\EngineSelfAudit.lean` |
+| `OperatorKO7\SupervisoryEngine\EvidenceCompilerClosure.lean` |
+| `OperatorKO7\SupervisoryEngine\EvidenceCompilerDisagreement.lean` |
+| `OperatorKO7\SupervisoryEngine\EvidenceCompilerGates.lean` |
+| `OperatorKO7\SupervisoryEngine\EvidenceCompilerVerdict.lean` |
+| `OperatorKO7\SupervisoryEngine\ForcedOutputCertificate.lean` |
+| `OperatorKO7\SupervisoryEngine\ImmigrationEligibility.lean` |
+| `OperatorKO7\SupervisoryEngine\LicensedDynamics.lean` |
+| `OperatorKO7\SupervisoryEngine\SupervisorState.lean` |
+| `OperatorKO7\SupervisoryEngine\TenantPolicy.lean` |
+| `OperatorKO7\SupervisoryEngine\TestEngineR3Reach.lean` |
+| `OperatorKO7\SupervisoryEngine\TryBarrierCatalog.lean` |
+| `OperatorKO7\SupervisoryEngine\TryDPConfession.lean` |
+| `OperatorKO7\SupervisoryEngine\W0BaseClassifier.lean` |
+
+### Supervisory Engine Import and Bridge Dependency Reviewer NDA Files
+
+These files are withheld because they are direct supervisory-engine import dependencies or universal bridge/classifier surfaces whose public release would pull private engine/product closure rather than a paper-only theorem closure.
+
+| Path |
+|---|
+| `OperatorKO7\Meta\BoundaryGeneral\DirectMeasureGrammarClosure.lean` |
+| `OperatorKO7\Meta\Physics\ConfessionLandauerExact.lean` |
+| `OperatorKO7\Meta\UniversalBoundary\BoundaryGeneralBridge.lean` |
+| `OperatorKO7\Meta\UniversalBoundary\GrammarClosure.lean` |
+| `OperatorKO7\Meta\Universal\ClassifyUniversal.lean` |
 
 ### Paper A Reviewer NDA Files
 
