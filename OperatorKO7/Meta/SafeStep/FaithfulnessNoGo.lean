@@ -123,6 +123,41 @@ theorem payloadDiscarding_constant_functor_surface :
   ⟨step_distinction_boundary_functor_constant,
     distinction_no_faithful_dynamical_functor⟩
 
+/-! ## Generic image-section characterization behind the no-go -/
+
+/-- A section over the image of a projection is payload-faithful when it returns
+the exact source point on every projected input. This is the generic source
+recovery surface behind the payload no-go. -/
+def IsPayloadFaithfulSection {X Y : Type} (projection : X -> Y)
+    (sec : Set.range projection -> X) : Prop :=
+  ∀ x : X, sec ⟨projection x, ⟨x, rfl⟩⟩ = x
+
+/-- A projection has an image-section returning each source point exactly if and
+only if the projection is injective. The payload-discarding boundary no-go is the
+collapse-boundary application of this elementary characterization. -/
+theorem payloadFaithfulSection_exists_iff_injective
+    {X Y : Type} (projection : X -> Y) :
+    (∃ sec : Set.range projection -> X,
+        IsPayloadFaithfulSection projection sec)
+      ↔ Function.Injective projection := by
+  constructor
+  · rintro ⟨sec, hsec⟩ x y hxy
+    have hsub :
+        (⟨projection x, ⟨x, rfl⟩⟩ : Set.range projection)
+          = ⟨projection y, ⟨y, rfl⟩⟩ := by
+      apply Subtype.ext
+      exact hxy
+    calc
+      x = sec ⟨projection x, ⟨x, rfl⟩⟩ := (hsec x).symm
+      _ = sec ⟨projection y, ⟨y, rfl⟩⟩ := by rw [hsub]
+      _ = y := hsec y
+  · intro hinj
+    refine ⟨fun y => Classical.choose y.2, ?_⟩
+    intro x
+    apply hinj
+    exact Classical.choose_spec (p := fun z => projection z = projection x)
+      (h := (⟨x, rfl⟩ : ∃ z, projection z = projection x))
+
 #print axioms not_payloadFaithful_of_covers
 #print axioms distinction_no_faithful_dynamical_functor
 #print axioms orientation_no_faithful_dynamical_functor
@@ -130,5 +165,6 @@ theorem payloadDiscarding_constant_functor_surface :
 #print axioms step_distinction_boundary_functor_constant
 #print axioms safeStep_distinction_boundary_functor_constant
 #print axioms payloadDiscarding_constant_functor_surface
+#print axioms payloadFaithfulSection_exists_iff_injective
 
 end OperatorKO7.Meta.SafeStep.FaithfulnessNoGo

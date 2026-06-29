@@ -8,7 +8,7 @@ This repository is the public companion artifact for three manuscripts:
 - *Operational Inexpressibility at the Primitive-Recursion Orientation Boundary.*
 - *The Confluence-Preservation Boundary for Diagonal Identity Queries: Non-Left-Linearity, Signature Inexpressibility, and External Guarding.*
 
-The files below are included in this public Lean release for inspection of the theorem surfaces used by those three manuscripts. The first two papers trace the termination axis of the boundary; the third traces the confluence axis, contributing a generic first-order Critical Pair Lemma library, the equality-witness diagonal fork with its global-confluence, guarded-repair, SafeStep-maximality, finite-expansion, and reverse-mathematics results. Reviewer-NDA modules are the runtime-consumed classifier, oracle, coverage-ledger, audit, route-ledger, universal-API, plug-intake, bridge, and canonical supervisory-engine surfaces that the supervisory engine product depends on at run time; they are released to qualified reviewers under NDA, not in this public tree.
+The files below are included in this public Lean release for inspection of the theorem surfaces used by those three manuscripts. The first two papers trace the termination axis of the boundary; the third traces the confluence axis, contributing a generic first-order Critical Pair Lemma library, the equality-witness diagonal fork with its global-confluence, guarded-repair, SafeStep-maximality, finite-expansion, categorical wrapper, finite Cech obstruction, normalization-face, and reverse-mathematics results. Reviewer-NDA modules are the runtime-consumed classifier, oracle, coverage-ledger, audit, route-ledger, universal-API, plug-intake, bridge, and canonical supervisory-engine surfaces that the supervisory engine product depends on at run time; they are released to qualified reviewers under NDA, not in this public tree.
 
 ## Release Contents
 
@@ -26,7 +26,7 @@ The files below are included in this public Lean release for inspection of the t
 |---|---:|
 | Orientation Boundary Lean files | 215 |
 | Operational Inexpressibility Lean files | 94 |
-| Confluence-Preservation Boundary Lean files | 99 |
+| Confluence-Preservation Boundary Lean files | 113 |
 | Shared Lean infrastructure | 4 |
 | External proof artifacts | 12 |
 | Direct Supervisory Engine Lean files withheld under NDA | 22 |
@@ -356,7 +356,7 @@ The files below are included in this public Lean release for inspection of the t
 
 ## Confluence-Preservation Boundary (Paper C) Lean Files
 
-These are the public theorem surfaces for *The Confluence-Preservation Boundary for Diagonal Identity Queries*: the generic first-order rewriting and Critical Pair Lemma library (`Meta\Rewriting`), the KO7 equality-witness diagonal fork with its global-confluence, guarded-repair, and SafeStep-maximality results (`Meta\DistinctionBoundary`, `Meta\SafeStep`), the informational-incompleteness and retained-route cost-dual readings of the fork (`Meta\InformationalIncompleteness`, `Meta\BoundaryGeneral`, `Meta\DistinctionBoundary`), and the reverse-mathematics strength calibration (`Meta\ReverseMath`). The engine-coupled modules of this paper are listed separately under reviewer NDA below.
+These are the public theorem surfaces for *The Confluence-Preservation Boundary for Diagonal Identity Queries*: the generic first-order rewriting and Critical Pair Lemma library (`Meta\Rewriting`), the KO7 equality-witness diagonal fork with its global-confluence, guarded-repair, and SafeStep-maximality results (`Meta\DistinctionBoundary`, `Meta\SafeStep`), the informational-incompleteness and retained-route cost-dual readings of the fork (`Meta\InformationalIncompleteness`, `Meta\BoundaryGeneral`, `Meta\DistinctionBoundary`), the finite directed-space and finite Cech obstruction package, the normalization-face irreversibility package, and the reverse-mathematics strength calibration (`Meta\ReverseMath`). The engine-coupled modules of this paper are listed separately under reviewer NDA below.
 
 | Path |
 |---|
@@ -366,21 +366,30 @@ These are the public theorem surfaces for *The Confluence-Preservation Boundary 
 | `OperatorKO7\Meta\BoundaryOperator.lean` |
 | `OperatorKO7\Meta\ComparatorNecessity.lean` |
 | `OperatorKO7\Meta\ComparatorNecessityPartial.lean` |
+| `OperatorKO7\Meta\DistinctionBoundary\AxisDualityFunctor.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\CriticalPairCompleteness.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\CriticalPairLemmaKO7.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\ContextualDiagonalFork.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\CopyDiscardDeterminism.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\CostDual.lean` |
+| `OperatorKO7\Meta\DistinctionBoundary\CostScalingDimension.lean` |
+| `OperatorKO7\Meta\DistinctionBoundary\DirectedReductionSpace.lean` |
+| `OperatorKO7\Meta\DistinctionBoundary\DualExternalLicenseBoundary.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\EqualityModeCertificate.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\EqualizerObstruction.lean` |
+| `OperatorKO7\Meta\DistinctionBoundary\FiniteCechDiagonalObstruction.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\FiniteGluingObstruction.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\GlobalConfluence.lean` |
+| `OperatorKO7\Meta\DistinctionBoundary\KolmogorovBranchCertificate.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\LawvereObstruction.lean` |
+| `OperatorKO7\Meta\DistinctionBoundary\LinearLogicDiagonalInterface.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\MetricDiagonalAxiom.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\Pillar.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\RepairBasis.lean` |
+| `OperatorKO7\Meta\DistinctionBoundary\RepairCategory.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\RepairRoutes.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\RewritingLiar.lean` |
+| `OperatorKO7\Meta\DistinctionBoundary\SafeStepCtxDerivationLength.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\SemanticsPreservingMaximality.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\SharedRoot.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\SingleBadCriticalPair.lean` |
@@ -403,11 +412,15 @@ These are the public theorem surfaces for *The Confluence-Preservation Boundary 
 | `OperatorKO7\Meta\InformationalIncompleteness\QueryInterface.lean` |
 | `OperatorKO7\Meta\InformationalIncompleteness\SemideciderCollapseSchema.lean` |
 | `OperatorKO7\Meta\InformationalIncompleteness\ShannonFinite.lean` |
+| `OperatorKO7\Meta\NormalizationBoundary\AntiNormalizationMap.lean` |
 | `OperatorKO7\Meta\NormalizationBoundary\DeltaIntegrateAsymmetry.lean` |
+| `OperatorKO7\Meta\NormalizationBoundary\DeltaIntegrateLoop.lean` |
+| `OperatorKO7\Meta\NormalizationBoundary\NormalizationLicense.lean` |
 | `OperatorKO7\Meta\RepShift_BottleneckPredicate.lean` |
 | `OperatorKO7\Meta\RepShift_LayeredSemanticsTower.lean` |
 | `OperatorKO7\Meta\ReverseMath\Complexity.lean` |
 | `OperatorKO7\Meta\ReverseMath\ConfluenceOrderType.lean` |
+| `OperatorKO7\Meta\ReverseMath\GuardedNewmanExactCalibration.lean` |
 | `OperatorKO7\Meta\ReverseMath\GuardedNewmanRCA0.lean` |
 | `OperatorKO7\Meta\ReverseMath\Language.lean` |
 | `OperatorKO7\Meta\ReverseMath\NewmanComplexity.lean` |
@@ -434,6 +447,7 @@ These are the public theorem surfaces for *The Confluence-Preservation Boundary 
 | `OperatorKO7\Meta\Rewriting\UnifyCorrect.lean` |
 | `OperatorKO7\Meta\SafeStep\BoundaryBundle.lean` |
 | `OperatorKO7\Meta\SafeStep\BoundaryDuality.lean` |
+| `OperatorKO7\Meta\SafeStep\BranchAdmissionFloor.lean` |
 | `OperatorKO7\Meta\SafeStep\BranchCodeFloor.lean` |
 | `OperatorKO7\Meta\SafeStep\BranchEntropy.lean` |
 | `OperatorKO7\Meta\SafeStep\BranchEntropyGeneral.lean` |

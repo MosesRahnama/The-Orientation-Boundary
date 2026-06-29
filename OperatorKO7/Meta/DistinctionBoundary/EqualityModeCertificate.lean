@@ -32,6 +32,38 @@ theorem inert_mode_no_fork_certificate :
     Not (EqualityMode.CanDiagonalFork EqualityMode.relational) :=
   id
 
+/-- Relational equality is certified by absence of any fork label. -/
+theorem relational_mode_no_fork_certificate :
+    Not (EqualityMode.CanDiagonalFork EqualityMode.relational) :=
+  id
+
+/-- Structural equality is certified by absence of any fork label. -/
+theorem structural_mode_no_fork_certificate :
+    Not (EqualityMode.CanDiagonalFork EqualityMode.structural) :=
+  id
+
+/-- Guarded equality is certified by absence of any fork label. -/
+theorem guarded_mode_no_fork_certificate :
+    Not (EqualityMode.CanDiagonalFork EqualityMode.guardedRewrite) :=
+  id
+
+/-- Delete-rewrite equality is certified by absence of any fork label. -/
+theorem delete_mode_no_fork_certificate :
+    Not (EqualityMode.CanDiagonalFork EqualityMode.deleteRewrite) :=
+  id
+
+/-- Quotient-rewrite equality is certified by absence of any fork label. -/
+theorem quotient_mode_no_fork_certificate :
+    Not (EqualityMode.CanDiagonalFork EqualityMode.quotientRewrite) :=
+  id
+
+/-- The five-mode table is a complete certified classification: only the
+unguarded totalized rewrite mode carries the diagonal-fork label. -/
+theorem five_mode_certificate_complete (m : EqualityMode) :
+    EqualityMode.CanDiagonalFork m ↔
+      m = EqualityMode.unguardedTotalizedRewrite :=
+  equalityMode_canDiagonalFork_iff m
+
 /-- Collapse mode is certified as the raw diagonal-fork case. -/
 theorem collapse_mode_is_raw_fork_certificate :
     EqualityMode.CanDiagonalFork EqualityMode.unguardedTotalizedRewrite
@@ -41,6 +73,12 @@ theorem collapse_mode_is_raw_fork_certificate :
 
 #print axioms raw_mode_certificate
 #print axioms typed_mode_confluence_certificate
+#print axioms relational_mode_no_fork_certificate
+#print axioms structural_mode_no_fork_certificate
+#print axioms guarded_mode_no_fork_certificate
+#print axioms delete_mode_no_fork_certificate
+#print axioms quotient_mode_no_fork_certificate
+#print axioms five_mode_certificate_complete
 #print axioms collapse_mode_is_raw_fork_certificate
 
 end OperatorKO7.Meta.DistinctionBoundary.EqualityModeCertificate
