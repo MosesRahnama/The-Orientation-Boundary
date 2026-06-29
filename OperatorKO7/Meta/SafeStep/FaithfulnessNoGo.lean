@@ -92,9 +92,43 @@ theorem safeStep_distinction_no_faithful_dynamical_functor :
   | none => exact absurd rfl hx
   | some t => exact ⟨t, rfl⟩
 
+/-- A boundary functor is verdict-constant when all source objects have the same
+boundary verdict. This is the exact finite functor-strengthening supported by
+the compiled collapse functors. -/
+def BoundaryVerdictConstant {R : Trace → Trace → Prop}
+    {B : BoundaryOperator (Option Trace) Trace}
+    (F : RewriteBoundaryFunctor R B) : Prop :=
+  ∀ a b : Trace,
+    B.apply (F.mapObj a) (F.mapObj_domain a)
+      = B.apply (F.mapObj b) (F.mapObj_domain b)
+
+/-- The full-kernel distinction collapse functor is the constant functor on the
+boundary verdict. -/
+theorem step_distinction_boundary_functor_constant :
+    BoundaryVerdictConstant step_distinction_dynamical_boundary_functor := by
+  intro a b
+  rfl
+
+/-- The guarded distinction collapse functor is also verdict-constant. -/
+theorem safeStep_distinction_boundary_functor_constant :
+    BoundaryVerdictConstant safeStep_distinction_dynamical_boundary_functor := by
+  intro a b
+  rfl
+
+/-- Constant-verdict collapse plus the no-faithfulness theorem, packaged for the
+distinction boundary. -/
+theorem payloadDiscarding_constant_functor_surface :
+    BoundaryVerdictConstant step_distinction_dynamical_boundary_functor
+      ∧ ¬ PayloadFaithful step_distinction_dynamical_boundary_functor :=
+  ⟨step_distinction_boundary_functor_constant,
+    distinction_no_faithful_dynamical_functor⟩
+
 #print axioms not_payloadFaithful_of_covers
 #print axioms distinction_no_faithful_dynamical_functor
 #print axioms orientation_no_faithful_dynamical_functor
 #print axioms safeStep_distinction_no_faithful_dynamical_functor
+#print axioms step_distinction_boundary_functor_constant
+#print axioms safeStep_distinction_boundary_functor_constant
+#print axioms payloadDiscarding_constant_functor_surface
 
 end OperatorKO7.Meta.SafeStep.FaithfulnessNoGo

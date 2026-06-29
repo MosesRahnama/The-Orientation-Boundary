@@ -203,6 +203,15 @@ theorem guarded_interfaces_refute_universal_failure (Sg : GuardedEqWLike T) (a :
     LocalJoinAtG Sg (Sg.E a a) :=
   guarded_diagonal_localJoin Sg a
 
+/-- **Named anti-overclaim theorem.** Not every eqW-like comparison interface
+forks: the concrete guarded KO7 interface is an equality-witness surface and
+local-joins at every diagonal. This is the formal counterexample to the naive
+"all equality witnesses fork" reading. -/
+theorem not_every_eqW_like_interface_forks :
+    ∃ Sg : GuardedEqWLike Trace, ∀ a : Trace, LocalJoinAtG Sg (Sg.E a a) :=
+  ⟨ko7GuardedDiagonalFork, fun a => guarded_interfaces_refute_universal_failure
+    ko7GuardedDiagonalFork a⟩
+
 /-! ## Part 6 — the necessity bridge: every distinction generator is a comparison interface
 
 This part closes the necessity direction. A *distinction-generating system* is forced to
@@ -285,6 +294,7 @@ section AuditChecks
 #check @quotient_avoids_fork
 #check (ko7_eqW_is_internalized_totalized_comparison : UnguardedEqWLike Trace)
 #check @guarded_interfaces_refute_universal_failure
+#check @not_every_eqW_like_interface_forks
 
 #print axioms comparison_diagonal_no_difference
 #print axioms ComparisonInterface.toDecidableEq
@@ -293,6 +303,7 @@ section AuditChecks
 #print axioms delete_avoids_fork
 #print axioms quotient_avoids_fork
 #print axioms ko7_eqW_is_internalized_totalized_comparison
+#print axioms not_every_eqW_like_interface_forks
 
 #check @DistinctionGenerator.toComparisonInterface
 #check @DistinctionGenerator.toDecidableEq

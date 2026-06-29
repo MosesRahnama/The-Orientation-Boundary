@@ -3,11 +3,31 @@ import OperatorKO7.Meta.DistinctionBoundary.Pillar
 import OperatorKO7.Meta.DistinctionBoundary.SharedRoot
 import OperatorKO7.Meta.DistinctionBoundary.CostDual
 import OperatorKO7.Meta.DistinctionBoundary.SemanticsPreservingMaximality
+import OperatorKO7.Meta.DistinctionBoundary.SingleBadCriticalPair
+import OperatorKO7.Meta.DistinctionBoundary.TerminalRepair
+import OperatorKO7.Meta.DistinctionBoundary.FiniteGluingObstruction
+import OperatorKO7.Meta.DistinctionBoundary.EqualizerObstruction
+import OperatorKO7.Meta.DistinctionBoundary.StrictTransform
+import OperatorKO7.Meta.DistinctionBoundary.TransactionGalois
+import OperatorKO7.Meta.DistinctionBoundary.CopyDiscardDeterminism
+import OperatorKO7.Meta.DistinctionBoundary.LawvereObstruction
+import OperatorKO7.Meta.DistinctionBoundary.RewritingLiar
+import OperatorKO7.Meta.DistinctionBoundary.MetricDiagonalAxiom
+import OperatorKO7.Meta.DistinctionBoundary.EqualityModeCertificate
+import OperatorKO7.Meta.DistinctionBoundary.RepairBasis
+import OperatorKO7.Meta.DistinctionBoundary.ContextualDiagonalFork
 import OperatorKO7.Meta.DistinctionBoundary.RepairRoutes
 import OperatorKO7.Meta.SafeStep.GuardNecessity
 import OperatorKO7.Meta.SafeStep.DistinctionControls
 import OperatorKO7.Meta.SafeStep.BranchTransaction
 import OperatorKO7.Meta.SafeStep.BranchEntropy
+import OperatorKO7.Meta.SafeStep.BranchCodeFloor
+import OperatorKO7.Meta.SafeStep.RefusalLoadMinimum
+import OperatorKO7.Meta.SafeStep.EntropySink
+import OperatorKO7.Meta.SafeStep.FalseFormalLegitimacy
+import OperatorKO7.Meta.SafeStep.UniversalGuardCompletion
+import OperatorKO7.Meta.SafeStep.RecordSurfaceGenerator
+import OperatorKO7.Meta.SafeStep.EqualityReflectionInstance
 import OperatorKO7.Meta.SafeStep.NonlinearityDichotomy
 import OperatorKO7.Meta.SafeStep.DistinctionAscentProfile
 import OperatorKO7.Meta.SafeStep.FaithfulnessNoGo
@@ -16,10 +36,14 @@ import OperatorKO7.Meta.SafeStep.DistinctionInexpressible
 import OperatorKO7.Meta.ComparatorNecessity
 import OperatorKO7.Meta.BoundaryGeneral.DistinctionRecord
 import OperatorKO7.Meta.InformationalIncompleteness.ConfluenceForcedTrilemma
+import OperatorKO7.Meta.InformationalIncompleteness.SemideciderCollapseSchema
+import OperatorKO7.Meta.InformationalIncompleteness.EqWDiagonalCapacity
 import OperatorKO7.Meta.Rewriting.CriticalPairComplete
 import OperatorKO7.Meta.Rewriting.ParallelReductionConfluence
 import OperatorKO7.Meta.ReverseMath.NewmanComplexity
 import OperatorKO7.Meta.ReverseMath.ConfluenceOrderType
+import OperatorKO7.Meta.ReverseMath.GuardedNewmanRCA0
+import OperatorKO7.Meta.NormalizationBoundary.DeltaIntegrateAsymmetry
 
 /-!
 # Distinction Boundary public claim-liveness gate
@@ -28,9 +52,10 @@ One consolidated reach gate over the manuscript's public theorem package: every
 headline anchor of the confluence-axis development is `#check`-ed here, and
 `#print axioms` confirms each depends only on the baseline whitelist
 `{propext, Classical.choice, Quot.sound}` or no axioms. A reviewer builds this
-single module against the public release to confirm that the cited anchors exist
-with the claimed types and trusted base. Every module referenced here is in the
-public Lean release (the engine-coupled meta-halt bridge is excluded by design).
+single module against the public release to confirm that the cited public anchors
+exist with the claimed types and trusted base. Every module referenced here is in
+the public Lean release; the engine-coupled and NDA physics bridges are excluded
+by design.
 
 No `sorry`, no `axiom`; this file only `#check`s and `#print axioms` existing
 declarations.
@@ -54,7 +79,7 @@ namespace OperatorKO7.Test.DistinctionBoundaryClaimLiveness
 #check @OperatorKO7.Meta.SafeStep.DistinctionInexpressible.ko7_confluence_witnessOrder_nonzero
 #check @OperatorKO7.Meta.ComparatorNecessity.exactComparator_decidableEq
 
--- Repair, guard, branch transaction, record legality, branch entropy.
+-- Repair, guard, branch transaction, and record legality.
 #check @OperatorKO7.Meta.SafeStep.GuardNecessity.guard_is_the_satisfier
 #check @OperatorKO7.Meta.DistinctionBoundary.RepairRoutes.confluent_inert
 #check @OperatorKO7.Meta.SafeStep.BranchTransaction.ko7_branchTransaction
@@ -103,6 +128,34 @@ namespace OperatorKO7.Test.DistinctionBoundaryClaimLiveness
 #check @OperatorKO7.Meta.SafeStep.DistinctionInexpressible.kappaDist_eq_one
 #check @OperatorKO7.Meta.SafeStep.EqualityWitnessGeneralization.diagonal_repair_exhaustive
 
+-- ROADMAP-06 theorem sprint: finite formal cores for the ambitious review additions.
+#check @OperatorKO7.Meta.DistinctionBoundary.SingleBadCriticalPair.ko7_single_bad_pair_package
+#check @OperatorKO7.Meta.DistinctionBoundary.TerminalRepair.safeStep_terminal_repair
+#check @OperatorKO7.Meta.SafeStep.UniversalGuardCompletion.canonical_refuses_diag_diff
+#check @OperatorKO7.Meta.SafeStep.RecordSurfaceGenerator.ProductiveRecordSurface.toDistinctionGenerator
+#check @OperatorKO7.Meta.DistinctionBoundary.FiniteGluingObstruction.raw_diagonal_sections_fail_to_glue
+#check @OperatorKO7.Meta.SafeStep.BranchCodeFloor.diagonal_branch_code_drops_one
+#check @OperatorKO7.Meta.ReverseMath.GuardedNewmanRCA0.guarded_newman_upper_package
+#check @OperatorKO7.Meta.DistinctionBoundary.EqualizerObstruction.raw_diagonal_square_fails
+#check @OperatorKO7.Meta.SafeStep.EntropySink.ko7_entropySink_balance
+#check @OperatorKO7.Meta.DistinctionBoundary.StrictTransform.ko7_chart_refuses_diagonal_difference
+#check @OperatorKO7.Meta.DistinctionBoundary.TransactionGalois.finite_transaction_galois
+#check @OperatorKO7.Meta.SafeStep.FalseFormalLegitimacy.raw_diagonal_emits_false_formal_legitimacy
+#check @OperatorKO7.Meta.SafeStep.RefusalLoadMinimum.ko7_refusal_load_is_minimum
+#check @OperatorKO7.Meta.DistinctionBoundary.LawvereObstruction.eqW_void_void_finite_fixed_point_obstruction
+#check @OperatorKO7.Meta.DistinctionBoundary.RewritingLiar.eqW_void_void_rewriting_liar
+#check @OperatorKO7.Meta.DistinctionBoundary.MetricDiagonalAxiom.safeStep_satisfies_metric_diagonal_null
+#check @OperatorKO7.Meta.DistinctionBoundary.EqualityModeCertificate.collapse_mode_is_raw_fork_certificate
+#check @OperatorKO7.Meta.SafeStep.EqualityReflectionInstance.equalityReflection_localConfluence_fails
+#check @OperatorKO7.Meta.InformationalIncompleteness.SemideciderCollapseSchema.equality_semidecider_collapse_is_decidableEq
+#check @OperatorKO7.Meta.InformationalIncompleteness.EqWDiagonalCapacity.eqW_diagonal_zero_capacity_with_fork
+#check @OperatorKO7.Meta.SafeStep.FaithfulnessNoGo.payloadDiscarding_constant_functor_surface
+#check @OperatorKO7.Meta.DistinctionBoundary.RepairBasis.determined_diagonal_repair_condition
+#check @OperatorKO7.Meta.DistinctionBoundary.ContextualDiagonalFork.eqW_void_void_contextual_obstruction_certificate
+#check @OperatorKO7.Meta.SafeStep.EqualityWitnessGeneralization.not_every_eqW_like_interface_forks
+#check @OperatorKO7.Meta.DistinctionBoundary.CopyDiscardDeterminism.raw_comparator_violates_copy_discard_at_void
+#check @OperatorKO7.Meta.NormalizationBoundary.DeltaIntegrateAsymmetry.twoWayNorm_not_wellFounded_rev
+
 -- Baseline-axiom inventory on the headline theorems (each ⊆ {propext, Classical.choice, Quot.sound}).
 #print axioms OperatorKO7.Meta.DistinctionBoundary.CriticalPairCompleteness.eqW_diagonal_is_the_unique_root_obstruction
 #print axioms OperatorKO7.Meta.DistinctionBoundary.GlobalConfluence.safeStep_globally_confluent
@@ -120,5 +173,10 @@ namespace OperatorKO7.Test.DistinctionBoundaryClaimLiveness
 #print axioms OperatorKO7.Meta.DistinctionBoundary.semantics_preserving_subrel_subset_safestep
 #print axioms OperatorKO7.Meta.DistinctionBoundary.semantics_preserving_subrel_eq_safestep
 #print axioms OperatorKO7.Meta.DistinctionBoundary.safeStep_is_maximal_semantics_preserving_repair
+#print axioms OperatorKO7.Meta.DistinctionBoundary.SingleBadCriticalPair.ko7_single_bad_pair_package
+#print axioms OperatorKO7.Meta.SafeStep.RefusalLoadMinimum.ko7_refusal_load_is_minimum
+#print axioms OperatorKO7.Meta.DistinctionBoundary.LawvereObstruction.eqW_void_void_finite_fixed_point_obstruction
+#print axioms OperatorKO7.Meta.SafeStep.EqualityWitnessGeneralization.not_every_eqW_like_interface_forks
+#print axioms OperatorKO7.Meta.NormalizationBoundary.DeltaIntegrateAsymmetry.twoWayNorm_not_wellFounded_rev
 
 end OperatorKO7.Test.DistinctionBoundaryClaimLiveness

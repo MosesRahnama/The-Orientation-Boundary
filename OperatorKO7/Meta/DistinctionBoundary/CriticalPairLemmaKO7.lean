@@ -287,7 +287,7 @@ theorem reify_injective : ∀ {a b : Trace}, reify a = reify b → a = b := by
       exact congr (congrArg Trace.app (ihx h.1)) (ihy h.2)
   | recΔ x y z ihx ihy ihz =>
       intro b h; cases b <;> simp only [reify, Term.app.injEq, List.cons.injEq,
-        and_true, true_and, reduceCtorEq, false_and, and_false] at h
+        and_true, true_and, reduceCtorEq, and_false] at h
       exact congr (congr (congrArg Trace.recΔ (ihx h.1)) (ihy h.2.1)) (ihz h.2.2)
   | eqW x y ihx ihy =>
       intro b h; cases b <;> simp only [reify, Term.app.injEq, List.cons.injEq,
@@ -310,8 +310,7 @@ theorem rootStep_to_kernel_step {s t : Trace}
     | integrate u =>
         cases u with
         | delta w =>
-            simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and,
-              reduceCtorEq] at hlhs
+            simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and] at hlhs
             have htv : t = void := by apply reify_injective; rw [hrhs]; rfl
             rw [htv]
             exact Step.R_int_delta w
@@ -324,8 +323,7 @@ theorem rootStep_to_kernel_step {s t : Trace}
     | merge u v =>
         cases u with
         | void =>
-            simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and,
-              reduceCtorEq] at hlhs
+            simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and] at hlhs
             have hv : reify v = σ 0 := hlhs
             have : reify t = reify v := hrhs.trans hv.symm
             exact reify_injective this ▸ Step.R_merge_void_left v
@@ -338,8 +336,7 @@ theorem rootStep_to_kernel_step {s t : Trace}
     | merge u v =>
         cases v with
         | void =>
-            simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and,
-              reduceCtorEq] at hlhs
+            simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and] at hlhs
             have hu : reify u = σ 0 := hlhs
             have : reify t = reify u := hrhs.trans hu.symm
             exact reify_injective this ▸ Step.R_merge_void_right u
@@ -350,8 +347,7 @@ theorem rootStep_to_kernel_step {s t : Trace}
       Subst.apply_var] at hlhs hrhs
     cases s with
     | merge u v =>
-        simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and,
-          reduceCtorEq] at hlhs
+        simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and] at hlhs
         have hu : reify u = σ 0 := hlhs.1
         have hv : reify v = σ 0 := hlhs.2
         have hvu : v = u := reify_injective (hv.trans hu.symm)
@@ -366,8 +362,7 @@ theorem rootStep_to_kernel_step {s t : Trace}
     | recΔ b sc n =>
         cases n with
         | void =>
-            simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and,
-              reduceCtorEq] at hlhs
+            simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and] at hlhs
             have hb : reify b = σ 0 := hlhs.1
             have htb : t = b := reify_injective (hrhs.trans hb.symm)
             rw [htb]
@@ -381,19 +376,16 @@ theorem rootStep_to_kernel_step {s t : Trace}
     | recΔ b sc n =>
         cases n with
         | delta w =>
-            simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and,
-              reduceCtorEq] at hlhs
+            simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and] at hlhs
             obtain ⟨hb, hsc, hw⟩ := hlhs
             cases t with
             | app p q =>
-                simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and,
-                  reduceCtorEq] at hrhs
+                simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and] at hrhs
                 obtain ⟨hp, hq⟩ := hrhs
                 have hpsc : p = sc := reify_injective (hp.trans hsc.symm)
                 cases q with
                 | recΔ b' sc' w' =>
-                    simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and,
-                      reduceCtorEq] at hq
+                    simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and] at hq
                     obtain ⟨hb', hsc', hw'⟩ := hq
                     have e1 : b' = b := reify_injective (hb'.trans hb.symm)
                     have e2 : sc' = sc := reify_injective (hsc'.trans hsc.symm)
@@ -409,8 +401,7 @@ theorem rootStep_to_kernel_step {s t : Trace}
       Subst.apply_var] at hlhs hrhs
     cases s with
     | eqW u v =>
-        simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and,
-          reduceCtorEq] at hlhs
+        simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and] at hlhs
         have hu : reify u = σ 0 := hlhs.1
         have hv : reify v = σ 0 := hlhs.2
         have hvu : v = u := reify_injective (hv.trans hu.symm)
@@ -424,15 +415,13 @@ theorem rootStep_to_kernel_step {s t : Trace}
       Subst.apply_var] at hlhs hrhs
     cases s with
     | eqW u v =>
-        simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and,
-          reduceCtorEq] at hlhs
+        simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and] at hlhs
         obtain ⟨hu, hv⟩ := hlhs
         cases t with
         | integrate r =>
             cases r with
             | merge p q =>
-                simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and,
-                  reduceCtorEq] at hrhs
+                simp only [reify, Term.app.injEq, List.cons.injEq, and_true, true_and] at hrhs
                 obtain ⟨hp, hq⟩ := hrhs
                 have hpu : p = u := reify_injective (hp.trans hu.symm)
                 have hqv : q = v := reify_injective (hq.trans hv.symm)
@@ -553,7 +542,7 @@ theorem no_step_var {x : RenVar Nat} {b : Term KO7Sym (RenVar Nat)} :
     obtain ⟨args, hhead⟩ := renameTRS_lhs_head hmem
     rcases hhead with hh | hh | hh | hh <;>
       · rw [hh] at hlhs
-        simp only [Subst.apply_app, Subst.apply_var] at hlhs
+        simp only [Subst.apply_app] at hlhs
         exact absurd hlhs (by simp [reduceCtorEq])
   · exact absurd he1 (by simp [reduceCtorEq])
 
@@ -569,7 +558,7 @@ theorem no_step_cpVoid : ¬ ∃ u, Rewriting.Step (renameTRS ko7Rules) cpVoid u 
       · rw [hh] at hlhs
         simp only [cpVoid, Subst.apply_app, Term.app.injEq, reduceCtorEq, false_and] at hlhs
   · -- cpVoid = app void (pre ++ a :: post), but its argument list is []
-    simp only [cpVoid, Term.app.injEq, true_and] at he1
+    simp only [cpVoid, Term.app.injEq] at he1
     exact absurd he1.symm (by simp)
 
 /-- Any rewrite sequence out of `cpVoid` is trivial: its only reduct is itself. -/
@@ -606,13 +595,13 @@ theorem inner_step_closed {a b : Term KO7Sym (RenVar Nat)}
             | (-- every other rule: head or argument clash makes `hlhs` impossible
                exfalso
                simp only [intDeltaRule, mergeVoidLeftRule, mergeVoidRightRule, recZeroRule,
-                 recSuccRule, eqReflRule, eqDiffRule, renameRule, Term.rename, Term.renameList,
-                 Subst.apply_app, Subst.applyList_cons, Subst.applyList_nil, Subst.apply_var,
-                 Term.app.injEq, List.cons.injEq, reduceCtorEq, false_and, and_false,
-                 and_true, true_and] at hlhs)
+                  recSuccRule, eqReflRule, eqDiffRule, renameRule, Term.rename, Term.renameList,
+                  Subst.apply_app, Subst.applyList_cons, Subst.applyList_nil, Subst.apply_var,
+                  Term.app.injEq, List.cons.injEq, reduceCtorEq, false_and, and_false,
+                  and_true] at hlhs)
     · -- arg step: the redex sits in one slot of [x, x]; both are variables, no step
       exfalso
-      simp only [Term.app.injEq, true_and] at he1
+      simp only [Term.app.injEq] at he1
       obtain ⟨_, hlist⟩ := he1
       rcases pre with _ | ⟨p0, pre'⟩
       · simp only [List.nil_append, List.cons.injEq] at hlist
@@ -658,11 +647,11 @@ theorem integrateGood_step_closed {a b : Term KO7Sym (RenVar Nat)}
           rcases hinner_fam with rfl | rfl <;>
             simp only [intDeltaRule, mergeVoidLeftRule, mergeVoidRightRule, mergeCancelRule,
               recZeroRule, recSuccRule, eqReflRule, eqDiffRule, renameRule, Term.rename,
-              Term.renameList, Subst.apply_app, Subst.applyList_cons, Subst.applyList_nil,
-              Subst.apply_var, Term.app.injEq, List.cons.injEq, reduceCtorEq, false_and,
-              and_false, and_true, true_and] at hlhs
+                Term.renameList, Subst.apply_app, Subst.applyList_cons, Subst.applyList_nil,
+                Subst.apply_var, Term.app.injEq, List.cons.injEq, reduceCtorEq, and_false,
+                and_true] at hlhs
   · -- the step is inside the single argument [inner]; so pre = [], post = [], c = inner
-    simp only [Term.app.injEq, true_and] at he1
+    simp only [Term.app.injEq] at he1
     obtain ⟨hf, hlist⟩ := he1
     subst hf
     rcases pre with _ | ⟨p0, pre'⟩
