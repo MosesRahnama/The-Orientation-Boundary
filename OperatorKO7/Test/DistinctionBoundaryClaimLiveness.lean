@@ -7,6 +7,7 @@ import OperatorKO7.Meta.DistinctionBoundary.SemanticsPreservingMaximality
 import OperatorKO7.Meta.DistinctionBoundary.SingleBadCriticalPair
 import OperatorKO7.Meta.DistinctionBoundary.TerminalRepair
 import OperatorKO7.Meta.DistinctionBoundary.RepairCategory
+import OperatorKO7.Meta.DistinctionBoundary.GuardingComonad
 import OperatorKO7.Meta.DistinctionBoundary.FiniteGluingObstruction
 import OperatorKO7.Meta.DistinctionBoundary.DirectedReductionSpace
 import OperatorKO7.Meta.DistinctionBoundary.FiniteCechDiagonalObstruction
@@ -202,6 +203,7 @@ namespace OperatorKO7.Test.DistinctionBoundaryClaimLiveness
 #check @OperatorKO7.Meta.DistinctionBoundary.CostScalingDimension.orientation_bulk_quadratic_doubled
 #check @OperatorKO7.Meta.DistinctionBoundary.CostScalingDimension.bulk_boundary_scaling_diverge
 #check @OperatorKO7.Meta.DistinctionBoundary.RepairCategory.safeStepFinalObject
+#check @OperatorKO7.Meta.DistinctionBoundary.GuardingComonad.guarding_comonad_value_is_maximal_repair
 
 -- Baseline-axiom inventory on the headline theorems (each ⊆ {propext, Classical.choice, Quot.sound}).
 #print axioms OperatorKO7.Meta.DistinctionBoundary.CriticalPairCompleteness.eqW_diagonal_is_the_unique_root_obstruction
@@ -240,5 +242,6 @@ namespace OperatorKO7.Test.DistinctionBoundaryClaimLiveness
 #print axioms OperatorKO7.Meta.DistinctionBoundary.KolmogorovBranchCertificate.finite_guarded_branch_kolmogorov_drop_exact
 #print axioms OperatorKO7.Meta.DistinctionBoundary.CostScalingDimension.bulk_boundary_scaling_diverge
 #print axioms OperatorKO7.Meta.DistinctionBoundary.RepairCategory.safeStepFinalObject
+#print axioms OperatorKO7.Meta.DistinctionBoundary.GuardingComonad.guarding_comonad_value_is_maximal_repair
 
 end OperatorKO7.Test.DistinctionBoundaryClaimLiveness

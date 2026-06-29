@@ -6,7 +6,7 @@ This repository is the **public companion artifact** for the following manuscrip
 - Rahnama, M. *Operational Inexpressibility at the Primitive-Recursion Orientation Boundary.*
 - Rahnama, M. *The Confluence-Preservation Boundary for Diagonal Identity Queries: Non-Left-Linearity, Signature Inexpressibility, and External Guarding.*
 
-It contains the public Lean 4 source package for the exposed theorem surface, selected external proof artifacts, and reproducibility metadata for inspection of the formal claims made in those manuscripts.
+It contains the public Lean 4 source package for the exposed theorem surface, manuscript source snapshots, selected external proof artifacts, and reproducibility metadata for inspection of the formal claims made in those manuscripts.
 
 ---
 
@@ -33,6 +33,11 @@ OperatorKO7/
   Meta/                           public theorem modules
   Test/                           reachability and axiom-audit gates
 
+Manuscripts/
+  Orientation_Boundary/           Paper A TeX source and bibliography
+  Operational_Inexpressibility/   Paper B TeX source and bibliography
+  Distinction_Boundary/           Paper C TeX source
+
 Artifacts/
   ttt2/                           external proof artifacts
   REPRODUCIBILITY.md              reproducibility notes
@@ -53,7 +58,7 @@ lean-toolchain                     Lean version pin
 
 Some supporting proof-development material is outside the public package. Reviewer access is handled through the NDA process described below when additional material is needed to evaluate a manuscript claim.
 
-The module-map appendices of *The Orientation Boundary for Step-Duplicating Recursors: Mechanized Impossibility, Escape, and Certification*, *Operational Inexpressibility at the Primitive-Recursion Orientation Boundary*, and *The Confluence-Preservation Boundary for Diagonal Identity Queries* remain the manuscript-level inventory of cited Lean modules.
+The module-map appendices in *The Orientation Boundary for Step-Duplicating Recursors: Mechanized Impossibility, Escape, and Certification*, *Operational Inexpressibility at the Primitive-Recursion Orientation Boundary*, and *The Confluence-Preservation Boundary for Diagonal Identity Queries* remain the manuscript-level inventory of cited Lean modules.
 
 ---
 

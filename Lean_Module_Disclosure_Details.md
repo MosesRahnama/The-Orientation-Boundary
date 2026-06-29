@@ -1,4 +1,4 @@
-# Public Lean Release Note
+# Public Lean and Manuscript Release Note
 
 **Date:** 2026-06-28
 
@@ -26,14 +26,25 @@ The files below are included in this public Lean release for inspection of the t
 |---|---:|
 | Orientation Boundary Lean files | 215 |
 | Operational Inexpressibility Lean files | 94 |
-| Confluence-Preservation Boundary Lean files | 113 |
+| Confluence-Preservation Boundary Lean files | 114 |
 | Shared Lean infrastructure | 4 |
 | External proof artifacts | 12 |
+| Manuscript source snapshots | 3 |
 | Direct Supervisory Engine Lean files withheld under NDA | 22 |
 | Supervisory Engine import and bridge dependencies withheld under NDA | 5 |
-| Reviewer NDA Lean files for Orientation Boundary | 141 |
+| Reviewer NDA Lean files for Orientation Boundary | 142 |
 | Reviewer NDA Lean files for Operational Inexpressibility | 48 |
 | Reviewer NDA Lean files for Confluence-Preservation Boundary | 14 |
+
+## Manuscript Sources
+
+| Path |
+|---|
+| `Manuscripts\Orientation_Boundary\Rahnama_The_Orientation_Boundary.tex` |
+| `Manuscripts\Orientation_Boundary\references.bib` |
+| `Manuscripts\Operational_Inexpressibility\Rahnama_Operational_Inexpressibility.tex` |
+| `Manuscripts\Operational_Inexpressibility\references.bib` |
+| `Manuscripts\Distinction_Boundary\Rahnama_The_Distinction_Boundary.tex` |
 
 ## The Orientation Boundary (Paper A) Lean Files
 
@@ -380,6 +391,7 @@ These are the public theorem surfaces for *The Confluence-Preservation Boundary 
 | `OperatorKO7\Meta\DistinctionBoundary\FiniteCechDiagonalObstruction.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\FiniteGluingObstruction.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\GlobalConfluence.lean` |
+| `OperatorKO7\Meta\DistinctionBoundary\GuardingComonad.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\KolmogorovBranchCertificate.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\LawvereObstruction.lean` |
 | `OperatorKO7\Meta\DistinctionBoundary\LinearLogicDiagonalInterface.lean` |
@@ -665,6 +677,7 @@ These files are withheld because they are direct supervisory-engine import depen
 | `OperatorKO7\Test\RDRSNonConservativeEscapeAtlasReach.lean` |
 | `OperatorKO7\Test\RDRSNotesReconciliationAddendumReach.lean` |
 | `OperatorKO7\Test\RDRSPathOrderDichotomyReach.lean` |
+| `OperatorKO7\Test\RDRSSemanticCoverageLedgerReach.lean` |
 | `OperatorKO7\Test\RDRSSemanticStructuralAtlasReach.lean` |
 | `OperatorKO7\Test\RDRSTerminationMethodAtlasReach.lean` |
 | `OperatorKO7\Test\RDRSTerminationMethodUniverseCloseoutReach.lean` |
