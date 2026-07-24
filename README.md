@@ -12,9 +12,9 @@ It contains the public Lean 4 source package for the exposed theorem surface, ma
 
 ## Disclosure Scope
 
-The public file set exposes the top-level API roots selected for release, their transitive Lean source closure, the external TTT2 and CeTA trail, and the build metadata needed to identify the intended Lean environment.
+For the Orientation Boundary paper, the release target is its complete 380-file Lean closure: 270 direct manuscript references plus 110 transitive imports. The current staging state is 201 source-identical public files, 80 public files requiring synchronization, and 99 files pending transfer.
 
-Additional supporting material may be made available to qualified academic or editorial reviewers under a non-disclosure agreement when needed to evaluate a manuscript claim.
+No Orientation Boundary closure file is subject to NDA. NDA access may still apply to other manuscripts or product-facing material outside that paper closure.
 
 For the current disclosure policy and the full module-to-manuscript map, see [Lean_Module_Disclosure_Details.md](./Lean_Module_Disclosure_Details.md).
 
@@ -56,9 +56,9 @@ lean-toolchain                     Lean version pin
 
 ## What Is Not Included
 
-Some supporting proof-development material is outside the public package. Reviewer access is handled through the NDA process described below when additional material is needed to evaluate a manuscript claim.
+The Orientation Boundary files marked `pending transfer` or `synchronization required` in the disclosure ledger are not yet release-ready, but all are designated public and require no NDA. Other manuscripts may retain separate access policies.
 
-The module-map appendices in *The Orientation Boundary for Step-Duplicating Recursors: Mechanized Impossibility, Escape, and Certification*, *Operational Inexpressibility at the Primitive-Recursion Orientation Boundary*, and *The Confluence-Preservation Boundary for Diagonal Identity Queries* remain the manuscript-level inventory of cited Lean modules.
+For the Orientation Boundary paper, the complete direct-plus-import inventory is the 380-row closure table in `Lean_Module_Disclosure_Details.md`; the manuscript module map is a theorem-facing summary rather than an exhaustive import manifest.
 
 ---
 
@@ -107,7 +107,7 @@ For paid licensing or any licensing inquiry, contact:
 
 ## Reviewer NDA Access
 
-Academic and editorial reviewers may request access to additional supporting material under a standard non-disclosure agreement when needed to evaluate a manuscript claim. Contact:
+No NDA is required for any file in the Orientation Boundary Lean closure. For material outside that closure, academic and editorial reviewers may request access under the applicable policy. Contact:
 
 **info@minaanalytics.com**
 
