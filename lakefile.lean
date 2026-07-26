@@ -22,4 +22,10 @@ package OperatorKO7 where
 lean_lib OperatorKO7 where
   roots := #[`OperatorKO7]
 
+/-- Runnable artifact verifier cited by the manuscript reproducibility note:
+`lake exe verifyTpdbExport` re-checks the generated TPDB text against both the
+embedded checked literal and the on-disk `Artifacts/ttt2/KO7_full_step.trs`. -/
+lean_exe verifyTpdbExport where
+  root := `VerifyTpdbExport
+
 require mathlib from git "https://github.com/leanprover-community/mathlib4.git" @ "632465e4b02cb70a5dfa4cfe15468e8a62c2bd85"

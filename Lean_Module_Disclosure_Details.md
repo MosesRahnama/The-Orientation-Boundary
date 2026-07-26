@@ -8,7 +8,7 @@ This repository is the public Lean companion for exactly three manuscripts:
 - *Operational Inexpressibility at the Primitive-Recursion Orientation Boundary.*
 - *The Confluence-Preservation Boundary for Diagonal Identity Queries: Non-Left-Linearity, Signature Inexpressibility, and External Guarding.*
 
-As of 2026-07-26, after the second release delta below, the `OperatorKO7\` tree contains 678 Lean source files. A file is included only when it is directly named by one of the three manuscripts, owns a declaration cited by one of them, or lies in the recursive project-owned import closure of such a file. Repository metadata, proof artifacts, and Lake configuration are retained as supporting release infrastructure.
+As of 2026-07-26, after the second release delta below, the `OperatorKO7\` tree contains 679 Lean source files. A file is included only when it is directly named by one of the three manuscripts, owns a declaration cited by one of them, or lies in the recursive project-owned import closure of such a file. Repository metadata, proof artifacts, and Lake configuration are retained as supporting release infrastructure.
 
 No NDA, qualified-reviewer restriction, or separate access grant applies to the retained public-release copies. The separate NDA-controlled inventory at the end governs excluded/private material and records the six historical paths whose manuscript-required public copies remain public.
 
@@ -19,19 +19,21 @@ No NDA, qualified-reviewer restriction, or separate access grant applies to the 
 | Orientation Boundary | 383 files: 273 manuscript-named modules plus 110 recursive imports |
 | Operational Inexpressibility (quantitative manuscript) | 500 files: 197 manuscript-named modules, 11 cited-declaration owners, and 292 recursive imports |
 | Confluence-Preservation Boundary | 263 files: 158 public module-map seeds plus 105 recursive imports |
-| Deduplicated three-manuscript union | 678 files |
+| Deduplicated three-manuscript union | 679 files |
 
 The Operational-Inexpressibility count rose by eleven on 2026-07-26 with the gap-closure modules recorded in the second release delta below. All eleven are named by the manuscript's appendix module map, and each one's project-owned imports were already public, so the closure grows by exactly eleven.
 
-The union figure also absorbs a one-file reconciliation. The first delta of 2026-07-26 added `OperatorKO7\Meta\DistinctionBoundary\ContextualDiagonalScope.lean` and raised the Confluence-Preservation count to 263, but left the union at its pre-addition value of 666; the correct pre-gap-closure union was 667, and adding the eleven gap-closure modules gives 678.
+The union figure also absorbs a two-file reconciliation. The first delta of 2026-07-26 added `OperatorKO7\Meta\DistinctionBoundary\ContextualDiagonalScope.lean` and raised the Confluence-Preservation count to 263, but left the union at its pre-addition value of 666. The audited pre-gap-closure tree held 668 files, and the eleven gap-closure modules bring it to 679.
 
-**Count verification required before release.** The per-manuscript figures above are carried forward from the previous receipt with the gap-closure delta applied; they were not recomputed against the working tree, which was mid-synchronization when this section was written. Reproduce the tree count with
+**Tree audit, 2026-07-26.** Every one of the 679 files in this tree was compared by SHA-256 against its counterpart in the source repository: 679 identical, zero differing, zero files present here but absent from source. `OperatorKO7\SchemaAPI.lean` was the single divergence found: the public copy carried four extra imports and CRLF line endings. It is now the source repository's version, which is the authoritative one and the one that elaborates against the built module set. The four modules it no longer imports remain present in this tree and are reached through the other API roots. The tree count is reproducible with
 
 ```bash
 find OperatorKO7 -name '*.lean' | wc -l
 ```
 
-and recompute the three per-manuscript closures from the current manuscript sources before publishing. Any difference from 678 means files entered or left the tree after this delta and the receipt needs regenerating.
+The three per-manuscript closure figures are carried forward from the previous receipt with the gap-closure delta applied. They were not recomputed from the current manuscript sources, so regenerate them if the manuscripts change again before publication.
+
+**Excluded material.** The NDA-controlled inventory at the end of this document was re-checked against the tree after synchronization: none of the 22 Supervisory Engine files, the `MetaHalt` family, the excluded `InformationalIncompleteness` modules, or the excluded reviewer test files are present. The `SupervisoryEngine\` directory does not exist in this repository.
 
 The Orientation count includes `OperatorKO7\Meta\ComputableMeasure_Verification.lean`, which is named without a `.lean` suffix in the manuscript and was omitted from the earlier 382-file parser receipt.
 
