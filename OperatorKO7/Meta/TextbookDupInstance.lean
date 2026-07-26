@@ -1,5 +1,3 @@
-
-import OperatorKO7.Meta.StepDuplicatingSchema
 import OperatorKO7.Meta.BarrierWitness
 
 /-!

@@ -3,8 +3,9 @@ import OperatorKO7.Meta.Conjecture_Boundary
 /-!
 # Pure Head-Precedence Barrier
 
-This module upgrades the standalone head-precedence witness to a theorem-backed family.
-The family is intentionally narrow: the measure depends only on the head constructor.
+The family is deliberately narrow: its measure depends only on the outermost
+constructor. The collapsing `merge_cancel` rule supplies the obstruction to a
+global orientation.
 -/
 
 namespace OperatorKO7.PrecedenceBarrier
@@ -21,8 +22,7 @@ structure HeadPrecedenceFamily where
 def HeadPrecedenceFamily.eval (M : HeadPrecedenceFamily) : Trace → Nat :=
   headPrecedenceMeasure M.rank
 
-/-- No pure head-precedence family can globally orient `Step`. The failure already appears
-at the collapsing `merge_cancel` branch. -/
+/-- The collapsing `merge_cancel` branch prevents global orientation by this head-only family. -/
 theorem no_global_step_orientation_headPrecedenceFamily (M : HeadPrecedenceFamily) :
     ¬ GlobalOrients M.eval (· < ·) := by
   simpa [HeadPrecedenceFamily.eval] using

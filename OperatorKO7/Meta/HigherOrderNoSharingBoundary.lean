@@ -1,11 +1,12 @@
 import OperatorKO7.Meta.HigherOrderSharingBoundary
 
 /-!
-# Higher-Order No-Sharing Boundary
+# Two-policy sharing classification
 
-This file makes the tree/no-sharing restriction theorem-visible.
-It does not claim a full higher-order no-go theorem. It isolates the exact
-policy boundary needed before the existing tree-based story can be lifted.
+`NoSharingPolicy` contains only `.tree`. Because `SharingPolicy` has the two constructors `.tree` and
+`.shared`, every policy outside `NoSharingPolicy` is `.shared`; the imported
+`shared_policy_counter_orients_step` then proves `NoSharingLiftHypothesis`. This is a finite policy
+classification, not a necessity or minimality theorem for unrestricted higher-order rewriting.
 -/
 
 namespace OperatorKO7.HigherOrderNoSharingBoundary
@@ -13,7 +14,7 @@ namespace OperatorKO7.HigherOrderNoSharingBoundary
 open OperatorKO7.SharingBarrierLift
 open OperatorKO7.HigherOrderSharingBoundary
 
-/-- Policies that preserve the tree/no-sharing side of the current carrier. -/
+/-- The singleton policy class containing `.tree`. -/
 inductive NoSharingPolicy : SharingPolicy → Prop
   | tree : NoSharingPolicy .tree
 
@@ -22,13 +23,11 @@ recursor shape. -/
 abbrev RestrictedHigherOrderFragment : HOTerm → Prop :=
   HOClosedFragment
 
-/-- Exact hypothesis required before a tree-based lift can ignore the shared
-counterexample: every policy outside the no-sharing class must be treated as a
-separate orientable branch rather than silently absorbed into the tree theorem. -/
+/-- Every policy outside the singleton tree class orients the imported step relation. -/
 abbrev NoSharingLiftHypothesis : Prop :=
   ∀ {policy : SharingPolicy}, ¬ NoSharingPolicy policy → HOPolicyOrientsStep policy
 
-/-- Paper-facing status package for the current no-sharing boundary. -/
+/-- Package of the three displayed two-policy facts. -/
 structure NoSharingBoundaryStatus : Prop where
   sharedPolicyRejected : ¬ NoSharingPolicy .shared
   noSharingRequiredForLift : NoSharingLiftHypothesis
@@ -41,9 +40,7 @@ theorem shared_policy_not_no_sharing :
   intro h
   cases h
 
-/-- The no-sharing hypothesis is load-bearing for any tree-style lift on the
-current higher-order carrier. Every policy outside the no-sharing class falls
-onto the shared-policy orienting branch. -/
+/-- The two-constructor policy enumeration satisfies `NoSharingLiftHypothesis`. -/
 theorem no_sharing_hypothesis_is_required_for_tree_lift :
     NoSharingLiftHypothesis := by
   intro policy hNoSharing
@@ -53,19 +50,17 @@ theorem no_sharing_hypothesis_is_required_for_tree_lift :
   | shared =>
       exact shared_policy_counter_orients_step
 
-/-- The shared-policy branch already refutes any unqualified higher-order no-go
-claim that ignores the sharing policy. -/
+/-- Imported negation of `UnqualifiedHigherOrderLiftClaim` for the shared-policy branch. -/
 theorem shared_policy_refutes_unqualified_no_go :
     ¬ UnqualifiedHigherOrderLiftClaim :=
   sharing_policy_blocks_unqualified_tree_barrier_lift
 
-/-- The restricted fragment still contains every embedded first-order shape
-used by the current sharing-aware surrogate. -/
+/-- Every embedded `SharedTerm` satisfies the imported closed-fragment predicate. -/
 theorem restricted_fragment_embeds_first_order_shape :
     ∀ t : SharedTerm, RestrictedHigherOrderFragment (embedSharedTerm t) :=
   embedSharedTerm_closedFragment
 
-/-- The current theorem-visible status of the no-sharing boundary. -/
+/-- Assemble the three proved fields of `NoSharingBoundaryStatus`. -/
 def noSharingBoundaryStatus : NoSharingBoundaryStatus where
   sharedPolicyRejected := shared_policy_not_no_sharing
   noSharingRequiredForLift := no_sharing_hypothesis_is_required_for_tree_lift

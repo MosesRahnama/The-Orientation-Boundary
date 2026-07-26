@@ -3,28 +3,27 @@ import OperatorKO7.Meta.ClassicalAscentProfile
 /-!
 # Typed LCEL `Σ` / `Γ'` Carriers
 
-Generic typed carriers for the operational-inexpressibility manuscript's two explicit LCEL slots beyond the boundary
+Generic typed carriers for Paper C's two explicit LCEL slots beyond the boundary
 object `Π` and annotation functor `Imp`:
 
 - the external-license slot `Σ`, and
 - the reimport-class slot `Γ'`.
 
-The comparison object already contains enough semantic structure to expose both
-slots as genuine typed objects. This file factors out the reusable carrier
-shapes and their compatibility theorems with the older proposition-level
-readings used elsewhere in the LCEL stack.
+The comparison object supplies the reflection and reimport witnesses used to
+construct both typed slots. This file factors out the reusable carrier shapes
+and their compatibility theorems with the proposition-level readings used
+elsewhere in the LCEL stack.
 -/
 
 namespace OperatorKO7.LCELTypedSigmaGamma
 
 open OperatorKO7.ClassicalAscentProfile
 
-/-- Typed external-license object for the operational-inexpressibility manuscript's explicit LCEL slot `Σ`.
+/-- Typed external-license object for Paper C's explicit LCEL slot `Σ`.
 
-The designated witness carries not only a stronger-framework witness extending
-base, but also the blocked sentence that it reflects, together with the theorem-
-backed non-provability / truth / licensed-admission data attached to that
-sentence. -/
+The designated witness packages a stronger-framework witness extending the
+base, the blocked sentence that it reflects, and the supplied unprovability,
+truth, and licensed-admission fields attached to that sentence. -/
 structure LCELExternalLicenseObject
     (B : FormalBaseTheorySemantics) (R : FormalReflectionOperatorSemantics B) where
   LicenseWitness : Type
@@ -65,7 +64,7 @@ theorem designated_realizes
 
 end LCELExternalLicenseObject
 
-/-- Typed reimport-class object for the operational-inexpressibility manuscript's explicit LCEL slot `Γ'`.
+/-- Typed reimport-class object for Paper C's explicit LCEL slot `Γ'`.
 
 The designated witness packages a typed admission witness together with the
 sentence it certifies and the theorem-backed truth of that sentence in the base

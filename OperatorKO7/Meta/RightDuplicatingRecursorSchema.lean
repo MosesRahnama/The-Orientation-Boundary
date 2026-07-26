@@ -18,7 +18,8 @@ The interface intentionally captures only:
 - a payload-occurrence predicate `payloadOccursAt` and a count function `payloadCount`,
 - a distinguished payload coordinate with one occurrence on the lhs and at least
   two occurrences on the rhs,
-- a firability predicate on closed terms.
+- a declared closed-firability proposition. This is metadata only; an
+  operational realization requires a separate theorem in a concrete adapter.
 
 It excludes:
 
@@ -41,8 +42,8 @@ Minimum honest interface for a right-duplicating recursor rule.
 A candidate term algebra `Term` is paired with a payload-coordinate index type
 `PayloadCoord`, a syntactic-position index type `Position`, an occurrence
 predicate, and a count function. The distinguished payload coordinate occurs
-exactly once on the lhs and at least twice on the rhs. The firability predicate
-keeps the rule from being vacuously inapplicable on closed instances. -/
+exactly once on the lhs and at least twice on the rhs. The final proposition is
+only a carrier-supplied declaration and is not an operational step witness. -/
 structure RightDuplicatingRecursorSchema where
   /-- The term carrier. -/
   Term : Type
@@ -67,9 +68,9 @@ structure RightDuplicatingRecursorSchema where
   /-- The distinguished payload occurs at least twice on the rhs. -/
   rhs_duplicates_payload :
     2 ≤ payloadCount distinguishedPayload rhs
-  /-- The rule is firable on closed terms; the concrete realization is left to
-  the carrier so framework-parametricity stays honest. -/
-  firesOnClosedTerms : Prop
+  /-- Carrier-supplied closed-firability declaration. A concrete rewrite-step
+  theorem is required before this metadata can be used as firing evidence. -/
+  declaredClosedFirability : Prop
 
 namespace RightDuplicatingRecursorSchema
 

@@ -22,6 +22,8 @@ import OperatorKO7.Meta.DistinctionBoundary.MetricDiagonalAxiom
 import OperatorKO7.Meta.DistinctionBoundary.EqualityModeCertificate
 import OperatorKO7.Meta.DistinctionBoundary.RepairBasis
 import OperatorKO7.Meta.DistinctionBoundary.ContextualDiagonalFork
+import OperatorKO7.Meta.DistinctionBoundary.ContextualDiagonalScope
+import OperatorKO7.Meta.DistinctionBoundary.Quantitative.TerminalMultiplicity
 import OperatorKO7.Meta.DistinctionBoundary.RepairRoutes
 import OperatorKO7.Meta.DistinctionBoundary.DualExternalLicenseBoundary
 import OperatorKO7.Meta.DistinctionBoundary.KolmogorovBranchCertificate
@@ -35,7 +37,6 @@ import OperatorKO7.Meta.SafeStep.BranchCodeFloor
 import OperatorKO7.Meta.SafeStep.BranchAdmissionFloor
 import OperatorKO7.Meta.SafeStep.RefusalLoadMinimum
 import OperatorKO7.Meta.SafeStep.EntropySink
-import OperatorKO7.Meta.SafeStep.FalseFormalLegitimacy
 import OperatorKO7.Meta.SafeStep.UniversalGuardCompletion
 import OperatorKO7.Meta.SafeStep.RecordSurfaceGenerator
 import OperatorKO7.Meta.SafeStep.EqualityReflectionInstance
@@ -105,7 +106,6 @@ namespace OperatorKO7.Test.DistinctionBoundaryClaimLiveness
 #check @OperatorKO7.Meta.SafeStep.DistinctionAscentProfile.distinctionBoundary_has_dp_structural_identity
 #check @OperatorKO7.Meta.SafeStep.FaithfulnessNoGo.not_payloadFaithful_of_covers
 #check @OperatorKO7.Meta.SafeStep.NonlinearityDichotomy.ko7_raw_mechanism_correspondence
-#check @OperatorKO7.Meta.InformationalIncompleteness.ConfluenceForcedTrilemma.diagonal_emission_is_false_formal_legitimacy
 
 -- Cost-side duality of verdict-retaining licensed routes.
 #check @OperatorKO7.Meta.DistinctionBoundary.CostDual.totalCharge_append
@@ -155,7 +155,6 @@ namespace OperatorKO7.Test.DistinctionBoundaryClaimLiveness
 #check @OperatorKO7.Meta.SafeStep.EntropySink.ko7_entropySink_balance
 #check @OperatorKO7.Meta.DistinctionBoundary.StrictTransform.ko7_chart_refuses_diagonal_difference
 #check @OperatorKO7.Meta.DistinctionBoundary.TransactionGalois.finite_transaction_galois
-#check @OperatorKO7.Meta.SafeStep.FalseFormalLegitimacy.raw_diagonal_emits_false_formal_legitimacy
 #check @OperatorKO7.Meta.SafeStep.RefusalLoadMinimum.ko7_refusal_load_is_minimum
 #check @OperatorKO7.Meta.DistinctionBoundary.LawvereObstruction.eqW_void_void_finite_fixed_point_obstruction
 #check @OperatorKO7.Meta.DistinctionBoundary.RewritingLiar.eqW_void_void_rewriting_liar
@@ -167,6 +166,12 @@ namespace OperatorKO7.Test.DistinctionBoundaryClaimLiveness
 #check @OperatorKO7.Meta.SafeStep.FaithfulnessNoGo.payloadDiscarding_constant_functor_surface
 #check @OperatorKO7.Meta.DistinctionBoundary.RepairBasis.determined_diagonal_repair_condition
 #check @OperatorKO7.Meta.DistinctionBoundary.ContextualDiagonalFork.eqW_void_void_contextual_obstruction_certificate
+#check @OperatorKO7.Meta.DistinctionBoundary.ContextualDiagonalScope.eqW_void_void_ctx_not_joinable
+#check @OperatorKO7.Meta.DistinctionBoundary.ContextualDiagonalScope.eqW_delta_diagonal_ctx_joinable
+#check @OperatorKO7.Meta.DistinctionBoundary.ContextualDiagonalScope.contextual_fracture_scope
+#print axioms OperatorKO7.Meta.DistinctionBoundary.ContextualDiagonalScope.contextual_fracture_scope
+#check @OperatorKO7.Meta.DistinctionBoundary.Quantitative.normalizingAt_premise_cannot_be_weakened
+#print axioms OperatorKO7.Meta.DistinctionBoundary.Quantitative.normalizingAt_premise_cannot_be_weakened
 #check @OperatorKO7.Meta.SafeStep.EqualityWitnessGeneralization.not_every_eqW_like_interface_forks
 #check @OperatorKO7.Meta.DistinctionBoundary.CopyDiscardDeterminism.raw_comparator_violates_copy_discard_at_void
 #check @OperatorKO7.Meta.NormalizationBoundary.DeltaIntegrateAsymmetry.twoWayNorm_not_wellFounded_rev
@@ -210,7 +215,6 @@ namespace OperatorKO7.Test.DistinctionBoundaryClaimLiveness
 #print axioms OperatorKO7.Meta.DistinctionBoundary.GlobalConfluence.safeStep_globally_confluent
 #print axioms OperatorKO7.Meta.SafeStep.SyntacticNonDerivability.disequality_not_sigma_expressible_unconditional
 #print axioms OperatorKO7.Meta.SafeStep.GuardNecessity.guard_is_the_satisfier
-#print axioms OperatorKO7.Meta.InformationalIncompleteness.ConfluenceForcedTrilemma.diagonal_emission_is_false_formal_legitimacy
 #print axioms OperatorKO7.Meta.SafeStep.EqualityWitnessGeneralization.fork_iff_verdicts_not_join
 #print axioms OperatorKO7.Meta.SafeStep.EqualityWitnessGeneralization.comparison_diagonal_no_difference
 #print axioms OperatorKO7.Meta.DistinctionBoundary.CostDual.orientation_totalCharge_doubled_eq_confessedBurdenDoubled

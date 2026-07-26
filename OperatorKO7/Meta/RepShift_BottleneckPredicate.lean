@@ -3,23 +3,20 @@ import OperatorKO7.Meta.RepShift_LayeredSemanticsTower
 /-!
 # Representation-Shift Bottleneck Predicate
 
-This module formalizes the central predicates of the
-Representation-Shift Bottleneck paper:
+This module defines abstract witness-hierarchy and cross-layer record types:
 
 - representation depth `kappa : Witness -> Nat`
-- minimal representation order `kappaStar`
+- upper and lower relations `kappaStarLe` and `kappaStarGt`
 - the **single-layer bottleneck predicate**, instantiated against an
   abstract witness-language hierarchy
 - the **interface bottleneck predicate**, instantiated against a
   two-layer tower from
   `Meta/RepShift_LayeredSemanticsTower.lean`
 
-The bottleneck has *five* clauses in its abstract statement; the first
-four are properties of the witness landscape and are formalized here
-as a `Prop`-valued definition. The fifth (agent instability) is a
-property of the *agent population* and is left as a parameter so that
-downstream modules can supply it from empirical data without forcing
-a particular formalization on the proof side.
+`RepresentationShiftBottleneck` has three stored fields. `InterfaceBottleneck`
+has four supplied fields. `PreUndecidabilityFracture` stores a `Decidable`
+instance, an accepted witness, a positive depth proof, and a proof of an
+arbitrary caller-supplied `instability` proposition.
 -/
 
 namespace OperatorKO7.RepShift
@@ -93,7 +90,7 @@ def kappaStarGt (H : WitnessHierarchy S) (P : S → Prop) (x : S)
 end WitnessHierarchy
 
 /--
-**Single-layer representation-shift bottleneck predicate.**
+**Single-layer representation-shift bottleneck record.**
 
 An instance `x` exhibits a representation-shift bottleneck at depth
 `k` (with respect to a witness hierarchy `H` and property `P`) when:
@@ -102,9 +99,7 @@ An instance `x` exhibits a representation-shift bottleneck at depth
 2. no adequate witness exists at any depth strictly below `k`;
 3. an adequate witness exists at depth `k`.
 
-The fifth clause of the paper's abstract definition (agent
-instability) is formalized separately in
-`Meta/RepShift_PseudoWitnessMass.lean`.
+These are exactly the three fields of the structure.
 -/
 structure RepresentationShiftBottleneck {S : Type u}
     (H : WitnessHierarchy S) (P : S → Prop) (x : S) (k : Nat) : Prop where
@@ -161,9 +156,8 @@ interface bottleneck at `x` consists of:
 4. a sound transfer rule (witness transport) lifts the higher-layer
    witness back to a proof of `P x`.
 
-Clauses (1)-(3) are *empirical* facts about the witness landscape;
-clause (4) is the *transfer theorem*. Together they characterise
-the interface where the proof must cross representation.
+All four clauses are supplied as fields when constructing the record; this
+module does not derive or empirically validate them.
 -/
 structure InterfaceBottleneck
     {S T : Type u} (𝒯 : TwoLayerTower S T)
@@ -199,17 +193,10 @@ theorem hi_witness_at_alpha (B : InterfaceBottleneck 𝒯 Vlo Vhi P Phi_P x) :
 
 end InterfaceBottleneck
 
-/-! ## Pre-undecidability fracture
-
-The pre-undecidability fracture is the special case of a bottleneck
-where the property is decidable for `x`, the verifier accepts the
-higher-layer witness in bounded time, and yet a population of
-reasoning agents is unstable at the interface. The first three
-ingredients are recorded structurally below; the fourth is a
-parameter. -/
+/-! ## Decidable-instance witness package -/
 
 /--
-**Pre-undecidability fracture predicate.**
+**Decidable-instance witness package.**
 
 The four clauses are:
 
@@ -217,16 +204,13 @@ The four clauses are:
    (modelled here by `Decidable (P x)`);
 2. an adequate witness exists at depth `k > 0` (so the bottleneck
    is non-trivial);
-3. the verifier `accepts` is decidable on the supplied witness
-   (modelled by carrying a witness with an explicit acceptance proof);
-4. yet the agent population is unstable at the interface (carried as
-   an external `instability` proposition).
+3. the witness subtype carries a proof of `H.accepts w` for the supplied
+   witness; the structure contains no bounded-time verifier or decision
+   procedure for `accepts`;
+4. the caller supplies a proof of the arbitrary proposition `instability`.
 
-The fracture is *not* an undecidability theorem; on the contrary, it
-holds *strictly below* undecidability — the truth is fixed, the
-witness exists, the verifier is external. The agent instability is
-the empirical content. The predicate packages all four conditions in
-one record so downstream modules can cite them by name.
+The structure packages these inputs. It does not establish an undecidability
+boundary or an empirical population claim.
 -/
 structure PreUndecidabilityFracture {S : Type u}
     (H : WitnessHierarchy S) (P : S → Prop) (x : S) (k : Nat)
@@ -241,13 +225,11 @@ namespace PreUndecidabilityFracture
 variable {S : Type u} {H : WitnessHierarchy S} {P : S → Prop} {x : S} {k : Nat}
   {instability : Prop}
 
-/-- The fracture is genuinely *pre*-undecidability: the prop-valued
-projections (the witness exists, `k > 0`, and the agent instability
-holds) all follow from the fracture record. The decidability witness
-is accessible as a separate field.
+/-- Project the accepted-witness, positive-depth, and caller-supplied
+`instability` fields. The `Decidable (P x)` value is available separately as
+`F.decidable_truth`.
 
-Stated as a conjunction over Props only; `Decidable (P x)` is data
-and is exposed by `F.decidable_truth` directly. -/
+The conjunction contains only propositions. -/
 theorem pre_undecidability_signature
     (F : PreUndecidabilityFracture H P x k instability) :
     H.hasAdequateAtDepth k P x ∧ 0 < k ∧ instability :=

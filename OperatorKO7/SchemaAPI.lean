@@ -28,11 +28,24 @@ import OperatorKO7.Meta.MatrixBarrierLexPermD
 import OperatorKO7.Meta.MatrixBarrierMix2
 import OperatorKO7.Meta.MatrixBarrierFunctional
 import OperatorKO7.Meta.MatrixBarrierArbitrary
+import OperatorKO7.Meta.ContextClosedBarrier
+import OperatorKO7.Meta.ContextClosedBarrier_FullClosure
+import OperatorKO7.Meta.BoundaryGeneral.DirectMeasureGrammarClosure
+import OperatorKO7.Meta.BoundaryGeneral.VectorGrammarClosure
 import OperatorKO7.Meta.MatrixBarrierArbitrary_Instances
 import OperatorKO7.Meta.MatrixBarrierArcticTropical
 import OperatorKO7.Meta.MatrixBarrierArcticTropical_Instances
 import OperatorKO7.Meta.ScalarProjectionBarrier
 import OperatorKO7.Meta.ProjectedPrimaryBarrier
+import OperatorKO7.Meta.MatrixProjectionCoverage
+import OperatorKO7.Meta.MatrixToolSearchMapping
+import OperatorKO7.Meta.ToolSearchFragmentCoverage
+import OperatorKO7.Meta.ToolSearchFragmentCoverage_Status
+import OperatorKO7.Meta.ToolSearchFragmentCoverage_PerFamily
+import OperatorKO7.Meta.ToolSearchFragmentCoverage_ListAudit
+import OperatorKO7.Meta.ToolSearchFragmentCoverage_Exactness
+import OperatorKO7.Meta.ToolSearchFragmentCoverage_ResidualBoundary
+import OperatorKO7.Meta.ToolSearchFragmentCoverage_FinalCatalog
 
 -- Symbolic comparator barriers
 import OperatorKO7.Meta.SymbolicComparatorBarrier
@@ -46,11 +59,28 @@ import OperatorKO7.Meta.StandardPumpLemmas
 import OperatorKO7.Meta.TextbookDupInstance
 
 -- Executable boundary tooling
+import OperatorKO7.Meta.BarrierWitness
+import OperatorKO7.Meta.BarrierWitness_Extended
+import OperatorKO7.Meta.BarrierWitness_Budgets
+import OperatorKO7.Meta.SynthesisOracle
+import OperatorKO7.Meta.BarrierClass_Classifier
 
 -- Confession method family (escape side)
 import OperatorKO7.Meta.ConfessionMethod
+import OperatorKO7.Meta.ConfessionMethod_RouteEvidence
+import OperatorKO7.Meta.ConfessionMethod_UsableRules
+import OperatorKO7.Meta.ConfessionMethod_UsableRulesConcrete
+import OperatorKO7.Meta.ConfessionMethod_UniversalUsableRules
+import OperatorKO7.Meta.ConfessionMethod_UsableRulesBridgeAttempt
+import OperatorKO7.Meta.ConfessionMethod_UsableRulesFinalStatus
 import OperatorKO7.Meta.ConfessionMethod_Family
 import OperatorKO7.Meta.TransformedCallClassification
+import OperatorKO7.Meta.ConstructionRouteCatalog
+import OperatorKO7.Meta.ConstructionRouteCatalog_Payload
+import OperatorKO7.Meta.ConstructionRouteCatalog_Certificate
+import OperatorKO7.Meta.ConstructionRouteCatalog_Audit
+import OperatorKO7.Meta.ConstructionRouteCatalog_Exactness
+import OperatorKO7.Meta.ConstructionRouteCatalog_Partition
 
 -- Reusable DP fragment (schema-level rank / SCC descent)
 import OperatorKO7.Meta.DependencyPairs_Fragment
@@ -84,9 +114,10 @@ import OperatorKO7.Meta.MutualDuplication_Preserving_Transparent
 import OperatorKO7.Meta.MutualDuplication_PacketGraph
 import OperatorKO7.Meta.EscapeTrichotomy_Schema
 
--- Cross-manuscript-capable schema interfaces
+-- Cross-paper-capable schema interfaces
 import OperatorKO7.Meta.BenchmarkedPrimitiveRecursionFamily
 import OperatorKO7.Meta.OperationalIncompleteness
+import OperatorKO7.Meta.RecordStorageForm
 import OperatorKO7.Meta.ExternalizedTraceStorage
 import OperatorKO7.Meta.ProjectionTransactionDynamics
 
@@ -111,10 +142,10 @@ The split public roots are now:
 
 - `OperatorKO7.PrimitiveSchemaAPI`: conservative primitive/schema-parametric core
 - `OperatorKO7.SchemaExtendedAPI`: broader reusable barrier/tooling/SCC layer
-- `OperatorKO7.CrossPaperAPI`: KO7-facing bridge and cross-manuscript layer
+- `OperatorKO7.CrossPaperAPI`: KO7-facing bridge and cross-paper layer
 
 `SchemaAPI` continues to re-export the wider convenience surface for existing
-downstream users. Because it still bundles confession-family and cross-manuscript
+downstream users. Because it still bundles confession-family and cross-paper
 packaging, it should not be treated as the strict primitive boundary.
 
 What this module provides:
@@ -175,7 +206,8 @@ Executable boundary tooling:
 - Computable barrier-witness extractors (`additive_witness`, etc.)
 - Extended witness extractors for quadratic, max-plus, and projected matrix families
 - Canonical witness-budget theorems for the current extractor layer
-- Decidable coefficient-table classification
+- Synthesis-oracle interface
+- Decidable coefficient-table classifier
 
 Named schema instances:
 - KO7 (via the imports under `OperatorKO7.CompositionalImpossibility`, threaded
@@ -206,7 +238,7 @@ Confession-method family (escape side):
   layer to the confession-route convergence package via
   `fullDuplicating_w2_success_projects_confession_route_evidence`
 
-Cross-manuscript-capable schema interfaces:
+Cross-paper-capable schema interfaces:
 - Six-member primitive-recursion family classification over the `RecCore` signature
 - `CertifiedForgettingWitness` / `PayloadOperationalIncompleteness` schema
   packaging

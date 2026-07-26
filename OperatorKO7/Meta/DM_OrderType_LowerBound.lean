@@ -43,7 +43,7 @@ theorem exists_of_multiset (m : Multiset Nat) :
     ∃ c : CNFωω, c.eval = dmOrdEmbed m :=
   ⟨ofMultiset m, by simp⟩
 
-/-- Phase-B upper bound restated on the CNF carrier. -/
+/-- Upper bound for the CNF carrier's ordinal evaluation. -/
 theorem eval_lt_opow_omega (c : CNFωω) :
     c.eval < (ω : Ordinal) ^ (ω : Ordinal) := by
   simpa [eval] using
@@ -136,8 +136,7 @@ private theorem exists_multiset_eval_bounded :
       exact ⟨m, by simpa [m] using hEval, hmLt⟩
 
 /--
-Unconditional surjectivity of `dmOrdEmbed` below `ω^ω`, obtained from Mathlib's canonical
-Cantor normal form decomposition.
+Surjectivity of `dmOrdEmbed` below `ω^ω`, obtained from Mathlib's Cantor normal form decomposition.
 -/
 theorem dmOrdEmbed_surjective_lt_opow_omega :
     ∀ α < (ω : Ordinal) ^ (ω : Ordinal), ∃ m : Multiset Nat, dmOrdEmbed m = α := by
@@ -171,14 +170,14 @@ theorem dmOrdEmbed_surjective_lt_opow_omega :
     dmOrdEmbed m = L.foldr (fun p r ↦ (ω : Ordinal) ^ p.1 * p.2 + r) 0 := hm
     _ = α := by simpa [L] using (Ordinal.CNF_foldr (ω : Ordinal) α)
 
-/-- Phase-B bridge: surjectivity of `dmOrdEmbed` below `ω^ω` (proved unconditionally). -/
+/-- Proposition expressing surjectivity of `dmOrdEmbed` below `ω^ω`. -/
 def DmEmbedSurjBelowOmegaOmega : Prop :=
   ∀ α < (ω : Ordinal) ^ (ω : Ordinal), ∃ m : Multiset Nat, dmOrdEmbed m = α
 
 theorem dmOrdEmbed_surjective_prop : DmEmbedSurjBelowOmegaOmega :=
   dmOrdEmbed_surjective_lt_opow_omega
 
-/-- Order-reflection schema needed for a fully unconditional lower-bound bridge. -/
+/-- Proposition expressing reflection of strict ordinal order into `DM`. -/
 def DmEmbedReflects : Prop :=
   ∀ {m₁ m₂ : Multiset Nat}, dmOrdEmbed m₁ < dmOrdEmbed m₂ → DM m₁ m₂
 
@@ -500,16 +499,15 @@ theorem dmOrdEmbed_eq_iff {m₁ m₂ : Multiset Nat} :
     dmOrdEmbed m₁ = dmOrdEmbed m₂ ↔ m₁ = m₂ :=
   ⟨fun h => dmOrdEmbed_injective h, fun h => by simp [h]⟩
 
-/-! ### Order-type isomorphism: (Multiset Nat, DM) ≅ₒ (Iio ω^ω, <) -/
+/-! ### Order-characterization package -/
 
-/-- Complete order-type characterization of the DM ordering on `Multiset Nat`.
-The embedding `dmOrdEmbed` is an order isomorphism from `(Multiset Nat, DM)` to
-`({α : Ordinal | α < ω^ω}, <)`:
+/-- Conjunction of the three stated properties of `dmOrdEmbed`:
 1. **Bi-directional order**: `DM m₁ m₂ ↔ dmOrdEmbed m₁ < dmOrdEmbed m₂`
 2. **Boundedness**: `dmOrdEmbed m < ω^ω` for all `m`
 3. **Surjectivity**: every ordinal below `ω^ω` is hit
 
-Together these imply the order type of `(Multiset Nat, DM)` is exactly `ω^ω`. -/
+The declaration returns this conjunction rather than a Lean `OrderIso`; injectivity is proved
+separately by `dmOrdEmbed_injective`. -/
 theorem dm_order_type_omega_omega :
     (∀ m₁ m₂ : Multiset Nat, DM m₁ m₂ ↔ dmOrdEmbed m₁ < dmOrdEmbed m₂) ∧
     (∀ m : Multiset Nat, dmOrdEmbed m < (ω : Ordinal) ^ (ω : Ordinal)) ∧
@@ -518,14 +516,14 @@ theorem dm_order_type_omega_omega :
    dmOrdEmbed_lt_opow_omega,
    CNFωω.dmOrdEmbed_surjective_lt_opow_omega⟩
 
-/-- Phase-B CNF scaffold, stated as the exact `ω^ω` order-type package used in the paper. -/
+/-- Alias of `dm_order_type_omega_omega` retaining the three-property conjunction. -/
 theorem phaseB_cnf_scaffold_exact_order_type :
     (∀ m₁ m₂ : Multiset Nat, DM m₁ m₂ ↔ dmOrdEmbed m₁ < dmOrdEmbed m₂) ∧
     (∀ m : Multiset Nat, dmOrdEmbed m < (ω : Ordinal) ^ (ω : Ordinal)) ∧
     (∀ α < (ω : Ordinal) ^ (ω : Ordinal), ∃ m : Multiset Nat, dmOrdEmbed m = α) :=
   dm_order_type_omega_omega
 
-/-- Phase-B cofinality restated on the reflected `dmRankOrd` image. -/
+/-- Surjectivity below `ω^ω` for the reflected `dmRankOrd` image. -/
 theorem phaseB_cnf_scaffold_cofinal :
     ∀ α < (ω : Ordinal) ^ (ω : Ordinal), ∃ m : Multiset Nat, dmRankOrd m = α :=
   CNFωω.dmRankOrd_surjective_lt_opow_omega

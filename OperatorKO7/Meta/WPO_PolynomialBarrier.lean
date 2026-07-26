@@ -2,19 +2,14 @@ import OperatorKO7.Meta.WPO_PolynomialBarrier_Schema
 import OperatorKO7.Meta.CompositionalMeasure_Impossibility
 
 /-!
-# WPO-Facing Polynomial-Algebra Barrier Corollary
+# WPO-facing bounded polynomial-algebra barrier corollaries
 
-This module does **not** formalize generic weighted path order metatheory.
-Instead, it packages a narrow consequence of the existing generalized bounded
-polynomial barrier:
+This module specializes the generalized bounded polynomial barrier to
+`WPOPolynomialDirectOrder`. Under the stated unboundedness and eventual base-dominance assumptions,
+the duplicating step obstructs global orientation in this direct polynomial-algebra branch.
 
-- if a direct order certifies strict comparison by a bounded-degree
-  constructor-local polynomial algebra, then the polynomial barrier already
-  blocks that direct order on the duplicating schema step.
-
-This is intended as a WPO-facing corollary for the direct polynomial-algebra
-branch used in tool implementations, not as a theorem about recursive path
-descent, max branches, or full WPO completeness.
+Generic recursive-path, maximum-branch, and completeness results require additional definitions and
+theorems beyond this branch.
 -/
 
 namespace OperatorKO7.WPOPolynomialBarrier
@@ -59,8 +54,7 @@ theorem no_global_step_orientation_wpoPolynomialDirect_of_wrap_pump
   intro b s n
   exact h (ko7System.dup_step b s n)
 
-/-- KO7-facing necessary condition for any successful direct WPO-style escape
-through a bounded polynomial algebra branch. -/
+/-- Under unboundedness and global orientation, eventual base dominance fails. -/
 theorem wpoPolynomialDirect_escape_requires_failure_of_base_dominance
     (W : StepDuplicatingSchema.WPOPolynomialDirectOrder ko7Schema)
     (hunbounded : StepDuplicatingSchema.HasUnboundedRangePoly W.measure)

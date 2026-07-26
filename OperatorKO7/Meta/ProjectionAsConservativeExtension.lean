@@ -1,14 +1,13 @@
 import OperatorKO7.Meta.ClassicalAscentProfile
 
 /-!
-# Projection as Conservative Extension
+# One-way witness-language projection
 
-Witness-language transport layer for the classical-side comparison program.
-
-This file stays honest: it does not assert a historical theorem about Gödelian
-comparison. It formalizes the exact witness-language extension shape used by the
-paper's discussion and instantiates it on the benchmark contract where the
-relevant transformed-call witness is already mechanized.
+This module defines a one-way lift from a witness proposition at one language
+level to a witness proposition at another. The benchmark value discharges the
+target from the independently available transformed-call witness, so its proof
+term does not depend on the source witness. Historical conservativity and
+source-dependent transport require stronger interfaces.
 -/
 
 namespace OperatorKO7.ProjectionAsConservativeExtension
@@ -29,12 +28,14 @@ structure WitnessLanguage where
   label : String
   level : WLevel
 
-/-- Conservative extension between witness languages on a fixed tower. -/
+/-- One-way witness lift between two language levels on a fixed tower. The
+structure contains a single implication and carries neither reflection nor
+equivalence laws. -/
 structure ConservativeExtension (T : WitnessTower)
     (base ext : WitnessLanguage) where
   lifts : HasWitness T base.level → HasWitness T ext.level
 
-/-- Transport `HasWitness` along a conservative extension. -/
+/-- Apply the stored one-way implication to a source witness. -/
 theorem ConservativeExtension.transports_hasWitness
     {T : WitnessTower} {base ext : WitnessLanguage}
     (hExt : ConservativeExtension T base ext)
@@ -42,8 +43,8 @@ theorem ConservativeExtension.transports_hasWitness
     HasWitness T ext.level :=
   hExt.lifts hBase
 
-/-- Transport `kappaLe` along a conservative extension when the target level is
-at least the extension's witness level. -/
+/-- Use the stored implication to construct a `kappaLe` witness at a higher
+target level. -/
 theorem ConservativeExtension.transports_kappaLe
     {T : WitnessTower} {base ext target : WitnessLanguage}
     (hExt : ConservativeExtension T base ext)
@@ -62,10 +63,9 @@ def transformedCallLanguage : WitnessLanguage where
   label := "transformed call"
   level := WLevel.transformedCall
 
-/-- On the benchmark contract tower, transformed-call witnesses are available,
-so imported-whole witness claims can be conservatively re-expressed at the
-transformed-call layer. This is a transport theorem, not a claim of internal
-whole-term adequacy. -/
+/-- Benchmark one-way lift whose target is discharged by the globally available
+transformed-call witness. The implementation ignores its source premise, so it
+records target availability rather than source-dependent transport. -/
 def benchmarkContractProjectionExtension :
     ConservativeExtension (contractTower ko7Tower benchmarkContract)
       importedWholeLanguage transformedCallLanguage where
@@ -85,8 +85,8 @@ theorem benchmarkContract_projection_extension_sound
       transformedCallLanguage.level :=
   benchmarkContractProjectionExtension.lifts hBase
 
-/-- The benchmark contract therefore has a conservative witness-language
-transport from imported-whole to transformed-call. -/
+/-- The benchmark target witness yields a `kappaLe` result at the
+transformed-call level under the source premise. -/
 theorem benchmarkContract_projection_extension_kappaLe
     (hBase : HasWitness (contractTower ko7Tower benchmarkContract)
       importedWholeLanguage.level) :
@@ -122,7 +122,7 @@ def benchmarkTransportComparison : ConcreteComparisonProfile where
   resolutionLabel := "first admissible witness at transformed-call"
   licensedReimportLabel := "transported transformed-call admission"
 
-/-- Typed historical annotation for the benchmark transport comparison layer. -/
+/-- Classification tags attached to the benchmark transport comparison layer. -/
 def benchmarkTransportHistoricalAnnotation :
     OperatorKO7.ClassicalAscentProfile.HistoricalComparisonAnnotation where
   baseKind := HistoricalBaseKind.benchmarkContractKO7
@@ -139,8 +139,8 @@ theorem benchmarkTransportAscentProfile_realizesSixStep :
   · exact ko7_kappaContract_le_transformedCall
   · exact ko7_kappaContract_le_transformedCall
 
-/-- The benchmark-contract conservative-extension layer now directly yields a
-concrete comparison profile, not only an abstract transport theorem. -/
+/-- The benchmark comparison profile satisfies its six stipulated propositions
+and carries the reflection family tag. -/
 theorem benchmarkContractProjectionExtension_instantiates_concreteComparison :
     RealizesSixStepShape benchmarkTransportAscentProfile.shape
       ∧ benchmarkTransportAscentProfile.family = AscentFamily.reflection := by

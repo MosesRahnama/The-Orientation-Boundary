@@ -8,10 +8,8 @@ import OperatorKO7.Meta.StructuralIdentityComparison
 
 Layer-Crossing-Under-External-License schema as a single Lean carrier.
 
-This file realizes the operational-inexpressibility manuscript's Definition 5.7 (`def:lcel-schema`) as a
-packaged six-slot structure at the Lean level. It is intentionally a
-**definition-and-packaging** layer: it does not rescue the paper's broader
-blanket mechanization claim for the LCEL block. The substrate propositions
+This file represents Paper C's Definition 5.7 (`def:lcel-schema`) as a
+packaged six-slot structure. Its scope is definition and packaging. The substrate propositions
 (`prop:lcel-reversibility`, `prop:lcel-boundary-factorization`) and the
 schema-level structural-identity theorem (`thm:lcel-structural-identity`)
 are developed in the companion files
@@ -40,9 +38,9 @@ the existing `FormalExternalClassicalComparisonObject`, adjoining the two
 slots (explicit license `Σ`, explicit reimport class `Γ'`) that the
 comparison object folds into `strongerFramework` and `reimport`.
 
-Adapters from the Gödel-side and benchmark-side comparison objects are
-supplied, witnessing the two instantiations named in the operational-inexpressibility manuscript's
-`thm:structural-identity` proof.
+Adapters from the synthetic Gödel-labelled comparison object and the benchmark
+comparison object supply the two displayed LCEL instances. The Gödel-labelled
+adapter inherits the stipulated finite-model scope of `ClassicalAscentProfile`.
 -/
 
 namespace OperatorKO7.LCELSchema
@@ -56,7 +54,7 @@ open OperatorKO7.StructuralIdentityComparison
 
 /-! ## Light propositional profile -/
 
-/-- the operational-inexpressibility manuscript Definition 5.7 read as a six-clause propositional profile. -/
+/-- Paper C Definition 5.7 read as a six-clause propositional profile. -/
 structure LCELSlotProfile where
   hasBaseSystem : Prop
   hasBoundary : Prop
@@ -65,7 +63,7 @@ structure LCELSlotProfile where
   hasReimportClass : Prop
   hasAnnotationFunctor : Prop
 
-/-- the operational-inexpressibility manuscript's LCEL realization: all six clauses hold. -/
+/-- Paper C's LCEL realization: all six clauses hold. -/
 def RealizesLCELSchema (P : LCELSlotProfile) : Prop :=
   P.hasBaseSystem
     ∧ P.hasBoundary
@@ -145,7 +143,7 @@ theorem StagewiseLCELEquivalent.preserves_realization
 
 /-! ## Richer typed LCEL boundary and annotation objects -/
 
-/-- Typed boundary object for the operational-inexpressibility manuscript's LCEL boundary slot `Π`.
+/-- Typed boundary object for Paper C's LCEL boundary slot `Π`.
 
 This records a witness family into the base-theory sentence space together with
 the two semantic side conditions that the paper treats as load-bearing:
@@ -172,7 +170,7 @@ theorem designated_realizes {B : FormalBaseTheorySemantics}
 
 end LCELBoundaryObject
 
-/-- Typed annotation functor for the operational-inexpressibility manuscript's LCEL slot
+/-- Typed annotation functor for Paper C's LCEL slot
 `Imp : Der(T⁺) → Annot(T)`.
 
 This remains artifact-facing: it records a typed annotation carrier, a decoder
@@ -215,15 +213,14 @@ end LCELAnnotationFunctor
 
 This bundles an existing `FormalExternalClassicalComparisonObject`
 with richer typed LCEL boundary/annotation objects and with the two extra
-slot fields that the operational-inexpressibility manuscript Definition 5.7 treats separately: an explicit
+slot fields that Paper C Definition 5.7 treats separately: an explicit
 external-license object `Σ` and an explicit reimport-class object `Γ'`.
 
-The structure does not fake proofs of the substrate propositions; it
-supplies the data the paper's LCEL definition names while retaining the
-older proposition-level witness surface for compatibility with the current
-LCEL theorem stack. The reversibility asymmetry and boundary factorization are derived in
+The structure supplies the data named by the LCEL definition while retaining
+the proposition-level witness surface used by the surrounding theorem stack.
+The reversibility asymmetry and boundary factorization are derived in
 `LCELReversibility.lean` conditional on additional witnesses that the
-paper glosses as standard facts. -/
+corresponding theorem statements require. -/
 structure FormalLCELInstance where
   /-- Underlying four-slot comparison object from
   `ClassicalAscentProfile`. Wraps base theory, obstruction, stronger
@@ -400,11 +397,8 @@ def benchmarkTransportLCELBoundaryObject :
     simpa using
       benchmarkTransportFormalExternalClassicalComparisonObject.obstructionContent.blocked_true
 
-/-- Rich benchmark-side annotation functor for the LCEL annotation slot.
-After the reimport-content admission-carrier upgrade, the admission
-space and the annotation space both coincide with the typed sentence
-space, so `annotate` is the identity on sentences rather than a
-constant landing on the designated imported sentence. -/
+/-- Benchmark-side annotation functor whose admission and annotation carriers
+both use the typed sentence space; `annotate` is the identity on sentences. -/
 def benchmarkTransportLCELAnnotationFunctor :
     LCELAnnotationFunctor
       benchmarkTransportFormalExternalClassicalComparisonObject.baseTheoryContent
@@ -434,11 +428,10 @@ def benchmarkTransportLCELReimportClassObject :
       benchmarkTransportFormalExternalClassicalComparisonObject.reimportContent :=
   defaultReimportClassObject benchmarkTransportFormalExternalClassicalComparisonObject
 
-/-- Gödel-side canonical LCEL instance. Wraps
+/-- Canonical LCEL instance for the synthetic Gödel-labelled model. Wraps
 `godel1931FormalExternalClassicalComparisonObject` with the two extra
-slots. The explicit `Σ` / `Γ'` carriers are now present as typed semantic
-objects, while the older proposition-level witness fields are retained as
-compatibility projections. -/
+slots. The `Σ` and `Γ'` carriers are typed objects, while the
+proposition-level witness fields remain as compatibility projections. -/
 def godel1931LCELInstance : FormalLCELInstance where
   comparison := godel1931FormalExternalClassicalComparisonObject
   boundaryObject := godel1931LCELBoundaryObject
@@ -494,10 +487,9 @@ def godel1931LCELInstance : FormalLCELInstance where
     · intro _
       exact godel1931LCELAnnotationFunctor.witness_realizes
 
-/-- Benchmark / DP-side canonical LCEL instance. Wraps the benchmark
-transport comparison object with the two extra slots. The explicit
-`Σ` / `Γ'` carriers are now present as typed semantic objects, while the
-older proposition-level witness fields are retained as compatibility
+/-- Canonical benchmark-side LCEL instance. Wraps the benchmark comparison
+object with the two extra slots. The `Σ` and `Γ'` carriers are typed
+objects, while the proposition-level witness fields remain as compatibility
 projections. -/
 def benchmarkTransportLCELInstance : FormalLCELInstance where
   comparison := benchmarkTransportFormalExternalClassicalComparisonObject
@@ -554,21 +546,23 @@ def benchmarkTransportLCELInstance : FormalLCELInstance where
     · intro _
       exact benchmarkTransportLCELAnnotationFunctor.witness_realizes
 
-/-- The Gödel-side LCEL instance realizes the operational-inexpressibility manuscript's LCEL schema. -/
+/-- The synthetic Gödel-labelled LCEL instance realizes its six supplied slot
+propositions. -/
 theorem godel1931LCELInstance_realizesSchema :
     RealizesLCELSchema godel1931LCELInstance.toSlotProfile := by
   exact
     godel1931LCELInstance.realizesLCELSchema_of_supported
       godel1931FormalExternalClassicalComparison_supported
 
-/-- The benchmark-side LCEL instance realizes the operational-inexpressibility manuscript's LCEL schema. -/
+/-- The benchmark-side LCEL instance realizes Paper C's LCEL schema. -/
 theorem benchmarkTransportLCELInstance_realizesSchema :
     RealizesLCELSchema benchmarkTransportLCELInstance.toSlotProfile := by
   exact
     benchmarkTransportLCELInstance.realizesLCELSchema_of_supported
       benchmarkTransportFormalExternalClassicalComparison_supported
 
-/-- Both canonical LCEL instances realize the schema. -/
+/-- The synthetic Gödel-labelled and benchmark LCEL instances each realize
+their supplied six-slot profiles. -/
 theorem canonical_lcel_instances_realize_schema :
     RealizesLCELSchema godel1931LCELInstance.toSlotProfile
       ∧ RealizesLCELSchema benchmarkTransportLCELInstance.toSlotProfile :=

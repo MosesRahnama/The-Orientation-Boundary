@@ -1,12 +1,12 @@
 import OperatorKO7.Meta.ContextClosed_SN_Full
 
 /-!
-Concrete derivational-complexity bounds for KO7.
+# Counted contextual reductions
 
-This file deliberately avoids any claim of a generic ordinal-extraction framework. Instead it
-derives a direct step-count bound from the already mechanized global polynomial witness `W`:
-every context-closed reduction in the full unguarded system has length strictly less than the
-`W`-value of its source term.
+`StepCtxFullPow` records the exact number of full contextual `Step` reductions.
+The imported strict descent of the polynomial witness `W` yields an additive
+drop bound and, using positivity of `W`, a strict source-weight bound. The
+relation here is the full unguarded contextual relation `StepCtxFull`.
 -/
 
 open OperatorKO7 Trace
@@ -17,7 +17,7 @@ namespace MetaSN_KO7
 /-- Exact-length reflexive-transitive closure of the full contextual relation. -/
 inductive StepCtxFullPow : Trace → Nat → Trace → Prop
 | refl (t : Trace) : StepCtxFullPow t 0 t
-| tail {a b c : Trace} (hab : StepCtxFull a b) (hbc : StepCtxFullPow b n c) :
+| tail {a b c : Trace} {n : Nat} (hab : StepCtxFull a b) (hbc : StepCtxFullPow b n c) :
     StepCtxFullPow a (n + 1) c
 
 /-- Every counted full-context derivation has length bounded by the drop in `W`. -/

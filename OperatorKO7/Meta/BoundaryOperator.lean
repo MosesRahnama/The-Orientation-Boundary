@@ -3,10 +3,11 @@ import Mathlib
 /-!
 # Boundary Operator Core
 
-This module introduces the WS-D boundary-operator carrier as a theorem-facing
-runtime object. The surrounding engine specification names several carriers that
-do not yet exist in the Lean tree, so this file lands the smallest honest local
-versions needed to support the boundary operator and its first transport layers.
+This module defines a boundary-operator record and a finite inhabited example.
+The record carries six equations or propositions as fields. Its gauge maps are
+not required to satisfy action laws, `Channel.preserves_isolation` is not linked
+to `send`, and the Landauer field imposes no positivity assumptions on its
+constants. Consumers requiring those properties must add them separately.
 
 The payload-discarding law is encoded as global non-recoverability rather than a
 pointwise negated existence statement. The pointwise statement would be
@@ -27,31 +28,34 @@ set_option linter.dupNamespace false
 
 universe u v
 
-/-- Minimal observable payload used by the licensed-quotient surface. -/
+/-- Real-valued carrier used for the cost field. -/
+abbrev KineticEnergy : Type := ℝ
+
+/-- Label-only observable record. -/
 structure Observable where
   label : String
   deriving DecidableEq, Repr
 
-/-- Minimal channel surface needed by the boundary operator and the
-pre-entanglement transport. -/
+/-- Partial-output channel with an unconstrained isolation proposition. -/
 structure Channel (X : Type u) (Y : Type v) where
   send : X → Option Y
   preserves_isolation : Prop := False
 
-/-- Meta-layer target used by the pre-entanglement transport surface. -/
+/-- One-constructor meta-layer tag. -/
 inductive MetaLayer
   | verdict
   deriving DecidableEq, Repr
 
-/-- Named placeholder for the licensed negative-separation witness required by
-the licensed-quotient factorization surface. -/
+/-- Package an arbitrary proposition together with a proof. The type name does
+not by itself connect the proposition to a Lawvere-Yanofsky theorem. -/
 structure LawvereYanofskyNegativeSeparation where
   obstruction : Prop
   holds : obstruction
 
-/-- The WS-D boundary-operator carrier. The five laws are carried as proof
-fields so the module remains theorem-facing without introducing standalone
-assumption declarations. -/
+/-- Boundary-operator carrier with six proof fields. `gauge_action_X` and
+`gauge_action_Y` are functions rather than verified group actions;
+`irreversibility` excludes exactly one domain preimage for each output; and
+`payloadDiscarding` excludes one global recovery map over all domain points. -/
 structure BoundaryOperator (X : Type u) (Y : Type v) where
   domain : X → Prop
   apply : (x : X) → domain x → Y
@@ -62,6 +66,9 @@ structure BoundaryOperator (X : Type u) (Y : Type v) where
   channel : Channel X Y
   Payload : Type v
   payload_extract : X → Payload
+  landauer_cost : (x : X) → domain x → KineticEnergy
+  kB : ℝ
+  temperature : ℝ
   partiality : ¬ ∀ x : X, domain x
   irreversibility :
     ∀ y : Y, ¬ ∃! xh : {x : X // domain x}, apply xh.1 xh.2 = y
@@ -76,6 +83,9 @@ structure BoundaryOperator (X : Type u) (Y : Type v) where
     ¬ ∃ recover : Y → Payload,
         ∀ xh : {x : X // domain x},
           recover (apply xh.1 xh.2) = payload_extract xh.1
+  landauerCost :
+    ∀ x : X, ∀ h : domain x,
+      kB * temperature * Real.log 2 ≤ landauer_cost x h
 
 attribute [instance] BoundaryOperator.gauge_struct
 
@@ -109,6 +119,11 @@ theorem payloadDiscarding_holds {X : Type u} {Y : Type v}
         ∀ xh : DomainPoint B,
           recover (B.apply xh.1 xh.2) = B.payload_extract xh.1 :=
   B.payloadDiscarding
+
+theorem landauerCost_holds {X : Type u} {Y : Type v}
+    (B : BoundaryOperator X Y) (x : X) (h : B.domain x) :
+    B.kB * B.temperature * Real.log 2 ≤ B.landauer_cost x h :=
+  B.landauerCost x h
 
 /-- The two-element gauge group used by the finite non-vacuous toy example. -/
 inductive Z2
@@ -156,9 +171,9 @@ def toyChannel : Channel (Option Bool) Bool where
     | none => none
   preserves_isolation := False
 
-/-- A smallest non-vacuous concrete boundary operator. Two live inputs collapse
-to one observable output, which makes irreversibility and payload discarding
-theorem-backed rather than vacuous. -/
+/-- Finite boundary-operator example. Two live inputs with distinct payloads
+map to `false`; `true` has no preimage. These facts make the irreversibility and
+global non-recovery proofs non-vacuous. -/
 noncomputable def toyBoundaryOperator : BoundaryOperator (Option Bool) Bool where
   domain x := x ≠ none
   apply _ _ := false
@@ -171,6 +186,9 @@ noncomputable def toyBoundaryOperator : BoundaryOperator (Option Bool) Bool wher
   payload_extract
     | some b => b
     | none => false
+  landauer_cost _ _ := Real.log 2
+  kB := 1
+  temperature := 1
   partiality := by
     intro hall
     exact hall none rfl
@@ -209,6 +227,11 @@ noncomputable def toyBoundaryOperator : BoundaryOperator (Option Bool) Bool wher
     simp at h0 h1
     have : false = true := h0.symm.trans h1
     simp at this
+  landauerCost := by
+    intro x h
+    have hlog : 0 ≤ Real.log 2 := by
+      exact Real.log_nonneg (by norm_num : (1 : ℝ) ≤ 2)
+    nlinarith
 
 @[simp] theorem toyBoundaryOperator_domain_none :
     ¬ toyBoundaryOperator.domain none := by

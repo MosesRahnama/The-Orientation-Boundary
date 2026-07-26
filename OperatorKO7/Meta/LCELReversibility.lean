@@ -1,53 +1,41 @@
 import OperatorKO7.Meta.LCELSchema
 
 /-!
-# LCEL Reversibility and Boundary Factorization
+# LCEL proposition-support packages
 
-Witness-parameterized packaging for the operational-inexpressibility manuscript Propositions 5.8
+Witness-parameterized packaging for Paper C Propositions 5.8
 (`prop:lcel-reversibility`) and 5.9 (`prop:lcel-boundary-factorization`).
 
-This file is intentionally conservative. It does **not** pretend to derive the
-paper's reversibility or factorization content from the LCEL carrier alone.
-Those claims are instance-sensitive and require external mathematics:
-
-- Axelsen--Glück / Nishida--Palacios--Vidal style partial-injection facts on
-  the step-duplicating side, or
-- Kreisel--Lévy / Beklemishev style conservativity facts on the reflection
-  side.
-
-What is mechanized here is the honest schema-level packaging:
-
-- explicit witness structures for the three clauses of reversibility
-  asymmetry, and
-- an explicit witness structure for the projection factorization.
-
-Any future substantive instance proof should enter by constructing these
-witnesses, not by weakening the theorem statements.
+The records in this file contain supplied propositions and proofs for the
+labels used in Paper C Propositions 5.8 and 5.9. Reversibility relations,
+inverse or partial-injection laws, projection maps, and a projection-composition
+equation require separate formal data. Instance packages below populate the
+proposition slots from the available LCEL semantic-support fields.
 -/
 
 namespace OperatorKO7.LCELReversibility
 
 open OperatorKO7.LCELSchema
 
-/-- the operational-inexpressibility manuscript Proposition 5.8 clause (1): base step-relation is reversible after
-projecting to the chosen observable boundary. -/
+/-- Supplied proposition slot for the base-reversibility clause. This record
+contains the proposition and its proof. -/
 structure BaseStepReversibilityWitness (L : FormalLCELInstance) : Type where
   isReversible : Prop
   holds : isReversible
 
-/-- the operational-inexpressibility manuscript Proposition 5.8 clause (2): adjoining the external license is not
-reversible at that same projection level. -/
+/-- Supplied proposition slot for the license-irreversibility clause. This
+record contains the proposition and its proof. -/
 structure LicenseIrreversibilityWitness (L : FormalLCELInstance) : Type where
   isIrreversible : Prop
   holds : isIrreversible
 
-/-- the operational-inexpressibility manuscript Proposition 5.8 clause (3): on the designated reimport class the
-licensed import is reversible back to a base-layer derivation. -/
+/-- Supplied proposition slot for the designated reimport-class clause. -/
 structure ReimportReversibilityWitness (L : FormalLCELInstance) : Type where
   isReversibleOnReimportClass : Prop
   holds : isReversibleOnReimportClass
 
-/-- Three-clause output package for the operational-inexpressibility manuscript Proposition 5.8. -/
+/-- Three supplied propositions and their proofs, labeled for Paper C
+Proposition 5.8. -/
 structure LCELReversibilityAsymmetry (L : FormalLCELInstance) : Type where
   baseReversible : Prop
   licenseIrreversible : Prop
@@ -56,8 +44,8 @@ structure LCELReversibilityAsymmetry (L : FormalLCELInstance) : Type where
   holdsLicense : licenseIrreversible
   holdsReimport : reimportReversibleOnReimportClass
 
-/-- the operational-inexpressibility manuscript Proposition 5.8 in honest artifact form: if the three constituent
-reversibility witnesses are supplied, the named asymmetry package exists. -/
+/-- Repackage three supplied proposition witnesses as the named asymmetry
+record. -/
 def lcel_reversibility_asymmetry_of_witnesses
     {L : FormalLCELInstance}
     (hBaseRev : BaseStepReversibilityWitness L)
@@ -71,20 +59,17 @@ def lcel_reversibility_asymmetry_of_witnesses
     holdsLicense := hLicenseIrrev.holds
     holdsReimport := hReimportRev.holds }
 
-/-- Witness for the factorization `π_T = π_rev ∘ π_irr` used in the operational-inexpressibility manuscript
-Proposition 5.9. The two proposition fields record exactly the two aspects that
-matter at schema level:
-
-- the reversible visible component, and
-- the irreversible boundary-sensitive component.
--/
+/-- Two supplied proposition slots labeled for the visible and
+boundary-sensitive components of Paper C Proposition 5.9. This record contains
+propositions and proofs; projection maps and a composition equation require a
+separate structure. -/
 structure ProjectionFactorizationWitness (L : FormalLCELInstance) : Type where
   visibleViaReversible : Prop
   sensitiveToIrreversible : Prop
   visibleHolds : visibleViaReversible
   sensitiveHolds : sensitiveToIrreversible
 
-/-- Named output package for the operational-inexpressibility manuscript Proposition 5.9. -/
+/-- Three proposition slots and proofs labeled for Paper C Proposition 5.9. -/
 structure LCELBoundaryFactorization (L : FormalLCELInstance) : Type where
   hasReversibleProjection : Prop
   hasIrreversibleQuotient : Prop
@@ -93,8 +78,8 @@ structure LCELBoundaryFactorization (L : FormalLCELInstance) : Type where
   holdsIrreversible : hasIrreversibleQuotient
   holdsBoundary : boundarySensitiveToIrreversible
 
-/-- the operational-inexpressibility manuscript Proposition 5.9 in honest artifact form: once a factorization
-witness is supplied, the boundary-factorization package is immediate. -/
+/-- Repackage the two supplied proposition witnesses as the named boundary
+record. -/
 def lcel_boundary_factorization_of_witness
     {L : FormalLCELInstance}
     (hFact : ProjectionFactorizationWitness L) :
@@ -106,21 +91,20 @@ def lcel_boundary_factorization_of_witness
     holdsIrreversible := hFact.sensitiveHolds
     holdsBoundary := hFact.sensitiveHolds }
 
-/-! ## Honest semantic support adapters -/
+/-! ## Proposition-support adapters -/
 
-/-- Current artifact-facing semantic support for the base layer of a typed LCEL
-instance. This is the theorem-backed proposition currently available from the
-formal external comparison object itself. -/
+/-- Available base-layer support proposition read from a typed LCEL
+instance. -/
 def SemanticBaseLayerSupport (L : FormalLCELInstance) : Prop :=
   L.comparison.baseTheoryContent.hasInternalProofLayer
 
-/-- Current artifact-facing semantic support for the obstruction-to-license
-transfer used by the LCEL asymmetry packaging. -/
+/-- Available obstruction-to-license support proposition read from a typed
+LCEL instance. -/
 def SemanticLicenseTransferSupport (L : FormalLCELInstance) : Prop :=
   L.comparison.semanticCoherence.obstructionTransfersToReflection
 
-/-- Current artifact-facing semantic support for the licensed reimport stage used
-by the LCEL asymmetry packaging. -/
+/-- Available licensed-reimport support proposition read from a typed LCEL
+instance. -/
 def SemanticReimportTransferSupport (L : FormalLCELInstance) : Prop :=
   L.comparison.semanticCoherence.reflectionTransfersToReimport
 
@@ -128,9 +112,9 @@ def SemanticReimportTransferSupport (L : FormalLCELInstance) : Prop :=
 
 /-- Stronger support record for the base-layer side of LCEL reversibility.
 
-This keeps the current artifact-facing semantic support proposition, but
-adds the designated internal proof witness and the designated boundary witness
-used by the current canonical LCEL instances. -/
+It stores the available semantic-support proposition, a designated internal
+proof witness, and a designated boundary witness used by the named LCEL
+instances. -/
 structure BaseReversibilitySupport (L : FormalLCELInstance) : Type where
   semanticBaseHolds : SemanticBaseLayerSupport L
   internalSentence : L.comparison.baseTheoryContent.Sentence
@@ -196,10 +180,9 @@ end BaseReversibilitySupport
 
 /-- Stronger support record for the external-license side of LCEL reversibility.
 
-This carries not just the current obstruction-to-reflection transfer
-proposition, but also the concrete blocked sentence, its non-provability and
-truth, and the designated stronger-framework / license data witnessing that
-transfer. -/
+It stores the available obstruction-to-reflection transfer proposition, the
+blocked sentence, proofs of its unprovability and truth, and the designated
+stronger-framework and license data. -/
 structure LicenseIrreversibilitySupport (L : FormalLCELInstance) : Type where
   semanticTransferHolds : SemanticLicenseTransferSupport L
   externalLicenseHolds : L.externalLicenseWitness
@@ -266,7 +249,7 @@ end LicenseIrreversibilitySupport
 
 /-- Stronger support record for the reimport side of LCEL reversibility.
 
-This packages the current reflection-to-reimport transfer together with the
+This packages the available reflection-to-reimport transfer together with the
 typed reimport witness, its imported sentence, and the designated annotation
 evidence already present in the LCEL instance. -/
 structure ReimportReversibilitySupport (L : FormalLCELInstance) : Type where
@@ -343,10 +326,9 @@ end ReimportReversibilitySupport
 
 /-- Stronger support record for the factorization package.
 
-This is intentionally still instance-sensitive: it carries the stronger
-reimport-visible support and the stronger license-sensitive support, together
-with the coherence equalities that tie the obstruction, reflection, and
-reimport layers into one boundary-sensitive factorization story. -/
+This instance-sensitive record carries reimport-visible support,
+license-sensitive support, and coherence equalities between the obstruction,
+reflection, and reimport layers. -/
 structure BoundaryFactorizationSupport (L : FormalLCELInstance) : Type where
   visibleSupport : ReimportReversibilitySupport L
   sensitiveSupport : LicenseIrreversibilitySupport L
@@ -394,8 +376,8 @@ def toLCELBoundaryFactorization
 
 end BoundaryFactorizationSupport
 
-/-- Build stronger base-layer support from the current LCEL carrier and the
-currently available base-layer semantic theorem. -/
+/-- Build base-layer proposition support from the LCEL carrier and its available
+semantic theorem. -/
 def baseReversibilitySupport_of_semanticBase
     {L : FormalLCELInstance}
     (hBase : SemanticBaseLayerSupport L) :
@@ -411,8 +393,8 @@ def baseReversibilitySupport_of_semanticBase
       simpa using L.boundaryObject.designated_true
     boundaryRealized := L.boundaryObject.designated_realizes }
 
-/-- Build stronger license-side support from the current LCEL carrier and the
-currently available obstruction-to-reflection transfer theorem. -/
+/-- Build license-side proposition support from the LCEL carrier and its
+available obstruction-to-reflection transfer theorem. -/
 def licenseIrreversibilitySupport_of_semanticTransfer
     {L : FormalLCELInstance}
     (hLicense : SemanticLicenseTransferSupport L) :
@@ -436,8 +418,8 @@ def licenseIrreversibilitySupport_of_semanticTransfer
     blockedLicensedAdmission :=
       L.comparison.reflectionContent.blocked_licensedAdmission }
 
-/-- Build stronger reimport-side support from the current LCEL carrier and the
-currently available reflection-to-reimport transfer theorem. -/
+/-- Build reimport-side proposition support from the LCEL carrier and its
+available reflection-to-reimport transfer theorem. -/
 def reimportReversibilitySupport_of_semanticTransfer
     {L : FormalLCELInstance}
     (hReimport : SemanticReimportTransferSupport L) :
@@ -531,10 +513,8 @@ def lcelBoundaryFactorization_of_strongerSupport
       (LicenseIrreversibilitySupport.supported (hSupport.sensitiveSupport)
         ∧ L.boundaryObject.realized) := rfl
 
-/-- Turn the currently mechanized base-layer semantic support into the abstract
-LCEL base-step reversibility witness slot. This does not claim that the full
-paper proposition has been derived from the carrier alone; it only records the
-current theorem-backed support surface honestly. -/
+/-- Place the available base-layer semantic-support proposition in the abstract
+base-step witness slot. The result remains a proposition-support record. -/
 def baseStepReversibilityWitness_of_semanticBase
     {L : FormalLCELInstance}
     (hBase : SemanticBaseLayerSupport L) :
@@ -542,7 +522,7 @@ def baseStepReversibilityWitness_of_semanticBase
   { isReversible := SemanticBaseLayerSupport L
     holds := hBase }
 
-/-- Turn the currently mechanized obstruction-to-license transfer support into
+/-- Place the available obstruction-to-license transfer support in
 the abstract LCEL license-irreversibility witness slot. -/
 def licenseIrreversibilityWitness_of_semanticTransfer
     {L : FormalLCELInstance}
@@ -551,7 +531,7 @@ def licenseIrreversibilityWitness_of_semanticTransfer
   { isIrreversible := SemanticLicenseTransferSupport L
     holds := hLicense }
 
-/-- Turn the currently mechanized reflection-to-reimport transfer support into
+/-- Place the available reflection-to-reimport transfer support in
 the abstract LCEL reimport-reversibility witness slot. -/
 def reimportReversibilityWitness_of_semanticTransfer
     {L : FormalLCELInstance}
@@ -560,10 +540,9 @@ def reimportReversibilityWitness_of_semanticTransfer
   { isReversibleOnReimportClass := SemanticReimportTransferSupport L
     holds := hReimport }
 
-/-- Package the current formal external transfer surface as a boundary-
-factorization witness. The reversible-visible component is represented by the
-reflection-to-reimport transfer, and the irreversible-sensitive component by the
-obstruction-to-reflection transfer. -/
+/-- Package two formal transfer propositions in the boundary-factorization
+witness slots. The visible slot stores reflection-to-reimport transfer, and the
+sensitive slot stores obstruction-to-reflection transfer. -/
 def projectionFactorizationWitness_of_semanticTransfers
     {L : FormalLCELInstance}
     (hVisible : SemanticReimportTransferSupport L)
@@ -574,8 +553,8 @@ def projectionFactorizationWitness_of_semanticTransfers
     visibleHolds := hVisible
     sensitiveHolds := hSensitive }
 
-/-- Canonical LCEL reversibility-asymmetry package assembled directly from the
-current semantic support surface. -/
+/-- LCEL asymmetry proposition package assembled from the supplied semantic
+support fields. -/
 def lcelReversibilityAsymmetry_of_semanticSupports
     {L : FormalLCELInstance}
     (hBase : SemanticBaseLayerSupport L)
@@ -611,8 +590,8 @@ def lcelReversibilityAsymmetry_of_semanticSupports
     (lcelReversibilityAsymmetry_of_semanticSupports hBase hLicense hReimport).reimportReversibleOnReimportClass =
       SemanticReimportTransferSupport L := rfl
 
-/-- Canonical LCEL boundary-factorization package assembled directly from the
-current semantic support surface. -/
+/-- LCEL boundary proposition package assembled from the supplied semantic
+support fields. -/
 def lcelBoundaryFactorization_of_semanticSupports
     {L : FormalLCELInstance}
     (hVisible : SemanticReimportTransferSupport L)
@@ -662,22 +641,22 @@ theorem godel1931_semanticReimportTransferSupport :
     ⟨_, hTransfer⟩
   simpa [SemanticReimportTransferSupport, godel1931LCELInstance]
 
-/-- Stronger Gödel-side base support package assembled from the typed LCEL
-carrier and the current semantic base-layer theorem. -/
+/-- Gödel-side base support package assembled from the typed LCEL carrier and
+its semantic base-layer theorem. -/
 def godel1931BaseReversibilitySupport :
     BaseReversibilitySupport godel1931LCELInstance :=
   baseReversibilitySupport_of_semanticBase
     godel1931_semanticBaseLayerSupport
 
-/-- Stronger Gödel-side license-side support package assembled from the typed
-LCEL carrier and the current semantic transfer theorem. -/
+/-- Gödel-side license support package assembled from the typed LCEL carrier and
+its semantic transfer theorem. -/
 def godel1931LicenseIrreversibilitySupport :
     LicenseIrreversibilitySupport godel1931LCELInstance :=
   licenseIrreversibilitySupport_of_semanticTransfer
     godel1931_semanticLicenseTransferSupport
 
-/-- Stronger Gödel-side reimport-side support package assembled from the typed
-LCEL carrier and the current semantic transfer theorem. -/
+/-- Gödel-side reimport support package assembled from the typed LCEL carrier
+and its semantic transfer theorem. -/
 def godel1931ReimportReversibilitySupport :
     ReimportReversibilitySupport godel1931LCELInstance :=
   reimportReversibilitySupport_of_semanticTransfer
@@ -691,36 +670,36 @@ def godel1931BoundaryFactorizationSupport :
     godel1931ReimportReversibilitySupport
     godel1931LicenseIrreversibilitySupport
 
-/-- Honest Gödel-side LCEL asymmetry witness package assembled from the current
-formal semantic support layer. -/
+/-- Gödel-side LCEL asymmetry witness package assembled from the formal semantic
+support layer. -/
 def godel1931BaseStepReversibilityWitness :
     BaseStepReversibilityWitness godel1931LCELInstance :=
   baseStepReversibilityWitness_of_semanticBase
     godel1931_semanticBaseLayerSupport
 
-/-- Honest Gödel-side LCEL license witness assembled from the current formal
-semantic transfer layer. -/
+/-- Gödel-side LCEL license witness assembled from the formal semantic transfer
+layer. -/
 def godel1931LicenseIrreversibilityWitness :
     LicenseIrreversibilityWitness godel1931LCELInstance :=
   licenseIrreversibilityWitness_of_semanticTransfer
     godel1931_semanticLicenseTransferSupport
 
-/-- Honest Gödel-side LCEL reimport witness assembled from the current formal
-semantic transfer layer. -/
+/-- Gödel-side LCEL reimport witness assembled from the formal semantic transfer
+layer. -/
 def godel1931ReimportReversibilityWitness :
     ReimportReversibilityWitness godel1931LCELInstance :=
   reimportReversibilityWitness_of_semanticTransfer
     godel1931_semanticReimportTransferSupport
 
-/-- Honest Gödel-side LCEL boundary-factorization witness package assembled from
-the current formal semantic transfer layer. -/
+/-- Gödel-side LCEL boundary witness package assembled from the formal semantic
+transfer layer. -/
 def godel1931ProjectionFactorizationWitness :
     ProjectionFactorizationWitness godel1931LCELInstance :=
   projectionFactorizationWitness_of_semanticTransfers
     godel1931_semanticReimportTransferSupport
     godel1931_semanticLicenseTransferSupport
 
-/-- Honest Gödel-side LCEL reversibility-asymmetry package. -/
+/-- Gödel-side LCEL asymmetry proposition package. -/
 def godel1931LCELReversibilityAsymmetry :
     LCELReversibilityAsymmetry godel1931LCELInstance :=
   lcelReversibilityAsymmetry_of_semanticSupports
@@ -728,7 +707,7 @@ def godel1931LCELReversibilityAsymmetry :
     godel1931_semanticLicenseTransferSupport
     godel1931_semanticReimportTransferSupport
 
-/-- Honest Gödel-side LCEL boundary-factorization package. -/
+/-- Gödel-side LCEL boundary proposition package. -/
 def godel1931LCELBoundaryFactorization :
     LCELBoundaryFactorization godel1931LCELInstance :=
   lcelBoundaryFactorization_of_semanticSupports
@@ -769,22 +748,22 @@ theorem benchmarkTransport_semanticReimportTransferSupport :
     ⟨_, hTransfer⟩
   simpa [SemanticReimportTransferSupport, benchmarkTransportLCELInstance]
 
-/-- Stronger benchmark-side base support package assembled from the typed LCEL
-carrier and the current semantic base-layer theorem. -/
+/-- Benchmark-side base support package assembled from the typed LCEL carrier
+and its semantic base-layer theorem. -/
 def benchmarkTransportBaseReversibilitySupport :
     BaseReversibilitySupport benchmarkTransportLCELInstance :=
   baseReversibilitySupport_of_semanticBase
     benchmarkTransport_semanticBaseLayerSupport
 
-/-- Stronger benchmark-side license-side support package assembled from the
-typed LCEL carrier and the current semantic transfer theorem. -/
+/-- Benchmark-side license support package assembled from the typed LCEL carrier
+and its semantic transfer theorem. -/
 def benchmarkTransportLicenseIrreversibilitySupport :
     LicenseIrreversibilitySupport benchmarkTransportLCELInstance :=
   licenseIrreversibilitySupport_of_semanticTransfer
     benchmarkTransport_semanticLicenseTransferSupport
 
-/-- Stronger benchmark-side reimport-side support package assembled from the
-typed LCEL carrier and the current semantic transfer theorem. -/
+/-- Benchmark-side reimport support package assembled from the typed LCEL
+carrier and its semantic transfer theorem. -/
 def benchmarkTransportReimportReversibilitySupport :
     ReimportReversibilitySupport benchmarkTransportLCELInstance :=
   reimportReversibilitySupport_of_semanticTransfer
@@ -798,36 +777,36 @@ def benchmarkTransportBoundaryFactorizationSupport :
     benchmarkTransportReimportReversibilitySupport
     benchmarkTransportLicenseIrreversibilitySupport
 
-/-- Honest benchmark-side LCEL asymmetry witness package assembled from the
-current formal semantic support layer. -/
+/-- Benchmark-side LCEL asymmetry witness package assembled from the formal
+semantic support layer. -/
 def benchmarkTransportBaseStepReversibilityWitness :
     BaseStepReversibilityWitness benchmarkTransportLCELInstance :=
   baseStepReversibilityWitness_of_semanticBase
     benchmarkTransport_semanticBaseLayerSupport
 
-/-- Honest benchmark-side LCEL license witness assembled from the current formal
-semantic transfer layer. -/
+/-- Benchmark-side LCEL license witness assembled from the formal semantic
+transfer layer. -/
 def benchmarkTransportLicenseIrreversibilityWitness :
     LicenseIrreversibilityWitness benchmarkTransportLCELInstance :=
   licenseIrreversibilityWitness_of_semanticTransfer
     benchmarkTransport_semanticLicenseTransferSupport
 
-/-- Honest benchmark-side LCEL reimport witness assembled from the current
-formal semantic transfer layer. -/
+/-- Benchmark-side LCEL reimport witness assembled from the formal semantic
+transfer layer. -/
 def benchmarkTransportReimportReversibilityWitness :
     ReimportReversibilityWitness benchmarkTransportLCELInstance :=
   reimportReversibilityWitness_of_semanticTransfer
     benchmarkTransport_semanticReimportTransferSupport
 
-/-- Honest benchmark-side LCEL boundary-factorization witness package assembled
-from the current formal semantic transfer layer. -/
+/-- Benchmark-side LCEL boundary witness package assembled from the formal
+semantic transfer layer. -/
 def benchmarkTransportProjectionFactorizationWitness :
     ProjectionFactorizationWitness benchmarkTransportLCELInstance :=
   projectionFactorizationWitness_of_semanticTransfers
     benchmarkTransport_semanticReimportTransferSupport
     benchmarkTransport_semanticLicenseTransferSupport
 
-/-- Honest benchmark-side LCEL reversibility-asymmetry package. -/
+/-- Benchmark-side LCEL asymmetry proposition package. -/
 def benchmarkTransportLCELReversibilityAsymmetry :
     LCELReversibilityAsymmetry benchmarkTransportLCELInstance :=
   lcelReversibilityAsymmetry_of_semanticSupports
@@ -835,7 +814,7 @@ def benchmarkTransportLCELReversibilityAsymmetry :
     benchmarkTransport_semanticLicenseTransferSupport
     benchmarkTransport_semanticReimportTransferSupport
 
-/-- Honest benchmark-side LCEL boundary-factorization package. -/
+/-- Benchmark-side LCEL boundary proposition package. -/
 def benchmarkTransportLCELBoundaryFactorization :
     LCELBoundaryFactorization benchmarkTransportLCELInstance :=
   lcelBoundaryFactorization_of_semanticSupports

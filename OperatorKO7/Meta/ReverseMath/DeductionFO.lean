@@ -18,10 +18,10 @@ needs.
 `derivableFO_sound`: if `M ⊨ T` then for every `DerivableFO T φ` and every environment
 `env : Fin n → M`, `φ.Realize default env`. At `n = 0` (a `Sentence`) this is the usual `M ⊨ φ`.
 
-Rules: `hyp` (theory axioms), `mp`, classical-propositional `ax_k`/`ax_s`/`ax_dne` (at every level),
-`all_intro` (generalization: `φ ⊢ ∀ φ`), `all_elim` (specialization: `∀ φ ⊢ φ`). Each is purely
-syntactic and individually sound; instantiation at terms and the equality axioms are the next
-constructors to add for the full object derivation.
+Rules include `hyp` (theory axioms), `mp`, classical-propositional
+`ax_k`/`ax_s`/`ax_dne` at every level, `all_intro`, term specialization through
+`all_elim`, and the equality constructors `eq_refl`, `eq_symm`, `eq_trans`, and
+`eq_subst`. The soundness theorem covers every listed constructor.
 
 No `sorry`, `axiom`, `native_decide`, or semantic-premise smuggling.
 -/

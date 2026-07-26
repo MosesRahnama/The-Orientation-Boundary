@@ -6,23 +6,9 @@ import OperatorKO7.Meta.SchemaForgettingWitness
 /-!
 # Operational incompleteness for the duplicated payload coordinate
 
-This module packages a narrow theorem-backed notion of **operational
-incompleteness** for the KO7 duplicating recursor.
+## Formal Scope
 
-The claim formalized here is intentionally precise:
-
-- the direct whole-term witness language for KO7 is empty;
-- mathematically sound witnesses do exist above that layer;
-- under the benchmark contract the first admissible witness appears only at the
-  transformed-call layer;
-- the transformed witness is carried by a rank that explicitly drops wrapper
-  sensitivity, i.e. it works only by **certified forgetting** of the duplicated
-  payload coordinate.
-
-This is a witness-language incompleteness statement, not an undecidability
-statement. The point is not that the duplicated payload is meaningless, but
-that the direct whole-term proof language cannot remain fully sensitive to it
-and still certify the KO7 duplicating step.
+The package combines imported witness-threshold bounds with existence of one certified-forgetting witness. It does not prove that every admissible witness requires forgetting.
 -/
 
 namespace OperatorKO7.MetaOperationalIncompleteness
@@ -32,13 +18,9 @@ open OperatorKO7.Trace
 open OperatorKO7.WitnessOrder
 open OperatorKO7.ConfessionMethodFamily
 
-/-- A transformed witness that succeeds by orienting the duplicating step while
-explicitly violating wrapper sensitivity on the duplicated payload coordinate.
-
-This is the narrow formal content behind the informal phrase "ignore the
-payload": the witness comes with an explicit rank, and that rank can be shown
-not to satisfy the wrapper-subterm sensitivity expected of the direct
-whole-term barrier families. -/
+/-- A rank together with duplicating-step orientation and explicit witnesses of
+two wrapper-sensitivity failures. The structure records their conjunction; it
+does not assert a causal relation among the fields. -/
 structure CertifiedForgettingWitness where
   rank : Trace → Nat
   orientsDupStep :
@@ -48,8 +30,8 @@ structure CertifiedForgettingWitness where
   violatesPayloadRight :
     ∃ x y : Trace, ¬ (rank (app x y) > rank y)
 
-/-- KO7's dependency-pair projection is the canonical certified-forgetting
-witness in the current artifact. -/
+/-- Package the dependency-pair projection with its proved orientation and
+sensitivity-violation fields. -/
 def dpCertifiedForgettingWitness : CertifiedForgettingWitness where
   rank := OperatorKO7.CompositionalImpossibility.dpProjection
   orientsDupStep := OperatorKO7.CompositionalImpossibility.dp_projection_orients_rec_succ
@@ -130,8 +112,7 @@ Interpretation:
 - truth-level witnesses exist above that universe;
 - under the benchmark contract the first admissible witness sits at the
   transformed-call layer;
-- that transformed-call witness succeeds by certified forgetting of wrapper
-  sensitivity on the duplicated payload coordinate. -/
+- one certified-forgetting witness is supplied at the transformed-call layer. -/
 structure PayloadOperationalIncompleteness where
   noDirectWhole :
     ¬ HasWitness ko7Tower WLevel.directWhole
@@ -152,14 +133,14 @@ def ko7PayloadOperationalIncompleteness : PayloadOperationalIncompleteness where
   contractWitnessAtTransformedCall := ko7_kappaContract_le_transformedCall
   certifiedForgetting := dpCertifiedForgettingWitness
 
-/-- Paper-facing packaged constant for the same formal object. -/
+/-- public packaged constant for the same formal object. -/
 def ko7_operationally_incomplete_at_payload :
     PayloadOperationalIncompleteness :=
   ko7PayloadOperationalIncompleteness
 
-/-- A sharper corollary: any benchmark-admissible KO7 witness must live above
-the imported-whole layer, and the artifact already exhibits one whose rank
-works only by violating wrapper sensitivity. -/
+/-- Conjunction of the imported threshold bounds and existence of one
+certified-forgetting witness. Despite its historical name, this theorem does
+not quantify over every admissible witness. -/
 theorem ko7_admissible_witness_requires_certified_forgetting :
     kappaGt (contractTower ko7Tower benchmarkContract) WLevel.importedWhole
       ∧ kappaLe (contractTower ko7Tower benchmarkContract) WLevel.transformedCall

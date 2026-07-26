@@ -2,12 +2,12 @@ namespace OperatorKO7.MatrixResidualTaxonomy
 
 /-- Exact residual matrix subfamilies replacing the old opaque residual label.
 
-LONG-22 Lane X additive extension (`unconstrainedRelationClosed`):
-records that the unconstrained relation has a separate closed-by-
-named-theorem family of its own under the LONG-22 X.5 unrestricted-
-split final catalog. The legacy `unconstrainedRelation` constructor is
-preserved verbatim (downstream `MatrixResidualStatusCatalog` continues
-to assert the legacy `notYetMethodClass` status against it). -/
+The `unconstrainedRelationClosed` constructor records that the
+unconstrained relation has a separate closed-by-named-theorem family of
+its own under the unrestricted-split final catalog. The legacy
+`unconstrainedRelation` constructor is preserved verbatim (downstream
+`MatrixResidualStatusCatalog` continues to assert the legacy
+`notYetMethodClass` status against it). -/
 inductive MatrixResidualFamily
   | componentwiseWeakStrict
   | paretoProduct
@@ -21,19 +21,19 @@ inductive MatrixResidualFamily
   | unconstrainedRelationClosed
   deriving DecidableEq, Repr
 
-/-- Procedure-grade closure labels for exact residual matrix subfamilies.
+/-- Engine-grade closure labels for exact residual matrix subfamilies.
 
-LONG-22 Lane X additive extension (`closedByUnrestrictedSplitFinalCatalog`):
-records that a residual family previously labeled `notYetMethodClass`
-has been promoted to a closed-by-named-theorem state by Lane X's
+The `closedByUnrestrictedSplitFinalCatalog` constructor records that a
+residual family previously labeled `notYetMethodClass` is promoted to a
+closed-by-named-theorem state by
 `unrestricted_matrix_classes_split_final_catalog_unconditional`. The
 existing five constructors are preserved verbatim; the family-level
 status function `matrixResidualClosureStatus` is unchanged for backward
 compatibility (downstream consumers in
 `ToolSearchFragmentCoverage_Status.MatrixResidualStatusCatalog` continue
 to assert `unconstrainedRelation = .notYetMethodClass`). The new
-constructor surfaces only at the catalog-row layer, where Lane X adds a
-sibling row for the unrestricted-split closure. -/
+constructor surfaces only at the catalog-row layer, where the
+unrestricted-split closure adds a sibling row. -/
 inductive MatrixClosureStatus
   | blocked
   | reducedToExistingTheorem

@@ -2,62 +2,17 @@ import OperatorKO7.Kernel
 import OperatorKO7.Meta.Recursor.DPConfessionLicense
 
 /-!
-# Recursor Free Algebra over the seven-arity KO7 signature
+# Fold algebra for the seven-constructor `RecursorTerm` signature
 
-This module supplies the substrate that replaces the W17.3
-`PartialProgressClaim` carriers in
-`Meta/Recursor/DPConfessionLicense.lean` with unconditional theorems.
-The closure path requires a custom free-algebra surface over the
-seven-arity KO7 signature
-`{void, delta, integrate, merge, app, recR, eqWit}`. This module
-ships the surface and the substitution-invariance induction
-principle.
+`SigmaAlgebra` supplies interpretations for one nullary, two unary, three binary, and one ternary
+constructor. `RecursorTerm.fold` evaluates a term in such an algebra.
+`RecursorFreeAlgebra.substitution_invariance`, despite its historical name, is the ordinary fold
+uniqueness theorem for a function satisfying the seven homomorphism equations.
 
-## Why a custom surface
-
-Mathlib's `Mathlib.Algebra.Free`, `FreeMonoid.Basic`, and
-`Mathlib.Algebra.FreeMagmaWithZero` package free algebras over a
-single binary operation (`Free.Magma`) or a single monoid operation
-(`FreeMonoid`). Neither generalizes cleanly to a seven-arity mixed
-signature with a constant (`void`), three unaries (`delta`,
-`integrate`, single-argument view of `merge`/`app`/etc.), three
-binaries (`merge`, `app`, `eqWit`), and one ternary (`recR`).
-The W17.3 `PartialProgressClaim` carrier flagged this as the
-specific Mathlib obstruction. The closure path stated in
-`Meta/Recursor/DPConfessionLicense.lean` is "define a custom
-`RecursorFreeAlgebra` ... prove the substitution-invariance lemma
-by structural induction on the closed-term tree". This module
-executes that closure path.
-
-## What the surface provides
-
-The `RecursorTerm` inductive type already lives in
-`Meta/Recursor/DPConfessionLicense.lean` (introduced under the
-honest-failure carrier). Here we add:
-
-  * `Σ-algebra` structure record bundling the seven operator slots.
-  * `RecursorTerm.fold`: the canonical universal-property fold from
-    `RecursorTerm` to any Σ-algebra.
-  * `RecursorTerm.fold_unique`: the universal property — any
-    function that respects the seven operators agrees with `fold`
-    on every closed term. This is the substitution-invariance
-    induction principle the closure path requires.
-  * `IsSigmaHomomorphism`: the predicate "respects all seven
-    operators".
-  * `DpCollapseToVoidSigma`: the constant-`void` Σ-algebra
-    structure. Every `RecursorTerm` folds to `void` under this
-    structure. This is the formal handle on the
-    `dpCollapseToVoid` collapse used by the existing W17.3
-    negative-witness lemma.
-  * `FactorsThroughCollapse`: the "image of a function defined on
-    the constant-collapse Σ-algebra" predicate. The unconditional
-    theorem is "every signature-fold-expressible function factors
-    through `dpCollapseToVoid`", combined with the existing
-    `DP_projection_is_not_substitution_invariant` lemma to derive
-    "DP projection is not signature-fold-expressible".
-
-No `sorry`. No new `axiom`. The substitution-invariance principle
-closes by direct structural induction on `RecursorTerm`.
+The constant algebra sends every constructor to one value. `FactorsThroughCollapse` is exactly the
+predicate that a function is constant, and the final theorems prove constancy and consequent failure
+to distinguish two terms. This module does not prove that a dependency-pair projection is
+inexpressible or substitution-variant.
 -/
 
 open OperatorKO7
@@ -67,8 +22,8 @@ namespace OperatorKO7.Meta.Recursor.RecursorFreeAlgebra
 
 universe u
 
-/-- A `Σ-algebra` over the seven-arity KO7 signature. The seven slots
-record the carrier-side image of each `RecursorTerm` constructor. -/
+/-- An algebra over the seven-constructor, mixed-arity `RecursorTerm` signature. The seven slots
+record the carrier-side interpretation of each constructor. -/
 structure SigmaAlgebra (α : Type u) : Type u where
   void      : α
   delta     : α → α
@@ -78,9 +33,8 @@ structure SigmaAlgebra (α : Type u) : Type u where
   recR      : α → α → α → α
   eqWit     : α → α → α
 
-/-- The canonical universal-property fold from `RecursorTerm` to any
-`SigmaAlgebra` carrier. This is the unique Σ-algebra homomorphism
-into the target carrier, by the universal property of free algebras. -/
+/-- Recursive evaluation of `RecursorTerm` in a `SigmaAlgebra`. Uniqueness under the homomorphism
+equations is proved below. -/
 def RecursorTerm.fold {α : Type u} (S : SigmaAlgebra α) :
     RecursorTerm → α
   | .void          => S.void
@@ -124,14 +78,9 @@ theorem RecursorTerm.fold_isSigmaHomomorphism
   pres_recR      := fun _ _ _ => rfl
   pres_eqWit     := fun _ _ => rfl
 
-/-- **Substitution-invariance induction principle.** The universal
-property of the free algebra: any Σ-homomorphism `f : RecursorTerm
-→ α` agrees with the canonical fold on every closed term. This is
-the closure-path principle: a function determined by its
-action on the seven generators is uniquely determined on the entire
-free algebra.
-
-Proof: by direct structural induction on the closed-term tree. -/
+/-- Any function satisfying the seven homomorphism equations agrees with the recursive fold. The
+historical declaration name uses “substitution invariance,” but the theorem mentions no substitution
+operation. -/
 theorem RecursorFreeAlgebra.substitution_invariance
     {α : Type u} (S : SigmaAlgebra α)
     (f : RecursorTerm → α) (hf : IsSigmaHomomorphism f S) :
@@ -161,9 +110,8 @@ def DpCollapseToVoidSigma : SigmaAlgebra RecursorTerm where
   recR      := fun _ _ _ => RecursorTerm.void
   eqWit     := fun _ _ => RecursorTerm.void
 
-/-- The fold under the constant-`void` Σ-algebra structure agrees
-with `dpCollapseToVoid` (the existing W17.3 negative-witness
-substitution): every closed term folds to `void`. -/
+/-- Folding through the constant-`void` algebra agrees with the constant function
+`dpCollapseToVoid`. -/
 theorem RecursorTerm.fold_DpCollapseToVoidSigma_eq_dpCollapseToVoid
     (t : RecursorTerm) :
     RecursorTerm.fold DpCollapseToVoidSigma t = dpCollapseToVoid t := by
@@ -176,18 +124,12 @@ theorem RecursorTerm.fold_DpCollapseToVoidSigma_eq_dpCollapseToVoid
   | recR _ _ _ _ _ _ => rfl
   | eqWit _ _ _ _ => rfl
 
-/-- "Factors through the constant-`void` Σ-algebra" predicate: a
-function `P : RecursorTerm → α` factors iff its image is determined
-solely by the carrier's `void` constant. -/
+/-- Historical name for the proposition that `P` is a constant function. -/
 def FactorsThroughCollapse {α : Type u}
     (P : RecursorTerm → α) : Prop :=
   ∃ k : α, ∀ t : RecursorTerm, P t = k
 
-/-- **Lemma.** If a function `P : RecursorTerm → α` is a
-Σ-homomorphism into the constant-`void` Σ-algebra (every slot
-returns `void`), then `P` is a constant function. This is the
-formal handle on "factors through the constant-collapse
-substitution". -/
+/-- A homomorphism into an algebra whose seven operations all return `k` is constant with value `k`. -/
 theorem factorsThroughCollapse_of_constantSigmaHomomorphism
     {α : Type u} (k : α) (P : RecursorTerm → α)
     (S : SigmaAlgebra α)
@@ -216,9 +158,7 @@ theorem factorsThroughCollapse_of_constantSigmaHomomorphism
   | eqWit a b iha ihb =>
       simp [RecursorTerm.fold, h6, iha, ihb]
 
-/-- **Anti-distinguishability principle.** Any function that factors
-through the constant-`void` Σ-algebra cannot distinguish any two
-RecursorTerms — its image is constant. -/
+/-- A function satisfying `FactorsThroughCollapse` has equal values on every two terms. -/
 theorem factorsThroughCollapse_no_distinguishing
     {α : Type u} (P : RecursorTerm → α)
     (h : FactorsThroughCollapse P) :

@@ -2,40 +2,29 @@ import OperatorKO7.Kernel
 import Mathlib.Order.Basic
 import Mathlib.Tactic.Linarith
 import OperatorKO7.Meta.ComputableMeasure
--- Impossibility Lemmas - documentation mirror (see Confluence_Safe for helpers)
+-- Counterexamples for selected termination-measure families.
 
 /-!
-# Impossibility Lemmas - mirror of failure catalog (fails_central + consolidation)
+# Counterexamples for selected measure families
 
-Goal
-- Keep and enrich the centralized failure witnesses so they fully represent
-  the failure taxonomy described in the project documentation.
+This module records explicit counterexamples for several simple measures on the
+KO7 trace syntax. Each result is limited to the definition named in its theorem.
 
-What’s inside (all self‑contained, kernel unchanged)
-- Small runnable branch and duplication witnesses aligned with the failure catalog.
-- κ+ k counterexample on KO7 traces (R_rec_succ): ties by rfl branchwise.
-- Flag‑only outer discriminator failure: concrete Step raises the flag.
-- Duplication stress identity (toy calculus): additive counter non‑drop, plus
-  DM and MPO orientation witnesses.
-- Historical dead-end notes are recorded separately in
-  `Docs/Impossibility_DeadEnds.md`.
-
-Note
-- Live theorems/examples compile and can be cited in the paper/docs.
-- Historical dead-end commentary is kept out of this theorem file.
+The counterexamples cover `kappa + k`, a two-component lexicographic measure,
+a root `delta` flag, constellation size, and the additive `simpleSize` measure.
+The imported safe-step measure is included only as a contrasting certified
+construction; this module does not classify all termination orderings.
 -/
 
 
 namespace OperatorKO7
 namespace Impossibility
 
- -- Shorten local names for the rest of this file (doc preface section).
+ -- Short local names for the declarations below.
  open OperatorKO7 Trace
  open Prod (Lex)
 
-/-! This module collects small, kernel‑native witnesses and commentary aligned
-  with fails_central sections A–M. This is a documentation mirror; no kernel
-  changes. -/
+/-! The declarations below are concrete witnesses over `Trace` and `Step`. -/
 
 end Impossibility
 end OperatorKO7
@@ -43,10 +32,8 @@ end OperatorKO7
 namespace OperatorKO7
 namespace Impossibility
 
--- This file provides formal, machine-checked proofs that simpler, common
--- termination measures fail for the KO7 kernel. This justifies the necessity
--- of the more complex hybrid measure used in the final successful proof for the
--- guarded sub-relation.
+-- These proofs refute the particular measure definitions stated below. They do
+-- not establish a universal lower bound over all termination methods.
 
 -- Shorten local names for the active content below.
 open Trace
@@ -54,8 +41,7 @@ open Prod (Lex)
 
 namespace FailedMeasures
 
-/-- A simple depth-based counter for `recΔ` nodes. This was one of the first
-measures attempted and fails on duplication. -/
+/-- A depth-based counter for `recΔ` nodes. -/
 @[simp]
 def kappa : Trace → Nat
   | recΔ _ _ n => kappa n + 1
@@ -71,9 +57,8 @@ only its type, to demonstrate the failure of lexicographic ordering. -/
 def mu (_t : Trace) : Nat := 0
 
 /-! ### Theorem 1: Failure of `kappa + k`
-This theorem proves that no fixed additive constant `k` can orient the
-`rec_succ` rule, especially for nested `delta` constructors. This refutes
-the entire class of "additive bump" solutions.
+For the defined `kappa`, adding the same fixed constant to both sides does not
+orient every `rec_succ` instance. The witness uses a nested `delta` term.
 -/
 theorem kappa_plus_k_fails (k : Nat) :
   ¬ (∀ (b s n : Trace),
@@ -88,10 +73,8 @@ theorem kappa_plus_k_fails (k : Nat) :
   simp [kappa]
 
 /-! ### Theorem 2: Failure of Simple Lexicography
-This theorem proves that a standard 2-component lexicographic measure `(κ, μ)`
-fails because the primary component, `κ`, does not strictly decrease.
-This forces the move to a more complex measure where the primary component is a
-flag or a multiset designed to handle specific reduction rules.
+The defined two-component lexicographic pair `(kappa, mu)` fails on a concrete
+`rec_succ` instance because both components tie.
 -/
 theorem simple_lex_fails :
   ¬ (∀ (b s n : Trace),
@@ -108,12 +91,10 @@ theorem simple_lex_fails :
 
 end FailedMeasures
 
-/-! ## Boolean δ-flag alone - explicit increase on a non-rec rule (fails_central §F)
+/-! ## Boolean delta flag
 
-Using only a “top-is-delta?” flag as the outer lex key breaks monotonicity:
-there exists a Step that raises the flag. This mirrors the doc’s warning that
-an unguarded global flag is unsafe; KO7 uses it only under a guard in safe
-subrelations. -/
+The root-shape flag increases on a concrete `merge` step, so this flag by itself
+does not decrease on every `Step`. -/
 namespace FlagFailure
 
 /-- Top-shape flag: 1 only when the term is headed by `delta`. -/
@@ -139,10 +120,10 @@ theorem merge_void_raises_flag :
 
 end FlagFailure
 
-/-! ## P1 rfl-gate (branch realism) - explicit per-branch check (fails_central §B)
+/-! ## Branchwise definitional equalities
 
-For any pattern-matched `f`, check rfl per clause and avoid asserting a single
-global equation unless all branches agree. We include a tiny exemplar here. -/
+The two constructor clauses of `f` reduce definitionally, while the corresponding
+constant global equation is refuted by the `B` constructor. -/
 namespace RflGate
 
 inductive Two where | A | B deriving DecidableEq, Repr
@@ -152,37 +133,33 @@ def f : Two → Nat
   | .B => 1
 
 -- Per-branch rfl (passes):
-example : f Two.A = 0 := rfl
-example : f Two.B = 1 := rfl
+theorem f_Two_A_eq_zero : f Two.A = 0 := rfl
+theorem f_Two_B_eq_one : f Two.B = 1 := rfl
 
 -- Over-strong global law fails: not (∀ x, f x = 0)
-example : ¬ (∀ x, f x = 0) := by
+theorem not_forall_f_eq_zero : ¬ (∀ x, f x = 0) := by
   intro h
   -- f B = 1 contradicts h B : f B = 0
   exact Nat.one_ne_zero (by simpa [f] using h Two.B)
 
 end RflGate
 
-/-! ## Anchors to the green path (consolidation §J)
+/-! ## Imported safe-step measure examples
 
-The fixes live under KO7’s safe layer:
-- `Meta/ComputableMeasure.lean`: `drop_R_rec_succ_c` (outer δ-flag drop),
-  `measure_decreases_safe_c`, `wf_SafeStepRev_c`.
-These aren’t re‑proved here; this file focuses on the impossibility side. -/
-
-/-! ## KO7 safe Lex3c - tiny cross-link examples (the fix path) -/
+`Meta/ComputableMeasure.lean` supplies the `Lex3c` decrease and well-foundedness
+theorems used below for the selected guarded `SafeStep` relation. -/
 
 namespace KO7_FixPathExamples
 
 open OperatorKO7.MetaCM
 
--- delta-substitution (rec_succ) strictly drops by KO7's outer flag component.
+-- The `rec_succ` constructor strictly decreases the imported `Lex3c` measure.
 lemma rec_succ_drops (b s n : Trace) :
    Lex3c (mu3c (app s (recΔ b s n)))
          (mu3c (recΔ b s (delta n))) := by
    simpa using drop_R_rec_succ_c b s n
 
--- The guarded aggregator yields a decrease certificate per safe step.
+-- The aggregate theorem supplies the same decrease for this safe-step instance.
 lemma safe_decrease_rec_succ (b s n : Trace) :
    Lex3c (mu3c (app s (recΔ b s n)))
          (mu3c (recΔ b s (delta n))) := by
@@ -190,12 +167,12 @@ lemma safe_decrease_rec_succ (b s n : Trace) :
      (measure_decreases_safe_c
         (MetaSN_KO7.SafeStep.R_rec_succ b s n))
 
--- Well-foundedness of the reverse safe relation (no infinite safe reductions).
+-- Well-foundedness of the reverse safe-step relation.
 theorem wf_safe : WellFounded MetaSN_KO7.SafeStepRev := wf_SafeStepRev_c
 
 end KO7_FixPathExamples
 
-/-! ## Additional computable drop one-liners (cross-link) -/
+/-! ## Additional imported decrease instances -/
 
 namespace Computable_FixPathExamples
 
@@ -215,15 +192,11 @@ lemma drop_eq_diff (a b : Trace) :
 
 end Computable_FixPathExamples
 
-/-! ## Approach #9: Complex Hybrid/Constellation Measures (Paper §7, Item 9 in failure catalog)
+/-! ## Constellation-shape examples
 
-Paper quote: "Attempts to combine measures in ad-hoc ways failed to provide
-a uniform decrease across all 8 rules."
-
-Constellation theory attempts to track the "shape" or "pattern" of subterms
-rather than their numeric size. The idea is that certain constellations of
-constructors signal termination progress. This fails because the δ-duplication
-rule creates constellations that cannot be uniformly ordered.
+The abstraction below retains constructor shape and forgets leaf content. The
+proved results establish constructor inequality and failure of its additive node
+count on the duplicating rule. They make no claim about every order on shapes.
 -/
 namespace ConstellationFailure
 
@@ -249,8 +222,8 @@ def toConstellation : Trace → Constellation
   | .recΔ b s n => .recNode (toConstellation b) (toConstellation s) (toConstellation n)
   | .eqW a b => .eqNode (toConstellation a) (toConstellation b)
 
-/-- The δ-duplication step produces structurally different constellations.
-    The RHS has `appNode` at the root while LHS has `recNode`, so no simple ordering works. -/
+/-- The two sides of the delta-duplication step have different root constructors
+in the constellation abstraction. -/
 theorem constellation_shapes_differ (b s n : Trace) :
     toConstellation (app s (recΔ b s n)) ≠ toConstellation (recΔ b s (delta n)) := by
   simp only [toConstellation]
@@ -267,8 +240,8 @@ def constellationSize : Constellation → Nat
   | .recNode b s n => constellationSize b + constellationSize s + constellationSize n + 1
   | .eqNode a b => constellationSize a + constellationSize b + 1
 
-/-- The δ-duplication rule does NOT decrease constellation size when s is non-trivial.
-    This shows additive constellation measures fail just like numeric ones.
+/-- The right side of the delta-duplication rule has at least the left side's
+    constellation size when `s` has constellation size at least one.
     LHS: recNode(b, s, deltaNode(n)) has size = |b| + |s| + (|n| + 1) + 1
     RHS: appNode(s, recNode(b, s, n)) has size = |s| + (|b| + |s| + |n| + 1) + 1
     Difference: RHS - LHS = |s| - 1 ≥ 0 when |s| ≥ 1. -/
@@ -281,23 +254,14 @@ theorem constellation_size_not_decreasing (b s n : Trace)
 
 end ConstellationFailure
 
-/-! ## Approach #10: Unchecked Recursion (Paper §7, Item 10 in failure catalog)
+/-! ## Additive-size behavior of the duplicating rule
 
-Paper quote: "The raw duplicating rule is the canonical obstacle for global
-aggregation: it entangles the relevant recursion counter with an irrelevant
-duplicated mass trapped under inert app."
-
-The rule `recΔ b s (delta n) → app s (recΔ b s n)`:
-1. Duplicates `s` (appears once on LHS, twice on RHS)
-2. The recursive `recΔ` call has `n` instead of `delta n`
-3. BUT the `app s (...)` wrapping creates work that grows with each step
-
-The recursion is "checked" only when restricted to `SafeStep`, which gates
-certain steps behind a δ-phase condition.
--/
+The rule `recΔ b s (delta n) -> app s (recΔ b s n)` duplicates `s` while
+removing one outer `delta` from the recursive argument. The following theorems
+compute its effect on the particular additive measure `simpleSize`. -/
 namespace UncheckedRecursionFailure
 
-/-- Concrete witness: with a simple additive size, the RHS is NOT smaller. -/
+/-- Additive size on the trace constructors. -/
 def simpleSize : Trace → Nat
   | .void => 0
   | .delta t => simpleSize t + 1
@@ -310,27 +274,27 @@ def simpleSize : Trace → Nat
 /-- The rec_succ rule is the structural barrier for additive measures.
     LHS: simpleSize(recΔ b s (delta n)) = |b| + |s| + (|n| + 1) + 1 = |b| + |s| + |n| + 2
     RHS: simpleSize(app s (recΔ b s n)) = |s| + (|b| + |s| + |n| + 1) + 1 = 2|s| + |b| + |n| + 2
-    Difference: RHS - LHS = |s| ≥ 0. No strict decrease when |s| ≥ 0.
-    This is the "ultimate counterexample" from the paper. -/
+    Difference: RHS - LHS = |s| >= 0. -/
 theorem rec_succ_additive_barrier (b s n : Trace) :
     simpleSize (app s (recΔ b s n)) ≥ simpleSize (recΔ b s (delta n)) := by
   simp only [simpleSize]
   omega
 
-/-- Stronger: RHS is strictly LARGER when s is non-void. -/
+/-- The right side is strictly larger when `s` has positive `simpleSize`. -/
 theorem rec_succ_size_increases (b s n : Trace) (hs : simpleSize s ≥ 1) :
     simpleSize (app s (recΔ b s n)) > simpleSize (recΔ b s (delta n)) := by
   simp only [simpleSize]
   omega
 
-/-- The full Step relation (not SafeStep) allows this barrier to be hit. -/
+/-- The full `Step` relation contains an instance of the duplicating rule. -/
 theorem full_step_permits_barrier :
     ∃ b s n, Step (recΔ b s (delta n)) (app s (recΔ b s n)) := by
   exact ⟨void, void, void, Step.R_rec_succ void void void⟩
 
-/-- Reference: The SafeStep guard is what makes termination provable.
-    See `OperatorKO7.MetaCM.wf_SafeStepRev_c` for the working proof. -/
-example : WellFounded MetaSN_KO7.SafeStepRev := OperatorKO7.MetaCM.wf_SafeStepRev_c
+/-- The imported computable measure proves well-foundedness of the reverse
+    selected `SafeStep` relation. -/
+theorem wf_SafeStepRev_via_computable :
+    WellFounded MetaSN_KO7.SafeStepRev := OperatorKO7.MetaCM.wf_SafeStepRev_c
 
 end UncheckedRecursionFailure
 

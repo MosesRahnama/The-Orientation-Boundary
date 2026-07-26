@@ -2,6 +2,14 @@ import OperatorKO7.Meta.NonlinearDominanceCriteria
 import OperatorKO7.Meta.ConstructionMethodClassification
 import OperatorKO7.Meta.NonlinearMethodLawCarrier
 
+/-!
+# NonlinearUnconstrainedSplit
+
+## Formal Scope
+
+NonlinearUnconstrainedRow is a three-constructor policy taxonomy, and the inventory theorem exhausts that defined type. No classifier from an external unconstrained nonlinear-method domain is provided.
+-/
+
 namespace OperatorKO7.NonlinearUnconstrainedSplit
 
 open OperatorKO7.ConstructionMethodClassification
@@ -9,145 +17,146 @@ open OperatorKO7.NonlinearResidualTaxonomy
 open OperatorKO7.NonlinearDominanceCriteria
 open _root_.OperatorKO7.NonlinearMethodLawCarrier
 
-/-- Exact sub-boundaries carried by the still-open nonlinear unconstrained row. -/
+/-- Three tags used to subdivide the nonlinear-unconstrained metadata row. -/
 inductive NonlinearUnconstrainedRow where
-  | transparentWithDominanceConditional
+  | transparentWithDominanceBoundary
   | crossCoupledGlobalWitness
-  | unsupportedArbitraryRelation
+  | arbitraryRelationLawBoundary
 deriving DecidableEq, Repr
 
-/-- Status vocabulary for the theorem-visible unconstrained nonlinear split. -/
+/-- Status tags assigned to the three metadata rows. -/
 inductive NonlinearUnconstrainedStatus where
-  | conditionallyBlockedByDominance
+  | blockedUnderDominanceHypotheses
   | licensedEscape (route : ConstructionRoute)
-  | openUnsupportedBoundary
+  | exactLawCarrierDichotomy
 deriving DecidableEq, Repr
 
-/-- The finite unconstrained nonlinear split row list formalized in this sprint. -/
+/-- Enumeration of every constructor of `NonlinearUnconstrainedRow`. -/
 def nonlinearUnconstrainedRows : List NonlinearUnconstrainedRow :=
-  [.transparentWithDominanceConditional,
+  [.transparentWithDominanceBoundary,
     .crossCoupledGlobalWitness,
-    .unsupportedArbitraryRelation]
+    .arbitraryRelationLawBoundary]
 
-/-- The finite status list realized by the unconstrained nonlinear split. -/
+/-- Status values used by `nonlinearUnconstrainedRowStatus`. -/
 def nonlinearUnconstrainedStatuses : List NonlinearUnconstrainedStatus :=
-  [.conditionallyBlockedByDominance,
+  [.blockedUnderDominanceHypotheses,
     .licensedEscape .W1,
-    .openUnsupportedBoundary]
+    .exactLawCarrierDichotomy]
 
-/-- Exact status projection for each unconstrained nonlinear sub-boundary. -/
+/-- Constructor-to-status assignment. -/
 def nonlinearUnconstrainedRowStatus :
     NonlinearUnconstrainedRow → NonlinearUnconstrainedStatus
-  | .transparentWithDominanceConditional => .conditionallyBlockedByDominance
+  | .transparentWithDominanceBoundary => .blockedUnderDominanceHypotheses
   | .crossCoupledGlobalWitness => .licensedEscape .W1
-  | .unsupportedArbitraryRelation => .openUnsupportedBoundary
+  | .arbitraryRelationLawBoundary => .exactLawCarrierDichotomy
 
-/-- Exact row membership characterization for the unconstrained nonlinear split. -/
+/-- Membership characterization for the three-constructor row type. -/
 theorem nonlinearUnconstrainedRows_complete_exact (row : NonlinearUnconstrainedRow) :
     row ∈ nonlinearUnconstrainedRows ↔
-      row = .transparentWithDominanceConditional
+      row = .transparentWithDominanceBoundary
         ∨ row = .crossCoupledGlobalWitness
-        ∨ row = .unsupportedArbitraryRelation := by
+        ∨ row = .arbitraryRelationLawBoundary := by
   cases row <;> simp [nonlinearUnconstrainedRows]
 
 /-- The finite unconstrained nonlinear split row list has no duplicates. -/
 theorem nonlinearUnconstrainedRows_nodup : nonlinearUnconstrainedRows.Nodup := by
   decide
 
-/-- The finite unconstrained nonlinear split row list has exact size three. -/
+/-- The finite unconstrained nonlinear split row list has specified size three. -/
 theorem nonlinearUnconstrainedRows_length : nonlinearUnconstrainedRows.length = 3 := by
   rfl
 
-/-- Exact status membership characterization for the unconstrained nonlinear split. -/
+/-- specified status membership characterization for the unconstrained nonlinear split. -/
 theorem nonlinearUnconstrainedStatuses_complete_exact
     (status : NonlinearUnconstrainedStatus) :
     status ∈ nonlinearUnconstrainedStatuses ↔
-      status = .conditionallyBlockedByDominance
+      status = .blockedUnderDominanceHypotheses
         ∨ status = .licensedEscape .W1
-        ∨ status = .openUnsupportedBoundary := by
+        ∨ status = .exactLawCarrierDichotomy := by
   cases status with
-  | conditionallyBlockedByDominance =>
+  | blockedUnderDominanceHypotheses =>
       simp [nonlinearUnconstrainedStatuses]
   | licensedEscape route =>
       cases route <;> simp [nonlinearUnconstrainedStatuses]
-  | openUnsupportedBoundary =>
+  | exactLawCarrierDichotomy =>
       simp [nonlinearUnconstrainedStatuses]
 
 /-- The finite unconstrained nonlinear split status list has no duplicates. -/
 theorem nonlinearUnconstrainedStatuses_nodup : nonlinearUnconstrainedStatuses.Nodup := by
   decide
 
-/-- The finite unconstrained nonlinear split status list has exact size three. -/
+/-- The finite unconstrained nonlinear split status list has specified size three. -/
 theorem nonlinearUnconstrainedStatuses_length : nonlinearUnconstrainedStatuses.length = 3 := by
   rfl
 
-/-- Every unconstrained nonlinear split row lands in the finite status list. -/
+/-- Every constructor receives one of the listed status tags. -/
 theorem nonlinearUnconstrainedRow_has_listed_status (row : NonlinearUnconstrainedRow) :
     nonlinearUnconstrainedRowStatus row ∈ nonlinearUnconstrainedStatuses := by
   cases row <;> simp [nonlinearUnconstrainedRowStatus, nonlinearUnconstrainedStatuses]
 
-/-- Theorem-backed support payload carried by each unconstrained nonlinear split row. -/
+/-- Support proposition selected for each constructor tag. -/
 def NonlinearUnconstrainedRowSupported : NonlinearUnconstrainedRow → Prop
-  | .transparentWithDominanceConditional =>
+  | .transparentWithDominanceBoundary =>
       TransparentPolynomialDominanceCriteriaCatalog
   | .crossCoupledGlobalWitness =>
       poly_w1_success.route = .W1
         ∧ poly_w1_success.importClass = .globalPolynomial
         ∧ PermittedW1Import .globalPolynomial
-  | .unsupportedArbitraryRelation =>
-      nonlinearUnconstrainedRowStatus .unsupportedArbitraryRelation = .openUnsupportedBoundary
+  | .arbitraryRelationLawBoundary =>
+      nonlinearUnconstrainedRowStatus .arbitraryRelationLawBoundary = .exactLawCarrierDichotomy
         ∧ ∀ (R : NonlinearRelation),
-            unsupported_arbitrary_relation_boundary R
+            arbitrary_relation_law_boundary R
 
-/-- The transparent conditional row is supported exactly by the dominance-criteria catalog. -/
-theorem transparentWithDominanceConditional_supported :
-    NonlinearUnconstrainedRowSupported .transparentWithDominanceConditional :=
+/-- The transparent dominance-hypothesis row is supported directly by the dominance-criteria catalog. -/
+theorem transparentWithDominanceBoundary_supported :
+    NonlinearUnconstrainedRowSupported .transparentWithDominanceBoundary :=
   transparent_polynomial_dominance_criteria_catalog
 
-/-- The cross-coupled global witness row is exactly the existing W1 polynomial witness. -/
+/-- The cross-coupled global witness row is directly the existing W1 polynomial witness. -/
 theorem crossCoupledGlobalWitness_supported :
     NonlinearUnconstrainedRowSupported .crossCoupledGlobalWitness := by
   exact ⟨rfl, rfl, poly_w1_success_requires_global_polynomial_import⟩
 
-/-- The unsupported arbitrary relation row keeps the explicit boundary label and now carries the method-law dichotomy. -/
-theorem unsupported_arbitrary_relation_supported_unconditional :
-    NonlinearUnconstrainedRowSupported .unsupportedArbitraryRelation := by
+/-- The unsupported arbitrary relation row keeps the explicit boundary label and here carries the method-law dichotomy. -/
+theorem arbitrary_relation_law_supported_unconditional :
+    NonlinearUnconstrainedRowSupported .arbitraryRelationLawBoundary := by
   exact ⟨rfl,
-    unsupported_arbitrary_relation_no_first_order_method_or_licensed_escape⟩
+    arbitrary_relation_law_no_first_order_method_or_licensed_escape⟩
 
-/-- The unsupported arbitrary relation row stays explicitly open. -/
-theorem unsupportedArbitraryRelation_supported :
-    NonlinearUnconstrainedRowSupported .unsupportedArbitraryRelation :=
-  unsupported_arbitrary_relation_supported_unconditional
+/-- The unsupported arbitrary relation row is closed by the exact law-carrier dichotomy. -/
+theorem arbitraryRelationLawBoundary_supported :
+    NonlinearUnconstrainedRowSupported .arbitraryRelationLawBoundary :=
+  arbitrary_relation_law_supported_unconditional
 
-/-- Non-overclaim: the transparent conditional row is not itself a licensed escape row. -/
-theorem transparentWithDominanceConditional_not_licensedEscape :
-    nonlinearUnconstrainedRowStatus .transparentWithDominanceConditional ≠ .licensedEscape .W1 := by
+/-- Non-overclaim: the transparent dominance-hypothesis row is not itself a licensed escape row. -/
+theorem transparentWithDominanceBoundary_not_licensedEscape :
+    nonlinearUnconstrainedRowStatus .transparentWithDominanceBoundary ≠ .licensedEscape .W1 := by
   decide
 
 /-- Non-overclaim: the cross-coupled global witness row is not claimed as conditionally blocked. -/
-theorem crossCoupledGlobalWitness_not_conditionallyBlocked :
-    nonlinearUnconstrainedRowStatus .crossCoupledGlobalWitness ≠ .conditionallyBlockedByDominance := by
+theorem crossCoupledGlobalWitness_not_dominanceBlocked :
+    nonlinearUnconstrainedRowStatus .crossCoupledGlobalWitness ≠ .blockedUnderDominanceHypotheses := by
   decide
 
 /-- Non-overclaim: the unsupported arbitrary relation row is not claimed as blocked by dominance. -/
-theorem unsupportedArbitraryRelation_not_conditionallyBlocked :
-    nonlinearUnconstrainedRowStatus .unsupportedArbitraryRelation ≠ .conditionallyBlockedByDominance := by
+theorem arbitraryRelationLawBoundary_not_dominanceBlocked :
+    nonlinearUnconstrainedRowStatus .arbitraryRelationLawBoundary ≠ .blockedUnderDominanceHypotheses := by
   decide
 
 /-- Non-overclaim: the unsupported arbitrary relation row is not claimed as a licensed escape. -/
-theorem unsupportedArbitraryRelation_not_licensedEscape :
-    nonlinearUnconstrainedRowStatus .unsupportedArbitraryRelation ≠ .licensedEscape .W1 := by
+theorem arbitraryRelationLawBoundary_not_licensedEscape :
+    nonlinearUnconstrainedRowStatus .arbitraryRelationLawBoundary ≠ .licensedEscape .W1 := by
   decide
 
-/-- Exact split catalog for the currently open unconstrained nonlinear row. -/
+/-- Catalog over the constructors of the locally defined row type. -/
 abbrev NonlinearUnconstrainedSplitCatalog : Prop :=
   ∀ row : NonlinearUnconstrainedRow,
     row ∈ nonlinearUnconstrainedRows
       ∧ NonlinearUnconstrainedRowSupported row
       ∧ nonlinearUnconstrainedRowStatus row ∈ nonlinearUnconstrainedStatuses
 
-/-- The unconstrained nonlinear row is split exactly into the listed theorem-visible sub-boundaries. -/
+/-- Every constructor of the local row type belongs to the list and has its
+selected support proposition. This does not classify an external method domain. -/
 theorem nonlinear_unconstrained_split_catalog :
     NonlinearUnconstrainedSplitCatalog := by
   intro row
@@ -155,19 +164,19 @@ theorem nonlinear_unconstrained_split_catalog :
     nonlinearUnconstrainedRow_has_listed_status row⟩
   · cases row <;> simp
   · cases row with
-    | transparentWithDominanceConditional =>
-        exact transparentWithDominanceConditional_supported
+    | transparentWithDominanceBoundary =>
+        exact transparentWithDominanceBoundary_supported
     | crossCoupledGlobalWitness =>
         exact crossCoupledGlobalWitness_supported
-    | unsupportedArbitraryRelation =>
-        exact unsupportedArbitraryRelation_supported
+    | arbitraryRelationLawBoundary =>
+        exact arbitraryRelationLawBoundary_supported
 
-/-- Certificate packaging the parent open-row status and its exact sub-boundary split. -/
+/-- Package of the parent status tag and local-constructor catalog. -/
 structure NonlinearUnconstrainedSplitCertificate where
-  parentStatus : nonlinearResidualStatus .unconstrainedNonlinearDirect = .openResidualClass
+  parentStatus : nonlinearResidualStatus .unconstrainedNonlinearDirect = .exactLawCarrierBoundary
   splitCatalog : NonlinearUnconstrainedSplitCatalog
 
-/-- The open unconstrained nonlinear row is sharpened by an exact theorem-visible split. -/
+/-- Construct the package from the parent status equality and local catalog. -/
 theorem nonlinear_unconstrained_split_certificate :
     NonlinearUnconstrainedSplitCertificate := by
   exact {
@@ -177,10 +186,10 @@ theorem nonlinear_unconstrained_split_certificate :
 
 /-- The unconstrained split certificate projects the parent open-row status. -/
 theorem nonlinear_unconstrained_split_certificate_projects_parent_status :
-    nonlinearResidualStatus .unconstrainedNonlinearDirect = .openResidualClass :=
+    nonlinearResidualStatus .unconstrainedNonlinearDirect = .exactLawCarrierBoundary :=
   nonlinear_unconstrained_split_certificate.parentStatus
 
-/-- The unconstrained split certificate projects the exact sub-boundary catalog. -/
+/-- Project the local-constructor catalog from the package. -/
 theorem nonlinear_unconstrained_split_certificate_projects_split_catalog :
     NonlinearUnconstrainedSplitCatalog :=
   nonlinear_unconstrained_split_certificate.splitCatalog

@@ -5,12 +5,10 @@ import OperatorKO7.Meta.Rewriting.Position
 /-!
 # Critical pairs of a first-order term rewriting system
 
-Roadmap source: `ROADMAP-01-generic-critical-pair-lemma.md`, sections 3 (the
-three redex-overlap cases and the critical-overlap notion), 4, and 5
-(`Meta/Rewriting/CriticalPair.lean` signatures). This is Wave 3B: the
-critical-pair construction that genuinely enumerates the overlaps of a term
-rewriting system, plus the soundness theorem that every emitted pair is a real
-overlap peak.
+This module enumerates non-variable overlaps of a term rewriting system and
+proves that every emitted pair is an overlap peak in the renamed system. A
+peak consists of two one-step reducts of a common source; the two targets may
+coincide.
 
 ## What this module delivers
 
@@ -36,15 +34,15 @@ overlap peak.
   is consumed cleanly: a pair is emitted exactly when both the subterm read and
   the unification succeed.
 
-- `criticalPairs_sound`: every emitted critical pair `(s, t)` is a genuine
+- `criticalPairs_sound`: every emitted critical pair `(s, t)` is an
   overlap peak. With `w = μ • r1.lhs` the unified redex, `w` rewrites by `r1`
   at the root to `s` and by `r2` at the overlap position `p` to `t`, both as
   `Step` rewrites in the renamed system `renameTRS R`. The rule-2 contraction at
-  `p` rests on `unify_sound` (Wave 3A `UnifyCorrect.lean`).
+  `p` rests on `unify_sound` from `UnifyCorrect.lean`.
 
-- `criticalPairs_demoTRS` / `demo_criticalPair_is_peak`: a concrete two-rule
-  system whose `criticalPairs` is a specific non-empty list, with a witness that
-  one emitted pair is a real peak.
+- `criticalPairs_demoTRS_nonempty` / `demo_criticalPair_is_peak`: a concrete
+  two-rule system with a nonempty `criticalPairs` list and a witness that one
+  emitted pair is an overlap peak.
 
 Trust: kernel-only; baseline-only under `#print axioms` (subset of
 `{propext, Classical.choice, Quot.sound}`). Any `Classical.choice`/`propext`
@@ -466,9 +464,9 @@ def overlapPairs [DecidableEq sigma] [DecidableEq nu]
 rules `(r1, r2)` of `R`, with `r1` renamed into the left variable summand and
 `r2` into the right summand (so they share no variables), the critical pairs of
 overlapping `r2` into `r1`. The pairs live over the renamed carrier `RenVar nu`
-and are genuine overlap peaks in `renameTRS R` (see `criticalPairs_sound`). The
-ordered double `flatMap` enumerates every overlap, including a rule with a
-renamed copy of itself; the list is never a stub. -/
+and are overlap peaks in `renameTRS R` (see `criticalPairs_sound`). The ordered
+double `flatMap` enumerates the represented overlaps, including a rule with a
+renamed copy of itself. -/
 def criticalPairs [DecidableEq sigma] [DecidableEq nu] (R : TRS sigma nu) :
     List (Term sigma (RenVar nu) × Term sigma (RenVar nu)) :=
   R.flatMap (fun r1 => R.flatMap (fun r2 =>
@@ -495,8 +493,7 @@ theorem overlapAt_eq_some [DecidableEq sigma] [DecidableEq nu]
 
 /-- Soundness of `overlapAt`: a pair emitted at position `p` is an overlap peak of
 the two rules. With `w = μ • r1.lhs` the unified redex, `w` rewrites by `r1` at
-the root to `s` and by `r2` at the overlap position `p` to `t`, so `s` and `t`
-genuinely diverge from the single peak `w`. -/
+the root to `s` and by `r2` at the overlap position `p` to `t`. -/
 theorem overlapAt_sound [DecidableEq sigma] [DecidableEq nu]
     (R : TRS sigma nu) {r1 r2 : Rule sigma (RenVar nu)}
     (h1 : r1 ∈ renameTRS R) (h2 : r2 ∈ renameTRS R) {p : Pos}
@@ -537,12 +534,11 @@ theorem overlapPairs_sound [DecidableEq sigma] [DecidableEq nu]
   obtain ⟨p, _hp, hmatch⟩ := hst
   exact overlapAt_sound R h1 h2 hmatch
 
-/-- Every emitted critical pair is a genuine overlap peak: there is a term `w`
+/-- Every emitted critical pair is an overlap peak: there is a term `w`
 that rewrites by `Step` to both components of the pair, in the renamed system
 `renameTRS R`. The peak is the unified redex `μ • r1.lhs`, which rule 1
-contracts at the root to `s` and rule 2 contracts at the overlap position `p` to
-`t`. This is a real two-way divergence, the defining property of a critical
-pair. -/
+contracts at the root to `s` and rule 2 contracts at the overlap position `p`
+to `t`; the theorem does not require `s ≠ t`. -/
 theorem criticalPairs_sound [DecidableEq sigma] [DecidableEq nu]
     (R : TRS sigma nu) {s t : Term sigma (RenVar nu)}
     (hst : (s, t) ∈ criticalPairs R) :
@@ -555,8 +551,8 @@ theorem criticalPairs_sound [DecidableEq sigma] [DecidableEq nu]
 
 /-! ## Non-vacuity: a concrete two-rule system with a real critical pair
 
-The construction enumerates overlaps genuinely; this section exhibits one. The
-system has two rules over `Nat`-symbols and `Nat`-variables:
+This section exhibits one enumerated overlap. The system has two rules over
+`Nat`-symbols and `Nat`-variables:
 
 * rule A: `f(g(x), y) -> h(x, y)`
 * rule B: `g(z) -> k(z)`
@@ -629,8 +625,8 @@ theorem mem_criticalPairs_of_AB {pair : Term Nat (RenVar Nat) × Term Nat (RenVa
   rw [List.mem_flatMap]
   exact ⟨ruleB, by simp [demoTRS], hpair⟩
 
-/-- `criticalPairs demoTRS` is non-empty: the A-versus-B overlap at `[0]` lands a
-pair in the enumeration, so the construction returns a real list, never `[]`. -/
+/-- `criticalPairs demoTRS` is nonempty because the A-versus-B overlap at `[0]`
+lands a pair in the enumeration. -/
 theorem criticalPairs_demoTRS_nonempty :
     (criticalPairs demoTRS) ≠ [] := by
   intro hcontra
@@ -639,10 +635,9 @@ theorem criticalPairs_demoTRS_nonempty :
   rw [hcontra] at hmem
   exact List.not_mem_nil hmem
 
-/-- The witnessed critical pair of the demonstration system is a real overlap
-peak: there is a term `w` that rewrites in `renameTRS demoTRS` by one `Step` to
-each component. This instantiates `criticalPairs_sound` on a concrete pair, so
-the non-vacuity is a genuine two-way divergence, not a trivial emission. -/
+/-- The witnessed critical pair of the demonstration system is an overlap peak:
+there is a term `w` that rewrites in `renameTRS demoTRS` by one `Step` to each
+component. -/
 theorem demo_criticalPair_is_peak :
     ∃ s t : Term Nat (RenVar Nat), (s, t) ∈ criticalPairs demoTRS ∧
       ∃ w, Step (renameTRS demoTRS) w s ∧ Step (renameTRS demoTRS) w t := by

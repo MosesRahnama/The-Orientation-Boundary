@@ -7,21 +7,9 @@ import OperatorKO7.Meta.LCELUniversalTheorem
 /-!
 # LCEL Benchmark-Transport ↔ Native DP Comparison Witness
 
-Workstream F of the LCEL universal-theorem roadmap: a direct support
-comparison witness between the benchmark-transport LCEL instance and the
-native DP / emitter LCEL instance, and the corresponding universal
-structural-identity corollary via genuine source-to-target transport.
+## Formal Scope
 
-The witness is built by composing the two existing canonical witnesses
-`godel_benchmark_lcelSupportComparisonWitness` and
-`godel_dpEmitter_lcelSupportComparisonWitness` through the Gödel side, using
-transitivity of `StagewiseEquivalent` and of `Iff`. Canonical support
-records on both sides are reused from the existing admissibility packages.
-
-This is an internal-consistency theorem: it certifies that the benchmark-
-transport layer and the native DP / emitter layer present the same
-substrate story on the canonical support-record level, without routing the
-comparison through the Gödel-side canonical instance.
+The comparison package establishes proposition-level equivalences from available inhabitants, and one witness is composed through the Goedel route. It does not provide evidence-preserving direct DP transport.
 -/
 
 namespace OperatorKO7.LCELBenchmarkDpComparison
@@ -159,9 +147,8 @@ def benchmark_dp_admissibleLCELComparisonWitness :
       dpEmitterAdmissibleLCELInstance :=
   benchmark_dpEmitter_lcelSupportComparisonWitness
 
-/-- Universal quasi-functor from benchmark-transport to native DP / emitter,
-via genuine source-to-target transport through the composed canonical
-support-comparison witness. -/
+/-- Proposition-equivalence package from benchmark transport to native DP /
+emitter, built from the supplied support-comparison witness. -/
 def benchmark_dp_universal_quasiFunctor :
     LCELUniversalQuasiFunctor
       benchmarkTransportAdmissibleLCELInstance
@@ -169,11 +156,9 @@ def benchmark_dp_universal_quasiFunctor :
   lcelUniversalQuasiFunctor_ofComparison
     benchmark_dp_admissibleLCELComparisonWitness
 
-/-- Universal structural-identity corollary for the benchmark-transport ↔
-native DP / emitter pair. This closes Workstream F of the LCEL universal-
-theorem roadmap: the two non-Gödel canonical sides are structurally parallel
-to each other via a direct universal quasi-functor, not only through the
-Gödel side. -/
+/-- Inhabitation of the proposition-equivalence package for benchmark
+transport and native DP / emitter. The supporting comparison used above is
+composed through the Goedel-side witness. -/
 theorem benchmark_dp_universal_structural_identity :
     Nonempty
       (LCELUniversalQuasiFunctor

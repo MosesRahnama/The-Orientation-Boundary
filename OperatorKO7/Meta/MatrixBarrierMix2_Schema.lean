@@ -1,17 +1,17 @@
 import OperatorKO7.Meta.MatrixBarrier2_Schema
 
 /-!
-# Mixed Coordinate Dimension-2 Matrix Barrier
+This module proves a conditional barrier for a balanced two-coordinate mixed projection. Every
+balance, positivity, projection, and unboundedness hypothesis appears in the theorem types.
 
-This module extends the tracked-coordinate matrix barriers to a mixed
-two-dimensional class. Each constructor may mix both coordinates through a full
-`2×2` linear map. The barrier is proved for a balanced regime: the two column
-sums of each map agree, so the aggregate sum of the two coordinates becomes a
-scalar affine measure.
 
-This is still narrower than arbitrary mixed matrix interpretations, but it is no
-longer a single-coordinate projection theorem. Off-diagonal coefficients may be
-nonzero throughout.
+
+
+
+
+
+
+
 -/
 
 namespace OperatorKO7.StepDuplicating
@@ -30,18 +30,18 @@ structure Lin2 where
 
 namespace Lin2
 
-/-- Apply a `2×2` linear map to a vector. -/
+/-- Field requirements are given by the displayed type. -/
 @[simp] def act (A : Lin2) (v : Vec2) : Vec2 :=
   (A.a11 * v.1 + A.a12 * v.2, A.a21 * v.1 + A.a22 * v.2)
 
-/-- Balanced column sums, making the aggregate coordinate sum scalar-affine. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def Balanced (A : Lin2) : Prop :=
   A.a11 + A.a21 = A.a12 + A.a22
 
-/-- Common column sum in the balanced case. -/
+/-- Field requirements are given by the displayed type. -/
 @[simp] def sumCoeff (A : Lin2) : Nat := A.a11 + A.a21
 
-/-- The aggregate coordinate sum of a balanced map factors through one scalar coefficient. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 lemma vecSum_act_eq (A : Lin2) (hbal : A.Balanced) (v : Vec2) :
     vecSum (A.act v) = A.sumCoeff * vecSum v := by
   dsimp [vecSum, act, sumCoeff, Balanced] at hbal ⊢
@@ -86,7 +86,7 @@ structure MatrixMix2Measure (S : StepDuplicatingSchema) where
   h_wrap_left_pos : 1 ≤ wrap_left.sumCoeff
   h_wrap_right_pos : 1 ≤ wrap_right.sumCoeff
 
-/-- Aggregate-sum projection of the mixed matrix measure to the scalar affine barrier. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def MatrixMix2Measure.sumAffine {S : StepDuplicatingSchema}
     (M : MatrixMix2Measure S) : AffineMeasure S where
   eval := fun t => vecSum (M.eval t)
@@ -126,17 +126,17 @@ def MatrixMix2Measure.sumAffine {S : StepDuplicatingSchema}
   h_wrap_left_pos := M.h_wrap_left_pos
   h_wrap_right_pos := M.h_wrap_right_pos
 
-/-- Unbounded pump in the aggregate coordinate sum. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def HasUnboundedRangeSum {S : StepDuplicatingSchema} (M : MatrixMix2Measure S) : Prop :=
   ∀ k : Nat, ∃ t : S.T, k ≤ vecSum (M.eval t)
 
-/-- Strict componentwise decrease forces strict decrease of the aggregate coordinate sum. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 lemma vecSum_lt_of_pairLt {u v : Vec2} (h : PairLt u v) :
     vecSum u < vecSum v := by
   exact Nat.add_lt_add h.1 h.2
 
-/-- Balanced mixed-coordinate componentwise orientation is impossible once the aggregate
-coordinate sum has an unbounded pump. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_matrixMix2_orients_dup_step_of_sum_pump
     {S : StepDuplicatingSchema} (M : MatrixMix2Measure S)
     (hunbounded : HasUnboundedRangeSum M) :
@@ -157,7 +157,7 @@ theorem no_matrixMix2_orients_dup_step_of_sum_pump
     no_affine_orients_dup_step_of_unbounded
       (S := S) M.sumAffine hunbounded' hsum
 
-/-- The mixed sum barrier also lifts to global root orientation. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem no_global_orients_matrixMix2_of_sum_pump
     {Sys : StepDuplicatingSystem} (M : MatrixMix2Measure Sys.toStepDuplicatingSchema)
     (hunbounded : HasUnboundedRangeSum M) :

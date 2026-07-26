@@ -3,32 +3,20 @@ import OperatorKO7.Meta.LCELReversibility
 import OperatorKO7.Meta.LCELDpInstance
 
 /-!
-# LCEL Theorem-Strength Substrate Mathematics
+# Proof-carrying LCEL support objects
 
-Workstream B of the LCEL universal-theorem roadmap: upgrade the witness
-structures of `LCELReversibility.lean` from the current propositional-pair
-packaging (`{isReversible : Prop, holds : isReversible}`) to theorem-strength
-objects carrying the concrete mathematical content the paper gestures at.
+This file packages explicit sentences and proofs already supplied by the LCEL
+support records. It defines four record types: a provable/unprovable sentence
+pair, a blocked-sentence reflection package, a reimport certification package,
+and a boundary-factorization package. The extraction functions project those
+fields from `BaseReversibilitySupport`, `LicenseIrreversibilitySupport`,
+`ReimportReversibilitySupport`, and `BoundaryFactorizationSupport`.
 
-This file makes a conservative first-pass upgrade. It does not attempt to
-formalize literal `π_T`-reversibility as a partial-injection on a concrete
-step relation; that is a larger program and would require explicit step-
-relation data on each LCEL instance. What this file does supply is:
-
-- `BaseReversibilityTheorem L`, a theorem-strength object that carries an
-  explicit provable-sentence witness, an explicit unprovable-boundary-sentence
-  witness, and a distinctness theorem between them;
-- an extraction `baseReversibilityTheorem_of_support` from the proof-carrying
-  `BaseReversibilitySupport` record of `LCELReversibility.lean`;
-- canonical realizations of the theorem object on the Gödel, benchmark-
-  transport, and native DP / emitter sides.
-
-The distinctness component is the key theorem-strength content: on every
-canonical LCEL instance the base theory does have some provable sentences
-and does have a designated boundary sentence that it does not prove, and
-these two sentences are therefore provably distinct. This is a stronger
-statement than the propositional `isReversible` witness, because it produces
-explicit separating sentences rather than an abstract proposition.
+The declarations do not define a concrete step relation or prove that a
+projection is a partial inverse. Terms such as "reversibility" and
+"irreversibility" below refer to the corresponding LCEL record interfaces.
+Each instantiated result therefore inherits the assumptions and semantics of
+its supplied support record.
 -/
 
 namespace OperatorKO7.LCELSubstrateMathematics
@@ -37,15 +25,11 @@ open OperatorKO7.LCELSchema
 open OperatorKO7.LCELReversibility
 open OperatorKO7.LCELDpInstance
 
-/-! ## Theorem-strength base reversibility object -/
+/-! ## Provable/unprovable sentence package -/
 
-/-- Theorem-strength base-layer reversibility object for the operational-inexpressibility manuscript Proposition
-5.8 clause (1).
-
-The object carries two named sentences on the base theory together with
-concrete proofs that they separate: one is provable, the other is the
-designated boundary sentence (true but unprovable). Their distinctness is a
-theorem, not a propositional packaging. -/
+/-- A proof-carrying pair of base-theory sentences: one provable sentence and
+the designated boundary sentence, together with its non-provability, reference
+truth, and distinctness from the first sentence. -/
 structure BaseReversibilityTheorem (L : FormalLCELInstance) : Type where
   /-- A sentence that the base theory proves. -/
   provedSentence : L.comparison.baseTheoryContent.Sentence
@@ -64,9 +48,7 @@ structure BaseReversibilityTheorem (L : FormalLCELInstance) : Type where
   /-- The unproved sentence is true in the reference model. -/
   unprovedSentence_true :
     L.comparison.baseTheoryContent.trueInReferenceModel unprovedSentence
-  /-- The two sentences are distinct. This is the theorem-strength content:
-  a `provedSentence` that is provable and an `unprovedSentence` that is not
-  cannot be equal. -/
+  /-- The provable and unprovable sentences are distinct. -/
   distinct : provedSentence ≠ unprovedSentence
 
 namespace BaseReversibilityTheorem
@@ -83,9 +65,8 @@ theorem provedSentence_ne_boundary
   rw [T.unprovedSentence_eq]
   exact h
 
-/-- Downgrade a theorem-strength base reversibility object to the abstract
-`BaseStepReversibilityWitness` packaging used elsewhere in the LCEL stack.
-This shows the theorem-strength layer dominates the propositional packaging. -/
+/-- Project a `BaseReversibilityTheorem` to the two-proposition
+`BaseStepReversibilityWitness` interface. -/
 def toBaseStepReversibilityWitness
     {L : FormalLCELInstance}
     (T : BaseReversibilityTheorem L) :
@@ -99,10 +80,8 @@ end BaseReversibilityTheorem
 
 /-! ## Extraction from proof-carrying support records -/
 
-/-- Every `BaseReversibilitySupport` record extracts a theorem-strength base
-reversibility object. The distinctness clause follows from the provability
-of the internal sentence and the non-provability of the designated boundary
-sentence: they cannot be equal. -/
+/-- Package the fields of a supplied `BaseReversibilitySupport` record. The
+distinctness proof follows from its provability and non-provability fields. -/
 def baseReversibilityTheorem_of_support
     {L : FormalLCELInstance}
     (S : BaseReversibilitySupport L) :
@@ -122,60 +101,52 @@ def baseReversibilityTheorem_of_support
     rw [← h]
     exact S.internalSentenceProved
 
-/-! ## Canonical theorem-strength realizations -/
+/-! ## Instantiations from the supplied support records -/
 
-/-- Gödel-side theorem-strength base reversibility object. -/
+/-- Gödel-side proof-carrying base sentence package. -/
 def godel1931BaseReversibilityTheorem :
     BaseReversibilityTheorem godel1931LCELInstance :=
   baseReversibilityTheorem_of_support godel1931BaseReversibilitySupport
 
-/-- Benchmark-transport-side theorem-strength base reversibility object. -/
+/-- Benchmark-transport-side proof-carrying base sentence package. -/
 def benchmarkTransportBaseReversibilityTheorem :
     BaseReversibilityTheorem benchmarkTransportLCELInstance :=
   baseReversibilityTheorem_of_support benchmarkTransportBaseReversibilitySupport
 
-/-- Native DP / emitter-side theorem-strength base reversibility object. -/
+/-- Native DP / emitter-side proof-carrying base sentence package. -/
 def dpEmitterBaseReversibilityTheorem :
     BaseReversibilityTheorem dpEmitterLCELInstance :=
   baseReversibilityTheorem_of_support dpEmitterBaseReversibilitySupport
 
-/-! ## Downgrade to the existing witness layer
+/-! ## Projection to the proposition-only witness layer
 
-The theorem-strength object yields the existing `BaseStepReversibilityWitness`
-packaging used by `LCELReversibility.lean`, so it can be connectorged into the
-existing LCEL substrate machinery without any other changes. -/
+The following definitions retain only the provability and non-provability
+conjunction used by `BaseStepReversibilityWitness`. -/
 
-/-- Gödel-side base-step reversibility witness derived from the theorem-strength
-object. -/
+/-- Gödel-side base-step witness projected from its sentence package. -/
 def godel1931BaseStepReversibilityWitness_ofTheorem :
     BaseStepReversibilityWitness godel1931LCELInstance :=
   BaseReversibilityTheorem.toBaseStepReversibilityWitness
     godel1931BaseReversibilityTheorem
 
-/-- Benchmark-transport-side base-step reversibility witness derived from the
-theorem-strength object. -/
+/-- Benchmark-transport-side base-step witness projected from its sentence
+package. -/
 def benchmarkTransportBaseStepReversibilityWitness_ofTheorem :
     BaseStepReversibilityWitness benchmarkTransportLCELInstance :=
   BaseReversibilityTheorem.toBaseStepReversibilityWitness
     benchmarkTransportBaseReversibilityTheorem
 
-/-- Native DP-side base-step reversibility witness derived from the
-theorem-strength object. -/
+/-- Native DP-side base-step witness projected from its sentence package. -/
 def dpEmitterBaseStepReversibilityWitness_ofTheorem :
     BaseStepReversibilityWitness dpEmitterLCELInstance :=
   BaseReversibilityTheorem.toBaseStepReversibilityWitness
     dpEmitterBaseReversibilityTheorem
 
-/-! ## Theorem-strength license irreversibility object -/
+/-! ## Blocked-sentence reflection package -/
 
-/-- Theorem-strength license-side irreversibility object for the operational-inexpressibility manuscript
-Proposition 5.8 clause (2).
-
-The object carries the designated blocked sentence, its non-provability in
-the base, its truth in the reference model, a reflection witness for it
-from the stronger framework, an external-license witness, and a packaged
-distinctness statement showing the stronger framework genuinely extends
-the base on this sentence. -/
+/-- A proof-carrying blocked-sentence package containing base non-provability,
+reference-model truth, stronger-framework reflection, external-license
+inhabitation, licensed admission, and their packaged conjunction. -/
 structure LicenseIrreversibilityTheorem (L : FormalLCELInstance) : Type where
   /-- The blocked sentence targeted by the external license. -/
   blockedSentence : L.comparison.baseTheoryContent.Sentence
@@ -199,10 +170,8 @@ structure LicenseIrreversibilityTheorem (L : FormalLCELInstance) : Type where
   /-- The blocked sentence is licensed for admission. -/
   blocked_licensedAdmission :
     L.comparison.reflectionContent.licensedAdmission blockedSentence
-  /-- Packaged license-extension content: the base does not prove the
-  blocked sentence, and the stronger framework does reflect it. This is
-  the theorem-strength statement that the license genuinely extends the
-  base on the designated blocked sentence. -/
+  /-- The conjunction of base non-provability and stronger-framework
+  reflection for the designated blocked sentence. -/
   licenseExtendsBase :
     (¬ L.comparison.baseTheoryContent.proves blockedSentence)
       ∧ L.comparison.reflectionContent.reflects
@@ -211,8 +180,7 @@ structure LicenseIrreversibilityTheorem (L : FormalLCELInstance) : Type where
 
 namespace LicenseIrreversibilityTheorem
 
-/-- Downgrade to the abstract `LicenseIrreversibilityWitness` used in the
-existing LCEL substrate machinery. -/
+/-- Project to the proposition-only `LicenseIrreversibilityWitness` interface. -/
 def toLicenseIrreversibilityWitness
     {L : FormalLCELInstance}
     (T : LicenseIrreversibilityTheorem L) :
@@ -226,8 +194,7 @@ def toLicenseIrreversibilityWitness
 
 end LicenseIrreversibilityTheorem
 
-/-- Extraction of a theorem-strength license irreversibility object from the
-proof-carrying license support record. -/
+/-- Package the fields of a supplied license support record. -/
 def licenseIrreversibilityTheorem_of_support
     {L : FormalLCELInstance}
     (S : LicenseIrreversibilitySupport L) :
@@ -241,34 +208,29 @@ def licenseIrreversibilityTheorem_of_support
   blocked_licensedAdmission := S.blockedLicensedAdmission
   licenseExtendsBase := ⟨S.blockedNotProvable, S.strongerFrameworkReflectsBlocked⟩
 
-/-- Gödel-side theorem-strength license irreversibility object. -/
+/-- Gödel-side blocked-sentence reflection package. -/
 def godel1931LicenseIrreversibilityTheorem :
     LicenseIrreversibilityTheorem godel1931LCELInstance :=
   licenseIrreversibilityTheorem_of_support
     godel1931LicenseIrreversibilitySupport
 
-/-- Benchmark-transport-side theorem-strength license irreversibility object. -/
+/-- Benchmark-transport-side blocked-sentence reflection package. -/
 def benchmarkTransportLicenseIrreversibilityTheorem :
     LicenseIrreversibilityTheorem benchmarkTransportLCELInstance :=
   licenseIrreversibilityTheorem_of_support
     benchmarkTransportLicenseIrreversibilitySupport
 
-/-- Native DP-side theorem-strength license irreversibility object. -/
+/-- Native DP-side blocked-sentence reflection package. -/
 def dpEmitterLicenseIrreversibilityTheorem :
     LicenseIrreversibilityTheorem dpEmitterLCELInstance :=
   licenseIrreversibilityTheorem_of_support
     dpEmitterLicenseIrreversibilitySupport
 
-/-! ## Theorem-strength reimport reversibility object -/
+/-! ## Reimport certification package -/
 
-/-- Theorem-strength reimport-side reversibility object for the operational-inexpressibility manuscript
-Proposition 5.8 clause (3).
-
-The object carries the imported sentence, its truth, its certification by
-the reimport witness, the reimport-class slot witness, and the decoder
-coherence that ties the annotation functor back to the imported sentence.
-Distinctness content: certification of the imported sentence is inherited
-by the decoded annotation. -/
+/-- A proof-carrying package for the designated imported sentence, including
+reference-model truth, witness certification, reimport-class inhabitation, and
+annotation-decoder coherence. -/
 structure ReimportReversibilityTheorem (L : FormalLCELInstance) : Type where
   /-- The imported sentence. -/
   importedSentence : L.comparison.baseTheoryContent.Sentence
@@ -301,8 +263,7 @@ structure ReimportReversibilityTheorem (L : FormalLCELInstance) : Type where
 
 namespace ReimportReversibilityTheorem
 
-/-- Downgrade to the abstract `ReimportReversibilityWitness` used in the
-existing LCEL substrate machinery. -/
+/-- Project to the proposition-only `ReimportReversibilityWitness` interface. -/
 def toReimportReversibilityWitness
     {L : FormalLCELInstance}
     (T : ReimportReversibilityTheorem L) :
@@ -318,8 +279,7 @@ def toReimportReversibilityWitness
 
 end ReimportReversibilityTheorem
 
-/-- Extraction of a theorem-strength reimport reversibility object from the
-proof-carrying reimport support record. -/
+/-- Package the fields of a supplied reimport support record. -/
 def reimportReversibilityTheorem_of_support
     {L : FormalLCELInstance}
     (S : ReimportReversibilitySupport L) :
@@ -332,39 +292,32 @@ def reimportReversibilityTheorem_of_support
   annotationDecodes_imported := S.annotationDecodesImported
   annotationCertifiesDecoded := S.annotationCertifiesDecoded
 
-/-- Gödel-side theorem-strength reimport reversibility object. -/
+/-- Gödel-side reimport certification package. -/
 def godel1931ReimportReversibilityTheorem :
     ReimportReversibilityTheorem godel1931LCELInstance :=
   reimportReversibilityTheorem_of_support
     godel1931ReimportReversibilitySupport
 
-/-- Benchmark-transport-side theorem-strength reimport reversibility object. -/
+/-- Benchmark-transport-side reimport certification package. -/
 def benchmarkTransportReimportReversibilityTheorem :
     ReimportReversibilityTheorem benchmarkTransportLCELInstance :=
   reimportReversibilityTheorem_of_support
     benchmarkTransportReimportReversibilitySupport
 
-/-- Native DP-side theorem-strength reimport reversibility object. -/
+/-- Native DP-side reimport certification package. -/
 def dpEmitterReimportReversibilityTheorem :
     ReimportReversibilityTheorem dpEmitterLCELInstance :=
   reimportReversibilityTheorem_of_support
     dpEmitterReimportReversibilitySupport
 
-/-! ## Theorem-strength boundary factorization object -/
+/-! ## Boundary-factorization package -/
 
-/-- Theorem-strength boundary-factorization object for the operational-inexpressibility manuscript Proposition 5.9.
-
-Packages the reimport-side theorem (visible via the reversible projection)
-and the license-side theorem (sensitive to the irreversible quotient)
-together with the two coherence equalities that tie the obstruction,
-reflection, and reimport layers into a single boundary-sensitive
-factorization, plus the boundary-realization witness. -/
+/-- A record combining the reimport and blocked-sentence packages with two
+sentence equalities and the supplied boundary-realization witness. -/
 structure BoundaryFactorizationTheorem (L : FormalLCELInstance) : Type where
-  /-- Reimport-side theorem-strength object (visible via reversible
-  projection). -/
+  /-- Reimport-side certification package. -/
   visible : ReimportReversibilityTheorem L
-  /-- License-side theorem-strength object (sensitive to irreversible
-  quotient). -/
+  /-- Blocked-sentence reflection package. -/
   sensitive : LicenseIrreversibilityTheorem L
   /-- Coherence equality between the designated obstruction's blocked
   sentence and the reflection-content's blocked sentence. -/
@@ -382,8 +335,8 @@ structure BoundaryFactorizationTheorem (L : FormalLCELInstance) : Type where
 
 namespace BoundaryFactorizationTheorem
 
-/-- Downgrade to the abstract `ProjectionFactorizationWitness` used in the
-existing LCEL substrate machinery. -/
+/-- Project to the proposition-only `ProjectionFactorizationWitness`
+interface. -/
 def toProjectionFactorizationWitness
     {L : FormalLCELInstance}
     (T : BoundaryFactorizationTheorem L) :
@@ -410,8 +363,7 @@ def toProjectionFactorizationWitness
 
 end BoundaryFactorizationTheorem
 
-/-- Extraction of a theorem-strength boundary-factorization object from the
-proof-carrying support record. -/
+/-- Package the fields of a supplied boundary-factorization support record. -/
 def boundaryFactorizationTheorem_of_support
     {L : FormalLCELInstance}
     (S : BoundaryFactorizationSupport L) :
@@ -423,19 +375,19 @@ def boundaryFactorizationTheorem_of_support
   reflectionBlockedEqImported := S.reflectionBlockedEqImported
   boundaryRealized := S.boundaryRealized
 
-/-- Gödel-side theorem-strength boundary factorization object. -/
+/-- Gödel-side boundary-factorization package. -/
 def godel1931BoundaryFactorizationTheorem :
     BoundaryFactorizationTheorem godel1931LCELInstance :=
   boundaryFactorizationTheorem_of_support
     godel1931BoundaryFactorizationSupport
 
-/-- Benchmark-transport-side theorem-strength boundary factorization object. -/
+/-- Benchmark-transport-side boundary-factorization package. -/
 def benchmarkTransportBoundaryFactorizationTheorem :
     BoundaryFactorizationTheorem benchmarkTransportLCELInstance :=
   boundaryFactorizationTheorem_of_support
     benchmarkTransportBoundaryFactorizationSupport
 
-/-- Native DP-side theorem-strength boundary factorization object. -/
+/-- Native DP-side boundary-factorization package. -/
 def dpEmitterBoundaryFactorizationTheorem :
     BoundaryFactorizationTheorem dpEmitterLCELInstance :=
   boundaryFactorizationTheorem_of_support

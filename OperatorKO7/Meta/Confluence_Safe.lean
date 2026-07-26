@@ -86,15 +86,14 @@ theorem localJoin_of_nf (a : Trace) (hnf : NormalFormSafe a) : LocalJoinSafe a :
   refine localJoin_of_none (a := a) ?h
   intro b hb; exact no_step_from_nf hnf hb
 
-/-- Root critical peak at `merge void void` is trivially joinable:
- both branches step to `void`. -/
+/-- Every applicable safe root rule at `merge void void` has target `void`, so every
+root peak is trivially joinable. -/
 theorem localJoin_merge_void_void : LocalJoinSafe (merge void void) := by
   intro b c hb hc
-  -- Both reducts are definitionally `void` in each possible branch.
+  -- Every applicable derivation has target `void`.
   have hb_refl : SafeStepStar b void := by
     cases hb with
     | R_merge_void_left t hδ =>
-        -- Here a = merge void t unifies with merge void void, so t = void and b = void.
         exact SafeStepStar.refl _
     | R_merge_void_right t hδ =>
         exact SafeStepStar.refl _
@@ -152,7 +151,7 @@ theorem localJoin_integrate_rec (b s n : Trace) : LocalJoinSafe (integrate (rec�
   refine localJoin_of_none (a := integrate (recΔ b s n)) ?h
   intro x hx; cases hx
 
-/-- At `merge void t` there is only one safe root rule; local join is trivial. -/
+/-- Every applicable safe root rule at `merge void t` has target `t`; local join is trivial. -/
 theorem localJoin_merge_void_left (t : Trace) : LocalJoinSafe (merge void t) := by
   intro b c hb hc
   have hb_refl : SafeStepStar b t := by
@@ -167,7 +166,7 @@ theorem localJoin_merge_void_left (t : Trace) : LocalJoinSafe (merge void t) := 
     | R_merge_cancel _ _ _ => exact SafeStepStar.refl _
   exact ⟨t, hb_refl, hc_refl⟩
 
-/-- At `merge t void` there is only one safe root rule; local join is trivial. -/
+/-- Every applicable safe root rule at `merge t void` has target `t`; local join is trivial. -/
 theorem localJoin_merge_void_right (t : Trace) : LocalJoinSafe (merge t void) := by
   intro b c hb hc
   have hb_refl : SafeStepStar b t := by
@@ -366,15 +365,14 @@ theorem localJoin_merge_no_void_neq (a b : Trace)
 theorem localJoin_if_normalize_fixed (a : Trace) (hfix : normalizeSafe a = a) :
     LocalJoinSafe a := by
   have hnf : NormalFormSafe a := (nf_iff_normalize_fixed a).mpr hfix
-  -- avoid definality issues by expanding the goal
   intro b c hb hc
   exact (localJoin_of_nf a hnf) hb hc
 
 /--
 Global local-join discharge for the safe relation.
 
-This closes the remaining hypothesis needed by `Meta/Newman_Safe.lean`:
-for every source trace `a`, root local-joinability holds for `SafeStep`.
+This supplies the global root local-join theorem used by `Meta/Newman_Safe.lean`:
+every source trace `a` is locally joinable under `SafeStep`.
 -/
 theorem localJoin_all_safe : ∀ a : Trace, LocalJoinSafe a := by
   intro a
@@ -459,7 +457,8 @@ end MetaSN_KO7
 
 namespace MetaSN_KO7
 
-/-- Ctx wrapper: if neither side is void and `a ≠ b`, then ctx-local join holds at `merge a b`. -/
+/-- Context-closure lift: if neither side is `void` and `a ≠ b`, then
+`merge a b` is locally joinable. -/
 theorem localJoin_ctx_merge_no_void_neq (a b : Trace)
     (hav : a ≠ void) (hbv : b ≠ void) (hneq : a ≠ b) :
     LocalJoinSafe_ctx (merge a b) :=
@@ -470,13 +469,15 @@ end MetaSN_KO7
 
 namespace MetaSN_KO7
 
-/-- Ctx wrapper: eqW distinct arguments have ctx-local join (only diff rule applies). -/
+/-- Context-closure lift: distinct `eqW` arguments admit only `R_eq_diff`, so they are
+locally joinable. -/
 theorem localJoin_ctx_eqW_ne (a b : Trace) (hne : a ≠ b) :
     LocalJoinSafe_ctx (eqW a b) :=
   localJoin_ctx_of_localJoin (a := eqW a b)
     (h := localJoin_eqW_ne a b hne)
 
-/-- Ctx wrapper: at eqW a a with kappaM a ≠ 0, only diff applies; ctx-local join holds. -/
+/-- Context-closure lift: at `eqW a a` with `kappaM a ≠ 0`, neither safe `eqW` rule
+applies, so local join holds vacuously. -/
 theorem localJoin_ctx_eqW_refl_guard_ne (a : Trace)
     (h0ne : MetaSN_DM.kappaM a ≠ 0) :
     LocalJoinSafe_ctx (eqW a a) :=
@@ -487,19 +488,22 @@ end MetaSN_KO7
 
 namespace MetaSN_KO7
 
-/-- Ctx wrapper: if `normalizeSafe (merge a a) = delta n`, eqW a a ctx-joins. -/
+/-- Context-closure lift: if `normalizeSafe (merge a a) = delta n`, then `eqW a a`
+is locally joinable. -/
 theorem localJoin_ctx_eqW_refl_if_merge_normalizes_to_delta (a n : Trace)
     (hn : normalizeSafe (merge a a) = delta n) :
     LocalJoinSafe_ctx (eqW a a) :=
   localJoin_eqW_refl_ctx_if_merge_normalizes_to_delta a n hn
 
-/-- Ctx wrapper: if `integrate (merge a a) ⇒ctx* void`, eqW a a ctx-joins at void. -/
+/-- Context-closure lift: if `integrate (merge a a) ⇒ctx* void`, then `eqW a a`
+is locally joinable at `void`. -/
 theorem localJoin_ctx_eqW_refl_if_integrate_merge_to_void (a : Trace)
     (hiv : SafeStepCtxStar (integrate (merge a a)) void) :
     LocalJoinSafe_ctx (eqW a a) :=
   localJoin_eqW_refl_ctx_if_integrate_merge_to_void a hiv
 
-/-- Ctx wrapper: if `a ⇒* delta n` and guards hold on `delta n`, eqW a a ctx-joins. -/
+/-- Context-closure lift: if `a ⇒* delta n` and the guards hold on `delta n`, then
+`eqW a a` is locally joinable. -/
 theorem localJoin_ctx_eqW_refl_if_arg_star_to_delta (a n : Trace)
     (ha : SafeStepStar a (delta n))
     (hδ : deltaFlag (delta n) = 0)
@@ -507,7 +511,8 @@ theorem localJoin_ctx_eqW_refl_if_arg_star_to_delta (a n : Trace)
     LocalJoinSafe_ctx (eqW a a) :=
   localJoin_eqW_refl_ctx_if_arg_star_to_delta a n ha hδ h0
 
-/-- Ctx wrapper: if `normalizeSafe a = delta n` and guards hold, eqW a a ctx-joins. -/
+/-- Context-closure lift: if `normalizeSafe a = delta n` and the guards hold, then
+`eqW a a` is locally joinable. -/
 theorem localJoin_ctx_eqW_refl_if_normalizes_to_delta (a n : Trace)
     (hn : normalizeSafe a = delta n)
     (hδ : deltaFlag (delta n) = 0)
@@ -519,7 +524,8 @@ end MetaSN_KO7
 
 namespace MetaSN_KO7
 
-/-- Ctx wrapper: when `a` is literally `delta n` and guards hold, eqW (delta n) (delta n) ctx-joins. -/
+/-- Context-closure lift: when `a` is `delta n` and the guards hold,
+`eqW (delta n) (delta n)` is locally joinable. -/
 theorem localJoin_ctx_eqW_refl_when_a_is_delta (n : Trace)
     (hδ : deltaFlag (delta n) = 0)
     (h0 : MetaSN_DM.kappaM (delta n) = 0) :

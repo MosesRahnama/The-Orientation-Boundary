@@ -3,14 +3,12 @@ import OperatorKO7.Meta.DependencyPairs_FiniteGraph
 /-!
 # Finite Call-Graph Presentation for Dependency Pairs
 
-This module removes one more layer of manual graph packaging for finite dependency-pair
-arguments. Instead of supplying a binary pair relation directly, a caller can work with a
-more concrete extracted call-graph presentation:
+This module derives a binary edge relation from a caller-supplied finite call-graph presentation:
 
 - a finite type of dependency-pair nodes,
 - a finite key type for marked call heads,
 - one key attached to each node, and
-- the finite set of successor keys extracted from each node.
+- a finite set of successor keys for each node.
 
 The binary edge relation is then built automatically by matching successor keys against the
 keys of target nodes.
@@ -18,7 +16,7 @@ keys of target nodes.
 
 namespace OperatorKO7.DependencyPairsFragment
 
-/-- Finite extracted call-graph presentation for dependency-pair nodes. -/
+/-- Caller-supplied finite key presentation for dependency-pair nodes. -/
 structure FiniteCallGraph (ι κ : Type) [Fintype ι] [DecidableEq ι] [DecidableEq κ] where
   nodeKey : ι → κ
   succKeys : ι → Finset κ
@@ -27,8 +25,7 @@ namespace FiniteCallGraph
 
 variable {ι κ : Type} [Fintype ι] [DecidableEq ι] [DecidableEq κ] (G : FiniteCallGraph ι κ)
 
-/-- The induced dependency-pair edge relation: a target node is reachable when its key
-appears in the extracted successor-key set of the source node. -/
+/-- Direct edge relation obtained when the target key belongs to the source successor-key set. -/
 def Edge (i j : ι) : Prop :=
   G.nodeKey j ∈ G.succKeys i
 

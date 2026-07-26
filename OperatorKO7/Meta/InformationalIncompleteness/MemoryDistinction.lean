@@ -1,6 +1,7 @@
 import OperatorKO7.Meta.InformationalIncompleteness.ShannonFinite
 import OperatorKO7.Meta.InformationalIncompleteness.DiagonalEntropy
 import OperatorKO7.Meta.SafeStep.EqWVoidAnomaly
+import OperatorKO7.Meta.Physics.ConfessionLandauerSplit
 
 /-!
 # Memory, distinction, information: the mechanizable core of the triad
@@ -9,7 +10,7 @@ This module mechanizes the three theorem-shaped legs under the interpretive read
 as memory; memory is required to establish distinction; a registered distinction is information." The
 *physical* reading (identifying these finite carriers with physical memory or physical measurement)
 stays co-constitutive prose (ANALOGY-typed). The *finite-substrate* co-constitution is now a theorem
-(`memory_distinction_information_equiv`, Leg 4): on a finite carrier the three faces are one
+(`memory_distinction_information_equiv`, Leg 5): on a finite carrier the three faces are one
 equivalence.
 
 1. **Memory is necessary for distinction** (`equality_not_one_cell_observable`): on any carrier with
@@ -26,15 +27,19 @@ equivalence.
    instance `eqW void void` the two rules fork to unjoinable normal forms (the existing W16.1 anomaly,
    re-exported). The distinction operation is exactly where the kernel's confluence boundary sits.
 
-4. **The triad as a theorem** (`memory_distinction_information_equiv`): on a finite carrier,
+4. **Memory is free, the registered distinction is costed** (`memory_free_distinction_costed`): the
+   Landauer floor is invariant under the redundant memory carrier and strictly positive on the
+   committed record (re-export of the `ConfessionLandauerSplit` recursor witnesses).
+
+5. **The triad as a theorem** (`memory_distinction_information_equiv`): on a finite carrier,
    `Nontrivial α` (a distinction exists) is equivalent both to the impossibility of a one-cell equality
    observer (two-cell memory is necessary) and to the existence of a register over `α` with strictly
    positive Shannon information. The three faces co-determine. This is the formal core of the
    co-constitutive reading; the physical gloss remains ANALOGY and carries no formal force.
 
 ## Claim typing (binding)
-* PROVEN: the four legs above, each a Lean theorem below or a thin re-export of an existing
-  baseline-clean anchor. Leg 4 is the finite-substrate co-constitution equivalence.
+* PROVEN: the five legs above, each a Lean theorem below or a thin re-export of an existing
+  baseline-clean anchor. Leg 5 is the finite-substrate co-constitution equivalence.
 * ANALOGY (docstring only, never asserted by a theorem): any identification of these finite carriers
   with physical memory or physical measurement, and the dynamical "duplication manufactures the
   working-versus-recorded distinction" gloss.
@@ -117,7 +122,21 @@ theorem eqW_distinction_fork :
       (eqW void void) void (integrate (merge void void)) :=
   OperatorKO7.Meta.SafeStep.EqWVoidAnomaly.local_confluence_fails_at_eqW_void_void
 
-/-! ## Leg 4: the co-constitution promoted to a theorem
+/-! ## Leg 4: memory is free, the registered distinction is costed -/
+
+open OperatorKO7.Meta.Physics.ConfessionLandauerSplit
+open OperatorKO7.Meta.Physics.LandauerHeatBound in
+/-- **Memory free, distinction costed.** On the recursor-shaped confession event: the Landauer floor is
+invariant under the redundant memory carrier (five duplicated payload copies cost the same as zero),
+while the committed record's floor is strictly positive (`log 2`). The memory is free; registering the
+distinction is the costed event. Thin conjunction of the `ConfessionLandauerSplit` witnesses. -/
+theorem memory_free_distinction_costed :
+    (landauerLowerBound (recursorConfessionEvent 5) 1 1
+        = landauerLowerBound (recursorConfessionEvent 0) 1 1)
+    ∧ 0 < landauerLowerBound (recursorConfessionEvent 5) 1 1 :=
+  ⟨recursorConfession_floor_indep_of_copies 1 1, recursorConfession_floor_pos⟩
+
+/-! ## Leg 5: the co-constitution promoted to a theorem
 
 The triad reading was previously ANALOGY-only. On a finite carrier the three faces are made one
 equivalence: a distinction exists (`Nontrivial α`) iff no one-cell observer decides equality (two held
@@ -221,6 +240,7 @@ theorem memory_distinction_information_witness :
 #print axioms distinction_bears_information
 #print axioms no_distinction_zero_information
 #print axioms eqW_distinction_fork
+#print axioms memory_free_distinction_costed
 #print axioms boolEmbed_injective
 #print axioms pushforward_total
 #print axioms memory_distinction_information_equiv

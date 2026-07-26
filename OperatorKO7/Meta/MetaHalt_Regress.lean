@@ -1,0 +1,978 @@
+import OperatorKO7.Meta.MetaHalt_Signatures
+import OperatorKO7.Meta.MetaHalt_Predicate
+import OperatorKO7.Meta.GenericSupervisoryEngine
+import Mathlib.Tactic.Linarith
+import Mathlib.Data.Finset.Basic
+import Mathlib.Data.List.Basic
+import Mathlib.Data.List.Count
+
+/-!
+This module defines an outer supervisory loop over a finite catalog. The steps field counts
+selected catalog entries. Inner execution cost, returned step counts, state consumption, and
+checker-log coverage lie beyond the proved invariant.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-/
+
+namespace OperatorKO7.MetaHalt.Regress
+
+open OperatorKO7
+open OperatorKO7.WitnessOrder
+open OperatorKO7.MetaHalt.Signatures
+open OperatorKO7.MetaHalt.Predicate
+
+/-- Data record whose requirements are the fields displayed below. -/
+structure LanguageAuditEntry where
+  language : LanguageSignature
+  firedClause : MetaHaltClause
+  allocatedBudget : Nat
+  stepsConsumed : Nat
+  candidateCount : Nat
+  partialTraceTags : List TraceTag
+  loopPatternHit : Option LoopPattern
+  deriving Repr
+
+/-- Data record whose requirements are the fields displayed below. -/
+structure AuditCompleteC3Record where
+  auditEntries : List LanguageAuditEntry
+  checkerLog : List String
+  deriving Repr
+
+/-- Carrier with the constructors displayed below. -/
+inductive SupervisoryLoopOutcome
+  | acceptedWitness (L : LanguageSignature) (out : TypedOutput)
+  | auditC3 (record : AuditCompleteC3Record)
+  deriving Repr
+
+/-- Data record whose requirements are the fields displayed below. -/
+structure SupervisoryLoopState where
+  visited : List LanguageSignature
+  trace : SearchTraceSignature
+  currLang : Option LanguageSignature
+  usedSteps : Nat
+  deriving Repr
+
+/-- Definition with formal content given by the displayed type and body. -/
+def SupervisoryLoopState.mark_visited
+    (s : SupervisoryLoopState) (L : LanguageSignature) : SupervisoryLoopState :=
+  { s with
+    visited := L :: s.visited
+    currLang := none
+    trace := SearchTraceSignature.empty }
+
+/-- Definition with formal content given by the displayed type and body. -/
+def SupervisoryLoopState.set_current
+    (s : SupervisoryLoopState) (L : LanguageSignature) : SupervisoryLoopState :=
+  { s with
+    currLang := some L
+    trace := SearchTraceSignature.empty }
+
+/-- Data record whose requirements are the fields displayed below.
+-/
+structure CatalogLiftPolicy where
+  choose : Catalog → List LanguageSignature → Option LanguageSignature
+  never_revisits :
+    ∀ (C : Catalog) (visited : List LanguageSignature) (L : LanguageSignature),
+      choose C visited = some L → L ∉ visited
+
+/-- Inner per-language loop (abstracted away). -/
+def InnerSearchStep :=
+  (L : LanguageSignature) →
+  (T : SearchTraceSignature) →
+  (budget : Nat) →
+  SearchTraceSignature ⊕ (LanguageSignature × TypedOutput)
+
+/-- Definition with formal content given by the displayed type and body. -/
+def supervisoryLoop
+    (fuel : Nat)
+    (C : Catalog)
+    (policy : CatalogLiftPolicy)
+    (admiss : AdmissibilityTable)
+    (loops : LoopPatternTable)
+    (inner : InnerSearchStep)
+    (O : ObligationSignature)
+    (s : SupervisoryLoopState)
+    (auditSoFar : List LanguageAuditEntry) : SupervisoryLoopOutcome :=
+  match fuel with
+  | 0 =>
+      .auditC3 { auditEntries := auditSoFar.reverse, checkerLog := [] }
+  | fuel + 1 =>
+      match policy.choose C s.visited with
+      | none =>
+          .auditC3 { auditEntries := auditSoFar.reverse, checkerLog := [] }
+      | some L =>
+          match C.entryOf L with
+          | none =>
+              .auditC3 { auditEntries := auditSoFar.reverse, checkerLog := [] }
+          | some entry =>
+              let catalogRem := C.size - s.visited.length - 1
+              let preTrace := SearchTraceSignature.empty
+              match metaHalt O L preTrace admiss loops entry.budget catalogRem with
+              | some clause =>
+                  let audit : LanguageAuditEntry :=
+                    { language := L
+                      firedClause := clause
+                      allocatedBudget := entry.budget
+                      stepsConsumed := preTrace.stepsConsumed
+                      candidateCount := preTrace.candidateCount
+                      partialTraceTags := preTrace.traceTags
+                      loopPatternHit := loops.patterns.find? (fun p => p.fires preTrace) }
+                  supervisoryLoop fuel C policy admiss loops inner O
+                    (s.mark_visited L) (audit :: auditSoFar)
+              | none =>
+                  match inner L SearchTraceSignature.empty entry.budget with
+                  | .inr (_Lacc, out) =>
+                      .acceptedWitness L out
+                  | .inl trace' =>
+                      match metaHalt O L trace' admiss loops entry.budget catalogRem with
+                      | some clause =>
+                          let audit : LanguageAuditEntry :=
+                            { language := L
+                              firedClause := clause
+                              allocatedBudget := entry.budget
+                              stepsConsumed := trace'.stepsConsumed
+                              candidateCount := trace'.candidateCount
+                              partialTraceTags := trace'.traceTags
+                              loopPatternHit := loops.patterns.find? (fun p => p.fires trace') }
+                          supervisoryLoop fuel C policy admiss loops inner O
+                            (s.mark_visited L) (audit :: auditSoFar)
+                      | none =>
+                          let audit : LanguageAuditEntry :=
+                            { language := L
+                              firedClause := MetaHaltClause.budgetExhausted
+                              allocatedBudget := entry.budget
+                              stepsConsumed := trace'.stepsConsumed
+                              candidateCount := trace'.candidateCount
+                              partialTraceTags := trace'.traceTags
+                              loopPatternHit := none }
+                          supervisoryLoop fuel C policy admiss loops inner O
+                            (s.mark_visited L) (audit :: auditSoFar)
+termination_by fuel
+
+/-- Number of still-unvisited catalog entries. -/
+def Catalog.remainingCount (C : Catalog) (visited : List LanguageSignature) : Nat :=
+  C.entries.countP (fun e => e.language ∉ visited)
+
+/-- Definition with formal content given by the displayed type and body.
+-/
+def supervisoryLoopWithSteps
+    (fuel : Nat)
+    (C : Catalog)
+    (policy : CatalogLiftPolicy)
+    (admiss : AdmissibilityTable)
+    (loops : LoopPatternTable)
+    (inner : InnerSearchStep)
+    (O : ObligationSignature)
+    (s : SupervisoryLoopState)
+    (auditSoFar : List LanguageAuditEntry) : Nat × SupervisoryLoopOutcome :=
+  match fuel with
+  | 0 =>
+      (0, .auditC3 { auditEntries := auditSoFar.reverse, checkerLog := [] })
+  | fuel + 1 =>
+      match policy.choose C s.visited with
+      | none =>
+          (0, .auditC3 { auditEntries := auditSoFar.reverse, checkerLog := [] })
+      | some L =>
+          match C.entryOf L with
+          | none =>
+              (0, .auditC3 { auditEntries := auditSoFar.reverse, checkerLog := [] })
+          | some entry =>
+              let catalogRem := C.size - s.visited.length - 1
+              let preTrace := SearchTraceSignature.empty
+              match metaHalt O L preTrace admiss loops entry.budget catalogRem with
+              | some clause =>
+                  let audit : LanguageAuditEntry :=
+                    { language := L
+                      firedClause := clause
+                      allocatedBudget := entry.budget
+                      stepsConsumed := preTrace.stepsConsumed
+                      candidateCount := preTrace.candidateCount
+                      partialTraceTags := preTrace.traceTags
+                      loopPatternHit := loops.patterns.find? (fun p => p.fires preTrace) }
+                  let recResult := supervisoryLoopWithSteps fuel C policy admiss loops inner O
+                    (s.mark_visited L) (audit :: auditSoFar)
+                  (recResult.1 + 1, recResult.2)
+              | none =>
+                  match inner L SearchTraceSignature.empty entry.budget with
+                  | .inr (_Lacc, out) =>
+                      (1, .acceptedWitness L out)
+                  | .inl trace' =>
+                      match metaHalt O L trace' admiss loops entry.budget catalogRem with
+                      | some clause =>
+                          let audit : LanguageAuditEntry :=
+                            { language := L
+                              firedClause := clause
+                              allocatedBudget := entry.budget
+                              stepsConsumed := trace'.stepsConsumed
+                              candidateCount := trace'.candidateCount
+                              partialTraceTags := trace'.traceTags
+                              loopPatternHit := loops.patterns.find? (fun p => p.fires trace') }
+                          let recResult := supervisoryLoopWithSteps fuel C policy admiss loops inner O
+                            (s.mark_visited L) (audit :: auditSoFar)
+                          (recResult.1 + 1, recResult.2)
+                      | none =>
+                          let audit : LanguageAuditEntry :=
+                            { language := L
+                              firedClause := MetaHaltClause.budgetExhausted
+                              allocatedBudget := entry.budget
+                              stepsConsumed := trace'.stepsConsumed
+                              candidateCount := trace'.candidateCount
+                              partialTraceTags := trace'.traceTags
+                              loopPatternHit := none }
+                          let recResult := supervisoryLoopWithSteps fuel C policy admiss loops inner O
+                            (s.mark_visited L) (audit :: auditSoFar)
+                          (recResult.1 + 1, recResult.2)
+termination_by fuel
+
+@[simp] theorem supervisoryLoopWithSteps_snd
+    (fuel : Nat)
+    (C : Catalog)
+    (policy : CatalogLiftPolicy)
+    (admiss : AdmissibilityTable)
+    (loops : LoopPatternTable)
+    (inner : InnerSearchStep)
+    (O : ObligationSignature)
+    (s : SupervisoryLoopState)
+    (auditSoFar : List LanguageAuditEntry) :
+    (supervisoryLoopWithSteps fuel C policy admiss loops inner O s auditSoFar).2 =
+      supervisoryLoop fuel C policy admiss loops inner O s auditSoFar := by
+  induction fuel generalizing s auditSoFar with
+  | zero =>
+      simp [supervisoryLoopWithSteps, supervisoryLoop]
+  | succ fuel ih =>
+      simp [supervisoryLoopWithSteps, supervisoryLoop]
+      cases hchoose : policy.choose C s.visited <;>
+        simp [ih]
+      rename_i current
+      cases hentry : C.entryOf current <;>
+        simp
+      rename_i entry
+      let catalogRem := C.size - s.visited.length - 1
+      let preTrace := SearchTraceSignature.empty
+      cases hpre : metaHalt O current preTrace admiss loops entry.budget catalogRem <;>
+        simp
+      cases hinner : inner current SearchTraceSignature.empty entry.budget <;>
+        simp
+      rename_i trace'
+      cases hpost : metaHalt O current trace' admiss loops entry.budget catalogRem <;>
+        simp
+
+private theorem remainingCount_cons_le
+    (entries : List CatalogEntry)
+    (visited : List LanguageSignature)
+    (current : LanguageSignature) :
+    entries.countP (fun e => e.language ∉ current :: visited) ≤
+      entries.countP (fun e => e.language ∉ visited) := by
+  induction entries with
+  | nil => simp
+  | cons x xs ih =>
+      by_cases hv : x.language ∉ visited
+      · by_cases hx : x.language = current
+        · have hstep : xs.countP (fun e => e.language ∉ visited) ≤
+            (x :: xs).countP (fun e => e.language ∉ visited) := by
+            simp [hv]
+          simpa [hv, hx] using Nat.le_trans ih hstep
+        · have hv' : x.language ∉ current :: visited := by
+            simp [hx, hv]
+          simpa [hv, hv', hx] using Nat.succ_le_succ ih
+      · have hv' : ¬ x.language ∉ current :: visited := by
+          intro h
+          exact hv (fun hmem => h (by simp [hmem]))
+        simpa [hv, hv'] using ih
+
+private theorem exists_entry_of_find_eq_some
+    (entries : List CatalogEntry)
+    (current : LanguageSignature) (entry : CatalogEntry)
+    (hentry : entries.find? (fun e => e.language = current) = some entry) :
+    ∃ e ∈ entries, e.language = current := by
+  induction entries with
+  | nil =>
+      simp [List.find?] at hentry
+  | cons x xs ih =>
+      by_cases hx : x.language = current
+      · exact ⟨x, by simp, hx⟩
+      · simp [List.find?, hx] at hentry
+        rcases ih hentry with ⟨e, he, heq⟩
+        exact ⟨e, by simp [he], heq⟩
+
+private theorem exists_entry_of_entryOf_eq_some
+    (C : Catalog) (current : LanguageSignature) (entry : CatalogEntry)
+    (hentry : C.entryOf current = some entry) :
+    ∃ e ∈ C.entries, e.language = current := by
+  unfold Catalog.entryOf at hentry
+  exact exists_entry_of_find_eq_some C.entries current entry hentry
+
+private theorem remainingCount_mark_visited_succ_le_entries
+    (entries : List CatalogEntry)
+    (visited : List LanguageSignature)
+    (current : LanguageSignature)
+    (hnotin : current ∉ visited)
+    (hex : ∃ e ∈ entries, e.language = current) :
+    entries.countP (fun e => e.language ∉ current :: visited) + 1 ≤
+      entries.countP (fun e => e.language ∉ visited) := by
+  induction entries with
+  | nil =>
+      rcases hex with ⟨e, he, _⟩
+      cases he
+  | cons x xs ih =>
+      rcases hex with ⟨e, he, heq⟩
+      by_cases hx : x.language = current
+      · have hmono := remainingCount_cons_le xs visited current
+        have hxNot : x.language ∉ visited := by
+          simpa [hx] using hnotin
+        calc
+          (x :: xs).countP (fun e => e.language ∉ current :: visited) + 1
+              = xs.countP (fun e => e.language ∉ current :: visited) + 1 := by
+                  simp [hx]
+          _ ≤ xs.countP (fun e => e.language ∉ visited) + 1 :=
+              Nat.add_le_add_right hmono 1
+          _ = (x :: xs).countP (fun e => e.language ∉ visited) := by
+              symm
+              simp [hxNot, Nat.add_comm]
+      · have hexs : ∃ e ∈ xs, e.language = current := by
+          cases he with
+          | head => exact False.elim (hx heq)
+          | tail _ hmem => exact ⟨e, hmem, heq⟩
+        have hrec := ih hexs
+        by_cases hv : x.language ∉ visited
+        · have hv' : x.language ∉ current :: visited := by
+            simp [hx, hv]
+          simpa [hx, hv, hv'] using Nat.succ_le_succ hrec
+        · have hv' : ¬ x.language ∉ current :: visited := by
+            intro h
+            exact hv (fun hmem => h (by simp [hmem]))
+          simpa [hx, hv, hv'] using hrec
+
+private theorem remainingCount_mark_visited_succ_le
+    (C : Catalog)
+    (visited : List LanguageSignature)
+    (current : LanguageSignature)
+    (entry : CatalogEntry)
+    (hentry : C.entryOf current = some entry)
+    (hnotin : current ∉ visited) :
+    Catalog.remainingCount C (current :: visited) + 1 ≤ Catalog.remainingCount C visited := by
+  have hex : ∃ e ∈ C.entries, e.language = current :=
+    exists_entry_of_entryOf_eq_some C current entry hentry
+  unfold Catalog.remainingCount
+  exact remainingCount_mark_visited_succ_le_entries C.entries visited current hnotin hex
+
+/-- Sum of all per-language budgets, with one extra META-HALT check per
+    language. -/
+def Catalog.totalBudgetPlusOne (C : Catalog) : Nat :=
+  C.entries.foldr (fun e acc => acc + (e.budget + 1)) 0
+
+private theorem remainingCount_le_size
+    (C : Catalog)
+    (visited : List LanguageSignature) :
+    Catalog.remainingCount C visited ≤ C.size := by
+  unfold Catalog.remainingCount Catalog.size
+  exact List.countP_le_length
+
+private theorem size_le_totalBudgetPlusOne
+    (C : Catalog) :
+    C.size ≤ Catalog.totalBudgetPlusOne C := by
+  unfold Catalog.size Catalog.totalBudgetPlusOne
+  induction C.entries with
+  | nil => simp
+  | cons e es ih =>
+      have hstep : es.length + 1 ≤ es.foldr (fun e acc => acc + (e.budget + 1)) 0 + 1 :=
+        Nat.succ_le_succ ih
+      have hone : es.foldr (fun e acc => acc + (e.budget + 1)) 0 + 1 ≤
+          es.foldr (fun e acc => acc + (e.budget + 1)) 0 + (e.budget + 1) := by
+        exact Nat.add_le_add_left (Nat.succ_le_succ (Nat.zero_le e.budget)) _
+      exact Nat.le_trans hstep hone
+
+private theorem supervisoryLoopWithSteps_fst_le_remainingCount
+    (fuel : Nat)
+    (C : Catalog)
+    (policy : CatalogLiftPolicy)
+    (admiss : AdmissibilityTable)
+    (loops : LoopPatternTable)
+    (inner : InnerSearchStep)
+    (O : ObligationSignature)
+    (s : SupervisoryLoopState)
+    (auditSoFar : List LanguageAuditEntry) :
+    (supervisoryLoopWithSteps fuel C policy admiss loops inner O s auditSoFar).1 ≤
+      Catalog.remainingCount C s.visited := by
+  induction fuel generalizing s auditSoFar with
+  | zero =>
+      simp [supervisoryLoopWithSteps, Catalog.remainingCount]
+  | succ fuel ih =>
+      simp [supervisoryLoopWithSteps]
+      cases hchoose : policy.choose C s.visited with
+      | none =>
+          simp [Catalog.remainingCount]
+      | some current =>
+          cases hentry : C.entryOf current with
+          | none =>
+            simp [hentry, Catalog.remainingCount]
+          | some entry =>
+              have hnotin : current ∉ s.visited :=
+                policy.never_revisits C s.visited current hchoose
+              have hdrop : Catalog.remainingCount C (current :: s.visited) + 1 ≤ Catalog.remainingCount C s.visited :=
+                remainingCount_mark_visited_succ_le C s.visited current entry hentry hnotin
+              let catalogRem := C.size - s.visited.length - 1
+              let preTrace := SearchTraceSignature.empty
+              cases hpre : metaHalt O current preTrace admiss loops entry.budget catalogRem with
+              | some clause =>
+                  have hchild := ih (s := s.mark_visited current)
+                    (auditSoFar := {
+                      language := current
+                      firedClause := clause
+                      allocatedBudget := entry.budget
+                      stepsConsumed := preTrace.stepsConsumed
+                      candidateCount := preTrace.candidateCount
+                      partialTraceTags := preTrace.traceTags
+                      loopPatternHit := loops.patterns.find? (fun p => p.fires preTrace)
+                    } :: auditSoFar)
+                  simpa [catalogRem, preTrace, hchoose, hentry, hpre] using
+                    Nat.le_trans (Nat.succ_le_succ hchild) hdrop
+              | none =>
+                  cases hinner : inner current SearchTraceSignature.empty entry.budget with
+                  | inr pair =>
+                      have hone : 1 ≤ Catalog.remainingCount C s.visited := by
+                        exact Nat.le_trans (Nat.succ_le_succ (Nat.zero_le _)) hdrop
+                      simpa [catalogRem, preTrace, hchoose, hentry, hpre, hinner] using hone
+                  | inl trace' =>
+                      cases hpost : metaHalt O current trace' admiss loops entry.budget catalogRem with
+                      | some clause =>
+                          have hchild := ih (s := s.mark_visited current)
+                            (auditSoFar := {
+                              language := current
+                              firedClause := clause
+                              allocatedBudget := entry.budget
+                              stepsConsumed := trace'.stepsConsumed
+                              candidateCount := trace'.candidateCount
+                              partialTraceTags := trace'.traceTags
+                              loopPatternHit := loops.patterns.find? (fun p => p.fires trace') } :: auditSoFar)
+                          simpa [catalogRem, preTrace, hchoose, hentry, hpre, hinner, hpost] using
+                            Nat.le_trans (Nat.succ_le_succ hchild) hdrop
+                      | none =>
+                          have hchild := ih (s := s.mark_visited current)
+                            (auditSoFar := {
+                              language := current
+                              firedClause := MetaHaltClause.budgetExhausted
+                              allocatedBudget := entry.budget
+                              stepsConsumed := trace'.stepsConsumed
+                              candidateCount := trace'.candidateCount
+                              partialTraceTags := trace'.traceTags
+                              loopPatternHit := none } :: auditSoFar)
+                          simpa [catalogRem, preTrace, hchoose, hentry, hpre, hinner, hpost] using
+                            Nat.le_trans (Nat.succ_le_succ hchild) hdrop
+
+/-- The displayed proposition follows from the stated hypotheses. -/
+theorem audit_entry_fields_total (e : LanguageAuditEntry) :
+    e.language = e.language ∧
+    e.firedClause = e.firedClause ∧
+    e.allocatedBudget = e.allocatedBudget ∧
+    e.stepsConsumed = e.stepsConsumed ∧
+    e.candidateCount = e.candidateCount := by
+  exact ⟨rfl, rfl, rfl, rfl, rfl⟩
+
+/-- The displayed proposition follows from the stated hypotheses. -/
+theorem supervisoryLoop_terminates_in_catalog_budget
+    (C : Catalog) (policy : CatalogLiftPolicy)
+    (admiss : AdmissibilityTable) (loops : LoopPatternTable)
+    (inner : InnerSearchStep) (O : ObligationSignature)
+    (s : SupervisoryLoopState) :
+    ∃ (outcome : SupervisoryLoopOutcome) (steps : Nat),
+      steps ≤ Catalog.totalBudgetPlusOne C ∧
+      supervisoryLoop (C.size + 1) C policy admiss loops inner O s [] = outcome := by
+  refine ⟨(supervisoryLoopWithSteps (C.size + 1) C policy admiss loops inner O s []).2,
+    (supervisoryLoopWithSteps (C.size + 1) C policy admiss loops inner O s []).1,
+    ?_, ?_⟩
+  · exact Nat.le_trans
+      (supervisoryLoopWithSteps_fst_le_remainingCount (C.size + 1) C policy admiss loops inner O s [])
+      (Nat.le_trans (remainingCount_le_size C s.visited) (size_le_totalBudgetPlusOne C))
+  · simp [supervisoryLoopWithSteps_snd]
+
+/-- The displayed proposition follows from the stated hypotheses. -/
+theorem supervisoryLoop_emits_c3_or_c1c2
+    (C : Catalog) (policy : CatalogLiftPolicy)
+    (admiss : AdmissibilityTable) (loops : LoopPatternTable)
+    (inner : InnerSearchStep) (O : ObligationSignature)
+    (s : SupervisoryLoopState) :
+    let out := supervisoryLoop (C.size + 1) C policy admiss loops inner O s []
+    (∃ L o, out = .acceptedWitness L o) ∨ (∃ rec, out = .auditC3 rec) := by
+  dsimp
+  cases h : supervisoryLoop (C.size + 1) C policy admiss loops inner O s [] with
+  | acceptedWitness L o =>
+      exact Or.inl ⟨L, o, rfl⟩
+  | auditC3 rec =>
+      exact Or.inr ⟨rec, rfl⟩
+
+/-! Declarations for the section below. -/
+
+abbrev GenericLoopState :=
+  OperatorKO7.SupervisoryEngine.LoopState LanguageSignature SearchTraceSignature
+
+abbrev GenericLoopOutcome :=
+  OperatorKO7.SupervisoryEngine.LoopOutcome
+    LanguageSignature TypedOutput LanguageAuditEntry
+
+def toGenericLoopState (s : SupervisoryLoopState) : GenericLoopState :=
+  { visited := s.visited
+    trace := s.trace
+    currLang := s.currLang
+    usedSteps := s.usedSteps }
+
+def genericAuditReportToConcrete
+    (r : OperatorKO7.SupervisoryEngine.AuditReport LanguageAuditEntry) :
+    AuditCompleteC3Record :=
+  { auditEntries := r.auditEntries, checkerLog := r.checkerLog }
+
+def genericLoopOutcomeToConcrete (out : GenericLoopOutcome) :
+    SupervisoryLoopOutcome :=
+  match out with
+  | .acceptedWitness L o => .acceptedWitness L o
+  | .auditC3 rec => .auditC3 (genericAuditReportToConcrete rec)
+
+def genericLoopWithStepsToConcrete
+    (p : Nat × GenericLoopOutcome) : Nat × SupervisoryLoopOutcome :=
+  (p.1, genericLoopOutcomeToConcrete p.2)
+
+def genericCatalogInterface :
+    OperatorKO7.SupervisoryEngine.CatalogInterface
+      Catalog CatalogEntry LanguageSignature where
+  entries := Catalog.entries
+  language := CatalogEntry.language
+  budget := CatalogEntry.budget
+  entryOf := Catalog.entryOf
+  entryOf_mem := exists_entry_of_entryOf_eq_some
+
+def genericLiftPolicy (policy : CatalogLiftPolicy) :
+    OperatorKO7.SupervisoryEngine.LiftPolicy Catalog LanguageSignature where
+  choose := policy.choose
+  never_revisits := policy.never_revisits
+
+def genericDetectLoop (loops : LoopPatternTable) :
+    SearchTraceSignature → Option LoopPattern :=
+  fun T => loops.patterns.find? (fun p => p.fires T)
+
+def genericMetaHalt (admiss : AdmissibilityTable) (loops : LoopPatternTable) :
+    ObligationSignature →
+      LanguageSignature → SearchTraceSignature → Nat → Nat → Option MetaHaltClause :=
+  fun O L T budget catalogRem => metaHalt O L T admiss loops budget catalogRem
+
+def genericAuditBuilder
+    (L : LanguageSignature)
+    (clause : MetaHaltClause)
+    (budget : Nat)
+    (trace : SearchTraceSignature)
+    (hit : Option LoopPattern) :
+    LanguageAuditEntry :=
+  { language := L
+    firedClause := clause
+    allocatedBudget := budget
+    stepsConsumed := trace.stepsConsumed
+    candidateCount := trace.candidateCount
+    partialTraceTags := trace.traceTags
+    loopPatternHit := hit }
+
+def supervisoryLoopViaGeneric
+    (fuel : Nat)
+    (C : Catalog)
+    (policy : CatalogLiftPolicy)
+    (admiss : AdmissibilityTable)
+    (loops : LoopPatternTable)
+    (inner : InnerSearchStep)
+    (O : ObligationSignature)
+    (s : SupervisoryLoopState)
+    (auditSoFar : List LanguageAuditEntry) : GenericLoopOutcome :=
+  OperatorKO7.SupervisoryEngine.supervisoryLoop
+    genericCatalogInterface
+    fuel
+    C
+    (genericLiftPolicy policy)
+    (genericMetaHalt admiss loops)
+    (genericDetectLoop loops)
+    inner
+    MetaHaltClause.budgetExhausted
+    genericAuditBuilder
+    O
+    (toGenericLoopState s)
+    auditSoFar
+    SearchTraceSignature.empty
+
+def supervisoryLoopWithStepsViaGeneric
+    (fuel : Nat)
+    (C : Catalog)
+    (policy : CatalogLiftPolicy)
+    (admiss : AdmissibilityTable)
+    (loops : LoopPatternTable)
+    (inner : InnerSearchStep)
+    (O : ObligationSignature)
+    (s : SupervisoryLoopState)
+    (auditSoFar : List LanguageAuditEntry) : Nat × GenericLoopOutcome :=
+  OperatorKO7.SupervisoryEngine.supervisoryLoopWithSteps
+    genericCatalogInterface
+    fuel
+    C
+    (genericLiftPolicy policy)
+    (genericMetaHalt admiss loops)
+    (genericDetectLoop loops)
+    inner
+    MetaHaltClause.budgetExhausted
+    genericAuditBuilder
+    O
+    (toGenericLoopState s)
+    auditSoFar
+    SearchTraceSignature.empty
+
+@[simp] theorem toGenericLoopState_mark_visited
+    (s : SupervisoryLoopState)
+    (L : LanguageSignature) :
+    toGenericLoopState (s.mark_visited L) =
+      (toGenericLoopState s).markVisited L SearchTraceSignature.empty := rfl
+
+@[simp] theorem toGenericLoopState_set_current
+    (s : SupervisoryLoopState)
+    (L : LanguageSignature) :
+    toGenericLoopState (s.set_current L) =
+      (toGenericLoopState s).setCurrent L SearchTraceSignature.empty := rfl
+
+@[simp] theorem genericCatalogInterface_size_eq
+    (C : Catalog) :
+    genericCatalogInterface.size C = C.size := rfl
+
+@[simp] theorem genericCatalogInterface_entryOf_eq
+    (C : Catalog)
+    (L : LanguageSignature) :
+    genericCatalogInterface.entryOf C L = C.entryOf L := rfl
+
+@[simp] theorem genericCatalogInterface_budget_eq
+    (e : CatalogEntry) :
+    genericCatalogInterface.budget e = e.budget := rfl
+
+@[simp] theorem genericLiftPolicy_choose_eq
+    (policy : CatalogLiftPolicy)
+    (C : Catalog)
+    (visited : List LanguageSignature) :
+    (genericLiftPolicy policy).choose C visited = policy.choose C visited := rfl
+
+@[simp] theorem genericDetectLoop_eq
+    (loops : LoopPatternTable)
+    (T : SearchTraceSignature) :
+    genericDetectLoop loops T = loops.patterns.find? (fun p => p.fires T) := rfl
+
+@[simp] theorem genericMetaHalt_eq
+    (admiss : AdmissibilityTable)
+    (loops : LoopPatternTable)
+    (O : ObligationSignature)
+    (L : LanguageSignature)
+    (T : SearchTraceSignature)
+    (budget catalogRem : Nat) :
+    genericMetaHalt admiss loops O L T budget catalogRem =
+      metaHalt O L T admiss loops budget catalogRem := rfl
+
+@[simp] theorem genericAuditBuilder_eq
+    (L : LanguageSignature)
+    (clause : MetaHaltClause)
+    (budget : Nat)
+    (trace : SearchTraceSignature)
+    (hit : Option LoopPattern) :
+    genericAuditBuilder L clause budget trace hit =
+      { language := L
+        firedClause := clause
+        allocatedBudget := budget
+        stepsConsumed := trace.stepsConsumed
+        candidateCount := trace.candidateCount
+        partialTraceTags := trace.traceTags
+        loopPatternHit := hit } := rfl
+
+@[simp] theorem generic_totalBudgetPlusOne_eq (C : Catalog) :
+    genericCatalogInterface.totalBudgetPlusOne C = Catalog.totalBudgetPlusOne C := rfl
+
+/-- The displayed proposition follows from the stated hypotheses.
+-/
+theorem supervisoryLoop_factors_through_generic_engine
+    (fuel : Nat)
+    (C : Catalog)
+    (policy : CatalogLiftPolicy)
+    (admiss : AdmissibilityTable)
+    (loops : LoopPatternTable)
+    (inner : InnerSearchStep)
+    (O : ObligationSignature)
+    (s : SupervisoryLoopState)
+    (auditSoFar : List LanguageAuditEntry) :
+    genericLoopOutcomeToConcrete
+        (supervisoryLoopViaGeneric fuel C policy admiss loops inner O s auditSoFar) =
+      supervisoryLoop fuel C policy admiss loops inner O s auditSoFar := by
+  induction fuel generalizing s auditSoFar with
+  | zero =>
+      simp [supervisoryLoopViaGeneric, supervisoryLoop,
+        OperatorKO7.SupervisoryEngine.supervisoryLoop, genericLoopOutcomeToConcrete,
+        genericAuditReportToConcrete, toGenericLoopState]
+  | succ fuel ih =>
+      cases hchoose : policy.choose C s.visited with
+      | none =>
+          simp [supervisoryLoopViaGeneric, supervisoryLoop,
+            OperatorKO7.SupervisoryEngine.supervisoryLoop, hchoose,
+            genericLoopOutcomeToConcrete, genericAuditReportToConcrete,
+            toGenericLoopState]
+      | some current =>
+          cases hentry : C.entryOf current with
+          | none =>
+              simp [supervisoryLoopViaGeneric, supervisoryLoop,
+                OperatorKO7.SupervisoryEngine.supervisoryLoop, hchoose, hentry,
+                genericLoopOutcomeToConcrete, genericAuditReportToConcrete,
+                toGenericLoopState]
+          | some entry =>
+              let catalogRem := C.size - s.visited.length - 1
+              let preTrace := SearchTraceSignature.empty
+              cases hpre : metaHalt O current preTrace admiss loops entry.budget catalogRem with
+              | some clause =>
+                  simpa [supervisoryLoopViaGeneric, supervisoryLoop,
+                    OperatorKO7.SupervisoryEngine.supervisoryLoop, hchoose, hentry,
+                    catalogRem, preTrace, hpre, genericLoopOutcomeToConcrete,
+                    genericAuditReportToConcrete, toGenericLoopState,
+                    toGenericLoopState_mark_visited]
+                    using ih (s.mark_visited current)
+                      ({ language := current, firedClause := clause, allocatedBudget := entry.budget,
+                          stepsConsumed := SearchTraceSignature.empty.stepsConsumed,
+                          candidateCount := SearchTraceSignature.empty.candidateCount,
+                          partialTraceTags := SearchTraceSignature.empty.traceTags,
+                          loopPatternHit := loops.patterns.find? (fun p => p.fires SearchTraceSignature.empty) } ::
+                        auditSoFar)
+              | none =>
+                  cases hinner : inner current SearchTraceSignature.empty entry.budget with
+                  | inr acc =>
+                      cases acc with
+                      | mk Lacc out =>
+                          simp [supervisoryLoopViaGeneric, supervisoryLoop,
+                            OperatorKO7.SupervisoryEngine.supervisoryLoop, hchoose, hentry,
+                            catalogRem, preTrace, hpre, hinner, genericLoopOutcomeToConcrete,
+                            toGenericLoopState]
+                  | inl trace' =>
+                      cases hpost : metaHalt O current trace' admiss loops entry.budget catalogRem with
+                      | some clause =>
+                          simpa [supervisoryLoopViaGeneric, supervisoryLoop,
+                            OperatorKO7.SupervisoryEngine.supervisoryLoop, hchoose, hentry,
+                            catalogRem, preTrace, hpre, hinner, hpost,
+                            genericLoopOutcomeToConcrete, genericAuditReportToConcrete,
+                            toGenericLoopState, toGenericLoopState_mark_visited]
+                            using ih (s.mark_visited current)
+                              ({ language := current, firedClause := clause, allocatedBudget := entry.budget,
+                                  stepsConsumed := trace'.stepsConsumed,
+                                  candidateCount := trace'.candidateCount,
+                                  partialTraceTags := trace'.traceTags,
+                                  loopPatternHit := loops.patterns.find? (fun p => p.fires trace') } ::
+                                auditSoFar)
+                      | none =>
+                          simpa [supervisoryLoopViaGeneric, supervisoryLoop,
+                            OperatorKO7.SupervisoryEngine.supervisoryLoop, hchoose, hentry,
+                            catalogRem, preTrace, hpre, hinner, hpost,
+                            genericLoopOutcomeToConcrete, genericAuditReportToConcrete,
+                            toGenericLoopState, toGenericLoopState_mark_visited]
+                            using ih (s.mark_visited current)
+                              ({ language := current, firedClause := MetaHaltClause.budgetExhausted,
+                                  allocatedBudget := entry.budget, stepsConsumed := trace'.stepsConsumed,
+                                  candidateCount := trace'.candidateCount,
+                                  partialTraceTags := trace'.traceTags, loopPatternHit := none } ::
+                                auditSoFar)
+
+/-- The displayed proposition follows from the stated hypotheses.
+-/
+private theorem supervisoryLoopWithSteps_fst_factors_through_generic_engine
+    (fuel : Nat)
+    (C : Catalog)
+    (policy : CatalogLiftPolicy)
+    (admiss : AdmissibilityTable)
+    (loops : LoopPatternTable)
+    (inner : InnerSearchStep)
+    (O : ObligationSignature)
+    (s : SupervisoryLoopState)
+    (auditSoFar : List LanguageAuditEntry) :
+    (supervisoryLoopWithStepsViaGeneric fuel C policy admiss loops inner O s auditSoFar).1 =
+      (supervisoryLoopWithSteps fuel C policy admiss loops inner O s auditSoFar).1 := by
+  induction fuel generalizing s auditSoFar with
+  | zero =>
+      simp [supervisoryLoopWithStepsViaGeneric, supervisoryLoopWithSteps,
+        OperatorKO7.SupervisoryEngine.supervisoryLoopWithSteps, toGenericLoopState]
+  | succ fuel ih =>
+      cases hchoose : policy.choose C s.visited with
+      | none =>
+          simp [supervisoryLoopWithStepsViaGeneric, supervisoryLoopWithSteps,
+            OperatorKO7.SupervisoryEngine.supervisoryLoopWithSteps, hchoose,
+            toGenericLoopState]
+      | some current =>
+          cases hentry : C.entryOf current with
+          | none =>
+              simp [supervisoryLoopWithStepsViaGeneric, supervisoryLoopWithSteps,
+                OperatorKO7.SupervisoryEngine.supervisoryLoopWithSteps, hchoose, hentry,
+                toGenericLoopState]
+          | some entry =>
+              let catalogRem := C.size - s.visited.length - 1
+              let preTrace := SearchTraceSignature.empty
+              cases hpre : metaHalt O current preTrace admiss loops entry.budget catalogRem with
+              | some clause =>
+                  simpa [supervisoryLoopWithStepsViaGeneric, supervisoryLoopWithSteps,
+                    OperatorKO7.SupervisoryEngine.supervisoryLoopWithSteps, hchoose, hentry,
+                    catalogRem, preTrace, hpre, toGenericLoopState,
+                    toGenericLoopState_mark_visited]
+                    using ih (s.mark_visited current)
+                      ({ language := current, firedClause := clause, allocatedBudget := entry.budget,
+                          stepsConsumed := SearchTraceSignature.empty.stepsConsumed,
+                          candidateCount := SearchTraceSignature.empty.candidateCount,
+                          partialTraceTags := SearchTraceSignature.empty.traceTags,
+                          loopPatternHit := loops.patterns.find? (fun p => p.fires SearchTraceSignature.empty) } ::
+                        auditSoFar)
+              | none =>
+                  cases hinner : inner current SearchTraceSignature.empty entry.budget with
+                  | inr acc =>
+                      cases acc with
+                      | mk Lacc out =>
+                          simp [supervisoryLoopWithStepsViaGeneric, supervisoryLoopWithSteps,
+                            OperatorKO7.SupervisoryEngine.supervisoryLoopWithSteps, hchoose, hentry,
+                            catalogRem, preTrace, hpre, hinner, toGenericLoopState]
+                  | inl trace' =>
+                      cases hpost : metaHalt O current trace' admiss loops entry.budget catalogRem with
+                      | some clause =>
+                          simpa [supervisoryLoopWithStepsViaGeneric, supervisoryLoopWithSteps,
+                            OperatorKO7.SupervisoryEngine.supervisoryLoopWithSteps, hchoose, hentry,
+                            catalogRem, preTrace, hpre, hinner, hpost, toGenericLoopState,
+                            toGenericLoopState_mark_visited]
+                            using ih (s.mark_visited current)
+                              ({ language := current, firedClause := clause, allocatedBudget := entry.budget,
+                                  stepsConsumed := trace'.stepsConsumed,
+                                  candidateCount := trace'.candidateCount,
+                                  partialTraceTags := trace'.traceTags,
+                                  loopPatternHit := loops.patterns.find? (fun p => p.fires trace') } ::
+                                auditSoFar)
+                      | none =>
+                          simpa [supervisoryLoopWithStepsViaGeneric, supervisoryLoopWithSteps,
+                            OperatorKO7.SupervisoryEngine.supervisoryLoopWithSteps, hchoose, hentry,
+                            catalogRem, preTrace, hpre, hinner, hpost, toGenericLoopState,
+                            toGenericLoopState_mark_visited]
+                            using ih (s.mark_visited current)
+                              ({ language := current, firedClause := MetaHaltClause.budgetExhausted,
+                                  allocatedBudget := entry.budget, stepsConsumed := trace'.stepsConsumed,
+                                  candidateCount := trace'.candidateCount,
+                                  partialTraceTags := trace'.traceTags, loopPatternHit := none } ::
+                                auditSoFar)
+
+/-- The displayed proposition follows from the stated hypotheses.
+-/
+theorem supervisoryLoopWithSteps_factors_through_generic_engine
+    (fuel : Nat)
+    (C : Catalog)
+    (policy : CatalogLiftPolicy)
+    (admiss : AdmissibilityTable)
+    (loops : LoopPatternTable)
+    (inner : InnerSearchStep)
+    (O : ObligationSignature)
+    (s : SupervisoryLoopState)
+    (auditSoFar : List LanguageAuditEntry) :
+    genericLoopWithStepsToConcrete
+        (supervisoryLoopWithStepsViaGeneric fuel C policy admiss loops inner O s auditSoFar) =
+      supervisoryLoopWithSteps fuel C policy admiss loops inner O s auditSoFar := by
+  apply Prod.ext
+  · exact supervisoryLoopWithSteps_fst_factors_through_generic_engine
+      fuel C policy admiss loops inner O s auditSoFar
+  · simp [genericLoopWithStepsToConcrete, supervisoryLoopWithStepsViaGeneric,
+      genericLoopOutcomeToConcrete, genericAuditReportToConcrete,
+      OperatorKO7.SupervisoryEngine.supervisoryLoopWithSteps_snd,
+      supervisoryLoopWithSteps_snd]
+    exact supervisoryLoop_factors_through_generic_engine
+      fuel C policy admiss loops inner O s auditSoFar
+
+/-- The displayed proposition follows from the stated hypotheses.
+
+
+-/
+theorem supervisoryLoopViaGeneric_terminates_in_catalog_budget
+    (C : Catalog) (policy : CatalogLiftPolicy)
+    (admiss : AdmissibilityTable) (loops : LoopPatternTable)
+    (inner : InnerSearchStep) (O : ObligationSignature)
+    (s : SupervisoryLoopState) :
+    ∃ (outcome : GenericLoopOutcome) (steps : Nat),
+      steps ≤ Catalog.totalBudgetPlusOne C ∧
+      supervisoryLoopViaGeneric (C.size + 1) C policy admiss loops inner O s [] = outcome := by
+  rcases OperatorKO7.SupervisoryEngine.supervisoryLoop_terminates_in_catalog_budget
+      genericCatalogInterface C (genericLiftPolicy policy) (genericMetaHalt admiss loops)
+      (genericDetectLoop loops) inner MetaHaltClause.budgetExhausted
+      genericAuditBuilder O (toGenericLoopState s) SearchTraceSignature.empty with
+    ⟨outcome, steps, hsteps, hout⟩
+  refine ⟨outcome, steps, ?_, ?_⟩
+  · simpa [generic_totalBudgetPlusOne_eq] using hsteps
+  · simpa [supervisoryLoopViaGeneric] using hout
+
+/-- The displayed proposition follows from the stated hypotheses.
+-/
+theorem supervisoryLoopViaGeneric_emits_audit_or_accept
+    (C : Catalog) (policy : CatalogLiftPolicy)
+    (admiss : AdmissibilityTable) (loops : LoopPatternTable)
+    (inner : InnerSearchStep) (O : ObligationSignature)
+    (s : SupervisoryLoopState) :
+    let out := supervisoryLoopViaGeneric (C.size + 1) C policy admiss loops inner O s []
+    (∃ L o, out = .acceptedWitness L o) ∨ (∃ rec, out = .auditC3 rec) := by
+  have hgen :=
+    OperatorKO7.SupervisoryEngine.supervisoryLoop_emits_audit_or_accept
+      genericCatalogInterface C (genericLiftPolicy policy) (genericMetaHalt admiss loops)
+      (genericDetectLoop loops) inner MetaHaltClause.budgetExhausted
+      genericAuditBuilder O (toGenericLoopState s) SearchTraceSignature.empty
+  simpa [supervisoryLoopViaGeneric] using hgen
+
+/-- The displayed proposition follows from the stated hypotheses.
+-/
+theorem supervisoryLoop_terminates_via_generic_engine
+    (C : Catalog) (policy : CatalogLiftPolicy)
+    (admiss : AdmissibilityTable) (loops : LoopPatternTable)
+    (inner : InnerSearchStep) (O : ObligationSignature)
+    (s : SupervisoryLoopState) :
+    ∃ (outcome : SupervisoryLoopOutcome) (steps : Nat),
+      steps ≤ Catalog.totalBudgetPlusOne C ∧
+      supervisoryLoop (C.size + 1) C policy admiss loops inner O s [] = outcome := by
+  rcases supervisoryLoopViaGeneric_terminates_in_catalog_budget C policy admiss loops inner O s with
+    ⟨outcome, steps, hsteps, hout⟩
+  refine ⟨genericLoopOutcomeToConcrete outcome, steps, hsteps, ?_⟩
+  rw [← supervisoryLoop_factors_through_generic_engine
+    (fuel := C.size + 1) (C := C) (policy := policy) (admiss := admiss)
+    (loops := loops) (inner := inner) (O := O) (s := s) (auditSoFar := [])]
+  exact congrArg genericLoopOutcomeToConcrete hout
+
+/-- The displayed proposition follows from the stated hypotheses.
+-/
+theorem supervisoryLoop_emits_audit_or_accept_via_generic_engine
+    (C : Catalog) (policy : CatalogLiftPolicy)
+    (admiss : AdmissibilityTable) (loops : LoopPatternTable)
+    (inner : InnerSearchStep) (O : ObligationSignature)
+    (s : SupervisoryLoopState) :
+    let out := supervisoryLoop (C.size + 1) C policy admiss loops inner O s []
+    (∃ L o, out = .acceptedWitness L o) ∨ (∃ rec, out = .auditC3 rec) := by
+  have hgen := supervisoryLoopViaGeneric_emits_audit_or_accept C policy admiss loops inner O s
+  dsimp at hgen ⊢
+  rw [← supervisoryLoop_factors_through_generic_engine
+    (fuel := C.size + 1) (C := C) (policy := policy) (admiss := admiss)
+    (loops := loops) (inner := inner) (O := O) (s := s) (auditSoFar := [])]
+  rcases hgen with hacc | haudit
+  · rcases hacc with ⟨L, o, hEq⟩
+    exact Or.inl ⟨L, o, by
+      simpa [genericLoopOutcomeToConcrete] using congrArg genericLoopOutcomeToConcrete hEq⟩
+  · rcases haudit with ⟨rec, hEq⟩
+    exact Or.inr ⟨genericAuditReportToConcrete rec, by
+      simpa [genericLoopOutcomeToConcrete, genericAuditReportToConcrete]
+        using congrArg genericLoopOutcomeToConcrete hEq⟩
+
+end OperatorKO7.MetaHalt.Regress

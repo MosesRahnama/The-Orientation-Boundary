@@ -25,7 +25,7 @@ Theorems close by direct construction on the orbit definitions; no
 `sorry`, no new `axiom`.
 
 Citation chain:
-  Payload-discarding certificate packages outside this release
+  PayloadDiscarding (Axiom 5; Meta/BoundaryOperator/PayloadDiscarding.lean)
     → CircularIdentity (W17.1; this module; structural-identity
                                  theorem)
       → PayloadGrowthBlindness (W17.2; sibling; payload-growth

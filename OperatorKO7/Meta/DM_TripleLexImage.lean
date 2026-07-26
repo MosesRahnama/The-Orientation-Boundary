@@ -29,7 +29,7 @@ theorem full_triple_lex_image_upper_bound (x : FullTripleLexCarrier) :
     lex3cToOrd x.toLex3cTuple < ((ω : Ordinal) ^ (ω : Ordinal)) * (2 : Nat) :=
   lex3cToOrd_lt_opow_omega_mul_two x.phase_le_one
 
-/-- The phase-`0` slice is exactly the inner `lexDMToOrd` block. -/
+/-- The phase-`0` slice is the inner `lexDMToOrd` block. -/
 theorem full_triple_lex_dm_component_embeds (κ : Multiset Nat) (τ : Nat) :
     lex3cToOrd
         (FullTripleLexCarrier.toLex3cTuple

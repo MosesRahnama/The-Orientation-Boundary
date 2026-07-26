@@ -2,18 +2,19 @@ import OperatorKO7.Meta.DependencyPairs_ExtractedCallGraph
 import OperatorKO7.Meta.TPDB_Export
 
 /-!
-# Dependency-Pair Call-Graph Extraction from TPDB Rules
+# Rule-Head Call Graph from TPDB Rules
 
 This module connects the finite SCC search surface to the concrete TPDB / TTT2 export
 syntax already used in the artifact. Starting from a finite list of first-order TPDB
-rules, it extracts:
+rules, it computes:
 
 - the set of defined heads (left-hand side root symbols),
 - the defined call-heads appearing in each right-hand side, and
-- the corresponding array-backed extracted call graph.
+- the corresponding array-backed rule-head call graph.
 
-This does not yet prove SCC existence for an arbitrary TRS, but it removes the remaining
-manual call-graph packaging step for concrete finite TPDB-style rule lists.
+This is a rule-level abstraction, not marked dependency-pair extraction: it creates one
+record per function-headed rule, and `Finset` storage collapses repeated head occurrences.
+Semantic adequacy and SCC existence for an arbitrary TRS remain separate obligations.
 -/
 
 namespace OperatorKO7.DependencyPairsFragment
@@ -43,7 +44,7 @@ def lhsHead? (r : TpdbRule) : Option String :=
 
 end TpdbRule
 
-/-- Extracted TPDB dependency-pair node data. -/
+/-- Rule-head call-graph data for one TPDB rule. -/
 structure ExtractedTpdbNode where
   rule : TpdbRule
   nodeKey : String
@@ -58,9 +59,8 @@ def tpdbDefinedHeads (rules : Array TpdbRule) : Finset String :=
       | none => acc)
     ∅
 
-/-- Extract one dependency-pair call-graph node from a TPDB rule, when the left-hand side
-has a function head. The successor keys are the defined heads occurring in the right-hand
-side. -/
+/-- Build one rule-head record from a TPDB rule whose left-hand side has a function head.
+The successor keys are the defined heads occurring in the right-hand side. -/
 def extractTpdbNode? (defined : Finset String) (r : TpdbRule) : Option ExtractedTpdbNode :=
   match TpdbRule.lhsHead? r with
   | none => none
@@ -70,23 +70,23 @@ def extractTpdbNode? (defined : Finset String) (r : TpdbRule) : Option Extracted
           nodeKey := f
           succKeys := (TpdbTerm.allHeads r.rhs).filter (· ∈ defined) }
 
-/-- Extracted dependency-pair call-graph nodes for a finite TPDB rule set. -/
+/-- Rule-head call-graph records for a finite TPDB rule set. -/
 def extractTpdbNodes (rules : Array TpdbRule) : Array ExtractedTpdbNode :=
   let defined := tpdbDefinedHeads rules
   rules.filterMap (extractTpdbNode? defined)
 
-/-- Array-backed extracted call graph induced by a finite TPDB rule list. -/
+/-- Array-backed rule-head call graph induced by a finite TPDB rule list. -/
 def tpdbExtractedCallGraph (rules : Array TpdbRule) : FiniteExtractedCallGraph String :=
   FiniteExtractedCallGraph.ofArrayMap
     (nodes := extractTpdbNodes rules)
     (nodeKey := ExtractedTpdbNode.nodeKey)
     (succKeys := ExtractedTpdbNode.succKeys)
 
-/-- Concrete extracted nodes for the exported KO7 full-step TRS. -/
+/-- Concrete rule-head records for the exported KO7 full-step TRS. -/
 def ko7FullStepExtractedNodes : Array ExtractedTpdbNode :=
   extractTpdbNodes ko7FullStepTpdbRules.toArray
 
-/-- Concrete extracted call graph for the exported KO7 full-step TRS. -/
+/-- Concrete rule-head call graph for the exported KO7 full-step TRS. -/
 def ko7FullStepExtractedCallGraph : FiniteExtractedCallGraph String :=
   tpdbExtractedCallGraph ko7FullStepTpdbRules.toArray
 
@@ -99,19 +99,31 @@ theorem ko7_full_step_defined_heads :
       ({ "integrate", "merge", "recD", "eqW" } : Finset String) := by
   decide
 
-/-- Existential search over `.toList` combined with `Finset` equality.
-The kernel `decide` reducer cannot normalize `Finset.instDecidableEq`
-on multiset-quotient witnesses within the existential body; the
-compiled-code reducer (`native_decide`) does. Trust slot: build-time
-only; no Paper A theorem depends on this row beyond the audit ledger.
-The complete axiom dependence of this theorem is recorded in the
-`#print axioms` attestation in
-`OperatorKO7.Meta.NativeDecideAuditGate.keptNativeDecideTheorems`. -/
+/-- The recursive rule supplies the sixth extracted node. Its right-hand side
+contains `app` and `recD`; filtering by defined heads retains `recD`. -/
 theorem ko7_full_step_has_recD_successor :
     ∃ n ∈ ko7FullStepExtractedNodes.toList,
       n.nodeKey = "recD" ∧ n.succKeys = ({ "recD" } : Finset String) := by
-  native_decide
--- #print axioms ko7_full_step_has_recD_successor
--- depends on axioms: [propext, Classical.choice, Lean.ofReduceBool, Quot.sound]
+  have hsize : 5 < ko7FullStepExtractedNodes.size := by
+    rw [ko7_full_step_extracted_node_count]
+    decide
+  let n := ko7FullStepExtractedNodes[5]
+  refine ⟨n, Array.getElem_mem_toList hsize, rfl, ?_⟩
+  have hsucc : n.succKeys =
+      (TpdbTerm.allHeads (tapp ty (trecD tx ty tz))).filter
+        (· ∈ tpdbDefinedHeads ko7FullStepTpdbRules.toArray) := by
+    rfl
+  rw [hsucc, ko7_full_step_defined_heads]
+  apply Finset.ext
+  intro f
+  simp [TpdbTerm.allHeads, tapp, trecD, tx, ty, tz]
+  constructor
+  · rintro ⟨hf, hd⟩
+    rcases hf with rfl | rfl
+    · simp at hd
+    · rfl
+  · intro h
+    subst f
+    simp
 
 end OperatorKO7.DependencyPairsFragment

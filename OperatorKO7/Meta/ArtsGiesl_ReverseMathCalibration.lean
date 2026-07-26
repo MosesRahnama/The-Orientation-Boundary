@@ -1,14 +1,15 @@
 import OperatorKO7.Meta.ArtsGiesl_LowerBound
 
 /-!
-# Arts--Giesl Reverse-Mathematical Calibration
+# Arts-Giesl calibration records
 
-Current best calibration package for the Arts--Giesl soundness license.
-
-This module is deliberately honest:
-- the upper bound is theorem-level;
-- the lower bound is theorem-level but coarse;
-- the target itself remains conjectural.
+This module packages Arts-Giesl profile, evidence-status, and comparison
+records. The proved propositions concern fields of those records and the
+finite `FormalTheory` order. They do not formalize second-order principles,
+reductions between principles, or an exact reverse-mathematical equivalence.
+In particular, `CalibrationStatus.exact` and `EvidenceStatus.theoremLevel`
+below are enum values stored in records, not independent proofs of the
+mathematical calibration described by their labels.
 -/
 
 namespace OperatorKO7.ArtsGieslReverseMathCalibration
@@ -21,9 +22,9 @@ open OperatorKO7.TerminationPrincipleRegister
 open OperatorKO7.ArtsGieslUpperBound
 open OperatorKO7.ArtsGieslLowerBound
 
-/-- Best current calibration object for the Arts--Giesl soundness license.
-The exact target remains conjectural, but it is now bracketed by theorem-level
-upper- and lower-bound packages inside one public object. -/
+/-- Profile record with the proposed target, registered upper and lower
+packages, and conjectural status. The order fields compare only the registered
+`FormalTheory` values. -/
 noncomputable def artsGieslCurrentCalibration : ReverseMathCalibration artsGieslPrincipleProfile where
   targetProfile := rca0WoOmega3TheoryProfile
   upperBound := artsGieslTheoremUpperBound
@@ -41,21 +42,21 @@ noncomputable def artsGieslCurrentCalibration : ReverseMathCalibration artsGiesl
 @[simp] theorem artsGieslCurrentCalibration_target_ordinal :
     artsGieslCurrentCalibration.targetProfile.ordinalCeiling? = some omegaPowThree := rfl
 
-/-- The current calibration object carries a theorem-level upper bound. -/
+/-- The calibration record's upper package carries the `theoremLevel` tag. -/
 theorem artsGieslCurrentCalibration_has_theoremUpperBound :
     artsGieslCurrentCalibration.upperBound.evidenceStatus = EvidenceStatus.theoremLevel :=
   artsGieslTheoremUpperBound_status
 
-/-- The current calibration object also carries a theorem-level lower bound,
-though only in the current coarse `RCA₀` + `Π⁰₂` sense. -/
+/-- The calibration record's lower package carries the `theoremLevel` tag and
+the coarse `RCA₀` plus `Π⁰₂` profile. -/
 theorem artsGieslCurrentCalibration_has_theoremLowerBound :
     match artsGieslCurrentCalibration.lowerBound? with
     | some lb => lb.evidenceStatus = EvidenceStatus.theoremLevel
     | none => False := by
   simp [artsGieslCurrentCalibration, artsGieslTheoremLowerBound_status]
 
-/-- The target remains below the theorem-level `ε₀` benchmark tracked by the
-artifact. -/
+/-- The recorded target ordinal `ω^3` is below the registered `ε₀` upper
+benchmark. -/
 theorem artsGieslCurrentCalibration_below_safe_measure :
     artsGieslCurrentCalibration.targetProfile.ordinalCeiling? = some omegaPowThree
       ∧ omegaPowThree < ko7SafeMeasureUpperBound.upper := by
@@ -63,8 +64,8 @@ theorem artsGieslCurrentCalibration_below_safe_measure :
   · rfl
   · simpa [ko7SafeMeasureUpperBound] using omegaPowThree_lt_epsilon0
 
-/-- The current calibration agrees with the existing SCT target on both theory
-and ordinal, while keeping its own conjectural status. -/
+/-- The Arts-Giesl and SCT records use the same target theory and ordinal,
+while the Arts-Giesl record remains tagged `conjectural`. -/
 theorem artsGieslCurrentCalibration_matches_sct_reference :
     artsGieslCurrentCalibration.targetProfile.theory = sctExactCalibration.targetProfile.theory
       ∧ artsGieslCurrentCalibration.targetProfile.ordinalCeiling? =
@@ -76,7 +77,7 @@ theorem artsGieslCurrentCalibration_matches_sct_reference :
   · rfl
   · rfl
 
-/-- Summary theorem for the current AG calibration layer. -/
+/-- Collect the calibration record's status, target theory, and evidence tags. -/
 theorem artsGieslCurrentCalibration_supported :
     artsGieslCurrentCalibration.status = CalibrationStatus.conjectural
       ∧ artsGieslCurrentCalibration.targetProfile.theory = FormalTheory.RCA0_WO_omega3
@@ -92,17 +93,13 @@ theorem artsGieslCurrentCalibration_supported :
   · exact artsGieslTheoremUpperBound_status
   · simp [artsGieslCurrentCalibration, artsGieslTheoremLowerBound_status]
 
-/-- Witness-bearing exact transport from the exact SCT calibration to the
-Arts--Giesl principle profile.
+/-- Metadata transfer record pairing the SCT calibration profile with a
+constant-overhead cost-shape witness and target-labelled Arts-Giesl packages.
 
-This closes the gap left by the earlier status-only alignment layer: the
-transport now carries
-
-- the exact source calibration,
-- the explicit constant-overhead recursor transport, and
-- theorem-level destination upper/lower packages that hit the exact target
-  profile on the nose.
--/
+`ConstantOverheadTransformation` contains only a natural-number cost function
+and its affine equation. It is not indexed by source and destination
+principles, so this definition does not prove an Arts-Giesl/SCT reduction or
+transfer reverse-mathematical strength. -/
 noncomputable def artsGieslExactCalibrationTransferFromSct :
     ExactCalibrationTransfer.{0, 0, 0} sctPrincipleProfile artsGieslPrincipleProfile where
   sourceCalibration := sctExactCalibration
@@ -142,17 +139,25 @@ theorem artsGieslExactCalibrationTransferFromSct_supported :
   · rfl
   · rfl
 
-/-- Exact Arts--Giesl calibration obtained from the witness-bearing transport
-out of the exact SCT calibration. -/
+/-- Compatibility metadata object.
+
+Its `exact` status is inherited from supplied record fields, not from a
+formalized proof that the Arts-Giesl soundness principle has reverse-
+mathematical strength `RCA₀ + WO(ω^3)`. -/
 noncomputable def artsGieslExactCalibration :
     ReverseMathCalibration artsGieslPrincipleProfile :=
   ExactCalibrationTransfer.transferredCalibration.{0, 0, 0}
     artsGieslExactCalibrationTransferFromSct
 
-@[simp] theorem artsGieslExactCalibration_status :
+/-- Record-field projection; this does not establish mathematical exactness. -/
+@[simp] theorem quarantined_metadata_artsGieslExactCalibration_status :
     artsGieslExactCalibration.status = CalibrationStatus.exact := rfl
 
-theorem artsGiesl_exactCalibration :
+/-- Record-field summary; this does not establish mathematical exactness.
+`artsGieslCurrentCalibration_supported` states the conjectural profile, while
+`artsGiesl_exactCalibration_of_matching_bounds` and
+`artsGiesl_exactCalibration_of_sharp_bounds` are conditional constructors. -/
+theorem quarantined_metadata_artsGiesl_exactCalibration :
     let C := artsGieslExactCalibration
     C.status = CalibrationStatus.exact
       ∧ C.targetProfile.theory = FormalTheory.RCA0_WO_omega3
@@ -171,10 +176,8 @@ theorem artsGiesl_exactCalibration :
   · rfl
   · rfl
 
-/-- Exact-calibration schema for the Arts--Giesl license. This does not claim
-the hypotheses are currently proved; it isolates the remaining mathematical
-burden exactly: theorem-level matching of both the upper and lower bound with
-the current `RCA₀ + WO(ω^3)` target profile. -/
+/-- Conditional profile-equality assumptions for matching both registered
+bounds to the proposed `RCA₀ + WO(ω^3)` target. -/
 structure ArtsGieslMatchingBounds where
   upperTheory :
     artsGieslTheoremUpperBound.theoryProfile.theory = FormalTheory.RCA0_WO_omega3
@@ -185,17 +188,15 @@ structure ArtsGieslMatchingBounds where
   lowerOrdinal :
     artsGieslTheoremLowerBound.theoryProfile.ordinalCeiling? = some omegaPowThree
 
-/-- The current theorem-level upper/lower packages do not yet match the target
-profile, so the exact-calibration witness object is still uninhabited. -/
+/-- The registered lower package has theory `RCA₀`, so it cannot satisfy the
+matching-bounds record whose lower theory is `RCA₀ + WO(ω^3)`. -/
 theorem artsGieslMatchingBounds_uninhabited : ¬ ArtsGieslMatchingBounds := by
   intro h
   have hLower : FormalTheory.RCA0 = FormalTheory.RCA0_WO_omega3 := by
     simpa [artsGieslTheoremLowerBound, artsGieslPi02FloorProfile] using h.lowerTheory
   cases hLower
 
-/-- Unbundled exact-calibration schema for the Arts--Giesl license. This form
-is kept for direct theorem invocation when the four matching equations are more
-convenient than a packaged witness. -/
+/-- Construct a calibration record from four supplied profile equalities. -/
 noncomputable def artsGieslExactCalibrationOfMatchingBounds
     (hUpperTheory :
       artsGieslTheoremUpperBound.theoryProfile.theory = FormalTheory.RCA0_WO_omega3)
@@ -232,8 +233,8 @@ noncomputable def artsGieslExactCalibrationOfMatchingBounds
       hUpperTheory hUpperOrdinal hLowerTheory hLowerOrdinal).status =
         CalibrationStatus.exact := rfl
 
-/-- Once the theorem-level upper and lower bounds match the current target
-exactly, the AG calibration closes to an exact theorem-level package. -/
+/-- Under the four profile-equality assumptions, collect the resulting record
+fields and evidence tags. -/
 theorem artsGiesl_exactCalibration_of_matching_bounds
     (hUpperTheory :
       artsGieslTheoremUpperBound.theoryProfile.theory = FormalTheory.RCA0_WO_omega3)
@@ -262,10 +263,8 @@ theorem artsGiesl_exactCalibration_of_matching_bounds
   · exact artsGieslTheoremUpperBound_status
   · simp [artsGieslExactCalibrationOfMatchingBounds, artsGieslTheoremLowerBound_status]
 
-/-- Exact-calibration existence schema: once the theorem-level upper and lower
-bounds coincide with the current target profile, exact Arts--Giesl calibration
-follows. This keeps the remaining open work explicit without overclaiming that
-those hypotheses are already proved. -/
+/-- Under the four profile-equality assumptions, construct a calibration
+record whose status field is `exact`. -/
 theorem artsGiesl_exactCalibration_exists_if_matching_bounds
     (hUpperTheory :
       artsGieslTheoremUpperBound.theoryProfile.theory = FormalTheory.RCA0_WO_omega3)
@@ -280,22 +279,21 @@ theorem artsGiesl_exactCalibration_exists_if_matching_bounds
   exact ⟨artsGieslExactCalibrationOfMatchingBounds
     hUpperTheory hUpperOrdinal hLowerTheory hLowerOrdinal, rfl⟩
 
-/-- Bundled exact-calibration schema: package the remaining matching-bounds
-burden into one explicit witness object. -/
+/-- Construct the same calibration record from a bundled matching-bounds
+witness. -/
 noncomputable def artsGieslExactCalibrationOfWitnessedMatchingBounds
     (h : ArtsGieslMatchingBounds) :
     ReverseMathCalibration artsGieslPrincipleProfile :=
   artsGieslExactCalibrationOfMatchingBounds
     h.upperTheory h.upperOrdinal h.lowerTheory h.lowerOrdinal
 
-/-- Witnessed exact-calibration package closes with exact status as soon as the
-matching-bounds witness exists. -/
+/-- The record built from a matching-bounds witness has status field `exact`. -/
 @[simp] theorem artsGieslExactCalibrationOfWitnessedMatchingBounds_status
     (h : ArtsGieslMatchingBounds) :
     (artsGieslExactCalibrationOfWitnessedMatchingBounds h).status =
       CalibrationStatus.exact := rfl
 
-/-- Witnessed exact-calibration theorem in bundled form. -/
+/-- Collect the fields of the calibration record built from a bundled witness. -/
 theorem artsGiesl_exactCalibration_of_witnessed_matching_bounds
     (h : ArtsGieslMatchingBounds) :
     let C := artsGieslExactCalibrationOfWitnessedMatchingBounds h
@@ -309,8 +307,8 @@ theorem artsGiesl_exactCalibration_of_witnessed_matching_bounds
   exact artsGiesl_exactCalibration_of_matching_bounds
     h.upperTheory h.upperOrdinal h.lowerTheory h.lowerOrdinal
 
-/-- Bundled existence schema: exact calibration follows from a witnessed
-matching-bounds package. -/
+/-- A bundled matching-bounds witness yields a calibration record tagged
+`exact`. -/
 theorem artsGiesl_exactCalibration_exists_if_witnessed_matching_bounds
     (h : ArtsGieslMatchingBounds) :
     ∃ C : ReverseMathCalibration artsGieslPrincipleProfile,
@@ -318,9 +316,8 @@ theorem artsGiesl_exactCalibration_exists_if_witnessed_matching_bounds
   exact artsGiesl_exactCalibration_exists_if_matching_bounds
     h.upperTheory h.upperOrdinal h.lowerTheory h.lowerOrdinal
 
-/-- The current theorem-level Arts--Giesl calibration gap, stated as a precise
-artifact object: the lower bound is still below the target theory and the upper
-bound is still above it. -/
+/-- Finite-register gap data: the lower theory differs from the target and the
+target differs from the upper theory, with both registered order relations. -/
 structure ArtsGieslTheoremBoundGap where
   lowerTheory : FormalTheory
   targetTheory : FormalTheory
@@ -330,8 +327,8 @@ structure ArtsGieslTheoremBoundGap where
   lowerNeTarget : lowerTheory ≠ targetTheory
   targetNeUpper : targetTheory ≠ upperTheory
 
-/-- Current theorem-level AG gap object. This records exactly why the present
-artifact does not yet justify an exact calibration theorem. -/
+/-- Instantiate the finite-register gap with `RCA₀`,
+`RCA₀ + WO(ω^3)`, and `WO(ε₀)`. -/
 noncomputable def artsGieslCurrentTheoremBoundGap : ArtsGieslTheoremBoundGap where
   lowerTheory := FormalTheory.RCA0
   targetTheory := FormalTheory.RCA0_WO_omega3
@@ -341,23 +338,20 @@ noncomputable def artsGieslCurrentTheoremBoundGap : ArtsGieslTheoremBoundGap whe
   lowerNeTarget := by decide
   targetNeUpper := by decide
 
-/-- The current theorem-level lower bound is still strictly weaker than the
-target theory. -/
+/-- The registered lower and target theories are distinct enum values. -/
 theorem artsGieslCurrentTheoremBoundGap_has_strict_lower_gap :
     artsGieslCurrentTheoremBoundGap.lowerTheory ≠
       artsGieslCurrentTheoremBoundGap.targetTheory :=
   artsGieslCurrentTheoremBoundGap.lowerNeTarget
 
-/-- The current theorem-level upper bound is still strictly above the target
-theory. -/
+/-- The registered target and upper theories are distinct enum values. -/
 theorem artsGieslCurrentTheoremBoundGap_has_strict_upper_gap :
     artsGieslCurrentTheoremBoundGap.targetTheory ≠
       artsGieslCurrentTheoremBoundGap.upperTheory :=
   artsGieslCurrentTheoremBoundGap.targetNeUpper
 
-/-- Exact calibration is not yet available from the current theorem-level
-bounds alone: the current lower and upper theorem bounds still leave a genuine
-gap around the target profile. -/
+/-- The registered lower and upper packages do not equal the proposed target
+in the finite theory register. -/
 theorem artsGiesl_exactCalibration_still_requires_bound_sharpening :
     artsGieslCurrentTheoremBoundGap.lowerTheory ≠
         artsGieslCurrentTheoremBoundGap.targetTheory
@@ -366,7 +360,8 @@ theorem artsGiesl_exactCalibration_still_requires_bound_sharpening :
   exact ⟨artsGieslCurrentTheoremBoundGap_has_strict_lower_gap,
     artsGieslCurrentTheoremBoundGap_has_strict_upper_gap⟩
 
-/-- The side-specific lower-gap object refines the combined theorem-bound gap. -/
+/-- The side-specific lower-gap record uses the same lower and target theory
+values as the combined gap. -/
 theorem artsGieslCurrentLowerGap_refines_currentTheoremBoundGap :
     artsGieslCurrentTheoremLowerBoundGap.current.theoryProfile.theory =
         artsGieslCurrentTheoremBoundGap.lowerTheory
@@ -374,7 +369,8 @@ theorem artsGieslCurrentLowerGap_refines_currentTheoremBoundGap :
         artsGieslCurrentTheoremBoundGap.targetTheory := by
   constructor <;> rfl
 
-/-- The side-specific upper-gap object refines the combined theorem-bound gap. -/
+/-- The side-specific upper-gap record uses the same target and upper theory
+values as the combined gap. -/
 theorem artsGieslCurrentUpperGap_refines_currentTheoremBoundGap :
     artsGieslCurrentTheoremUpperBoundGap.target.theory =
         artsGieslCurrentTheoremBoundGap.targetTheory
@@ -382,19 +378,18 @@ theorem artsGieslCurrentUpperGap_refines_currentTheoremBoundGap :
         artsGieslCurrentTheoremBoundGap.upperTheory := by
   constructor <;> rfl
 
-/-- If both missing Arts--Giesl/SCT theorem-level transfer programs are
-supplied, the sharp upper and lower witnesses follow immediately. -/
+/-- Pair an upper and lower target-profile package. The component structures
+carry profile equalities and evidence-status equalities. -/
 structure ArtsGieslSctSharpTransferPair where
   upper : ArtsGieslSctSharpUpperTransfer
   lower : ArtsGieslSctSharpLowerTransfer
 
-/-- The current registry-level AG/SCT alignment is not yet theorem-level, so it
-does not by itself discharge the sharp-transfer pair. -/
+/-- The registered AG/SCT alignment does not carry the `theoremLevel` tag. -/
 theorem artsGieslSctAlignment_still_below_sharpTransferPair :
     artsGieslSctAlignment.evidenceStatus ≠ EvidenceStatus.theoremLevel := by
   exact artsGieslSctAlignment_not_theoremLevel
 
-/-- Named exact target profile for the sharpened AG calibration program. -/
+/-- Proposed target profile used by the conditional constructors below. -/
 noncomputable def artsGieslExactTargetTheoryProfile : SecondOrderTheoryProfile where
   label := "RCA₀ + WO(ω^3)"
   theory := FormalTheory.RCA0_WO_omega3
@@ -406,10 +401,10 @@ noncomputable def artsGieslExactTargetTheoryProfile : SecondOrderTheoryProfile w
 @[simp] theorem artsGieslExactTargetTheoryProfile_ordinal :
     artsGieslExactTargetTheoryProfile.ordinalCeiling? = some omegaPowThree := rfl
 
-/-- Exact calibration from genuinely sharpened theorem-level upper/lower
-packages. This is the right constructive target for future work: replace the
-current coarse theorem packages with target-hitting theorem packages, and exact
-calibration follows immediately. -/
+/-- Construct a calibration record from upper and lower packages whose fields
+equal `artsGieslExactTargetTheoryProfile` and carry the `theoremLevel` tag.
+The component types encode only profile and status equalities; they do not
+contain derivations of the underlying reverse-mathematical bounds. -/
 noncomputable def artsGieslExactCalibrationOfSharpBounds
     (U : ArtsGieslSharpTheoremUpperBound)
     (L : ArtsGieslSharpTheoremLowerBound) :
@@ -431,8 +426,9 @@ noncomputable def artsGieslExactCalibrationOfSharpBounds
     (L : ArtsGieslSharpTheoremLowerBound) :
     (artsGieslExactCalibrationOfSharpBounds U L).status = CalibrationStatus.exact := rfl
 
-/-- Stronger exact-calibration target object: exact status plus theorem-level
-matching of both the upper and lower bound with the `RCA₀ + WO(ω^3)` target. -/
+/-- Record of a calibration together with target, bound-profile, and
+evidence-status equalities. This structure contains no reduction or
+second-order derivability field. -/
 structure ArtsGieslExactTheoremCalibration where
   calibration : ReverseMathCalibration artsGieslPrincipleProfile
   targetTheory :
@@ -457,8 +453,8 @@ structure ArtsGieslExactTheoremCalibration where
   statusExact :
     calibration.status = CalibrationStatus.exact
 
-/-- Sharp theorem-level upper and lower witnesses assemble into an exact
-theorem-level Arts--Giesl calibration object. -/
+/-- Assemble an `ArtsGieslExactTheoremCalibration` record from upper and lower
+profile packages. -/
 noncomputable def artsGieslExactTheoremCalibrationOfSharpBounds
     (U : ArtsGieslSharpTheoremUpperBound)
     (L : ArtsGieslSharpTheoremLowerBound) :
@@ -472,15 +468,14 @@ noncomputable def artsGieslExactTheoremCalibrationOfSharpBounds
   lowerBound := ⟨L.bound, rfl, L.theoryEq, L.ordinalEq, L.theoremLevel⟩
   statusExact := rfl
 
-/-- Public status theorem for the exact theorem-calibration assembly. -/
+/-- Project the assembled calibration record's status field. -/
 @[simp] theorem artsGieslExactTheoremCalibrationOfSharpBounds_status
     (U : ArtsGieslSharpTheoremUpperBound)
     (L : ArtsGieslSharpTheoremLowerBound) :
     (artsGieslExactTheoremCalibrationOfSharpBounds U L).calibration.status =
       CalibrationStatus.exact := rfl
 
-/-- The SCT-anchored transfer pair assembles directly into the exact-theorem
-calibration target. -/
+/-- Assemble a calibration record from the two SCT-labelled profile packages. -/
 noncomputable def artsGieslExactTheoremCalibrationOfSctSharpTransfers
     (T : ArtsGieslSctSharpTransferPair) :
     ArtsGieslExactTheoremCalibration :=
@@ -488,14 +483,13 @@ noncomputable def artsGieslExactTheoremCalibrationOfSctSharpTransfers
     T.upper.toSharpTheoremUpperBound
     T.lower.toSharpTheoremLowerBound
 
-/-- Status theorem for the SCT-anchored exact-theorem assembly. -/
+/-- Project the status field of the SCT-labelled assembly. -/
 @[simp] theorem artsGieslExactTheoremCalibrationOfSctSharpTransfers_status
     (T : ArtsGieslSctSharpTransferPair) :
     (artsGieslExactTheoremCalibrationOfSctSharpTransfers T).calibration.status =
       CalibrationStatus.exact := rfl
 
-/-- Extract the sharp theorem-level upper-bound witness from an exact
-theorem-calibration object. -/
+/-- Extract the upper profile package from a calibration record. -/
 noncomputable def ArtsGieslExactTheoremCalibration.toSharpUpperBound
     (C : ArtsGieslExactTheoremCalibration) :
     ArtsGieslSharpTheoremUpperBound where
@@ -504,8 +498,7 @@ noncomputable def ArtsGieslExactTheoremCalibration.toSharpUpperBound
   ordinalEq := C.upperOrdinal
   theoremLevel := C.upperTheoremLevel
 
-/-- Extract the sharp theorem-level lower-bound witness from an exact
-theorem-calibration object. -/
+/-- Extract the lower profile package from a calibration record. -/
 noncomputable def ArtsGieslExactTheoremCalibration.toSharpLowerBound
     (C : ArtsGieslExactTheoremCalibration) :
     ArtsGieslSharpTheoremLowerBound := by
@@ -520,21 +513,21 @@ noncomputable def ArtsGieslExactTheoremCalibration.toSharpLowerBound
       some OperatorKO7.ReverseMathSupport.omegaPowThree
   exact h.2.2.1
 
-/-- Extracted exact-theorem upper witness remains theorem-level. -/
+/-- The extracted upper package retains its evidence-status equality. -/
 theorem ArtsGieslExactTheoremCalibration.toSharpUpperBound_supported
     (C : ArtsGieslExactTheoremCalibration) :
     C.toSharpUpperBound.bound.evidenceStatus = EvidenceStatus.theoremLevel := by
   exact C.toSharpUpperBound.theoremLevel
 
-/-- Extracted exact-theorem lower witness remains theorem-level. -/
+/-- The extracted lower package retains its evidence-status equality. -/
 theorem ArtsGieslExactTheoremCalibration.toSharpLowerBound_supported
     (C : ArtsGieslExactTheoremCalibration) :
     C.toSharpLowerBound.bound.evidenceStatus = EvidenceStatus.theoremLevel := by
   exact C.toSharpLowerBound.theoremLevel
 
-/-- No exact theorem-calibration object can reuse the current theorem-level
-upper package unchanged. If it could, the extracted sharp upper witness would
-contradict `artsGieslTheoremUpperBound_not_sharp`. -/
+/-- No calibration record satisfying the target-profile upper equalities can
+reuse `artsGieslTheoremUpperBound`, whose registered theory differs from the
+target. -/
 theorem artsGiesl_noExactTheoremCalibration_with_current_upperBound :
     ¬ ∃ C : ArtsGieslExactTheoremCalibration,
         C.calibration.upperBound = artsGieslTheoremUpperBound := by
@@ -543,9 +536,9 @@ theorem artsGiesl_noExactTheoremCalibration_with_current_upperBound :
   refine ⟨C.toSharpUpperBound, ?_⟩
   simpa [ArtsGieslExactTheoremCalibration.toSharpUpperBound] using hC
 
-/-- No exact theorem-calibration object can reuse the current theorem-level
-lower package unchanged. If it could, the extracted sharp lower witness would
-contradict `artsGieslTheoremLowerBound_not_sharp`. -/
+/-- No calibration record satisfying the target-profile lower equalities can
+reuse `artsGieslTheoremLowerBound`, whose registered theory differs from the
+target. -/
 theorem artsGiesl_noExactTheoremCalibration_with_current_lowerBound :
     ¬ ∃ C : ArtsGieslExactTheoremCalibration,
         C.calibration.lowerBound? = some artsGieslTheoremLowerBound := by
@@ -558,8 +551,8 @@ theorem artsGiesl_noExactTheoremCalibration_with_current_lowerBound :
   refine ⟨C.toSharpLowerBound, ?_⟩
   simp [ArtsGieslExactTheoremCalibration.toSharpLowerBound, hChoose]
 
-/-- The pair of current theorem-level packages cannot already close the exact
-theorem-calibration target. -/
+/-- The two coarse registered packages cannot be the upper and lower fields of
+a record satisfying the target-profile equalities. -/
 theorem artsGiesl_currentTheoremPackages_do_not_yield_exactTheoremCalibration :
     ¬ ∃ C : ArtsGieslExactTheoremCalibration,
         C.calibration.upperBound = artsGieslTheoremUpperBound
@@ -567,8 +560,9 @@ theorem artsGiesl_currentTheoremPackages_do_not_yield_exactTheoremCalibration :
   rintro ⟨C, hUpper, _hLower⟩
   exact artsGiesl_noExactTheoremCalibration_with_current_upperBound ⟨C, hUpper⟩
 
-/-- The witness-bearing exact transport immediately yields sharp upper/lower
-theorem witnesses, hence a full exact-theorem calibration package. -/
+/-- Compatibility metadata package assembled from the SCT-labelled transfer
+record. Its status and evidence fields are inherited record values; this is not
+a proof of an Arts-Giesl/SCT reduction or reverse-mathematical equivalence. -/
 noncomputable def artsGieslExactTheoremCalibrationWitness :
     ArtsGieslExactTheoremCalibration :=
   artsGieslExactTheoremCalibrationOfSharpBounds
@@ -594,31 +588,30 @@ theorem artsGiesl_exactTheoremCalibration :
   · rfl
   · rfl
 
-/-- The SCT-anchored transfer pair is another sufficient route to exact
-theorem-level calibration. -/
+/-- Any supplied pair of target-profile packages yields a calibration record
+tagged `exact`. -/
 theorem artsGiesl_exactTheoremCalibration_of_sctSharpTransfers
     (T : ArtsGieslSctSharpTransferPair) :
     (artsGieslExactTheoremCalibrationOfSctSharpTransfers T).calibration.status =
       CalibrationStatus.exact := rfl
 
-/-- A stronger theorem-level AG/SCT alignment is sufficient to assemble the
-SCT-anchored sharp transfer pair. -/
+/-- Convert an alignment metadata record into paired profile packages. -/
 noncomputable def ArtsGieslSctSharpTransferPair.ofTheoremAlignment
     (A : ArtsGieslSctTheoremAlignment) :
     ArtsGieslSctSharpTransferPair where
   upper := ArtsGieslSctSharpUpperTransfer.ofTheoremAlignment A
   lower := ArtsGieslSctSharpLowerTransfer.ofTheoremAlignment A
 
-/-- Therefore a theorem-level AG/SCT alignment would close the exact theorem
-calibration target immediately. -/
+/-- Project the `exact` status assigned by the calibration constructor applied
+to alignment-derived profile packages. -/
 theorem artsGiesl_exactTheoremCalibration_of_theoremAlignment
     (A : ArtsGieslSctTheoremAlignment) :
     (artsGieslExactTheoremCalibrationOfSctSharpTransfers
       (ArtsGieslSctSharpTransferPair.ofTheoremAlignment A)).calibration.status =
         CalibrationStatus.exact := rfl
 
-/-- Sharp theorem-level upper/lower packages are sufficient for exact Arts--
-Giesl calibration. -/
+/-- Collect the status, profile, and evidence fields produced from two
+target-profile packages. -/
 theorem artsGiesl_exactCalibration_of_sharp_bounds
     (U : ArtsGieslSharpTheoremUpperBound)
     (L : ArtsGieslSharpTheoremLowerBound) :
@@ -640,18 +633,20 @@ theorem artsGiesl_exactCalibration_of_sharp_bounds
   · exact U.theoremLevel
   · simpa [artsGieslExactCalibrationOfSharpBounds] using L.theoremLevel
 
-/-- Exact calibration assembled from the direct target-hitting theorem-level
-upper and lower AG packages. -/
+/-- Compatibility metadata object assembled from target-labelled packages.
+It does not establish the reverse-mathematical bounds named by those labels. -/
 noncomputable def artsGieslExactCalibrationViaDirectSharpBounds :
     ReverseMathCalibration artsGieslPrincipleProfile :=
   artsGieslExactCalibrationOfSharpBounds
     artsGieslDirectSharpTheoremUpperBound
     artsGieslDirectSharpTheoremLowerBound
 
-@[simp] theorem artsGieslExactCalibrationViaDirectSharpBounds_status :
+/-- Record-field projection; this does not establish mathematical exactness. -/
+@[simp] theorem quarantined_metadata_artsGieslExactCalibrationViaDirectSharpBounds_status :
     artsGieslExactCalibrationViaDirectSharpBounds.status = CalibrationStatus.exact := rfl
 
-theorem artsGiesl_exactCalibration_via_directSharpBounds :
+/-- Record-field summary; this does not establish mathematical exactness. -/
+theorem quarantined_metadata_artsGiesl_exactCalibration_via_directSharpBounds :
     let C := artsGieslExactCalibrationViaDirectSharpBounds
     C.status = CalibrationStatus.exact
       ∧ C.targetProfile.theory = FormalTheory.RCA0_WO_omega3
@@ -664,40 +659,23 @@ theorem artsGiesl_exactCalibration_via_directSharpBounds :
     artsGieslDirectSharpTheoremUpperBound
     artsGieslDirectSharpTheoremLowerBound
 
-/-- Sharp theorem-level upper/lower packages are also sufficient for the
-stronger exact-theorem calibration object. -/
+/-- Two target-profile packages yield the corresponding calibration record. -/
 theorem artsGiesl_exactTheoremCalibration_of_sharp_bounds
     (U : ArtsGieslSharpTheoremUpperBound)
     (L : ArtsGieslSharpTheoremLowerBound) :
     (artsGieslExactTheoremCalibrationOfSharpBounds U L).calibration.status =
       CalibrationStatus.exact := rfl
 
-/-! ## Concrete top-level `*SctSharpTransfer` inhabitants (SCHEMA_GAP P0 task)
+/-! ## Named SCT-labelled profile packages
 
-The two structures `ArtsGieslSctSharpUpperTransfer` (declared in
-`Meta/ArtsGiesl_UpperBound.lean`) and `ArtsGieslSctSharpLowerTransfer`
-(declared in `Meta/ArtsGiesl_LowerBound.lean`) were previously inhabited
-only schematically, through parametric constructors like
-`ofTheoremAlignment` and `ofExactCalibrationTransfer`. The definitions
-below expose the concrete top-level inhabitants that downstream
-consumers (e.g. the Catalog Procedure's `tryDPConfession` driver) can
-cite by name, promoting `license_status` from `lcel_universal_partial`
-to `lcel_universal_closed`.
+The definitions below expose named upper and lower packages derived from
+`artsGieslExactCalibrationTransferFromSct`. Their obligations are profile and
+evidence-tag equalities discharged by reduction. They do not add a formal
+relation between the Arts-Giesl and SCT principles. They live in this namespace
+to preserve the import direction of the component modules. -/
 
-Construction is **trivial naming**: each named term reuses the
-destination upper/lower package of the already-proved
-`artsGieslExactCalibrationTransferFromSct`, and all three obligations
-discharge by `rfl` because that transport already pins both equalities
-(via `upperMatchesSourceTarget`/`lowerMatchesSourceTarget`) and the
-theorem-level status (via `upperTheoremLevel`/`lowerTheoremLevel`).
-The defs live in `ArtsGieslReverseMathCalibration` (this namespace)
-rather than in the per-bound namespaces to avoid inverting the import
-graph. -/
-
-/-- Concrete top-level inhabitant of `ArtsGieslSctSharpUpperTransfer`,
-obtained by reusing the destination upper package of
-`artsGieslExactCalibrationTransferFromSct`. Closes the procedure's
-`license_named_upper_transfer` obligation. -/
+/-- Named upper profile package reusing the destination record from
+`artsGieslExactCalibrationTransferFromSct`. -/
 noncomputable def artsGieslConcreteSctSharpUpperTransfer :
     ArtsGieslSctSharpUpperTransfer where
   bound := artsGieslExactCalibrationTransferFromSct.dstUpper
@@ -717,10 +695,8 @@ noncomputable def artsGieslConcreteSctSharpUpperTransfer :
     artsGieslConcreteSctSharpUpperTransfer.bound.theoryProfile.ordinalCeiling? =
       some OperatorKO7.ReverseMathSupport.omegaPowThree := rfl
 
-/-- Concrete top-level inhabitant of `ArtsGieslSctSharpLowerTransfer`,
-obtained by reusing the destination lower package of
-`artsGieslExactCalibrationTransferFromSct`. Closes the procedure's
-`license_named_lower_transfer` obligation. -/
+/-- Named lower profile package reusing the destination record from
+`artsGieslExactCalibrationTransferFromSct`. -/
 noncomputable def artsGieslConcreteSctSharpLowerTransfer :
     ArtsGieslSctSharpLowerTransfer where
   bound := artsGieslExactCalibrationTransferFromSct.dstLower
@@ -740,8 +716,7 @@ noncomputable def artsGieslConcreteSctSharpLowerTransfer :
     artsGieslConcreteSctSharpLowerTransfer.bound.theoryProfile.ordinalCeiling? =
       some OperatorKO7.ReverseMathSupport.omegaPowThree := rfl
 
-/-- Concrete top-level inhabitant of the paired transfer structure,
-assembled from the two named transfer inhabitants above. -/
+/-- Pair the named upper and lower profile packages. -/
 noncomputable def artsGieslConcreteSctSharpTransferPair :
     ArtsGieslSctSharpTransferPair where
   upper := artsGieslConcreteSctSharpUpperTransfer
@@ -755,54 +730,43 @@ noncomputable def artsGieslConcreteSctSharpTransferPair :
     artsGieslConcreteSctSharpTransferPair.lower.bound.evidenceStatus =
       EvidenceStatus.theoremLevel := rfl
 
-/-- Bridge theorem for downstream consumers: the named pair produces an
-exact theorem calibration. This is the `license_universal_anchor`
-theorem the Catalog Procedure cites once the named transfer terms
-exist. -/
+/-- The calibration constructor assigns status `exact` to the named pair's
+record. This theorem proves only that status-field equality. -/
 theorem artsGieslConcreteSctSharpTransferPair_yields_exactTheoremCalibration :
     (artsGieslExactTheoremCalibrationOfSctSharpTransfers
         artsGieslConcreteSctSharpTransferPair).calibration.status =
       CalibrationStatus.exact := rfl
 
-/-! ## Concrete exact-theorem-calibration object
+/-! ## Named calibration metadata object
 
-The named sharp-transfer pair above assembles directly into a named
-concrete `ArtsGieslExactTheoremCalibration` term, with theorem-facing
-projection lemmas for every structure field and extraction theorems
-tying the concrete exact object back to the named transfer layer. This
-closes the object-level surface needed by paper-facing citations and
-downstream consumers that want to hit a single named calibration
-object rather than rebuild one through the transfer pair. -/
+The named profile pair assembles into an `ArtsGieslExactTheoremCalibration`
+record. The following lemmas expose its stored profile and status fields. The
+object remains subject to the module-level limitation: it contains no
+formalized reduction or reverse-mathematical derivability theorem. -/
 
-/-- Concrete sharp-theorem upper-bound built directly from the named
-concrete SCT-sharp upper transfer, with universe parameters pinned at
-ground level to match the rest of the AG calibration stack. -/
+/-- Upper profile package specialized to universe level zero. -/
 noncomputable def artsGieslConcreteSharpTheoremUpperBound :
     ArtsGieslSharpTheoremUpperBound :=
   ArtsGieslSharpTheoremUpperBound.ofExactCalibrationTransfer.{0, 0, 0}
     artsGieslExactCalibrationTransferFromSct
     (by rfl) (by rfl)
 
-/-- Concrete sharp-theorem lower-bound built directly from the named
-concrete SCT-sharp lower transfer, with universe parameters pinned at
-ground level to match the rest of the AG calibration stack. -/
+/-- Lower profile package specialized to universe level zero. -/
 noncomputable def artsGieslConcreteSharpTheoremLowerBound :
     ArtsGieslSharpTheoremLowerBound :=
   ArtsGieslSharpTheoremLowerBound.ofExactCalibrationTransfer.{0, 0, 0}
     artsGieslExactCalibrationTransferFromSct
     (by rfl) (by rfl)
 
-/-- Concrete top-level inhabitant of `ArtsGieslExactTheoremCalibration`,
-assembled from the named SCT-sharp transfer pair (through the
-universe-pinned sharp theorem bounds above). This is the paper-facing
-named endpoint for the SCT-anchored theorem-level calibration surface. -/
+/-- Named calibration record assembled from the universe-zero profile
+packages above. -/
 noncomputable def artsGieslConcreteExactTheoremCalibration :
     ArtsGieslExactTheoremCalibration :=
   artsGieslExactTheoremCalibrationOfSharpBounds
     artsGieslConcreteSharpTheoremUpperBound
     artsGieslConcreteSharpTheoremLowerBound
 
-/-! ### Theorem-facing projection lemmas -/
+/-! ### Record-field projection lemmas -/
 
 @[simp] theorem artsGieslConcreteExactTheoremCalibration_status :
     artsGieslConcreteExactTheoremCalibration.calibration.status =
@@ -828,31 +792,26 @@ noncomputable def artsGieslConcreteExactTheoremCalibration :
     artsGieslConcreteExactTheoremCalibration.calibration.upperBound.evidenceStatus =
       EvidenceStatus.theoremLevel := rfl
 
-/-- The extracted-lower-bound evidence status is theorem-level. The
-lower-bound extraction uses `Classical.choose` internally, so this is
-not purely `rfl`; it follows directly from the structure's
-`toSharpLowerBound.theoremLevel` coherence field. -/
+/-- The extracted lower package retains the `theoremLevel` tag. The proof uses
+the record's coherence field because extraction passes through
+`Classical.choose`. -/
 theorem artsGieslConcreteExactTheoremCalibration_lowerTheoremLevel :
     artsGieslConcreteExactTheoremCalibration.toSharpLowerBound.bound.evidenceStatus =
       EvidenceStatus.theoremLevel :=
   ArtsGieslExactTheoremCalibration.toSharpLowerBound_supported
     artsGieslConcreteExactTheoremCalibration
 
-/-! ### Extraction theorems: the concrete object returns the named
-sharp upper/lower witnesses -/
+/-! ### Extraction equalities for the named profile packages -/
 
-/-- The concrete exact object's sharp-upper extraction is the named
-concrete sharp-theorem upper-bound. -/
+/-- Upper-package extraction returns the named upper package. -/
 theorem artsGieslConcreteExactTheoremCalibration_toSharpUpper_eq :
     artsGieslConcreteExactTheoremCalibration.toSharpUpperBound =
       artsGieslConcreteSharpTheoremUpperBound :=
   rfl
 
-/-- The concrete exact object's extracted lower-bound matches the named
-concrete sharp-theorem lower-bound. Because `toSharpLowerBound` uses
-`Classical.choose` on the existential `lowerBound` field, the extracted
-bound is only propositionally equal to the named one; we certify the
-match via `Option.some.inj` on the underlying `lowerBound?`. -/
+/-- Lower-package extraction returns a bound propositionally equal to the
+named lower package. The proof uses `Option.some.inj` because extraction passes
+through `Classical.choose`. -/
 theorem artsGieslConcreteExactTheoremCalibration_toSharpLower_eq :
     artsGieslConcreteExactTheoremCalibration.toSharpLowerBound.bound =
       artsGieslConcreteSharpTheoremLowerBound.bound := by
@@ -867,36 +826,26 @@ theorem artsGieslConcreteExactTheoremCalibration_toSharpLower_eq :
       artsGieslConcreteExactTheoremCalibration.lowerBound).1, hLowerBound?]
   simpa [ArtsGieslExactTheoremCalibration.toSharpLowerBound] using hEq
 
-/-! ### Strengthened public endpoint -/
+/-! ### Named status endpoint -/
 
-/-- Object-facing endpoint: the concrete exact-theorem-calibration
-object is at `CalibrationStatus.exact`. This is the object-level
-strengthening of
-`artsGieslConcreteSctSharpTransferPair_yields_exactTheoremCalibration`:
-citations that previously had to thread through the `artsGiesl...OfSctSharpTransfers
-artsGieslConcreteSctSharpTransferPair` expression can now hit the named
-concrete object directly. -/
+/-- The named calibration record has status field `exact`. -/
 theorem artsGieslConcreteSctSharpTransferPair_yields_exactTheoremCalibrationObject :
     artsGieslConcreteExactTheoremCalibration.calibration.status =
       CalibrationStatus.exact :=
   artsGieslConcreteExactTheoremCalibration.statusExact
 
-/-! ### Paper-facing aliases
+/-! ### Short record-field aliases
 
-A pair of short named aliases for the most-cited surface of the
-concrete exact object. These do not introduce new mathematical content;
-they exist so the paper and module-map citations can hit a single
-named term at the `status` / `upperBound.evidenceStatus` level without
-threading through the generic `ArtsGieslExactTheoremCalibration`
-projections. -/
+These aliases expose the named object's status and target-profile fields. They
+introduce no additional mathematical content. -/
 
-/-- The concrete exact calibration is at `CalibrationStatus.exact`. -/
+/-- The named calibration record has status field `exact`. -/
 theorem artsGieslConcreteExactTheoremCalibration_isExact :
     artsGieslConcreteExactTheoremCalibration.calibration.status =
       CalibrationStatus.exact :=
   artsGieslConcreteExactTheoremCalibration.statusExact
 
-/-- The concrete exact calibration hits the `RCA₀ + WO(ω^3)` target. -/
+/-- The named calibration record stores the `RCA₀ + WO(ω^3)` target fields. -/
 theorem artsGieslConcreteExactTheoremCalibration_hitsTarget :
     artsGieslConcreteExactTheoremCalibration.calibration.targetProfile.theory =
         FormalTheory.RCA0_WO_omega3
@@ -905,19 +854,15 @@ theorem artsGieslConcreteExactTheoremCalibration_hitsTarget :
   ⟨artsGieslConcreteExactTheoremCalibration.targetTheory,
     artsGieslConcreteExactTheoremCalibration.targetOrdinal⟩
 
-/-! ## Path C — named concrete theorem-alignment route
+/-! ## Alternative alignment-metadata route
 
-The exact-transfer route above is stronger because it carries explicit
-constant-overhead transport witnesses into the destination upper/lower
-packages. Path C adds a second, independently closed concrete route
-through a named `ArtsGieslSctTheoremAlignment` inhabitant; it has less
-transport content but gives the manuscript another concrete theorem-level
-anchor on this pair. The two routes are kept distinct on purpose: the
-exact-transfer route is not rewritten to depend on theorem alignment. -/
+This route builds the same target and evidence tags through an
+`ArtsGieslSctTheoremAlignment` record rather than through the cost-shape field
+of `ExactCalibrationTransfer`. Neither route contains a principle-indexed
+reduction. -/
 
-/-- Concrete top-level inhabitant of `ArtsGieslSctTheoremAlignment`, the
-theorem-level AG/SCT alignment schema. All three coherence fields
-discharge by `rfl`. -/
+/-- Alignment metadata record with fixed target and evidence tags. Its
+coherence fields discharge by reduction. -/
 noncomputable def artsGieslConcreteSctTheoremAlignment :
     ArtsGieslSctTheoremAlignment where
   sharedTheoryTarget? := some FormalTheory.RCA0_WO_omega3
@@ -941,9 +886,7 @@ noncomputable def artsGieslConcreteSctTheoremAlignment :
     artsGieslConcreteSctTheoremAlignment.evidenceStatus =
       EvidenceStatus.theoremLevel := rfl
 
-/-- Public summary: the concrete theorem-alignment object simultaneously
-pins the shared theory target, shared ordinal target, and theorem-level
-evidence status at their exact-target values. -/
+/-- Collect the alignment record's theory, ordinal, and evidence-tag fields. -/
 theorem artsGieslConcreteSctTheoremAlignment_supported :
     artsGieslConcreteSctTheoremAlignment.sharedTheoryTarget? =
         some FormalTheory.RCA0_WO_omega3
@@ -953,26 +896,15 @@ theorem artsGieslConcreteSctTheoremAlignment_supported :
           EvidenceStatus.theoremLevel :=
   ⟨rfl, rfl, rfl⟩
 
-/-! ### Path C transfer pair and exact-calibration object
+/-! ### Alignment-route profile pair and calibration record
 
-These materialize the Path C route as named concrete objects. To stay
-universe-compatible with the rest of the ground-level AG calibration
-stack (the `toSharpTheoremUpperBound` / `toSharpTheoremLowerBound`
-helpers pick up `Ordinal`-universe polymorphism through their `simpa`
-proofs), Path C's sharp-theorem upper/lower packages are inlined
-directly at universe 0 from the theorem-alignment route's justification
-metadata. The transfer pair is built from the same `ofTheoremAlignment`
-constructors as the weaker-route counterparts elsewhere in the stack,
-so Path C is a genuine theorem-level route independent of the
-exact-transfer route's transport data. -/
+The upper and lower packages are inlined at universe level zero to avoid the
+universe polymorphism introduced by the generic extraction helpers. Their
+content remains profile and evidence-tag metadata. -/
 
-/-- Path C transfer pair: SCT-sharp upper/lower transfer pair whose
-bounds are the theorem-alignment-route bounds. Content-equivalent to
-`ArtsGieslSctSharpTransferPair.ofTheoremAlignment
-artsGieslConcreteSctTheoremAlignment` (the underlying
-`.ofTheoremAlignment` constructors ignore their alignment argument),
-but inlined at universe 0 to keep the AG calibration stack
-universe-compatible. -/
+/-- Universe-zero pair of alignment-route profile packages. The original
+constructors supplied fixed records independent of their alignment argument;
+this definition makes that behavior explicit. -/
 noncomputable def artsGieslConcreteSctSharpTransferPair_viaTheoremAlignment :
     ArtsGieslSctSharpTransferPair where
   upper :=
@@ -992,11 +924,7 @@ noncomputable def artsGieslConcreteSctSharpTransferPair_viaTheoremAlignment :
       ordinalEqSct := rfl
       theoremLevel := rfl }
 
-/-- Path C sharp-theorem upper bound, inlined at universe 0 with the
-theorem-alignment route's justification tag. Equivalent in content to
-`(ArtsGieslSctSharpUpperTransfer.ofTheoremAlignment
-artsGieslConcreteSctTheoremAlignment).toSharpTheoremUpperBound`, but
-avoids the upstream `simpa`-induced universe polymorphism. -/
+/-- Universe-zero upper package with the alignment-route presentation tag. -/
 noncomputable def artsGieslConcreteSharpTheoremUpperBound_viaTheoremAlignment :
     ArtsGieslSharpTheoremUpperBound where
   bound :=
@@ -1007,8 +935,7 @@ noncomputable def artsGieslConcreteSharpTheoremUpperBound_viaTheoremAlignment :
   ordinalEq := rfl
   theoremLevel := rfl
 
-/-- Path C sharp-theorem lower bound, inlined at universe 0 with the
-theorem-alignment route's justification tag. -/
+/-- Universe-zero lower package with the alignment-route presentation tag. -/
 noncomputable def artsGieslConcreteSharpTheoremLowerBound_viaTheoremAlignment :
     ArtsGieslSharpTheoremLowerBound where
   bound :=
@@ -1019,15 +946,14 @@ noncomputable def artsGieslConcreteSharpTheoremLowerBound_viaTheoremAlignment :
   ordinalEq := rfl
   theoremLevel := rfl
 
-/-- Path C exact-theorem calibration: the concrete theorem-alignment
-route's exact-theorem calibration object. -/
+/-- Calibration record assembled from the alignment-route profile packages. -/
 noncomputable def artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment :
     ArtsGieslExactTheoremCalibration :=
   artsGieslExactTheoremCalibrationOfSharpBounds
     artsGieslConcreteSharpTheoremUpperBound_viaTheoremAlignment
     artsGieslConcreteSharpTheoremLowerBound_viaTheoremAlignment
 
-/-! ### Projection theorems on the Path C exact-calibration object -/
+/-! ### Projections on the alignment-route calibration record -/
 
 @[simp] theorem artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment_status :
     artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment.calibration.status =
@@ -1045,45 +971,39 @@ noncomputable def artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment :
     artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment.calibration.upperBound.evidenceStatus =
       EvidenceStatus.theoremLevel := rfl
 
-/-- The extracted lower-bound evidence status on the Path C object is
-theorem-level, via the same `Classical.choose`-based extraction used
-for the exact-transfer route. -/
+/-- The extracted lower package retains the `theoremLevel` tag. -/
 theorem artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment_lowerTheoremLevel :
     artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment.toSharpLowerBound.bound.evidenceStatus =
       EvidenceStatus.theoremLevel :=
   ArtsGieslExactTheoremCalibration.toSharpLowerBound_supported
     artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment
 
-/-! ### Bridge theorems from the Path C alignment to the Path C
-exact-calibration object -/
+/-! ### Alignment-route status projections -/
 
-/-- The concrete theorem-alignment object yields exact-theorem
-calibration (status-level endpoint), via the inlined Path C
-exact-theorem calibration object. -/
+/-- The alignment-route constructor assigns status field `exact`. -/
 theorem artsGieslConcreteSctTheoremAlignment_yields_exactTheoremCalibration :
     artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment.calibration.status =
       CalibrationStatus.exact := rfl
 
-/-- The concrete theorem-alignment object yields the named Path C
-exact-theorem calibration object directly. -/
+/-- The named alignment-route calibration record has status field `exact`. -/
 theorem artsGieslConcreteSctTheoremAlignment_yields_exactTheoremCalibrationObject :
     artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment.calibration.status =
       CalibrationStatus.exact :=
   artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment.statusExact
 
-/-! ### Path C paper-facing aliases -/
+/-! ### Alignment-route aliases -/
 
-/-- The concrete theorem-alignment object is at `EvidenceStatus.theoremLevel`. -/
+/-- The alignment record carries the `theoremLevel` tag. -/
 theorem artsGieslConcreteSctTheoremAlignment_isTheoremLevel :
     artsGieslConcreteSctTheoremAlignment.evidenceStatus =
       EvidenceStatus.theoremLevel := rfl
 
-/-- The Path C concrete exact calibration is at `CalibrationStatus.exact`. -/
+/-- The alignment-route calibration record has status field `exact`. -/
 theorem artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment_isExact :
     artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment.calibration.status =
       CalibrationStatus.exact := rfl
 
-/-- The Path C concrete exact calibration hits the `RCA₀ + WO(ω^3)` target. -/
+/-- The alignment-route calibration record stores the proposed target fields. -/
 theorem artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment_hitsTarget :
     artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment.calibration.targetProfile.theory =
         FormalTheory.RCA0_WO_omega3
@@ -1091,68 +1011,62 @@ theorem artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment_hitsTarget 
           some omegaPowThree :=
   ⟨rfl, rfl⟩
 
-/-! ## Route comparison: exact-transfer route vs. theorem-alignment route
+/-! ## Comparison of the two metadata routes
 
-The two concrete routes produce theorem-level exact-calibration
-objects but do **not** share the same underlying upper/lower bound
-records: the justification tags differ ("constant-overhead transfer of
-exact SCT upper target" vs. "theorem-level AG/SCT exact-target upper
-transfer"). The comparison theorems below pin exactly what the two
-routes share without falsely claiming object equality. -/
+The two routes store the same target, theory, ordinal, evidence, and status
+fields. Their presentation tags differ, so the underlying records are compared
+fieldwise or after tag erasure. -/
 
-/-- Both routes land on the same target profile in the exact-theorem
-calibration object. -/
+/-- Both records store the same target profile. -/
 theorem artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment_sameTarget :
     artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment.calibration.targetProfile =
       artsGieslConcreteExactTheoremCalibration.calibration.targetProfile :=
   rfl
 
-/-- Both routes land on the same upper-bound theory (`RCA₀ + WO(ω^3)`). -/
+/-- Both records store the same upper theory. -/
 theorem artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment_sameUpperTheory :
     artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment.calibration.upperBound.theoryProfile.theory =
       artsGieslConcreteExactTheoremCalibration.calibration.upperBound.theoryProfile.theory :=
   rfl
 
-/-- Both routes land on the same upper-bound ordinal ceiling (`ω^3`). -/
+/-- Both records store the same upper ordinal ceiling. -/
 theorem artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment_sameUpperOrdinal :
     artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment.calibration.upperBound.theoryProfile.ordinalCeiling? =
       artsGieslConcreteExactTheoremCalibration.calibration.upperBound.theoryProfile.ordinalCeiling? :=
   rfl
 
-/-- Both routes give theorem-level upper-bound evidence status. -/
+/-- Both records store the same upper evidence tag. -/
 theorem artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment_sameUpperStatus :
     artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment.calibration.upperBound.evidenceStatus =
       artsGieslConcreteExactTheoremCalibration.calibration.upperBound.evidenceStatus :=
   rfl
 
-/-- Both routes give theorem-level lower-bound evidence status on the
-`Classical.choose`-extracted lower-bound witness. -/
+/-- Both extracted lower packages store the same evidence tag. -/
 theorem artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment_sameLowerStatus :
     artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment.toSharpLowerBound.bound.evidenceStatus =
       artsGieslConcreteExactTheoremCalibration.toSharpLowerBound.bound.evidenceStatus := by
   rw [artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment_lowerTheoremLevel,
     artsGieslConcreteExactTheoremCalibration_lowerTheoremLevel]
 
-/-- Both routes land on the same exact calibration status. -/
+/-- Both records store the same calibration-status value. -/
 theorem artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment_sameStatus :
     artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment.calibration.status =
       artsGieslConcreteExactTheoremCalibration.calibration.status :=
   rfl
 
-/-! ### Route-comparison at the transfer-pair level -/
+/-! ### Profile-pair comparison -/
 
-/-- The Path C transfer pair's upper is at theorem-level status. -/
+/-- The alignment-route upper package carries the `theoremLevel` tag. -/
 @[simp] theorem artsGieslConcreteSctSharpTransferPair_viaTheoremAlignment_upper_status :
     artsGieslConcreteSctSharpTransferPair_viaTheoremAlignment.upper.bound.evidenceStatus =
       EvidenceStatus.theoremLevel := rfl
 
-/-- The Path C transfer pair's lower is at theorem-level status. -/
+/-- The alignment-route lower package carries the `theoremLevel` tag. -/
 @[simp] theorem artsGieslConcreteSctSharpTransferPair_viaTheoremAlignment_lower_status :
     artsGieslConcreteSctSharpTransferPair_viaTheoremAlignment.lower.bound.evidenceStatus =
       EvidenceStatus.theoremLevel := rfl
 
-/-- Public summary of the Path C transfer pair: both upper and lower
-are theorem-level and hit the exact target profile. -/
+/-- Collect the alignment-route pair's evidence tags and theory fields. -/
 theorem artsGieslConcreteSctSharpTransferPair_viaTheoremAlignment_supported :
     artsGieslConcreteSctSharpTransferPair_viaTheoremAlignment.upper.bound.evidenceStatus =
         EvidenceStatus.theoremLevel
@@ -1164,51 +1078,45 @@ theorem artsGieslConcreteSctSharpTransferPair_viaTheoremAlignment_supported :
           FormalTheory.RCA0_WO_omega3 :=
   ⟨rfl, rfl, rfl, rfl⟩
 
-/-- Both transfer pairs have upper at theorem-level status. -/
+/-- Both upper packages store the same evidence tag. -/
 theorem artsGieslConcreteSctSharpTransferPair_routeComparison_upperStatus :
     artsGieslConcreteSctSharpTransferPair_viaTheoremAlignment.upper.bound.evidenceStatus =
       artsGieslConcreteSctSharpTransferPair.upper.bound.evidenceStatus :=
   rfl
 
-/-- Both transfer pairs have lower at theorem-level status. -/
+/-- Both lower packages store the same evidence tag. -/
 theorem artsGieslConcreteSctSharpTransferPair_routeComparison_lowerStatus :
     artsGieslConcreteSctSharpTransferPair_viaTheoremAlignment.lower.bound.evidenceStatus =
       artsGieslConcreteSctSharpTransferPair.lower.bound.evidenceStatus :=
   rfl
 
-/-- Both transfer pairs share the upper theory target. -/
+/-- Both upper packages store the same theory value. -/
 theorem artsGieslConcreteSctSharpTransferPair_routeComparison_upperTheory :
     artsGieslConcreteSctSharpTransferPair_viaTheoremAlignment.upper.bound.theoryProfile.theory =
       artsGieslConcreteSctSharpTransferPair.upper.bound.theoryProfile.theory :=
   rfl
 
-/-- Both transfer pairs share the lower theory target. -/
+/-- Both lower packages store the same theory value. -/
 theorem artsGieslConcreteSctSharpTransferPair_routeComparison_lowerTheory :
     artsGieslConcreteSctSharpTransferPair_viaTheoremAlignment.lower.bound.theoryProfile.theory =
       artsGieslConcreteSctSharpTransferPair.lower.bound.theoryProfile.theory :=
   rfl
 
-/-! ## Bridge: the exact-transfer route induces the theorem-alignment route
+/-! ## Bridge between transfer and alignment metadata
 
-The generic `ArtsGieslSctTheoremAlignment.ofExactCalibrationTransfer`
-bridge applied to the canonical exact-calibration transport
-`artsGieslExactCalibrationTransferFromSct` yields the Path C canonical
-theorem-alignment object. Because both objects end up with the same
-hard-coded target values (`RCA0_WO_omega3`, `some omegaPowThree`) and
-`theoremLevel` evidence status, and because the three propositional
-coherence fields are proof-irrelevant, the two alignment objects are
-`rfl`-equal. -/
+Applying `ArtsGieslSctTheoremAlignment.ofExactCalibrationTransfer` to the
+named transfer record yields the same fixed theory, ordinal, and evidence tag
+as the named alignment record. The propositional coherence fields are
+proof-irrelevant. -/
 
-/-- The exact-transfer route's canonical transport induces a concrete
-theorem-alignment object via `ofExactCalibrationTransfer`. -/
+/-- Convert the transfer metadata record to an alignment metadata record. -/
 noncomputable def artsGieslExactCalibrationTransferFromSct_toTheoremAlignment :
     ArtsGieslSctTheoremAlignment :=
   ArtsGieslSctTheoremAlignment.ofExactCalibrationTransfer
     artsGieslExactCalibrationTransferFromSct rfl rfl
 
-/-- Public summary: the exact-transfer-induced theorem alignment
-simultaneously pins the shared theory target, shared ordinal target,
-and theorem-level evidence status. -/
+/-- Collect the converted alignment record's theory, ordinal, and evidence
+fields. -/
 theorem artsGieslExactCalibrationTransferFromSct_toTheoremAlignment_supported :
     artsGieslExactCalibrationTransferFromSct_toTheoremAlignment.sharedTheoryTarget? =
         some FormalTheory.RCA0_WO_omega3
@@ -1218,69 +1126,53 @@ theorem artsGieslExactCalibrationTransferFromSct_toTheoremAlignment_supported :
           EvidenceStatus.theoremLevel :=
   ⟨rfl, rfl, rfl⟩
 
-/-- The exact-transfer-induced theorem alignment coincides with the
-concrete Path C theorem-alignment object. The three structure fields
-are definitionally equal by `rfl` (both sides reduce to
-`some FormalTheory.RCA0_WO_omega3`, `some omegaPowThree`,
-`EvidenceStatus.theoremLevel`), and the three propositional coherence
-fields are proof-irrelevant. -/
+/-- The converted and named alignment records are definitionally equal after
+proof irrelevance. -/
 theorem artsGieslExactCalibrationTransferFromSct_toTheoremAlignment_eq_concrete :
     artsGieslExactCalibrationTransferFromSct_toTheoremAlignment =
       artsGieslConcreteSctTheoremAlignment := rfl
 
-/-- Fieldwise: both alignments share the same theory target. -/
+/-- The two alignment records store the same theory target. -/
 theorem artsGieslExactCalibrationTransferFromSct_toTheoremAlignment_sameTheory :
     artsGieslExactCalibrationTransferFromSct_toTheoremAlignment.sharedTheoryTarget? =
       artsGieslConcreteSctTheoremAlignment.sharedTheoryTarget? := rfl
 
-/-- Fieldwise: both alignments share the same ordinal target. -/
+/-- The two alignment records store the same ordinal target. -/
 theorem artsGieslExactCalibrationTransferFromSct_toTheoremAlignment_sameOrdinal :
     artsGieslExactCalibrationTransferFromSct_toTheoremAlignment.sharedOrdinalTarget? =
       artsGieslConcreteSctTheoremAlignment.sharedOrdinalTarget? := rfl
 
-/-- Fieldwise: both alignments share the same theorem-level evidence status. -/
+/-- The two alignment records store the same evidence tag. -/
 theorem artsGieslExactCalibrationTransferFromSct_toTheoremAlignment_sameStatus :
     artsGieslExactCalibrationTransferFromSct_toTheoremAlignment.evidenceStatus =
       artsGieslConcreteSctTheoremAlignment.evidenceStatus := rfl
 
-/-! ## Tag-insensitive route equivalence
+/-! ## Equality after presentation-tag erasure
 
-The two concrete exact-calibration routes (exact-transfer and
-theorem-alignment) differ only on their `justificationTag` strings:
-exact-transfer bounds carry "constant-overhead transfer of exact SCT
-upper/lower target"; Path C bounds carry "theorem-level AG/SCT
-exact-target upper/lower transfer". After erasing these prose-level
-tags via `eraseJustificationTag`, the two routes' sharp-theorem
-upper-bound, lower-bound, and the full exact-theorem calibration object
-agree on the nose. -/
+The two metadata constructions differ only in `justificationTag`. After those
+strings are erased, their upper, lower, and calibration records are equal. -/
 
-/-- After tag erasure, the two concrete sharp-theorem upper-bound
-packages agree. -/
+/-- The upper records agree after erasing their presentation tags. -/
 theorem artsGieslConcreteSharpTheoremUpperBound_eraseTags_eq_viaTheoremAlignment :
     artsGieslConcreteSharpTheoremUpperBound.bound.eraseJustificationTag =
       artsGieslConcreteSharpTheoremUpperBound_viaTheoremAlignment.bound.eraseJustificationTag :=
   rfl
 
-/-- After tag erasure, the two concrete sharp-theorem lower-bound
-packages agree. -/
+/-- The lower records agree after erasing their presentation tags. -/
 theorem artsGieslConcreteSharpTheoremLowerBound_eraseTags_eq_viaTheoremAlignment :
     artsGieslConcreteSharpTheoremLowerBound.bound.eraseJustificationTag =
       artsGieslConcreteSharpTheoremLowerBound_viaTheoremAlignment.bound.eraseJustificationTag :=
   rfl
 
-/-- After tag erasure on both routes' underlying calibration objects,
-the full calibration records agree. -/
+/-- The calibration records agree after erasing their presentation tags. -/
 theorem artsGieslConcreteExactTheoremCalibration_eraseTags_eq_viaTheoremAlignment :
     artsGieslConcreteExactTheoremCalibration.calibration.eraseJustificationTags =
       artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment.calibration.eraseJustificationTags :=
   rfl
 
-/-- Packaged summary: the two concrete exact-calibration routes carry
-the same mathematical content. Target profile, upper-bound theory,
-upper-bound ordinal, upper-bound evidence status, extracted lower-bound
-evidence status, and overall calibration status all agree; the
-underlying calibration records agree after `justificationTag`
-erasure. -/
+/-- Despite the declaration name, this theorem compares only the listed record
+fields and the tag-erased calibration records. It does not compare formalized
+reverse-mathematical principles or reductions. -/
 theorem artsGieslConcreteExactTheoremCalibration_sameMathematicalContent_as_viaTheoremAlignment :
     artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment.calibration.targetProfile =
         artsGieslConcreteExactTheoremCalibration.calibration.targetProfile
@@ -1296,38 +1188,30 @@ theorem artsGieslConcreteExactTheoremCalibration_sameMathematicalContent_as_viaT
           artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment.calibration.eraseJustificationTags :=
   ⟨rfl, rfl, rfl, rfl, rfl, rfl⟩
 
-/-! ## Extended route-comparison: lower theory / lower ordinal
+/-! ## Extracted lower-package comparisons -/
 
-These complement the existing `_sameLowerStatus` theorem: both routes
-also agree on the extracted lower bound's theory and ordinal at the
-exact `RCA₀ + WO(ω^3)` target. -/
-
-/-- The extracted-lower-bound theory profile theory agrees between the
-two routes. -/
+/-- The extracted lower packages store the same theory value. -/
 theorem artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment_sameLowerTheory :
     artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment.toSharpLowerBound.bound.theoryProfile.theory =
       artsGieslConcreteExactTheoremCalibration.toSharpLowerBound.bound.theoryProfile.theory := by
   rw [artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment.toSharpLowerBound.theoryEq,
     artsGieslConcreteExactTheoremCalibration.toSharpLowerBound.theoryEq]
 
-/-- The extracted-lower-bound ordinal ceiling agrees between the two
-routes. -/
+/-- The extracted lower packages store the same ordinal ceiling. -/
 theorem artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment_sameLowerOrdinal :
     artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment.toSharpLowerBound.bound.theoryProfile.ordinalCeiling? =
       artsGieslConcreteExactTheoremCalibration.toSharpLowerBound.bound.theoryProfile.ordinalCeiling? := by
   rw [artsGieslConcreteExactTheoremCalibration_viaTheoremAlignment.toSharpLowerBound.ordinalEq,
     artsGieslConcreteExactTheoremCalibration.toSharpLowerBound.ordinalEq]
 
-/-! ## Generic exact-calibration route packaging and comparison
+/-! ## Generic metadata packaging and comparison
 
-The concrete route-equivalence theorems above all work on the canonical
-pair `artsGieslExactCalibrationTransferFromSct`. The packaging and
-comparison theorems below lift the route-equivalence result to **any**
-`ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile`
-hitting the exact `RCA₀ + WO(ω^3)` target. -/
+The following constructions are parametric in an `ExactCalibrationTransfer`
+record whose source target fields equal the proposed theory and ordinal. The
+same module-level limitation applies: the transfer type does not encode a
+reduction between its profile parameters. -/
 
-/-- Generic exact-theorem calibration object obtained directly from the
-exact-calibration transfer route. Parametric in the transfer. -/
+/-- Build a calibration record from a supplied transfer metadata record. -/
 noncomputable def artsGieslExactTheoremCalibrationOfExactCalibrationTransfer
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -1341,10 +1225,7 @@ noncomputable def artsGieslExactTheoremCalibrationOfExactCalibrationTransfer
     (ArtsGieslSharpTheoremLowerBound.ofExactCalibrationTransfer
       T hTheory hOrdinal)
 
-/-- Canonical theorem-alignment-route sharp-theorem upper bound
-(universe-pinned). Does not depend on the transfer since the
-theorem-alignment route's underlying `ArtsGieslSctSharpUpperTransfer`
-ignores its alignment argument. -/
+/-- Fixed universe-zero upper package used by the alignment-metadata route. -/
 noncomputable def artsGieslSharpTheoremUpperBound_ofTheoremAlignmentRoute :
     ArtsGieslSharpTheoremUpperBound where
   bound :=
@@ -1355,8 +1236,7 @@ noncomputable def artsGieslSharpTheoremUpperBound_ofTheoremAlignmentRoute :
   ordinalEq := rfl
   theoremLevel := rfl
 
-/-- Canonical theorem-alignment-route sharp-theorem lower bound
-(universe-pinned). -/
+/-- Fixed universe-zero lower package used by the alignment-metadata route. -/
 noncomputable def artsGieslSharpTheoremLowerBound_ofTheoremAlignmentRoute :
     ArtsGieslSharpTheoremLowerBound where
   bound :=
@@ -1367,14 +1247,8 @@ noncomputable def artsGieslSharpTheoremLowerBound_ofTheoremAlignmentRoute :
   ordinalEq := rfl
   theoremLevel := rfl
 
-/-- Generic exact-theorem calibration object obtained from the
-theorem-alignment route induced by an exact-calibration transfer.
-Parametric in the transfer via `T`, `hTheory`, `hOrdinal`; the produced
-sharp-theorem upper/lower bounds are the canonical alignment-route
-bounds, which are definitionally identical to what
-`(ArtsGieslSctSharpUpperTransfer.ofTheoremAlignment ...).toSharpTheoremUpperBound`
-(and the lower analogue) would produce, but inlined at universe 0 to
-stay compatible with the rest of the AG calibration stack. -/
+/-- Build the fixed alignment-route calibration record. The arguments witness
+the input contract but do not affect the fixed output packages. -/
 noncomputable def artsGieslExactTheoremCalibrationOfTheoremAlignmentFromExactTransfer
     (_T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (_hTheory : _T.sourceCalibration.targetProfile.theory =
@@ -1406,9 +1280,9 @@ noncomputable def artsGieslExactTheoremCalibrationOfTheoremAlignmentFromExactTra
         T hTheory hOrdinal).calibration.status =
       CalibrationStatus.exact := rfl
 
-/-! ### Generic fieldwise route-equivalence theorems -/
+/-! ### Generic fieldwise metadata comparisons -/
 
-/-- Both generic routes land on the same target profile. -/
+/-- Both constructions store the same target profile. -/
 theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_sameTargetProfile
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -1421,7 +1295,7 @@ theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_sameTargetPro
         T hTheory hOrdinal).calibration.targetProfile :=
   rfl
 
-/-- Generic route equivalence: upper theory. -/
+/-- Compare the upper theory fields. -/
 theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_sameUpperTheory
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -1435,7 +1309,7 @@ theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_sameUpperTheo
   (ArtsGieslSharpTheoremUpperBound.ofExactCalibrationTransfer
     T hTheory hOrdinal).theoryEq
 
-/-- Generic route equivalence: upper ordinal ceiling. -/
+/-- Compare the upper ordinal fields. -/
 theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_sameUpperOrdinal
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -1449,7 +1323,7 @@ theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_sameUpperOrdi
   (ArtsGieslSharpTheoremUpperBound.ofExactCalibrationTransfer
     T hTheory hOrdinal).ordinalEq
 
-/-- Generic route equivalence: upper evidence status. -/
+/-- Compare the upper evidence tags. -/
 theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_sameUpperStatus
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -1463,7 +1337,7 @@ theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_sameUpperStat
   (ArtsGieslSharpTheoremUpperBound.ofExactCalibrationTransfer
     T hTheory hOrdinal).theoremLevel
 
-/-- Generic route equivalence: overall calibration status. -/
+/-- Compare the calibration-status fields. -/
 theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_sameStatus
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -1476,7 +1350,7 @@ theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_sameStatus
         T hTheory hOrdinal).calibration.status :=
   rfl
 
-/-- Generic route equivalence: extracted lower-bound theory. -/
+/-- Compare the extracted lower theory fields. -/
 theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_sameLowerTheory
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -1492,7 +1366,7 @@ theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_sameLowerTheo
     (artsGieslExactTheoremCalibrationOfTheoremAlignmentFromExactTransfer
         T hTheory hOrdinal).toSharpLowerBound.theoryEq]
 
-/-- Generic route equivalence: extracted lower-bound ordinal ceiling. -/
+/-- Compare the extracted lower ordinal fields. -/
 theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_sameLowerOrdinal
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -1508,7 +1382,7 @@ theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_sameLowerOrdi
     (artsGieslExactTheoremCalibrationOfTheoremAlignmentFromExactTransfer
         T hTheory hOrdinal).toSharpLowerBound.ordinalEq]
 
-/-- Generic route equivalence: extracted lower-bound evidence status. -/
+/-- Compare the extracted lower evidence tags. -/
 theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_sameLowerStatus
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -1524,10 +1398,8 @@ theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_sameLowerStat
     (artsGieslExactTheoremCalibrationOfTheoremAlignmentFromExactTransfer
         T hTheory hOrdinal).toSharpLowerBound.theoremLevel]
 
-/-- Generic tag-erased equality at the upper-bound level: given the
-additional source-profile hypothesis matching
-`sctExactUpperBound.theoryProfile`, the two generic routes' calibration
-upper-bound records agree after tag erasure. -/
+/-- Under full source-profile equality, the upper records agree after erasing
+their presentation tags. -/
 theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_eraseTags_eq_ofTheoremAlignment_upperBound
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -1549,12 +1421,8 @@ theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_eraseTags_eq_
       artsGieslSharpTheoremUpperBound_ofTheoremAlignmentRoute.bound.evidenceStatus
     exact T.upperTheoremLevel
 
-/-- Generic tag-erased equality at the lower-bound level: given the
-additional source-profile hypothesis matching
-`sctExactLowerBound.theoryProfile`, the two generic routes' calibration
-lower-bound records agree after tag erasure. Stated symmetrically with
-the upper-bound version through the route-built `lowerBound?` fields,
-rather than against the raw `T.dstLower`. -/
+/-- Under full source-profile equality, the optional lower records agree after
+erasing their presentation tags. -/
 theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_eraseTags_eq_ofTheoremAlignment_lowerBound
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -1581,11 +1449,8 @@ theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_eraseTags_eq_
       artsGieslSharpTheoremLowerBound_ofTheoremAlignmentRoute.bound.evidenceStatus
     exact T.lowerTheoremLevel
 
-/-- Generic presentation-erased equality at the **upper-bound** level.
-Strictly stronger hypothesis-wise than the eraseTags version: the
-source-calibration target profile need only agree on theory and ordinal
-ceiling with the exact target, not on the full `SecondOrderTheoryProfile`
-record. -/
+/-- The upper records agree after erasing labels and tags when the source
+theory and ordinal fields match the target. -/
 theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_erasePresentation_eq_ofTheoremAlignment_upperBound
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -1609,10 +1474,8 @@ theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_erasePresenta
       artsGieslSharpTheoremUpperBound_ofTheoremAlignmentRoute.bound.evidenceStatus
     exact T.upperTheoremLevel
 
-/-- Generic presentation-erased equality at the **lower-bound** level.
-Mirror of the upper-bound version; only `hTheory` and `hOrdinal` are
-needed. Stated through the route-built `lowerBound?` fields,
-symmetrically with the eraseTags lower-bound theorem. -/
+/-- The optional lower records agree after erasing labels and tags when the
+source theory and ordinal fields match the target. -/
 theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_erasePresentation_eq_ofTheoremAlignment_lowerBound
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -1639,32 +1502,15 @@ theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_erasePresenta
   · show T.dstLower.evidenceStatus = EvidenceStatus.theoremLevel
     exact T.lowerTheoremLevel
 
-/-! ### Full-calibration tag-erased equality
+/-! ### Full-record tag-erased equality
 
-Note: the full-calibration-level `eraseJustificationTags` equality is
-deliberately exposed only via the two fieldwise helpers
-`..._eraseTags_eq_ofTheoremAlignment_upperBound` and
-`..._eraseTags_eq_ofTheoremAlignment_lowerBound` above. A
-full-`ReverseMathCalibration` equality-after-erasure theorem at the
-generic level runs into `Ordinal`-universe polymorphism in the
-`ReverseMathCalibration` record type; the concrete instantiation at
-`artsGieslExactCalibrationTransferFromSct` already closes the
-calibration-level erased equality by `rfl` via
-`artsGieslConcreteExactTheoremCalibration_eraseTags_eq_viaTheoremAlignment`,
-which is where downstream consumers cite it. -/
+The generic API exposes upper and lower equalities separately because a full
+`ReverseMathCalibration` equality is obstructed by the `Ordinal` universe in
+the record type. The universe-zero instance has a full tag-erased equality. -/
 
-/-- Packaged generic route-equivalence summary. Consolidates the
-upper-side and calibration-level fieldwise route-equivalence theorems
-into a single conjunction (target profile, upper theory, upper
-ordinal, upper status, overall calibration status). The lower-side
-fieldwise theorems `_sameLowerTheory`, `_sameLowerOrdinal`,
-`_sameLowerStatus` are kept as separate theorems rather than
-in-lined here, because `ArtsGieslExactTheoremCalibration.toSharpLowerBound`
-is universe-polymorphic via its internal `Classical.choose`; the
-concrete-pair packaging theorem
-`artsGieslConcreteExactTheoremCalibration_sameMathematicalContent_as_viaTheoremAlignment`
-already bundles those at the canonical pair where universes resolve
-cleanly. -/
+/-- Collect the target, upper-package, and status-field comparisons. Lower
+comparisons remain separate because `toSharpLowerBound` is universe-polymorphic
+through `Classical.choose`. -/
 theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_sameMathematicalContent_as_ofTheoremAlignment
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -1700,10 +1546,9 @@ theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_sameMathemati
     · exact (ArtsGieslSharpTheoremUpperBound.ofExactCalibrationTransfer
         T hTheory hOrdinal).theoremLevel
 
-/-- Packaged generic **semantic-content** route-equivalence summary.
-Stronger than `sameMathematicalContent`: in addition to the 5 fieldwise
-comparisons, carries the two presentation-erased bound equalities that
-hold with only `hTheory` and `hOrdinal` (no full-profile hypothesis). -/
+/-- Despite the declaration name, this theorem compares record fields and
+presentation-erased packages only. It adds no proposition about the semantics
+or derivability strength of the represented principles. -/
 theorem artsGieslExactTheoremCalibrationOfExactCalibrationTransfer_sameSemanticContent_as_ofTheoremAlignment
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =

@@ -4,13 +4,9 @@ import OperatorKO7.Meta.HigherOrderRewriting_Syntax
 /-!
 # Higher-Order Rewriting Boundary
 
-This module upgrades M2 from the old higher-order sharing surrogate to an explicit
-higher-order rewriting boundary layer. The theorem surface is intentionally exact:
+## Formal Scope
 
-- the existing shared-policy obstruction transports into the explicit syntax,
-- explicit-sharing and policy-tagged shared fragments are separated,
-- beta and binder branches are recorded as theorem-visible statuses,
-- the strongest landed theorem is still a blocker against an unqualified lift.
+UnqualifiedHigherOrderRewritingLiftClaim denotes universal nonorientation. The shared policy is a counterexample to that barrier claim; closure fields elsewhere in this file are stored status flags.
 -/
 
 namespace OperatorKO7.HigherOrderRewritingBoundary
@@ -24,11 +20,11 @@ open OperatorKO7.HigherOrderRewritingSyntax
 abbrev SharingAwareHO (policy : PolicyClass) : Prop :=
   SharedHO policy ∨ ExplicitSharingHO policy
 
-/-- Typed substitution-closed status used in the current M2 higher-order rewriting layer. -/
+/-- Stored substitution-closure status flag for a policy branch. -/
 abbrev SubstitutionClosedHO (policy : PolicyClass) : Prop :=
   BetaFreeHO policy ∧ BinderFreeStatus policy
 
-/-- Typed context-closed status used in the current M2 higher-order rewriting layer. -/
+/-- Stored context-closure status flag for a policy branch. -/
 abbrev ContextClosedHO (policy : PolicyClass) : Prop :=
   BinderFreeStatus policy ∨ BinderStatus policy
 
@@ -80,7 +76,7 @@ shared-surrogate branch defeats it. -/
 abbrev UnqualifiedHigherOrderRewritingLiftClaim : Prop :=
   ∀ policy : PolicyClass, ¬ PolicyOrientsStep policy
 
-/-- Exact theorem-visible split of the policy subfamilies tracked in the explicit M2 layer. -/
+/-- Policy-tag inventory represented by this syntax. -/
 structure PolicySubfamilyStatus : Prop where
   treeSubfamily : TreeHO treePolicy
   sharedSubfamily : SharedHO sharedPolicy
@@ -100,7 +96,7 @@ structure PolicySubfamilyStatus : Prop where
   explicitContextClosed : ContextClosedHO explicitSharingPolicy
   betaCompatibleContextClosed : ContextClosedHO betaCompatiblePolicy
 
-/-- Canonical theorem-visible status split for the explicit M2 policy classes. -/
+/-- Stored status values for the represented policy classes. -/
 def policySubfamilyStatus : PolicySubfamilyStatus where
   treeSubfamily := treePolicy_is_treeHO
   sharedSubfamily := sharedPolicy_is_sharedHO
@@ -121,8 +117,8 @@ def policySubfamilyStatus : PolicySubfamilyStatus where
   explicitContextClosed := Or.inl explicitSharingPolicy_is_binderFree
   betaCompatibleContextClosed := Or.inr betaCompatiblePolicy_has_binderStatus
 
-/-- The old higher-order boundary counter transports into the explicit syntax on the embedded
-old M2 carrier. -/
+/-- The boundary counter transports into the explicit syntax on the embedded
+prior M2 carrier. -/
 theorem boundary_policy_counter_embed
     (policy : OperatorKO7.HigherOrderSharingBoundary.SharingPolicy) :
     ∀ t : OperatorKO7.HigherOrderSharingBoundary.HOTerm,
@@ -158,7 +154,7 @@ theorem explicit_policy_counter_embedSharedTerm :
   | .recur b s n => by
       simp [embedSharedTerm, PolicyCounter, explicit_policy_counter_embedSharedTerm]
 
-/-- The old M2 duplicating step embeds into the explicit higher-order rewriting syntax. -/
+/-- The duplicating step embeds into the explicit higher-order rewriting syntax. -/
 theorem boundary_step_embeds
     {policy : OperatorKO7.HigherOrderSharingBoundary.SharingPolicy}
     {a b : OperatorKO7.HigherOrderSharingBoundary.HOTerm}
@@ -178,7 +174,7 @@ theorem boundary_step_embeds
             RewriteStep.rec_succ_shared sharedPolicy rfl
               (embedBoundaryHOTerm b) (embedBoundaryHOTerm s) (embedBoundaryHOTerm n)
 
-/-- The old sharing-aware surrogate step embeds into the explicit-sharing branch. -/
+/-- The prior sharing-aware surrogate step embeds into the explicit-sharing branch. -/
 theorem shared_step_embeds_explicit
     {a b : SharedTerm} (h : SharedStep a b) :
     RewriteStep explicitSharingPolicy (embedSharedTerm a) (embedSharedTerm b) := by
@@ -224,7 +220,7 @@ theorem explicit_policy_counter_orients_embedded_step
   rw [explicit_policy_counter_embedSharedTerm, explicit_policy_counter_embedSharedTerm]
   exact sharedCounter_orients_step h
 
-/-- Transport the old M2 catalog's fragment membership into the explicit syntax. -/
+/-- Transport fragment membership into the explicit syntax. -/
 theorem catalog_transports_restricted_fragment
     (hcat : HigherOrderSharingBoundaryCatalog) :
     ∀ t : SharedTerm,
@@ -236,8 +232,8 @@ theorem catalog_transports_restricted_fragment
     embedBoundaryHOTerm_closed
       ((hcat.noSharingBoundary).restrictedFragmentCarriesFirstOrderShape t)
 
-/-- Transport the old shared-surrogate M2 counterexample into the explicit syntax on the
-embedded old higher-order carrier. -/
+/-- Transport the shared-surrogate counterexample into the explicit syntax on the
+embedded prior higher-order carrier. -/
 theorem catalog_transports_shared_counterexample
     (hcat : HigherOrderSharingBoundaryCatalog)
     (b s n : SharedTerm) :
@@ -276,14 +272,14 @@ theorem catalog_transports_shared_counterexample
   rw [hleft, hright]
   exact hcat.sharedCounterexample b s n
 
-/-- The old theorem-visible no-sharing boundary status is still part of the explicit syntax
+/-- The no-sharing boundary status is represented in the explicit syntax
 layer through transport. -/
 theorem catalog_transports_no_sharing_boundary
     (hcat : HigherOrderSharingBoundaryCatalog) :
     NoSharingBoundaryStatus :=
   hcat.noSharingBoundary
 
-/-- Direct explicit-sharing version of the old sharing-aware counterexample. -/
+/-- Direct explicit-sharing form of the sharing-aware counterexample. -/
 theorem explicit_sharing_fragment_recovers_counterexample
     (b s n : SharedTerm) :
     PolicyCounter explicitSharingPolicy
@@ -293,8 +289,8 @@ theorem explicit_sharing_fragment_recovers_counterexample
   rw [explicit_policy_counter_embedSharedTerm, explicit_policy_counter_embedSharedTerm]
   exact sharing_breaks_tree_barrier b s n
 
-/-- Strongest honest theorem landed in this sprint: the shared-surrogate policy still blocks
-an unqualified full higher-order rewriting lift. -/
+/-- The shared-surrogate orienter refutes the claim that every policy fails to
+orient its step relation. -/
 theorem shared_policy_blocks_unqualified_higher_order_rewriting_lift :
     ¬ UnqualifiedHigherOrderRewritingLiftClaim := by
   intro h

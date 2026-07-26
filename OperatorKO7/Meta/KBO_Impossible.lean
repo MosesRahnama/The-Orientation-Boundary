@@ -4,35 +4,9 @@ import OperatorKO7.Meta.SymbolicComparatorBarrier
 /-!
 # Explicit KBO-Style Impossibility Corollary
 
-Architectural status: paper-facing renaming layer.
-This module is intentionally thin. The substantive mathematical obstruction is
-the variable-condition barrier in `Meta/SymbolicComparatorBarrier.lean`
-(`not_orients_dup_rule`), which proves once and for all that any comparator
-respecting the standard variable condition cannot orient a rule whose right-hand
-side strictly increases the count of any variable. The KO7 `rec_succ` rule
-duplicates `s` from one occurrence on the LHS to two on the RHS, so the
-abstraction applies directly.
+## Formal Scope
 
-This file exists so that the paper can cite a corollary under a *KBO-facing
-name* (`no_kbo_orients_ko7_rec_succ`, `no_kbo_orients_ko7_rec_succ_trace`),
-rather than forcing every reviewer to translate from the symbolic abstraction
-themselves. Concretely, the file contributes:
-
-1. A type alias `KBOStyleOrder := VariableConditionOrder`.
-2. Two one-line forwarding theorems (`no_kbo_orients_dup_step`,
-   `no_kbo_orients_ko7_rec_succ`) that re-export the abstract obstruction under
-   KBO-facing names.
-3. One new bridge theorem (`no_kbo_orients_ko7_rec_succ_trace`) that
-   lifts the schema-level statement to the concrete `Trace`-level KO7 rule via
-   the `instantiate` map from `SymbolicComparatorBarrier`.
-
-Scope note:
-- We do not formalize the full Knuth-Bendix order metatheory here.
-- Instead, we isolate the single KBO property that matters for this rule:
-  the variable condition.
-- Any KBO instance therefore induces a value of `KBOStyleOrder` below.
-- Readers wanting the actual proof of the obstruction should look at
-  `Meta/SymbolicComparatorBarrier.lean`, not at this file.
+The local result is a conditional variable-count obstruction forwarded from imports. It does not formalize all KBO instances or derive the variable condition from a KBO implementation.
 -/
 
 namespace OperatorKO7.KBOImpossible

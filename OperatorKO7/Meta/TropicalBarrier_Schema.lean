@@ -1,27 +1,27 @@
 import OperatorKO7.Meta.MaxBarrier_Schema
 
 /-!
-# Tropical primary-projection barrier
+This module proves barriers for an abstract carrier equipped with a strict natural-number
+primary projection identified with a supplied MaxMeasure. Tropical algebra is motivational; the
+formal results use only the displayed projection and max-barrier hypotheses.
 
-This file extends the max/arctic line one step further. We still do not formalize
-generic tropical semiring algebra. Instead, we isolate the abstract ingredient
-used by the existing proofs:
 
-- a distinguished finite primary projection to `Nat`,
-- strict decrease in the ambient carrier reflected by strict decrease of that
-  projection,
-- and a projected scalar interface already blocked by the max barrier.
 
-This covers a broader tropical-family envelope than the arctic-specific file
-without claiming full semiring metatheory.
+
+
+
+
+
+
+
 -/
 
 namespace OperatorKO7.StepDuplicating
 
 namespace StepDuplicatingSchema
 
-/-- A broad tropical-family primary projection: the carrier is abstract, but every
-strict comparison must force strict decrease of the tracked finite primary scalar. -/
+/-- Data record whose requirements are the fields displayed below.
+-/
 structure TropicalPrimaryMeasure (S : StepDuplicatingSchema) (β : Type) where
   eval : S.T → β
   lt : β → β → Prop
@@ -30,7 +30,7 @@ structure TropicalPrimaryMeasure (S : StepDuplicatingSchema) (β : Type) where
   primary_eq : ∀ t, primary (eval t) = projectedMax.eval t
   lt_strict_primary : ∀ {x y : β}, lt x y → primary x < primary y
 
-/-- Unbounded-pump tropical barrier via the finite primary projection. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem no_tropical_primary_orients_dup_step_of_unbounded
     {S : StepDuplicatingSchema} {β : Type}
     (M : TropicalPrimaryMeasure S β)
@@ -49,7 +49,7 @@ theorem no_tropical_primary_orients_dup_step_of_unbounded
     simpa [M.primary_eq] using hproj
   exact no_max_orients_dup_step_of_unbounded (S := S) M.projectedMax hunbounded hmax
 
-/-- Successor-pump tropical barrier via the finite primary projection. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem no_tropical_primary_orients_dup_step_of_succ_pump
     {S : StepDuplicatingSchema} {β : Type}
     (M : TropicalPrimaryMeasure S β)
@@ -68,7 +68,7 @@ theorem no_tropical_primary_orients_dup_step_of_succ_pump
     simpa [M.primary_eq] using hproj
   exact no_max_orients_dup_step_of_succ_pump (S := S) M.projectedMax h_succ_const hmax
 
-/-- Wrap-pump tropical barrier via the finite primary projection. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem no_tropical_primary_orients_dup_step_of_wrap_pump
     {S : StepDuplicatingSchema} {β : Type}
     (M : TropicalPrimaryMeasure S β)

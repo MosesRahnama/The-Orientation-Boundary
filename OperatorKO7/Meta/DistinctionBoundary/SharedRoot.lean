@@ -32,8 +32,8 @@ layer. That single sentence is the abstract object `SubstitutionInvariantObstruc
 defined below, and BOTH axes are exhibited as inhabitants of it.
 
 This is the substitution-invariance unification, NOT the degenerate collapse
-isomorphism: `BoundaryDuality.collapseBoundaryOperator` / `verdictSwap` has a
-collapse fixed by construction and is neither imported nor referenced here. The content
+isomorphism: `BoundaryDuality.collapseBoundaryOperator` / `verdictSwap` is
+constant-by-construction and is neither imported nor referenced here. The content
 is the two genuine already-unconditional substitution-invariance facts:
 
 * `SigmaFreeAlgebra.disequality_is_not_substitution_invariant`
@@ -59,6 +59,10 @@ projection (Arts-Giesl 2000 DP soundness). These are different target predicates
 the two axes, captured by the per-instance `license` field. The unification is at
 the substitution-invariance level (the shared root), not at the level of a single
 common target predicate. The headline states exactly this and no more.
+
+No `sorry`, `admit`, new `axiom`, `native_decide`, `bv_decide`, `@[csimp]`,
+`unsafe`, `partial`, or `opaque`. Every headline is `#print axioms`-checked below
+against the baseline whitelist `{propext, Classical.choice, Quot.sound}`.
 
 Relation: not a rewriting relation; this is a metatheoretic statement about
 signature-homomorphic evaluators over the two KO7 free algebras.
@@ -87,7 +91,7 @@ Fields:
 
 * `collapse : Term → Term` — the constant-collapse Σ-homomorphism (every
   constructor sent to one carrier value). Concretely this is `evalSigma a b ·` at a
-  fixed term on the distinction axis, and `dpCollapseToVoid` / the fixed-void
+  constant term on the distinction axis, and `dpCollapseToVoid` / the constant-void
   fold on the orientation axis.
 * `license : Term → Lic` — the EXTERNAL license observable, i.e. the boundary
   decision that lives outside the rewriting layer (disequality for distinction, the
@@ -163,7 +167,7 @@ exactly `void ≠ delta void`. This is the substitution-invariance content of
 `disequality_is_not_substitution_invariant` repackaged as a shared-root instance. -/
 
 /-- The distinction-axis instance of the shared obstruction. `collapse` is the
-fixed-void substitution evaluator `evalSigma · · void`; the witness pair is
+constant-void substitution evaluator `evalSigma · · void`; the witness pair is
 `(void, delta void)`; the external license is the identity (the disequality
 decision separates the two terms). Non-vacuous: every field is a genuine value and
 `distinct` is the real disequality. -/

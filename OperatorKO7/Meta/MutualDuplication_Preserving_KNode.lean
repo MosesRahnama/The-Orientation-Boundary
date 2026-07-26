@@ -288,7 +288,7 @@ theorem no_global_orients_ctx_additive (M : AdditiveMeasure (k := k)) :
     exact syncTarget_eval_gt M (0 : Fin (k + 1)) base payload
   exact Nat.lt_asymm hcomp hgt
 
-/-! ## Conditional affine extension -/
+/-! ## Exact affine boundary -/
 
 /-- Affine constructor-local measures on the preserving finite-cycle syntax.
 
@@ -459,6 +459,145 @@ theorem no_global_orients_ctx_affine_of_wrapper_dominance
         M.eval (syncSource (0 : Fin (k + 1)) base payloadTerm) := by
     exact DependencyPairsFragment.transGen_drop (R := StepCtx) (m := M.eval) horient hpath
   exact Nat.lt_asymm hcomp hgt
+
+
+/-! ## Exact maximality of wrapper dominance -/
+
+/-- A positive affine evaluation that doubles the packet contribution and is
+additive through wrappers. -/
+@[simp] def affineEscapeEval : SyncTerm k → Nat
+  | base => 1
+  | payload => 1
+  | empty => 1
+  | slot _ t => affineEscapeEval t
+  | cons x xs => affineEscapeEval x + affineEscapeEval xs
+  | wrap x y => affineEscapeEval x + affineEscapeEval y
+  | recur _ _ packet => 2 * affineEscapeEval packet
+
+lemma affineEscapeEval_pos (t : SyncTerm k) : 0 < affineEscapeEval t := by
+  induction t <;> simp_all [affineEscapeEval] <;> omega
+
+/-- Affine measure witnessing that the unrestricted finite-cycle affine no-go is
+false when wrapper dominance is absent. -/
+def affineEscapeMeasure : AffineMeasure (k := k) where
+  eval := affineEscapeEval
+  c_base := 1
+  c_payload := 1
+  c_empty := 1
+  wrap_const := 0
+  wrap_left := 1
+  wrap_right := 1
+  recur_const := 0
+  recur_ctx := 0
+  recur_packet := 2
+  eval_base := rfl
+  eval_payload := rfl
+  eval_empty := rfl
+  eval_slot := by intro i t; rfl
+  eval_cons := by intro x xs; rfl
+  eval_wrap := by intro; simp [affineEscapeEval]
+  eval_recur := by intro; simp [affineEscapeEval]
+  h_wrap_left_pos := by decide
+  h_wrap_right_pos := by decide
+
+lemma affineEscapeMeasure_wrapRightIter (n : Nat) :
+    (affineEscapeMeasure (k := k)).wrapRightIter n = 1 := by
+  induction n with
+  | zero => rfl
+  | succ n ih =>
+      show (affineEscapeMeasure (k := k)).wrapRightIter n * 1 = 1
+      rw [ih]
+
+lemma affineEscapeMeasure_wrapLeftIter (n : Nat) :
+    (affineEscapeMeasure (k := k)).wrapLeftIter n = n := by
+  induction n with
+  | zero => rfl
+  | succ n ih =>
+      show (affineEscapeMeasure (k := k)).wrapLeftIter n
+             + (affineEscapeMeasure (k := k)).wrapRightIter n * 1 = n + 1
+      rw [ih, affineEscapeMeasure_wrapRightIter]
+
+lemma affineEscapeMeasure_wrapConstIter (n : Nat) :
+    (affineEscapeMeasure (k := k)).wrapConstIter n = 0 := by
+  induction n with
+  | zero => rfl
+  | succ n ih =>
+      show (affineEscapeMeasure (k := k)).wrapConstIter n
+             + (affineEscapeMeasure (k := k)).wrapRightIter n * 0 = 0
+      rw [ih]
+      simp
+
+/-- Packet evaluation specialised to the escape measure, stated directly in
+`affineEscapeEval` so that unfolding the measure keeps the rewrite applicable. -/
+lemma affineEscapeEval_syncPacket (i : Fin (k + 1)) (n : Nat) (p : SyncTerm k) :
+    affineEscapeEval (syncPacket i n p) = n * affineEscapeEval p + 1 :=
+  eval_syncPacket_affine (affineEscapeMeasure (k := k)) i n p
+
+/-- Wrapper-nest evaluation specialised to the escape measure. -/
+lemma affineEscapeEval_wrapNest (p : SyncTerm k) (n : Nat) (t : SyncTerm k) :
+    affineEscapeEval (wrapNest p n t) = n * affineEscapeEval p + affineEscapeEval t := by
+  have h := eval_wrapNest_affine (affineEscapeMeasure (k := k)) p n t
+  rw [affineEscapeMeasure_wrapConstIter, affineEscapeMeasure_wrapLeftIter,
+    affineEscapeMeasure_wrapRightIter] at h
+  simpa using h
+
+/-- The escape measure strictly orients every synchronized finite-cycle
+composite from target to source. -/
+theorem affineEscapeMeasure_orients_synchronized_cycle
+    (i : Fin (k + 1)) (ctx p : SyncTerm k) :
+    affineEscapeMeasure.eval (syncTarget i ctx p) <
+      affineEscapeMeasure.eval (syncSource i ctx p) := by
+  rw [show affineEscapeMeasure.eval (syncSource i ctx p) =
+      2 * ((k + 1) * affineEscapeMeasure.eval p + 1) by
+    simp [syncSource, affineEscapeMeasure, affineEscapeEval_syncPacket]]
+  rw [show affineEscapeMeasure.eval (syncTarget i ctx p) =
+      (k + 1) * affineEscapeMeasure.eval p + 2 by
+    simp [syncTarget, affineEscapeMeasure, affineEscapeEval_wrapNest]]
+  have hp := affineEscapeEval_pos p
+  change 0 < affineEscapeMeasure.eval p at hp
+  nlinarith
+
+/-- The escape measure does not satisfy wrapper dominance. -/
+theorem affineEscapeMeasure_not_wrapperDominant :
+    ¬ WrapperDominance (k := k) affineEscapeMeasure := by
+  unfold WrapperDominance
+  rw [affineEscapeMeasure_wrapLeftIter]
+  show ¬ ((k + 1) * 2 < k + 1)
+  omega
+
+/-- The blanket affine no-go without wrapper dominance is false for every finite
+cycle length. -/
+theorem unrestricted_affine_no_go_false :
+    ¬ (∀ M : AffineMeasure (k := k),
+      ¬ (∀ (i : Fin (k + 1)) (ctx payloadTerm : SyncTerm k),
+        M.eval (syncTarget i ctx payloadTerm) <
+          M.eval (syncSource i ctx payloadTerm))) := by
+  intro h
+  exact h affineEscapeMeasure affineEscapeMeasure_orients_synchronized_cycle
+
+/-- Exact affine boundary for finite preserving cycles: wrapper dominance plus
+an unbounded pump is sufficient for the no-go, and removing that structural
+condition makes a universal no-go theorem false. -/
+structure AffineFiniteCycleExactBoundary : Prop where
+  noGoUnderDominance :
+    ∀ (M : AffineMeasure (k := k)),
+      WrapperDominance M →
+      (∀ q : Nat, ∃ t : SyncTerm k, q ≤ M.eval t) →
+      ¬ (∀ (i : Fin (k + 1)) (ctx payloadTerm : SyncTerm k),
+        M.eval (syncTarget i ctx payloadTerm) <
+          M.eval (syncSource i ctx payloadTerm))
+  unrestrictedNoGoFalse :
+    ¬ (∀ M : AffineMeasure (k := k),
+      ¬ (∀ (i : Fin (k + 1)) (ctx payloadTerm : SyncTerm k),
+        M.eval (syncTarget i ctx payloadTerm) <
+          M.eval (syncSource i ctx payloadTerm)))
+
+/-- Complete maximality certificate for the affine finite-cycle theorem. -/
+theorem affine_finite_cycle_exact_boundary :
+    AffineFiniteCycleExactBoundary (k := k) where
+  noGoUnderDominance :=
+    no_affine_orients_synchronized_cycle_of_wrapper_dominance
+  unrestrictedNoGoFalse := unrestricted_affine_no_go_false
 
 end SyncTerm
 

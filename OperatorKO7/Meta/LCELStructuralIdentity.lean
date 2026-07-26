@@ -5,26 +5,9 @@ import OperatorKO7.Meta.LCELDpInstance
 /-!
 # LCEL Structural Identity
 
-Artifact-facing structural parallelism for the LCEL slot carrier.
+## Formal Scope
 
-This file deliberately avoids the earlier overstatement:
-
-- it does **not** claim that mere realization of six propositional slots is
-  enough to build a meaningful LCEL quasi-functor; and
-- it does **not** claim the unrestricted schema theorem from the paper.
-
-What it does mechanize is the honest reusable core now available in the
-artifact:
-
-1. if two formal LCEL instances have stagewise-equivalent comparison profiles,
-2. and if their two extra explicit LCEL slots (`Σ` and `Γ'`) are equivalent,
-
-then there is a six-slot LCEL quasi-functor between them.
-
-The concrete Gödel-side and benchmark/DP-side instances satisfy those
-hypotheses because both comparison profiles are already proved stagewise
-equivalent to the same mechanized DP profile, and both explicit extra slots are
-inhabited by theorem-backed semantic witnesses.
+LCELQuasiFunctor is a package of six proposition-level equivalences. No carrier maps, functor laws, or evidence-preservation theorem is defined.
 -/
 
 namespace OperatorKO7.LCELStructuralIdentity
@@ -36,6 +19,8 @@ open OperatorKO7.ClassicalAscentProfile
 open OperatorKO7.ReflectionSchema
 open OperatorKO7.StructuralIdentityComparison
 
+/-- Build a proposition-level equivalence from separate inhabitants. Each
+direction returns the stored inhabitant and need not use its input evidence. -/
 private theorem iff_of_true {P Q : Prop} (hP : P) (hQ : Q) : P ↔ Q := by
   constructor
   · intro _
@@ -81,8 +66,8 @@ def clauseMap {L₁ L₂ : FormalLCELInstance}
   | .reimportClass => F.reimportClassMap
   | .annotationFunctor => F.annotationFunctorMap
 
-/-- A quasi-functor between LCEL instances is a stagewise parallelism of their
-slot profiles. -/
+/-- The six stored biconditionals imply stagewise equivalence of the slot
+propositions. -/
 theorem stagewise_equivalent
     {L₁ L₂ : FormalLCELInstance}
     (F : LCELQuasiFunctor L₁ L₂) :
@@ -90,7 +75,8 @@ theorem stagewise_equivalent
   intro c
   exact F.clauseMap c
 
-/-- Quasi-functors transport LCEL realization from source to target. -/
+/-- Apply the forward implication of each stored biconditional to an LCEL
+realization proof. -/
 theorem transports_realization
     {L₁ L₂ : FormalLCELInstance}
     (F : LCELQuasiFunctor L₁ L₂)
@@ -98,7 +84,7 @@ theorem transports_realization
     RealizesLCELSchema L₂.toSlotProfile :=
   F.stagewise_equivalent.preserves_realization hL₁
 
-/-- Identity quasi-functor on any LCEL instance. -/
+/-- Identity biconditional package on one LCEL instance. -/
 def id (L : FormalLCELInstance) : LCELQuasiFunctor L L where
   baseSystemMap := Iff.rfl
   boundaryMap := Iff.rfl
@@ -107,7 +93,7 @@ def id (L : FormalLCELInstance) : LCELQuasiFunctor L L where
   reimportClassMap := Iff.rfl
   annotationFunctorMap := Iff.rfl
 
-/-- Reverse quasi-functor: invert each clause biconditional. -/
+/-- Reverse the package by inverting each clause biconditional. -/
 def symm {L₁ L₂ : FormalLCELInstance}
     (F : LCELQuasiFunctor L₁ L₂) :
     LCELQuasiFunctor L₂ L₁ where
@@ -118,7 +104,7 @@ def symm {L₁ L₂ : FormalLCELInstance}
   reimportClassMap := F.reimportClassMap.symm
   annotationFunctorMap := F.annotationFunctorMap.symm
 
-/-- Composition of two quasi-functors. -/
+/-- Compose the six biconditionals pointwise. -/
 def comp {L₁ L₂ L₃ : FormalLCELInstance}
     (G : LCELQuasiFunctor L₂ L₃) (F : LCELQuasiFunctor L₁ L₂) :
     LCELQuasiFunctor L₁ L₃ where
@@ -131,9 +117,9 @@ def comp {L₁ L₂ L₃ : FormalLCELInstance}
 
 end LCELQuasiFunctor
 
-/-- Honest artifact-facing comparison witness between two formal LCEL instances.
+/-- scope-qualified public comparison witness between two formal LCEL instances.
 
-This packages exactly the three ingredients currently available in the artifact:
+This packages directly the three ingredients in this module available in the artifact:
 
 1. stagewise equivalence of the underlying comparison profiles;
 2. equivalence of the explicit external-license slot; and
@@ -274,15 +260,13 @@ private theorem annotationFunctor_slot_equivalent_of_comparison_shapes
     exact L₂.annotationMatchesProfile
   exact hLeft.trans ((hShape .licensedReimport).trans hRight.symm)
 
-/-- Honest construction principle for an LCEL quasi-functor.
-
-The artifact currently needs three ingredients:
+/-- Construct the six-biconditional package from three supplied equivalences:
 
 1. stagewise equivalence of the underlying comparison profiles;
 2. equivalence of the explicit external-license slot; and
 3. equivalence of the explicit reimport-class slot.
 
-That is the real reusable core available today. -/
+-/
 def lcelQuasiFunctor_of_comparison_and_slots
     {L₁ L₂ : FormalLCELInstance}
     (hShape : StagewiseEquivalent L₁.comparison.profile.shape L₂.comparison.profile.shape)
@@ -300,7 +284,7 @@ def lcelQuasiFunctor_of_comparison_and_slots
   annotationFunctorMap :=
     annotationFunctor_slot_equivalent_of_comparison_shapes hShape
 
-/-- Repackage an honest LCEL comparison witness as a quasi-functor. -/
+/-- Repackage an LCEL comparison witness as the six-biconditional package. -/
 def lcelQuasiFunctor_of_comparisonWitness
     {L₁ L₂ : FormalLCELInstance}
     (W : LCELComparisonWitness L₁ L₂) :
@@ -310,8 +294,8 @@ def lcelQuasiFunctor_of_comparisonWitness
     W.externalLicenseEquivalent
     W.reimportClassEquivalent
 
-/-- Artifact-facing LCEL structural identity: a quasi-functor exists once the
-comparison-profile stages and the two explicit extra LCEL slots are aligned. -/
+/-- Inhabitation of the six-biconditional package under the three displayed
+equivalence hypotheses. -/
 theorem lcel_structural_identity
     {L₁ L₂ : FormalLCELInstance}
     (hShape : StagewiseEquivalent L₁.comparison.profile.shape L₂.comparison.profile.shape)
@@ -322,8 +306,7 @@ theorem lcel_structural_identity
     Nonempty (LCELQuasiFunctor L₁ L₂) :=
   ⟨lcelQuasiFunctor_of_comparison_and_slots hShape hLicense hReimport⟩
 
-/-- Bidirectional form of the artifact-facing LCEL structural-identity
-construction. -/
+/-- Package inhabitation in both directions. -/
 theorem lcel_structural_identity_bidirectional
     {L₁ L₂ : FormalLCELInstance}
     (hShape : StagewiseEquivalent L₁.comparison.profile.shape L₂.comparison.profile.shape)
@@ -337,14 +320,14 @@ theorem lcel_structural_identity_bidirectional
 
 namespace LCELComparisonWitness
 
-/-- Build the corresponding quasi-functor from an honest comparison witness. -/
+/-- Build the corresponding biconditional package from a comparison witness. -/
 def toQuasiFunctor
     {L₁ L₂ : FormalLCELInstance}
     (W : LCELComparisonWitness L₁ L₂) :
     LCELQuasiFunctor L₁ L₂ :=
   lcelQuasiFunctor_of_comparisonWitness W
 
-/-- Any honest LCEL comparison witness yields artifact-facing structural identity. -/
+/-- A comparison witness inhabits the corresponding biconditional package. -/
 theorem structural_identity
     {L₁ L₂ : FormalLCELInstance}
     (W : LCELComparisonWitness L₁ L₂) :
@@ -360,7 +343,7 @@ def symm
   externalLicenseEquivalent := W.externalLicenseEquivalent.symm
   reimportClassEquivalent := W.reimportClassEquivalent.symm
 
-/-- Honest bidirectional structural identity from a single comparison witness. -/
+/-- Package inhabitation in both directions from one comparison witness. -/
 theorem structural_identity_bidirectional
     {L₁ L₂ : FormalLCELInstance}
     (W : LCELComparisonWitness L₁ L₂) :
@@ -375,7 +358,8 @@ theorem stagewise_slots
     StagewiseLCELEquivalent L₁.toSlotProfile L₂.toSlotProfile :=
   W.toQuasiFunctor.stagewise_equivalent
 
-/-- Comparison witnesses transport LCEL schema realization from left to right. -/
+/-- Apply the comparison witness's forward slot implications to an LCEL
+realization proof. -/
 theorem transports_realization
     {L₁ L₂ : FormalLCELInstance}
     (W : LCELComparisonWitness L₁ L₂)
@@ -385,13 +369,8 @@ theorem transports_realization
 
 end LCELComparisonWitness
 
-/-- Stronger artifact-facing comparison witness between two formal LCEL
-instances.
-
-This extends `LCELComparisonWitness` with the current theorem-backed semantic
-support surface used to realize the LCEL reversibility and boundary-
-factorization packages on canonical instances. It is still conditional, but it
-supports more of the paper's LCEL comparison story than slot parallelism alone. -/
+/-- Extend `LCELComparisonWitness` with additional equivalences and support
+records supplied as fields. -/
 structure LCELSemanticComparisonWitness (L₁ L₂ : FormalLCELInstance)
     extends LCELComparisonWitness L₁ L₂ where
   baseLayerSupportEquivalent :
@@ -553,7 +532,7 @@ def transports_boundaryFactorizationFromSupport
   lcelBoundaryFactorization_of_strongerSupport
     (W.transports_boundaryFactorizationSupport hSupport)
 
-/-- Semantic comparison witnesses still transport LCEL schema realization, via
+/-- Semantic comparison witnesses remains transport LCEL schema realization, via
 their underlying slot-level comparison witness. -/
 theorem transports_realization
     {L₁ L₂ : FormalLCELInstance}
@@ -594,7 +573,7 @@ private theorem boundaryFactorizationSupport_supported
 
 /-- Support-comparison witness between two formal LCEL instances.
 
-This extends the semantic comparison witness by packaging the current
+This extends the semantic comparison witness by packaging the defined
 proof-carrying substrate support records on both sides together with
 equivalence data for their `supported` propositions. -/
 structure LCELSupportComparisonWitness (L₁ L₂ : FormalLCELInstance)
@@ -804,7 +783,7 @@ private theorem godel_benchmark_semanticReimportTransferSupport_equivalent :
     (ReimportReversibilitySupport.supportsSemanticTransfer
       benchmarkTransportReimportReversibilitySupport)
 
-/-- Honest comparison witness between the canonical Gödel-side and
+/-- scope-qualified comparison witness between the canonical Gödel-side and
 benchmark/DP-side LCEL instances. -/
 def godel_benchmark_lcelComparisonWitness :
     LCELComparisonWitness godel1931LCELInstance benchmarkTransportLCELInstance where
@@ -814,7 +793,7 @@ def godel_benchmark_lcelComparisonWitness :
 
 /-- Stronger semantic comparison witness between the canonical Gödel-side and
 benchmark/DP-side LCEL instances. This packages both slot parallelism and the
-current theorem-backed semantic support surface used by the LCEL substrate
+defined theorem-backed semantic support surface used by the LCEL substrate
 packages. -/
 def godel_benchmark_lcelSemanticComparisonWitness :
     LCELSemanticComparisonWitness
@@ -826,7 +805,7 @@ def godel_benchmark_lcelSemanticComparisonWitness :
   reimportTransferSupportEquivalent :=
     godel_benchmark_semanticReimportTransferSupport_equivalent
 
-/-- Strongest current comparison witness between the canonical Gödel-side and
+/-- specified defined comparison witness between the canonical Gödel-side and
 benchmark-side LCEL instances. This packages slot-level comparison, semantic
 support comparison, and the proof-carrying substrate support records on both
 sides. -/
@@ -861,8 +840,8 @@ def godel_benchmark_lcelSupportComparisonWitness :
     (boundaryFactorizationSupport_supported
       benchmarkTransportBoundaryFactorizationSupport)
 
-/-- The canonical LCEL slot profiles are stagewise equivalent in the current
-artifact-facing sense. -/
+/-- The canonical LCEL slot profiles are stagewise equivalent in the defined
+public sense. -/
 theorem godel_benchmark_lcel_stagewise_slots :
     StagewiseLCELEquivalent
       godel1931LCELInstance.toSlotProfile
@@ -883,7 +862,7 @@ theorem benchmark_to_godel_lcel_realization :
       RealizesLCELSchema godel1931LCELInstance.toSlotProfile :=
   godel_benchmark_lcelComparisonWitness.symm.transports_realization
 
-/-- The current semantic-support reading of LCEL base reversibility is
+/-- The defined semantic-support reading of LCEL base reversibility is
 clausewise equivalent on the canonical Gödel-side and benchmark-side
 instances. -/
 theorem godel_benchmark_lcel_baseReversible_equivalent :
@@ -891,7 +870,7 @@ theorem godel_benchmark_lcel_baseReversible_equivalent :
       ↔ benchmarkTransportLCELReversibilityAsymmetry.baseReversible := by
   simpa using godel_benchmark_semanticBaseLayerSupport_equivalent
 
-/-- The current semantic-support reading of LCEL license irreversibility is
+/-- The defined semantic-support reading of LCEL license irreversibility is
 clausewise equivalent on the canonical Gödel-side and benchmark-side
 instances. -/
 theorem godel_benchmark_lcel_licenseIrreversible_equivalent :
@@ -899,7 +878,7 @@ theorem godel_benchmark_lcel_licenseIrreversible_equivalent :
       ↔ benchmarkTransportLCELReversibilityAsymmetry.licenseIrreversible := by
   simpa using godel_benchmark_semanticLicenseTransferSupport_equivalent
 
-/-- The current semantic-support reading of LCEL reimport reversibility is
+/-- The defined semantic-support reading of LCEL reimport reversibility is
 clausewise equivalent on the canonical Gödel-side and benchmark-side
 instances. -/
 theorem godel_benchmark_lcel_reimportReversible_equivalent :
@@ -907,7 +886,7 @@ theorem godel_benchmark_lcel_reimportReversible_equivalent :
       ↔ benchmarkTransportLCELReversibilityAsymmetry.reimportReversibleOnReimportClass := by
   simpa using godel_benchmark_semanticReimportTransferSupport_equivalent
 
-/-- The current semantic-support reading of the reversible LCEL projection is
+/-- The defined semantic-support reading of the reversible LCEL projection is
 clausewise equivalent on the canonical Gödel-side and benchmark-side
 instances. -/
 theorem godel_benchmark_lcel_reversibleProjection_equivalent :
@@ -915,7 +894,7 @@ theorem godel_benchmark_lcel_reversibleProjection_equivalent :
       ↔ benchmarkTransportLCELBoundaryFactorization.hasReversibleProjection := by
   simpa using godel_benchmark_semanticReimportTransferSupport_equivalent
 
-/-- The current semantic-support reading of the irreversible LCEL quotient is
+/-- The defined semantic-support reading of the irreversible LCEL quotient is
 clausewise equivalent on the canonical Gödel-side and benchmark-side
 instances. -/
 theorem godel_benchmark_lcel_irreversibleQuotient_equivalent :
@@ -923,7 +902,7 @@ theorem godel_benchmark_lcel_irreversibleQuotient_equivalent :
       ↔ benchmarkTransportLCELBoundaryFactorization.hasIrreversibleQuotient := by
   simpa using godel_benchmark_semanticLicenseTransferSupport_equivalent
 
-/-- The current semantic-support reading of LCEL boundary sensitivity is
+/-- The defined semantic-support reading of LCEL boundary sensitivity is
 clausewise equivalent on the canonical Gödel-side and benchmark-side
 instances. -/
 theorem godel_benchmark_lcel_boundarySensitivity_equivalent :
@@ -932,7 +911,7 @@ theorem godel_benchmark_lcel_boundarySensitivity_equivalent :
   simpa using godel_benchmark_semanticLicenseTransferSupport_equivalent
 
 /-- Rebuild the benchmark-side LCEL reversibility-asymmetry package by
-transporting the current semantic support surface from the Gödel side across the
+transporting the defined semantic support surface from the Gödel side across the
 stronger semantic comparison witness. -/
 def godel_to_benchmark_lcelReversibilityAsymmetry_via_semanticComparison :
     LCELReversibilityAsymmetry benchmarkTransportLCELInstance :=
@@ -942,7 +921,7 @@ def godel_to_benchmark_lcelReversibilityAsymmetry_via_semanticComparison :
     godel1931_semanticReimportTransferSupport
 
 /-- Rebuild the Gödel-side LCEL reversibility-asymmetry package by transporting
-the current semantic support surface from the benchmark side across the stronger
+the defined semantic support surface from the benchmark side across the stronger
 semantic comparison witness. -/
 def benchmark_to_godel_lcelReversibilityAsymmetry_via_semanticComparison :
     LCELReversibilityAsymmetry godel1931LCELInstance :=
@@ -952,7 +931,7 @@ def benchmark_to_godel_lcelReversibilityAsymmetry_via_semanticComparison :
     benchmarkTransport_semanticReimportTransferSupport
 
 /-- Rebuild the benchmark-side LCEL boundary-factorization package by
-transporting the current semantic support surface from the Gödel side across the
+transporting the defined semantic support surface from the Gödel side across the
 stronger semantic comparison witness. -/
 def godel_to_benchmark_lcelBoundaryFactorization_via_semanticComparison :
     LCELBoundaryFactorization benchmarkTransportLCELInstance :=
@@ -961,7 +940,7 @@ def godel_to_benchmark_lcelBoundaryFactorization_via_semanticComparison :
     godel1931_semanticLicenseTransferSupport
 
 /-- Rebuild the Gödel-side LCEL boundary-factorization package by transporting
-the current semantic support surface from the benchmark side across the stronger
+the defined semantic support surface from the benchmark side across the stronger
 semantic comparison witness. -/
 def benchmark_to_godel_lcelBoundaryFactorization_via_semanticComparison :
     LCELBoundaryFactorization godel1931LCELInstance :=
@@ -997,7 +976,7 @@ def benchmark_to_godel_lcelBoundaryFactorizationFromSupport_via_semanticComparis
     LCELBoundaryFactorization godel1931LCELInstance :=
   godel_benchmark_lcelSupportComparisonWitness.transports_boundaryFactorizationFromTargetSupport
 
-/-- Honest comparison witness between the canonical Gödel-side and the native
+/-- scope-qualified comparison witness between the canonical Gödel-side and the native
 DP/emitter-side LCEL instances. -/
 private theorem godel_dpEmitter_comparison_stagewise_equivalent :
     StagewiseEquivalent
@@ -1048,7 +1027,7 @@ private theorem godel_dpEmitter_semanticReimportTransferSupport_equivalent :
     (ReimportReversibilitySupport.supportsSemanticTransfer
       dpEmitterReimportReversibilitySupport)
 
-/-- Honest comparison witness between the canonical Gödel-side and the native
+/-- scope-qualified comparison witness between the canonical Gödel-side and the native
 DP/emitter-side LCEL instances. -/
 def godel_dpEmitter_lcelComparisonWitness :
     LCELComparisonWitness godel1931LCELInstance dpEmitterLCELInstance where
@@ -1068,7 +1047,7 @@ def godel_dpEmitter_lcelSemanticComparisonWitness :
   reimportTransferSupportEquivalent :=
     godel_dpEmitter_semanticReimportTransferSupport_equivalent
 
-/-- Strongest current comparison witness between the canonical Gödel-side and
+/-- specified defined comparison witness between the canonical Gödel-side and
 native DP/emitter-side LCEL instances. This packages slot-level comparison,
 semantic support comparison, and the proof-carrying substrate support records on
 both sides. -/
@@ -1104,7 +1083,7 @@ def godel_dpEmitter_lcelSupportComparisonWitness :
       dpEmitterBoundaryFactorizationSupport)
 
 /-- The canonical Gödel-side and native DP/emitter-side LCEL slot profiles are
-stagewise equivalent in the current artifact-facing sense. -/
+stagewise equivalent in the defined public sense. -/
 theorem godel_dpEmitter_lcel_stagewise_slots :
     StagewiseLCELEquivalent
       godel1931LCELInstance.toSlotProfile
@@ -1125,7 +1104,7 @@ theorem dpEmitter_to_godel_lcel_realization :
       RealizesLCELSchema godel1931LCELInstance.toSlotProfile :=
   godel_dpEmitter_lcelComparisonWitness.symm.transports_realization
 
-/-- The current semantic-support reading of LCEL base reversibility is
+/-- The defined semantic-support reading of LCEL base reversibility is
 clausewise equivalent on the canonical Gödel-side and native DP/emitter-side
 instances. -/
 theorem godel_dpEmitter_lcel_baseReversible_equivalent :
@@ -1133,7 +1112,7 @@ theorem godel_dpEmitter_lcel_baseReversible_equivalent :
       ↔ dpEmitterLCELReversibilityAsymmetry.baseReversible := by
   simpa using godel_dpEmitter_semanticBaseLayerSupport_equivalent
 
-/-- The current semantic-support reading of LCEL license irreversibility is
+/-- The defined semantic-support reading of LCEL license irreversibility is
 clausewise equivalent on the canonical Gödel-side and native DP/emitter-side
 instances. -/
 theorem godel_dpEmitter_lcel_licenseIrreversible_equivalent :
@@ -1141,7 +1120,7 @@ theorem godel_dpEmitter_lcel_licenseIrreversible_equivalent :
       ↔ dpEmitterLCELReversibilityAsymmetry.licenseIrreversible := by
   simpa using godel_dpEmitter_semanticLicenseTransferSupport_equivalent
 
-/-- The current semantic-support reading of LCEL reimport reversibility is
+/-- The defined semantic-support reading of LCEL reimport reversibility is
 clausewise equivalent on the canonical Gödel-side and native DP/emitter-side
 instances. -/
 theorem godel_dpEmitter_lcel_reimportReversible_equivalent :
@@ -1149,7 +1128,7 @@ theorem godel_dpEmitter_lcel_reimportReversible_equivalent :
       ↔ dpEmitterLCELReversibilityAsymmetry.reimportReversibleOnReimportClass := by
   simpa using godel_dpEmitter_semanticReimportTransferSupport_equivalent
 
-/-- The current semantic-support reading of the reversible LCEL projection is
+/-- The defined semantic-support reading of the reversible LCEL projection is
 clausewise equivalent on the canonical Gödel-side and native DP/emitter-side
 instances. -/
 theorem godel_dpEmitter_lcel_reversibleProjection_equivalent :
@@ -1157,7 +1136,7 @@ theorem godel_dpEmitter_lcel_reversibleProjection_equivalent :
       ↔ dpEmitterLCELBoundaryFactorization.hasReversibleProjection := by
   simpa using godel_dpEmitter_semanticReimportTransferSupport_equivalent
 
-/-- The current semantic-support reading of the irreversible LCEL quotient is
+/-- The defined semantic-support reading of the irreversible LCEL quotient is
 clausewise equivalent on the canonical Gödel-side and native DP/emitter-side
 instances. -/
 theorem godel_dpEmitter_lcel_irreversibleQuotient_equivalent :
@@ -1165,7 +1144,7 @@ theorem godel_dpEmitter_lcel_irreversibleQuotient_equivalent :
       ↔ dpEmitterLCELBoundaryFactorization.hasIrreversibleQuotient := by
   simpa using godel_dpEmitter_semanticLicenseTransferSupport_equivalent
 
-/-- The current semantic-support reading of LCEL boundary sensitivity is
+/-- The defined semantic-support reading of LCEL boundary sensitivity is
 clausewise equivalent on the canonical Gödel-side and native DP/emitter-side
 instances. -/
 theorem godel_dpEmitter_lcel_boundarySensitivity_equivalent :
@@ -1174,7 +1153,7 @@ theorem godel_dpEmitter_lcel_boundarySensitivity_equivalent :
   simpa using godel_dpEmitter_semanticLicenseTransferSupport_equivalent
 
 /-- Rebuild the native DP/emitter-side LCEL reversibility-asymmetry package by
-transporting the current semantic support surface from the Gödel side across the
+transporting the defined semantic support surface from the Gödel side across the
 stronger semantic comparison witness. -/
 def godel_to_dpEmitter_lcelReversibilityAsymmetry_via_semanticComparison :
     LCELReversibilityAsymmetry dpEmitterLCELInstance :=
@@ -1184,7 +1163,7 @@ def godel_to_dpEmitter_lcelReversibilityAsymmetry_via_semanticComparison :
     godel1931_semanticReimportTransferSupport
 
 /-- Rebuild the Gödel-side LCEL reversibility-asymmetry package by transporting
-the current semantic support surface from the native DP/emitter side across the
+the defined semantic support surface from the native DP/emitter side across the
 stronger semantic comparison witness. -/
 def dpEmitter_to_godel_lcelReversibilityAsymmetry_via_semanticComparison :
     LCELReversibilityAsymmetry godel1931LCELInstance :=
@@ -1194,7 +1173,7 @@ def dpEmitter_to_godel_lcelReversibilityAsymmetry_via_semanticComparison :
     dpEmitter_semanticReimportTransferSupport
 
 /-- Rebuild the native DP/emitter-side LCEL boundary-factorization package by
-transporting the current semantic support surface from the Gödel side across the
+transporting the defined semantic support surface from the Gödel side across the
 stronger semantic comparison witness. -/
 def godel_to_dpEmitter_lcelBoundaryFactorization_via_semanticComparison :
     LCELBoundaryFactorization dpEmitterLCELInstance :=
@@ -1203,7 +1182,7 @@ def godel_to_dpEmitter_lcelBoundaryFactorization_via_semanticComparison :
     godel1931_semanticLicenseTransferSupport
 
 /-- Rebuild the Gödel-side LCEL boundary-factorization package by transporting
-the current semantic support surface from the native DP/emitter side across the
+the defined semantic support surface from the native DP/emitter side across the
 stronger semantic comparison witness. -/
 def dpEmitter_to_godel_lcelBoundaryFactorization_via_semanticComparison :
     LCELBoundaryFactorization godel1931LCELInstance :=
@@ -1245,7 +1224,7 @@ def godel_dp_lcelQuasiFunctor :
     LCELQuasiFunctor godel1931LCELInstance dpEmitterLCELInstance :=
   godel_dpEmitter_lcelComparisonWitness.toQuasiFunctor
 
-/-- Artifact-facing structural identity for the Gödel-side and native
+/-- public structural identity for the Gödel-side and native
 DP/emitter-side canonical LCEL instances. -/
 theorem godel_dp_lcel_structural_identity :
     Nonempty

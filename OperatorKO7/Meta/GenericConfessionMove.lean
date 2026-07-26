@@ -1,19 +1,19 @@
 /-!
-# Generic Confession Move
+This module defines an abstract confession-move interface together with refinement and
+mutual-refinement relations. Every result is conditional on the fields supplied by an
+inhabitant; route coverage requires separate instances.
 
-This module packages the common theorem boundary shared by confession routes.
-It does not claim that every required bridge has already been constructed in
-the current artifact. Instead it gives one honest parametric carrier together
-with structural refinement and equivalence relations that later route-specific
-or information-theoretic wrappers can use.
+
+
+
 -/
 
 namespace OperatorKO7.Meta.GenericConfessionMove
 
 universe u v w z
 
-/-- A generic confession move records the common structure shared by all
-confession-style reductions at the theorem boundary. -/
+/-- Data record whose requirements are the fields displayed below.
+-/
 structure GenericConfessionMove
     (X : Type u)
     (P : X → Prop)
@@ -35,8 +35,8 @@ namespace GenericConfessionMove
 
 variable {X : Type u} {P : X → Prop} {License : Type v}
 
-/-- The built-in certificate for a quotient value certifies the residual
-obstruction whenever the verifier accepts it. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem certificate_projects_residual
   (M : GenericConfessionMove X P License)
     {q : M.Quotient}
@@ -44,7 +44,7 @@ theorem certificate_projects_residual
     M.residualObstruction q :=
   M.verifier_sound q h
 
-/-- Residual obstruction implies source-barrier membership. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem residual_projects_sourceBarrier
   (M : GenericConfessionMove X P License)
     {x : X}
@@ -52,7 +52,7 @@ theorem residual_projects_sourceBarrier
     M.sourceBarrier x :=
   M.barrier_covers_residual x h
 
-/-- Residual obstruction is sufficient for the underlying verdict predicate. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem residual_implies_verdict
   (M : GenericConfessionMove X P License)
     {x : X}
@@ -60,7 +60,7 @@ theorem residual_implies_verdict
     P x :=
   M.soundness x h
 
-/-- Computational witness for one refinement factorization. -/
+/-- Data record whose requirements are the fields displayed below. -/
 structure RefinementWitness
   {License1 : Type v} {License2 : Type w}
   (M₁ : GenericConfessionMove X P License1)
@@ -68,16 +68,16 @@ structure RefinementWitness
   factor : M₁.Quotient → M₂.Quotient
   commutes : ∀ x, factor (M₁.projection x) = M₂.projection x
 
-/-- A confession move `M₁` refines `M₂` when `M₂` factors through `M₁`'s
-projection. This means `M₁` retains at least as much quotient-level structure
-as `M₂`. -/
+/-- Abbreviation for the displayed type.
+
+-/
 abbrev Refines
   {License1 : Type v} {License2 : Type w}
   (M₁ : GenericConfessionMove X P License1)
   (M₂ : GenericConfessionMove X P License2) : Prop :=
   Nonempty (RefinementWitness M₁ M₂)
 
-/-- A refinement commutes with the underlying projection on every source term. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem RefinementWitness.projects_projection
   {License1 : Type v} {License2 : Type w}
   {M₁ : GenericConfessionMove X P License1}
@@ -86,8 +86,8 @@ theorem RefinementWitness.projects_projection
     h.factor (M₁.projection x) = M₂.projection x :=
   h.commutes x
 
-/-- A proposition-level refinement commutes with the underlying projection on
-every source term. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem Refines.projects_projection
   {License1 : Type v} {License2 : Type w}
   {M₁ : GenericConfessionMove X P License1}
@@ -98,7 +98,7 @@ theorem Refines.projects_projection
   rcases h with ⟨h⟩
   exact ⟨h.factor, h.projects_projection x⟩
 
-/-- Every confession move refines itself. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem Refines.refl
   {License1 : Type v}
   (M : GenericConfessionMove X P License1) : Refines M M := by
@@ -109,7 +109,7 @@ theorem Refines.refl
       rfl
   }⟩
 
-/-- Refinement is transitive. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem Refines.trans
   {License1 : Type v} {License2 : Type w} {License3 : Type z}
   {M₁ : GenericConfessionMove X P License1}
@@ -131,7 +131,7 @@ theorem Refines.trans
         _ = M₃.projection x := h₂₃.commutes x
   }⟩
 
-/-- Computational witness for H-equivalence. -/
+/-- Data record whose requirements are the fields displayed below. -/
 structure HEquivalenceWitness
   {License1 : Type v} {License2 : Type w}
   (M₁ : GenericConfessionMove X P License1)
@@ -139,14 +139,14 @@ structure HEquivalenceWitness
   forward : RefinementWitness M₁ M₂
   backward : RefinementWitness M₂ M₁
 
-/-- Two confession moves are H-equivalent when they refine each other. -/
+/-- Abbreviation for the displayed type. -/
 abbrev HEquivalent
   {License1 : Type v} {License2 : Type w}
   (M₁ : GenericConfessionMove X P License1)
   (M₂ : GenericConfessionMove X P License2) : Prop :=
   Nonempty (HEquivalenceWitness M₁ M₂)
 
-/-- H-equivalence is reflexive. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem HEquivalent.refl
   {License1 : Type v}
   (M : GenericConfessionMove X P License1) : HEquivalent M M := by
@@ -165,7 +165,7 @@ theorem HEquivalent.refl
     }
   }⟩
 
-/-- H-equivalence is symmetric. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem HEquivalent.symm
   {License1 : Type v} {License2 : Type w}
   {M₁ : GenericConfessionMove X P License1}
@@ -177,7 +177,7 @@ theorem HEquivalent.symm
     backward := h.forward
   }⟩
 
-/-- H-equivalence is transitive. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem HEquivalent.trans
   {License1 : Type v} {License2 : Type w} {License3 : Type z}
   {M₁ : GenericConfessionMove X P License1}
@@ -192,8 +192,8 @@ theorem HEquivalent.trans
     backward := Classical.choice (Refines.trans ⟨h₂₃.backward⟩ ⟨h₁₂.backward⟩)
   }⟩
 
-/-- If a confession move refines another, equal source projections for the
-first move force equal target projections for the second move. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem Refines.projection_eq_of_projection_eq
   {License1 : Type v} {License2 : Type w}
   {M₁ : GenericConfessionMove X P License1}
@@ -210,8 +210,8 @@ theorem Refines.projection_eq_of_projection_eq
     _ = h.factor (M₁.projection x') := by simp [hp]
     _ = M₂.projection x' := h.commutes x'
 
-/-- Verdict sufficiency can be transported across a refinement using equal
-source projections in the refining move. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem Refines.transport_verdict
   {License1 : Type v} {License2 : Type w}
   {M₁ : GenericConfessionMove X P License1}

@@ -3,12 +3,11 @@ import OperatorKO7.Meta.Impossibility_Lemmas
 /-!
 # Conjecture Boundary (Theorem-Level No-Go Statements)
 
-This module collects theorem-level barriers that are already justified by the
-current KO7 artifact.
+This module collects theorem-level barriers proved by the KO7 artifact.
 
 The purpose is narrower:
-- record explicit "no-go" theorems for concrete internal method families;
-- keep these boundaries importable from one place for audit/review.
+- record explicit impossibility theorems for concrete internal method families;
+- keep these boundaries importable from one module.
 -/
 
 namespace OperatorKO7.MetaConjectureBoundary
@@ -171,8 +170,8 @@ theorem no_global_step_orientation_flag :
 
 /-! ## Strict increase witness (rec_succ makes additive measures grow) -/
 
-/-- When `s` is non-void, `simpleSize` strictly INCREASES across `rec_succ`.
-The duplication barrier is not just "no drop" - the measure goes UP. -/
+/-- Under the stated lower bound on `s`, `simpleSize` strictly increases across
+`rec_succ`. -/
 theorem rec_succ_size_strictly_increases (b s n : Trace)
     (hs : UncheckedRecursionFailure.simpleSize s ≥ 1) :
     UncheckedRecursionFailure.simpleSize (app s (recΔ b s n)) >
@@ -198,10 +197,9 @@ theorem no_global_step_orientation_kappa_strictMono
 
 /-! ## Dual-barrier theorem (rec_succ vs merge_void are complementary) -/
 
-/-- The duplication barrier and the flag barrier target DIFFERENT rules.
-Any single Nat-valued measure that handles rec_succ (which requires insensitivity
-to duplication of `s`) is blocked by merge_void (which can raise flags), and vice
-versa. This theorem witnesses both barriers simultaneously on full `Step`. -/
+/-- Two concrete measures fail on different full-`Step` rules: `simpleSize` does not
+decrease on `rec_succ`, while `deltaFlagTop` increases on `merge_void_left`. This
+conjunction records both witnesses; it does not quantify over arbitrary measures. -/
 theorem dual_barrier_rec_succ_and_merge_void :
     -- (1) Additive size fails on rec_succ:
     (∀ (b s n : Trace),
@@ -215,11 +213,10 @@ theorem dual_barrier_rec_succ_and_merge_void :
   · exact UncheckedRecursionFailure.rec_succ_additive_barrier
   · simp [FlagFailure.deltaFlagTop]
 
-/-! ## Structural depth barrier (#6: ties on collapsing rules)
+/-! ## Structural depth barrier
 
-A nesting-depth measure that does NOT count `merge` as a level ties on
-`merge_cancel`. This formalizes failure mode #6 from the paper:
-"Structural depth: Ties on collapsing rules (merge_cancel)." -/
+A nesting-depth measure that does not count `merge` as a level ties on
+`merge_cancel`. -/
 
 /-- Nesting depth where `merge` does not add a level. -/
 @[simp] def nestingDepth : Trace → Nat
@@ -231,9 +228,8 @@ A nesting-depth measure that does NOT count `merge` as a level ties on
   | .recΔ b s n => max (max (nestingDepth b) (nestingDepth s)) (nestingDepth n) + 1
   | .eqW a b => max (nestingDepth a) (nestingDepth b) + 1
 
-/-- `nestingDepth` ties on `merge_cancel`: `nestingDepth(merge t t) = nestingDepth(t)`.
-Since `merge t t → t`, orientation requires `nestingDepth(t) < nestingDepth(merge t t)`,
-which is `nestingDepth(t) < nestingDepth(t)` - false. -/
+/-- `nestingDepth` ties on `merge_cancel`: `nestingDepth (merge t t) = nestingDepth t`.
+Since `merge t t → t`, strict orientation would require `nestingDepth t < nestingDepth t`. -/
 theorem nestingDepth_merge_cancel_tie (t : Trace) :
     nestingDepth (merge t t) = nestingDepth t := by
   simp
@@ -246,22 +242,17 @@ theorem no_global_step_orientation_nestingDepth :
   have hlt := h hstep
   simp [nestingDepth] at hlt
 
-/-! ## Polynomial interpretation barrier (#3: Ladder Paradox)
+/-! ## A multiplicative polynomial schema that ties on `rec_succ`
 
-Polynomial measures using multiplicative coefficients at `recΔ` (e.g.,
-`M(recΔ b s n) = M(b) + M(s) * M(n)`) tie on `rec_succ` regardless of
-base weight. With additive `app`, the duplication of `s` is exactly
-cancelled by the multiplication:
+The concrete schema below assigns additive interpretations to `app` and a
+multiplicative interpretation to `recΔ`:
 
   M(recΔ b s (delta n)) = M(b) + M(s)*(M(n)+1) = M(b) + M(s)*M(n) + M(s)
   M(app s (recΔ b s n)) = M(s) + M(b) + M(s)*M(n)
 
-These are equal by commutativity of addition. Any polynomial that DOES
-break this tie requires importing external constants (e.g., `M(void) = 2`)
-and node-weight arithmetic - this is the Ladder Paradox (Gate F.4 in the
-Strict Execution Contract): the termination proof works only because it
-maps to external arithmetic we already trust, not because of any
-internally definable property. -/
+These values are equal by arithmetic normalization for every base weight `w`.
+The theorem concerns this `polyMul` schema only; it is not a no-go theorem for
+all polynomial interpretations. -/
 
 /-- Polynomial measure with multiplicative `recΔ`, parameterized by base weight `w`. -/
 @[simp] def polyMul (w : Nat) : Trace → Nat
@@ -273,8 +264,8 @@ internally definable property. -/
   | .recΔ b s n => polyMul w b + polyMul w s * polyMul w n
   | .eqW a b => polyMul w a + polyMul w b
 
-/-- Polynomial with multiplicative `recΔ` TIES on `rec_succ` for ANY base weight.
-This is an exact equality, not just a non-strict inequality. -/
+/-- `polyMul` ties on `rec_succ` for every base weight. This is an exact equality,
+not merely a non-strict inequality. -/
 theorem poly_mul_ties_rec_succ (w : Nat) (b s n : Trace) :
     polyMul w (app s (recΔ b s n)) =
     polyMul w (recΔ b s (delta n)) := by
@@ -291,17 +282,12 @@ theorem no_global_step_orientation_polyMul (w : Nat) :
   have heq := poly_mul_ties_rec_succ w void void void
   omega
 
-/-! ## Naive multiset barrier (#7: duplication inflates element count)
+/-! ## Unit-node cardinality barrier
 
-A naive multiset measure collects subterm weights into a bag and compares
-by sum (or cardinality). Unlike the Dershowitz-Manna ordering (which
-permits replacing one large element with multiple SMALLER elements),
-naive comparison has no mechanism to absorb duplication. When `rec_succ`
-duplicates `s`, the bag gains an extra copy of `s`'s weight, and the
-sum/cardinality strictly increases.
-
-This formalizes failure mode #7 from the paper:
-"Naive multiset orderings: Fail without DM-specific properties." -/
+`nodeCount` models the cardinality of a bag in which every constructor has unit
+weight. It is not a formalization of the Dershowitz-Manna multiset order. Under
+`rec_succ`, the duplicated `s` contributes an additional `nodeCount s`, so this
+cardinality measure cannot strictly decrease. -/
 
 /-- Node count: number of constructor applications in the term.
 This represents a naive multiset measure where every node has weight 1
@@ -322,7 +308,7 @@ theorem nodeCount_rec_succ_barrier (b s n : Trace) :
   simp [nodeCount]
   omega
 
-/-- With non-trivial `s`, node count strictly INCREASES on `rec_succ`. -/
+/-- Under the stated lower bound on `s`, node count strictly increases on `rec_succ`. -/
 theorem nodeCount_rec_succ_increases (b s n : Trace)
     (hs : nodeCount s ≥ 2) :
     nodeCount (app s (recΔ b s n)) > nodeCount (recΔ b s (delta n)) := by
@@ -339,25 +325,19 @@ theorem no_global_step_orientation_nodeCount :
   have hge := nodeCount_rec_succ_barrier void void void
   omega
 
-/-! ## The Boundary Between Code and Meta-Theory (Path Orders)
+/-! ## Isolated path-order components
 
 Scope note: this file does not show that full Lexicographic Path Ordering (LPO)
 or Multiset Path Ordering (MPO) fails to orient the KO7 calculus. Both full LPO and
 full MPO *succeed* in orienting the unrestricted system: LPO is CeTA-certified (external),
 and MPO orientation is Lean-mechanized in `Meta/MPO_FullStep.lean` (`mpo_orients_step`).
 
-Instead, the following two theorems demonstrate that the isolated *components* of path
-orders (pure head precedence and linear KBO-style weights) fail independently.
-Because these simple structural methods fail, any successful path order is
-mathematically forced to rely on the universal Subterm Property (f(t) > t).
-
-The paper argues that importing the Subterm Property (and by extension,
-Kruskal's Tree Theorem) goes beyond the "no imported axioms" structural
-constraint of KO7 (§3). The code shows the *necessity* of the
-external axiom, while the paper critiques its *validity*.
+The following theorems instead isolate two weaker components: a pure head-rank
+measure and a precedence-free additive weight. Their failure does not establish
+a necessity theorem for any particular feature of full LPO or MPO.
 -/
 
-/-! ## Pure Precedence Barrier (#7: Precedence conflict on collapsing rules)
+/-! ## Pure head-precedence barrier
 
 A measure that relies strictly on the precedence of the head constructor
 cannot orient collapsing rules like `merge_cancel`, because the RHS can
@@ -388,12 +368,11 @@ theorem no_global_step_orientation_headPrecedence (rank : OpHead → Nat) :
   revert hlt
   simp [headPrecedenceMeasure, getHead]
 
-/-! ## Linear Weight Barrier (KBO-style without precedence)
+/-! ## Linear weight barrier without precedence
 
-A purely additive weight function (where each constructor adds a fixed constant
-to the sum of its arguments' weights) cannot globally orient `Step`.
-This formalizes the failure of basic Knuth-Bendix Order (KBO) weight functions
-on the duplication in `rec_succ`.
+A purely additive weight function, where each constructor adds a fixed constant
+to the sum of its arguments' weights, cannot globally orient `Step`. This result
+concerns the isolated additive-weight component, not full Knuth-Bendix Order.
 -/
 
 def linearWeight (c_void c_delta c_int c_merge c_app c_rec c_eq : Nat) : Trace → Nat
@@ -430,7 +409,7 @@ of `s` in `rec_succ` can strictly increase the overall depth of the term.
   | .recΔ b s n => max (max (treeDepth b) (treeDepth s)) (treeDepth n) + 1
   | .eqW a b => max (treeDepth a) (treeDepth b) + 1
 
-/-- Standard tree depth strictly INCREASES on `rec_succ` when `s` is deep. -/
+/-- Standard tree depth strictly increases on `rec_succ` under the stated depth condition. -/
 theorem treeDepth_rec_succ_increases (b s n : Trace)
     (hs : treeDepth s > treeDepth n + 1) :
     treeDepth (app s (recΔ b s n)) > treeDepth (recΔ b s (delta n)) := by

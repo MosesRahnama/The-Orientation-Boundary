@@ -134,8 +134,9 @@ end KO7RDRSTerm
 /-- KO7 viewed as a right-duplicating recursor schema, with role-aware
 payload counting. The distinguished payload `sCoord` (the KO7 step
 argument) occurs exactly once on the lhs and exactly twice on the rhs.
-`firesOnClosedTerms` is realized by the projection identity into the
-live KO7 kernel `Step.R_rec_succ` rule (see `ko7RDRS_projects_to_kernel_step`). -/
+The schema carries a declared closed-firability marker. The separate theorem
+`ko7RDRS_projects_to_kernel_step` supplies the operational connection to the
+live KO7 kernel `Step.R_rec_succ` rule. -/
 def ko7RDRS : RightDuplicatingRecursorSchema where
   Term := KO7RDRSTerm
   PayloadCoord := KO7RDRSTerm.Coord
@@ -148,7 +149,7 @@ def ko7RDRS : RightDuplicatingRecursorSchema where
   lhs_has_payload := KO7RDRSTerm.lhs_s_count_eq_one
   rhs_duplicates_payload := by
     rw [KO7RDRSTerm.rhs_s_count_eq_two]; decide
-  firesOnClosedTerms := True
+  declaredClosedFirability := True
 
 /-- Per-instance smoke theorem: the KO7 RDRS adapter has positive
 duplication gap. -/

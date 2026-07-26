@@ -1,22 +1,20 @@
 import OperatorKO7.Kernel
 
 /-!
-# Sigma Free Algebra over the seven-arity KO7 signature
+# Sigma term algebra over the KO7 signature
 
-This module builds a custom free-algebra infrastructure for the seven-arity KO7
-signature plus the two predicate-variable slots `varA` and `varB`. The
-infrastructure supports the unconditional version of
-`disequality_not_sigma_expressible` discharged in the sibling module
-`SyntacticNonDerivability.lean`.
+`SigmaTerm` mirrors the seven `Trace` constructors and adds the two
+distinguished leaves `varA` and `varB`. `evalSigma a b` replaces those leaves
+with the supplied terms and recursively preserves every constructor head.
+Because `a` and `b` are themselves `SigmaTerm` values, the result may still
+contain distinguished leaves.
 
 ## Signature
 
 The KO7 kernel `Trace` carries seven term constructors:
 `void`, `delta`, `integrate`, `merge`, `app`, `recDelta`, `eqW`.
-Sigma-expressible disequality predicates are two-argument predicates
-over closed `SigmaTerm`s; we mirror the seven kernel constructors
-and add two variable slots `varA` / `varB` so a Sigma-term can
-receive its two arguments under a substitution.
+The two distinguished leaves provide the input positions used by the
+two-argument Sigma expressions in `SyntacticNonDerivability.lean`.
 
 ## Substitution and the head-leaf classification
 
@@ -33,32 +31,16 @@ distinguishes three cases of `t`:
     in the same head constructor; in particular `evalSigma t a b`
     is never equal to `void` because constructors are disjoint.
 
-## Substitution-invariance induction principle
-
-The `evalSigma_induction` principle is a uniform induction over
-SigmaTerm structure that respects substitution: a property
-`P : SigmaTerm → Prop` that holds at the leaves and is preserved
-by every constructor holds at every term, and crucially the
-property `(λt. evalSigma t a b ≠ void)` is preserved by all
-non-leaf constructors. This is the lemma that closes the non-expressibility
-theorem unconditionally.
-
-## Closure Path
-
-This module goes one level below Mathlib's `FreeMagma` / `FreeMonoid`: it builds
-the seven-arity term tree directly as an inductive type. There is no Mathlib
-dependency outside the standard `OperatorKO7.Kernel` import.
-
-No `sorry`. No new `axiom`.
+`evalSigma_non_leaf_never_void` classifies terms by their outer constructor.
+`substitution_invariance` is the ordinary structural induction principle for
+`SigmaTerm`; despite its historical name, it does not mention `evalSigma` in
+its theorem statement.
 -/
 
 namespace OperatorKO7.Meta.SafeStep.SigmaFreeAlgebra
 
-/-- Closed terms over the KO7 seven-arity signature plus two
-predicate-variable slots `varA`, `varB`. Mirrors `OperatorKO7.Trace`
-constructor by constructor and adds the two variable slots; the
-substitution evaluator `evalSigma` consumes the two slots to produce
-a closed term in the SigmaTerm free algebra. -/
+/-- Terms over the KO7 signature with two distinguished leaves, `varA` and
+`varB`. -/
 inductive SigmaTerm : Type
   | void      : SigmaTerm
   | varA      : SigmaTerm
@@ -71,10 +53,9 @@ inductive SigmaTerm : Type
   | eqW       : SigmaTerm → SigmaTerm → SigmaTerm
   deriving DecidableEq, Repr
 
-/-- The evaluator that substitutes `a` for every `varA` and `b` for
-every `varB`. The result is a closed SigmaTerm built from the
-seven kernel constructors plus whatever leaf structure `a` and `b`
-carry. -/
+/-- Replace every `varA` with `a` and every `varB` with `b`, preserving all
+constructor heads. The supplied terms may themselves contain `varA` or
+`varB`. -/
 def evalSigma (a b : SigmaTerm) : SigmaTerm → SigmaTerm
   | SigmaTerm.void                 => SigmaTerm.void
   | SigmaTerm.varA                 => a
@@ -112,8 +93,7 @@ outermost constructor of `t` is one of the six non-leaf
 constructors (delta, integrate, merge, app, recDelta, eqW), then
 the evaluator's result has the same outermost constructor and is
 therefore distinct from `void` by the disjointness of constructor
-heads in the inductive type. This is the substitution-invariance
-half of the non-expressibility proof. -/
+heads in the inductive type. -/
 theorem evalSigma_non_leaf_never_void
     (t : SigmaTerm) (h : ¬ isLeafForm t) (a b : SigmaTerm) :
     evalSigma a b t ≠ SigmaTerm.void := by
@@ -149,10 +129,7 @@ evaluates to its second argument. -/
 theorem evalSigma_varB (a b : SigmaTerm) :
     evalSigma a b SigmaTerm.varB = b := rfl
 
-/-- The structural-induction principle for SigmaTerm. Used by
-`SyntacticNonDerivability.lean` to discharge the unconditional
-non-expressibility theorem by case analysis on the outermost
-constructor of the candidate Sigma-term. -/
+/-- Structural induction for `SigmaTerm`, packaged as a theorem. -/
 theorem substitution_invariance
     (P : SigmaTerm → Prop)
     (h_void : P SigmaTerm.void)

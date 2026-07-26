@@ -9,7 +9,7 @@ corresponding `cichon` value.
 
 The relation here is intentionally exact. It does not yet allow arbitrary
 smaller descendants beneath the chosen fundamental-sequence approximation.
-That stronger abstraction is the remaining proof-development gap for a full
+That stronger abstraction is the remaining proof-engineering gap for a full
 Moser--Weiermann-style extraction on the KO7 relations.
 -/
 

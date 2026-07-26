@@ -1,11 +1,11 @@
 import OperatorKO7.Meta.SymbolicComparatorBarrier_Schema
 
 /-!
-# Explicit KBO-Style Impossibility Corollary: Schema Layer
+# KBO-style variable-condition obstruction
 
-Schema-facing naming layer over the symbolic variable-condition barrier.
-
-The KO7 trace-level bridge remains in `Meta/KBO_Impossible.lean`.
+This schema-facing layer aliases the symbolic comparator's variable-condition
+interface. Its two corollaries therefore cover that interface; the concrete
+KO7 trace specialization is stated in `Meta/KBO_Impossible.lean`.
 -/
 
 namespace OperatorKO7.KBOImpossible
@@ -16,12 +16,15 @@ open OperatorKO7.SymbolicComparatorBarrier
 It is just a symbolic comparator with the standard variable condition. -/
 abbrev KBOStyleOrder := VariableConditionOrder
 
-/-- No KBO-style order can orient the duplicating schema step. -/
+/-- A variable-condition comparator orienting the duplicating schema step yields
+a contradiction. -/
 theorem no_kbo_orients_dup_step (K : KBOStyleOrder) :
     ¬ K.gt dupSrc dupTgt :=
   not_orients_dup_rule K
 
-/-- No KBO-style order exists that orients the duplicating schema step. -/
+/-- Existence of a variable-condition comparator orienting the duplicating
+schema step yields a contradiction. Full KBO consequences require the
+trace-level adapter in `Meta/KBO_Impossible.lean`. -/
 theorem no_kbo_orients_ko7_rec_succ :
     ¬ ∃ K : KBOStyleOrder, K.gt dupSrc dupTgt :=
   no_symbolic_variable_condition_orients_dup_step

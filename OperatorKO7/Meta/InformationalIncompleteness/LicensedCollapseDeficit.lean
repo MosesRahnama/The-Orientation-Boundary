@@ -1,5 +1,6 @@
 import OperatorKO7.Meta.InformationalIncompleteness.ShannonFinite
 import OperatorKO7.Meta.SafeStep.BranchEntropy
+import OperatorKO7.Meta.Physics.ConfessionLandauerExact
 
 /-!
 # The unified licensed-collapse deficit (T1): both axes, one functional
@@ -24,7 +25,9 @@ license and zero after (`collapseDeficit_pos`, `licensed_residual_zero`).
 `boundary_collapse_unified` packages both as instances of the one functional: each has a strictly
 positive pre-license deficit collapsing to a determinate verdict with zero residual. The *magnitudes*
 can differ (the confluence load is a fixed bit, the termination carrier burden grows; that separation is
-`AxisGrowthSeparation`), but the *collapse* is the shared object.
+`AxisGrowthSeparation`), but the *collapse* is the shared object. The collapsed bit bears the Landauer
+floor on the `BoundaryOperator` carrier (`Physics.ConfessionLandauerSplit`); this module supplies its
+information-theoretic measure, the carrier supplies its thermodynamic cost.
 
 ## Claim typing (binding)
 * PROVEN: every theorem below (finite-alphabet Shannon entropy over the audited `ShannonFinite`
@@ -138,11 +141,29 @@ theorem confluence_collapse_matches_branch_entropy :
   ⟨OperatorKO7.Meta.SafeStep.BranchEntropy.branchEntropy_collapse_one_bit,
     confluence_collapseDeficit_eq_log_two⟩
 
+open OperatorKO7.Meta.Physics.LandauerHeatBound
+open OperatorKO7.Meta.Physics.ConfessionLandauerSplit
+open OperatorKO7.Meta.Physics.ConfessionLandauerExact
+
+/-- **The collapsed verdict bit bears the Landauer floor.** The confluence collapse deficit is exactly
+one bit, `log 2`, and the committed one-bit distinction record (the recursor confession event, which
+commits exactly one reliable bit) has Landauer floor exactly `kB * T * log 2`: the same `log 2` factor.
+The information-side collapse and the cost-side floor are one and the same bit. The physical-heat
+realization stays conditional on the C1 to C6 applicability package and the heat law
+(`ConfessionLandauerSplit`); this statement is about the defined floor functional and the verdict
+entropy, with no physical hypothesis. -/
+theorem confluence_collapse_bears_landauer_floor (kB T : ℝ) :
+    confluenceCollapse.collapseDeficit = Real.log 2
+      ∧ landauerLowerBound (recursorConfessionEvent 0) kB T = kB * T * Real.log 2 := by
+  refine ⟨confluence_collapseDeficit_eq_log_two, ?_⟩
+  rw [landauerLowerBound_eq_perBit_mul_bits, oneBit_reliableRecordBitCount, Nat.cast_one, mul_one]
+
 #print axioms H_uniformFin2
 #print axioms LicensedCollapse.collapseDeficit_pos
 #print axioms LicensedCollapse.licensed_residual_zero
 #print axioms boundary_collapse_unified
 #print axioms confluence_collapseDeficit_eq_log_two
 #print axioms confluence_collapse_matches_branch_entropy
+#print axioms confluence_collapse_bears_landauer_floor
 
 end OperatorKO7.Meta.InformationalIncompleteness.LicensedCollapseDeficit

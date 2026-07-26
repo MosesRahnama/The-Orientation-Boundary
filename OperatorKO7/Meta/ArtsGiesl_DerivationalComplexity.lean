@@ -3,22 +3,27 @@ import OperatorKO7.Meta.DependencyPairs_HeadView
 import Mathlib.Tactic
 
 /-!
-# Arts--Giesl Derivational Complexity
+# Arts-Giesl Derivational-Cost Accounting
 
-Finite-TRS-parametric cost layer for the paper-facing Arts--Giesl license story.
+Finite-TRS-parametric accounting records for a modeled dependency-pair soundness
+application.
 
 This module deliberately separates four levels:
 
-- a fixed-finite-TRS audit surface (`FixedFiniteTRS`);
-- a generic finite first-order TRS extraction-side pair-count bound;
-- a theorem-backed three-stage bound for one AG soundness application;
+- a fixed-finite-TRS metadata surface (`FixedFiniteTRS`);
+- a generic finite first-order TRS head-abstracted call-obligation count bound;
+- an additive three-stage bound conditional on supplied stage costs;
 - a metadata-only fallback theorem using an explicit pair-count witness.
 
-The resulting surface strengthens the old recursor-only theorem in two ways:
+The generic layer exposes two forms of arithmetic bookkeeping:
 
 - it gives a generic fixed-finite-TRS cost layer;
-- it now also derives the dependency-pair-count bound from the artifact's own
-  finite first-order extraction procedure, for finite symbol carriers.
+- it bounds the head-abstracted call obligations produced by the artifact's
+  finite first-order extraction engine when the symbol carrier is finite.
+
+The extraction count below records distinct defined call heads per rule and
+collapses repeated occurrences with the same head. External Arts-Giesl
+processor costs enter through supplied budget fields.
 -/
 
 namespace OperatorKO7.ArtsGieslDerivationalComplexity
@@ -26,8 +31,7 @@ namespace OperatorKO7.ArtsGieslDerivationalComplexity
 open OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem
 open OperatorKO7.DependencyPairsFragment
 
-/-- Fixed finite-TRS metadata used by the paper's Arts--Giesl derivational-cost
-proposition. -/
+/-- Abstract finite-TRS metadata used by the additive cost model. -/
 structure FixedFiniteTRS where
   ruleCount : Nat
   signatureSize : Nat
@@ -35,11 +39,11 @@ structure FixedFiniteTRS where
 
 namespace FixedFiniteTRS
 
-/-- Graph-construction contribution in the paper's cost audit. -/
+/-- Polynomial graph-construction budget stipulated by the cost model. -/
 def graphConstructionBound (R : FixedFiniteTRS) (constructionConstant : Nat) : Nat :=
   constructionConstant * R.ruleCount ^ 2 * R.signatureSize
 
-/-- One-application AG proof-length envelope on a fixed finite TRS. -/
+/-- Sum of the graph, base-order, and soundness budget terms. -/
 def singleApplicationBound (R : FixedFiniteTRS)
     (constructionConstant : Nat)
     (baseOrderProofLength : Nat → Nat)
@@ -48,8 +52,7 @@ def singleApplicationBound (R : FixedFiniteTRS)
     + baseOrderProofLength R.dependencyPairCount
     + soundnessConstant
 
-/-- Total certificate envelope after appending transformed-problem residual
-proof work. -/
+/-- Cost-model envelope after adding a supplied residual-proof budget. -/
 def totalCertificateBound (R : FixedFiniteTRS)
     (constructionConstant : Nat)
     (baseOrderProofLength : Nat → Nat)
@@ -76,24 +79,19 @@ private theorem list_sum_le_length_mul {α : Type}
         _ = (t.length + 1) * c := by rw [Nat.add_comm]
         _ = (a :: t).length * c := by simp
 
-/-- Affine upper-bound witness for a base-order proof-length function. This is
-strong enough for the paper's "linear base order implies polynomial overhead"
-corollary, while remaining honest about the dependency-pair count parameter. -/
+/-- Affine upper bound for a supplied base-order proof-length function. -/
 structure AffineBaseOrderBound (L : Nat → Nat) where
   coefficient : Nat
   constant : Nat
   bound : ∀ n, L n ≤ coefficient * n + constant
 
-/-- Optional dependency-pair-count witness. This packages the exact extra input
-needed to collapse the AG bound from the explicit pair-count parameter down to a
-pure rule/signature polynomial. -/
+/-- Upper-bound witness for the count stored in `FixedFiniteTRS`. -/
 structure DependencyPairCountBound (R : FixedFiniteTRS) where
   bound : Nat
   cert : R.dependencyPairCount ≤ bound
 
-/-- Three-stage audit for one Arts--Giesl soundness application on a fixed
-finite TRS. The theorem below uses only these stage bounds and their additive
-assembly; no hidden extraction theorem is assumed. -/
+/-- Supplied stage costs and upper bounds for one modeled soundness application.
+The structure stores external processor costs as caller-provided metadata. -/
 structure ArtsGieslSingleApplicationAudit (R : FixedFiniteTRS) where
   constructionConstant : Nat
   baseOrderProofLength : Nat → Nat
@@ -113,7 +111,7 @@ structure ArtsGieslSingleApplicationAudit (R : FixedFiniteTRS) where
 
 namespace FixedFiniteTRS
 
-/-- Canonical three-stage audit saturating the fixed-finite-TRS cost envelope. -/
+/-- Three-stage record obtained by setting every modeled stage cost to its budget. -/
 def canonicalAudit (R : FixedFiniteTRS)
     (constructionConstant : Nat)
     (baseOrderProofLength : Nat → Nat)
@@ -137,10 +135,7 @@ def canonicalAudit (R : FixedFiniteTRS)
 
 end FixedFiniteTRS
 
-/-- Finite-TRS-parametric AG bound for one soundness application. This is the
-strongest theorem-backed generic surface currently available in the repository:
-construction-stage bound + base-order proof-length on the extracted pair count
-+ constant soundness-invocation overhead. -/
+/-- Additive envelope obtained from the three supplied stage inequalities. -/
 theorem ag_proof_length_on_fixedFiniteTRS
     {R : FixedFiniteTRS}
     (A : ArtsGieslSingleApplicationAudit R) :
@@ -154,8 +149,7 @@ theorem ag_proof_length_on_fixedFiniteTRS
     (Nat.add_le_add A.graphConstruction_le A.baseOrderCheck_le)
     A.soundnessInvocation_le
 
-/-- Total certificate bound after adjoining residual transformed-problem proof
-work. -/
+/-- Additive envelope after adjoining a supplied residual-proof budget. -/
 theorem ag_total_certificate_length_on_fixedFiniteTRS
     {R : FixedFiniteTRS}
     (A : ArtsGieslSingleApplicationAudit R)
@@ -168,9 +162,8 @@ theorem ag_total_certificate_length_on_fixedFiniteTRS
         residualCost := by
   exact Nat.add_le_add_right (ag_proof_length_on_fixedFiniteTRS A) residualCost
 
-/-- If the chosen base order has affine proof-length, the AG overhead is
-polynomial in the explicit finite-TRS parameters `(ruleCount, signatureSize,
-dependencyPairCount)`. -/
+/-- An affine base-order budget yields the displayed polynomial expression in
+the three metadata fields. -/
 theorem arts_giesl_derivational_overhead_polynomial
     {R : FixedFiniteTRS}
     (A : ArtsGieslSingleApplicationAudit R)
@@ -197,9 +190,8 @@ theorem arts_giesl_derivational_overhead_polynomial
             A.soundnessConstant)
           (R.graphConstructionBound A.constructionConstant)
 
-/-- Metadata-only fallback: if an external theorem bounds the number of
-extracted dependency pairs, the AG overhead collapses to a pure
-rule/signature-side polynomial. -/
+/-- Replacing the stored call-obligation count by an upper bound yields the
+displayed metadata-side polynomial. -/
 theorem arts_giesl_derivational_overhead_polynomial_of_pairCountBound
     {R : FixedFiniteTRS}
     (A : ArtsGieslSingleApplicationAudit R)
@@ -230,11 +222,12 @@ theorem arts_giesl_derivational_overhead_polynomial_of_pairCountBound
 
 /-! ## Finite first-order TRS closure -/
 
-/-- Per-rule contribution to the extracted dependency-pair count in a finite
-head-view TRS presentation. -/
-noncomputable def finiteHeadRuleProcedureRuleContribution
+/-- Number of distinct defined call heads on one rule's right-hand side, with
+zero assigned to a headless left-hand side. This head abstraction collapses
+repeated call occurrences. -/
+noncomputable def finiteHeadRuleEngineRuleContribution
     {σ : Type} [DecidableEq σ]
-    (E : DependencyPairsFragment.FiniteHeadRuleProcedure σ)
+    (E : DependencyPairsFragment.FiniteHeadRuleEngine σ)
     (r : E.Rule) : Nat :=
   let _ : HasCallHeadView E.Term σ := E.termView
   if HasCallHeadView.rootHead? (τ := E.Term) (σ := σ) (E.lhs r) = none then
@@ -243,27 +236,24 @@ noncomputable def finiteHeadRuleProcedureRuleContribution
     ((HasCallHeadView.callHeads (τ := E.Term) (σ := σ) (E.rhs r)).filter
       (· ∈ E.definedHeads)).card
 
-/-- Extracted dependency-pair count induced by a finite head-view TRS
-presentation. This counts the filtered defined-head call obligations contributed
-by all rules in the presentation. -/
-noncomputable def finiteHeadRuleProcedureExtractedPairCount
+/-- Sum of the distinct defined call-head obligations contributed by all rules. -/
+noncomputable def finiteHeadRuleEngineExtractedPairCount
     {σ : Type} [DecidableEq σ]
-    (E : DependencyPairsFragment.FiniteHeadRuleProcedure σ) : Nat :=
-  (E.rules.toList.map (finiteHeadRuleProcedureRuleContribution E)).sum
+    (E : DependencyPairsFragment.FiniteHeadRuleEngine σ) : Nat :=
+  (E.rules.toList.map (finiteHeadRuleEngineRuleContribution E)).sum
 
-/-- Finite-signature bound on the extracted dependency-pair count of a finite
-head-view TRS presentation. Each rule contributes at most one filtered call-head
-set of size bounded by the signature carrier. -/
-theorem finiteHeadRuleProcedureExtractedPairCount_le_ruleCount_mul_signatureSize
+/-- The head-abstracted call-obligation count is at most the number of rules
+times the number of symbols. -/
+theorem finiteHeadRuleEngineExtractedPairCount_le_ruleCount_mul_signatureSize
     {σ : Type} [DecidableEq σ] [Fintype σ]
-    (E : DependencyPairsFragment.FiniteHeadRuleProcedure σ) :
-    finiteHeadRuleProcedureExtractedPairCount E ≤ E.rules.size * Fintype.card σ := by
-  let contribution : E.Rule → Nat := finiteHeadRuleProcedureRuleContribution E
+    (E : DependencyPairsFragment.FiniteHeadRuleEngine σ) :
+    finiteHeadRuleEngineExtractedPairCount E ≤ E.rules.size * Fintype.card σ := by
+  let contribution : E.Rule → Nat := finiteHeadRuleEngineRuleContribution E
   have hcontribution : ∀ r, contribution r ≤ Fintype.card σ := by
     intro r
     let _ : HasCallHeadView E.Term σ := E.termView
     by_cases hroot : HasCallHeadView.rootHead? (τ := E.Term) (σ := σ) (E.lhs r) = none
-    · simp [contribution, finiteHeadRuleProcedureRuleContribution, hroot]
+    · simp [contribution, finiteHeadRuleEngineRuleContribution, hroot]
     · have hcard :
           ((HasCallHeadView.callHeads (τ := E.Term) (σ := σ) (E.rhs r)).filter
             (· ∈ E.definedHeads)).card ≤ Fintype.card σ := by
@@ -271,211 +261,202 @@ theorem finiteHeadRuleProcedureExtractedPairCount_le_ruleCount_mul_signatureSize
           (Finset.card_le_univ
             ((HasCallHeadView.callHeads (τ := E.Term) (σ := σ) (E.rhs r)).filter
               (· ∈ E.definedHeads)))
-      simpa [contribution, finiteHeadRuleProcedureRuleContribution, hroot] using hcard
-  simpa [finiteHeadRuleProcedureExtractedPairCount, contribution] using
+      simpa [contribution, finiteHeadRuleEngineRuleContribution, hroot] using hcard
+  simpa [finiteHeadRuleEngineExtractedPairCount, contribution] using
     list_sum_le_length_mul E.rules.toList contribution (Fintype.card σ) hcontribution
 
-/-- Fixed-finite-TRS metadata induced by a finite head-view TRS presentation. -/
-noncomputable def FixedFiniteTRS.ofFiniteHeadRuleProcedure
+/-- Cost-model metadata induced by a finite head-view presentation. Its
+`dependencyPairCount` field stores the head-abstracted call-obligation count. -/
+noncomputable def FixedFiniteTRS.ofFiniteHeadRuleEngine
     {σ : Type} [DecidableEq σ] [Fintype σ]
-    (E : DependencyPairsFragment.FiniteHeadRuleProcedure σ) : FixedFiniteTRS where
+    (E : DependencyPairsFragment.FiniteHeadRuleEngine σ) : FixedFiniteTRS where
   ruleCount := E.rules.size
   signatureSize := Fintype.card σ
-  dependencyPairCount := finiteHeadRuleProcedureExtractedPairCount E
+  dependencyPairCount := finiteHeadRuleEngineExtractedPairCount E
 
-/-- The extracted dependency-pair count bound carried by a finite head-view TRS
-presentation. -/
-abbrev dependencyPairCountBound_of_finiteHeadRuleProcedure
+/-- Rule-count times signature-size bound for the head-abstracted count. -/
+abbrev dependencyPairCountBound_of_finiteHeadRuleEngine
     {σ : Type} [DecidableEq σ] [Fintype σ]
-    (E : DependencyPairsFragment.FiniteHeadRuleProcedure σ) :
-    DependencyPairCountBound (FixedFiniteTRS.ofFiniteHeadRuleProcedure E) where
+    (E : DependencyPairsFragment.FiniteHeadRuleEngine σ) :
+    DependencyPairCountBound (FixedFiniteTRS.ofFiniteHeadRuleEngine E) where
   bound := E.rules.size * Fintype.card σ
-  cert := finiteHeadRuleProcedureExtractedPairCount_le_ruleCount_mul_signatureSize E
+  cert := finiteHeadRuleEngineExtractedPairCount_le_ruleCount_mul_signatureSize E
 
-/-- One-application AG proof-length theorem for an artifact-internal finite
-head-view TRS presentation. This is the direct mechanized counterpart of the
-paper's `C * |R|^2 * |Σ| + L_base(n)` form, with `n` computed by the artifact's
-own extraction layer. -/
+/-- Instantiation of the additive cost envelope for a finite head-view
+presentation, with `n` equal to the head-abstracted call-obligation count. -/
 theorem ag_proof_length_on_finiteHeadRuleTRS
     {σ : Type} [DecidableEq σ] [Fintype σ]
-    (E : DependencyPairsFragment.FiniteHeadRuleProcedure σ)
-    (A : ArtsGieslSingleApplicationAudit (FixedFiniteTRS.ofFiniteHeadRuleProcedure E)) :
+    (E : DependencyPairsFragment.FiniteHeadRuleEngine σ)
+    (A : ArtsGieslSingleApplicationAudit (FixedFiniteTRS.ofFiniteHeadRuleEngine E)) :
     A.totalProofLength ≤
       A.constructionConstant * E.rules.size ^ 2 * Fintype.card σ
-        + A.baseOrderProofLength (finiteHeadRuleProcedureExtractedPairCount E)
+        + A.baseOrderProofLength (finiteHeadRuleEngineExtractedPairCount E)
         + A.soundnessConstant := by
-  simpa [FixedFiniteTRS.ofFiniteHeadRuleProcedure,
+  simpa [FixedFiniteTRS.ofFiniteHeadRuleEngine,
       FixedFiniteTRS.singleApplicationBound,
       FixedFiniteTRS.graphConstructionBound,
-      finiteHeadRuleProcedureExtractedPairCount] using
+      finiteHeadRuleEngineExtractedPairCount] using
     ag_proof_length_on_fixedFiniteTRS A
 
-/-- Total certificate bound for an artifact-internal finite head-view TRS
-presentation. -/
+/-- Head-view cost envelope after adding a supplied residual budget. -/
 theorem ag_total_certificate_length_on_finiteHeadRuleTRS
     {σ : Type} [DecidableEq σ] [Fintype σ]
-    (E : DependencyPairsFragment.FiniteHeadRuleProcedure σ)
-    (A : ArtsGieslSingleApplicationAudit (FixedFiniteTRS.ofFiniteHeadRuleProcedure E))
+    (E : DependencyPairsFragment.FiniteHeadRuleEngine σ)
+    (A : ArtsGieslSingleApplicationAudit (FixedFiniteTRS.ofFiniteHeadRuleEngine E))
     (residualCost : Nat) :
     A.totalProofLength + residualCost ≤
       A.constructionConstant * E.rules.size ^ 2 * Fintype.card σ
-        + A.baseOrderProofLength (finiteHeadRuleProcedureExtractedPairCount E)
+        + A.baseOrderProofLength (finiteHeadRuleEngineExtractedPairCount E)
         + A.soundnessConstant
         + residualCost := by
-  simpa [FixedFiniteTRS.ofFiniteHeadRuleProcedure,
+  simpa [FixedFiniteTRS.ofFiniteHeadRuleEngine,
       FixedFiniteTRS.totalCertificateBound,
       FixedFiniteTRS.singleApplicationBound,
       FixedFiniteTRS.graphConstructionBound,
-      finiteHeadRuleProcedureExtractedPairCount,
+      finiteHeadRuleEngineExtractedPairCount,
       Nat.add_assoc] using
     ag_total_certificate_length_on_fixedFiniteTRS A residualCost
 
-/-- Polynomial-overhead corollary for artifact-internal finite head-view TRS
-presentations with affine base-order proof length. -/
+/-- Metadata-side polynomial bound for a head-view presentation with an affine
+base-order budget. -/
 theorem arts_giesl_derivational_overhead_polynomial_of_finiteHeadRuleTRS
     {σ : Type} [DecidableEq σ] [Fintype σ]
-    (E : DependencyPairsFragment.FiniteHeadRuleProcedure σ)
-    (A : ArtsGieslSingleApplicationAudit (FixedFiniteTRS.ofFiniteHeadRuleProcedure E))
+    (E : DependencyPairsFragment.FiniteHeadRuleEngine σ)
+    (A : ArtsGieslSingleApplicationAudit (FixedFiniteTRS.ofFiniteHeadRuleEngine E))
     (hBase : AffineBaseOrderBound A.baseOrderProofLength) :
     A.totalProofLength ≤
       A.constructionConstant * E.rules.size ^ 2 * Fintype.card σ
         + (hBase.coefficient * (E.rules.size * Fintype.card σ) + hBase.constant)
         + A.soundnessConstant := by
-  simpa [FixedFiniteTRS.ofFiniteHeadRuleProcedure,
+  simpa [FixedFiniteTRS.ofFiniteHeadRuleEngine,
       FixedFiniteTRS.graphConstructionBound,
-      dependencyPairCountBound_of_finiteHeadRuleProcedure] using
+      dependencyPairCountBound_of_finiteHeadRuleEngine] using
     arts_giesl_derivational_overhead_polynomial_of_pairCountBound
-      A hBase (dependencyPairCountBound_of_finiteHeadRuleProcedure E)
+      A hBase (dependencyPairCountBound_of_finiteHeadRuleEngine E)
 
-/-- Extracted dependency-pair count induced by a finite first-order TRS
-presentation. -/
-noncomputable def finiteFirstOrderProcedureExtractedPairCount
+/-- Head-abstracted call-obligation count induced by a finite first-order
+presentation. Repeated calls with the same head in one rule are collapsed. -/
+noncomputable def finiteFirstOrderEngineExtractedPairCount
     {σ ν : Type} [DecidableEq σ] [Fintype σ]
-    (E : DependencyPairsFragment.FiniteFirstOrderProcedure σ ν) : Nat :=
-  finiteHeadRuleProcedureExtractedPairCount
-    (DependencyPairsFragment.FiniteHeadRuleProcedure.ofFiniteFirstOrderProcedure E)
+    (E : DependencyPairsFragment.FiniteFirstOrderEngine σ ν) : Nat :=
+  finiteHeadRuleEngineExtractedPairCount
+    (DependencyPairsFragment.FiniteHeadRuleEngine.ofFiniteFirstOrderEngine E)
 
-/-- Finite-signature bound on the extracted dependency-pair count of a finite
-first-order TRS presentation. -/
-theorem finiteFirstOrderProcedureExtractedPairCount_le_ruleCount_mul_signatureSize
+/-- Rule-count times signature-size bound for the first-order head abstraction. -/
+theorem finiteFirstOrderEngineExtractedPairCount_le_ruleCount_mul_signatureSize
     {σ ν : Type} [DecidableEq σ] [Fintype σ]
-    (E : DependencyPairsFragment.FiniteFirstOrderProcedure σ ν) :
-    finiteFirstOrderProcedureExtractedPairCount E ≤ E.rules.size * Fintype.card σ :=
-  finiteHeadRuleProcedureExtractedPairCount_le_ruleCount_mul_signatureSize
-    (DependencyPairsFragment.FiniteHeadRuleProcedure.ofFiniteFirstOrderProcedure E)
+    (E : DependencyPairsFragment.FiniteFirstOrderEngine σ ν) :
+    finiteFirstOrderEngineExtractedPairCount E ≤ E.rules.size * Fintype.card σ :=
+  finiteHeadRuleEngineExtractedPairCount_le_ruleCount_mul_signatureSize
+    (DependencyPairsFragment.FiniteHeadRuleEngine.ofFiniteFirstOrderEngine E)
 
-/-- Fixed-finite-TRS metadata induced by a finite first-order TRS presentation. -/
-noncomputable def FixedFiniteTRS.ofFiniteFirstOrderProcedure
+/-- Cost-model metadata induced by a finite first-order presentation. -/
+noncomputable def FixedFiniteTRS.ofFiniteFirstOrderEngine
     {σ ν : Type} [DecidableEq σ] [Fintype σ]
-    (E : DependencyPairsFragment.FiniteFirstOrderProcedure σ ν) : FixedFiniteTRS where
+    (E : DependencyPairsFragment.FiniteFirstOrderEngine σ ν) : FixedFiniteTRS where
   ruleCount := E.rules.size
   signatureSize := Fintype.card σ
-  dependencyPairCount := finiteFirstOrderProcedureExtractedPairCount E
+  dependencyPairCount := finiteFirstOrderEngineExtractedPairCount E
 
-/-- The extracted dependency-pair count bound carried by a finite first-order
-TRS presentation. -/
-abbrev dependencyPairCountBound_of_finiteFirstOrderProcedure
+/-- Rule-count times signature-size witness for the first-order head abstraction. -/
+abbrev dependencyPairCountBound_of_finiteFirstOrderEngine
     {σ ν : Type} [DecidableEq σ] [Fintype σ]
-    (E : DependencyPairsFragment.FiniteFirstOrderProcedure σ ν) :
-    DependencyPairCountBound (FixedFiniteTRS.ofFiniteFirstOrderProcedure E) where
+    (E : DependencyPairsFragment.FiniteFirstOrderEngine σ ν) :
+    DependencyPairCountBound (FixedFiniteTRS.ofFiniteFirstOrderEngine E) where
   bound := E.rules.size * Fintype.card σ
-  cert := finiteFirstOrderProcedureExtractedPairCount_le_ruleCount_mul_signatureSize E
+  cert := finiteFirstOrderEngineExtractedPairCount_le_ruleCount_mul_signatureSize E
 
-/-- One-application AG proof-length theorem for a finite first-order TRS
-presentation. This is the artifact's strongest honest theorem-level analogue of
-the paper's `L_AG(R) ≤ C * |R|^2 * |Σ| + L_base(n)`. -/
+/-- Instantiation of the additive cost envelope for a finite first-order
+presentation, using its head-abstracted call-obligation count. -/
 theorem ag_proof_length_on_finiteFirstOrderTRS
     {σ ν : Type} [DecidableEq σ] [Fintype σ]
-    (E : DependencyPairsFragment.FiniteFirstOrderProcedure σ ν)
-    (A : ArtsGieslSingleApplicationAudit (FixedFiniteTRS.ofFiniteFirstOrderProcedure E)) :
+    (E : DependencyPairsFragment.FiniteFirstOrderEngine σ ν)
+    (A : ArtsGieslSingleApplicationAudit (FixedFiniteTRS.ofFiniteFirstOrderEngine E)) :
     A.totalProofLength ≤
       A.constructionConstant * E.rules.size ^ 2 * Fintype.card σ
-        + A.baseOrderProofLength (finiteFirstOrderProcedureExtractedPairCount E)
+        + A.baseOrderProofLength (finiteFirstOrderEngineExtractedPairCount E)
         + A.soundnessConstant := by
-  simpa [FixedFiniteTRS.ofFiniteFirstOrderProcedure,
-      finiteFirstOrderProcedureExtractedPairCount,
+  simpa [FixedFiniteTRS.ofFiniteFirstOrderEngine,
+      finiteFirstOrderEngineExtractedPairCount,
       FixedFiniteTRS.singleApplicationBound,
       FixedFiniteTRS.graphConstructionBound] using
     ag_proof_length_on_fixedFiniteTRS A
 
-/-- Total certificate bound for a finite first-order TRS presentation. -/
+/-- First-order cost envelope after adding a supplied residual budget. -/
 theorem ag_total_certificate_length_on_finiteFirstOrderTRS
     {σ ν : Type} [DecidableEq σ] [Fintype σ]
-    (E : DependencyPairsFragment.FiniteFirstOrderProcedure σ ν)
-    (A : ArtsGieslSingleApplicationAudit (FixedFiniteTRS.ofFiniteFirstOrderProcedure E))
+    (E : DependencyPairsFragment.FiniteFirstOrderEngine σ ν)
+    (A : ArtsGieslSingleApplicationAudit (FixedFiniteTRS.ofFiniteFirstOrderEngine E))
     (residualCost : Nat) :
     A.totalProofLength + residualCost ≤
       A.constructionConstant * E.rules.size ^ 2 * Fintype.card σ
-        + A.baseOrderProofLength (finiteFirstOrderProcedureExtractedPairCount E)
+        + A.baseOrderProofLength (finiteFirstOrderEngineExtractedPairCount E)
         + A.soundnessConstant
         + residualCost := by
-  simpa [FixedFiniteTRS.ofFiniteFirstOrderProcedure,
-      finiteFirstOrderProcedureExtractedPairCount,
+  simpa [FixedFiniteTRS.ofFiniteFirstOrderEngine,
+      finiteFirstOrderEngineExtractedPairCount,
       FixedFiniteTRS.totalCertificateBound,
       FixedFiniteTRS.singleApplicationBound,
       FixedFiniteTRS.graphConstructionBound,
       Nat.add_assoc] using
     ag_total_certificate_length_on_fixedFiniteTRS A residualCost
 
-/-- Polynomial-overhead corollary for finite first-order TRS presentations with
-affine base-order proof length. This discharges the remaining pair-count side of
-`prop:ag-derivational` directly from the artifact's extraction layer. -/
+/-- Metadata-side polynomial bound for a finite first-order presentation with
+an affine base-order budget. -/
 theorem arts_giesl_derivational_overhead_polynomial_of_finiteFirstOrderTRS
     {σ ν : Type} [DecidableEq σ] [Fintype σ]
-    (E : DependencyPairsFragment.FiniteFirstOrderProcedure σ ν)
-    (A : ArtsGieslSingleApplicationAudit (FixedFiniteTRS.ofFiniteFirstOrderProcedure E))
+    (E : DependencyPairsFragment.FiniteFirstOrderEngine σ ν)
+    (A : ArtsGieslSingleApplicationAudit (FixedFiniteTRS.ofFiniteFirstOrderEngine E))
     (hBase : AffineBaseOrderBound A.baseOrderProofLength) :
     A.totalProofLength ≤
       A.constructionConstant * E.rules.size ^ 2 * Fintype.card σ
         + (hBase.coefficient * (E.rules.size * Fintype.card σ) + hBase.constant)
         + A.soundnessConstant := by
-  simpa [FixedFiniteTRS.ofFiniteFirstOrderProcedure,
+  simpa [FixedFiniteTRS.ofFiniteFirstOrderEngine,
       FixedFiniteTRS.graphConstructionBound,
-      dependencyPairCountBound_of_finiteFirstOrderProcedure] using
+      dependencyPairCountBound_of_finiteFirstOrderEngine] using
     arts_giesl_derivational_overhead_polynomial_of_pairCountBound
-      A hBase (dependencyPairCountBound_of_finiteFirstOrderProcedure E)
+      A hBase (dependencyPairCountBound_of_finiteFirstOrderEngine E)
 
 /-! ## Recursor-side specialization -/
 
-/-- Fixed finite-TRS metadata for the primitive step-duplicating recursor. -/
+/-- Stipulated metadata for the primitive step-duplicating recursor cost model. -/
 def stepDuplicatingRecursorTRS : FixedFiniteTRS where
   ruleCount := 2
   signatureSize := 4
   dependencyPairCount := 1
 
-/-- Rule count of the primitive duplicator. -/
+/-- Stored rule count for the recursor model. -/
 def recursorRuleCount : Nat := stepDuplicatingRecursorTRS.ruleCount
 
-/-- Signature size used by the paper's recursor-side bound. -/
+/-- Stored signature size for the recursor model. -/
 def recursorSignatureSize : Nat := stepDuplicatingRecursorTRS.signatureSize
 
-/-- Extracted dependency-pair count for the primitive duplicator. -/
+/-- Stored call-obligation count for the recursor model. -/
 def recursorDependencyPairCount : Nat := stepDuplicatingRecursorTRS.dependencyPairCount
 
-/-- Paper-facing construction cost envelope for the recursor's DP graph. -/
+/-- Graph-construction budget assigned by the recursor cost model. -/
 def agGraphConstructionCost : Nat :=
   stepDuplicatingRecursorTRS.graphConstructionBound 1
 
-/-- Paper-facing base-order check cost on the single extracted pair. -/
+/-- Base-order budget assigned to the recursor's one stored call obligation. -/
 def agBaseOrderCost : Nat :=
   recursorDependencyPairCount
 
-/-- Constant schematic overhead of one Arts--Giesl soundness invocation in the
-recursor-side cost model. -/
+/-- Soundness-invocation budget assigned by the recursor cost model. -/
 def agSchematicInvocationCost : Nat := 1
 
-/-- Total constant license overhead on the primitive duplicator. -/
+/-- Sum of the three stipulated recursor budget terms. -/
 def agLicenseOverhead : Nat :=
   agGraphConstructionCost + agBaseOrderCost + agSchematicInvocationCost
 
 @[simp] theorem ag_license_overhead_eq : agLicenseOverhead = 18 := by
   decide
 
-/-- The recursor-side base-order proof-length function is linear on the single
-extracted dependency pair. -/
+/-- Identity base-order budget function used in the recursor specialization. -/
 def stepDuplicatingRecursorBaseOrderProofLength : Nat → Nat := fun n => n
 
-/-- Affine base-order witness for the recursor specialization. -/
+/-- Affine upper-bound witness for the identity base-order budget. -/
 def stepDuplicatingRecursorAffineBaseOrderBound :
     AffineBaseOrderBound stepDuplicatingRecursorBaseOrderProofLength where
   coefficient := 1
@@ -484,14 +465,14 @@ def stepDuplicatingRecursorAffineBaseOrderBound :
     intro n
     simp [stepDuplicatingRecursorBaseOrderProofLength]
 
-/-- Exact singleton dependency-pair-count witness for the recursor. -/
+/-- Upper-bound witness for the recursor's stored count of one. -/
 def stepDuplicatingRecursorPairCountBound :
     DependencyPairCountBound stepDuplicatingRecursorTRS where
   bound := 1
   cert := by
     simp [stepDuplicatingRecursorTRS]
 
-/-- Concrete three-stage AG audit on the primitive recursor. -/
+/-- Three-stage record saturating the stipulated recursor budgets. -/
 def stepDuplicatingRecursorAudit :
     ArtsGieslSingleApplicationAudit stepDuplicatingRecursorTRS where
   constructionConstant := 1
@@ -515,14 +496,12 @@ def stepDuplicatingRecursorAudit :
 @[simp] theorem stepDuplicatingRecursorAudit_totalProofLength :
     stepDuplicatingRecursorAudit.totalProofLength = agLicenseOverhead := rfl
 
-/-- Original recursor-side exact identity, preserved in the stronger module. -/
+/-- Definitional accounting identity because `residualProofWork K = K`. -/
 theorem ag_proof_length_on_step_duplicating_recursor (K : Nat) :
     residualProofWork K + agLicenseOverhead = K + agLicenseOverhead := by
   simp [residualProofWork, agLicenseOverhead]
 
-/-- Clean specialization bridge from the generic fixed-finite-TRS layer to the
-step-duplicating recursor. This is a bound theorem, not the exact residual
-identity above. -/
+/-- Recursor specialization of the generic additive envelope. -/
 theorem ag_total_certificate_length_on_step_duplicating_recursor_via_fixedFiniteTRS
     (K : Nat) :
     stepDuplicatingRecursorAudit.totalProofLength + residualProofWork K ≤

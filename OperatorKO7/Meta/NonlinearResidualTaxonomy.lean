@@ -15,17 +15,17 @@ inductive NonlinearResidualFamily where
   | unconstrainedNonlinearDirect
 deriving DecidableEq, Repr
 
-/-- Current closure statuses for the nonlinear residual split. -/
+/-- Finite status vocabulary assigned by the nonlinear residual table. -/
 inductive NonlinearResidualStatus where
   | blockedByExistingTheorem
   | licensedEscape (route : ConstructionRoute)
   | certifiedSuccess
   | requiresExistingTheoremProjection
   | closedByConcreteDominanceWitnessClass
-  | openResidualClass
+  | exactLawCarrierBoundary
 deriving DecidableEq, Repr
 
-/-- The finite nonlinear residual family list formalized in this sprint. -/
+/-- Finite list of nonlinear residual family tags. -/
 def nonlinearResidualFamilies : List NonlinearResidualFamily :=
   [.boundedDegreeDirectTransparentPolynomial,
     .boundedCrossTermQuadratic,
@@ -35,13 +35,13 @@ def nonlinearResidualFamilies : List NonlinearResidualFamily :=
     .globalCrossCoupledWitness,
     .unconstrainedNonlinearDirect]
 
-/-- The finite nonlinear residual status list realized by the current split. -/
+/-- Finite list of status tags used by the assignment table. -/
 def nonlinearResidualStatuses : List NonlinearResidualStatus :=
   [.requiresExistingTheoremProjection,
     .closedByConcreteDominanceWitnessClass,
     .blockedByExistingTheorem,
     .licensedEscape .W1,
-    .openResidualClass]
+    .exactLawCarrierBoundary]
 
 /-- Status classification for each nonlinear residual subfamily. -/
 def nonlinearResidualStatus : NonlinearResidualFamily → NonlinearResidualStatus
@@ -51,9 +51,9 @@ def nonlinearResidualStatus : NonlinearResidualFamily → NonlinearResidualStatu
   | .wpoPolynomialBranch => .blockedByExistingTheorem
   | .maxPlusDirectFragment => .blockedByExistingTheorem
   | .globalCrossCoupledWitness => .licensedEscape .W1
-  | .unconstrainedNonlinearDirect => .openResidualClass
+  | .unconstrainedNonlinearDirect => .exactLawCarrierBoundary
 
-/-- Exact status equation for every nonlinear residual family. -/
+/-- Status-table equation for every nonlinear residual family. -/
 theorem nonlinearResidualStatus_exact (family : NonlinearResidualFamily) :
     nonlinearResidualStatus family =
       match family with
@@ -63,18 +63,18 @@ theorem nonlinearResidualStatus_exact (family : NonlinearResidualFamily) :
       | .wpoPolynomialBranch => .blockedByExistingTheorem
       | .maxPlusDirectFragment => .blockedByExistingTheorem
       | .globalCrossCoupledWitness => .licensedEscape .W1
-      | .unconstrainedNonlinearDirect => .openResidualClass := by
+      | .unconstrainedNonlinearDirect => .exactLawCarrierBoundary := by
   cases family <;> rfl
 
-/-- The finite nonlinear residual family list has no duplicates. -/
+/-- The finite nonlinear residual family list is duplicate-free. -/
 theorem nonlinearResidualFamilies_nodup : nonlinearResidualFamilies.Nodup := by
   decide
 
-/-- The finite nonlinear residual family list has exact size seven. -/
+/-- The finite nonlinear residual family list has length seven. -/
 theorem nonlinearResidualFamilies_length : nonlinearResidualFamilies.length = 7 := by
   rfl
 
-/-- Exact membership characterization for the nonlinear residual family list. -/
+/-- Membership characterization for the nonlinear residual family list. -/
 theorem nonlinearResidualFamilies_complete_exact (family : NonlinearResidualFamily) :
     family ∈ nonlinearResidualFamilies ↔
       family = .boundedDegreeDirectTransparentPolynomial
@@ -86,22 +86,22 @@ theorem nonlinearResidualFamilies_complete_exact (family : NonlinearResidualFami
         ∨ family = .unconstrainedNonlinearDirect := by
   cases family <;> simp [nonlinearResidualFamilies]
 
-/-- The finite nonlinear residual status list has no duplicates. -/
+/-- The finite nonlinear residual status list is duplicate-free. -/
 theorem nonlinearResidualStatuses_nodup : nonlinearResidualStatuses.Nodup := by
   decide
 
-/-- The finite nonlinear residual status list has exact size five. -/
+/-- The finite nonlinear residual status list has length five. -/
 theorem nonlinearResidualStatuses_length : nonlinearResidualStatuses.length = 5 := by
   rfl
 
-/-- Exact membership characterization for the nonlinear residual status list. -/
+/-- Membership characterization for the nonlinear residual status list. -/
 theorem nonlinearResidualStatuses_complete_exact (status : NonlinearResidualStatus) :
     status ∈ nonlinearResidualStatuses ↔
       status = .requiresExistingTheoremProjection
     ∨ status = .closedByConcreteDominanceWitnessClass
         ∨ status = .blockedByExistingTheorem
         ∨ status = .licensedEscape .W1
-        ∨ status = .openResidualClass := by
+        ∨ status = .exactLawCarrierBoundary := by
   cases status with
   | blockedByExistingTheorem =>
       simp [nonlinearResidualStatuses]
@@ -113,21 +113,22 @@ theorem nonlinearResidualStatuses_complete_exact (status : NonlinearResidualStat
       simp [nonlinearResidualStatuses]
   | closedByConcreteDominanceWitnessClass =>
     simp [nonlinearResidualStatuses]
-  | openResidualClass =>
+  | exactLawCarrierBoundary =>
       simp [nonlinearResidualStatuses]
 
-/-- Every nonlinear residual family lands in the current finite status list. -/
+/-- Every nonlinear residual family receives a tag from the finite status list. -/
 theorem nonlinearResidualFamily_has_listed_status (family : NonlinearResidualFamily) :
     nonlinearResidualStatus family ∈ nonlinearResidualStatuses := by
   cases family <;> simp [nonlinearResidualStatus, nonlinearResidualStatuses]
 
-/-- Paper-facing proposition for the finite nonlinear residual status catalog. -/
+/-- Proposition exposing the closed family-to-status assignment table. The
+status constructors carry metadata rather than backing theorem witnesses. -/
 abbrev NonlinearResidualStatusCatalog : Prop :=
   ∀ family : NonlinearResidualFamily,
     family ∈ nonlinearResidualFamilies ∧
       nonlinearResidualStatus family ∈ nonlinearResidualStatuses
 
-/-- The nonlinear residual split has an exact finite status catalog. -/
+/-- Realization of the finite assigned-status catalog by case analysis. -/
 theorem nonlinear_residual_status_catalog : NonlinearResidualStatusCatalog := by
   intro family
   exact ⟨(nonlinearResidualFamilies_complete_exact family).2 <| by

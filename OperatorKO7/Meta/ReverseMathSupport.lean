@@ -6,22 +6,22 @@ import Mathlib.SetTheory.Ordinal.Exponential
 /-!
 # Reverse-Mathematical Support Library
 
-This module lifts the paper-facing reverse-mathematical bookkeeping into a
-reusable support layer.
+This module combines proved ordinal inequalities with manually assigned
+calibration records.
 
 It provides:
 
 - theory calibration windows;
 - ordinal calibration windows;
-- shared exact/conjectural calibration profiles for SCT and Arts--Giesl;
-- compatibility theorems connecting the AG target to the existing `ε₀`
-  ordinal surface already mechanized for KO7;
+- shared calibration metadata for SCT and Arts--Giesl;
+- proved ordinal comparisons between `omegaPowThree`, `omegaPowOmega`, and
+  `ε₀`;
 - a constant-overhead transformation model capturing the recursor-side
   Arts--Giesl license overhead.
 
-The goal is not to prove the reverse-mathematical conjecture itself. The goal
-is to give it enough internal structure that it can be compared, transported,
-and strengthened without remaining an isolated named constant.
+The `status`, theory target, ordinal target, and license fields are data chosen
+by the definitions below. Equality between two such fields proves equality of
+the registered values, not an external reverse-mathematical equivalence.
 -/
 
 namespace OperatorKO7.ReverseMathSupport
@@ -84,7 +84,8 @@ theorem omegaPowThree_lt_epsilon0 :
     omegaPowThree < ε₀ := by
   exact lt_trans omegaPowThree_lt_omegaPowOmega OperatorKO7.MetaDM.opow_omega_lt_epsilon0
 
-/-- Reference theory window for the exact SCT calibration at `RCA₀ + WO(ω^3)`. -/
+/-- Registered SCT theory window, with order facts in the finite
+`FormalTheory` order and a stored status label. -/
 def sctTheoryWindow : TheoryCalibrationWindow where
   lowerTheory := FormalTheory.RCA0
   targetTheory := FormalTheory.RCA0_WO_omega3
@@ -93,7 +94,8 @@ def sctTheoryWindow : TheoryCalibrationWindow where
   targetLeUpper := by decide
   status := CalibrationStatus.exact
 
-/-- Reference ordinal window for the exact SCT calibration at `ω^3`. -/
+/-- Registered SCT ordinal window. Its two ordinal inequalities are proved;
+the status label is assigned by the definition. -/
 noncomputable def sctOrdinalWindow : OrdinalCalibrationWindow where
   lowerOrdinal := 0
   targetOrdinal := omegaPowThree
@@ -104,15 +106,14 @@ noncomputable def sctOrdinalWindow : OrdinalCalibrationWindow where
   targetLtUpper := omegaPowThree_lt_epsilon0
   status := CalibrationStatus.exact
 
-/-- Exact SCT reverse-mathematical calibration profile used as the adjacent
-reference point for the AG conjecture. -/
+/-- SCT profile assembled from the selected license and registered windows. -/
 noncomputable def sctReverseMathProfile : ReverseMathProfile where
   license := OperatorKO7.ConfessionMethodFamily.SoundnessLicense.leeJonesBenAmram2001
   theoryWindow := sctTheoryWindow
   ordinalWindow := sctOrdinalWindow
 
-/-- Theory window induced by the AG conjectural target already recorded in the
-paper-facing proof-theoretic register. -/
+/-- Theory window assembled from the AG target values stored in the imported
+proof-theoretic register. -/
 def artsGieslTheoryWindow : TheoryCalibrationWindow where
   lowerTheory := FormalTheory.RCA0
   targetTheory := artsGieslReverseMathCalibration.target
@@ -132,7 +133,8 @@ noncomputable def artsGieslOrdinalWindow : OrdinalCalibrationWindow where
   targetLtUpper := omegaPowThree_lt_epsilon0
   status := CalibrationStatus.conjectural
 
-/-- Strengthened reverse-mathematical profile for the Arts--Giesl license. -/
+/-- Arts--Giesl profile assembled from the selected license and registered
+windows. -/
 noncomputable def artsGieslReverseMathProfile : ReverseMathProfile where
   license := OperatorKO7.ConfessionMethodFamily.SoundnessLicense.artsGiesl2000
   theoryWindow := artsGieslTheoryWindow
@@ -157,14 +159,14 @@ noncomputable def artsGieslReverseMathProfile : ReverseMathProfile where
 @[simp] theorem sctOrdinalWindow_status :
     sctOrdinalWindow.status = CalibrationStatus.exact := rfl
 
-/-- The AG theory target agrees with the SCT reference target. -/
+/-- The two registered theory-target fields are equal. -/
 theorem artsGiesl_and_sct_share_theory_target :
     artsGieslReverseMathProfile.theoryWindow.targetTheory =
       sctReverseMathProfile.theoryWindow.targetTheory := by
   simp [artsGieslReverseMathProfile, sctReverseMathProfile,
     artsGieslTheoryWindow, sctTheoryWindow]
 
-/-- The AG ordinal target agrees with the SCT reference target. -/
+/-- The two registered ordinal-target fields are definitionally equal. -/
 theorem artsGiesl_and_sct_share_ordinal_target :
     artsGieslReverseMathProfile.ordinalWindow.targetOrdinal =
       sctReverseMathProfile.ordinalWindow.targetOrdinal := by
@@ -196,8 +198,8 @@ noncomputable def ko7SafeMeasureUpperBound : ArtifactOrdinalUpperBound where
   upper := ε₀
   bounded := OperatorKO7.MetaDM.safeMeasure_below_epsilon0
 
-/-- The AG conjectural ordinal target sits below the currently mechanized KO7
-artifact benchmark. -/
+/-- The registered AG ordinal target is below the upper ordinal stored in
+`ko7SafeMeasureUpperBound`. -/
 theorem artsGiesl_target_below_ko7_safe_measure_upper :
     artsGieslReverseMathProfile.ordinalWindow.targetOrdinal < ko7SafeMeasureUpperBound.upper := by
   simpa [ko7SafeMeasureUpperBound] using artsGiesl_target_strictly_below_epsilon0
@@ -207,23 +209,21 @@ theorem sct_target_below_ko7_safe_measure_upper :
     sctReverseMathProfile.ordinalWindow.targetOrdinal < ko7SafeMeasureUpperBound.upper := by
   simpa [ko7SafeMeasureUpperBound] using sct_target_strictly_below_epsilon0
 
-/-- Constant-overhead transformation model. This is the right abstraction for
-proof-method transformations that preserve the underlying witness language up to
-uniform finite assembly cost. -/
+/-- Data consisting of a cost function and a supplied equality to
+`n + overhead`. -/
 structure ConstantOverheadTransformation where
   overhead : Nat
   transformedCost : Nat → Nat
   exactShape : ∀ n, transformedCost n = n + overhead
 
-/-- Constant-overhead transformations preserve affine linear growth in the
-strongest exact form available in this repository. -/
+/-- Projection of the supplied `exactShape` equality. -/
 theorem ConstantOverheadTransformation.preserves_affine_linear_shape
     (T : ConstantOverheadTransformation) (n : Nat) :
     T.transformedCost n = n + T.overhead :=
   T.exactShape n
 
-/-- The recursor-side Arts--Giesl license application is a constant-overhead
-transformation of the residual proof work. -/
+/-- Instance whose transformed-cost equation is the imported
+`ag_proof_length_on_step_duplicating_recursor` theorem. -/
 def agRecursorTransformation : ConstantOverheadTransformation where
   overhead := agLicenseOverhead
   transformedCost := fun n =>

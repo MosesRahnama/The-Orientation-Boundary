@@ -6,23 +6,18 @@ import Mathlib.Tactic.Linarith
 # Nonlinear Polynomial Interpretation for the Full KO7 System
 
 This module defines a nonlinear polynomial interpretation `W : Trace → Nat`
-that strictly orients all 8 KO7 root rules.  This shows that the
-full unguarded system is terminating by a direct global measure, provided
-the measure lies outside every formalized barrier class.
+that strictly orients all eight KO7 root rules. The resulting reverse-step
+relation is well-founded without an additional hypothesis about barrier
+classes.
 
 The interpretation uses:
 - `W(recΔ b s n) = (W(n) + 1) * (W(s) + W(b) + 1)` (nonlinear coupling)
 - `W(delta t) = W(t) + 1` (non-transparent, since W(δt) ≠ W(t))
 
-These two properties place `W` outside:
-- Tier 1 (additivity violated by the multiplicative recursor)
-- Tier 2 (δ-transparency violated: W(δ t) = W(t)+1 ≠ W(t))
-- Affine class (linearity violated by the cross-term product)
-
-The barrier theorems predict exactly this: any measure that orients the
-duplicating step must import structural assumptions outside the formalized
-classes.  This module provides a machine-checked witness confirming the
-barrier's precision (Remark 4.5 of the paper).
+The file separately proves that `W` violates successor transparency, the
+listed additive recursor equation, and the listed affine recursor equation.
+Those three separation theorems do not classify `W` against every measure
+family formalized elsewhere.
 -/
 
 namespace OperatorKO7.PolyInterpretation

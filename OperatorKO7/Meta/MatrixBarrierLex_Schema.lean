@@ -4,14 +4,14 @@ import OperatorKO7.Meta.MatrixBarrier2_Schema
 # Dimension-2 Lexicographic Affine Barrier
 
 This module extends the tracked-component pair barrier from strict componentwise order
-to a lexicographic order on `Nat × Nat`.  The theorem is still deliberately narrow:
+to a lexicographic order on `Nat × Nat`. The theorem has tracked-primary scope:
 the first component is the tracked affine component, and the proof shows that one can
 force a strict increase in that primary component on the duplicating step.  Once the
-primary component rises, lexicographic decrease is impossible regardless of the second
-component.
+primary component rises, the displayed lexicographic decrease yields a
+contradiction independently of the second component.
 
-This is a concrete extension of the current barrier frontier, not a general matrix
-interpretation theory.
+The result concerns this two-coordinate order and its supplied pump hypotheses.
+General matrix interpretations require additional interfaces.
 -/
 
 namespace OperatorKO7.StepDuplicating

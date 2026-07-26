@@ -43,8 +43,9 @@ non-leaf-never-void substitution-invariance lemma.
      in scope, the SafeStep guard's disequality witness must come
      from outside the rewriting layer.
 
-The headline theorem is now an unconditional proven proposition; the earlier
-incomplete carrier is removed.
+No `sorry`. No new `axiom`. The headline theorem is now an
+unconditional proven proposition; the partial-progress carrier is
+removed.
 -/
 
 open OperatorKO7 Trace

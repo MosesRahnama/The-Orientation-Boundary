@@ -3,36 +3,13 @@ import OperatorKO7.Meta.ReverseMath.ArtsGieslKO7Bridge
 import OperatorKO7.Meta.ReverseMath.DeductionFO
 
 /-!
-# The Arts–Giesl `ω³` product theorem (assembly)
+# Product record for predecessor descent, an `ω³` order, and KO7 rank descent
 
-This module assembles the `ArtsGieslOmega3ProductTheorem` of the roadmap from the genuinely-proven
-component theorems. The product is the order-*descriptor* calibration (NOT a fake reversal): it
-bundles the structural `Π⁰₂` classification, the upper derivability, the genuine `WO(ω³)` order
-descriptor, the standard-model faithfulness bridge, and the KO7-recursor relevance bridge (R2).
-
-## What is proven unconditionally here
-
-Four of the five fields are discharged by real, kernel-checked, baseline-axiom-only theorems built in
-this directory:
-
-* `pi02` ← `artsGieslSctSoundness_isPi02` (structural recursion on the formula, not a metadata tag);
-* `omega3Descriptor` ← `ReverseMathOmega3.wo_omega3_backing` (genuine `WellFounded` + order-type `ω³`);
-* `soundnessFaithful` ← `artsGieslSctSoundness_faithful` (standard-model satisfaction ↔ the actual
-  arithmetical property);
-* `ko7Bridge` ← `actualSctSoundness_certifies_ko7_recursor` (the SCT principle certifies the actual
-  KO7 duplicating recursor `DPPairRev`, non-vacuously).
-
-## The upper field
-
-`upper : DerivableFO T ArtsGieslSctSoundnessFormula` is the object-derivation upper bound (roadmap R1,
-route (a)): a literal Hilbert-style proof in the sound first-order calculus `DeductionFO` (which, via
-its `all_intro`/`spec`/`ex_intro` rules, can derive the quantified `∀∃` sentence — the propositional
-`Deduction.Derivable` cannot). It is parameterized over the theory `T` here, so the product is proven
-for **any** theory given its upper derivation; `ArtsGieslUpperSyntactic.lean` discharges it for
-`T := rca0BasicAxioms` with the genuine object derivation `artsGiesl_syntactic_upper`, yielding the
-fully syntactic product `artsGieslOmega3Product_rca0`.
-
-No `sorry`, `axiom`, or `native_decide`.
+The record in this module groups five independently typed facts: the `Π⁰₂` shape and derivability of
+the predecessor-descent sentence, a canonical well-order of type `ω³`, standard-model faithfulness
+for the predecessor sentence, and a KO7 dependency-pair well-foundedness implication from a generic
+natural-number measure principle. The record does not prove that the predecessor sentence expresses
+Arts-Giesl dependency-pair soundness, and it does not prove an SCT reverse-mathematics equivalence.
 -/
 
 set_option autoImplicit false
@@ -41,27 +18,25 @@ namespace OperatorKO7.ReverseMath
 
 open FirstOrder Language
 
-/-- The Arts–Giesl `ω³` product theorem, parameterized over the object theory `T`. The order
-*descriptor* calibration: structural `Π⁰₂` classification, upper derivability of the SCT/AG soundness
-sentence from `T`, the genuine `WO(ω³)` order descriptor, the standard-model faithfulness bridge, and
-the KO7-recursor relevance bridge. -/
+/-- A conjunction-style record parameterized by the theory `T`. Its fields concern the historically
+named predecessor sentence, a canonical `ω³` order, and the KO7 rank-descent implication. No field
+identifies these components as an SCT equivalence. -/
 structure ArtsGieslOmega3ProductTheorem (T : L2.Theory) : Prop where
-  /-- The SCT/AG soundness sentence is `Π⁰₂` (genuine structural classification). -/
+  /-- The predecessor-descent sentence is structurally `Π⁰₂`. -/
   pi02 : Complexity.IsPi02 ArtsGieslSctSoundnessFormula
-  /-- `T` derives the SCT/AG soundness sentence (object-level upper bound, first-order calculus). -/
+  /-- `T` derives the predecessor-descent sentence in the first-order calculus. -/
   upper : DeductionFO.DerivableFO T ArtsGieslSctSoundnessFormula
-  /-- The `WO(ω³)` order descriptor: a genuine well-ordering of order type exactly `ω³`. -/
+  /-- Well-foundedness and order-type equality for the canonical `ω³` carrier. -/
   omega3Descriptor : OperatorKO7.ReverseMathOmega3.WOOmega3Backing
-  /-- Faithfulness: standard-model satisfaction of the sentence is exactly the actual property. -/
+  /-- Standard-model satisfaction is equivalent to the elementary natural-number property. -/
   soundnessFaithful :
     (StdCarrier ⊨ ArtsGieslSctSoundnessFormula) ↔ ActualArtsGieslSctSoundness
-  /-- KO7 relevance (R2): the SCT soundness principle certifies the actual KO7 recursor. -/
+  /-- A generic natural-number measure-descent principle implies well-foundedness of `DPPairRev`. -/
   ko7Bridge :
     SctDescentSoundness.{0} → WellFounded OperatorKO7.MetaDependencyPairs.DPPairRev
 
-/-- **Product assembly.** For any object theory `T` that derives the SCT/AG soundness sentence, the
-full `ArtsGieslOmega3ProductTheorem T` holds: the other four fields are discharged unconditionally by
-the component theorems of this directory. Specialize `T := RCA0` once the upper derivation lands. -/
+/-- Assemble the record from a supplied derivation of the predecessor sentence and the four imported
+component theorems. -/
 theorem artsGieslOmega3Product_of_upper (T : L2.Theory)
     (upper : DeductionFO.DerivableFO T ArtsGieslSctSoundnessFormula) :
     ArtsGieslOmega3ProductTheorem T where
@@ -70,5 +45,9 @@ theorem artsGieslOmega3Product_of_upper (T : L2.Theory)
   omega3Descriptor := OperatorKO7.ReverseMathOmega3.wo_omega3_backing
   soundnessFaithful := artsGieslSctSoundness_faithful
   ko7Bridge := actualSctSoundness_certifies_ko7_recursor
+
+#check ArtsGieslOmega3ProductTheorem
+#check artsGieslOmega3Product_of_upper
+#print axioms artsGieslOmega3Product_of_upper
 
 end OperatorKO7.ReverseMath

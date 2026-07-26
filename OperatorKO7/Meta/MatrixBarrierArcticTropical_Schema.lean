@@ -4,16 +4,17 @@ import OperatorKO7.Meta.ArcticBarrier_Schema
 /-!
 # Arctic/Tropical Matrix Scalarization Certificates
 
-This module starts the finite-vector arctic/tropical matrix upgrade without claiming a full
-semiring metatheory that the current artifact does not yet prove. The barrier theorems here
-are certificate-backed:
+This module defines finite-vector arctic and tropical scalarization interfaces.
+The barrier theorems are conditional on supplied comparison and scalarization
+certificates:
 
 - the carrier is an explicit finite vector family;
 - the ambient comparison law is explicit;
-- a theorem-visible scalarization certificate links that comparison to the already-landed
+- a theorem-visible scalarization certificate links that comparison to the
   arbitrary mixed-matrix scalarization barrier.
 
-This yields real matrix-class barrier theorems while keeping the current limitation honest.
+The resulting theorems are scalar-dominance reductions. Semiring
+interpretations and matrix-to-scalar adequacy laws are separate requirements.
 -/
 
 namespace OperatorKO7.StepDuplicating

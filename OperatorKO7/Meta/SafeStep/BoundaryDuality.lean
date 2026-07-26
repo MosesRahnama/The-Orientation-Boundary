@@ -9,7 +9,7 @@ ascent-profile rung (`DistinctionAscentProfile`) shows the two boundaries are
 stagewise-equivalent and isomorphic as six-step ascent profiles. This module
 strengthens that to a morphism in a category of boundary operators: it exhibits
 each boundary as a `BoundaryOperator` carrier (with the full partiality /
-irreversibility / gauge-covariance / channel / payload-discarding law
+irreversibility / gauge-covariance / channel / payload-discarding / Landauer law
 stack) and constructs an explicit isomorphism between them.
 
 It contains no `sorry`, no new `axiom`, no `native_decide`, and no `@[csimp]`.
@@ -19,8 +19,8 @@ The public isomorphism theorem has been spot-checked with `#print axioms`
 ## Honest scope
 
 The boundary-operator presentation captures the *collapse* essence common to both
-boundaries: a partial, irreversible, payload-discarding, gauge-covariant
-map to a verdict. The distinction instance collapses the diagonal
+boundaries: a partial, irreversible, payload-discarding, gauge-covariant,
+Landauer-costed map to a verdict. The distinction instance collapses the diagonal
 identity query to its eqW verdict `void`; the orientation instance collapses the
 duplicated carrier to its projected verdict. Both instantiate the same collapse
 boundary operator, differing only in the verdict, and the verdict isomorphism
@@ -40,7 +40,7 @@ set_option linter.unusedVariables false
 
 /-- The collapse boundary operator: every in-domain input collapses to a single
 verdict `y0`, discarding its payload. Both KO7 boundaries instantiate this with
-their own verdict. The five boundary-operator laws are discharged exactly as for
+their own verdict. The six boundary-operator laws are discharged exactly as for
 `toyBoundaryOperator`, with the two distinct witnesses `void` and `delta void`. -/
 noncomputable def collapseBoundaryOperator (y0 : Trace) :
     BoundaryOperator (Option Trace) Trace where
@@ -53,6 +53,9 @@ noncomputable def collapseBoundaryOperator (y0 : Trace) :
   channel := { send := fun x => match x with | some _ => some y0 | none => none }
   Payload := Trace
   payload_extract x := match x with | some a => a | none => void
+  landauer_cost _ _ := Real.log 2
+  kB := 1
+  temperature := 1
   partiality := by
     intro hall
     exact (hall none) rfl
@@ -83,6 +86,10 @@ noncomputable def collapseBoundaryOperator (y0 : Trace) :
     simp at h0 h1
     have hbad : (void : Trace) = delta void := h0.symm.trans h1
     simp at hbad
+  landauerCost := by
+    intro x h
+    have hlog : (0 : ℝ) ≤ Real.log 2 := Real.log_nonneg (by norm_num : (1 : ℝ) ≤ 2)
+    nlinarith
 
 /-- A morphism of boundary operators: carrier maps commuting with the partial
 boundary action (domain preservation and apply-commutation). -/

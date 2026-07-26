@@ -3,11 +3,9 @@ import OperatorKO7.Meta.Confluence_Safe
 set_option autoImplicit false
 
 /-!
-Guard-necessity results for the `eqW` overlap in the full kernel relation.
-
-The original affine-orientation target for this suggestion was too strong and in fact false.
-What the artifact can prove cleanly is the confluence-theoretic obstruction directly: in the
-unguarded kernel relation, the overlap at `eqW a a` is never locally joinable.
+The full kernel relation gives `eqW a a` two distinct normal-form reducts. Therefore this diagonal
+overlap fails `LocalJoinStep`. The declarations establish exactly that local-confluence obstruction;
+minimality and necessity properties for concrete `SafeStep` guards lie outside their conclusion.
 -/
 
 open OperatorKO7 Trace
@@ -44,7 +42,7 @@ theorem not_localJoinStep_eqW_refl (a : Trace) : ¬ LocalJoinStep (eqW a a) := b
     (nf_no_stepstar_forward hnf_int hcStar).symm
   exact void_ne_integrate_merge_self a (hd_eq_void.symm.trans hd_eq_int)
 
-/-- The `eqW` guards in `SafeStep` are genuine local-confluence guards. -/
+/-- Historical guard-necessity name for failure of local joinability at every diagonal `eqW` term. -/
 theorem eqW_guards_are_confluence_necessary :
     ∀ a : Trace, ¬ LocalJoinStep (eqW a a) :=
   not_localJoinStep_eqW_refl
@@ -53,14 +51,12 @@ end MetaSN_KO7
 
 namespace OperatorKO7.Meta.EqW_Guard_Barrier
 
-/-- Namespace-stable alias for the root normal-form fact used by the Distinction
-Boundary claim ledger. -/
+/-- Namespace-stable alias for the root normal-form fact. -/
 theorem normalForm_integrate_merge_self (a : Trace) :
     NormalForm (integrate (merge a a)) :=
   MetaSN_KO7.normalForm_integrate_merge_self a
 
-/-- Namespace-stable alias for the target-separation fact used by the
-Distinction Boundary claim ledger. -/
+/-- Namespace-stable alias for the target-separation fact. -/
 theorem void_ne_integrate_merge_self (a : Trace) :
     (void : Trace) ≠ integrate (merge a a) :=
   MetaSN_KO7.void_ne_integrate_merge_self a
@@ -70,7 +66,7 @@ theorem not_localJoinStep_eqW_refl (a : Trace) :
     ¬ MetaSN_KO7.LocalJoinStep (eqW a a) :=
   MetaSN_KO7.not_localJoinStep_eqW_refl a
 
-/-- Namespace-stable alias for the guard-necessity theorem. -/
+/-- Namespace-stable alias for the diagonal `eqW` local-join obstruction. -/
 theorem eqW_guards_are_confluence_necessary :
     ∀ a : Trace, ¬ MetaSN_KO7.LocalJoinStep (eqW a a) :=
   MetaSN_KO7.eqW_guards_are_confluence_necessary

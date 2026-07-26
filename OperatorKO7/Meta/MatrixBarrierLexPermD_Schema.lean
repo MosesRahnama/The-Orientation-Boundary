@@ -1,25 +1,25 @@
 import OperatorKO7.Meta.ProjectedPrimaryBarrier
 
 /-!
-# Permutation-Priority Finite Lexicographic Barrier
+This module proves conditional barriers for lexicographic vector orders after a supplied
+coordinate permutation. Theorems use the displayed positivity, projection, and unboundedness
+hypotheses.
 
-This module extends the finite tracked-primary lexicographic barrier from the fixed natural
-coordinate order to arbitrary priority permutations.
 
-The important point is structural: once a chosen primary coordinate is placed at highest
-priority in the lex order, the same barrier proof goes through. A lexicographic decrease
-under that priority permutation still forces the primary coordinate to be non-increasing,
-so the standard affine pump on that coordinate blocks orientation.
 
-This sharpens the orientation boundary in a mathematically meaningful way:
-the barrier no longer depends on the incidental choice of coordinate enumeration.
+
+
+
+
+
+
 -/
 
 namespace OperatorKO7.StepDuplicating
 
 namespace StepDuplicatingSchema
 
-/-- The distinguished highest-priority coordinate under a permutation-based lex order. -/
+/-- Field requirements are given by the displayed type. -/
 @[simp] def permPrimaryIdx {d : Nat} (σ : Equiv.Perm (Fin (d + 1))) : Fin (d + 1) :=
   σ (primaryIdx d)
 
@@ -29,8 +29,8 @@ def VecPermLexLt {d : Nat} (σ : Equiv.Perm (Fin (d + 1)))
   ∃ i : Fin (d + 1),
     (∀ j : Fin (d + 1), j.val < i.val → u (σ j) = v (σ j)) ∧ u (σ i) < v (σ i)
 
-/-- Any permutation-priority lex decrease forces the highest-priority coordinate to be
-non-increasing. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem permPrimary_le_of_vecPermLexLt {d : Nat} {σ : Equiv.Perm (Fin (d + 1))}
     {u v : Fin (d + 1) → Nat}
     (h : VecPermLexLt σ u v) :
@@ -48,8 +48,8 @@ theorem permPrimary_le_of_vecPermLexLt {d : Nat} {σ : Equiv.Perm (Fin (d + 1))}
     have heq := hprefix (primaryIdx d) hpos
     exact Nat.le_of_eq (by simpa [permPrimaryIdx] using heq)
 
-/-- A finite-dimensional lexicographic direct measure whose highest-priority coordinate is a
-tracked affine primary component. -/
+/-- Data record whose requirements are the fields displayed below.
+-/
 structure MatrixLexPermMeasureD (S : StepDuplicatingSchema) (d : Nat) where
   priority : Equiv.Perm (Fin (d + 1))
   eval : S.T → Fin (d + 1) → Nat
@@ -82,7 +82,7 @@ structure MatrixLexPermMeasureD (S : StepDuplicatingSchema) (d : Nat) where
   h_wrap_left_pos : 1 ≤ wrap_left
   h_wrap_right_pos : 1 ≤ wrap_right
 
-/-- The primary affine projection exposed by the permutation-priority family. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def MatrixLexPermMeasureD.primaryAffine
     {S : StepDuplicatingSchema} {d : Nat}
     (M : MatrixLexPermMeasureD S d) : AffineMeasure S where
@@ -104,14 +104,14 @@ def MatrixLexPermMeasureD.primaryAffine
   h_wrap_left_pos := M.h_wrap_left_pos
   h_wrap_right_pos := M.h_wrap_right_pos
 
-/-- Unbounded pump in the highest-priority coordinate. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def HasUnboundedPermPrimaryRange
     {S : StepDuplicatingSchema} {d : Nat}
     (M : MatrixLexPermMeasureD S d) : Prop :=
   ∀ k : Nat, ∃ t : S.T, k ≤ M.eval t (permPrimaryIdx M.priority)
 
-/-- Permutation-priority lex families are instances of the generic projected-primary
-dominance theorem. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_matrixLexPermD_orients_dup_step_of_unbounded_primary
     {S : StepDuplicatingSchema} {d : Nat}
     (M : MatrixLexPermMeasureD S d)
@@ -164,7 +164,7 @@ structure MatrixLexPermMeasureDWithPrimaryPump (S : StepDuplicatingSchema) (d : 
   has_primary_pump :
     (1 ≤ succ_bias ∧ 1 ≤ succ_scale) ∨ 1 ≤ wrap_const + wrap_right * c_base
 
-/-- Unconditional barrier for the strengthened permutation-priority subclass. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem no_matrixLexPermD_with_primary_pump_orients_dup_step
     {S : StepDuplicatingSchema} {d : Nat}
     (M : MatrixLexPermMeasureDWithPrimaryPump S d) :
@@ -175,7 +175,7 @@ theorem no_matrixLexPermD_with_primary_pump_orients_dup_step
   · exact no_matrixLexPermD_orients_dup_step_of_succ_pump (M := M.toMatrixLexPermMeasureD) hsucc.1 hsucc.2
   · exact no_matrixLexPermD_orients_dup_step_of_wrap_pump (M := M.toMatrixLexPermMeasureD) hwrap
 
-/-- Global root orientation would orient the duplicating step as well. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem no_global_orients_matrixLexPermD_with_primary_pump
     {Sys : StepDuplicatingSystem} {d : Nat}
     (M : MatrixLexPermMeasureDWithPrimaryPump Sys.toStepDuplicatingSchema d) :

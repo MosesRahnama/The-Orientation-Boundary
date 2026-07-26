@@ -1,26 +1,26 @@
 import OperatorKO7.Meta.StepDuplicatingSchema
 
 /-!
-# Restricted Quadratic Barrier
+This module proves barriers for constructor-local measures with affine successor and wrapper
+clauses plus a pure counter-square recursor term. Every unboundedness, positivity, and pump
+hypothesis appears in the theorem types.
 
-This module inserts one bounded nonlinear layer between the existing affine barrier and the
-known successful nonlinear witnesses.
 
-The class formalized here keeps `succ` and `wrap` affine and allows the recursor to use one
-extra pure counter-square term:
 
-`eval (recur b s n) = const + base*B + step*S + counter*N + quad*N^2`.
 
-There is no step-counter cross term. This keeps the theorem outside the existing RecΔ-core
-witness, whose escape mechanism depends on coupling the step payload to the counter growth.
+
+
+
+
+
 -/
 
 namespace OperatorKO7.StepDuplicating
 
 namespace StepDuplicatingSchema
 
-/-- Restricted quadratic constructor-local measures:
-`succ` and `wrap` are affine, while the recursor adds one pure counter-square term. -/
+/-- Data record whose requirements are the fields displayed below.
+-/
 structure QuadraticCounterMeasure (S : StepDuplicatingSchema) where
   eval : S.T → Nat
   c_base : Nat
@@ -46,12 +46,12 @@ structure QuadraticCounterMeasure (S : StepDuplicatingSchema) where
   h_wrap_left_pos : 1 ≤ wrap_left
   h_wrap_right_pos : 1 ≤ wrap_right
 
-/-- Unbounded range hypothesis for restricted quadratic schema theorems. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def HasUnboundedRangeQ {S : StepDuplicatingSchema} (M : QuadraticCounterMeasure S) : Prop :=
   ∀ k : Nat, ∃ t : S.T, k ≤ M.eval t
 
-/-- Positive successor drift still pumps restricted quadratic measures because the
-successor constructor itself remains affine. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 lemma eval_succIter_ge_quadratic {S : StepDuplicatingSchema} (M : QuadraticCounterMeasure S)
     (h_succ_bias : 1 ≤ M.succ_bias) (h_succ_scale : 1 ≤ M.succ_scale) (k : Nat) :
     k ≤ M.eval (succIter S k) := by
@@ -63,8 +63,8 @@ lemma eval_succIter_ge_quadratic {S : StepDuplicatingSchema} (M : QuadraticCount
       simp [succIter, M.eval_succ]
       nlinarith
 
-/-- Positive wrap/base drift still pumps restricted quadratic measures because the
-wrapper constructor itself remains affine. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 lemma eval_wrapIter_ge_quadratic {S : StepDuplicatingSchema} (M : QuadraticCounterMeasure S)
     (h_wrap_bias : 1 ≤ M.wrap_const + M.wrap_right * M.c_base) (k : Nat) :
     k ≤ M.eval (wrapIter S k) := by
@@ -76,9 +76,9 @@ lemma eval_wrapIter_ge_quadratic {S : StepDuplicatingSchema} (M : QuadraticCount
       simp [wrapIter, M.eval_wrap, M.eval_base]
       nlinarith [M.h_wrap_left_pos, h_wrap_bias, ih]
 
-/-- Restricted quadratic barrier:
-without step-counter coupling, a pure counter-square term still does not rescue direct
-orientation of the duplicating step. Pump the step argument and fix the counter at `base`. -/
+/-- The displayed proposition follows from the stated hypotheses.
+
+-/
 theorem no_quadratic_counter_orients_dup_step_of_unbounded
     {S : StepDuplicatingSchema} (M : QuadraticCounterMeasure S)
     (hunbounded : HasUnboundedRangeQ M) :
@@ -138,7 +138,7 @@ theorem no_quadratic_counter_orients_dup_step_of_unbounded
       le_trans h_sum_to_wsum h_with_const
   exact Nat.not_lt_of_ge hge hspec'
 
-/-- Positive successor drift gives the restricted quadratic barrier via a `succ` pump. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem no_quadratic_counter_orients_dup_step_of_succ_pump
     {S : StepDuplicatingSchema} (M : QuadraticCounterMeasure S)
     (h_succ_bias : 1 ≤ M.succ_bias) (h_succ_scale : 1 ≤ M.succ_scale) :
@@ -149,7 +149,7 @@ theorem no_quadratic_counter_orients_dup_step_of_succ_pump
   refine ⟨succIter S k, ?_⟩
   simpa using eval_succIter_ge_quadratic (M := M) h_succ_bias h_succ_scale k
 
-/-- Positive wrap/base drift gives the restricted quadratic barrier via a `wrap` pump. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem no_quadratic_counter_orients_dup_step_of_wrap_pump
     {S : StepDuplicatingSchema} (M : QuadraticCounterMeasure S)
     (h_wrap_bias : 1 ≤ M.wrap_const + M.wrap_right * M.c_base) :
@@ -160,8 +160,8 @@ theorem no_quadratic_counter_orients_dup_step_of_wrap_pump
   refine ⟨wrapIter S k, ?_⟩
   simpa using eval_wrapIter_ge_quadratic (M := M) h_wrap_bias k
 
-/-- Any globally oriented system containing the duplicating step would orient that step.
-The restricted quadratic barrier therefore also lifts to global root orientation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_quadratic_of_unbounded
     {Sys : StepDuplicatingSystem} (M : QuadraticCounterMeasure Sys.toStepDuplicatingSchema)
     (hunbounded : HasUnboundedRangeQ M) :
@@ -172,7 +172,7 @@ theorem no_global_orients_quadratic_of_unbounded
       (S := Sys.toStepDuplicatingSchema) M hunbounded
       (fun b s n => h (Sys.dup_step b s n))
 
-/-- Positive successor drift yields the restricted quadratic global barrier. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem no_global_orients_quadratic_of_succ_pump
     {Sys : StepDuplicatingSystem} (M : QuadraticCounterMeasure Sys.toStepDuplicatingSchema)
     (h_succ_bias : 1 ≤ M.succ_bias) (h_succ_scale : 1 ≤ M.succ_scale) :
@@ -182,7 +182,7 @@ theorem no_global_orients_quadratic_of_succ_pump
   refine ⟨succIter Sys.toStepDuplicatingSchema k, ?_⟩
   simpa using eval_succIter_ge_quadratic (M := M) h_succ_bias h_succ_scale k
 
-/-- Positive wrap/base drift yields the restricted quadratic global barrier. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem no_global_orients_quadratic_of_wrap_pump
     {Sys : StepDuplicatingSystem} (M : QuadraticCounterMeasure Sys.toStepDuplicatingSchema)
     (h_wrap_bias : 1 ≤ M.wrap_const + M.wrap_right * M.c_base) :
@@ -192,9 +192,9 @@ theorem no_global_orients_quadratic_of_wrap_pump
   refine ⟨wrapIter Sys.toStepDuplicatingSchema k, ?_⟩
   simpa using eval_wrapIter_ge_quadratic (M := M) h_wrap_bias k
 
-/-- Any Nat-valued global orienter is not representable by a restricted quadratic
-measure from this barrier class when the measure satisfies the same unbounded pump
-hypothesis used by the schema theorem. -/
+/-- The displayed proposition follows from the stated hypotheses.
+
+-/
 theorem global_orienter_not_quadratic_unbounded_representable
     {Sys : StepDuplicatingSystem} (μ : Sys.T → Nat)
     (horient : GlobalOrients Sys μ (· < ·)) :

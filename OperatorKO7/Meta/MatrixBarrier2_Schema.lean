@@ -10,9 +10,8 @@ cannot decrease on the duplicating step, then componentwise decrease is impossib
 A symmetric theorem then shows the same for the second component under the corresponding
 positivity hypotheses.
 
-This is deliberately a **tracked-component** result rather than a full arbitrary `2×2` matrix
-theory.  It is the smallest honest step from the scalar affine barrier toward matrix-style
-interpretations.
+The scope is a **tracked-component** pair result. Arbitrary `2×2` matrix
+interpretations require additional matrix semantics and adequacy laws.
 -/
 
 namespace OperatorKO7.StepDuplicating

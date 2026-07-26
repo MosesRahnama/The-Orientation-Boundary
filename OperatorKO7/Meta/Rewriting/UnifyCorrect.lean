@@ -3,13 +3,10 @@ import OperatorKO7.Meta.Rewriting.Unify
 /-!
 # Correctness of first-order unification
 
-Roadmap source: `ROADMAP-01-generic-critical-pair-lemma.md`, sections 3 (the
-correctness statements), 5, and 8 (the most-generality blueprint and the
-Ribeiro-Camarao / idempotent-MGU mechanizations). This is Wave 3A: the keystone
-gate, establishing that the Martelli-Montanari engine `solve`/`unify` of
-`Unify.lean` returns a genuine most-general unifier as data.
+This module proves soundness, completeness, and most-generality for the
+Martelli-Montanari engine `solve` and its singleton wrapper `unify`.
 
-## What this module delivers
+## Exported results
 
 For the singleton problem `unify s t = solve [(s, t)]`:
 
@@ -32,19 +29,17 @@ invariant about `solve` over a whole worklist `W : List (Term × Term)`. Writing
                           ∃ ρ, ∀ x, τ x = (ρ.comp μ) x`.
 
 Each is proved by the custom recursion principle `solve.induct`, which supplies
-the induction hypothesis on exactly the smaller worklist each move recurses into,
+the induction hypothesis on the smaller worklist each move recurses into,
 matching the lexicographic measure that makes `solve` terminate. `solve`'s
 five-way case split (empty, delete, two eliminate forms, decompose) plus its four
 failure branches (occurs-check ×2, arity/head clash ×2) become the nine
 `solve.induct` cases. The eliminate move is the crux, and it rests on the algebraic
 identities `Unifies_wlSubst1`/`apply_comp` (relating a substituted worklist to the
 composed substitution), `comp_subst1_eq_of_unifies` (a unifier of `x =?= t`
-absorbs `subst1 x t`), and the occurs-check, exactly as in the idempotent-MGU
-mechanizations.
+absorbs `subst1 x t`), and the occurs-check.
 
-Trust: kernel-only; baseline-only under `#print axioms` (a subset of
-`{propext, Classical.choice, Quot.sound}`, from `Finset`/`DecidableEq` plumbing).
-No `sorry`, `axiom`, `native_decide`, `partial`, or `unsafe`.
+Trust: kernel checking with the baseline axioms reported by `#print axioms`
+for the exported declarations.
 -/
 
 set_option autoImplicit false
@@ -81,7 +76,7 @@ def Unifies (g : Subst sigma nu) (W : List (Term sigma nu × Term sigma nu)) : P
     · exact hp
     · exact hW q hq
 
-/-- A unifier of a singleton worklist `[(s, t)]` is exactly a unifier of the
+/-- A unifier of a singleton worklist `[(s, t)]` is equivalent to a unifier of the
 equation `s =?= t`. The bridge from the worklist invariant to the headline
 single-equation statements. -/
 theorem Unifies_singleton (g : Subst sigma nu) (s t : Term sigma nu) :
@@ -100,12 +95,12 @@ theorem Unifies_append (g : Subst sigma nu)
 
 The eliminate move replaces a worklist `W` by `wlSubst1 x t W` and composes the
 recursively returned substitution with `subst1 x t`. Two facts power its analysis:
-a substitution unifies the pushed-through worklist exactly when its composite with
+a substitution unifies the pushed-through worklist iff its composite with
 `subst1 x t` unifies the original worklist; and a unifier of the equation
 `var x =?= t` already absorbs `subst1 x t`, so composing changes nothing. -/
 
 /-- Composition through a worklist substitution: a substitution `g` unifies the
-pushed-through worklist `wlSubst1 x t W` exactly when its composite
+pushed-through worklist `wlSubst1 x t W` iff its composite
 `g.comp (subst1 x t)` unifies the original worklist `W`. This is the worklist
 form of `apply_comp`. -/
 theorem Unifies_wlSubst1 [DecidableEq nu] (g : Subst sigma nu) (x : nu)
@@ -171,7 +166,7 @@ theorem comp_subst1_unifies_head [DecidableEq nu] (s₀ : Subst sigma nu) (x : n
 A substitution unifies a decomposed argument worklist exactly when it unifies the
 two applications they came from. -/
 
-/-- Applying a substitution to matching-arity applications is equal exactly when
+/-- Applying a substitution to matching-arity applications is equal iff
 the substitution unifies the zipped argument worklist. The decompose move's
 correctness, both directions. -/
 theorem Unifies_zipPairs_iff (g : Subst sigma nu) (f : sigma)
@@ -217,11 +212,9 @@ theorem Unifies_congr_of_pointwise [DecidableEq nu] {g g' : Subst sigma nu}
 
 /-! ## Occurs-check completeness
 
-If a variable `x` occurs in a strictly larger term `t` (an application), no
-substitution can unify `var x =?= t`: applying any substitution makes the image of
-`t` strictly larger than the image of `x`. This is what licenses the eliminate
-move's occurs-check in the completeness direction: a failed occurs-check means no
-unifier existed. -/
+If a variable `x` occurs in a strictly larger application `t`, a purported
+unifier of `var x =?= t` yields a strict size contradiction. This licenses the
+eliminate move's occurs-check in the completeness direction. -/
 
 /-- A variable's image sits within the image of any term that contains it. The
 size of `apply τ (var x)` is at most the size of `apply τ u` whenever `x ∈ vars u`. -/
@@ -247,9 +240,9 @@ theorem size_apply_var_le_of_mem [DecidableEq nu] (τ : Subst sigma nu) (x : nu)
         Term.size_lt_of_mem hmem
       omega
 
-/-- The occurs-check is complete for unifiability: if `x` occurs in an application
-`app g bs`, then no substitution unifies `var x =?= app g bs`, because the image of
-the application is strictly larger than the image of the variable. -/
+/-- Occurs-check completeness: if `x` occurs in an application `app g bs`,
+a unifying substitution yields a contradiction because the application image is
+strictly larger than the variable image. -/
 theorem not_unifies_of_occurs_app [DecidableEq nu] (τ : Subst sigma nu) (x : nu)
     (g : sigma) (bs : List (Term sigma nu)) (hocc : occurs x (Term.app g bs) = true) :
     apply τ (Term.var x) ≠ apply τ (Term.app g bs) := by
@@ -270,7 +263,7 @@ theorem not_unifies_of_occurs_app [DecidableEq nu] (τ : Subst sigma nu) (x : nu
 
 `solve W = some μ` forces `μ` to unify every equation of `W`. Proved by the
 custom recursion principle `solve.induct`, which supplies the induction
-hypothesis on exactly the smaller worklist each move recurses into. -/
+hypothesis on the smaller worklist each move recurses into. -/
 
 /-- Worklist soundness: a substitution returned by `solve` unifies the whole
 worklist. The five moves: the empty list returns the identity, which trivially
@@ -380,7 +373,7 @@ theorem solve_isSome [DecidableEq sigma] [DecidableEq nu]
       rw [Unifies_congr_of_pointwise (comp_subst1_eq_of_unifies τ x (Term.var y) hτ.1)]
       exact hτ.2
   | case4 x g bs rest hocc =>
-      -- occurs-check failure is impossible under a unifier
+      -- occurs-check failure contradicts the supplied unifier
       obtain ⟨τ, hτ⟩ := hex
       rw [Unifies_cons] at hτ
       exact absurd hτ.1 (not_unifies_of_occurs_app τ x g bs hocc)
@@ -395,7 +388,7 @@ theorem solve_isSome [DecidableEq sigma] [DecidableEq nu]
       rw [Unifies_congr_of_pointwise (comp_subst1_eq_of_unifies τ x (Term.app g bs) hτ.1)]
       exact hτ.2
   | case6 f as y rest hocc =>
-      -- oriented occurs-check failure is impossible under a unifier
+      -- oriented occurs-check failure contradicts the supplied unifier
       obtain ⟨τ, hτ⟩ := hex
       rw [Unifies_cons] at hτ
       exact absurd hτ.1.symm (not_unifies_of_occurs_app τ y f as hocc)
@@ -421,7 +414,7 @@ theorem solve_isSome [DecidableEq sigma] [DecidableEq nu]
       rw [Unifies_append]
       exact ⟨(Unifies_zipPairs_iff τ f as bs hlen).2 hτ.1, hτ.2⟩
   | case9 f as g bs rest hfg =>
-      -- head/arity clash is impossible under a unifier
+      -- head/arity clash contradicts the supplied unifier
       obtain ⟨τ, hτ⟩ := hex
       rw [Unifies_cons] at hτ
       -- a unifier forces equal heads and equal arity, contradicting the clash
@@ -541,14 +534,13 @@ theorem solve_mostGeneral [DecidableEq sigma] [DecidableEq nu]
 
 /-! ## The headline single-equation theorems
 
-`unify s t = solve [(s, t)]` by definition, so the three roadmap headline
+`unify s t = solve [(s, t)]` by definition, so the three exported
 statements are the singleton specializations of the worklist invariants above,
 bridged through `Unifies_singleton`. -/
 
-/-- Soundness of `unify`: a returned substitution unifies the two terms. Relation:
-syntactic equality of substitution images. Strategy: not applicable (unification,
-not rewriting). Trust: kernel-only. The singleton specialization of
-`solve_unifies`. -/
+/-- Soundness of `unify`: a returned substitution unifies the two terms.
+Relation: syntactic equality of substitution images. The result is the singleton
+specialization of `solve_unifies`. -/
 theorem unify_sound [DecidableEq sigma] [DecidableEq nu] {s t : Term sigma nu}
     {sigma' : Subst sigma nu} (h : unify s t = some sigma') :
     sigma'.apply s = sigma'.apply t := by
@@ -584,7 +576,7 @@ theorem unify_mostGeneral [DecidableEq sigma] [DecidableEq nu] {s t : Term sigma
 
 end OperatorKO7.Meta.Rewriting
 
-/-! ## Verification: headline types and axiom audit -/
+/-! ## Exported types and axiom reports -/
 
 open OperatorKO7.Meta.Rewriting in
 #check @unify_sound

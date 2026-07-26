@@ -3,11 +3,10 @@ import OperatorKO7.Meta.MaxBarrier_Schema
 /-!
 # Arctic Projection Barrier
 
-This file records a tool-facing arctic-style corollary of the max barrier. We do
-not formalize generic arctic matrix algebra. Instead, we isolate the case that
-matters for the current boundary story: an arctic-family interpretation with a
-distinguished finite primary projection whose values obey the same max-plus laws
-as the schema-level `MaxMeasure`.
+This file records a tool-facing arctic-style corollary of the max barrier. The
+formal surface isolates an arctic-family interpretation with a distinguished
+finite primary projection whose values obey the same max-plus laws as the
+schema-level `MaxMeasure`.
 -/
 
 namespace OperatorKO7.StepDuplicating

@@ -5,9 +5,9 @@ import OperatorKO7.Meta.MutualDuplication_Case
 /-!
 # First-Class Finite-Cycle Mutual Step-Duplicating Schema
 
-This module re-exports the existing finite `k + 1`-node SCC infrastructure through a
-first-class mutual-recursion surface. The point is to expose the finite-cycle objects and
-barrier theorems under the mutual-schema lane without duplicating the older proof stack.
+## Formal Scope
+
+The results cover the displayed bounded finite-cycle schemas and concrete two-rule and three-rule witnesses. They do not assert an unbounded arbitrary-graph classification.
 -/
 
 namespace OperatorKO7.MutualDuplicationFiniteSchema
@@ -87,7 +87,7 @@ namespace KCycleSystem
 abbrev toKCycleSchema {k : Nat} (Sys : KCycleSystem k) : KCycleSchema k :=
   Sys.toCyclicDupSchema
 
-/-- Bridge back to the legacy `k + 1`-node SCC witness layer. -/
+/-- Bridge back to the prior `k + 1`-node SCC witness layer. -/
 abbrev toKNodeWitness {k : Nat} (Sys : KCycleSystem k) :
     OperatorKO7.MutualDuplicationKNode.CyclicDupSchema.CyclicDupSystem k :=
   Sys
@@ -106,7 +106,7 @@ def toCycleWitness {k : Nat} (Sys : KCycleSystem k) :
       (KCycleSchema.toNodeSchema Sys.toKCycleSchema (0 : Fin (k + 1))) (k + 1) :=
   OperatorKO7.MutualDuplicationKNodeAbstract.CyclicDupSystem.cycleWitness Sys.toKNodeWitness
 
-/-- The finite-cycle path realized by the legacy `k + 1`-node SCC development is exactly the
+/-- The finite-cycle path realized by the prior `k + 1`-node SCC development is directly the
 first-class finite-cycle path. -/
 theorem cycle_realized_via_kNode
     {k : Nat} (Sys : KCycleSystem k) (i : Fin (k + 1)) (b s n : Sys.T) :

@@ -37,20 +37,26 @@ namespace OperatorKO7.OrdinalHierarchy
 
 def omegaNote : ONote := ONote.oadd 1 1 0
 
-/-- `cichon` arithmetic on `ONote` does not reduce by kernel `decide`:
-the `Decidable` instance gets stuck at `Bool.ble` over recursive
-ordinal-notation evaluations. Compiled-code `native_decide` reduces
-these. Trust slot: build-time only; the complete axiom dependence is
-recorded by `#print axioms` in
-`OperatorKO7.Meta.NativeDecideAuditGate.keptNativeDecideTheorems`. -/
-theorem cichon_ofNat_five_one_eq_five : cichon (ONote.ofNat 5) 1 = 5 := by native_decide
--- #print axioms cichon_ofNat_five_one_eq_five
--- depends on axioms: [propext, Classical.choice, Lean.ofReduceBool, Quot.sound]
+/-- Direct kernel proof of the finite Cichon calculation.  The recursion is
+unfolded through the successor equations instead of delegated to compiled-code
+decision. -/
+theorem cichon_ofNat_five_one_eq_five : cichon (ONote.ofNat 5) 1 = 5 := by
+  rw [@cichon_succ (ONote.ofNat 5) (ONote.ofNat 4) rfl]
+  rw [@cichon_succ (ONote.ofNat 4) (ONote.ofNat 3) rfl]
+  rw [@cichon_succ (ONote.ofNat 3) (ONote.ofNat 2) rfl]
+  rw [@cichon_succ (ONote.ofNat 2) (ONote.ofNat 1) rfl]
+  rw [@cichon_succ (ONote.ofNat 1) (ONote.ofNat 0) rfl]
+  rw [show cichon (ONote.ofNat 0) = fun _ => 0 by exact cichon_zero]
 
-/-- Same retention rationale as `cichon_ofNat_five_one_eq_five`. -/
-theorem cichon_omegaNote_one_eq_three : cichon omegaNote 1 = 3 := by native_decide
--- #print axioms cichon_omegaNote_one_eq_three
--- depends on axioms: [propext, Classical.choice, Lean.ofReduceBool, Quot.sound]
+/-- Direct kernel proof of the first nontrivial limit calculation. -/
+theorem cichon_omegaNote_one_eq_three : cichon omegaNote 1 = 3 := by
+  rw [cichon_limit omegaNote
+    (by rfl : fundamentalSequence omegaNote =
+      Sum.inr (fun i => ONote.ofNat (i + 1)))]
+  change Nat.succ (cichon (ONote.ofNat 2) 2) = 3
+  rw [@cichon_succ (ONote.ofNat 2) (ONote.ofNat 1) rfl]
+  rw [@cichon_succ (ONote.ofNat 1) (ONote.ofNat 0) rfl]
+  rw [show cichon (ONote.ofNat 0) = fun _ => 0 by exact cichon_zero]
 
 theorem not_cichon_mono_repr :
     ¬ ∀ a b : ONote, ∀ k : Nat, a.repr ≤ b.repr → cichon a k ≤ cichon b k := by
@@ -58,13 +64,10 @@ theorem not_cichon_mono_repr :
   have hle : (ONote.ofNat 5).repr ≤ omegaNote.repr := by
     simpa [omegaNote] using (Ordinal.nat_lt_omega0 5).le
   have hbad := hmono (ONote.ofNat 5) omegaNote 1 hle
-  -- decide is intractable: same `cichon`/`ONote` reduction issue as in
-  -- cichon_ofNat_five_one_eq_five above.
   have hcontra : ¬ cichon (ONote.ofNat 5) 1 ≤ cichon omegaNote 1 := by
-    native_decide
+    rw [cichon_ofNat_five_one_eq_five, cichon_omegaNote_one_eq_three]
+    decide
   exact hcontra hbad
--- #print axioms not_cichon_mono_repr
--- depends on axioms: [propext, Classical.choice, Lean.ofReduceBool, Quot.sound]
 
 /-! ## Relaxed controlled descent relation -/
 

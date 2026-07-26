@@ -23,7 +23,7 @@ namespace MetaSN_KO7
 /-- Exact-length reflexive-transitive closure of `SafeStep`. -/
 inductive SafeStepPow : Trace → Nat → Trace → Prop
 | refl (t : Trace) : SafeStepPow t 0 t
-| tail {a b c : Trace} (hab : SafeStep a b) (hbc : SafeStepPow b n c) :
+| tail {a b c : Trace} {n : Nat} (hab : SafeStep a b) (hbc : SafeStepPow b n c) :
     SafeStepPow a (n + 1) c
 
 /-- Forget the exact length and obtain a `SafeStepStar` path. -/

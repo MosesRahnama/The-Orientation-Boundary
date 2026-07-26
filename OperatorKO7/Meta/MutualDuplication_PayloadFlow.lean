@@ -12,9 +12,8 @@ results. The syntax-specific packet model is abstracted to:
 - a recursor-like carrier `recur`,
 - and a certified one-cycle path from `syncSource` to `syncTarget`.
 
-The resulting theorems are still concrete enough to recover additive and affine SCC
-barriers, but no longer depend on the explicit packet syntax used by the current
-finite-cycle implementations.
+The resulting theorems recover additive and affine SCC barriers through this
+abstract packet interface and its supplied one-cycle path.
 -/
 
 namespace OperatorKO7.MutualDuplicationPayloadFlow

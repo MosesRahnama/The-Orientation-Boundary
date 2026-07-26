@@ -5,11 +5,11 @@ import OperatorKO7.Meta.ComputableMeasure
 /-!
 # No-go results around contextual copy budgets
 
-This file contains the exploratory obstruction side of the tighter
-`SafeStepCtx` complexity program. The positive outcome now lives in
-`Meta/ContextualCopyBudget.lean`; this companion file keeps the failed measure
-families, concrete counterexamples, and the class-level impossibility theorem
-for the monotone arithmetic closure of the initial candidate coordinates.
+This companion module contains obstruction results for contextual `SafeStepCtx`
+measures. `Meta/ContextualCopyBudget.lean` supplies the constructive counterpart.
+The results below record rejected measure families, concrete counterexamples,
+and the class-level impossibility theorem for the monotone arithmetic closure
+of the specified candidate coordinates.
 -/
 
 open OperatorKO7 Trace
@@ -175,7 +175,7 @@ theorem counterBudget_rec_succ_strict_of_dom (b s n : Trace)
   rw [hsrc, htgt]
   omega
 
-/-- In the earlier base-dominated flat-`copyBudget` example, the localized counter budget does drop. -/
+/-- In the base-dominated flat-`copyBudget` example, the localized counter budget drops. -/
 theorem recSuccFlatTau_counterBudget_drops :
     counterBudget recSuccFlatTauTgt < counterBudget recSuccFlatTauSrc := by
   simp [recSuccFlatTauSrc, recSuccFlatTauTgt, counterBudget, copyBudget]
@@ -271,7 +271,7 @@ theorem not_copyMass_mono_safe :
   have h := hmono recSuccMassBad_step
   exact Nat.not_le_of_lt recSuccMassBad_copyMass_increases h
 
-/-- A small DSL for monotone arithmetic expressions over the currently explored
+/-- A small DSL for monotone arithmetic expressions over the specified
 contextual coordinates. -/
 inductive CoordExpr where
 | const : Nat → CoordExpr
@@ -299,7 +299,7 @@ theorem recSuccPayloadFlat_copyMass_eq :
     copyMass recSuccPayloadFlatTgt = copyMass recSuccPayloadFlatSrc := by
   simp [recSuccPayloadFlatSrc, recSuccPayloadFlatTgt, copyMass, copyBudget]
 
-/-- Every monotone arithmetic expression over the current coordinates is non-decreasing
+/-- Every monotone arithmetic expression over the specified coordinates is non-decreasing
 on the payload-recursive `rec_succ` obstruction. -/
 theorem coordExpr_payloadFlat_nondec (e : CoordExpr) :
     e.eval recSuccPayloadFlatSrc ≤ e.eval recSuccPayloadFlatTgt := by
@@ -373,7 +373,7 @@ theorem not_coordExprStackCertifies_payloadFlat (es : List CoordExpr) :
   | succ k ih =>
       simp [deltaPow, copyMass, ih]
 
-/-- Infinite payload-recursive `rec_succ` family with persistent copy pressure. -/
+/-- Nat-indexed payload-recursive `rec_succ` family with persistent copy pressure. -/
 @[simp] def payloadRecFamily (k : Nat) : Trace :=
   recΔ void void (deltaPow (k + 1))
 
@@ -405,8 +405,8 @@ theorem payloadRecFamily_copyMass_nondec (k : Nat) :
   simp [payloadRecFamilySrc, payloadRecFamilyTgt, payloadRecFamily, copyMass, copyBudget]
   omega
 
-/-- The same monotone arithmetic closure is blocked on an infinite payload-recursive family,
-not just on a single witness. -/
+/-- The monotone arithmetic closure is blocked at every index of the
+payload-recursive family, not only at the displayed witness. -/
 theorem coordExpr_payloadFamily_nondec (e : CoordExpr) (k : Nat) :
     e.eval (payloadRecFamilySrc k) ≤ e.eval (payloadRecFamilyTgt k) := by
   induction e generalizing k with

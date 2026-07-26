@@ -3,10 +3,10 @@ import OperatorKO7.Meta.StepDuplicatingSchema
 /-!
 # Computable barrier-witness extractors
 
-This module packages the constructive content of the barrier theorems as
-computable certificate extractors.  Given any claimed measure (additive,
-compositional, or affine), the extractors produce a concrete instantiation
-`(b, s, n)` for which orientation fails:
+This module packages constructive barrier content as certificate extractors.
+For additive measures, transparent-successor compositional measures, and
+affine measures supplied with a threshold pump term, the extractors produce a
+concrete instantiation `(b, s, n)` for which orientation fails:
 
     M.eval (S.wrap s (S.recur b s n)) ≥ M.eval (S.recur b s (S.succ n))
 
@@ -68,7 +68,7 @@ def compositional_witness {S : StepDuplicatingSchema}
     have hsub := CM.wrap_subterm2 CM.c_base (CM.c_recur CM.c_base CM.c_base CM.c_base)
     omega
 
-/-- The compositional witness is the minimal all-base instantiation. -/
+/-- The compositional witness is the all-base instantiation. -/
 theorem compositional_witness_is_base {S : StepDuplicatingSchema}
     (CM : CompositionalMeasure S)
     (h_transparent : CM.c_succ CM.c_base = CM.c_base) :

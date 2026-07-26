@@ -3,47 +3,9 @@ import OperatorKO7.Meta.Rewriting.CriticalPairComplete
 /-!
 # A certified confluence decision procedure for a finite rewriting system
 
-Roadmap source: the confluence-toolkit expansion on top of the verified Critical
-Pair Lemma (`CriticalPairComplete.lean`). This module turns the Knuth-Bendix/Huet
-characterization into an executable check: equip a finite term rewriting system
-with a normalizer (a function returning, for each term, a reduct it reaches), run
-it on both components of every critical pair, and accept when the two reducts
-coincide. Strong normalization of the renamed system then upgrades the resulting
-local confluence to confluence.
+## Formal Scope
 
-## What this module delivers
-
-- `Normalizer R` : a function `nf` together with the reachability certificate
-  `nf_reach : ∀ t, StepStar R t (nf t)`. Every value `nf t` is a reduct of `t`,
-  so a shared `nf`-value certifies joinability.
-
-- `joinable_of_nf_eq` : equal normal forms give joinability. When `nf s = nf t`,
-  both `s` and `t` reach the common value `nf s`, so `joinable R s t`.
-
-- `decideConfluence R norm` : the Boolean check. It runs the normalizer of
-  `renameTRS R` on both components of every member of `criticalPairs R` and
-  accepts when each pair shares a normal form. This is a real enumeration of the
-  overlaps (`criticalPairs`), with one genuine comparison per emitted pair.
-
-- `decideConfluence_sound` : when the check succeeds and `Step (renameTRS R)` is
-  strongly normalizing (its `flip` is well-founded), `Step (renameTRS R)` is
-  confluent (`AbsConfluent`). Route: the check makes every critical pair joinable
-  (`joinable_of_nf_eq`), `critical_pair_lemma` turns that into local confluence,
-  and `confluent_of_cp_joinable_of_SN` adds strong normalization to reach
-  confluence.
-
-- `decideConfluence_complete` : the reach direction. A confluent system whose
-  normalizer returns genuine normal forms (irreducible reducts) passes the check:
-  confluence drives the two reducts of each critical pair to the same normal form.
-
-- `Demo` : a concrete confluent system `f(c) -> c`, an explicit `Normalizer`, the
-  check evaluating to `true`, and the soundness conclusion applied under a clean
-  strong-normalization hypothesis.
-
-Trust: kernel-only; baseline-only under `#print axioms` (a subset of
-`{propext, Classical.choice, Quot.sound}`). Any `Classical.choice`/`propext`
-dependence is from `Finset`/`DecidableEq` plumbing inherited through the
-foundation modules.
+Normalizer supplies a reachable reduct; irreducibility is the separate IsNF predicate. decideConfluence is a conditional Boolean criterion, sound with strong normalization and complete with confluence plus IsNF.
 -/
 
 set_option autoImplicit false
@@ -57,7 +19,7 @@ universe u v
 
 variable {sigma : Type u} {nu : Type v}
 
-/-! ## Normalizers
+/-! ## Reachable-Reduct Selectors
 
 A normalizer for `R` assigns to each term a reduct it reaches. The reachability
 certificate is the load-bearing field: it is what lets a shared normalizer value
@@ -73,29 +35,28 @@ structure Normalizer (R : TRS sigma nu) where
   /-- Each value `nf t` is reachable from `t` by the rewrite relation. -/
   nf_reach : ∀ t, StepStar R t (nf t)
 
-/-- Equal normal forms give joinability: if a normalizer sends `s` and `t` to the
+/-- Equal selected reducts give joinability: if a `Normalizer` sends `s` and `t` to the
 same value, then `s` and `t` are joinable, both reaching the common value
 `norm.nf s`. -/
 theorem joinable_of_nf_eq {R : TRS sigma nu} (norm : Normalizer R)
     {s t : Term sigma nu} (h : norm.nf s = norm.nf t) : joinable R s t :=
   ⟨norm.nf s, norm.nf_reach s, h ▸ norm.nf_reach t⟩
 
-/-! ## The decision procedure
+/-! ## Conditional Boolean Check
 
-The check runs the normalizer of the renamed system on both components of every
-critical pair, accepting when each pair shares a normal form. `criticalPairs R` is
-a genuine enumeration of the system's overlaps, so this is a real check. -/
+The check runs the reachable-reduct selector on both components of every
+critical pair, accepting when each pair receives the same selected reduct. -/
 
-/-- The confluence check for a finite system `R` equipped with a normalizer for the
+/-- Boolean critical-pair check for a finite system `R` equipped with a selector for the
 renamed system `renameTRS R`: every critical pair of `R` is tested for a shared
-normal form. Accepts (`true`) exactly when every emitted critical pair has its two
+selected reduct. Accepts (`true`) when every emitted critical pair has its two
 components sent to the same value by `norm.nf`. -/
 def decideConfluence [DecidableEq sigma] [DecidableEq nu]
     (R : TRS sigma nu) (norm : Normalizer (renameTRS R)) : Bool :=
   (criticalPairs R).all (fun p => decide (norm.nf p.1 = norm.nf p.2))
 
 /-- Reading the check back: when `decideConfluence R norm = true`, every critical
-pair of `R` has its components sent to a shared normal form, hence is joinable in
+pair of `R` has its components sent to a shared reduct, hence is joinable in
 `renameTRS R`. This is the bridge from the Boolean check to the hypothesis of the
 Critical Pair Lemma. -/
 theorem cp_joinable_of_decideConfluence [DecidableEq sigma] [DecidableEq nu]
@@ -107,7 +68,7 @@ theorem cp_joinable_of_decideConfluence [DecidableEq sigma] [DecidableEq nu]
   have hq' : decide (norm.nf q.1 = norm.nf q.2) = true := h q hq
   exact joinable_of_nf_eq norm (of_decide_eq_true hq')
 
-/-- Soundness of the decision procedure: when the check succeeds and the one-step
+/-- Conditional soundness: when the check succeeds and the one-step
 relation `Step (renameTRS R)` is strongly normalizing (its `flip` is
 well-founded), `Step (renameTRS R)` is confluent. The successful check makes every
 critical pair joinable, `critical_pair_lemma` turns that into local confluence, and
@@ -123,10 +84,10 @@ theorem decideConfluence_sound [DecidableEq sigma] [DecidableEq nu]
   intro a b c hab hac
   exact confluent_of_cp_joinable_of_SN hSN hcp a b c hab hac
 
-/-! ## Completeness: a confluent system with genuine normal forms passes
+/-! ## Completeness with Irreducible Selected Reducts
 
 The reach direction. If `renameTRS R` is confluent and the normalizer returns
-genuine normal forms (each `nf t` is irreducible and reachable), then the two
+normal forms (each `nf t` is irreducible and reachable), then the two
 reducts of every critical pair are driven to the same normal form, so the check
 accepts. -/
 
@@ -146,7 +107,7 @@ theorem stepStar_eq_of_nf {R : TRS sigma nu} {n u : Term sigma nu}
   · rfl
   · exact absurd hnm (hn m)
 
-/-- Completeness of the decision procedure: a confluent renamed system with a
+/-- Completeness of the Boolean check: a confluent renamed system with a
 normal-form normalizer passes the check. Each critical pair is a genuine peak
 (`criticalPairs_sound`), so the shared source reaches both normal-form images;
 joining those images through `AbsConfluent` and using irreducibility on both ends
@@ -158,7 +119,7 @@ theorem decideConfluence_complete [DecidableEq sigma] [DecidableEq nu]
   rw [decideConfluence, List.all_eq_true]
   intro q hq
   rw [decide_eq_true_eq]
-  -- the critical pair is a genuine peak `w -> q.1`, `w -> q.2`
+  -- The critical pair supplies a peak `w -> q.1`, `w -> q.2`.
   obtain ⟨w, hw1, hw2⟩ := criticalPairs_sound R hq
   -- both components reach their own normal form
   have hr1 : StepStar (renameTRS R) q.1 (norm.nf q.1) := norm.nf_reach q.1
@@ -176,7 +137,7 @@ theorem decideConfluence_complete [DecidableEq sigma] [DecidableEq nu]
 
 end OperatorKO7.Meta.Rewriting
 
-/-! ## Non-vacuity: a concrete confluent system passes the check
+/-! ## Concrete Accepted Fixture
 
 The system has one rule over `Nat`-symbols and `Nat`-variables:
 
@@ -184,8 +145,8 @@ The system has one rule over `Nat`-symbols and `Nat`-variables:
 
 Its only overlap is the rule with a renamed copy of itself at the root, whose
 critical pair has identical components `(c, c)`. So the check accepts under any
-normalizer; the identity normalizer (each term reaches itself in zero steps) is the
-cleanest witness. Under a clean strong-normalization hypothesis the soundness
+selector; the identity selector sends each term to itself in zero steps. Under a
+strong-normalization hypothesis the soundness
 conclusion gives confluence of the renamed system. -/
 
 namespace OperatorKO7.Meta.Rewriting
@@ -204,8 +165,8 @@ def ruleFc : Rule Nat Nat where
 /-- The one-rule demonstration system `[f(c) -> c]`. -/
 def trs : TRS Nat Nat := [ruleFc]
 
-/-- The identity normalizer for the renamed system: each term is its own reduct,
-reached in zero steps. A genuine `Normalizer`, with the reachability field
+/-- The identity `Normalizer` value for the renamed system: each term is its own
+selected reduct, reached in zero steps, with the reachability field
 discharged by reflexivity of the closure. -/
 def idNormalizer : Normalizer (renameTRS trs) where
   nf := fun t => t
@@ -222,7 +183,7 @@ theorem decideConfluence_trs_eq_true :
     nonVarPositionsList, Term.subtermAt, unify, solve, zipPairs, Subst.apply,
     Subst.applyList, Term.replaceAt, Term.replaceAtList]
 
-/-- The soundness conclusion applied to the demonstration system: under a clean
+/-- The soundness conclusion applied to the demonstration system: under a
 strong-normalization hypothesis for the renamed system, the accepted check yields
 confluence of `Step (renameTRS trs)`. The strong-normalization witness is taken as
 a hypothesis, as the soundness route permits. -/
@@ -235,7 +196,7 @@ end Demo
 
 end OperatorKO7.Meta.Rewriting
 
-/-! ## Verification: headline types and axiom audit -/
+/-! ## Type and Axiom Checks -/
 
 open OperatorKO7.Meta.Rewriting in
 #check @Normalizer

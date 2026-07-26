@@ -1,15 +1,14 @@
+import OperatorKO7.Meta.ConfessionMethod_RouteEvidence
 import OperatorKO7.Meta.ConstructionMethodClassification
 import OperatorKO7.Meta.BenchmarkedPrimitiveRecursionFamily
 import OperatorKO7.Meta.RecCore
-import OperatorKO7.Meta.ConfessionMethod_RouteEvidence
 
 /-!
 # Transformed-Call Classification
 
-This module continues the M1 classification layer with an explicit W2 surface.
-It stays narrow: the carrier is built around theorem-backed transformed-call
-witnesses already present in the artifact, not around a generic dependency-pair
-library.
+This module defines a two-constructor route class and packages imported transformed-call witnesses.
+The route-evidence theorem near the end is a conjunction of independent projections; it does not
+identify or transport the concrete DP proof into the confession-method evidence field.
 
 The canonical W2 routes formalized here are:
 
@@ -143,8 +142,9 @@ theorem fullDuplicating_w2_separates_from_direct_search :
     fullDuplicating_has_no_direct_witness⟩
   simp [fullDuplicating_w2_success]
 
-/-- The duplicating transformed-call route is the same KO7 DP route carried by
-the confession-method convergence package. -/
+/-- Bundle four independent facts: the local route tag, the local permitted-transform witness, an
+equality between two fields of the imported confession package, and a transformed-call witness. No
+equality between the local DP evidence and the confession-package evidence is asserted. -/
 theorem fullDuplicating_w2_success_projects_confession_route_evidence :
     fullDuplicating_w2_success.transformClass = .ko7DPProjection
     ∧ PermittedW2Transform .ko7DPProjection fullDuplicating
@@ -156,7 +156,8 @@ theorem fullDuplicating_w2_success_projects_confession_route_evidence :
     OperatorKO7.ConfessionMethodFamily.confessionRouteConvergencePackage_projects_route_agreement.1,
     fullDuplicating_w2_success_requires_transformed_call_witness⟩
 
-/-- Combined catalog for the canonical theorem-backed W2 witnesses formalized here. -/
+/-- Conjunction of the target tags, route tags, permitted-transform witnesses, and transformed-call
+witnesses for the two constructed values. -/
 theorem canonical_w2_witness_catalog :
     (fullDuplicating_w2_success.target = fullDuplicating ∧
       fullDuplicating_w2_success.transformClass = .ko7DPProjection ∧

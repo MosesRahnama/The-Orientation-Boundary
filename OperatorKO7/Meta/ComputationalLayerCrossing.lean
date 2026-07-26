@@ -6,26 +6,28 @@ import OperatorKO7.Meta.SchemaOperationalIncompleteness
 /-!
 # Computational Layer Crossing
 
-This module formalizes the computation-to-record bridge suggested by the
-Failure Floor structural-identity discussion.
+This module defines record-emission interfaces for a base-duplicating system
+and derives access, projection, and conservation properties from their stated
+fields.
 
 The core object is a `RecordEmissionWitness` for a fixed base/step seed pair
 inside a `BaseDuplicatingSystem`. Such a witness supplies:
 
-- a live-computation coordinate that stays constant along the canonical live
-  computation stages and vanishes at the terminal record, and
-- a record coordinate that grows exactly with the progress index and therefore
-  decodes that hidden index from the emitted record family.
+- a live-computation coordinate whose canonical and terminal values are fixed
+  by the interface, and
+- a record coordinate whose canonical and terminal values equal the supplied
+  progress and depth indices.
 
 From this we derive a concrete `MetaAccessModel` in the sense of
 `Meta/InformationAccess.lean`:
 
-- the live channel is not directly verdict-retrieving once there are at least
-  two possible progress indices; but
-- the record channel retrieves the hidden progress index exactly.
+- the constructed initial channel is constant when at least two progress
+  indices are available, and
+- the constructed positive-stage channel returns the progress index.
 
-This is the formal computation-side "layer crossing" used to tighten the
-structural-identity bridge.
+The final section realizes all interfaces on an inductive free-term carrier.
+The access result is about the access model constructed here; the bridge
+predicate is the conjunction stated explicitly below.
 -/
 
 namespace OperatorKO7.StepDuplicating
@@ -162,13 +164,14 @@ theorem live_terminal_separation (k i : Nat) (hik : i ≤ k) :
   rw [W.live_canonical k i hik, W.live_terminal k]
   decide
 
-/-- Access model in which the hidden verdict is the progress index itself:
+/-- Access model in which the verdict is the progress index:
 
 - at stage `0`, the meta layer sees only the live computation coordinate;
 - at stage `1`, it sees the emitted record coordinate.
 
-This makes the computation-to-record crossing explicit inside the generic
-Section 2 access framework. -/
+The meta view is constant by construction. The stage-zero trace is fixed to
+`1` by the witness laws, while every positive-stage trace reads the terminal
+record coordinate. -/
 def liveRecordAccessModel (K : Nat) :
     MetaAccessModel (Fin (K + 1)) Unit (Fin (K + 1)) Nat where
   metaView := fun _ => ()
@@ -222,16 +225,15 @@ theorem liveRecordAccess_not_directRetrieval {K : Nat} (hK : 1 ≤ K) :
     simp [i0, i1] at hvals
   omega
 
-/-- The record-emission witness realizes a genuine sequential uncertainty
-reduction event: the live channel is not directly verdict-retrieving, but the
-record channel is. -/
+/-- In the constructed access model, direct retrieval fails at stage zero and
+retrieval holds at stage one when at least two depths are available. -/
 theorem liveRecordAccess_sequentialReduction {K : Nat} (hK : 1 ≤ K) :
     (W.liveRecordAccessModel K).SequentialUncertaintyReduction 1 := by
   refine ⟨W.liveRecordAccess_not_directRetrieval hK, ?_⟩
   simpa using W.liveRecordAccess_stage1_retrieval K
 
-/-- The hidden progress index is genuinely hidden from the meta layer alone and
-becomes accessible only through the emitted record coordinate. -/
+/-- The stage-one trace is inaccessible from the constant meta view alone but,
+together with that meta view, determines the verdict in the constructed model. -/
 theorem liveRecordAccess_requires_hidden_state {K : Nat} (hK : 1 ≤ K) :
     ∃ φ : Fin (K + 1) → Nat,
       ¬ OperatorKO7.InformationAccess.AccessibleFrom
@@ -323,14 +325,10 @@ theorem requires_hidden_state {K : Nat} (hK : 1 ≤ K) :
 
 end FaithfulRecordEmitter
 
-/-- A semantic projection kernel on the ambient carrier. Unlike the explicit
-stage-indexed extension principle, this object is constructor-driven: it gives
-an ambient projection map together with a projection rank on the ambient schema
-view, and requires the projection map itself to respect the step-duplicating
-constructors in the generator-tracking way needed for the canonical trace.
-
-This is the right abstract replacement for per-stage extension data when the
-ambient carrier already comes with a semantically meaningful projection. -/
+/-- Projection data on the ambient carrier. The interface supplies a projection
+map, a `ProjectionRank`, and equations specifying how the projection treats all
+four constructors. These fields suffice to derive the canonical-trace and
+terminal equations without separate stage-indexed extension data. -/
 structure SemanticProjectionKernel (Sys : BaseDuplicatingSystem) where
   project : Sys.T → Sys.T
   projectedRank : ProjectionRank Sys.toStepDuplicatingSchema
@@ -440,12 +438,11 @@ theorem unique_of_generated
 
 end SemanticProjectionKernel
 
-/-- A genuine constructor-recursion principle for the ambient carrier.
-Unlike `GeneratedByConstructors`, this is strong enough to *define* ambient
-functions out of `Sys.T` by giving their constructor equations. This is the
-missing hypothesis behind the remaining raw-emitter ambient-staticity gap:
-without some interface of this kind, the raw emitter data alone does not let
-Lean build the ambient projection map or rank on an arbitrary carrier. -/
+/-- A polymorphic constructor-recursion interface for the ambient carrier.
+It supplies a fold into every target type and equations for all four
+constructors. These fields are sufficient to define the projection and rank
+used below; `GeneratedByConstructors` alone provides only an induction-style
+decomposition statement. -/
 structure ConstructorRecursor (Sys : BaseDuplicatingSystem) where
   fold :
     {α : Type} →
@@ -549,11 +546,9 @@ def toSemanticProjectionKernel : SemanticProjectionKernel Sys where
 
 end ConstructorRecursor
 
-/-- A weaker projection-kernel interface. Unlike `SemanticProjectionKernel`,
-this object only controls the projected rank after projection, not the
-projected term itself. This is the right weaker abstract hypothesis when the
-ambient projection is semantically meaningful only through the generator rank
-it induces. -/
+/-- Projection data that constrain only the rank after projection. In contrast
+to `SemanticProjectionKernel`, this interface has no equations for the
+projected term itself. -/
 structure RankLevelProjectionKernel (Sys : BaseDuplicatingSystem) where
   project : Sys.T → Sys.T
   projectedRank : ProjectionRank Sys.toStepDuplicatingSchema
@@ -623,11 +618,9 @@ def ofSemanticProjectionKernel (K' : SemanticProjectionKernel Sys) :
 
 end RankLevelProjectionKernel
 
-/-- A record emitter equipped with an explicit projection to the generator-side
-counter rank. This is the critic-facing bridge from the computation-to-record
-layer crossing to the confession / forgetting stack: the emitted record carries
-progress externally, while a licensed projection recovers the hidden generator
-coordinate internally. -/
+/-- A faithful record emitter equipped with an ambient projection and a
+`ProjectionRank`. The final two fields state the projected rank on the
+canonical trace and terminal record. -/
 structure ProjectiveRecordEmitter (Sys : BaseDuplicatingSystem) (b s : Sys.T)
     extends FaithfulRecordEmitter Sys b s where
   project : Sys.T → Sys.T
@@ -644,8 +637,8 @@ namespace ProjectiveRecordEmitter
 
 variable {b s : Sys.T} (E : ProjectiveRecordEmitter Sys b s)
 
-/-- The projected generator coordinate obtained by applying the licensed
-projection and then reading the projection rank. -/
+/-- The projected generator coordinate obtained by applying the supplied
+projection and then reading its rank. -/
 def projectedGeneratorCoord (t : Sys.T) : Nat :=
   E.projectedRank.rank (E.project t)
 
@@ -682,14 +675,15 @@ theorem projectedGenerator_drops_one_per_step (k i : Nat) (hik : i < k) :
 def toForgettingWitness : ForgettingWitness Sys.toStepDuplicatingSchema :=
   ForgettingWitness.ofProjectionRank E.projectedRank
 
-/-- The same projection rank yields the Paper-2 operational-incompleteness
-bundle on the ambient step-duplicating system view. -/
+/-- The supplied projection rank is converted to the generic
+`OperationalIncompleteness` structure. -/
 def toOperationalIncompleteness :
     OperationalIncompleteness Sys.toStepDuplicatingSystem :=
   OperationalIncompleteness.ofProjectionRank E.projectedRank
 
-/-- A projective record emitter determines a projection-transaction once a
-license proposition is fixed. -/
+/-- Package the projected coordinate, forgetting witness, and any proved
+proposition supplied as the transaction's `license` field. This construction
+does not impose additional semantics on that proposition. -/
 def toProjectionTransaction (license : Prop) (hlicense : license) :
     ProjectionTransaction Sys.toStepDuplicatingSchema where
   dimension := E.projectedGeneratorCoord
@@ -697,8 +691,8 @@ def toProjectionTransaction (license : Prop) (hlicense : license) :
   boundary := E.toForgettingWitness
   licensed := hlicense
 
-/-- Named critic-facing bridge: a single projective emitter witnesses both the
-computation-to-record crossing and the confession-style forgetting package. -/
+/-- Named conjunction of the access-model crossing property and the existence
+of an `OperationalIncompleteness` package for the ambient system. -/
 def RealizesComputationToConfessionBridge (K : Nat) : Prop :=
   (E.toRecordEmissionWitness).RealizesComputationToRecordCrossing K
     ∧ Nonempty (OperationalIncompleteness Sys.toStepDuplicatingSystem)
@@ -710,11 +704,10 @@ theorem realizesComputationToConfessionBridge_of_one_le {K : Nat} (hK : 1 ≤ K)
 
 end ProjectiveRecordEmitter
 
-/-- A more semantic generator-preserving emitter. Compared with
-`ProjectiveRecordEmitter`, this interface does not assume a packaged
-`ProjectionRank`; it only gives a generator coordinate satisfying the
-projection-rank equations after projection. From this data we can reconstruct
-the projective/confession bridge canonically. -/
+/-- A generator-preserving emitter that supplies a projection and a numeric
+coordinate instead of a packaged `ProjectionRank`. The constructor equations
+for the coordinate and the two trace equations suffice to construct a
+`ProjectiveRecordEmitter`. -/
 structure GeneratorPreservingRecordEmitter
     (Sys : BaseDuplicatingSystem) (b s : Sys.T)
     extends FaithfulRecordEmitter Sys b s where
@@ -758,11 +751,9 @@ theorem realizesComputationToConfessionBridge_of_one_le {K : Nat} (hK : 1 ≤ K)
 
 end GeneratorPreservingRecordEmitter
 
-/-- A semantically coherent generator-preserving emitter. This is strictly
-weaker than supplying a `SemanticProjectionKernel` as separate data: it starts
-from the generator-preserving emitter interface and only adds the fact that the
-ambient projection itself respects the step-duplicating constructors. From this
-the semantic kernel can be reconstructed canonically. -/
+/-- A generator-preserving emitter whose projection also satisfies equations
+for all four constructors. These additional equations package the existing
+projection and coordinate as a `SemanticProjectionKernel`. -/
 structure SemanticGeneratorPreservingRecordEmitter
     (Sys : BaseDuplicatingSystem) (b s : Sys.T)
     extends GeneratorPreservingRecordEmitter Sys b s where
@@ -792,8 +783,8 @@ projective emitter as its underlying generator-preserving interface. -/
 def toProjectiveRecordEmitter : BaseDuplicatingSystem.ProjectiveRecordEmitter Sys b s :=
   E.toGeneratorPreservingRecordEmitter.toProjectiveRecordEmitter
 
-/-- Hence the coherent generator-preserving emitter already determines the full
-projective/confession bridge. -/
+/-- The coherent generator-preserving emitter satisfies the named bridge
+predicate through its induced projective emitter. -/
 theorem realizesComputationToConfessionBridge_of_one_le {K : Nat}
     (hK : 1 ≤ K) :
     (E.toProjectiveRecordEmitter).RealizesComputationToConfessionBridge K := by
@@ -801,11 +792,9 @@ theorem realizesComputationToConfessionBridge_of_one_le {K : Nat}
 
 end SemanticGeneratorPreservingRecordEmitter
 
-/-- A weaker semantic precursor than `GeneratorPreservingRecordEmitter`.
-It does not assume a separate generator coordinate as primitive data; instead
-it gives a projection together with a raw projected rank satisfying the
-generator equations after projection. This is enough to reconstruct the full
-generator-preserving bridge. -/
+/-- An interface that supplies a projection and projected-rank function with
+the constructor, canonical-trace, and terminal equations needed to construct a
+`GeneratorPreservingRecordEmitter`. -/
 structure ProjectedGeneratorWitness
     (Sys : BaseDuplicatingSystem) (b s : Sys.T)
     extends FaithfulRecordEmitter Sys b s where
@@ -843,7 +832,7 @@ def toGeneratorPreservingRecordEmitter :
   project_canonical := W.project_canonical
   project_terminal := W.project_terminal
 
-/-- And therefore it also induces the full projective/confession bridge. -/
+/-- Its induced projective emitter satisfies the named bridge predicate. -/
 def toProjectiveRecordEmitter :
     BaseDuplicatingSystem.ProjectiveRecordEmitter Sys b s :=
   BaseDuplicatingSystem.GeneratorPreservingRecordEmitter.toProjectiveRecordEmitter
@@ -858,12 +847,11 @@ theorem realizesComputationToConfessionBridge_of_one_le {K : Nat} (hK : 1 ≤ K)
 
 end ProjectedGeneratorWitness
 
-/-- A weaker semantic precursor than `ProjectedGeneratorWitness`.
-Instead of assuming the exact projected generator coordinate along the canonical
-trace, this interface only assumes the conservation law saying that the
-projected generator coordinate and the emitted record depth sum to the original
-counter depth. Since the record channel already decodes the progress index
-exactly, the projected counter value can then be recovered algebraically. -/
+/-- A projected-rank interface stated through conservation equations. It
+assumes that projected rank plus decoded record depth equals the original
+counter depth on the canonical trace and terminal record. The projected
+counter values below follow algebraically from these equations and the decoder
+laws inherited from `FaithfulRecordEmitter`. -/
 structure ConservationBasedGeneratorEmitter
     (Sys : BaseDuplicatingSystem) (b s : Sys.T)
     extends FaithfulRecordEmitter Sys b s where
@@ -926,8 +914,8 @@ def toProjectedGeneratorWitness :
   project_canonical := E.project_canonical
   project_terminal := E.project_terminal
 
-/-- Hence the conservation-based interface already induces the full
-computation-to-confession bridge. -/
+/-- The conservation-based interface satisfies the named bridge predicate
+through the projective emitter constructed from its recovered equations. -/
 theorem realizesComputationToConfessionBridge_of_one_le {K : Nat} (hK : 1 ≤ K) :
     BaseDuplicatingSystem.ProjectiveRecordEmitter.RealizesComputationToConfessionBridge
       (E.toProjectedGeneratorWitness.toProjectiveRecordEmitter) K := by
@@ -937,11 +925,9 @@ theorem realizesComputationToConfessionBridge_of_one_le {K : Nat} (hK : 1 ≤ K)
 
 end ConservationBasedGeneratorEmitter
 
-/-- A weaker semantic precursor than `SemanticGeneratorPreservingRecordEmitter`.
-It starts only from the conservation-law interface and adds constructor-respecting
-coherence for the ambient projection itself. The exact canonical/terminal
-projected generator equations are then recovered from conservation, not assumed
-as primitive data. -/
+/-- A conservation-based emitter whose projection also satisfies equations for
+all four constructors. The canonical-trace and terminal projected-rank equations
+are derived from the supplied conservation and decoder laws. -/
 structure SemanticConservationBasedGeneratorEmitter
     (Sys : BaseDuplicatingSystem) (b s : Sys.T)
     extends ConservationBasedGeneratorEmitter Sys b s where
@@ -992,8 +978,8 @@ def toSemanticGeneratorPreservingRecordEmitter :
   project_wrap := E.project_wrap
   project_recur := E.project_recur
 
-/-- Hence the weaker semantic-conservation interface already determines the
-full projective/confession bridge. -/
+/-- The semantic conservation interface satisfies the named bridge predicate
+through the packages constructed above. -/
 theorem realizesComputationToConfessionBridge_of_one_le {K : Nat}
     (hK : 1 ≤ K) :
     BaseDuplicatingSystem.ProjectiveRecordEmitter.RealizesComputationToConfessionBridge
@@ -1005,11 +991,10 @@ theorem realizesComputationToConfessionBridge_of_one_le {K : Nat}
 
 end SemanticConservationBasedGeneratorEmitter
 
-/-- A genuinely step-indexed precursor below the global conservation-law
-interface. Instead of postulating a single ambient projected-rank function, it
-only provides the projected generator coordinate along the canonical live trace
-and at the terminal record. This is the right next-lower semantic layer for the
-critic-facing "computation to record" story. -/
+/-- A stage-indexed conservation interface. It supplies projected coordinates
+only on canonical live stages and terminal records, together with conservation
+equations at those observations; it does not supply a global projected-rank
+function on the ambient carrier. -/
 structure StageIndexedConservationEmitter
     (Sys : BaseDuplicatingSystem) (b s : Sys.T)
     extends FaithfulRecordEmitter Sys b s where
@@ -1061,10 +1046,9 @@ theorem realizesComputationToRecordCrossing_of_one_le {K : Nat} (hK : 1 ≤ K) :
     (E.toRecordEmissionWitness).RealizesComputationToRecordCrossing K := by
   exact E.toFaithfulRecordEmitter.realizesComputationToRecordCrossing_of_one_le hK
 
-/-- An explicit extension principle lifting the stage-indexed conservation
-interface to a global projected-rank function on the ambient carrier. This is
-the exact bridge needed to turn local stage-by-stage generator recovery into
-the stronger global conservation-law interface. -/
+/-- Additional data extending the stage-indexed coordinates to a global
+projection and projected-rank function on the ambient carrier. The extension
+equations permit construction of the global conservation interface. -/
 structure Extension
     (E : StageIndexedConservationEmitter Sys b s) where
   project : Sys.T → Sys.T
@@ -1109,8 +1093,8 @@ def toConservationBasedGeneratorEmitter :
     rw [X.extends_terminal k]
     exact E.conservation_at_terminal k
 
-/-- Hence the stage-indexed interface plus an explicit extension principle
-already induces the full computation-to-confession bridge. -/
+/-- A stage-indexed emitter with an extension satisfies the named bridge
+predicate through the induced global conservation interface. -/
 theorem realizesComputationToConfessionBridge_of_one_le {K : Nat} (hK : 1 ≤ K) :
     BaseDuplicatingSystem.ProjectiveRecordEmitter.RealizesComputationToConfessionBridge
       (X.toConservationBasedGeneratorEmitter.toProjectedGeneratorWitness.toProjectiveRecordEmitter) K := by
@@ -1120,11 +1104,9 @@ theorem realizesComputationToConfessionBridge_of_one_le {K : Nat} (hK : 1 ≤ K)
 
 end Extension
 
-/-- A semantic strengthening of the raw stage-indexed extension principle.
-Compared with `Extension`, this does not add projected-generator equations; it
-only requires that the ambient extension projection itself respects the
-step-duplicating constructors. Together with stage-indexed conservation, this
-is enough to recover a semantic-kernel completion. -/
+/-- An `Extension` whose projection also satisfies equations for all
+four constructors. These equations package the extension as a semantic
+conservation interface. -/
 structure SemanticExtension
     (E : StageIndexedConservationEmitter Sys b s)
     extends E.Extension where
@@ -1149,8 +1131,8 @@ def toSemanticConservationBasedGeneratorEmitter :
   project_wrap := X.project_wrap
   project_recur := X.project_recur
 
-/-- Hence the semantic raw stage-indexed extension already determines the full
-projective/confession bridge. -/
+/-- A semantic extension satisfies the named bridge predicate through its
+induced semantic conservation package. -/
 theorem realizesComputationToConfessionBridge_of_one_le {K : Nat} (hK : 1 ≤ K) :
     BaseDuplicatingSystem.ProjectiveRecordEmitter.RealizesComputationToConfessionBridge
       (BaseDuplicatingSystem.SemanticGeneratorPreservingRecordEmitter.toProjectiveRecordEmitter
@@ -1166,8 +1148,8 @@ inductive ShadowObservation
   | live (k i : Nat) (hik : i ≤ k)
   | terminal (k : Nat)
 
-/-- Direct canonical-shadow conservation profile extracted from the stage-
-indexed interface, with no separately postulated ambient extension principle. -/
+/-- Conservation profile on the synthetic shadow carrier consisting only of
+canonical live-stage and terminal observations. -/
 structure CanonicalShadowConservationInterface where
   materialize : ShadowObservation → Sys.T
   projectedCoord : ShadowObservation → Nat
@@ -1216,10 +1198,8 @@ namespace FaithfulRecordEmitter
 
 variable {b s : Sys.T} (E : FaithfulRecordEmitter Sys b s)
 
-/-- If the ambient carrier already comes with a semantic projection kernel
-whose projected base seed is normalized, then any faithful record emitter
-induces the ambient conservation-law interface directly. This avoids the
-separate stage-indexed extension axiom entirely. -/
+/-- Construct an ambient conservation interface from a faithful emitter, a
+semantic projection kernel, and a normalized projected base seed. -/
 def toConservationBasedGeneratorEmitterOfSemanticKernel
     (K : SemanticProjectionKernel Sys)
     (hprojBase : K.projectedRank.rank (K.project b) = 0) :
@@ -1243,8 +1223,8 @@ def toConservationBasedGeneratorEmitterOfSemanticKernel
     rw [hprojBase, E.decode_record_at_terminal k]
     omega
 
-/-- Hence a faithful record emitter plus a semantic ambient projection kernel
-already yields the full computation-to-confession bridge. -/
+/-- The conservation package constructed from a faithful emitter and semantic
+projection kernel satisfies the named bridge predicate. -/
 theorem realizesComputationToConfessionBridge_of_semanticKernel {Kdepth : Nat}
     (K : SemanticProjectionKernel Sys)
     (hprojBase : K.projectedRank.rank (K.project b) = 0)
@@ -1259,10 +1239,9 @@ theorem realizesComputationToConfessionBridge_of_semanticKernel {Kdepth : Nat}
       (BaseDuplicatingSystem.FaithfulRecordEmitter.toConservationBasedGeneratorEmitterOfSemanticKernel
         (E := E) K hprojBase) hK
 
-/-- The same bridge already follows from the weaker rank-level kernel
-hypothesis. This is the real weaker abstract form: only the generator-rank
-behavior of the projection matters for the bridge, not exact term-level
-constructor equations of the projected image. -/
+/-- Construct the same conservation package from rank-level projection data.
+Only projected-rank equations are used; term-level equations for the projected
+image are not fields of `RankLevelProjectionKernel`. -/
 def toConservationBasedGeneratorEmitterOfRankLevelKernel
     (K : RankLevelProjectionKernel Sys)
     (hprojBase : K.projectedRank.rank (K.project b) = 0) :
@@ -1450,9 +1429,8 @@ def freeRecordEmissionWitness :
     intro k
     simpa using freeRecordCoord_terminal k
 
-/-- Semantic free-syntax emitter: the live observable distinguishes live
-computation from terminal record, and the record observable decodes the wrapper
-depth directly. -/
+/-- Free-syntax faithful emitter whose observables are the live-site and wrapper
+counts and whose record decoder is the identity on `Nat`. -/
 def freeFaithfulRecordEmitter :
     BaseDuplicatingSystem.FaithfulRecordEmitter freeBaseSystem freeSeedX freeSeedY where
   LiveObs := Bool
@@ -1478,15 +1456,15 @@ def freeFaithfulRecordEmitter :
     intro k
     simpa using freeRecordCoord_terminal k
 
-/-- The free primitive syntax realizes the computation-to-record crossing at
-every nontrivial depth budget. -/
+/-- The concrete free-syntax witness satisfies the named crossing predicate for
+every depth budget containing at least the indices zero and one. -/
 theorem freeRecordEmission_realizes_crossing {K : Nat} (hK : 1 ≤ K) :
     freeRecordEmissionWitness.RealizesComputationToRecordCrossing K := by
   exact freeRecordEmissionWitness.realizesComputationToRecordCrossing_of_one_le hK
 
-/-- The free primitive syntax exposes a hidden progress coordinate that is not
-meta-accessible at stage 0 but becomes exactly accessible through the emitted
-record family. -/
+/-- In the access model constructed from the free-syntax witness, the stage-one
+trace is inaccessible from the constant meta view and jointly determines the
+progress-index verdict. -/
 theorem freeRecordEmission_requires_hidden_progress {K : Nat} (hK : 1 ≤ K) :
     ∃ φ : Fin (K + 1) → Nat,
       ¬ OperatorKO7.InformationAccess.AccessibleFrom
@@ -1497,14 +1475,14 @@ theorem freeRecordEmission_requires_hidden_progress {K : Nat} (hK : 1 ≤ K) :
             (freeRecordEmissionWitness.liveRecordAccessModel K).verdict := by
   exact freeRecordEmissionWitness.liveRecordAccess_requires_hidden_state hK
 
-/-- The same crossing can be recovered from the more semantic
-`FaithfulRecordEmitter` interface, not only from the raw numeric witness. -/
+/-- The faithful-emitter package induces the same numeric witness and therefore
+satisfies the same named crossing predicate. -/
 theorem freeFaithfulRecordEmitter_realizes_crossing {K : Nat} (hK : 1 ≤ K) :
     (freeFaithfulRecordEmitter.toRecordEmissionWitness).RealizesComputationToRecordCrossing K := by
   exact freeFaithfulRecordEmitter.realizesComputationToRecordCrossing_of_one_le hK
 
-/-- The semantic free emitter also exposes the hidden progress coordinate
-through the emitted record family. -/
+/-- The access model induced by the faithful free emitter has the same
+stage-one hidden-state property. -/
 theorem freeFaithfulRecordEmitter_requires_hidden_progress {K : Nat} (hK : 1 ≤ K) :
     ∃ φ : Fin (K + 1) → Nat,
       ¬ OperatorKO7.InformationAccess.AccessibleFrom
@@ -1578,9 +1556,8 @@ recursor spine on the free syntax. -/
         (freeGeneratorProjection (freeBaseSystem.wrapChain freeSeedY k freeSeedX)) = 0 := by
   simp [freeSeedX, freeProjectionRank]
 
-/-- The free primitive duplicator carries the semantic ambient projection
-kernel used to derive the conservation-law interface without any stage-indexed
-extension data. -/
+/-- The free-term projection and counter-depth rank satisfy all fields of the
+ambient semantic projection kernel. -/
 def freeSemanticProjectionKernel :
     BaseDuplicatingSystem.SemanticProjectionKernel freeBaseSystem where
   project := freeGeneratorProjection
@@ -1605,9 +1582,8 @@ def freeRankLevelProjectionKernel :
   BaseDuplicatingSystem.RankLevelProjectionKernel.ofSemanticProjectionKernel
     freeSemanticProjectionKernel
 
-/-- Free-syntax projective emitter: the same primitive duplicator carries both
-the record-emission crossing and a licensed projection back to the generator
-counter. -/
+/-- Projective emitter on free syntax, using wrapper erasure as the projection
+and counter depth as its rank. -/
 def freeProjectiveRecordEmitter :
     BaseDuplicatingSystem.ProjectiveRecordEmitter freeBaseSystem freeSeedX freeSeedY where
   toFaithfulRecordEmitter := freeFaithfulRecordEmitter
@@ -1621,8 +1597,7 @@ def freeProjectiveRecordEmitter :
     intro k
     simpa [freeBaseSystem, freeSchema] using freeProjectedRank_terminal k
 
-/-- The same free-syntax bridge packaged at the more semantic
-generator-preserving level. -/
+/-- The free-syntax data packaged as a generator-preserving emitter. -/
 def freeGeneratorPreservingRecordEmitter :
     BaseDuplicatingSystem.GeneratorPreservingRecordEmitter freeBaseSystem freeSeedX freeSeedY where
   toFaithfulRecordEmitter := freeFaithfulRecordEmitter
@@ -1639,8 +1614,8 @@ def freeGeneratorPreservingRecordEmitter :
     intro k
     simpa [freeProjectionRank] using freeProjectedRank_terminal k
 
-/-- The free primitive duplicator also satisfies the stronger semantically
-coherent generator-preserving interface. -/
+/-- The free-syntax projection equations package the same data as a semantic
+generator-preserving emitter. -/
 def freeSemanticGeneratorPreservingRecordEmitter :
     BaseDuplicatingSystem.SemanticGeneratorPreservingRecordEmitter
       freeBaseSystem freeSeedX freeSeedY where
@@ -1657,8 +1632,8 @@ def freeSemanticGeneratorPreservingRecordEmitter :
     intro b s n
     rfl
 
-/-- The weaker projected-generator interface is also realized concretely on the
-free primitive duplicator. -/
+/-- The free-syntax projection and rank satisfy the projected-generator
+interface. -/
 def freeProjectedGeneratorWitness :
     BaseDuplicatingSystem.ProjectedGeneratorWitness freeBaseSystem freeSeedX freeSeedY where
   toFaithfulRecordEmitter := freeFaithfulRecordEmitter
@@ -1682,8 +1657,8 @@ def freeProjectedGeneratorWitness :
     intro k
     simpa [freeProjectionRank] using freeProjectedRank_terminal k
 
-/-- The conservation-law precursor is also realized concretely on the free
-primitive duplicator. -/
+/-- The free-syntax projection, rank, and decoder satisfy the conservation-based
+emitter interface. -/
 def freeConservationBasedGeneratorEmitter :
     BaseDuplicatingSystem.ConservationBasedGeneratorEmitter
       freeBaseSystem freeSeedX freeSeedY where
@@ -1718,8 +1693,8 @@ def freeConservationBasedGeneratorEmitter :
     rw [freeFaithfulRecordEmitter.decode_record_at_terminal k]
     omega
 
-/-- The weaker semantic-conservation interface is also realized concretely on
-the free primitive duplicator. -/
+/-- The free-syntax constructor equations extend the conservation package to a
+semantic conservation emitter. -/
 def freeSemanticConservationBasedGeneratorEmitter :
     BaseDuplicatingSystem.SemanticConservationBasedGeneratorEmitter
       freeBaseSystem freeSeedX freeSeedY where
@@ -1736,8 +1711,8 @@ def freeSemanticConservationBasedGeneratorEmitter :
     intro b s n
     rfl
 
-/-- The genuinely step-indexed conservation interface is also realized on the
-free primitive duplicator. -/
+/-- The canonical free-syntax trace and terminal coordinates satisfy the
+stage-indexed conservation interface. -/
 def freeStageIndexedConservationEmitter :
     BaseDuplicatingSystem.StageIndexedConservationEmitter
       freeBaseSystem freeSeedX freeSeedY where
@@ -1789,8 +1764,8 @@ def freeConstructorRecursor :
       ((freeConstructorRecursor.toSemanticProjectionKernel.project) freeSeedX) = 0 := by
   rfl
 
-/-- The canonical free-syntax extension principle lifting the stage-indexed
-interface to the global conservation-law interface. -/
+/-- Extend the free-syntax stage coordinates with the wrapper-erasing projection
+and counter-depth rank on all free terms. -/
 def freeStageIndexedConservationExtension :
     (BaseDuplicatingSystem.StageIndexedConservationEmitter.Extension
       freeStageIndexedConservationEmitter) where
@@ -1825,8 +1800,8 @@ def freeStageIndexedConservationExtension :
       BaseDuplicatingSystem.StageIndexedConservationEmitter.projectedTerminal_zero
         freeStageIndexedConservationEmitter k
 
-/-- The weaker semantic raw stage-indexed extension is also realized on the
-free primitive duplicator. -/
+/-- The same free-syntax extension also satisfies the constructor equations
+required by `SemanticExtension`. -/
 def freeStageIndexedSemanticExtension :
     (BaseDuplicatingSystem.StageIndexedConservationEmitter.SemanticExtension
       freeStageIndexedConservationEmitter) where
@@ -1885,9 +1860,8 @@ def toFreeAmbientConservationBasedGeneratorEmitter
     rw [E.decode_record_at_terminal k]
     omega
 
-/-- Therefore any faithful record emitter on the free primitive duplicator
-already induces the full computation-to-confession bridge through the ambient
-free carrier itself. -/
+/-- Any faithful emitter on this free carrier, together with the fixed ambient
+projection and rank above, satisfies the named bridge predicate. -/
 theorem realizesComputationToConfessionBridge_onFree_of_one_le
     (E : BaseDuplicatingSystem.FaithfulRecordEmitter freeBaseSystem freeSeedX freeSeedY)
     {K : Nat} (hK : 1 ≤ K) :
@@ -1899,8 +1873,8 @@ theorem realizesComputationToConfessionBridge_onFree_of_one_le
 
 end BaseDuplicatingSystem.FaithfulRecordEmitter
 
-/-- The weakest currently formalized semantic interface already induces the
-full computation-to-confession bridge on the free primitive duplicator. -/
+/-- The projected-generator witness satisfies the named bridge predicate on the
+free primitive duplicator. -/
 theorem freeProjectedGeneratorWitness_realizes_bridge {K : Nat} (hK : 1 ≤ K) :
     BaseDuplicatingSystem.ProjectiveRecordEmitter.RealizesComputationToConfessionBridge
       (BaseDuplicatingSystem.ProjectedGeneratorWitness.toProjectiveRecordEmitter
@@ -1909,8 +1883,8 @@ theorem freeProjectedGeneratorWitness_realizes_bridge {K : Nat} (hK : 1 ≤ K) :
     BaseDuplicatingSystem.ProjectedGeneratorWitness.realizesComputationToConfessionBridge_of_one_le
       freeProjectedGeneratorWitness hK
 
-/-- The conservation-law interface already induces the full bridge on the free
-primitive duplicator. -/
+/-- The conservation-based emitter satisfies the named bridge predicate on the
+free primitive duplicator. -/
 theorem freeConservationBasedGeneratorEmitter_realizes_bridge {K : Nat} (hK : 1 ≤ K) :
     BaseDuplicatingSystem.ProjectiveRecordEmitter.RealizesComputationToConfessionBridge
       (BaseDuplicatingSystem.ConservationBasedGeneratorEmitter.toProjectedGeneratorWitness
@@ -1919,8 +1893,8 @@ theorem freeConservationBasedGeneratorEmitter_realizes_bridge {K : Nat} (hK : 1 
     BaseDuplicatingSystem.ConservationBasedGeneratorEmitter.realizesComputationToConfessionBridge_of_one_le
       freeConservationBasedGeneratorEmitter hK
 
-/-- The weaker semantic-conservation interface already induces the full bridge
-on the free primitive duplicator. -/
+/-- The semantic conservation emitter satisfies the named bridge predicate on
+the free primitive duplicator. -/
 theorem freeSemanticConservationBasedGeneratorEmitter_realizes_bridge {K : Nat} (hK : 1 ≤ K) :
     BaseDuplicatingSystem.ProjectiveRecordEmitter.RealizesComputationToConfessionBridge
       (BaseDuplicatingSystem.SemanticGeneratorPreservingRecordEmitter.toProjectiveRecordEmitter
@@ -1929,16 +1903,16 @@ theorem freeSemanticConservationBasedGeneratorEmitter_realizes_bridge {K : Nat} 
     BaseDuplicatingSystem.SemanticConservationBasedGeneratorEmitter.realizesComputationToConfessionBridge_of_one_le
       freeSemanticConservationBasedGeneratorEmitter hK
 
-/-- The step-indexed conservation interface already realizes the computation-
-to-record crossing on the free primitive duplicator. -/
+/-- The stage-indexed conservation emitter satisfies the named crossing
+predicate through its faithful-emitter component. -/
 theorem freeStageIndexedConservationEmitter_realizes_crossing {K : Nat} (hK : 1 ≤ K) :
     (freeStageIndexedConservationEmitter.toRecordEmissionWitness).RealizesComputationToRecordCrossing K := by
   exact
     BaseDuplicatingSystem.StageIndexedConservationEmitter.realizesComputationToRecordCrossing_of_one_le
       freeStageIndexedConservationEmitter hK
 
-/-- The step-indexed conservation interface plus its explicit free-syntax
-extension principle already induces the full computation-to-confession bridge. -/
+/-- The free-syntax stage extension induces a projective emitter satisfying the
+named bridge predicate. -/
 theorem freeStageIndexedConservationExtension_realizes_bridge {K : Nat} (hK : 1 ≤ K) :
     BaseDuplicatingSystem.ProjectiveRecordEmitter.RealizesComputationToConfessionBridge
       (freeStageIndexedConservationExtension.toConservationBasedGeneratorEmitter
@@ -1947,8 +1921,8 @@ theorem freeStageIndexedConservationExtension_realizes_bridge {K : Nat} (hK : 1 
     BaseDuplicatingSystem.StageIndexedConservationEmitter.Extension.realizesComputationToConfessionBridge_of_one_le
       freeStageIndexedConservationExtension hK
 
-/-- The weaker semantic raw stage-indexed extension likewise induces the full
-bridge on the free primitive duplicator. -/
+/-- The semantic stage extension induces a projective emitter satisfying the
+named bridge predicate. -/
 theorem freeStageIndexedSemanticExtension_realizes_bridge {K : Nat} (hK : 1 ≤ K) :
     BaseDuplicatingSystem.ProjectiveRecordEmitter.RealizesComputationToConfessionBridge
       (BaseDuplicatingSystem.SemanticGeneratorPreservingRecordEmitter.toProjectiveRecordEmitter
@@ -1958,9 +1932,8 @@ theorem freeStageIndexedSemanticExtension_realizes_bridge {K : Nat} (hK : 1 ≤ 
     BaseDuplicatingSystem.StageIndexedConservationEmitter.SemanticExtension.realizesComputationToConfessionBridge_of_one_le
       freeStageIndexedSemanticExtension hK
 
-/-- On the free primitive duplicator, the ambient-carrier conservation bridge
-can now be derived directly from the faithful-emitter layer, with no explicit
-extension principle. -/
+/-- Combine the faithful free emitter directly with the fixed ambient
+free-syntax projection and rank to satisfy the named bridge predicate. -/
 theorem freeFaithfulRecordEmitter_realizes_ambient_bridge_direct {K : Nat} (hK : 1 ≤ K) :
     BaseDuplicatingSystem.ProjectiveRecordEmitter.RealizesComputationToConfessionBridge
       (BaseDuplicatingSystem.FaithfulRecordEmitter.toFreeAmbientConservationBasedGeneratorEmitter
@@ -1969,9 +1942,8 @@ theorem freeFaithfulRecordEmitter_realizes_ambient_bridge_direct {K : Nat} (hK :
     BaseDuplicatingSystem.FaithfulRecordEmitter.realizesComputationToConfessionBridge_onFree_of_one_le
       freeFaithfulRecordEmitter hK
 
-/-- The same direct ambient-carrier derivation is therefore available for the
-genuinely stage-indexed emitter on the free primitive duplicator, with no
-separately postulated extension package. -/
+/-- Apply the same ambient free-syntax construction to the faithful-emitter
+component of the stage-indexed package. -/
 theorem freeStageIndexedConservationEmitter_realizes_ambient_bridge_direct {K : Nat} (hK : 1 ≤ K) :
     BaseDuplicatingSystem.ProjectiveRecordEmitter.RealizesComputationToConfessionBridge
       (BaseDuplicatingSystem.FaithfulRecordEmitter.toFreeAmbientConservationBasedGeneratorEmitter
@@ -1981,8 +1953,8 @@ theorem freeStageIndexedConservationEmitter_realizes_ambient_bridge_direct {K : 
     BaseDuplicatingSystem.FaithfulRecordEmitter.realizesComputationToConfessionBridge_onFree_of_one_le
       freeStageIndexedConservationEmitter.toFaithfulRecordEmitter hK
 
-/-- The same direct ambient-carrier bridge can be read through the new generic
-semantic-kernel abstraction. -/
+/-- Derive the named bridge predicate through the generic semantic-kernel
+constructor. -/
 theorem freeFaithfulRecordEmitter_realizes_bridge_via_semanticKernel {K : Nat} (hK : 1 ≤ K) :
     let C :=
       BaseDuplicatingSystem.FaithfulRecordEmitter.toConservationBasedGeneratorEmitterOfSemanticKernel
@@ -1995,8 +1967,8 @@ theorem freeFaithfulRecordEmitter_realizes_bridge_via_semanticKernel {K : Nat} (
       (E := freeFaithfulRecordEmitter) freeSemanticProjectionKernel
       (by simp [freeSeedX, freeSemanticProjectionKernel, freeProjectionRank]) hK
 
-/-- Likewise for the weaker stage-indexed conservation emitter, once it is read
-through its underlying faithful-emitter layer. -/
+/-- Apply the semantic-kernel constructor to the faithful-emitter component of
+the stage-indexed package. -/
 theorem freeStageIndexedConservationEmitter_realizes_bridge_via_semanticKernel {K : Nat} (hK : 1 ≤ K) :
     let C :=
       BaseDuplicatingSystem.FaithfulRecordEmitter.toConservationBasedGeneratorEmitterOfSemanticKernel
@@ -2009,7 +1981,8 @@ theorem freeStageIndexedConservationEmitter_realizes_bridge_via_semanticKernel {
       (E := freeStageIndexedConservationEmitter.toFaithfulRecordEmitter) freeSemanticProjectionKernel
       (by simp [freeSeedX, freeSemanticProjectionKernel, freeProjectionRank]) hK
 
-/-- The same bridge can be obtained from the weaker rank-level kernel. -/
+/-- Derive the named bridge predicate through the rank-level kernel
+constructor. -/
 theorem freeFaithfulRecordEmitter_realizes_bridge_via_rankLevelKernel {K : Nat} (hK : 1 ≤ K) :
     let C :=
       BaseDuplicatingSystem.FaithfulRecordEmitter.toConservationBasedGeneratorEmitterOfRankLevelKernel
@@ -2028,8 +2001,8 @@ theorem freeFaithfulRecordEmitter_realizes_bridge_via_rankLevelKernel {K : Nat} 
           BaseDuplicatingSystem.RankLevelProjectionKernel.ofSemanticProjectionKernel,
           freeSemanticProjectionKernel, freeProjectionRank, freeSeedX]) hK
 
-/-- Likewise for the stage-indexed emitter through its underlying faithful
-record-emitter layer. -/
+/-- Apply the rank-level kernel constructor to the faithful-emitter component
+of the stage-indexed package. -/
 theorem freeStageIndexedConservationEmitter_realizes_bridge_via_rankLevelKernel {K : Nat} (hK : 1 ≤ K) :
     let C :=
       BaseDuplicatingSystem.FaithfulRecordEmitter.toConservationBasedGeneratorEmitterOfRankLevelKernel
@@ -2058,22 +2031,21 @@ theorem freeGeneratorPreservingRecordEmitter_realizes_bridge {K : Nat} (hK : 1 �
     BaseDuplicatingSystem.GeneratorPreservingRecordEmitter.realizesComputationToConfessionBridge_of_one_le
       freeGeneratorPreservingRecordEmitter hK
 
-/-- The free primitive duplicator realizes the full computation-to-confession
-bridge: hidden progress becomes externally retrievable through the emitted
-record family, while the same system admits the projection-based forgetting
-witness driving operational incompleteness. -/
+/-- The concrete free projective emitter satisfies the named conjunction: its
+constructed access model has the crossing property, and its projection rank
+supplies an `OperationalIncompleteness` package. -/
 theorem freeProjectiveRecordEmitter_realizes_bridge {K : Nat} (hK : 1 ≤ K) :
     freeProjectiveRecordEmitter.RealizesComputationToConfessionBridge K := by
   exact freeProjectiveRecordEmitter.realizesComputationToConfessionBridge_of_one_le hK
 
-/-- The free primitive duplicator therefore carries a generic schema-level
-operational-incompleteness bundle directly from the projective emitter. -/
+/-- The free projective emitter's projection rank supplies the generic
+`OperationalIncompleteness` structure. -/
 theorem freeProjectiveRecordEmitter_operationally_incomplete :
     Nonempty (OperationalIncompleteness freeBaseSystem.toStepDuplicatingSystem) :=
   ⟨freeProjectiveRecordEmitter.toOperationalIncompleteness⟩
 
-/-- The free primitive duplicator also determines a projection-transaction once
-the external soundness license is fixed. -/
+/-- Projection transaction using the proposition `True` and its proof as the
+abstract license field. No external soundness theorem is supplied here. -/
 def freeProjectionTransaction :
     ProjectionTransaction freeBaseSystem.toStepDuplicatingSchema :=
   freeProjectiveRecordEmitter.toProjectionTransaction True trivial

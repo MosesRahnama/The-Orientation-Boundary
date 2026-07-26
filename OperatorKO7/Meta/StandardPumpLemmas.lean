@@ -3,16 +3,11 @@ import OperatorKO7.Meta.PumpedBarrierClasses_Schema
 /-!
 # Standard Pump Lemmas
 
-This module factors out the growth lemmas that connect the current conditional barrier
-theorems to the explicit positive-growth subclasses already formalized in the artifact.
-
-Why this file exists:
-- Exposes reusable unboundedness lemmas for the current affine, restricted-quadratic,
-  and tracked-primary pair families.
-- Packages the corresponding positive-growth hypotheses into the pumped subclasses as
-  explicit constructors, rather than leaving that bridge implicit in barrier corollaries.
-- Keeps the scope honest: this is a bridge for the standard constructor-local families
-  already formalized here, not a theorem about every external tool format or heuristic.
+The theorems derive unbounded-range witnesses from explicit positive successor
+or wrapper drift for the declared affine, restricted-quadratic, and
+tracked-primary pair families. The constructors package those same hypotheses
+into their corresponding pumped subclasses. The scope is the displayed
+constructor-local families and hypotheses.
 -/
 
 namespace OperatorKO7.StepDuplicating

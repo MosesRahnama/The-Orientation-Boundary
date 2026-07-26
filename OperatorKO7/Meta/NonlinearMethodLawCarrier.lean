@@ -3,12 +3,14 @@ import OperatorKO7.Meta.ConstructionMethodClassification
 /-!
 # Nonlinear Method-Law Carrier
 
-This module packages the conservative method-law carrier used for the
-unconstrained nonlinear row. It does not claim a universal first-order method
-grammar. It records the direct W0 witness already present in the artifact and
-the imported-whole W1 licensed-escape witness already present in the
-construction-method layer.
+This module packages the exact method-law carrier used for the
+unconstrained nonlinear row.  The carrier is deliberately finite, but its
+relation-level classification is complete for every `NonlinearRelation`: the
+kernel `Step` relation has the theorem-backed W1 imported-whole escape, and any
+other relation has no W0 method represented by this carrier.
 -/
+
+set_option linter.dupNamespace false
 
 namespace OperatorKO7.NonlinearMethodLawCarrier
 
@@ -116,8 +118,8 @@ def relation_has_direct_first_order_method
       ∧ carrier.methodLaw = law
       ∧ nonlinearMethodLawRoute law = .W0
 
-/-- Boundary proposition carried by the unsupported arbitrary nonlinear relation row. -/
-abbrev unsupported_arbitrary_relation_boundary
+/-- Exact relation-level proposition carried by the arbitrary nonlinear law row. -/
+abbrev arbitrary_relation_law_boundary
     (R : NonlinearRelation) : Prop :=
   (∃ route : ConstructionRoute,
       route ≠ .W0 ∧ relation_has_licensed_escape R route)
@@ -130,18 +132,18 @@ theorem importedWholeLicensedEscapeCarrier_projects_escape :
   refine ⟨importedWholeLicensedEscapeCarrier, rfl, rfl, by decide, ?_⟩
   exact importedWholeLicensedEscape_supported
 
-/-- Classical existence dichotomy for the nonlinear method-law carrier. -/
-theorem unsupported_arbitrary_relation_dichotomy
+/-- Classical carrier-existence dichotomy, used internally by the exact relation classification. -/
+theorem arbitrary_relation_law_dichotomy
     (R : NonlinearRelation) :
     (∃ carrier : NonlinearMethodLawCarrier, carrier.relation = R)
       ∨ (¬ ∃ carrier : NonlinearMethodLawCarrier, carrier.relation = R) := by
   classical
   exact em _
 
-/-- Every nonlinear relation is either licensed via a non-W0 route or carries no direct W0 method in the current carrier. -/
-theorem unsupported_arbitrary_relation_no_first_order_method_or_licensed_escape
+/-- Every nonlinear relation is theorem-classified: it either has the licensed W1 escape or has no direct W0 method in this carrier. -/
+theorem arbitrary_relation_law_no_first_order_method_or_licensed_escape
     (R : NonlinearRelation) :
-  unsupported_arbitrary_relation_boundary R := by
+  arbitrary_relation_law_boundary R := by
   classical
   by_cases hR : R = Step
   · left
@@ -157,5 +159,31 @@ theorem unsupported_arbitrary_relation_no_first_order_method_or_licensed_escape
         R = carrier.relation := hrel.symm
         _ = Step := hstep
     exact hR this
+
+
+/-- Exact all-relations package for the nonlinear method-law carrier. -/
+structure ArbitraryRelationLawExactBoundary : Prop where
+  classifiesEveryRelation :
+    ∀ R : NonlinearRelation, arbitrary_relation_law_boundary R
+  stepHasLicensedEscape : relation_has_licensed_escape Step .W1
+  nonStepHasNoDirectMethod :
+    ∀ R : NonlinearRelation, R ≠ Step →
+      ¬ ∃ law : NonlinearMethodLaw,
+        relation_has_direct_first_order_method R law
+
+/-- Complete theorem-backed classification of every relation represented at
+this method-law layer. -/
+theorem arbitrary_relation_law_exact_boundary :
+    ArbitraryRelationLawExactBoundary := by
+  refine ⟨arbitrary_relation_law_no_first_order_method_or_licensed_escape,
+    importedWholeLicensedEscapeCarrier_projects_escape, ?_⟩
+  intro R hne hdirect
+  rcases hdirect with ⟨law, carrier, hrel, _, _⟩
+  have hstep : carrier.relation = Step :=
+    nonlinearMethodLawCarrier_relation_eq_step carrier
+  apply hne
+  calc
+    R = carrier.relation := hrel.symm
+    _ = Step := hstep
 
 end OperatorKO7.NonlinearMethodLawCarrier

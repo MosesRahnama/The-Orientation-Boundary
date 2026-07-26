@@ -3,17 +3,16 @@ import OperatorKO7.Kernel
 namespace OperatorKO7
 
 /-!
-# Feature-4 Ablation: Linear (Non-Duplicating) Recursor
+# Linear recursor ablation
 
-This module proves that removing step duplication (barrier condition 4)
-dissolves the global orientation barrier. We define a linear recursor variant
-where the step argument `s` is not duplicated on the RHS of `rec_succ`
-(the RHS is `recΔ b s n` instead of `app s (recΔ b s n)`), and show that
-`simpleSize` (a Tier-1 additive compositional measure) strictly orients both
-rules.
-
-This is consistent with duplication being the operative source of the barrier,
-not the recursor pattern itself.
+This module defines a two-rule recursor relation whose successor rule returns
+`recΔ b s n` instead of `app s (recΔ b s n)`. The node-count function
+`simpleSize` strictly orients both constructors of this relation, which gives
+well-foundedness of its reverse step relation. A final counterexample shows
+that the same `simpleSize` function fails to orient every instance of the
+duplicating successor rule. These results establish this specific contrast;
+they do not identify duplication as the sole cause of every orientation
+barrier.
 -/
 
 open Trace

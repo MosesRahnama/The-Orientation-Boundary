@@ -13,15 +13,11 @@ import OperatorKO7.Meta.LCELUnrestrictedTheorem
 import OperatorKO7.Meta.LCELUnrestrictedExistence
 
 /-!
-# LCEL Unrestricted Classification and Obstruction Analysis
-(post-closure Phase P4A)
+# LCEL witness-admission classification
 
 This file pursues the **classification theorem** for
 `AdmitsLCELUnrestrictedWitness` on arbitrary raw `FormalLCELInstance`
-pairs. The closure target is P4A of the post-closure program:
-
-> strongest honest witness-existence classification theorem landed;
-> exact scope documented.
+pairs.
 
 Concretely:
 
@@ -33,19 +29,10 @@ Concretely:
   classification structure `LCELRawPairClassificationData L₁ L₂`,
   which exists non-propositionally; its forward lift into
   `LCELUnrestrictedMathematicalWitness L₁ L₂` is the packaging lift.
-- The obstruction to a universal `∀ L₁ L₂, AdmitsLCELUnrestrictedWitness
-  L₁ L₂` theorem is named explicitly: every raw `FormalLCELInstance`
-  carries its typed schema data but **not** an automatic
-  `RealizesLCELSchema` witness on top of that data, and no raw pair
-  carries an automatic `LCELMathematicalSupportWitness`. Those two
-  Nonempties are the honest residual proof obligations for a
-  witness-free theorem. This file does **not** discharge them
-  universally — producing them is still a mathematical content problem
-  outside the LCEL schema — but it does reduce the witness-free
-  problem to exactly those two Nonempties.
-
-Phase P4C (universal witness-free theorem) is **not** closed here and is
-not claimed. Only P4A is closed by this file.
+- A theorem over every raw pair would additionally require uniform
+  constructions of the two schema realizations and the pairwise
+  mathematical support witness. The classification records those
+  support-existence obligations explicitly.
 -/
 
 namespace OperatorKO7.LCELUnrestrictedClassification
@@ -97,11 +84,11 @@ end LCELRawPairClassificationData
 /-! ## The classification theorem
 
 The propositional predicate `AdmitsLCELUnrestrictedWitness` is
-equivalent to the conjunction of the three Nonempty components of
-`LCELRawPairClassificationData`. This gives the sharpest honest scope
-for any future attempt at a universal witness-free theorem. -/
+equivalent to the conjunction of the three `Nonempty` components of
+`LCELRawPairClassificationData`. This is a support-existence
+characterization. -/
 
-/-- **LCEL unrestricted-witness classification theorem (Phase P4A).**
+/-- **LCEL unrestricted-witness classification theorem.**
 
 `AdmitsLCELUnrestrictedWitness L₁ L₂` holds iff all three component
 Nonempties hold: schema realization on the source, schema realization on
@@ -141,16 +128,11 @@ theorem admitsUnrestrictedWitness_of_classification
 
 /-! ## The obstruction predicate
 
-A named predicate enumerating the two kinds of proof obligation that
-remain before a universal witness-free theorem could be claimed: schema
-realization on each side, and a cross-instance mathematical support
-witness for each pair. This predicate is **not** proved universally;
-it is the honest boundary for Phase P4C. -/
+A named predicate containing schema realization on each side and a
+cross-instance mathematical support witness for the pair. -/
 
-/-- The two-tier obstruction between the admissibility-with-witness
-theorem (closed) and the bare witness-free theorem (unclosed): for any
-raw pair `L₁ L₂`, the residual proof obligations are the three Nonempty
-components of `LCELRawPairClassificationData`. -/
+/-- For any raw pair `L₁ L₂`, the support-existence obligation is the three
+`Nonempty` components of `LCELRawPairClassificationData`. -/
 abbrev LCELWitnessFreeResidualObligation
     (L₁ L₂ : FormalLCELInstance) : Prop :=
   Nonempty (RealizesLCELSchema L₁.toSlotProfile)
@@ -186,60 +168,19 @@ def godel_benchmark_classificationData :
   targetRealizes := benchmarkTransportLCELInstance_realizesSchema
   comparison := godel_benchmark_lcelMathematicalSupportWitness
 
-/-! ## Refined classification via pairwise bridge data (genuinely weaker)
+/-! ## Classification via pairwise bridge data
 
-The classification above is an honest tautology: it asserts that
-`AdmitsLCELUnrestrictedWitness` is `Nonempty (LCELMathematicalSupportWitness)`
-plus the two schema-realization Nonempties, and since
-`LCELMathematicalSupportWitness` already packages schema-realization-
-independent content, the equivalence does not meaningfully reduce the
-witness-construction burden. The checker's review flagged this.
-
-The refinement below supplies a strictly weaker set of inputs:
-`LCELRawPairBridgeData` carries only a **strong slot correspondence** and
-a **stagewise equivalence of profile shapes**, two components that are
-pairwise (per-pair, not per-instance) and are independent of the
-admissibility data packages on each side. Given:
-
-- `LCELAdmissibilityData L₁` (per-side data on the source),
-- `LCELAdmissibilityData L₂` (per-side data on the target), and
-- `LCELRawPairBridgeData L₁ L₂` (pairwise bridging data),
-
-a builder constructs a full `LCELMathematicalSupportWitness L₁ L₂`
-without taking `Nonempty (LCELMathematicalSupportWitness L₁ L₂)` as a
-hypothesis. This is a real decomposition: the inputs are strictly
-simpler than the output carrier.
-
-The construction produces an unrestricted mathematical witness whose
-transport functions are **constant canonical transports** on the
-generic pair (each transport returns the target canonical theorem
-extracted from `A₂`'s support records). On the paper-facing canonical
-pairs, the source-informed canonical transports of
-`LCELMathematicalSupportWitness.lean` remain the authoritative
-construction; this bridge-based builder is a separate, more primitive
-entry point for arbitrary pairs.
-
-The substantive content of the refined classification:
-
-- witness admission is implied by having admissibility data on both
-  sides plus pairwise bridging data (strong slot correspondence +
-  stagewise equivalence) — this is a **strictly weaker** hypothesis set
-  than `Nonempty (LCELMathematicalSupportWitness)`, in the sense that
-  it does not package the support records and substrate data redundantly
-  inside the cross-instance witness;
-- the residual mathematical content still needed for an arbitrary raw
-  pair is now **exactly** "do these two per-side admissibility data
-  packages exist and does a pairwise bridge exist?", which is the
-  cleanest possible reduction of the problem before one invents new
-  mathematics outside the LCEL schema.
+The builder below takes source and target admissibility packages together with
+pairwise slot correspondence and stagewise-equivalence data. It assembles an
+`LCELMathematicalSupportWitness` whose four transport functions return the
+canonical target theorems. This is separated-input packaging with constant
+transport, rather than a source-sensitive transport result.
 -/
 
-/-- Pairwise bridge data between two raw `FormalLCELInstance`s: a
-strong semantic slot correspondence plus a stagewise equivalence of
-comparison-profile shapes. This is strictly pairwise data (no per-side
-admissibility content) and is the minimal "relational layer" needed on
-top of per-side admissibility to reconstruct a full
-`LCELMathematicalSupportWitness`. -/
+/-- Pairwise bridge data between two raw `FormalLCELInstance`s: a strong
+semantic slot correspondence plus a stagewise equivalence of
+comparison-profile shapes. Per-side admissibility data is supplied separately
+to the builder below. -/
 structure LCELRawPairBridgeData
     (L₁ L₂ : FormalLCELInstance) : Type 1 where
   /-- Strong semantic slot correspondence carrying preservation laws on
@@ -265,8 +206,7 @@ end LCELRawPairBridgeData
 /-! ### The bridge-data builder: LCELMathematicalSupportWitness from
 two admissibility-data packages plus a pairwise bridge
 
-This is the real content of the refined classification theorem. It
-constructs every field of `LCELMathematicalSupportWitness` from the
+This builder constructs every field of `LCELMathematicalSupportWitness` from the
 admissibility data plus the pairwise bridge. Support equivalence iffs
 are `iff_of_true` from both sides being inhabited (because each
 admissibility data package supplies both propositional sides of its
@@ -317,9 +257,9 @@ private theorem boundarySupport_supported_of_admissibilityData
         boundarySupport := A.boundarySupport },
     A.boundarySupport.boundaryRealized⟩
 
-/-- Build a full `LCELMathematicalSupportWitness L₁ L₂` from two
-admissibility-data packages and one pairwise bridge. Every field is
-constructed; no witness-level hypothesis is taken. -/
+/-- Build an `LCELMathematicalSupportWitness L₁ L₂` from two
+admissibility-data packages and one pairwise bridge. Its four transport
+functions return the canonical target theorems. -/
 def LCELMathematicalSupportWitness.ofBridgeData
     {L₁ L₂ : FormalLCELInstance}
     (A₁ : LCELAdmissibilityData L₁)
@@ -409,18 +349,14 @@ def LCELUnrestrictedMathematicalWitness.ofAdmissibilityDataAndBridge
     A₁ A₂
     (LCELMathematicalSupportWitness.ofBridgeData A₁ A₂ bridge)
 
-/-! ### The refined classification theorem (Phase P4A, strengthened) -/
+/-! ### Pairwise bridge admission theorem -/
 
 /-- **LCEL unrestricted-witness refined classification theorem.**
 
 A raw pair admits an unrestricted mathematical witness whenever two
 `LCELAdmissibilityData` packages and a pairwise `LCELRawPairBridgeData`
-exist. This is strictly weaker than the tautological `iff` above:
-instead of assuming the whole `LCELMathematicalSupportWitness`
-propositionally, it asks only for admissibility on each side plus a
-pairwise bridge consisting of a strong slot correspondence and a
-stagewise equivalence of shapes. The residual witness-construction
-burden is reduced to constructing the bridge, not the full witness. -/
+exist. The constructed witness uses canonical target-returning transport
+functions. -/
 theorem admitsUnrestrictedWitness_of_bridgeData
     {L₁ L₂ : FormalLCELInstance}
     (A₁ : LCELAdmissibilityData L₁)
@@ -430,13 +366,12 @@ theorem admitsUnrestrictedWitness_of_bridgeData
   ⟨LCELUnrestrictedMathematicalWitness.ofAdmissibilityDataAndBridge
     A₁ A₂ bridge⟩
 
-/-! ### Canonical refined bridges
+/-! ### Named pairwise bridges
 
 On the two paper-facing canonical pairs, the bridge data is supplied by
 the existing strong slot correspondence and the stagewise equivalence
-extracted from the canonical mathematical support witness. These
-canonical bridges close the refined classification theorem on the
-manuscript-critical endpoints without going through the tautological layer. -/
+extracted from the canonical mathematical support witness. These bridges
+instantiate the admission theorem on the named endpoints. -/
 
 /-- Canonical Gödel ↔ native DP pairwise bridge data. -/
 def godel_dp_bridgeData :
@@ -478,16 +413,15 @@ theorem godel_benchmark_admitsUnrestrictedWitness_viaBridge :
     benchmarkTransportLCELAdmissibilityData
     godel_benchmark_bridgeData
 
-/-! ## Audit theorems: the weak `ofBridgeData` route is constant
+/-! ## Constant-transport equations for `ofBridgeData`
 
 These four theorems make the collapse of the weak bridge-data route
 visible at the theorem level: the `transportBase`, `transportLicense`,
 `transportReimport`, and `transportBoundary` fields of
 `LCELMathematicalSupportWitness.ofBridgeData A₁ A₂ bridge` are **constant**
 functions, always returning the canonical target theorem extracted from
-`A₂`'s support records regardless of the source theorem input. The
-strong route below replaces each with a genuine transport function
-supplied by the bridge itself. -/
+`A₂`'s support records for every source theorem input. The bridge-record
+route below instead stores caller-supplied transport functions. -/
 
 theorem ofBridgeData_transportBase_constant
     {L₁ L₂ : FormalLCELInstance}
@@ -531,25 +465,18 @@ theorem ofBridgeData_transportBoundary_constant
 
 /-! ## Strong transport-bridge data
 
-`LCELTransportBridgeData A₁ A₂` is a strictly stronger pairwise bridge
-structure than `LCELRawPairBridgeData`. It carries, in addition to the
+`LCELTransportBridgeData A₁ A₂` carries, in addition to the
 strong slot correspondence and stagewise equivalence, four **explicit
 theorem-object transport functions** and four coherence equations tying
 each transport's output on the canonical source theorem
 (`baseReversibilityTheorem_of_support A₁.<slot>Support` etc.) to the
 canonical target theorem extracted from `A₂`'s support records.
 
-This is strictly smaller than a full `LCELMathematicalSupportWitness`:
-it does not carry support records, support-equivalence iffs, or the
-eight `source/target<Slot>Theorem` + `_fromSupport` fields. The
-admissibility data supplies all of those; the bridge adds only the
-transport layer that the weak `LCELRawPairBridgeData` lacks.
-
-On a pair where the strong slot correspondence is non-constant (e.g.
-the benchmark ↔ DP pair under the typed sentence translation
-`benchmarkTransportSentence_to_dpEmitterSentence`), the bridge's
-transport functions are the genuine source-informed transport helpers
-rather than constant target-returning closures. -/
+The admissibility data supplies support records, support-equivalence iffs, and
+the eight `source/target<Slot>Theorem` and `_fromSupport` fields. The bridge
+record constrains each transport function at its canonical source theorem.
+Source sensitivity, pointwise preservation, and nonconstancy require additional
+laws beyond this structure. -/
 structure LCELTransportBridgeData
     {L₁ L₂ : FormalLCELInstance}
     (A₁ : LCELAdmissibilityData L₁)
@@ -661,14 +588,12 @@ def LCELMathematicalSupportWitness.ofTransportBridgeData
       rw [weak.sourceBoundaryTheorem_fromSupport, weak.targetBoundaryTheorem_fromSupport]
       exact bridge.transportBoundary_canonical }
 
-/-! ### Audit theorems: the strong route uses the bridge transports
+/-! ### Bridge-transport projection equations
 
-These four theorems make the strong route's source-sensitivity visible
-at the theorem level: the `transportBase`, `transportLicense`,
+These four theorems identify the `transportBase`, `transportLicense`,
 `transportReimport`, and `transportBoundary` fields of the
-strong-route witness are definitionally **the bridge's own transport
-functions**, not constant target-returning closures. Contrast with
-`ofBridgeData_transport..._constant` above. -/
+bridge-record witness with the transport functions supplied by the bridge.
+They impose zero additional source-sensitivity or nonconstancy law. -/
 
 theorem ofTransportBridgeData_transportBase_fromBridge
     {L₁ L₂ : FormalLCELInstance}
@@ -728,8 +653,7 @@ def LCELUnrestrictedMathematicalWitness.ofAdmissibilityDataAndTransportBridge
 /-- **LCEL unrestricted-witness refined classification theorem via strong
 transport bridge.** A raw pair admits an unrestricted mathematical
 witness whenever two admissibility data packages and a strong transport
-bridge exist; the resulting witness's transport functions are the
-bridge's own, not constant target-returning closures. -/
+bridge exist; the resulting witness stores the bridge's transport functions. -/
 theorem admitsUnrestrictedWitness_of_transportBridgeData
     {L₁ L₂ : FormalLCELInstance}
     (A₁ : LCELAdmissibilityData L₁)
@@ -743,8 +667,8 @@ theorem admitsUnrestrictedWitness_of_transportBridgeData
 
 The canonical Gödel ↔ DP and Gödel ↔ benchmark pairs' mathematical
 support witnesses use correspondence-driven transport helpers; the
-transport-bridge record below packages exactly the transport functions
-used in those canonical witnesses, now exposed explicitly. The
+transport-bridge record below packages the transport functions used in those
+canonical witnesses. The
 transport coherence equations are `rfl` because the canonical
 correspondence's translate maps are constant on the Gödel side, so
 transport applied to the canonical source theorem reduces definitionally
@@ -844,14 +768,14 @@ theorem godel_benchmark_admitsUnrestrictedWitness_viaTransportBridge :
     benchmarkTransportLCELAdmissibilityData
     godel_benchmark_transportBridgeData
 
-/-- Downgrading the canonical Gödel ↔ native DP strong transport bridge to
-the weak bridge recovers the canonical weak bridge exactly. -/
+/-- Downgrading the canonical Gödel ↔ native DP transport bridge yields the
+canonical weak bridge. -/
 theorem godel_dp_transportBridgeData_toRawPairBridgeData_eq_bridgeData :
     godel_dp_transportBridgeData.toRawPairBridgeData = godel_dp_bridgeData :=
   rfl
 
-/-- Downgrading the canonical Gödel ↔ benchmark strong transport bridge to
-the weak bridge recovers the canonical weak bridge exactly. -/
+/-- Downgrading the canonical Gödel ↔ benchmark transport bridge yields the
+canonical weak bridge. -/
 theorem godel_benchmark_transportBridgeData_toRawPairBridgeData_eq_bridgeData :
     godel_benchmark_transportBridgeData.toRawPairBridgeData
       = godel_benchmark_bridgeData :=
@@ -919,7 +843,7 @@ def toBridgeData
 
 /-- Extract the strong transport bridge from an unrestricted witness.
 The witness's four `transport<Slot>` fields plus their `..._source`
-coherence equations supply exactly the transport-bridge fields tied to
+coherence equations supply the transport-bridge fields tied to
 the extracted source/target admissibility data. -/
 def toTransportBridgeData
     {L₁ L₂ : FormalLCELInstance}
@@ -962,8 +886,8 @@ def toTransportBridgeData
         ← W.comparison.targetBoundaryTheorem_fromSupport]
     exact W.comparison.transportBoundary_source
 
-/-- Downgrading the strong extracted bridge from an unrestricted witness
-recovers the weak extracted bridge exactly. -/
+/-- Downgrading the extracted transport bridge yields the extracted weak
+bridge. -/
 theorem toTransportBridgeData_toRawPairBridgeData_eq_toBridgeData
     {L₁ L₂ : FormalLCELInstance}
     (W : LCELUnrestrictedMathematicalWitness L₁ L₂) :
@@ -1001,12 +925,9 @@ open OperatorKO7.LCELUnrestrictedExistence
 
 /-- **LCEL unrestricted-witness refined classification biconditional.**
 
-Genuine iff characterization: a raw pair admits an unrestricted
-mathematical witness iff there is admissibility data on each side plus
-a pairwise bridge. Strictly weaker on both directions than the
-tautological `admitsUnrestrictedWitness_iff`, which packaged the whole
-cross-instance mathematical support witness in a single Nonempty
-component. -/
+A raw pair admits an unrestricted mathematical witness iff there is
+admissibility data on each side plus a pairwise bridge. The reverse direction
+uses the constant-transport builder above. -/
 theorem admitsUnrestrictedWitness_iff_bridgeData
     (L₁ L₂ : FormalLCELInstance) :
     AdmitsLCELUnrestrictedWitness L₁ L₂
@@ -1037,8 +958,8 @@ biconditional.**
 
 Dependent strong-route analogue of `admitsUnrestrictedWitness_iff_bridgeData`:
 a raw pair admits an unrestricted witness iff there exist source-side and
-target-side admissibility data packages together with a strong transport
-bridge between those exact packages. -/
+target-side admissibility data packages together with a transport bridge
+between those packages. -/
 theorem admitsUnrestrictedWitness_iff_transportBridgeData
     (L₁ L₂ : FormalLCELInstance) :
     AdmitsLCELUnrestrictedWitness L₁ L₂

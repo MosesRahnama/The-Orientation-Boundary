@@ -1,4 +1,4 @@
-# The Orientation Boundary
+# OperatorKO7 Public Manuscript Companion
 
 This repository is the **public companion artifact** for the following manuscripts:
 
@@ -6,15 +6,17 @@ This repository is the **public companion artifact** for the following manuscrip
 - Rahnama, M. *Operational Inexpressibility at the Primitive-Recursion Orientation Boundary.*
 - Rahnama, M. *The Confluence-Preservation Boundary for Diagonal Identity Queries: Non-Left-Linearity, Signature Inexpressibility, and External Guarding.*
 
-It contains the public Lean 4 source package for the exposed theorem surface, manuscript source snapshots, selected external proof artifacts, and reproducibility metadata for inspection of the formal claims made in those manuscripts.
+It contains the public Lean 4 source package, selected external proof artifacts, and reproducibility metadata for inspection of the formal claims made in those manuscripts.
 
 ---
 
 ## Disclosure Scope
 
-For the Orientation Boundary paper, the release target is its complete 380-file Lean closure: 270 direct manuscript references plus 110 transitive imports. The current staging state is 201 source-identical public files, 80 public files requiring synchronization, and 99 files pending transfer.
+The release contains the exact 665-file deduplicated union of the three manuscript stacks: 383 files for Orientation Boundary, 489 for Operational Inexpressibility, and 262 for Confluence-Preservation Boundary. Every retained file is present and source-synchronized.
 
-No Orientation Boundary closure file is subject to NDA. NDA access may still apply to other manuscripts or product-facing material outside that paper closure.
+No NDA, reviewer qualification, or separate access grant applies to retained public-release copies. Product-facing Supervisory Engine modules and other listed private material outside the three manuscript stacks are excluded by scope and covered by the NDA inventory at the end of `Lean_Module_Disclosure_Details.md`.
+
+The proof-foundation audit promotes every former NDA-listed manuscript dependency into the public stack: six historical NDA paths are disclosed publicly, while the remaining 57 have zero manuscript references and zero import edges from the public proof closure. No disclosed proof depends on an NDA-only module.
 
 For the current disclosure policy and the full module-to-manuscript map, see [Lean_Module_Disclosure_Details.md](./Lean_Module_Disclosure_Details.md).
 
@@ -32,11 +34,6 @@ OperatorKO7/
   SchemaExtendedAPI.lean          extended-schema surface
   Meta/                           public theorem modules
   Test/                           reachability and axiom-audit gates
-
-Manuscripts/
-  Orientation_Boundary/           Paper A TeX source and bibliography
-  Operational_Inexpressibility/   Paper B TeX source and bibliography
-  Distinction_Boundary/           Paper C TeX source
 
 Artifacts/
   ttt2/                           external proof artifacts
@@ -56,9 +53,7 @@ lean-toolchain                     Lean version pin
 
 ## What Is Not Included
 
-The Orientation Boundary files marked `pending transfer` or `synchronization required` in the disclosure ledger are not yet release-ready, but all are designated public and require no NDA. Other manuscripts may retain separate access policies.
-
-For the Orientation Boundary paper, the complete direct-plus-import inventory is the 380-row closure table in `Lean_Module_Disclosure_Details.md`; the manuscript module map is a theorem-facing summary rather than an exhaustive import manifest.
+The separate product-facing `SupervisoryEngine\` module tree and all Lean modules unrelated to the three named manuscripts are intentionally excluded. `OperatorKO7\Meta\GenericSupervisoryEngine.lean` remains because it is imported by the manuscript-facing `CrossPaperAPI` proof surface.
 
 ---
 
@@ -105,9 +100,9 @@ For paid licensing or any licensing inquiry, contact:
 
 ---
 
-## Reviewer NDA Access
+## Access
 
-No NDA is required for any file in the Orientation Boundary Lean closure. For material outside that closure, academic and editorial reviewers may request access under the applicable policy. Contact:
+No NDA is required for the retained copies in this three-manuscript public release. The separate excluded/private NDA inventory is recorded at the end of `Lean_Module_Disclosure_Details.md`. Licensing questions can be directed to:
 
 **info@minaanalytics.com**
 

@@ -8,33 +8,9 @@ import OperatorKO7.Meta.MatrixBarrierLexPermD
 /-!
 # Escape Trichotomy
 
-This module replaces the paper's purely rhetorical "escape trichotomy" question
-with a theorem for an explicit universe of Nat-valued direct orienters.
+## Formal Scope
 
-The theorem universe is intentionally narrow and reviewable:
-- additive compositional measures
-- transparent compositional measures
-- pumped affine constructor-local measures
-- pumped restricted-quadratic constructor-local measures
-- pumped bounded-cross-term constructor-local measures
-- pumped bounded-multilinear constructor-local measures
-- pumped generalized bounded-polynomial constructor-local measures
-- pumped max-plus constructor-local measures
-- KO7-specific max-depth families
-- KO7-specific pure head-precedence families
-- tracked-primary componentwise pair families
-- tracked-primary lexicographic pair families
-- arbitrary finite tracked-primary lexicographic vector families
-- permutation-priority finite tracked-primary lexicographic vector families
-
-Within this universe, any successful root-step orienter must fail at least one of:
-- wrapper-subterm sensitivity
-- base-level successor transparency
-- representability by the formalized Nat-valued direct families above
-
-Dependency-pair frameworks and path orders remain outside this theorem universe.
-Broader projection-based matrix extensions are handled later in this file through
-their scalar representability layer rather than by these base constructors alone.
+Each trichotomy is a case split over the enumerated representability type shown in its theorem. No classification of methods outside that type is implied.
 -/
 
 namespace OperatorKO7.EscapeTrichotomy
@@ -47,7 +23,7 @@ open OperatorKO7.MetaConjectureBoundary
 open OperatorKO7.DepthBarrier
 open OperatorKO7.PrecedenceBarrier
 
-/-- An explicit KO7 direct-orienter universe covering the current scalar families and the
+/-- An explicit KO7 direct-orienter universe covering the defined scalar families and the
 tracked-primary pair families. -/
 inductive KO7DirectOrienter where
   | nat (μ : Trace → Nat)
@@ -225,7 +201,7 @@ theorem ko7_nat_direct_escape_trichotomy
     exact hsub
 
 /-- Extended KO7 escape trichotomy for the explicit direct universe formalized in the
-artifact, now including the tracked-primary componentwise and lexicographic pair families.
+artifact, here including the tracked-primary componentwise and lexicographic pair families.
 The failure modes are stated on the tracked primary scalar exposed by the orienter. -/
 theorem ko7_direct_escape_trichotomy_extended
     {O : KO7DirectOrienter}

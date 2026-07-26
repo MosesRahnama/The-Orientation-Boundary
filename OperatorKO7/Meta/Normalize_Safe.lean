@@ -307,9 +307,15 @@ theorem normalizeSafe_idempotent (t : Trace) :
 
 /-! ### (reserved) join-to-NF and confluence
 
--- Note: General join-to-NF and confluence results are intentionally deferred here.
--- They require additional confluence hypotheses or a separate argument; we keep the
--- current module to safe, non-controversial lemmas that do not rely on global CR.
+-- General join-to-NF and confluence results are a structural blocker at
+-- this module layer (blocker_id: confluence_requires_local_confluence;
+-- reason: deriving global Church-Rosser for `SafeStep` requires
+-- Newman's lemma plus a local-confluence proof for every overlap pair,
+-- which the current SafeStep relation does not carry as a substrate
+-- field; downstream confluence proofs live in EqGuardedConfluence and
+-- SafeStepCtx_Confluence under their explicit substrate assumptions).
+-- The current module is restricted to safe, non-controversial lemmas
+-- that do not rely on global Church-Rosser.
 
 -/
 

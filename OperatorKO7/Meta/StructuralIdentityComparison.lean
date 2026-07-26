@@ -9,7 +9,7 @@ mechanized DP-side six-step profile.
 
 This does not introduce a new historical theorem. It formalizes the exact shape
 of the stronger comparison claim so that any future classical-side profile can
-be connectorged into a machine-checked comparison object.
+be plugged into a machine-checked comparison object.
 -/
 
 namespace OperatorKO7.StructuralIdentityComparison
@@ -361,9 +361,9 @@ def benchmarkTransportReflectionContent :
   licensedAdmission s := s = .transformedWitnessSentence
   blockedSentence := .transformedWitnessSentence
   blocked_not_provable := by
-    simp [benchmarkTransportBaseTheoryContent, FormalBaseTheorySemantics.proves]
+    simp [benchmarkTransportBaseTheoryContent]
   blocked_true := by
-    simp [benchmarkTransportBaseTheoryContent, FormalBaseTheorySemantics.trueInReferenceModel]
+    simp [benchmarkTransportBaseTheoryContent]
   strongerFramework := .transformedCallTransport
   stronger_extendsBase := trivial
   stronger_reflects_blocked := rfl
@@ -404,11 +404,9 @@ def benchmarkTransportObstructionContent :
   witness_obstructs_blocked := rfl
   blocked_not_provable := by
     intro h
-    simp [benchmarkTransportBaseTheoryContent,
-      FormalBaseTheorySemantics.proves] at h
+    simp [benchmarkTransportBaseTheoryContent] at h
   blocked_true := by
-    simp [benchmarkTransportBaseTheoryContent,
-      FormalBaseTheorySemantics.trueInReferenceModel]
+    simp [benchmarkTransportBaseTheoryContent]
 
 /-- Typed stronger-framework semantics for the benchmark transport comparison. -/
 def benchmarkTransportFormalFramework : FormalHistoricalFramework where
@@ -458,8 +456,7 @@ def benchmarkTransportReimportContent :
   witness := .transformedWitnessSentence
   witness_certifies_imported := rfl
   imported_true := by
-    simp [benchmarkTransportBaseTheoryContent,
-      FormalBaseTheorySemantics.trueInReferenceModel]
+    simp [benchmarkTransportBaseTheoryContent]
 
 /-- Semantic coherence for the staged benchmark-side transfer:
 obstruction -> transformed-call reflection -> transported reimport.

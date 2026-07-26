@@ -22,10 +22,16 @@ import OperatorKO7.Meta.MatrixBarrierArbitrary_Schema
 import OperatorKO7.Meta.MatrixBarrierArcticTropical_Schema
 import OperatorKO7.Meta.ScalarProjectionBarrier
 import OperatorKO7.Meta.ProjectedPrimaryBarrier
+import OperatorKO7.Meta.MatrixProjectionCoverage_Schema
 import OperatorKO7.Meta.SymbolicComparatorBarrier_Schema
 import OperatorKO7.Meta.KBO_Impossible_Schema
 import OperatorKO7.Meta.PumpedBarrierClasses_Schema
 import OperatorKO7.Meta.StandardPumpLemmas
+import OperatorKO7.Meta.BarrierWitness
+import OperatorKO7.Meta.BarrierWitness_Extended
+import OperatorKO7.Meta.BarrierWitness_Budgets
+import OperatorKO7.Meta.SynthesisOracle
+import OperatorKO7.Meta.BarrierClass_Classifier
 import OperatorKO7.Meta.MutualDuplication_Schema
 import OperatorKO7.Meta.MutualDuplication_SchemaBarrier
 import OperatorKO7.Meta.MutualDuplication_FiniteSchema
@@ -45,20 +51,14 @@ import OperatorKO7.Meta.MutualDuplication_Preserving_KNode
 import OperatorKO7.Meta.MutualDuplication_Preserving_Abstract
 import OperatorKO7.Meta.MutualDuplication_Preserving_Transparent
 import OperatorKO7.Meta.MutualDuplication_PacketGraph
+import OperatorKO7.Meta.MutualDuplication_FiniteSchema_API
+import OperatorKO7.Meta.HigherOrderSharingBoundary_API
 import OperatorKO7.Meta.EscapeTrichotomy_Schema
 
 /-!
 # Schema Extended API
 
-Reusable public root above `PrimitiveSchemaAPI`.
-
-This file adds the broader barrier library, executable tooling, and reusable
-SCC-level schema extensions. It is intentionally broader than the primitive
-root, but it excludes KO7-facing and trace-facing packaging. In particular, the
-tool-search governance catalogs and the record-emission / externalized-trace
-layers stay on `SchemaAPI`, not on this stricter split root. The
-current import closure is audited by `scripts/audit_schema_extended_api.py`.
-
-It still exposes the extracted schema half of the escape-trichotomy
-development via `Meta/EscapeTrichotomy_Schema.lean`.
+This import-only root extends `PrimitiveSchemaAPI` with the barrier, matrix, mutual-duplication,
+higher-order sharing, and escape-trichotomy schema modules listed above. Import-closure audit
+receipts belong in the external Lean ledger rather than this source comment.
 -/

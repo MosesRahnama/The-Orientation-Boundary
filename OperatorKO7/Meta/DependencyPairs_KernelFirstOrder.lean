@@ -1,17 +1,16 @@
 import OperatorKO7.Meta.DependencyPairs_FiniteCarrierView
 
 /-!
-# KO7 Kernel Rules as a Generic First-Order TRS
+# Standalone KO7-Shaped First-Order Model
 
-This module packages the KO7 full root-step rules directly as a finite first-order TRS over
-an internal symbol type, rather than through the external TPDB string syntax. It shows
-that the generic first-order dependency-pair extraction layer can be driven from an
-artifact-internal presentation as well.
+This module defines a hand-authored finite first-order system over KO7-shaped
+symbols. A correspondence theorem connecting these records to the trace-kernel
+`Step` relation lies outside this module.
 -/
 
 namespace OperatorKO7.DependencyPairsFragment.KernelFirstOrder
 
-/-- Internal first-order symbol type for the KO7 full-step TRS. -/
+/-- Symbol type for the standalone eight-rule first-order model. -/
 inductive Symbol
 | void
 | delta
@@ -25,7 +24,7 @@ deriving DecidableEq, Repr
 abbrev Term := OperatorKO7.DependencyPairsFragment.FOTerm Symbol String
 abbrev Rule := OperatorKO7.DependencyPairsFragment.FORule Symbol String
 
-/-- Variable shorthands for the internal KO7 first-order presentation. -/
+/-- Variable shorthands for the standalone presentation. -/
 def x : Term := .var "x"
 def y : Term := .var "y"
 def z : Term := .var "z"
@@ -39,7 +38,7 @@ def app (a b : Term) : Term := .app Symbol.app [a, b]
 def recD (b s n : Term) : Term := .app Symbol.recD [b, s, n]
 def eqW (a b : Term) : Term := .app Symbol.eqW [a, b]
 
-/-- KO7 full-step rules as an internal first-order TRS. -/
+/-- Eight hand-authored rules of the standalone first-order model. -/
 def ko7FullStepRules : Array Rule :=
   #[ ⟨integrate (delta x), void⟩
    , ⟨merge void x, x⟩
@@ -50,12 +49,12 @@ def ko7FullStepRules : Array Rule :=
    , ⟨eqW x x, void⟩
    , ⟨eqW x y, integrate (merge x y)⟩ ]
 
-/-- Trivial internal engine carrier for the KO7 full-step TRS. -/
+/-- Unit engine carrier for the standalone first-order model. -/
 inductive EngineTag
 | full
 deriving DecidableEq, Repr
 
-/-- Finite rule carrier for the KO7 full-step TRS. -/
+/-- Finite carrier indexing the eight standalone rules. -/
 inductive RuleId
 | integrate_delta
 | merge_void_left
@@ -67,7 +66,7 @@ inductive RuleId
 | eq_diff
 deriving Fintype, DecidableEq, Repr
 
-/-- Left-hand sides indexed by the finite KO7 rule carrier. -/
+/-- Left-hand sides indexed by the finite rule carrier. -/
 def ruleLhs : RuleId → Term
 | .integrate_delta => integrate (delta x)
 | .merge_void_left => merge void x
@@ -78,7 +77,7 @@ def ruleLhs : RuleId → Term
 | .eq_refl => eqW x x
 | .eq_diff => eqW x y
 
-/-- Right-hand sides indexed by the finite KO7 rule carrier. -/
+/-- Right-hand sides indexed by the finite rule carrier. -/
 def ruleRhs : RuleId → Term
 | .integrate_delta => void
 | .merge_void_left => x
@@ -117,52 +116,52 @@ instance : OperatorKO7.DependencyPairsFragment.HasFiniteCarrierExtractedView Eng
   OperatorKO7.DependencyPairsFragment.finiteCarrierExtractedViewOfHeadCarrier
     EngineTag Symbol
 
-/-- KO7 full-step rules packaged through the generic internal-engine view. -/
+/-- Standalone rules packaged through the generic internal-engine view. -/
 def ko7Engine : OperatorKO7.DependencyPairsFragment.FiniteFirstOrderEngine Symbol String :=
   OperatorKO7.DependencyPairsFragment.HasFiniteFirstOrderView.toFiniteFirstOrderEngine EngineTag.full
 
-/-- KO7 full-step rules packaged through the finite rule-carrier engine view. -/
+/-- Standalone rules packaged through the finite rule-carrier engine view. -/
 noncomputable def ko7CarrierEngine :
     OperatorKO7.DependencyPairsFragment.FiniteCarrierFirstOrderEngine Symbol String :=
   OperatorKO7.DependencyPairsFragment.HasFiniteCarrierFirstOrderView.toFiniteCarrierFirstOrderEngine
     EngineTag.full
 
-/-- KO7 full-step rules recovered directly from the finite rule-carrier first-order surface. -/
+/-- Standalone rules exposed through the finite rule-carrier first-order surface. -/
 noncomputable def ko7CarrierFirstOrderEngine :
     OperatorKO7.DependencyPairsFragment.FiniteFirstOrderEngine Symbol String :=
   OperatorKO7.DependencyPairsFragment.HasFiniteCarrierFirstOrderView.toFiniteFirstOrderEngine
     (ε := EngineTag) (σ := Symbol) (ν := String) EngineTag.full
 
-/-- KO7 full-step rules packaged through the smaller head / call-head interface. -/
+/-- Standalone rules packaged through the head and call-head interface. -/
 def ko7HeadEngine : OperatorKO7.DependencyPairsFragment.FiniteHeadRuleEngine Symbol :=
   OperatorKO7.DependencyPairsFragment.FiniteHeadRuleEngine.ofRawFirstOrderView
     (ε := EngineTag) (σ := Symbol) (ν := String) EngineTag.full
 
-/-- KO7 full-step rules recovered directly from the typeclass-level head-view surface. -/
+/-- Standalone rules exposed through the typeclass-level head-view surface. -/
 def ko7HeadViewEngine : OperatorKO7.DependencyPairsFragment.FiniteHeadRuleEngine Symbol :=
   OperatorKO7.DependencyPairsFragment.HasFiniteHeadRuleView.toFiniteHeadRuleEngine EngineTag.full
 
-/-- KO7 full-step rules recovered directly from the finite rule-carrier head-view surface. -/
+/-- Standalone rules exposed through the finite rule-carrier head-view surface. -/
 noncomputable def ko7CarrierHeadEngine : OperatorKO7.DependencyPairsFragment.FiniteHeadRuleEngine Symbol :=
   OperatorKO7.DependencyPairsFragment.HasFiniteCarrierFirstOrderView.toFiniteHeadRuleEngine
     (ε := EngineTag) (σ := Symbol) (ν := String) EngineTag.full
 
-/-- KO7 full-step rules recovered directly from the finite head-carrier surface. -/
+/-- Standalone rules exposed through the finite head-carrier surface. -/
 noncomputable def ko7CarrierHeadOnlyEngine : OperatorKO7.DependencyPairsFragment.FiniteHeadRuleEngine Symbol :=
   OperatorKO7.DependencyPairsFragment.HasFiniteCarrierHeadView.toFiniteHeadRuleEngine
     (ε := EngineTag) (σ := Symbol) EngineTag.full
 
-/-- KO7 full-step rules recovered directly from the finite extracted-data carrier surface. -/
+/-- Standalone rules exposed through the finite call-head-data carrier surface. -/
 noncomputable def ko7CarrierExtractedGraph :
     OperatorKO7.DependencyPairsFragment.FiniteExtractedCallGraph Symbol :=
   OperatorKO7.DependencyPairsFragment.HasFiniteCarrierExtractedView.extractedCallGraph
     (ε := EngineTag) (κ := Symbol) EngineTag.full
 
-/-- Extracted nodes for the internal KO7 first-order TRS. -/
+/-- Rule-level call-head records for the standalone first-order model. -/
 def ko7FullStepExtractedNodes :=
   ko7Engine.extractedNodes
 
-/-- Extracted call graph for the internal KO7 first-order TRS. -/
+/-- Call graph constructed from the standalone first-order model. -/
 def ko7FullStepExtractedCallGraph :
     OperatorKO7.DependencyPairsFragment.FiniteExtractedCallGraph Symbol :=
   ko7Engine.extractedCallGraph
@@ -196,27 +195,55 @@ theorem ko7_head_view_engine_matches :
     ko7HeadViewEngine.definedHeads = ko7HeadEngine.definedHeads := by
   decide
 
-/-- Existential search over `.toList` combined with `Finset` equality.
-Kernel `decide` cannot normalize `Finset.instDecidableEq` on
-multiset-quotient witnesses within the existential body; compiled-code
-`native_decide` does. Trust slot: build-time only; the complete axiom
-dependence is recorded by `#print axioms` in
-`OperatorKO7.Meta.NativeDecideAuditGate.keptNativeDecideTheorems`. -/
+/-- The sixth rule-level record retains `recD` after filtering by defined heads. -/
 theorem ko7_full_step_has_recD_successor :
     ∃ n ∈ ko7FullStepExtractedNodes.toList,
       n.nodeKey = Symbol.recD ∧ n.succKeys = ({ Symbol.recD } : Finset Symbol) := by
-  native_decide
--- #print axioms ko7_full_step_has_recD_successor
--- depends on axioms: [propext, Classical.choice, Lean.ofReduceBool, Quot.sound]
+  have hsize : 5 < ko7FullStepExtractedNodes.size := by
+    rw [ko7_full_step_extracted_node_count]
+    decide
+  let n := ko7FullStepExtractedNodes[5]
+  refine ⟨n, Array.getElem_mem_toList hsize, rfl, ?_⟩
+  have hsucc : n.succKeys =
+      (FOTerm.allHeads (app y (recD x y z))).filter (· ∈ ko7Engine.definedHeads) := by
+    rfl
+  rw [hsucc, ko7_full_step_defined_heads]
+  apply Finset.ext
+  intro f
+  simp [FOTerm.allHeads, app, recD, x, y, z]
+  constructor
+  · rintro ⟨hf, hd⟩
+    rcases hf with rfl | rfl
+    · simp at hd
+    · rfl
+  · intro h
+    subst f
+    simp
 
-/-- Existential search over `.toList` combined with `Finset` equality
-(head-engine variant). Same retention rationale as
-`ko7_full_step_has_recD_successor` above. -/
+/-- The head-view engine's sixth record retains `recD` as its defined successor. -/
 theorem ko7_head_engine_has_recD_successor :
     ∃ n ∈ ko7HeadEngine.extractedNodes.toList,
       n.nodeKey = Symbol.recD ∧ n.succKeys = ({ Symbol.recD } : Finset Symbol) := by
-  native_decide
--- #print axioms ko7_head_engine_has_recD_successor
--- depends on axioms: [propext, Classical.choice, Lean.ofReduceBool, Quot.sound]
+  have hsize : 5 < ko7HeadEngine.extractedNodes.size := by
+    rw [ko7_head_engine_extracted_node_count]
+    decide
+  let n := ko7HeadEngine.extractedNodes[5]
+  refine ⟨n, Array.getElem_mem_toList hsize, rfl, ?_⟩
+  have hsucc : n.succKeys =
+      (FOTerm.allHeads (app y (recD x y z))).filter
+        (· ∈ ko7HeadEngine.definedHeads) := by
+    rfl
+  rw [hsucc, ko7_head_engine_defined_heads, ko7_full_step_defined_heads]
+  apply Finset.ext
+  intro f
+  simp [FOTerm.allHeads, app, recD, x, y, z]
+  constructor
+  · rintro ⟨hf, hd⟩
+    rcases hf with rfl | rfl
+    · simp at hd
+    · rfl
+  · intro h
+    subst f
+    simp
 
 end OperatorKO7.DependencyPairsFragment.KernelFirstOrder

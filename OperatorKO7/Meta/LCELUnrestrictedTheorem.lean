@@ -236,7 +236,7 @@ canonical pair, both thin wrappers around the canonical
 `Meta/LCELMathematicalSupportWitness.lean`. -/
 
 /-- Canonical Gödel 1931 ↔ native DP / emitter unrestricted mathematical
-witness. The manuscript-critical endpoint for Workstream E.
+witness. The paper-critical endpoint for Workstream E.
 
 Built via the Phase P2 `ofAdmissibilityData` builder from the canonical
 admissibility-data packages plus the canonical mathematical support
@@ -263,7 +263,7 @@ def godel_benchmark_unrestrictedMathematicalWitness :
 
 /-- Universal structural identity between the Gödel 1931 side and the
 native DP / emitter side, obtained over raw `FormalLCELInstance` pairs
-via the unrestricted mathematical witness. Manuscript-critical corollary. -/
+via the unrestricted mathematical witness. Paper-critical corollary. -/
 theorem godel_dp_unrestricted_structural_identity :
     Nonempty
       (LCELUniversalQuasiFunctor

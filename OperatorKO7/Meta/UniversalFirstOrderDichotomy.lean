@@ -67,6 +67,8 @@ The capstone names `UniversalFirstOrderDichotomy` and
 the Lane 23A re-export module.
 -/
 
+set_option linter.dupNamespace false
+
 namespace OperatorKO7.UniversalFirstOrderDichotomy
 
 open OperatorKO7.UniversalFirstOrderInterpretationMethod

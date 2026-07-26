@@ -4,19 +4,16 @@ import OperatorKO7.Meta.KO7RDRSAdapter
 /-!
 # Canonical Witness Universality
 
-Phase A.3 of the recursive-family expansion roadmap.
-
 This module packages generic `RightDuplicatingRecursorSchema` (RDRS) witness
 facts into a `CanonicalRDRSWitness`, then instantiates the canonical witness
-on every RDRS the roadmap names: KO7 itself (via the role-aware adapter in
+for four RDRS instances: KO7 itself (via the role-aware adapter in
 `Meta/KO7RDRSAdapter.lean`), textbook duplication, the tagged-binary
 recursor, and the depth-counter recursor.
 
-The KO7 canonical witness is connected to the live KO7 kernel `Step.R_rec_succ`
-rule by the adapter's projection lemma. The canonical witness layer exposes
-the four full canonical witnesses required by the validation table together
-with the same transfer lemmas through the generic `CanonicalRDRSWitness`
-interface.
+The KO7 canonical witness is connected to the kernel `Step.R_rec_succ` rule by
+the adapter's projection lemma. The canonical witness layer exposes these four
+witnesses together with transfer lemmas through the generic
+`CanonicalRDRSWitness` interface.
 -/
 
 namespace OperatorKO7.StepDuplicating
@@ -29,7 +26,7 @@ open RightDuplicatingRecursorSchema
 /-- A canonical structural witness packages the RDRS-level facts already proved
 for a right-duplicating recursor rule. This layer transfers only
 payload-duplication facts that are immediate from the RDRS shell, not later
-observer or measure-class theorems. -/
+  observer, measure-class, or operational firability theorems. -/
 structure CanonicalRDRSWitness where
   schema : RightDuplicatingRecursorSchema
   gapPos : 1 ≤ schema.distinguishedDuplicationGap
@@ -73,14 +70,14 @@ theorem canonicalWitnessTransferRhsPayloadPos
     0 < W.schema.payloadCount W.schema.distinguishedPayload W.schema.rhs :=
   W.rhsPayloadPos
 
-/-- The canonical witness's tracked closed-firability predicate. -/
-def CanonicalRDRSWitness.closedFirability (W : CanonicalRDRSWitness) : Prop :=
-  W.schema.firesOnClosedTerms
+/-- The canonical witness's carrier-supplied firability declaration. This
+projection is metadata and is not a rewrite-step witness. -/
+def CanonicalRDRSWitness.declaredClosedFirability (W : CanonicalRDRSWitness) : Prop :=
+  W.schema.declaredClosedFirability
 
 /-- Canonical witness for KO7 via the role-aware adapter of
-`Meta/KO7RDRSAdapter.lean`. The adapter projects to the live KO7 kernel
-`Step.R_rec_succ` reduction for every role assignment, so this is a
-full canonical witness, not a status surface. -/
+`Meta/KO7RDRSAdapter.lean`. The adapter projects to the KO7 kernel
+`Step.R_rec_succ` reduction for every role assignment. -/
 def ko7CanonicalWitness : CanonicalRDRSWitness :=
   canonicalWitnessOfRDRS ko7RDRS
 
@@ -96,8 +93,8 @@ def taggedBinaryCanonicalWitness : CanonicalRDRSWitness :=
 def depthCounterCanonicalWitness : CanonicalRDRSWitness :=
   canonicalWitnessOfRDRS depthCounterRDRS
 
-/-- The Phase A.3 universality surface is non-vacuous: it contains the three
-non-KO7 witnesses preserved from the first honest layer. -/
+/-- The non-KO7 witness list contains the textbook, tagged-binary, and
+depth-counter instances. -/
 def nonKO7CanonicalWitnesses : List CanonicalRDRSWitness :=
   [textbookCanonicalWitness, taggedBinaryCanonicalWitness, depthCounterCanonicalWitness]
 
@@ -105,8 +102,8 @@ theorem nonKO7CanonicalWitnesses_length :
     nonKO7CanonicalWitnesses.length = 3 := by
   rfl
 
-/-- The full non-vacuity list: KO7 together with the three non-KO7
-canonical witnesses. -/
+/-- The four structural witnesses: KO7 together with the three non-KO7
+schema instances. -/
 def canonicalWitnesses : List CanonicalRDRSWitness :=
   [ko7CanonicalWitness, textbookCanonicalWitness,
    taggedBinaryCanonicalWitness, depthCounterCanonicalWitness]
@@ -115,21 +112,39 @@ theorem canonicalWitnesses_length :
     canonicalWitnesses.length = 4 := by
   rfl
 
-theorem ko7CanonicalWitness_closedFirability :
-    ko7CanonicalWitness.closedFirability := by
+/-- The KO7 schema's declared firability marker. Operational firing is supplied
+by `ko7CanonicalWitness_projects_to_kernel_step` below. -/
+theorem ko7CanonicalWitness_declaredClosedFirability :
+    ko7CanonicalWitness.declaredClosedFirability := by
   trivial
 
-theorem textbookCanonicalWitness_closedFirability :
-    textbookCanonicalWitness.closedFirability := by
+/-- The textbook schema's declared firability marker. No rewrite relation is
+part of `RightDuplicatingRecursorSchema`. -/
+theorem textbookCanonicalWitness_declaredClosedFirability :
+    textbookCanonicalWitness.declaredClosedFirability := by
   trivial
 
-theorem taggedBinaryCanonicalWitness_closedFirability :
-    taggedBinaryCanonicalWitness.closedFirability := by
+/-- The tagged-binary schema's declared firability marker. No rewrite relation
+is part of `RightDuplicatingRecursorSchema`. -/
+theorem taggedBinaryCanonicalWitness_declaredClosedFirability :
+    taggedBinaryCanonicalWitness.declaredClosedFirability := by
   trivial
 
-theorem depthCounterCanonicalWitness_closedFirability :
-    depthCounterCanonicalWitness.closedFirability := by
+/-- The depth-counter schema's declared firability marker. No rewrite relation
+is part of `RightDuplicatingRecursorSchema`. -/
+theorem depthCounterCanonicalWitness_declaredClosedFirability :
+    depthCounterCanonicalWitness.declaredClosedFirability := by
   trivial
+
+/-- Every concrete role assignment of the KO7 canonical witness projects to
+the live kernel rule `Step.R_rec_succ`. Unlike the declaration above, this is an
+operational rewrite-step theorem. -/
+theorem ko7CanonicalWitness_projects_to_kernel_step (b s n : Trace) :
+    Step
+      (KO7RDRSTerm.project b s n ko7CanonicalWitness.schema.lhs)
+      (KO7RDRSTerm.project b s n ko7CanonicalWitness.schema.rhs) := by
+  simpa [ko7CanonicalWitness, canonicalWitnessOfRDRS] using
+    ko7RDRS_projects_to_kernel_step b s n
 
 /-- Transfer lemma: KO7 has positive duplication gap through the same
 canonical-witness interface as the non-KO7 witnesses. -/
@@ -158,10 +173,8 @@ theorem ko7CanonicalWitness_rhs_payload_pos :
 
 /-- KO7 is exposed as a canonical recursive-family witness through the same
 RDRS interface as the textbook, tagged-binary, and depth-counter witnesses.
-This is the public KO7-side packaging that the canonical-witness universality
-layer was supposed to ship; it is now unconditional, with the live KO7
-kernel `Step.R_rec_succ` connection proved in
-`Meta/KO7RDRSAdapter.lean` (see `ko7RDRS_projects_to_kernel_step`). -/
+The kernel `Step.R_rec_succ` connection is proved in
+`Meta/KO7RDRSAdapter.lean` by `ko7RDRS_projects_to_kernel_step`. -/
 theorem ko7_as_canonical_recursiveFamily_witness :
     ko7CanonicalWitness.schema = ko7RDRS := rfl
 

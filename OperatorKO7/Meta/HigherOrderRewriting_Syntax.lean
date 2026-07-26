@@ -3,10 +3,11 @@ import OperatorKO7.Meta.HigherOrderSharingBoundary
 /-!
 # Higher-Order Rewriting Syntax
 
-This module upgrades the current M2 surrogate from a minimal higher-order counterexample
-carrier to an explicit higher-order rewriting syntax. The scope remains narrow and
-theorem-driven: the file defines the syntax, policy classes, substitution, one-hole
-contexts, and embeddings from the existing M2 boundary surfaces.
+This module defines an untyped term syntax, three policy-tag enumerations, a replacement operation,
+one-hole contexts, and two syntax embeddings. It defines no rewrite relation. The policy fields are
+metadata tags rather than proofs of beta compatibility or sharing semantics. `substitute` respects a
+matching binder by stopping under it but performs no alpha-renaming, so replacement variables may be
+captured by other binders.
 -/
 
 namespace OperatorKO7.HigherOrderRewritingSyntax
@@ -20,7 +21,7 @@ inductive SharingMode
   | explicitSharing
   deriving DecidableEq, Repr
 
-/-- Beta-reduction status tracked at the policy level. -/
+/-- Two metadata tags for beta status. -/
 inductive BetaMode
   | betaFree
   | betaCompatible
@@ -32,7 +33,7 @@ inductive BinderMode
   | binderAware
   deriving DecidableEq, Repr
 
-/-- Exact higher-order rewriting policy class used by the explicit M2 syntax. -/
+/-- Product of sharing, beta, and binder metadata tags. -/
 structure PolicyClass where
   sharing : SharingMode
   beta : BetaMode
@@ -55,7 +56,7 @@ abbrev ExplicitSharingHO (policy : PolicyClass) : Prop :=
 abbrev BetaFreeHO (policy : PolicyClass) : Prop :=
   policy.beta = .betaFree
 
-/-- Beta-compatible higher-order rewriting status. -/
+/-- Predicate that the beta metadata field equals `betaCompatible`. -/
 abbrev BetaCompatibleStatus (policy : PolicyClass) : Prop :=
   policy.beta = .betaCompatible
 
@@ -79,11 +80,11 @@ def sharedPolicy : PolicyClass :=
 def explicitSharingPolicy : PolicyClass :=
   ⟨.explicitSharing, .betaFree, .binderFree⟩
 
-/-- Canonical beta-compatible status policy. -/
+/-- Fixture carrying the `betaCompatible` and `binderAware` tags. -/
 def betaCompatiblePolicy : PolicyClass :=
   ⟨.tree, .betaCompatible, .binderAware⟩
 
-/-- Existing M2 policies embedded into the explicit policy-class carrier. -/
+/-- Map the two boundary sharing-policy constructors to policy-tag fixtures. -/
 def policyOfBoundary : OperatorKO7.HigherOrderSharingBoundary.SharingPolicy → PolicyClass
   | .tree => treePolicy
   | .shared => sharedPolicy
@@ -117,9 +118,8 @@ def policyOfBoundary : OperatorKO7.HigherOrderSharingBoundary.SharingPolicy → 
 
 @[simp] theorem policyOfBoundary_shared_is_sharedHO : SharedHO (policyOfBoundary .shared) := rfl
 
-/-- Explicit higher-order rewriting terms. This remains deliberately small: free variables,
-binder nodes, application, recursor structure, and an explicit sharing node are enough to
-state the current M2 theorem surfaces. -/
+/-- Untyped terms with numeric variables and binders, application, recursor structure, and an
+explicit sharing node. -/
 inductive HOTerm : Type
   | var : Nat → HOTerm
   | atom : HOTerm
@@ -132,7 +132,7 @@ inductive HOTerm : Type
 
 open HOTerm
 
-/-- Closed fragment used to embed the current first-order or binder-free M2 surfaces. -/
+/-- Inductive fragment omitting `var` and `lam` constructors. -/
 inductive ClosedFragment : HOTerm → Prop
   | atom : ClosedFragment atom
   | succ {t : HOTerm} : ClosedFragment t → ClosedFragment (succ t)
@@ -143,9 +143,8 @@ inductive ClosedFragment : HOTerm → Prop
   | share {s r : HOTerm} :
       ClosedFragment s → ClosedFragment r → ClosedFragment (share s r)
 
-/-- Capture-avoiding substitution is not attempted here. The current M2 syntax only needs a
-simple theorem-visible replacement operation so beta-compatible status is explicit rather than
-purely prose. -/
+/-- Binder-shadowing replacement without alpha-renaming. A matching binder stops recursion; other
+binders retain their names, so free variables of `replacement` may become captured. -/
 @[simp] def substitute (name : Nat) (replacement : HOTerm) : HOTerm → HOTerm
   | var idx => if idx = name then replacement else var idx
   | atom => atom
@@ -179,29 +178,29 @@ inductive Context : Type
 
 namespace Context
 
-/-- Connector a term into a one-hole higher-order rewriting context. -/
-@[simp] def connector : Context → HOTerm → HOTerm
+/-- Plug a term into a one-hole higher-order rewriting context. -/
+@[simp] def plug : Context → HOTerm → HOTerm
   | .hole, t => t
-  | .succ c, t => HOTerm.succ (connector c t)
-  | .appLeft c arg, t => HOTerm.app (connector c t) arg
-  | .appRight fn c, t => HOTerm.app fn (connector c t)
-  | .lam idx c, t => HOTerm.lam idx (connector c t)
-  | .recurBase c s n, t => HOTerm.recur (connector c t) s n
-  | .recurStep b c n, t => HOTerm.recur b (connector c t) n
-  | .recurArg b s c, t => HOTerm.recur b s (connector c t)
-  | .shareLeft c r, t => HOTerm.share (connector c t) r
-  | .shareRight s c, t => HOTerm.share s (connector c t)
+  | .succ c, t => HOTerm.succ (plug c t)
+  | .appLeft c arg, t => HOTerm.app (plug c t) arg
+  | .appRight fn c, t => HOTerm.app fn (plug c t)
+  | .lam idx c, t => HOTerm.lam idx (plug c t)
+  | .recurBase c s n, t => HOTerm.recur (plug c t) s n
+  | .recurStep b c n, t => HOTerm.recur b (plug c t) n
+  | .recurArg b s c, t => HOTerm.recur b s (plug c t)
+  | .shareLeft c r, t => HOTerm.share (plug c t) r
+  | .shareRight s c, t => HOTerm.share s (plug c t)
 
 end Context
 
-/-- Embedding of the existing minimal M2 `HOTerm` carrier into the explicit syntax. -/
+/-- Embedding of `HigherOrderSharingBoundary.HOTerm` into this syntax. -/
 @[simp] def embedBoundaryHOTerm : OperatorKO7.HigherOrderSharingBoundary.HOTerm → HOTerm
   | .base => atom
   | .succ t => succ (embedBoundaryHOTerm t)
   | .app f a => app (embedBoundaryHOTerm f) (embedBoundaryHOTerm a)
   | .recur b s n => recur (embedBoundaryHOTerm b) (embedBoundaryHOTerm s) (embedBoundaryHOTerm n)
 
-/-- The old closed fragment embeds into the explicit binder-free closed fragment. -/
+/-- Map a source `HOClosedFragment` derivation to `ClosedFragment`. -/
 theorem embedBoundaryHOTerm_closed :
     ∀ {t : OperatorKO7.HigherOrderSharingBoundary.HOTerm},
       OperatorKO7.HigherOrderSharingBoundary.HOClosedFragment t →
@@ -236,8 +235,7 @@ theorem embedSharedTerm_closed :
         (embedSharedTerm_closed s)
         (embedSharedTerm_closed n)
 
-/-- The recursor source used by the existing M2 surrogate remains inside the explicit
-closed fragment. -/
+/-- The embedded shared recursor source belongs to `ClosedFragment`. -/
 theorem shared_recursor_shape_closed_fragment
     (b s n : SharedTerm) :
     ClosedFragment (embedSharedTerm (SharedTerm.recur b s (SharedTerm.succ n))) :=

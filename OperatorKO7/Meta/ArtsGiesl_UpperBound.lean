@@ -1,18 +1,21 @@
 import OperatorKO7.Meta.ReverseMathFramework
 import OperatorKO7.Meta.TerminationPrincipleRegister
+import OperatorKO7.Meta.ReverseMathOmega3WellOrdering
 
 /-!
-# Arts--Giesl Upper Bound
+# Arts-Giesl Upper-Bound Packages
 
-Theorem-level upper-bound package for the reverse-mathematical profile of the
-Arts--Giesl soundness license.
+This module separates three formal layers:
 
-This file does not claim an exact calibration. It isolates the strongest
-artifact-backed upper-bound facts currently available:
+- finite-register comparisons between the `RCA0_WO_omega3` and `WO_epsilon0`
+  theory profiles;
+- genuine Lean backing for the well-ordering of `omega^3`;
+- constructors that turn an explicitly supplied alignment or exact-calibration
+  transfer into an Arts-Giesl upper-bound package.
 
-- the candidate target theory sits below `WO(ε₀)`;
-- the candidate target ordinal is `ω^3`, hence below `ε₀`;
-- the recursor-side license transformation is constant-overhead.
+The theory and evidence-status fields are metadata. No theorem in this module
+derives the Arts-Giesl principle from `RCA0 + WO(omega^3)` or proves the reverse
+reduction. Such a semantic calibration requires an explicit transport theorem.
 -/
 
 namespace OperatorKO7.ArtsGieslUpperBound
@@ -23,9 +26,9 @@ open OperatorKO7.ReverseMathSupport
 open OperatorKO7.ReverseMathFramework
 open OperatorKO7.TerminationPrincipleRegister
 
-/-- The strongest theorem-level upper bound currently justified by the artifact
-for the Arts--Giesl license: the already mechanized `WO(ε₀)` benchmark.
--/
+/-- Broad registry package placing the Arts-Giesl profile under the
+`WO(epsilon0)` benchmark. The evidence-status field is a recorded tag; the
+package does not itself prove a reduction of principles. -/
 noncomputable def artsGieslTheoremUpperBound : ReverseMathUpperBound artsGieslPrincipleProfile where
   theoryProfile := woEpsilon0TheoryProfile
   evidenceStatus := EvidenceStatus.theoremLevel
@@ -40,33 +43,29 @@ noncomputable def artsGieslTheoremUpperBound : ReverseMathUpperBound artsGieslPr
 @[simp] theorem artsGieslTheoremUpperBound_ordinal :
     artsGieslTheoremUpperBound.theoryProfile.ordinalCeiling? = some ε₀ := rfl
 
-/-- The conjectural Arts--Giesl target theory lies below the theorem-level
-`WO(ε₀)` upper bound. -/
+/-- The finite theory register orders `RCA0_WO_omega3` below `WO_epsilon0`. -/
 theorem artsGiesl_targetTheory_le_theoremUpperBound :
     rca0WoOmega3TheoryProfile.theory ≤ artsGieslTheoremUpperBound.theoryProfile.theory := by
   decide
 
-/-- The conjectural Arts--Giesl ordinal target lies below the theorem-level
-`ε₀` upper bound already tracked by the KO7 artifact. -/
+/-- The ordinal target `omega^3` is strictly below `epsilon0`. -/
 theorem artsGiesl_targetOrdinal_lt_theoremUpperBound :
     omegaPowThree < ε₀ :=
   omegaPowThree_lt_epsilon0
 
-/-- The registry target agrees with the framework target used by this upper
-bound package. -/
+/-- The Arts-Giesl registry entry names the `RCA0_WO_omega3` target profile. -/
 theorem artsGiesl_registry_target_agrees_with_upperBound_target :
     artsGieslEntry.targetTheory? = some rca0WoOmega3TheoryProfile.theory := by
   simp [artsGieslEntry, rca0WoOmega3TheoryProfile]
 
-/-- The recursor-side Arts--Giesl invocation stays within constant additive
-assembly overhead. This is part of why the current reverse-mathematical
-upper-bound package is stable under the repository's witness-preserving
-transformations. -/
+/-- The registered recursor transformation adds its fixed overhead to the
+input cost. -/
 theorem artsGiesl_recursor_constant_overhead (n : Nat) :
     agRecursorTransformation.transformedCost n = n + agRecursorTransformation.overhead :=
   agRecursorTransformation_preserves_linear_growth n
 
-/-- Summary form of the theorem-level upper-bound package. -/
+/-- Summary of the broad package: theorem-level status, theory-register
+inclusion, and the strict ordinal inequality. -/
 theorem artsGieslTheoremUpperBound_supported :
     artsGieslTheoremUpperBound.evidenceStatus = EvidenceStatus.theoremLevel
       ∧ rca0WoOmega3TheoryProfile.theory ≤ artsGieslTheoremUpperBound.theoryProfile.theory
@@ -77,14 +76,13 @@ theorem artsGieslTheoremUpperBound_supported :
   · exact artsGiesl_targetTheory_le_theoremUpperBound
   · exact artsGiesl_targetOrdinal_lt_theoremUpperBound
 
-/-- The current theorem-level upper bound does not yet hit the exact theory
-target `RCA₀ + WO(ω^3)`. -/
+/-- The broad package's `WO_epsilon0` theory field is not the exact
+`RCA0_WO_omega3` target. -/
 theorem artsGieslTheoremUpperBound_theory_ne_target :
     artsGieslTheoremUpperBound.theoryProfile.theory ≠ FormalTheory.RCA0_WO_omega3 := by
   simp [artsGieslTheoremUpperBound, woEpsilon0TheoryProfile]
 
-/-- The current theorem-level upper bound does not yet hit the exact ordinal
-target `ω^3`. -/
+/-- The broad package's `epsilon0` ordinal ceiling is not `omega^3`. -/
 theorem artsGieslTheoremUpperBound_ordinal_ne_target :
     artsGieslTheoremUpperBound.theoryProfile.ordinalCeiling? ≠ some omegaPowThree := by
   intro h
@@ -92,9 +90,9 @@ theorem artsGieslTheoremUpperBound_ordinal_ne_target :
     simpa [artsGieslTheoremUpperBound, woEpsilon0TheoryProfile] using h
   exact omegaPowThree_lt_epsilon0.ne h'.symm
 
-/-- Sharpening target for a future theorem-level exact upper bound. This does
-not assert that the witness exists now; it records exactly what a successful
-upper-bound improvement must deliver. -/
+/-- Exact-target upper-bound package. Besides exact theory, ordinal, and status
+fields, an inhabitant carries the Lean theorem backing `WO(omega^3)`. The
+package still does not supply a semantic Arts-Giesl reduction. -/
 structure ArtsGieslSharpTheoremUpperBound where
   bound : ReverseMathUpperBound artsGieslPrincipleProfile
   theoryEq : bound.theoryProfile.theory = FormalTheory.RCA0_WO_omega3
@@ -102,8 +100,12 @@ structure ArtsGieslSharpTheoremUpperBound where
     bound.theoryProfile.ordinalCeiling? =
       some OperatorKO7.ReverseMathSupport.omegaPowThree
   theoremLevel : bound.evidenceStatus = EvidenceStatus.theoremLevel
+  /-- Genuine well-ordering backing for the `omega^3` ordinal field. -/
+  omega3Backing : OperatorKO7.ReverseMathOmega3.WOOmega3Backing :=
+    OperatorKO7.ReverseMathOmega3.wo_omega3_backing
 
-/-- Public summary of the sharpening target. -/
+/-- Project the exact theory, ordinal, and theorem-status fields from a sharp
+package. -/
 theorem ArtsGieslSharpTheoremUpperBound.supported
     (U : ArtsGieslSharpTheoremUpperBound) :
     U.bound.theoryProfile.theory = FormalTheory.RCA0_WO_omega3
@@ -112,8 +114,14 @@ theorem ArtsGieslSharpTheoremUpperBound.supported
       ∧ U.bound.evidenceStatus = EvidenceStatus.theoremLevel := by
   exact ⟨U.theoryEq, U.ordinalEq, U.theoremLevel⟩
 
-/-- The current theorem-level upper package is not already a sharp exact-target
-upper bound. -/
+/-- Project the genuine `WO(omega^3)` backing carried by a sharp package. -/
+theorem ArtsGieslSharpTheoremUpperBound.carries_genuine_wo_omega3
+    (U : ArtsGieslSharpTheoremUpperBound) :
+    OperatorKO7.ReverseMathOmega3.WOOmega3Backing :=
+  U.omega3Backing
+
+/-- The broad `WO(epsilon0)` package cannot be equal to an exact-target sharp
+package because their theory fields differ. -/
 theorem artsGieslTheoremUpperBound_not_sharp :
     ¬ ∃ U : ArtsGieslSharpTheoremUpperBound, U.bound = artsGieslTheoremUpperBound := by
   rintro ⟨U, hU⟩
@@ -121,7 +129,8 @@ theorem artsGieslTheoremUpperBound_not_sharp :
   rw [hU] at hTheory
   simp [artsGieslTheoremUpperBound, woEpsilon0TheoryProfile] at hTheory
 
-/-- Precise theorem-level upper-bound gap object for the Arts--Giesl program. -/
+/-- Exact data describing the gap between a registered upper package and a
+target profile. -/
 structure ArtsGieslTheoremUpperBoundGap where
   current : ReverseMathUpperBound artsGieslPrincipleProfile
   target : SecondOrderTheoryProfile
@@ -129,8 +138,8 @@ structure ArtsGieslTheoremUpperBoundGap where
   theoryNeTarget : current.theoryProfile.theory ≠ target.theory
   ordinalNeTarget : current.theoryProfile.ordinalCeiling? ≠ target.ordinalCeiling?
 
-/-- Current theorem-level upper-bound gap: the present artifact still lands at
-`WO(ε₀)` rather than the exact `RCA₀ + WO(ω^3)` target profile. -/
+/-- Gap witness from the broad `WO(epsilon0)` package to the
+`RCA0_WO_omega3` target. -/
 noncomputable def artsGieslCurrentTheoremUpperBoundGap : ArtsGieslTheoremUpperBoundGap where
   current := artsGieslTheoremUpperBound
   target := rca0WoOmega3TheoryProfile
@@ -138,7 +147,8 @@ noncomputable def artsGieslCurrentTheoremUpperBoundGap : ArtsGieslTheoremUpperBo
   theoryNeTarget := artsGieslTheoremUpperBound_theory_ne_target
   ordinalNeTarget := artsGieslTheoremUpperBound_ordinal_ne_target
 
-/-- Public summary of the current theorem-level upper-bound gap. -/
+/-- Project the status, register inclusion, and two unequal target fields from
+the broad-package gap witness. -/
 theorem artsGieslCurrentTheoremUpperBoundGap_supported :
     artsGieslCurrentTheoremUpperBoundGap.current.evidenceStatus = EvidenceStatus.theoremLevel
       ∧ artsGieslCurrentTheoremUpperBoundGap.target.theory ≤
@@ -155,8 +165,8 @@ theorem artsGieslCurrentTheoremUpperBoundGap_supported :
   · exact artsGieslCurrentTheoremUpperBoundGap.theoryNeTarget
   · exact artsGieslCurrentTheoremUpperBoundGap.ordinalNeTarget
 
-/-- The exact target for the sharp upper-bound program can be packaged as a
-theorem-level transfer from the already exact SCT calibration target. -/
+/-- Conditional Arts-Giesl upper package whose theory and ordinal fields agree
+with the exact SCT calibration and whose evidence status is theorem-level. -/
 structure ArtsGieslSctSharpUpperTransfer where
   bound : ReverseMathUpperBound artsGieslPrincipleProfile
   theoryEqSct :
@@ -165,8 +175,8 @@ structure ArtsGieslSctSharpUpperTransfer where
     bound.theoryProfile.ordinalCeiling? = sctExactCalibration.targetProfile.ordinalCeiling?
   theoremLevel : bound.evidenceStatus = EvidenceStatus.theoremLevel
 
-/-- Any theorem-level transfer to the exact SCT target yields the desired sharp
-theorem-level upper bound for Arts--Giesl. -/
+/-- Convert an SCT-aligned conditional transfer into the exact-target sharp
+package. -/
 noncomputable def ArtsGieslSctSharpUpperTransfer.toSharpTheoremUpperBound
     (T : ArtsGieslSctSharpUpperTransfer) :
     ArtsGieslSharpTheoremUpperBound where
@@ -175,7 +185,7 @@ noncomputable def ArtsGieslSctSharpUpperTransfer.toSharpTheoremUpperBound
   ordinalEq := by simpa using T.ordinalEqSct
   theoremLevel := T.theoremLevel
 
-/-- Public summary of the SCT-anchored upper transfer layer. -/
+/-- Project the exact target fields supplied by an SCT-aligned transfer. -/
 theorem ArtsGieslSctSharpUpperTransfer.supported
     (T : ArtsGieslSctSharpUpperTransfer) :
     T.bound.theoryProfile.theory = FormalTheory.RCA0_WO_omega3
@@ -184,29 +194,30 @@ theorem ArtsGieslSctSharpUpperTransfer.supported
       ∧ T.bound.evidenceStatus = EvidenceStatus.theoremLevel := by
   exact T.toSharpTheoremUpperBound.supported
 
-/-- The sharp theorem-level upper-bound witness exists as soon as the missing
-SCT-anchored transfer theorem is supplied. -/
+/-- A supplied SCT-aligned transfer yields a sharp upper-bound package with
+the same bound. -/
 theorem artsGiesl_sharpUpperBound_exists_if_sctTransfer
     (T : ArtsGieslSctSharpUpperTransfer) :
     ∃ U : ArtsGieslSharpTheoremUpperBound, U.bound = T.bound := by
   exact ⟨T.toSharpTheoremUpperBound, rfl⟩
 
-/-- A theorem-level AG/SCT alignment is sufficient to build the missing sharp
-upper-transfer witness. -/
+/-- Build the SCT-aligned transfer from a supplied theorem-alignment record.
+The evidence status is copied from that record, and its `theoremLevel` field
+establishes the required status equality. -/
 noncomputable def ArtsGieslSctSharpUpperTransfer.ofTheoremAlignment
-    (_A : ArtsGieslSctTheoremAlignment) :
+    (A : ArtsGieslSctTheoremAlignment) :
     ArtsGieslSctSharpUpperTransfer where
   bound := {
     theoryProfile := sctExactUpperBound.theoryProfile
-    evidenceStatus := EvidenceStatus.theoremLevel
+    evidenceStatus := A.evidenceStatus
     justificationTag := "theorem-level AG/SCT exact-target upper transfer"
   }
   theoryEqSct := by rfl
   ordinalEqSct := by rfl
-  theoremLevel := rfl
+  theoremLevel := A.theoremLevel
 
-/-- The stronger theorem-level alignment object therefore suffices for a sharp
-upper-bound witness. -/
+/-- A supplied theorem-alignment record yields a sharp package through the
+SCT-aligned transfer. -/
 theorem artsGiesl_sharpUpperBound_exists_if_theoremAlignment
     (A : ArtsGieslSctTheoremAlignment) :
     ∃ U : ArtsGieslSharpTheoremUpperBound,
@@ -214,10 +225,8 @@ theorem artsGiesl_sharpUpperBound_exists_if_theoremAlignment
   exact artsGiesl_sharpUpperBound_exists_if_sctTransfer
     (ArtsGieslSctSharpUpperTransfer.ofTheoremAlignment A)
 
-/-- A witness-bearing exact calibration transport from the exact SCT profile to
-Arts--Giesl yields a sharp theorem-level upper bound immediately. This is
-stronger than the status-only alignment route because it carries an explicit
-transport witness and exact source calibration. -/
+/-- Build a sharp package from an exact-calibration transfer whose source
+target has the required theory and ordinal fields. -/
 noncomputable def ArtsGieslSharpTheoremUpperBound.ofExactCalibrationTransfer
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory = FormalTheory.RCA0_WO_omega3)
@@ -234,8 +243,8 @@ noncomputable def ArtsGieslSharpTheoremUpperBound.ofExactCalibrationTransfer
     exact hOrdinal
   theoremLevel := T.upperTheoremLevel
 
-/-- The witness-bearing exact transport route therefore suffices for the sharp
-upper-bound target. -/
+/-- An exact-calibration transfer with the required source target yields a
+sharp package over its destination upper bound. -/
 theorem artsGiesl_sharpUpperBound_exists_if_exactTransfer
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory = FormalTheory.RCA0_WO_omega3)
@@ -245,10 +254,9 @@ theorem artsGiesl_sharpUpperBound_exists_if_exactTransfer
     ∃ U : ArtsGieslSharpTheoremUpperBound, U.bound = T.dstUpper := by
   exact ⟨ArtsGieslSharpTheoremUpperBound.ofExactCalibrationTransfer T hTheory hOrdinal, rfl⟩
 
-/-- Direct theorem-level sharp upper-bound package for Arts--Giesl.
-
-This is the direct-side target-hitting upper package, as opposed to the older
-coarse `WO(ε₀)` theorem package. -/
+/-- Direct exact-target record backed by the Lean theorem `WO(omega^3)`. This
+constructs the upper-bound data package; it does not prove the Arts-Giesl
+principle reduction represented by that package. -/
 noncomputable def artsGieslDirectSharpTheoremUpperBound :
     ArtsGieslSharpTheoremUpperBound where
   bound := {
@@ -277,29 +285,22 @@ theorem artsGieslDirectSharpTheoremUpperBound_supported :
   · rfl
   · rfl
 
-/-- The direct theorem package witnesses that the upper side now independently
-hits the exact target profile. -/
+/-- The direct exact-target data package is inhabited by its canonical
+construction. -/
 theorem artsGiesl_sharpUpperBound_exists_directly :
     ∃ U : ArtsGieslSharpTheoremUpperBound, U = artsGieslDirectSharpTheoremUpperBound := by
   exact ⟨artsGieslDirectSharpTheoremUpperBound, rfl⟩
 
-/-! ## Generic route-comparison theorems (upper side)
+/-! ## Comparison of conditional construction routes
 
-The two generic theorem-level routes to `ArtsGieslSharpTheoremUpperBound`
---- the direct exact-calibration transport
-`ofExactCalibrationTransfer` and the theorem-alignment induction
-`(ArtsGieslSctSharpUpperTransfer.ofTheoremAlignment ...).toSharpTheoremUpperBound`
-built on the induced alignment
-`ArtsGieslSctTheoremAlignment.ofExactCalibrationTransfer T hTheory hOrdinal`
---- agree on every mathematical field. They can agree on the full
-tag-erased record only when the transfer's source-calibration target
-profile is the same as `sctExactUpperBound.theoryProfile` (otherwise
-the `label` / `complexityFloor?` fields of `theoryProfile` may still
-differ); the fieldwise theorems below hold with just `hTheory` and
-`hOrdinal`. -/
+The exact-calibration and theorem-alignment routes agree on theory, ordinal,
+and evidence status. Equality after erasing only the justification tag also
+requires equality of the full source theory profile. Equality after erasing
+all presentation metadata needs only the theory and ordinal equalities.
+-/
 
-/-- Generic fieldwise comparison: both routes produce the same
-upper-bound theory. -/
+/-- The exact-calibration and induced theorem-alignment routes have the same
+upper-bound theory field. -/
 theorem ArtsGieslSharpTheoremUpperBound.ofExactCalibrationTransfer_sameTheory
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -319,8 +320,8 @@ theorem ArtsGieslSharpTheoremUpperBound.ofExactCalibrationTransfer_sameTheory
           T hTheory hOrdinal)
       ).toSharpTheoremUpperBound).theoryEq]
 
-/-- Generic fieldwise comparison: both routes produce the same
-upper-bound ordinal ceiling. -/
+/-- The exact-calibration and induced theorem-alignment routes have the same
+ordinal-ceiling field. -/
 theorem ArtsGieslSharpTheoremUpperBound.ofExactCalibrationTransfer_sameOrdinal
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -340,8 +341,8 @@ theorem ArtsGieslSharpTheoremUpperBound.ofExactCalibrationTransfer_sameOrdinal
           T hTheory hOrdinal)
       ).toSharpTheoremUpperBound).ordinalEq]
 
-/-- Generic fieldwise comparison: both routes produce the same
-upper-bound evidence status. -/
+/-- The exact-calibration and induced theorem-alignment routes have the same
+evidence-status field. -/
 theorem ArtsGieslSharpTheoremUpperBound.ofExactCalibrationTransfer_sameStatus
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -361,12 +362,8 @@ theorem ArtsGieslSharpTheoremUpperBound.ofExactCalibrationTransfer_sameStatus
           T hTheory hOrdinal)
       ).toSharpTheoremUpperBound).theoremLevel]
 
-/-- Generic tag-erased equality: with the additional hypothesis that
-the transfer's source-calibration target profile matches
-`sctExactUpperBound.theoryProfile` (equivalently,
-`rca0WoOmega3TheoryProfile`) on the nose --- not only up to theory and
-ordinal ceiling --- the two theorem-level upper bounds agree after
-erasing their justification tags. -/
+/-- If the source target profile equals the SCT exact profile, the two routes
+agree after erasing only their justification tags. -/
 theorem ArtsGieslSharpTheoremUpperBound.ofExactCalibrationTransfer_eraseTags_eq_ofTheoremAlignment
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -387,14 +384,8 @@ theorem ArtsGieslSharpTheoremUpperBound.ofExactCalibrationTransfer_eraseTags_eq_
   · show T.dstUpper.evidenceStatus = EvidenceStatus.theoremLevel
     exact T.upperTheoremLevel
 
-/-- Generic presentation-erased equality: without the full-profile
-`hSource` hypothesis, only `hTheory` and `hOrdinal`, the two
-theorem-level upper bounds agree after erasing **both** the
-presentation-level theory-profile metadata (`label`,
-`complexityFloor?`) and the justification tag. This is a strictly
-stronger statement than `..._eraseTags_eq_ofTheoremAlignment` at the
-hypothesis level: the source-calibration target profile need only
-agree on `theory` and `ordinalCeiling?`. -/
+/-- With only theory and ordinal agreement, the two routes agree after erasing
+the theory-profile presentation fields and justification tag. -/
 theorem ArtsGieslSharpTheoremUpperBound.ofExactCalibrationTransfer_erasePresentation_eq_ofTheoremAlignment
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =

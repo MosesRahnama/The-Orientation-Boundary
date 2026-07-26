@@ -3,16 +3,15 @@ import Mathlib.Order.WellFounded
 /-!
 # Small Dependency-Pair Fragment
 
-This module packages the two dependency-pair mechanisms already used in the
-artifact into a small reusable layer:
+This module packages two relation-and-rank mechanisms:
 
 - rank-based pair problems, where every extracted pair strictly decreases a
   projection rank;
-- SCC-style path reasoning, where a finite path in a transformed relation forces
+- finite-path reasoning, where a nonempty path in a relation forces
   strict decrease under any global orienter.
 
-This is intentionally narrow. It is not a generic DP library, and it does not
-formalize processors, usable rules, or SCC decomposition algorithms.
+`SCCCycle` is a historical name for a one-way `TransGen` path. It contains neither a return path nor
+an SCC-membership or cycle proof.
 -/
 
 namespace OperatorKO7.DependencyPairsFragment
@@ -60,7 +59,8 @@ theorem transGen_drop {α : Type} {R : α → α → Prop} {m : α → Nat}
   | tail hab hbc ih =>
       exact Nat.lt_trans (horient hbc) ih
 
-/-- A finite SCC witness in a transformed relation. -/
+/-- A source, a target, and a nonempty directed path from source to target. Despite the historical
+name, this structure does not assert that the endpoints share an SCC or form a cycle. -/
 structure SCCCycle (α : Type) where
   Step : α → α → Prop
   source : α
@@ -69,13 +69,13 @@ structure SCCCycle (α : Type) where
 
 namespace SCCCycle
 
-/-- Any global orienter must strictly decrease along the SCC witness path. -/
+/-- Any global orienter must strictly decrease along the stored directed path. -/
 theorem target_lt_source {α : Type} (C : SCCCycle α) {m : α → Nat}
     (horient : GlobalOrients C.Step m (· < ·)) :
     m C.target < m C.source := by
   exact transGen_drop (R := C.Step) (m := m) horient C.path
 
-/-- If a candidate measure does not strictly decrease across the SCC witness,
+/-- If a candidate measure does not strictly decrease across the stored path,
 then it cannot globally orient the transformed relation. -/
 theorem not_globalOrients_of_source_le_target {α : Type} (C : SCCCycle α)
     {m : α → Nat} (hge : m C.source ≤ m C.target) :

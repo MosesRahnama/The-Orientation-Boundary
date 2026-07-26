@@ -4,9 +4,7 @@ import Mathlib.Data.Set.Basic
 /-!
 # Layered Semantics Tower
 
-This module is part of the Lean mechanization of the Representation-Shift
-Bottleneck paper. It packages the abstract layered-semantics tower
-underlying the cross-layer interface theory of the paper:
+This module packages abstract semantic layers and a two-layer interface:
 
 ```
     L_0  --alpha_0-->  L_1  --alpha_1-->  L_2  --...-->  L_n
@@ -21,23 +19,14 @@ maps `gamma_i : S_{i+1} -> Set S_i`.
 The central abstract objects packaged here are:
 
 - `SemanticLayer S` for a state space `S`;
-- `LayerInterface` between two consecutive layers, packaging an
-  abstraction map, a concretization map, and an optional Galois
-  connection condition;
+- `LayerInterface` between two consecutive layers, packaging an abstraction
+  map, a concretization map, and the required unit condition
+  `x ∈ gamma (alpha x)`;
 - `WitnessTransport`: a sound transfer of witnesses from a higher
   layer back down to the property at a lower layer.
 
-The witness-language hierarchy is parametrized over an ordered index
-type `WLevel` of representation depths; concrete instantiations (e.g.,
-the four-level KO7 tower) live in downstream modules.
-
-This module is intentionally axiomatic and minimal: it fixes the shape
-of the cross-layer theory without committing to a specific
-mathematical instantiation. The recursor-side instance is in
-`Meta/RepShift_RecursorInstance.lean`; the abstract bottleneck
-predicate sits in `Meta/RepShift_BottleneckPredicate.lean`; the
-composition theorem sits in
-`Meta/RepShift_CrossLayerComposition.lean`.
+The unit condition is weaker than a full Galois connection because the
+structures carry no orders and no adjunction equivalence.
 -/
 
 namespace OperatorKO7.RepShift
@@ -102,16 +91,9 @@ structure ConcretizationMap {S T : Type u} (Llo : SemanticLayer S)
   gamma : T → Set S
 
 /--
-A **layer interface** between two consecutive layers. The interface
-optionally satisfies the standard Galois-connection condition of
-abstract interpretation:
-`α(x) ≤ y  ↔  x ∈ γ(y)`
-modelled here in its set-membership-vs-equality form, since neither
-layer is required to carry an order on its state space.
-
-The Galois connection is recorded as a flag rather than a hypothesis,
-so that downstream modules can require it where they need it without
-forcing every interface to satisfy it.
+A **layer interface** between two layers. It requires maps `alpha` and `gamma`
+and the unit condition `x ∈ gamma (alpha x)`. This is a required field, not an
+optional flag or a full Galois connection.
 -/
 structure LayerInterface {S T : Type u} (Llo : SemanticLayer S)
     (Lhi : SemanticLayer T) where
@@ -119,14 +101,12 @@ structure LayerInterface {S T : Type u} (Llo : SemanticLayer S)
   alpha : S → T
   /-- Concretization map. -/
   gamma : T → Set S
-  /-- The Galois condition: `x ∈ γ(α(x))` for every `x`.
-  This is the soundness side of the standard Galois connection. -/
+  /-- Required unit condition: `x ∈ gamma (alpha x)` for every `x`. -/
   galois_unit : ∀ x : S, x ∈ gamma (alpha x)
 
 namespace LayerInterface
 
-/-- The Galois unit equation, restated as a one-line lemma for
-downstream rewriting. -/
+/-- Restatement of the stored unit condition. -/
 theorem mem_gamma_alpha {S T : Type u}
     {Llo : SemanticLayer S} {Lhi : SemanticLayer T}
     (Φ : LayerInterface Llo Lhi) (x : S) :
@@ -170,9 +150,8 @@ def canonicalAbstractedProperty {S T : Type u}
     (Φ : LayerInterface Llo Lhi) (P : S → Prop) : T → Prop :=
   fun t => ∀ x ∈ Φ.gamma t, P x
 
-/-- The canonical abstracted property at `α(x)` always holds for `x`
-itself by the Galois unit. This is the soundness side of the
-canonical lift. -/
+/-- If the canonical abstracted property is supplied at `alpha x`, the unit
+condition specializes it to `P x`. -/
 theorem canonicalAbstractedProperty_holds_at_alpha {S T : Type u}
     {Llo : SemanticLayer S} {Lhi : SemanticLayer T}
     (Φ : LayerInterface Llo Lhi) (P : S → Prop) (x : S)
@@ -180,14 +159,7 @@ theorem canonicalAbstractedProperty_holds_at_alpha {S T : Type u}
   h x (Φ.galois_unit x)
 
 /--
-A **layered tower** is a finite list of layers connected by
-interfaces. We package the layers as an indexed family for now and
-defer multi-layer composition to
-`Meta/RepShift_CrossLayerComposition.lean`, where the additivity of
-`κ*` under composition is proved.
-
-The two-layer case suffices for the recursor instance and for the
-single-interface bottleneck predicate.
+A `TwoLayerTower` packages exactly two semantic layers and one interface.
 -/
 structure TwoLayerTower (S T : Type u) where
   /-- The lower layer. -/

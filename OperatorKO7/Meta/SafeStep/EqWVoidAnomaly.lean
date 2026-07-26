@@ -4,25 +4,9 @@ import OperatorKO7.Meta.Confluence_Safe
 /-!
 # SafeStep Worked Example: the eqW void void Gauge Anomaly
 
-Object-level critical-pair theorem for the `eqW void void` peak. The two kernel
-rules `R_eq_refl` and
-`R_eq_diff` overlap at every reflexive instance `eqW a a`; at the
-canonical witness `a = void` both produce normal forms, and the
-two normal forms are distinct, so local confluence fails at the
-full kernel `Step` relation.
+## Formal Scope
 
-The negative result is already stated in
-`OperatorKO7/Meta/Confluence_Safe.lean` as
-`MetaSN_KO7.not_localJoinStep_eqW_void_void`. This module re-exports that fact
-under SafeStep-local names and packages the two normal forms as a
-`CriticalPairAt` record.
-
-The two normal forms are `void` (via `R_eq_refl`) and
-`integrate (merge void void)` (via `R_eq_diff`). Both reduce to
-`integrate void` on subsequent merges, but at the root step the
-two distinct successors witness the local-confluence failure.
-
-No `sorry`. No new `axiom`. Theorems close by direct construction.
+The formal full-kernel relation treats void and integrate (merge void void) as distinct normal forms and proves them unjoinable. No subsequent reduction of the latter is asserted in this module.
 -/
 
 open OperatorKO7 Trace
@@ -47,8 +31,9 @@ theorem eqW_void_void_admits_two_normal_forms :
 
 /-- The two normal forms reachable from `eqW void void` are unjoinable:
 no common reduct exists in the multi-step closure of the full kernel
-relation. This is exactly the existing
-`MetaSN_KO7.not_localJoinStep_eqW_void_void` result repackaged for SafeStep. -/
+relation. This is directly the existing
+`MetaSN_KO7.not_localJoinStep_eqW_void_void` result repackaged in the
+`CriticalPairAt` record. -/
 theorem eqW_void_void_normal_forms_are_unjoinable :
     ¬ ∃ d, StepStar void d ∧ StepStar (integrate (merge void void)) d := by
   intro ⟨d, hbStar, hcStar⟩

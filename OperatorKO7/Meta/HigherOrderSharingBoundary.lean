@@ -3,10 +3,9 @@ import OperatorKO7.Meta.SharingBarrierLift
 /-!
 # Higher-Order Sharing Boundary
 
-This module makes one higher-order obstruction theorem-visible: an
-unqualified lift of the tree-based duplication barrier cannot ignore the
-sharing policy. The shared-policy branch admits a simple orienting counter, so
-the no-sharing/tree hypothesis is load-bearing.
+## Formal Scope
+
+The shared policy is a counterexample to universal nonorientation in the explicitly no-sharing fragment. The result does not classify sharing-aware systems.
 -/
 
 namespace OperatorKO7.HigherOrderSharingBoundary
@@ -104,7 +103,7 @@ theorem shared_step_embeds
       simpa [embedSharedTerm] using
         (HODupStep.rec_succ .shared (embedSharedTerm b) (embedSharedTerm s) (embedSharedTerm n))
 
-/-- Reused orientation fact from the sharing-aware surrogate, now stated on the
+/-- Reused orientation fact from the sharing-aware surrogate, here stated on the
 embedded higher-order shared step. -/
 theorem shared_policy_counter_orients_embedded_step
     {a b : SharedTerm} (h : SharedStep a b) :
@@ -146,9 +145,8 @@ theorem unqualified_higher_order_lift_contradiction
     (h : UnqualifiedHigherOrderLiftClaim) : False :=
   h .shared shared_policy_counter_orients_step
 
-/-- The tree/no-sharing hypothesis is load-bearing: once the policy admits
-sharing, the shared-policy counter blocks any unqualified lift of the tree
-barrier. -/
+/-- The shared orienter is a counterexample to extending universal
+nonorientation from the tree/no-sharing fragment to every policy. -/
 theorem sharing_policy_blocks_unqualified_tree_barrier_lift :
     ¬ UnqualifiedHigherOrderLiftClaim := by
   intro h

@@ -2,20 +2,20 @@ import OperatorKO7.Meta.ReverseMath.StandardModel
 import OperatorKO7.Meta.ReverseMath.ArtsGieslPi02
 
 /-!
-# Faithfulness bridge for the Arts–Giesl / SCT soundness sentence
+# Standard-model interpretation of the predecessor-descent sentence
 
-The mandatory faithfulness obligation (roadmap §Faithfulness Obligations): the object sentence
-`ArtsGieslSctSoundnessFormula` must be tied to the genuine Lean fact it encodes, via
-"standard-model satisfaction `↔` the actual property". Here:
+Despite its historical identifier, `ArtsGieslSctSoundnessFormula` is not a formalization of the
+Arts-Giesl dependency-pair theorem or an SCT soundness principle. It is the predecessor sentence
 
-* `ActualArtsGieslSctSoundness` is the genuine arithmetical content (a `Π⁰₂` statement over `ℕ`);
+`forall m, exists n, n < m or m = 0`.
+
+This module relates that object sentence to the natural-number property it encodes:
+
+* `ActualArtsGieslSctSoundness` is the elementary arithmetical content;
 * `artsGieslSctSoundness_faithful` proves `StdCarrier ⊨ ArtsGieslSctSoundnessFormula ↔
   ActualArtsGieslSctSoundness` (the relativized quantifiers restrict the single-sorted carrier to
   its number part `ℕ`);
-* `actualArtsGieslSctSoundness_holds` proves the property is true, so the standard model genuinely
-  satisfies the sentence (`stdModel_models_artsGieslSctSoundness`) -- it is sound, not vacuous.
-
-No `sorry`, `axiom`, or `native_decide`.
+* `actualArtsGieslSctSoundness_holds` proves the property, yielding standard-model satisfaction.
 -/
 
 set_option autoImplicit false
@@ -24,20 +24,21 @@ namespace OperatorKO7.ReverseMath
 
 open FirstOrder Language
 
-/-- The genuine arithmetical content of the SCT/AG soundness sentence: every number `m` has a
-descent witness `n` (with `n < m`) unless it is already at the floor `0`. A `Π⁰₂` statement over `ℕ`. -/
+/-- The arithmetical content of the historically named sentence: every number `m` has a descent
+witness `n` (with `n < m`) unless it is already at the floor `0`. A `Π⁰₂` statement over `ℕ`, but not
+an SCT soundness theorem. -/
 def ActualArtsGieslSctSoundness : Prop := ∀ m : ℕ, ∃ n : ℕ, n < m ∨ m = 0
 
 /-- The actual property is true over `ℕ`: for `m = 0` take the right disjunct; for `m = k + 1` take
-`n = k < m`. (So the encoded sentence is sound, not vacuous.) -/
+`n = k < m`. -/
 theorem actualArtsGieslSctSoundness_holds : ActualArtsGieslSctSoundness := by
   intro m
   cases m with
   | zero => exact ⟨0, Or.inr rfl⟩
   | succ k => exact ⟨k, Or.inl (Nat.lt_succ_self k)⟩
 
-/-- **Faithfulness bridge.** The standard model satisfies the SCT/AG soundness sentence iff the
-genuine arithmetical property `ActualArtsGieslSctSoundness` holds. The relativization guards
+/-- The standard model satisfies the historically named sentence iff the elementary
+arithmetical property `ActualArtsGieslSctSoundness` holds. The relativization guards
 (`¬IsSet`) restrict the single-sorted carrier `ℕ ⊕ Set ℕ` to its number part: set elements satisfy
 the matrix vacuously, number elements `inl m` carry exactly the `ℕ`-statement. -/
 theorem artsGieslSctSoundness_faithful :
@@ -76,10 +77,16 @@ theorem artsGieslSctSoundness_faithful :
         · exact Or.inl hlt
         · exact Or.inr (congrArg Sum.inl heq)
 
-/-- The standard model genuinely satisfies the SCT/AG soundness sentence (Gate R5 soundness: the
-sentence is true in the intended model, not vacuous). -/
+/-- The standard model satisfies the predecessor-descent sentence. -/
 theorem stdModel_models_artsGieslSctSoundness :
     StdCarrier ⊨ ArtsGieslSctSoundnessFormula :=
   artsGieslSctSoundness_faithful.mpr actualArtsGieslSctSoundness_holds
+
+#check actualArtsGieslSctSoundness_holds
+#print axioms actualArtsGieslSctSoundness_holds
+#check artsGieslSctSoundness_faithful
+#print axioms artsGieslSctSoundness_faithful
+#check stdModel_models_artsGieslSctSoundness
+#print axioms stdModel_models_artsGieslSctSoundness
 
 end OperatorKO7.ReverseMath

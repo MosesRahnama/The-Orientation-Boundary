@@ -2,21 +2,21 @@ import OperatorKO7.Meta.LCELSubstrateMathematics
 import OperatorKO7.Meta.LCELMathematicalSupportWitness
 
 /-!
-# LCEL Literal Substrate Surface
+This module packages LCEL-carrier propositions and projects their fields. Godel-labelled values
+are internal carrier instances. Sentence-level transport is represented by a separate
+factorization record with supplied correspondence.
 
-This helper exposes the strongest honest proposition-level substrate theorems
-available from the theorem-strength objects of `LCELSubstrateMathematics`.
 
-- Base reversibility, license irreversibility, and reimport reversibility now
-  have explicit proposition-level literal statements.
-- Boundary factorization still does **not** claim a literal projection equation:
-  the current LCEL carrier has no explicit projection-map or step-relation data.
-  Instead we export the exact theorem-level sentence-chain statement that the
-  current theorem object really supports.
 
-This keeps the support-record and theorem-object layers intact for downstream
-code, while giving Paper C's substrate clauses an explicit theorem-facing
-surface.
+
+
+
+
+
+
+
+
+
 -/
 
 namespace OperatorKO7.LCELLiteralSubstrate
@@ -25,8 +25,8 @@ open OperatorKO7.LCELSchema
 open OperatorKO7.LCELSubstrateMathematics
 open OperatorKO7.LCELMathematical
 
-/-- Literal theorem-level base reversibility statement extracted from a
-`BaseReversibilityTheorem`. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def LiteralBaseReversibility (L : FormalLCELInstance) : Prop :=
   ∃ provedSentence unprovedSentence : L.comparison.baseTheoryContent.Sentence,
     L.comparison.baseTheoryContent.proves provedSentence ∧
@@ -36,8 +36,8 @@ def LiteralBaseReversibility (L : FormalLCELInstance) : Prop :=
     L.comparison.baseTheoryContent.trueInReferenceModel unprovedSentence ∧
     provedSentence ≠ unprovedSentence
 
-/-- Literal theorem-level license irreversibility statement extracted from a
-`LicenseIrreversibilityTheorem`. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def LiteralLicenseIrreversibility (L : FormalLCELInstance) : Prop :=
   ∃ blockedSentence : L.comparison.baseTheoryContent.Sentence,
     blockedSentence = L.comparison.reflectionContent.blockedSentence ∧
@@ -49,8 +49,8 @@ def LiteralLicenseIrreversibility (L : FormalLCELInstance) : Prop :=
     L.externalLicenseWitness ∧
     L.comparison.reflectionContent.licensedAdmission blockedSentence
 
-/-- Literal theorem-level reimport reversibility statement extracted from a
-`ReimportReversibilityTheorem`. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def LiteralReimportReversibility (L : FormalLCELInstance) : Prop :=
   ∃ importedSentence : L.comparison.baseTheoryContent.Sentence,
     importedSentence = L.comparison.reimportContent.importedSentence ∧
@@ -67,9 +67,9 @@ def LiteralReimportReversibility (L : FormalLCELInstance) : Prop :=
       (L.annotationFunctor.decode
         (L.annotationFunctor.annotate L.comparison.reimportContent.witness))
 
-/-- Exact weaker theorem-level boundary statement honestly supported by the
-current LCEL carrier. This is sentence-level factorization data, not a literal
-projection equation. -/
+/-- Definition with formal content given by the displayed type and body.
+
+-/
 def SentenceLevelBoundaryFactorization (L : FormalLCELInstance) : Prop :=
   ∃ blockedSentence importedSentence : L.comparison.baseTheoryContent.Sentence,
     L.comparison.obstructionContent.blockedBy
@@ -98,8 +98,8 @@ def SentenceLevelBoundaryFactorization (L : FormalLCELInstance) : Prop :=
         (L.annotationFunctor.annotate L.comparison.reimportContent.witness)) ∧
     L.boundaryObject.realized
 
-/-- Promote a theorem-strength base reversibility object to the explicit
-literal proposition-level statement. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem literalBaseReversibility_of_theorem
     {L : FormalLCELInstance}
     (T : BaseReversibilityTheorem L) :
@@ -108,8 +108,8 @@ theorem literalBaseReversibility_of_theorem
   refine ⟨T.unprovedSentence_eq, T.unprovedSentence_not_provable, ?_⟩
   exact ⟨T.unprovedSentence_true, T.distinct⟩
 
-/-- Promote a theorem-strength license irreversibility object to the explicit
-literal proposition-level statement. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem literalLicenseIrreversibility_of_theorem
     {L : FormalLCELInstance}
     (T : LicenseIrreversibilityTheorem L) :
@@ -118,8 +118,8 @@ theorem literalLicenseIrreversibility_of_theorem
   refine ⟨T.blocked_true, T.stronger_reflects_blocked, ?_⟩
   exact ⟨T.externalLicenseHolds, T.blocked_licensedAdmission⟩
 
-/-- Promote a theorem-strength reimport reversibility object to the explicit
-literal proposition-level statement. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem literalReimportReversibility_of_theorem
     {L : FormalLCELInstance}
     (T : ReimportReversibilityTheorem L) :
@@ -130,7 +130,7 @@ theorem literalReimportReversibility_of_theorem
 
 namespace BoundaryFactorizationTheorem
 
-/-- The sensitive blocked sentence and the visible imported sentence agree. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem sensitiveBlocked_eq_visibleImported
     {L : FormalLCELInstance}
     (T : BoundaryFactorizationTheorem L) :
@@ -138,8 +138,8 @@ theorem sensitiveBlocked_eq_visibleImported
   rw [T.sensitive.blockedSentence_eq, T.reflectionBlockedEqImported,
     T.visible.importedSentence_eq.symm]
 
-/-- The obstruction layer's blocked sentence agrees with the sensitive blocked
-sentence. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem obstructionBlocked_eq_sensitiveBlocked
     {L : FormalLCELInstance}
     (T : BoundaryFactorizationTheorem L) :
@@ -149,8 +149,8 @@ theorem obstructionBlocked_eq_sensitiveBlocked
   rw [T.sensitive.blockedSentence_eq]
   exact T.obstructionBlockedEqReflectionBlocked
 
-/-- The obstruction layer's blocked sentence agrees with the visible imported
-sentence. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem obstructionBlocked_eq_visibleImported
     {L : FormalLCELInstance}
     (T : BoundaryFactorizationTheorem L) :
@@ -162,8 +162,8 @@ theorem obstructionBlocked_eq_visibleImported
 
 end BoundaryFactorizationTheorem
 
-/-- Promote a theorem-strength boundary factorization object to the exact
-sentence-level boundary theorem that the current carrier honestly supports. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem sentenceLevelBoundaryFactorization_of_theorem
     {L : FormalLCELInstance}
     (T : BoundaryFactorizationTheorem L) :
@@ -180,7 +180,7 @@ theorem sentenceLevelBoundaryFactorization_of_theorem
   refine ⟨T.visible.annotationDecodes_imported,
     T.visible.annotationCertifiesDecoded, T.boundaryRealized⟩
 
-/-! ## Canonical literal theorem surface -/
+/-! Declarations for the section below. -/
 
 theorem godel1931LiteralBaseReversibility :
     LiteralBaseReversibility godel1931LCELInstance :=
@@ -239,7 +239,7 @@ theorem dpEmitterSentenceLevelBoundaryFactorization :
   sentenceLevelBoundaryFactorization_of_theorem
     dpEmitterBoundaryFactorizationTheorem
 
-/-! ## Transported theorem-level substrate surface -/
+/-! Declarations for the section below. -/
 
 theorem sourceLiteralBaseReversibility
     {L₁ L₂ : FormalLCELInstance}

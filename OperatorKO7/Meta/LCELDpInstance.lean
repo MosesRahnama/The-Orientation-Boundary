@@ -3,16 +3,13 @@ import OperatorKO7.Meta.ComputationalLayerCrossing
 import OperatorKO7.Meta.ProjectionTransactionDynamics
 
 /-!
-# Native DP/Emitter-Side LCEL Instance
+# Finite DP/emitter-side LCEL fixture
 
-This module builds a native non-Godel LCEL instance directly from the free
-primitive-duplicator emitter / projection-transaction stack, rather than routing
-through the benchmark-transport comparison object.
-
-The goal is still artifact-honest. We do not claim the unrestricted universal
-LCEL theorem stack here. We package the currently mechanized DP/emitter-side
-bridge as a `FormalExternalClassicalComparisonObject`, then lift it into a
-`FormalLCELInstance` and expose the resulting semantic-support surface.
+This module combines a concrete projection-certification theorem with a finite two-sentence LCEL
+fixture. The base profile uses a constant `True` predicate, the reference-model predicate is
+constant `True`, and several obstruction, annotation, and reimport maps are equality or identity
+maps. The resulting support theorems certify the fields of the constructed records. They do not
+supply an external LCEL interpretation or an unrestricted semantic correspondence.
 -/
 
 namespace OperatorKO7.LCELDpInstance
@@ -30,34 +27,30 @@ open OperatorKO7.LCELSchema
 open OperatorKO7.LCELTypedSigmaGamma
 open OperatorKO7.LCELReversibility
 
-/-- Minimal sentence layer for the native DP/emitter-side formal LCEL instance. -/
+/-- Two tags used as the sentence carrier of the finite fixture. -/
 inductive DpEmitterSentenceSemantic
   | baseSystem
   | licensedProjection
   deriving DecidableEq, Repr
 
-/-- The projection-transaction object acts as the native stronger-framework /
-reimport carrier on the free primitive duplicator. -/
+/-- Projection transactions over the free primitive-duplicator schema. -/
 abbrev DpEmitterProjectionFramework :=
   ProjectionTransaction freeBaseSystem.toStepDuplicatingSchema
 
-/-- Native certification predicate for the DP/emitter-side projection
-transaction: it uses the same forgetting witness as the concrete projective
-emitter, carries the external license, and is backed by the concrete
-computation-to-confession bridge at the first nontrivial depth. -/
+/-- A transaction is certified when its boundary is the designated forgetting witness, its license
+field holds, and the fixed free emitter realizes its bridge at depth one. -/
 def projectionCertified (T : DpEmitterProjectionFramework) : Prop :=
   T.boundary = freeProjectiveRecordEmitter.toForgettingWitness
     ∧ T.license
     ∧ freeProjectiveRecordEmitter.RealizesComputationToConfessionBridge 1
 
-/-- The concrete free projection transaction satisfies the native certification
-predicate. -/
+/-- The designated free projection transaction satisfies `projectionCertified`. -/
 theorem freeProjectionTransaction_certified :
     projectionCertified freeProjectionTransaction := by
   refine ⟨rfl, trivial, ?_⟩
   exact freeProjectiveRecordEmitter_realizes_bridge (K := 1) (by decide)
 
-/-- Native base-theory profile on the free primitive duplicator side. -/
+/-- Base-profile record whose proof predicate is `True` for both sentence tags. -/
 def dpEmitterFormalBaseTheory : FormalHistoricalBaseTheory where
   label := "free primitive duplicator base system"
   Sentence := DpEmitterSentenceSemantic
@@ -65,11 +58,9 @@ def dpEmitterFormalBaseTheory : FormalHistoricalBaseTheory where
   witness := .baseSystem
   witness_provesBaseSystem := trivial
 
-/-- Native obstruction profile: hidden progress exists, but the direct whole-term
-witness layer remains blocked. The witness carrier is now the full
-native-side semantic sentence space, so that the downstream boundary
-witness space is non-singleton and the direct benchmark↔DP boundary
-correspondence can be genuinely non-constant. -/
+/-- Obstruction-profile record on the two sentence tags. Both predicates ignore their tag: the
+self-obstruction field is the fixed depth-one emitter proposition and the blocking field is the
+imported absence of a direct whole witness. The designated tag is `licensedProjection`. -/
 def dpEmitterFormalObstruction : FormalHistoricalObstruction where
   label := "hidden progress requires emitted record / no direct whole witness"
   Witness := DpEmitterSentenceSemantic
@@ -81,8 +72,7 @@ def dpEmitterFormalObstruction : FormalHistoricalObstruction where
     exact freeFaithfulRecordEmitter_realizes_crossing (K := 1) (by decide)
   witness_blocksBase := ko7_no_directWhole_witness
 
-/-- Native stronger-framework profile: a licensed projection transaction on the
-free primitive duplicator. -/
+/-- Framework-profile record using `projectionCertified` and the designated free transaction. -/
 def dpEmitterFormalFramework : FormalHistoricalFramework where
   label := "licensed projective-emitter transaction on the free primitive duplicator"
   Framework := DpEmitterProjectionFramework
@@ -91,12 +81,8 @@ def dpEmitterFormalFramework : FormalHistoricalFramework where
   resolver := freeProjectionTransaction
   resolver_resolves := freeProjectionTransaction_certified
 
-/-- Native reimport profile: the designated licensed-projection sentence
-is the reimport carrier. The admission carrier is the full semantic
-sentence space, matching the obstruction content so that the annotation
-functor's `annotate` map can be the identity on sentences. The
-projection-certified evidence is preserved on the designated witness
-via a constant-on-input certification predicate. -/
+/-- Reimport-profile record on the two sentence tags. Its certification predicate ignores the
+admission value and repeats certification of the designated free transaction. -/
 def dpEmitterFormalReimport : FormalHistoricalReimport where
   label := "projective-emitter certified forgetting reimport"
   Admission := DpEmitterSentenceSemantic
@@ -104,7 +90,8 @@ def dpEmitterFormalReimport : FormalHistoricalReimport where
   witness := .licensedProjection
   witness_certified := freeProjectionTransaction_certified
 
-/-- Deeper sentence semantics for the native DP/emitter-side base theory. -/
+/-- Sentence semantics in which `baseSystem` is provable, `licensedProjection` is not, and both tags
+are declared true in the reference model. -/
 def dpEmitterBaseTheoryContent : FormalBaseTheorySemantics where
   Sentence := DpEmitterSentenceSemantic
   proves
@@ -114,12 +101,9 @@ def dpEmitterBaseTheoryContent : FormalBaseTheorySemantics where
   baseSentence := .baseSystem
   baseSentence_proves := trivial
 
-/-- Deeper semantic obstruction on the native DP/emitter side, with
-witness carrier upgraded to the typed sentence space. The obstruction
-relation is witness-equals-sentence on the typed sentence space, and
-`blockedBy` is the identity on sentences. Only the designated witness
-(`.licensedProjection`) carries the theorem load; non-designated
-witnesses are structurally present without faking extra mathematics. -/
+/-- Obstruction-content record whose relation is sentence equality and whose `blockedBy` map is the
+identity. The self-reference proposition is independent of the witness tag; the designated witness
+is `licensedProjection`. -/
 def dpEmitterObstructionContent :
     FormalObstructionSemantics dpEmitterBaseTheoryContent where
   Witness := DpEmitterSentenceSemantic
@@ -136,9 +120,8 @@ def dpEmitterObstructionContent :
   blocked_true := by
     simp [dpEmitterBaseTheoryContent]
 
-/-- Deeper semantic reflection / framework content on the native DP/emitter
-side. The stronger framework is represented by the certified projection
-transaction itself. -/
+/-- Reflection-content record in which reflection means that a transaction is certified and the
+sentence equals `licensedProjection`. -/
 def dpEmitterReflectionContent :
     FormalReflectionOperatorSemantics dpEmitterBaseTheoryContent where
   Framework := DpEmitterProjectionFramework
@@ -156,11 +139,8 @@ def dpEmitterReflectionContent :
     exact ⟨freeProjectionTransaction_certified, rfl⟩
   blocked_licensedAdmission := rfl
 
-/-- Deeper semantic reimport content on the native DP/emitter side,
-with admission carrier upgraded to the typed sentence space. The
-certification relation is `a = s` on sentences; the projection-
-certified evidence is retained on the reflection-content layer (which
-still uses `DpEmitterProjectionFramework` as its framework type). -/
+/-- Reimport-content record whose admission carrier is the sentence type and whose certification
+relation is equality. -/
 def dpEmitterReimportContent :
     FormalReimportSemantics dpEmitterBaseTheoryContent where
   Admission := DpEmitterSentenceSemantic
@@ -171,10 +151,9 @@ def dpEmitterReimportContent :
   imported_true := by
     simp [dpEmitterBaseTheoryContent]
 
-/-- Coherence data tying the native DP/emitter-side obstruction,
-reflection, and reimport layers together. After the admission-carrier
-upgrade, `reimport_certifies_reflection_blocked` reduces to
-`.licensedProjection = .licensedProjection` and is `rfl`. -/
+/-- Coherence record for the three fixture layers. Its two sentence identifications and reimport
+certification field reduce to reflexive equalities; reflection coverage uses the designated
+transaction's certification theorem. -/
 def dpEmitterSemanticCoherence :
     FormalSemanticCoherence
       dpEmitterObstructionContent
@@ -186,7 +165,7 @@ def dpEmitterSemanticCoherence :
     ⟨freeProjectionTransaction_certified, rfl⟩
   reimport_certifies_reflection_blocked := rfl
 
-/-- Native DP/emitter-side formal external classical comparison object. -/
+/-- Package the finite profiles, content records, coherence record, and reflection-family tag. -/
 def dpEmitterFormalExternalClassicalComparisonObject :
     FormalExternalClassicalComparisonObject where
   baseSemantics := dpEmitterFormalBaseTheory
@@ -237,8 +216,8 @@ def dpEmitterFormalExternalClassicalComparisonObject :
         exact ⟨fun _ => hLicensed,
           fun _ => dpEmitterFormalReimport.realizesLicensedReimport⟩
 
-/-- The native DP/emitter-side formal comparison object is theorem-backed at the
-profile level. -/
+/-- Project the six-step shape, reflection-family tag, and stagewise-equivalence fields supplied by
+the constructed comparison object. -/
 theorem dpEmitterFormalExternalClassicalComparison_supported :
     RealizesSixStepShape dpEmitterFormalExternalClassicalComparisonObject.profile.shape
       ∧ dpEmitterFormalExternalClassicalComparisonObject.profile.family =
@@ -248,8 +227,7 @@ theorem dpEmitterFormalExternalClassicalComparison_supported :
           dpAsClassicalAscentProfile.shape := by
   exact dpEmitterFormalExternalClassicalComparisonObject.supported
 
-/-- The native DP/emitter-side formal comparison object has theorem-backed
-semantic content. -/
+/-- Project the seven named support predicates generated from the constructed content records. -/
 theorem dpEmitterFormalExternalClassicalComparison_semanticSupported :
     dpEmitterFormalExternalClassicalComparisonObject.baseTheoryContent.hasInternalProofLayer
       ∧ dpEmitterFormalExternalClassicalComparisonObject.obstructionContent.hasSemanticObstruction
@@ -260,14 +238,14 @@ theorem dpEmitterFormalExternalClassicalComparison_semanticSupported :
       ∧ dpEmitterFormalExternalClassicalComparisonObject.reimportContent.hasSemanticReimport := by
   exact dpEmitterFormalExternalClassicalComparisonObject.semanticSupported
 
-/-- The native DP/emitter-side formal comparison object also has theorem-backed
-transfer from obstruction to reflection and from reflection to reimport. -/
+/-- Project the two transfer predicates generated by `dpEmitterSemanticCoherence`. -/
 theorem dpEmitterFormalExternalClassicalComparison_transferSupported :
     dpEmitterFormalExternalClassicalComparisonObject.semanticCoherence.obstructionTransfersToReflection
       ∧ dpEmitterFormalExternalClassicalComparisonObject.semanticCoherence.reflectionTransfersToReimport := by
   exact dpEmitterFormalExternalClassicalComparisonObject.semanticTransferSupported
 
-/-- Native DP/emitter-side boundary object for the LCEL boundary slot. -/
+/-- Boundary-slot object using the obstruction witness type, identity blocked-sentence map, and
+designated `licensedProjection` witness. -/
 def dpEmitterLCELBoundaryObject :
     LCELBoundaryObject dpEmitterFormalExternalClassicalComparisonObject.baseTheoryContent where
   BoundaryWitness :=
@@ -282,11 +260,8 @@ def dpEmitterLCELBoundaryObject :
     simpa using
       dpEmitterFormalExternalClassicalComparisonObject.obstructionContent.blocked_true
 
-/-- Native DP/emitter-side annotation functor for the LCEL annotation
-slot. After the reimport-content admission-carrier upgrade, the
-admission space and the annotation space both coincide with the typed
-sentence space, so `annotate` is the identity on sentences rather than
-a constant landing on the designated imported sentence. -/
+/-- Annotation-slot object with the sentence type as its annotation carrier and identity maps for
+both annotation and decoding. -/
 def dpEmitterLCELAnnotationFunctor :
     LCELAnnotationFunctor
       dpEmitterFormalExternalClassicalComparisonObject.baseTheoryContent
@@ -301,23 +276,21 @@ def dpEmitterLCELAnnotationFunctor :
     simpa using
       dpEmitterFormalExternalClassicalComparisonObject.reimportContent.imported_true
 
-/-- Native DP/emitter-side typed external-license object for the LCEL slot
-`Σ`. -/
+/-- Default external-license object derived from the constructed comparison object. -/
 def dpEmitterLCELExternalLicenseObject :
     LCELExternalLicenseObject
       dpEmitterFormalExternalClassicalComparisonObject.baseTheoryContent
       dpEmitterFormalExternalClassicalComparisonObject.reflectionContent :=
   defaultExternalLicenseObject dpEmitterFormalExternalClassicalComparisonObject
 
-/-- Native DP/emitter-side typed reimport-class object for the LCEL slot
-`Γ'`. -/
+/-- Default reimport-class object derived from the constructed comparison object. -/
 def dpEmitterLCELReimportClassObject :
     LCELReimportClassObject
       dpEmitterFormalExternalClassicalComparisonObject.baseTheoryContent
       dpEmitterFormalExternalClassicalComparisonObject.reimportContent :=
   defaultReimportClassObject dpEmitterFormalExternalClassicalComparisonObject
 
-/-- Native DP/emitter-side LCEL instance. -/
+/-- Assemble the boundary, license, reimport, and annotation objects into a `FormalLCELInstance`. -/
 def dpEmitterLCELInstance : FormalLCELInstance where
   comparison := dpEmitterFormalExternalClassicalComparisonObject
   boundaryObject := dpEmitterLCELBoundaryObject
@@ -373,69 +346,61 @@ def dpEmitterLCELInstance : FormalLCELInstance where
     · intro _
       exact dpEmitterLCELAnnotationFunctor.witness_realizes
 
-/-- The native DP/emitter-side LCEL instance realizes the six-clause LCEL
-schema. -/
+/-- The constructed slot profile satisfies `RealizesLCELSchema` via the comparison object's support
+theorem. This is a theorem about the finite fixture. -/
 theorem dpEmitterLCELInstance_realizesSchema :
     RealizesLCELSchema dpEmitterLCELInstance.toSlotProfile := by
   exact
     dpEmitterLCELInstance.realizesLCELSchema_of_supported
       dpEmitterFormalExternalClassicalComparison_supported
 
-/-- The current theorem-backed base-layer support on the native DP/emitter-side
-LCEL instance. -/
+/-- Base-layer support projected from the comparison object's `hasInternalProofLayer` field. -/
 theorem dpEmitter_semanticBaseLayerSupport :
     SemanticBaseLayerSupport dpEmitterLCELInstance := by
   rcases dpEmitterFormalExternalClassicalComparison_semanticSupported with
     ⟨hBase, _, _, _, _, _, _⟩
   simpa [SemanticBaseLayerSupport, dpEmitterLCELInstance] using hBase
 
-/-- The current theorem-backed obstruction-to-license transfer support on the
-native DP/emitter-side LCEL instance. -/
+/-- License-transfer support projected from the first coherence transfer predicate. -/
 theorem dpEmitter_semanticLicenseTransferSupport :
     SemanticLicenseTransferSupport dpEmitterLCELInstance := by
   rcases dpEmitterFormalExternalClassicalComparison_transferSupported with
     ⟨hTransfer, _⟩
   simpa [SemanticLicenseTransferSupport, dpEmitterLCELInstance] using hTransfer
 
-/-- The current theorem-backed reflection-to-reimport transfer support on the
-native DP/emitter-side LCEL instance. -/
+/-- Reimport-transfer support projected from the second coherence transfer predicate. -/
 theorem dpEmitter_semanticReimportTransferSupport :
     SemanticReimportTransferSupport dpEmitterLCELInstance := by
   rcases dpEmitterFormalExternalClassicalComparison_transferSupported with
     ⟨_, hTransfer⟩
   simpa [SemanticReimportTransferSupport, dpEmitterLCELInstance] using hTransfer
 
-/-- Stronger native DP/emitter-side base support package assembled from the
-typed LCEL carrier and the current semantic base-layer theorem. -/
+/-- Construct a `BaseReversibilitySupport` record from the preceding base-layer predicate. -/
 def dpEmitterBaseReversibilitySupport :
     BaseReversibilitySupport dpEmitterLCELInstance :=
   baseReversibilitySupport_of_semanticBase
     dpEmitter_semanticBaseLayerSupport
 
-/-- Stronger native DP/emitter-side license-side support package assembled from
-the typed LCEL carrier and the current semantic transfer theorem. -/
+/-- Construct a `LicenseIrreversibilitySupport` record from the license-transfer predicate. -/
 def dpEmitterLicenseIrreversibilitySupport :
     LicenseIrreversibilitySupport dpEmitterLCELInstance :=
   licenseIrreversibilitySupport_of_semanticTransfer
     dpEmitter_semanticLicenseTransferSupport
 
-/-- Stronger native DP/emitter-side reimport-side support package assembled
-from the typed LCEL carrier and the current semantic transfer theorem. -/
+/-- Construct a `ReimportReversibilitySupport` record from the reimport-transfer predicate. -/
 def dpEmitterReimportReversibilitySupport :
     ReimportReversibilitySupport dpEmitterLCELInstance :=
   reimportReversibilitySupport_of_semanticTransfer
     dpEmitter_semanticReimportTransferSupport
 
-/-- Stronger native DP/emitter-side factorization support package assembled
-from the stronger visible and sensitive substrate layers. -/
+/-- Construct a `BoundaryFactorizationSupport` record from the reimport and license support records. -/
 def dpEmitterBoundaryFactorizationSupport :
     BoundaryFactorizationSupport dpEmitterLCELInstance :=
   boundaryFactorizationSupport_of_supports
     dpEmitterReimportReversibilitySupport
     dpEmitterLicenseIrreversibilitySupport
 
-/-- Native DP/emitter-side LCEL reversibility-asymmetry package assembled from
-the current semantic-support surface. -/
+/-- Construct an `LCELReversibilityAsymmetry` record from the three support predicates. -/
 def dpEmitterLCELReversibilityAsymmetry :
     LCELReversibilityAsymmetry dpEmitterLCELInstance :=
   lcelReversibilityAsymmetry_of_semanticSupports
@@ -443,16 +408,14 @@ def dpEmitterLCELReversibilityAsymmetry :
     dpEmitter_semanticLicenseTransferSupport
     dpEmitter_semanticReimportTransferSupport
 
-/-- Native DP/emitter-side LCEL boundary-factorization package assembled from
-the current semantic-support surface. -/
+/-- Construct an `LCELBoundaryFactorization` record from the two transfer predicates. -/
 def dpEmitterLCELBoundaryFactorization :
     LCELBoundaryFactorization dpEmitterLCELInstance :=
   lcelBoundaryFactorization_of_semanticSupports
     dpEmitter_semanticReimportTransferSupport
     dpEmitter_semanticLicenseTransferSupport
 
-/-- Stronger native DP/emitter-side LCEL asymmetry package assembled from the
-proof-carrying substrate support records. -/
+/-- Construct the same asymmetry-record type from the three intermediate support records. -/
 def dpEmitterLCELReversibilityAsymmetryFromSupport :
     LCELReversibilityAsymmetry dpEmitterLCELInstance :=
   lcelReversibilityAsymmetry_of_strongerSupports
@@ -460,8 +423,7 @@ def dpEmitterLCELReversibilityAsymmetryFromSupport :
     dpEmitterLicenseIrreversibilitySupport
     dpEmitterReimportReversibilitySupport
 
-/-- Stronger native DP/emitter-side LCEL boundary-factorization package
-assembled from the proof-carrying substrate support record. -/
+/-- Construct the factorization-record type from `dpEmitterBoundaryFactorizationSupport`. -/
 def dpEmitterLCELBoundaryFactorizationFromSupport :
     LCELBoundaryFactorization dpEmitterLCELInstance :=
   lcelBoundaryFactorization_of_strongerSupport

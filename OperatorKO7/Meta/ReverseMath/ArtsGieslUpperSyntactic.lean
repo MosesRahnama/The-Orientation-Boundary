@@ -5,13 +5,15 @@ import OperatorKO7.Meta.ReverseMath.ArtsGieslProduct
 import Mathlib.Tactic.FinCases
 
 /-!
-# Syntactic object derivation: `RCA₀ ⊢ φ` for the SCT/AG soundness sentence
+# Syntactic derivation of the predecessor-descent sentence
 
-This module delivers the **literal syntactic object derivation** `DerivableFO rca0BasicAxioms φ`,
-where `φ = ArtsGieslSctSoundnessFormula = ∀x∃y, ¬IsSet x → (¬IsSet y ∧ (y < x ∨ x = 0))` is the SCT/AG
-soundness sentence. This is the syntactic counterpart to the semantic upper bound
-`rca0BasicAxioms ⊨ᵇ φ` (`ArtsGieslUpperSemantic.lean`): rather than reasoning in an arbitrary model,
-it constructs a Hilbert-style proof term in the sound `DeductionFO`/`DeductionH` calculus.
+This module constructs `DerivableFO rca0BasicAxioms ArtsGieslSctSoundnessFormula` in the
+`DeductionFO` and `DeductionH` calculi. Despite the historical identifier, the formula is the
+elementary predecessor-descent sentence
+
+`∀x∃y, ¬IsSet x → (¬IsSet y ∧ (y < x ∨ x = 0))`,
+
+not an encoding of Arts-Giesl dependency-pair soundness or size-change termination soundness.
 
 ## The derivation
 
@@ -25,12 +27,8 @@ After `all_intro` (generalize `x`), the level-1 goal `∃y, sctMatrix` is proved
   * `∃z …` (`lemmaC`): `ex_mono` maps the predecessor witness `z` to `y`; `z < x` gives the descent
     disjunct directly (this is why `axZeroOrSucc` packages `z < x`, avoiding `eq_leibniz`).
 
-`instTop_self_sctMatrix` is the witness-instantiation conversion (`sctMatrix[y := x]` in explicit
-form) needed by the `x`-witness branches. Soundness of every `DerivableFO` constructor is proved in
-`DeductionFO.lean`, so this object derivation entails the semantic bound (and the standard model is a
-witness, so the target is not vacuous — Gate R5).
-
-No `sorry`, `axiom`, or `native_decide`.
+`instTop_self_sctMatrix` is the witness-instantiation conversion `sctMatrix[y := x]` used by the two
+branches that select `x` as the existential witness.
 -/
 
 set_option autoImplicit false
@@ -154,10 +152,8 @@ private theorem lemmaC :
 
 /-! ### The object derivation -/
 
-/-- **Syntactic upper bound (object derivation).** `RCA₀` (basic fragment) syntactically derives the
-SCT/AG soundness sentence in the sound `DeductionFO` calculus: a literal Hilbert-style proof term,
-not a semantic entailment. Combined with `derivableFO_sound` this re-proves the semantic bound, and
-the standard model witnesses non-vacuity (Gate R5). -/
+/-- `rca0BasicAxioms` syntactically derives the predecessor-descent sentence in the `DeductionFO`
+calculus. -/
 theorem artsGiesl_syntactic_upper :
     DerivableFO rca0BasicAxioms ArtsGieslSctSoundnessFormula := by
   apply DerivableFO.all_intro
@@ -176,10 +172,9 @@ theorem artsGiesl_syntactic_upper :
     · exact mp_H (ofClosed lemmaC)
         (assume_last [(isSetBd (&0)).not] (∃' zosSucc))
 
-/-- **The fully syntactic Arts–Giesl `ω³` product theorem.** Every field a genuine, kernel-checked,
-baseline-axiom-only theorem, with the upper bound discharged by the literal object derivation
-`artsGiesl_syntactic_upper` (not a semantic entailment). This specializes the parameterized product
-assembly at `T := rca0BasicAxioms`. -/
+/-- Specialization of `ArtsGieslOmega3ProductTheorem` at `rca0BasicAxioms`, using the syntactic
+predecessor-descent derivation for its `upper` field. The product record does not establish an SCT
+reversal or identify the predecessor sentence with dependency-pair soundness. -/
 theorem artsGieslOmega3Product_rca0 :
     ArtsGieslOmega3ProductTheorem rca0BasicAxioms :=
   artsGieslOmega3Product_of_upper rca0BasicAxioms artsGiesl_syntactic_upper

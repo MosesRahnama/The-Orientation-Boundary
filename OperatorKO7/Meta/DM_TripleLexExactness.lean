@@ -46,17 +46,17 @@ theorem full_triple_lex_image_surjective_lt_opow_omega_mul_two
     _ = α := by
         simpa [δOrd, inner] using (Ordinal.div_add_mod α ((ω : Ordinal) ^ (ω : Ordinal)))
 
-/-- Reflection boundary still needed for an unconditional exact order-type theorem. -/
+/-- Proposition expressing reflection of strict code order into `Lex3c`. -/
 def FullTripleLexOrderReflects : Prop :=
   ∀ {x y : FullTripleLexCarrier},
     lex3cToOrd x.toLex3cTuple < lex3cToOrd y.toLex3cTuple →
       Lex3c x.toLex3cTuple y.toLex3cTuple
 
-/-- Exact inner blocker still needed to turn equal `dmOrdEmbed` codes back into equal multisets. -/
+/-- Proposition expressing injectivity of `dmOrdEmbed`. -/
 def DmOrdEmbedInjective : Prop :=
   ∀ {m₁ m₂ : Multiset Nat}, dmOrdEmbed m₁ = dmOrdEmbed m₂ → m₁ = m₂
 
-/-- The lower-bound layer now supplies the missing DM-code injectivity theorem. -/
+/-- Instantiate `DmOrdEmbedInjective` with `dmOrdEmbed_injective`. -/
 theorem dmOrdEmbedInjective : DmOrdEmbedInjective := by
   intro m₁ m₂ hEq
   exact dmOrdEmbed_injective hEq
@@ -110,13 +110,13 @@ theorem lexDMToOrd_order_iff_of_dmOrdEmbedInjective
   · intro hlt
     exact lexDMToOrd_reflects_of_dmOrdEmbedInjective hInj hlt
 
-/-- Unconditional inner reflection for `lexDMToOrd`. -/
+/-- Inner reflection obtained from the proved injectivity of `dmOrdEmbed`. -/
 theorem lexDMToOrd_reflects {p q : Multiset Nat × Nat}
     (hlt : lexDMToOrd p < lexDMToOrd q) :
     LexDM_c p q :=
   lexDMToOrd_reflects_of_dmOrdEmbedInjective dmOrdEmbedInjective hlt
 
-/-- Unconditional inner order equivalence for the `ω * dmOrdEmbed + τ` code. -/
+/-- Inner order equivalence obtained from the proved injectivity of `dmOrdEmbed`. -/
 theorem lexDMToOrd_order_iff (p q : Multiset Nat × Nat) :
     LexDM_c p q ↔ lexDMToOrd p < lexDMToOrd q :=
   lexDMToOrd_order_iff_of_dmOrdEmbedInjective dmOrdEmbedInjective p q
@@ -266,18 +266,18 @@ theorem full_triple_lex_order_reflects_of_lexDMToOrd_reflects
         hδ
     exact (False.elim (lt_asymm hlt (lex3cToOrd_strictMono hrev)))
 
-/-- Triple reflection closes once the DM ordinal embedding is injective. -/
+/-- Derive triple reflection from injectivity of the DM ordinal embedding. -/
 theorem full_triple_lex_order_reflects_of_dmOrdEmbedInjective
     (hInj : DmOrdEmbedInjective) :
     FullTripleLexOrderReflects :=
   full_triple_lex_order_reflects_of_lexDMToOrd_reflects
     (fun {_ _} hlt => lexDMToOrd_reflects_of_dmOrdEmbedInjective hInj hlt)
 
-/-- The calibrated binary-phase triple-lex surface now reflects order unconditionally. -/
+/-- Triple-order reflection using `dmOrdEmbedInjective`. -/
 theorem full_triple_lex_order_reflects : FullTripleLexOrderReflects :=
   full_triple_lex_order_reflects_of_dmOrdEmbedInjective dmOrdEmbedInjective
 
-/-- Honest unconditional package for the calibrated binary-phase triple-lex image. -/
+/-- Package strict monotonicity, the image upper bound, and surjectivity below that bound. -/
 theorem full_triple_lex_image_surjective_package :
     (∀ x y : FullTripleLexCarrier,
       Lex3c x.toLex3cTuple y.toLex3cTuple →
@@ -292,7 +292,7 @@ theorem full_triple_lex_image_surjective_package :
   · intro α hα
     exact full_triple_lex_image_surjective_lt_opow_omega_mul_two hα
 
-/-- Exact order type follows once the remaining order-reflection lemma is supplied. -/
+/-- Given order reflection, package order equivalence, the image upper bound, and surjectivity. -/
 theorem full_triple_lex_exactness_residual_boundary
     (hReflect : FullTripleLexOrderReflects) :
     (∀ x y : FullTripleLexCarrier,
@@ -312,7 +312,7 @@ theorem full_triple_lex_exactness_residual_boundary
   · intro α hα
     exact full_triple_lex_image_surjective_lt_opow_omega_mul_two hα
 
-/-- The exact order-type package closes under the sharper injectivity blocker. -/
+/-- Given DM-code injectivity, package order equivalence, the image upper bound, and surjectivity. -/
 theorem full_triple_lex_exact_order_type_of_dmOrdEmbedInjective
     (hInj : DmOrdEmbedInjective) :
     (∀ x y : FullTripleLexCarrier,
@@ -325,7 +325,8 @@ theorem full_triple_lex_exact_order_type_of_dmOrdEmbedInjective
   full_triple_lex_exactness_residual_boundary
     (full_triple_lex_order_reflects_of_dmOrdEmbedInjective hInj)
 
-/-- The calibrated binary-phase triple-lex code realizes the exact order type of `ω^ω * 2`. -/
+/-- Three-property characterization of the calibrated code: order equivalence, bounded image, and
+surjectivity below `ω^ω * 2`. The declaration returns a conjunction rather than a Lean `OrderIso`. -/
 theorem full_triple_lex_exact_order_type :
     (∀ x y : FullTripleLexCarrier,
       Lex3c x.toLex3cTuple y.toLex3cTuple ↔

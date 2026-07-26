@@ -3,20 +3,9 @@ import OperatorKO7.Meta.ReverseMath.StandardModel
 /-!
 # The `RCA₀` theory (basic arithmetic fragment) and its standard-model consistency
 
-This module defines the basic-arithmetic (PA⁻-style, number-relativized) fragment of `RCA₀` as an
-`L2.Theory`, and proves the standard model `StdCarrier` satisfies every axiom — the Gate R5
-consistency guard (an inconsistent theory would make the upper-derivation target vacuous).
+## Formal Scope
 
-The two axioms `axZeroOrSucc` and `axLtSucc` are exactly what the object derivation of the SCT/AG
-soundness sentence needs (the sentence "every number is `0` or has a smaller predecessor"). The
-remaining axioms (`axSuccNeZero`, `axAddZero`, `axLtIrrefl`) are representative PA⁻ content included
-so the theory is a genuine arithmetic theory, not an ad hoc pair. The full Σ⁰₁-induction and
-Δ⁰₁-comprehension schemes are scheduled additions (not needed for the elementary upper derivation).
-
-All quantifiers are number-relativized (`¬IsSet`) per the Simpson single-sorted encoding, so the
-axioms read over the number sort `ℕ` of the standard model.
-
-No `sorry`, `axiom`, or `native_decide`.
+rca0BasicAxioms is a finite RCA0-inspired basic-arithmetic fragment without induction or comprehension schemes. The formal result proves standard-model satisfiability; syntactic consistency is not a theorem in this file.
 -/
 
 set_option autoImplicit false
@@ -27,7 +16,7 @@ open FirstOrder Language
 
 /-! ### Basic arithmetic axioms (number-relativized `L2` sentences) -/
 
-/-- `∀x, ¬IsSet x → (x = 0 ∨ ∃z, (¬IsSet z ∧ x = S z ∧ z < x))` — every number is zero or a
+/-- `∀x, ¬IsSet x → (x = 0 ∨ ∃z, (¬IsSet z ∧ x = S z ∧ z < x))` , every number is zero or a
 successor, with the predecessor strictly smaller (a basic arithmetic fact, provable from `axLtSucc`,
 included here so the SCT descent witness is available without `eq_leibniz`). -/
 def axZeroOrSucc : L2.Sentence :=
@@ -47,7 +36,7 @@ def axSuccNeZero : L2.Sentence :=
 def axAddZero : L2.Sentence :=
   ∀' ((∼ (isSetBd (&0))) ⟹ (Term.bdEqual (addTerm (&0) zeroTerm) (&0)))
 
-/-- `∀x, ¬IsSet x → ¬(x < x)` — irreflexivity of `<`. -/
+/-- `∀x, ¬IsSet x → ¬(x < x)` , irreflexivity of `<`. -/
 def axLtIrrefl : L2.Sentence :=
   ∀' ((∼ (isSetBd (&0))) ⟹ (∼ (ltBd (&0) (&0))))
 
@@ -108,9 +97,8 @@ private theorem stdModel_axLtIrrefl : StdCarrier ⊨ axLtIrrefl := by
   | inr S => exact absurd (trivial : stdStructure.RelMap Rel.isSet ![Sum.inr S]) hnotset
   | inl m => exact Nat.lt_irrefl m
 
-/-- **Consistency guard (Gate R5).** The standard model satisfies every basic-arithmetic axiom, so
-the `RCA₀` basic fragment is satisfiable (hence consistent); the upper-derivation target is not
-vacuous. -/
+/-- The standard model satisfies every axiom in the finite basic-arithmetic
+fragment, establishing satisfiability of that fragment. -/
 theorem stdModel_models_rca0BasicAxioms : StdCarrier ⊨ rca0BasicAxioms :=
   ⟨fun φ hφ => by
     simp only [rca0BasicAxioms, Set.mem_insert_iff, Set.mem_singleton_iff] at hφ

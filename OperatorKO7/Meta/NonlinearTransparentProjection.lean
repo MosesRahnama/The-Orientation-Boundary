@@ -3,6 +3,14 @@ import OperatorKO7.Meta.NonlinearDominanceWitnesses
 import OperatorKO7.Meta.PolynomialBarrierGeneral
 import OperatorKO7.Meta.EscapeTrichotomy_Schema
 
+/-!
+# NonlinearTransparentProjection
+
+## Formal Scope
+
+The boundary carries transparency and unboundedness, while barrier closure additionally requires supplied dominance data or a typed witness-class member. The boundary alone does not derive dominance.
+-/
+
 namespace OperatorKO7.NonlinearTransparentProjection
 
 open OperatorKO7.StepDuplicating
@@ -10,7 +18,7 @@ open OperatorKO7.CompositionalImpossibility
 open OperatorKO7.NonlinearDominanceWitnesses
 open OperatorKO7.NonlinearResidualTaxonomy
 
-/-- Boundary payload currently available for the transparent bounded-degree polynomial row. -/
+/-- Boundary payload in this module available for the transparent bounded-degree polynomial row. -/
 structure TransparentPolynomialProjectionBoundary where
   measure : StepDuplicatingSchema.BoundedPolynomialMeasure ko7Schema
   transparentAtBase : StepDuplicatingSchema.TransparentAtBase ko7Schema measure.eval
@@ -38,7 +46,7 @@ theorem transparentPolynomialProjectionBoundary_hasDominanceData_of_data
     TransparentPolynomialProjectionBoundaryHasDominanceData data.toBoundary := by
   exact ⟨data, rfl⟩
 
-/-- The transparent row remains classified as projection-required at the current E3 stage. -/
+/-- The transparent row remains classified as projection-required at the defined E3 stage. -/
 theorem transparentPolynomialProjectionBoundary_requires_projectionData
     (_boundary : TransparentPolynomialProjectionBoundary) :
     nonlinearResidualStatus .boundedDegreeDirectTransparentPolynomial =
@@ -93,7 +101,7 @@ theorem transparentPolynomialProjectionBoundary_with_witnessClass_is_blocked
     transparentPolynomialProjectionBoundary_with_dominanceData_is_blocked boundary
       (transparentPolynomialProjectionBoundary_hasDominanceData_of_witnessClass boundary hwitness)
 
-/-- Exact paper-facing catalog for the transparent projection boundary. -/
+/-- specified public catalog for the transparent projection boundary. -/
 abbrev TransparentPolynomialProjectionBoundaryCatalog : Prop :=
   ∀ boundary : TransparentPolynomialProjectionBoundary,
     nonlinearResidualStatus .boundedDegreeDirectTransparentPolynomial =
@@ -104,7 +112,7 @@ abbrev TransparentPolynomialProjectionBoundaryCatalog : Prop :=
           data.toBoundary = boundary →
             ¬ StepDuplicatingSchema.GlobalOrients ko7System boundary.measure.eval (· < ·)
 
-/-- The transparent row is exact boundary-only until the missing dominance witness is packaged. -/
+/-- The transparent row is specified boundary-only until the missing dominance witness is packaged. -/
 theorem transparent_polynomial_projection_boundary_catalog :
     TransparentPolynomialProjectionBoundaryCatalog := by
   intro boundary

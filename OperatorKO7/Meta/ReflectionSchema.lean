@@ -1,15 +1,14 @@
 import OperatorKO7.Meta.ProofTheoreticRegister
 
 /-!
-# Reflection Schema
+# Six-field profile comparison
 
-Abstract comparison layer for the six-step structural profile used in the
-Failure Floor paper.
-
-This module does not posit a classical witness by itself. It gives a precise
-stagewise comparison interface so that any future classical-side profile can be
-compared to the already mechanized DP-side profile without changing the shape
-of the argument.
+`SixStepStructuralProfile` supplies six proposition-valued fields.
+`StageHolds` selects one field, `StagewiseEquivalent` is pointwise logical
+equivalence across the six selectors, and the transport theorems project those
+equivalences. `dpStagewiseRealization` is derived from the imported
+`structural_identity` proof for `dpSixStepStructuralProfile`. The formal scope
+is proposition-level field comparison.
 -/
 
 namespace OperatorKO7.ReflectionSchema
@@ -50,7 +49,7 @@ theorem StagewiseEquivalent.symm
   intro s
   exact (hEQ s).symm
 
-/-- Comparison object between two structural profiles. -/
+/-- A package containing pointwise equivalence of the six profile fields. -/
 structure ReflectionComparisonSchema (P Q : SixStepStructuralProfile) where
   stagewiseAgreement : StagewiseEquivalent P Q
 
@@ -80,7 +79,7 @@ theorem StagewiseEquivalent.preserves_realization
   intro s
   exact (hEQ s).1 (hR.realizes s)
 
-/-- Every comparison schema transports realization from left to right. -/
+/-- The stored pointwise equivalence transports a realization from left to right. -/
 theorem ReflectionComparisonSchema.sound
     {P Q : SixStepStructuralProfile}
     (C : ReflectionComparisonSchema P Q)
@@ -88,8 +87,7 @@ theorem ReflectionComparisonSchema.sound
     RealizesSixStepShape Q :=
   C.stagewiseAgreement.preserves_realization hP
 
-/-- The already mechanized dependency-pair structural profile realizes every
-named stage. -/
+/-- Converts the imported `structural_identity` conjunction into a stage-indexed function. -/
 def dpStagewiseRealization : StagewiseRealization dpSixStepStructuralProfile := by
   rcases (realizesSixStepShape_iff_stagewise dpSixStepStructuralProfile).1 structural_identity with
     ⟨hR⟩

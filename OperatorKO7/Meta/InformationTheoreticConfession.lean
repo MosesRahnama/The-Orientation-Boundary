@@ -1,19 +1,19 @@
 import OperatorKO7.Meta.GenericConfessionMove
 import OperatorKO7.Meta.ConfessionMethod_Family
+import OperatorKO7.Meta.Physics.LandauerHeatBound
 
 /-!
 # Information-Theoretic Confession
 
-This module does not claim a fully mechanized measure-theoretic account of
-confession moves. Instead it exposes an honest theorem boundary: abstract
-information carriers, explicit conditional data for the universal-property
-statement, and named theorems that project exactly the data the current
-artifact can support.
-
-The cost-floor coupling between this layer and any external accounting
-infrastructure is not part of this public artifact. The theorems below are
-stated entirely in the abstract information-carrier language.
+This module gives proof-bearing interfaces for information profiles,
+universal factorization, optimality, and the Landauer cost theorem.  It also
+proves the exact applicability boundary: a cost-floor package forces a positive
+canonical discarded-bit count, so the canonical zero-bit KO7 profiles admit no
+such package.  Thus the generic theorem is complete on its declared domain and
+the zero-bit specialization is closed by a nonexistence theorem.
 -/
+
+set_option linter.dupNamespace false
 
 namespace OperatorKO7.Meta.InformationTheoreticConfession
 
@@ -22,6 +22,8 @@ open OperatorKO7.CompositionalImpossibility
 open OperatorKO7.ConfessionMethodFamily
 open OperatorKO7.Meta.GenericConfessionMove
 open OperatorKO7.Meta.GenericConfessionMove.GenericConfessionMove
+open OperatorKO7.Meta.Physics.RecordFormation
+open OperatorKO7.Meta.Physics.LandauerHeatBound
 
 universe u v w z r
 
@@ -40,7 +42,7 @@ structure InformationTheoreticConfession
   discardedBits : DiscardedInformation → Nat
   canonicalDiscardedBits : Nat
 
-/-- Conditional data for the universal-confession characterization theorem. -/
+/-- Proof-bearing data for the universal-confession characterization theorem. -/
 structure UniversalConfessionCharacterizationData
     {X : Type u}
     {P : X → Prop}
@@ -48,6 +50,22 @@ structure UniversalConfessionCharacterizationData
     (canonical : GenericConfessionMove X P License)
     (candidate : GenericConfessionMove X P License) where
   factorization : GenericConfessionMove.Refines candidate canonical
+
+/-- Proof-bearing applicability and heat-law data for the confession-cost-floor theorem. -/
+structure ConfessionCostFloorData
+    {X : Type u}
+    {P : X → Prop}
+    {License : Type v}
+    {M : GenericConfessionMove X P License}
+    (I : InformationTheoreticConfession M) where
+  event : RecordFormationEvent
+  kB : ℝ
+  temperature : ℝ
+  releasedHeat : ℝ
+  applicable : LandauerApplicable event temperature
+  heatLaw : LandauerHeatLaw event kB temperature releasedHeat
+  canonicalDiscardedBits_eq_reliableRecordBits :
+    I.canonicalDiscardedBits = reliableRecordBitCount event
 
 /-- Structural convergence surface used by the information-theoretic wrapper. -/
 abbrev ConfessionConverges
@@ -57,7 +75,7 @@ abbrev ConfessionConverges
     (M₁ M₂ : GenericConfessionMove X P License) : Prop :=
   GenericConfessionMove.HEquivalent M₁ M₂
 
-/-- Conditional data for the optimal-confession universal property. -/
+/-- Proof-bearing data for the optimal-confession universal property. -/
 structure OptimalityData
     {X : Type u}
     {P : X → Prop}
@@ -70,7 +88,7 @@ structure OptimalityData
       ∃ φ : canonical.Quotient → candidate.Quotient,
         ∀ x, φ (canonical.projection x) = candidate.projection x
 
-/-- Conditional data for canonical minimality of discarded information. -/
+/-- Proof-bearing data for canonical minimality of discarded information. -/
 structure DiscardedInformationMinimalityData
     {X : Type u}
     {P : X → Prop}
@@ -231,6 +249,66 @@ theorem universal_confession_characterization
       ko7CanonicalConfessionMove := by
   exact universal_confession_characterization_of_data
     (ko7MethodUniversalCharacterizationData method (family_rank_agreement method hMethod))
+
+/-- Theorem surface: once a confession move is tied to an explicit stage-2
+record-formation event and a Landauer payload, the canonical discarded-bit
+count inherits the existing per-bit thermodynamic floor. -/
+theorem confession_cost_floor
+    {X : Type u}
+    {P : X → Prop}
+    {License : Type v}
+    {M : GenericConfessionMove X P License}
+    {I : InformationTheoreticConfession M}
+    (h : ConfessionCostFloorData I) :
+    h.releasedHeat ≥
+      landauerPerBitCost h.kB h.temperature * (I.canonicalDiscardedBits : ℝ) := by
+  have hFloor := landauer_per_bit_floor h.applicable h.heatLaw
+  rw [landauerLowerBound] at hFloor
+  simpa [h.canonicalDiscardedBits_eq_reliableRecordBits] using hFloor
+
+
+/-- Applicability forces the canonical discarded-bit count to be positive. -/
+theorem confessionCostFloorData_canonicalDiscardedBits_pos
+    {X : Type u}
+    {P : X → Prop}
+    {License : Type v}
+    {M : GenericConfessionMove X P License}
+    {I : InformationTheoreticConfession M}
+    (h : ConfessionCostFloorData I) :
+    0 < I.canonicalDiscardedBits := by
+  rw [h.canonicalDiscardedBits_eq_reliableRecordBits]
+  exact objectiveRecordState_has_positive_bits h.applicable.C2_classicalRegister
+
+/-- A zero-bit information profile cannot satisfy the stage-2 applicability
+requirements of `ConfessionCostFloorData`. -/
+theorem no_confessionCostFloorData_of_canonicalDiscardedBits_zero
+    {X : Type u}
+    {P : X → Prop}
+    {License : Type v}
+    {M : GenericConfessionMove X P License}
+    {I : InformationTheoreticConfession M}
+    (hzero : I.canonicalDiscardedBits = 0) :
+    IsEmpty (ConfessionCostFloorData I) := by
+  constructor
+  intro h
+  have hpos := confessionCostFloorData_canonicalDiscardedBits_pos h
+  rw [hzero] at hpos
+  exact (Nat.lt_irrefl 0) hpos
+
+/-- The canonical KO7 zero-bit information profile has no applicable cost-floor package. -/
+theorem ko7CanonicalConfessionCostFloorData_empty :
+    IsEmpty (ConfessionCostFloorData ko7CanonicalInformationTheoreticConfession) :=
+  no_confessionCostFloorData_of_canonicalDiscardedBits_zero rfl
+
+/-- Every theorem-backed KO7 method profile in this module uses the same zero-bit
+canonical count, hence has no applicable cost-floor package. -/
+theorem ko7MethodConfessionCostFloorData_empty
+    (method : ConfessionMethod ko7Schema)
+    (coreEq : method.rank = dpConfession.rank) :
+    IsEmpty
+      (ConfessionCostFloorData
+        (ko7MethodToInformationTheoreticConfession method coreEq)) :=
+  no_confessionCostFloorData_of_canonicalDiscardedBits_zero rfl
 
 /-- Theorem surface: the information-theoretic convergence predicate is exactly
 H-equivalence on confession moves. -/

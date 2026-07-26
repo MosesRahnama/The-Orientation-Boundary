@@ -3,10 +3,7 @@ import OperatorKO7.Meta.RDRSSemanticDirectMeasure
 import OperatorKO7.Meta.RDRSSemanticPayloadSensitivity
 
 /-!
-# RDRS Semantic Certificate (Milestone S2/S3 bridge)
-
-Roadmap source:
-`OperatorKO7/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
+# RDRS semantic certificates
 
 Packages semantic direct measures with orientation and payload-
 sensitivity certificates. Three certificate strata:
@@ -19,17 +16,8 @@ sensitivity certificates. Three certificate strata:
   certificate plus `PayloadSensitiveRaw` and a `¬ CounterDominated`
   witness (the structural content of decisive payload sensitivity).
 
-The certificate types are the input types for the S3 universal
-lens-pump barrier (`RDRSSemanticLensPump.lean`).
-
-## Bible compliance
-
-- W2: `set_option autoImplicit false`.
-- W8: every `def`/`theorem`/`structure` carries the structured
-  docstring template.
-- W5/R1: no forbidden trust-surface tokens from the Lean audit bible.
-- Relation Gate: every certificate / theorem `Relation:` line is
-  explicit.
+`RDRSSemanticLensPump.lean` consumes these certificate structures. Existence
+of a certificate remains an explicit input for a chosen abstract `RDRSStep`.
 -/
 
 set_option autoImplicit false
@@ -40,56 +28,21 @@ open OperatorKO7.RDRSDescentLens
 open OperatorKO7.RDRSSemanticDirectMeasure
 open OperatorKO7.RDRSSemanticPayloadSensitivity
 
-/--
-Proves: a semantic orientation certificate for an RDRS step pair `R`:
-  a semantic direct measure together with a proof that the measure
-  orients `R`.
-Does not prove: payload sensitivity or decisiveness; those are
-  added by the certificates below.
-Relation: abstract `RDRSStep B S N T`; not a concrete rewriting
-  relation.
-Closure: root single-step orientation.
-Strategy: not applicable.
-Trust: kernel-only.
-Scope: every `R` for which a `SemanticDirectMeasure` orients.
--/
+/-- A semantic direct measure together with a proof that it orients the supplied abstract
+`RDRSStep` at the root-step relation. -/
 structure SemanticOrientationCertificate {B S N T : Type}
     (R : RDRSStep B S N T) where
   measure : SemanticDirectMeasure T
   orients : Orients R measure.μ measure.ltA
 
-/--
-Proves: an orientation certificate that is additionally raw payload-
-  sensitive on `R`.
-Does not prove: decisive payload sensitivity; the
-  `PayloadSensitiveRaw` witness only requires payload-distinguishing
-  values somewhere on the LHS.
-Relation: abstract `RDRSStep B S N T`.
-Closure: root single-step.
-Strategy: not applicable.
-Trust: kernel-only.
-Scope: per concrete `R`.
--/
+/-- Extends an orientation certificate with the supplied `PayloadSensitiveRaw` witness. -/
 structure RawSensitiveOrientationCertificate {B S N T : Type}
     (R : RDRSStep B S N T) extends SemanticOrientationCertificate R where
   raw_sensitive :
     PayloadSensitiveRaw R toSemanticOrientationCertificate.measure.data
 
-/--
-Proves: an orientation certificate that is decisively payload-
-  sensitive on `R`: the orientation conjunct comes from the parent
-  certificate, and the certificate carries the
-  `PayloadSensitiveRaw` and `¬ CounterDominated` witnesses needed
-  for the `PayloadSensitiveDecisive` shape.
-Does not prove: that decisively-payload-sensitive certificates
-  exist for every `R`; the S3 barrier proves they fail to orient
-  under additional structural conditions.
-Relation: abstract `RDRSStep B S N T`.
-Closure: root single-step.
-Strategy: not applicable.
-Trust: kernel-only.
-Scope: per concrete `R`.
--/
+/-- Extends an orientation certificate with supplied `PayloadSensitiveRaw` and
+`not CounterDominated` witnesses for the same abstract step relation. -/
 structure DecisivePayloadSensitiveCertificate {B S N T : Type}
     (R : RDRSStep B S N T) extends SemanticOrientationCertificate R where
   raw_sensitive :
@@ -97,17 +50,7 @@ structure DecisivePayloadSensitiveCertificate {B S N T : Type}
   not_counter_dominated :
     ¬ CounterDominated R toSemanticOrientationCertificate.measure.data
 
-/--
-Proves: every decisive payload-sensitive certificate projects a
-  `PayloadSensitiveDecisive` witness.
-Does not prove: existence of decisive certificates; only the
-  structural projection.
-Relation: abstract `RDRSStep B S N T`.
-Closure: not applicable.
-Strategy: not applicable.
-Trust: kernel-only.
-Scope: every decisive certificate.
--/
+/-- Repackages the three stored certificate fields as `PayloadSensitiveDecisive`. -/
 theorem DecisivePayloadSensitiveCertificate.toDecisive
     {B S N T : Type} {R : RDRSStep B S N T}
     (C : DecisivePayloadSensitiveCertificate R) :
@@ -115,7 +58,7 @@ theorem DecisivePayloadSensitiveCertificate.toDecisive
   ⟨C.toSemanticOrientationCertificate.orients,
     C.raw_sensitive, C.not_counter_dominated⟩
 
-/-- Audit anchor for the semantic-certificate surface. -/
+/-- String identifier for the decisive-certificate declaration. -/
 def rdrs_semantic_certificate_anchor : String :=
   "OperatorKO7.RDRSSemanticCertificate.DecisivePayloadSensitiveCertificate"
 

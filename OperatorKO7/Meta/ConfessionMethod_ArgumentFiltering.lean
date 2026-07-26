@@ -2,32 +2,16 @@ import OperatorKO7.Meta.ConfessionMethod
 import OperatorKO7.Meta.ConfessionMethod_DP
 
 /-!
-# Confession Method Instance: Argument Filtering
+# Argument-filtering projection witness
 
-Argument filtering (Arts-Giesl 2000, within the DP framework) maps each
-function symbol to a subset or projection of its argument list. For the
-step-duplicating schema:
+This module defines a rank projection and a constructorwise filter into unary counter syntax.
+It proves that the rank equals the registered dependency-pair projection, computes the filtered
+shape of the duplicating rule, and packages the resulting projection-rank profile.
 
-- π(recur) = 3   (project to the counter argument only)
-- π(wrap) = ε    (collapse to nothing)
-- π(succ) = 1    (keep the single argument)
-- π(base) = ε    (collapse to nothing)
-
-After filtering, the duplicating rule `recur(b, s, succ(n)) → wrap(s, recur(b, s, n))`
-becomes `succ(n) → n` in the filtered universe: the wrapper and the duplicated
-payload are entirely absent. Termination of the filtered problem is trivial.
-
-Argument filtering is a **structural drop**: it removes arguments from the
-proof obligation rather than constructing a new comparison object. The
-soundness is licensed by the argument-filtering soundness theorem within
-the DP framework, which guarantees that termination of the filtered problem
-implies termination of the original system under the conditions of the
-framework.
-
-On the step-duplicating schema, argument filtering produces the same
-concrete rank as DP + subterm criterion and counter-projection. What differs
-is the extraction mechanism (filtering map rather than DP pair extraction or
-direct argument selection) and the specific soundness theorem invoked.
+`SoundnessLicense.argumentFilteringSoundness` is a route-classification tag. It does not by
+itself prove that termination of the filtered relation transfers to the source system. This
+module therefore establishes the projection and its local filtered-step facts, not a global
+termination theorem for the source rewrite system.
 -/
 
 namespace OperatorKO7.ConfessionMethodFamily
@@ -37,21 +21,18 @@ open OperatorKO7.StepDuplicating
 open OperatorKO7.StepDuplicating.StepDuplicatingSchema
 open OperatorKO7.CompositionalImpossibility
 
-/-- A route-local argument-filtering witness on the original symbols.
-    The filter keeps only the counter coordinate of `recΔ`, drops the wrapper,
-    preserves `delta`, and collapses the remaining constructors. -/
+/-- A witness selecting the third, zero-based counter coordinate of `recΔ`. -/
 structure ArgumentFilteringWitness where
   keepRecurCoordinate : Fin 3
   keepRecurCoordinate_is_counter : keepRecurCoordinate = ⟨2, by decide⟩
 
-/-- The concrete schema witness for argument filtering. -/
+/-- The concrete witness selecting coordinate `2` of the three `recΔ` arguments. -/
 def schemaArgumentFilteringWitness : ArgumentFilteringWitness where
   keepRecurCoordinate := ⟨2, by decide⟩
   keepRecurCoordinate_is_counter := rfl
 
-/-- Route-local rank extracted from the filtering view.
-    After filtering away the wrapper and duplicated payload, only the counter
-    depth remains visible. -/
+/-- Counter depth retained by the route: `delta` increments, `recΔ` follows its counter,
+and all other constructors contribute zero. -/
 @[simp] def argumentFilteringRankFn : Trace → Nat
   | void        => 0
   | delta t     => argumentFilteringRankFn t + 1
@@ -61,15 +42,14 @@ def schemaArgumentFilteringWitness : ArgumentFilteringWitness where
   | recΔ _ _ n  => argumentFilteringRankFn n
   | eqW _ _     => 0
 
-/-- The argument-filtering route independently recovers the same counter-depth
-    rank function as the DP route. -/
+/-- The argument-filtering rank is extensionally equal to the registered DP projection. -/
 theorem argumentFilteringRankFn_eq_dpProjection :
     argumentFilteringRankFn = dpProjection := by
   funext t
   induction t <;> simp [argumentFilteringRankFn, dpProjection, *]
 
-/-- The argument-filtering witness packaged as the intermediate
-    confession-core witness. -/
+/-- Package the fixed argument-filtering rank and its four defining equations as a
+`ConfessionCoreWitness`. -/
 def ArgumentFilteringWitness.toConfessionCoreWitness
     (_W : ArgumentFilteringWitness) : ConfessionCoreWitness ko7Schema where
   rank := argumentFilteringRankFn
@@ -78,7 +58,7 @@ def ArgumentFilteringWitness.toConfessionCoreWitness
   rank_wrap := by intro x y; rfl
   rank_recur := by intro b s n; rfl
 
-/-- The projection rank derived from argument filtering. -/
+/-- The projection-rank object induced by `argumentFilteringRankFn`. -/
 def argumentFilteringDerivedRank : ProjectionRank ko7Schema where
   rank := argumentFilteringRankFn
   rank_base := by rfl
@@ -86,31 +66,27 @@ def argumentFilteringDerivedRank : ProjectionRank ko7Schema where
   rank_wrap := by intro x y; rfl
   rank_recur := by intro b s n; rfl
 
-/-- The argument-filtering route converges to the same rank function as the
-    canonical DP projection core. -/
+/-- The derived rank function agrees with the canonical DP projection rank function. -/
 theorem argumentFilteringDerivedRank_eq_dp_core :
     argumentFilteringDerivedRank.rank = dpProjectionRank.rank := by
   simpa [argumentFilteringDerivedRank, dpProjectionRank] using
     argumentFilteringRankFn_eq_dpProjection
 
-/-- The argument-filtering route converges to the same projection-rank object
-    as the canonical DP route. -/
+/-- The derived projection-rank object is extensionally equal to `dpProjectionRank`. -/
 theorem argumentFilteringDerivedRank_eq_dpProjectionRank :
     argumentFilteringDerivedRank = dpProjectionRank := by
   ext t
   simpa [argumentFilteringDerivedRank, dpProjectionRank] using
     congrFun argumentFilteringRankFn_eq_dpProjection t
 
-/-- The argument-filtering witness forgets the wrapper payload at the level of
-    the intermediate confession core. -/
+/-- The packaged rank assigns zero to every `app` term, so wrapper payload is erased. -/
 theorem argumentFilteringWitness_forgets_wrapper_payload :
     ∀ x y : Trace,
       schemaArgumentFilteringWitness.toConfessionCoreWitness.rank (app x y) = 0 := by
   intro x y
   rfl
 
-/-- The argument-filtering witness induces the same confession core as the
-    canonical DP route. -/
+/-- The witness induces the canonical DP projection-rank object. -/
 theorem argumentFilteringWitness_toConfessionCoreWitness_eq_core :
     schemaArgumentFilteringWitness.toConfessionCoreWitness.toProjectionRank =
       dpProjectionRank := by
@@ -118,40 +94,33 @@ theorem argumentFilteringWitness_toConfessionCoreWitness_eq_core :
   simpa [ArgumentFilteringWitness.toConfessionCoreWitness, dpProjectionRank] using
     congrFun argumentFilteringRankFn_eq_dpProjection t
 
-/-- Argument filtering as a confession method on KO7.
-    Same projection rank, but now via an explicit filtering witness and derived
-    projection rank; the license is the argument-filtering soundness theorem
-    within the DP framework. -/
+/-- Package the derived rank with the argument-filtering route tag. The tag is metadata and
+does not supply a source-termination transfer theorem. -/
 def argumentFilteringConfession : ConfessionMethod ko7Schema where
   toProjectionRank := argumentFilteringDerivedRank
   license := SoundnessLicense.argumentFilteringSoundness
 
-/-- The exported argument-filtering confession instance is routed through the
-    derived argument-filtering rank. -/
+/-- The exported confession method contains the derived argument-filtering rank. -/
 theorem argumentFilteringConfession_is_derived :
     argumentFilteringConfession.toProjectionRank = argumentFilteringDerivedRank := rfl
 
-/-- On the step-duplicating schema, argument filtering and DP produce
-    the same rank function. -/
+/-- The argument-filtering and dependency-pair packages expose the same rank function. -/
 theorem argumentFiltering_eq_dp_rank :
     argumentFilteringConfession.rank = dpConfession.rank := by
   simpa [argumentFilteringConfession, dpConfession, argumentFilteringDerivedRank,
     dpProjectionRank] using argumentFilteringRankFn_eq_dpProjection
 
-/-- The filtered counter-only target syntax used by the argument-filtering
-    route. -/
+/-- Unary counter syntax retained after filtering. -/
 inductive FilteredCounterTerm
   | zero : FilteredCounterTerm
   | succ : FilteredCounterTerm → FilteredCounterTerm
   deriving DecidableEq, Repr
 
-/-- The filtered counter-only step semantics. -/
+/-- The one-step predecessor relation on filtered unary counters. -/
 inductive FilteredCounterStep : FilteredCounterTerm → FilteredCounterTerm → Prop
   | succ_step (n : FilteredCounterTerm) : FilteredCounterStep (.succ n) n
 
-/-- Constructorwise argument-filter policy. This makes the argument-filtering
-    route explicit as an object that assigns a filtered interpretation to each
-    constructor rather than only as a recursive function on `Trace`. -/
+/-- Constructor handlers specifying a partial interpretation of `Trace` in filtered counters. -/
 structure ConstructorwiseArgumentFilter where
   onBase : Option FilteredCounterTerm
   onSucc : Option FilteredCounterTerm → Option FilteredCounterTerm
@@ -177,7 +146,8 @@ def applyConstructorwiseFilter (F : ConstructorwiseArgumentFilter) : Trace → O
         (applyConstructorwiseFilter F n)
   | eqW x y => F.onEqW (applyConstructorwiseFilter F x) (applyConstructorwiseFilter F y)
 
-/-- The concrete counter-only constructorwise filter used by the route. -/
+/-- Keep `void` and `delta`, project `app` to its right argument and `recΔ` to its counter,
+and reject the remaining constructors. -/
 def counterOnlyConstructorFilter : ConstructorwiseArgumentFilter where
   onBase := some FilteredCounterTerm.zero
   onSucc := Option.map FilteredCounterTerm.succ
@@ -187,11 +157,7 @@ def counterOnlyConstructorFilter : ConstructorwiseArgumentFilter where
   onRecur := fun _ _ n => n
   onEqW := fun _ _ => none
 
-/-- The route-local argument filter on KO7 traces:
-    - keep the counter through `recΔ`
-    - keep the unique argument through `delta`
-    - project `app` to its recursive-call payload side
-    - reject non-schema constructors. -/
+/-- Direct recursive presentation of the concrete counter-only constructor filter. -/
 @[simp] def argumentFilterTrace : Trace → Option FilteredCounterTerm
   | void => some FilteredCounterTerm.zero
   | delta t => Option.map FilteredCounterTerm.succ (argumentFilterTrace t)
@@ -201,14 +167,14 @@ def counterOnlyConstructorFilter : ConstructorwiseArgumentFilter where
   | recΔ _ _ n => argumentFilterTrace n
   | eqW _ _ => none
 
-/-- The concrete recursive filter is exactly the evaluator induced by the
-    constructorwise filter object. -/
+/-- The direct recursive filter equals evaluation of `counterOnlyConstructorFilter`. -/
 theorem argumentFilterTrace_eq_applyConstructorwiseFilter :
     argumentFilterTrace = applyConstructorwiseFilter counterOnlyConstructorFilter := by
   funext t
   induction t <;> simp [argumentFilterTrace, applyConstructorwiseFilter, counterOnlyConstructorFilter, *]
 
-/-- Richer route-local evidence for argument filtering. -/
+/-- Route-local evidence that the concrete filter erases wrapper payload and maps the
+duplicating rule to a single filtered `succ` step. -/
 structure ArgumentFilteringRouteEvidence where
   witness : ArgumentFilteringWitness
   constructorFilter : ConstructorwiseArgumentFilter
@@ -231,7 +197,7 @@ structure ArgumentFilteringRouteEvidence where
       ∧ argumentFilterTrace (app s (recΔ b s n)) = some m
       ∧ FilteredCounterStep (FilteredCounterTerm.succ m) m
 
-/-- The concrete rich argument-filtering route evidence on KO7. -/
+/-- The concrete route evidence obtained from the counter-only filter. -/
 def schemaArgumentFilteringRouteEvidence : ArgumentFilteringRouteEvidence where
   witness := schemaArgumentFilteringWitness
   constructorFilter := counterOnlyConstructorFilter
@@ -251,8 +217,7 @@ def schemaArgumentFilteringRouteEvidence : ArgumentFilteringRouteEvidence where
     · simp [argumentFilterTrace, hm]
     · simpa [argumentFilterTrace] using hm
 
-/-- Forget the argument-filtering-specific witness vocabulary and keep only the
-    generic schema-semantic profile. -/
+/-- Forget filter-specific fields while retaining the generic projection-rank equations. -/
 def ArgumentFilteringRouteEvidence.toRouteEvidence
     (E : ArgumentFilteringRouteEvidence) : RouteEvidence ko7Schema where
   rank := E.witness.toConfessionCoreWitness.rank
@@ -261,13 +226,12 @@ def ArgumentFilteringRouteEvidence.toRouteEvidence
   rank_wrap := E.witness.toConfessionCoreWitness.rank_wrap
   rank_recur := E.witness.toConfessionCoreWitness.rank_recur
 
-/-- The concrete argument-filtering route evidence packaged through the generic
-    adapter. -/
+/-- The concrete argument-filtering evidence viewed through the generic route interface. -/
 abbrev schemaArgumentFilteringGenericRouteEvidence : RouteEvidence ko7Schema :=
   schemaArgumentFilteringRouteEvidence.toRouteEvidence
 
-/-- The richer argument-filtering evidence entails the generic semantic
-    profile. -/
+/-- The rank carried by the concrete route evidence satisfies the four generic projection
+profile predicates. This is a rank-profile result, not a source-termination theorem. -/
 theorem argumentFilteringRouteEvidence_implies_semantic_profile :
     NormalizedAtBase ko7Schema
       schemaArgumentFilteringRouteEvidence.witness.toConfessionCoreWitness.rank
@@ -282,8 +246,7 @@ theorem argumentFilteringRouteEvidence_implies_semantic_profile :
       schemaArgumentFilteringRouteEvidence.witness.toConfessionCoreWitness
   simpa [schemaArgumentFilteringRouteEvidence] using h
 
-/-- The argument-filtering witness directly satisfies the generic semantic
-    confession profile. -/
+/-- The concrete witness's rank satisfies the four generic projection profile predicates. -/
 theorem argumentFilteringWitness_has_semantic_profile :
     NormalizedAtBase ko7Schema schemaArgumentFilteringWitness.toConfessionCoreWitness.rank
     ∧ TracksSuccessorDepth ko7Schema schemaArgumentFilteringWitness.toConfessionCoreWitness.rank

@@ -2,27 +2,16 @@ import OperatorKO7.Meta.RDRSDescentLens
 import OperatorKO7.Meta.RDRSSemanticDirectMeasure
 
 /-!
-# RDRS Semantic Payload Sensitivity (Milestone S2)
-
-Roadmap source:
-`OperatorKO7/Expansion/Universal_Payload_Sensitive_Direct_Measures_Roadmap.md`
-Milestone S2.
+# RDRS semantic payload sensitivity
 
 Provides the semantic payload-observable, payload-lens, raw/decisive
 payload-sensitivity, counter-forgetting, and counter-dominated
-predicates over `SemanticMeasureData`. Classifies the counter-first
-lex measure as raw payload-sensitive but NOT decisive payload-sensitive.
+predicates over `SemanticMeasureData`. The concrete first-coordinate example
+is raw payload-sensitive but fails the defined decisive predicate because a
+payload-invariant alternative orients the same two RDRS images.
 
-## Bible compliance
-
-- W2: `set_option autoImplicit false`.
-- W8: every theorem and `def` carries the structured docstring template.
-- W5/R1: no forbidden trust-surface tokens from the Lean audit bible.
-- Relation Gate: every theorem's `Relation:` line names the
-  abstract `RDRSStep` carrier; not a concrete rewriting relation.
-- The classification theorem
-  `counter_first_lex_is_raw_payload_sensitive_not_decisive_payload_sensitive`
-  is mandatory and proved here.
+`CounterDominated` constrains a witness only on the `lhs` and `rhs` images of
+the supplied `RDRSStep`; it does not state global payload invariance on `T`.
 The counter-first lex example uses bare `SemanticMeasureData` rather than
 fabricating directness evidence. Directness certificates are handled by
 `RDRSSemanticDirectMeasure.lean`.
@@ -266,7 +255,7 @@ theorem counter_first_lex_is_raw_payload_sensitive_not_decisive_payload_sensitiv
       show (n + 1 : Nat) > (n : Nat) -- after definitional reduction
       exact Nat.lt_succ_self n
 
-/-- Audit anchor for the S2 payload-sensitivity surface. -/
+/-- Stable declaration-name string for the payload-sensitivity surface. -/
 def rdrs_semantic_payload_sensitivity_anchor : String :=
   "OperatorKO7.RDRSSemanticPayloadSensitivity.PayloadSensitiveDecisive"
 

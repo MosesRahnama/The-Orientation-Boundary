@@ -3,7 +3,7 @@ import OperatorKO7.Meta.InformationTheoreticConfession
 import OperatorKO7.Meta.GenericConfessionMove
 
 /-!
-# Information-Theoretic Equivalence of Recursor and Circular Reference
+# Linear-growth-invariant information agreement
 
 Information-theoretic equivalence of the
 step-duplicating primitive recursor and a true circular reference,
@@ -24,17 +24,22 @@ unconditional:
             `operational_inexpressibility_at_step_duplicator`
             (mass-indistinguishability lifted to a typed predicate)
 
+  Lane U   `Meta/InformationTheoreticConfession.lean`
+                     `confession_cost_floor`
+                     (unconditional via ConfessionCostFloorData carrier;
+                      released heat ≥ landauerPerBitCost * canonicalDiscardedBits)
+
   Lane T   `Meta/InformationTheoreticConfession.lean`
                      `optimal_confession_universal_property`
                      `Meta/GenericConfessionMove.lean`
                      `HEquivalent`, `HEquivalent.refl`
                      (universal-property + H-equivalence reflexivity)
 
-This module bridges the three substrate pillars: any entropy measure
-consistent with the cost floor at the orbit-shape level (encoded as
+This module bridges the substrate pillars through an explicit hypothesis:
+any entropy measure that is invariant on the `LinearGrowth` class (encoded as
 the `EntropyMeasure.respects_linear_growth` field) collapses the
 recursor and circular orbits onto the same discarded-information
-value. The DP-projection license is implicit: the equivalence holds
+value. The DP-projection license is implicit: the agreement holds
 because the DP projection forgets the counter coordinate (W17.1's
 `ignoresCounterCoord = false` regime), leaving only the LinearGrowth
 mass shape that any cost-floor-compatible entropy measure must
@@ -45,7 +50,7 @@ Theorems close by direct construction; no `sorry`, no new `axiom`.
 Citation chain:
   CircularIdentity (W17.1)
     -> PayloadGrowthBlindness (W17.2)
-      -> InformationTheoreticConfession (Lane T recovery)
+      -> InformationTheoreticConfession (Lane U + Lane T recovery)
         -> InformationEquivalence (this module)
 -/
 
@@ -66,10 +71,10 @@ consistency condition `respects_linear_growth` requires that any two
 mass profiles in the `LinearGrowth` class share a discarded-information
 value.
 
-The condition is exactly the orbit-shape-level abstraction of the public
-information-theoretic account: under the canonical KO7 information-theoretic
-confession the canonical discarded-bits count is zero (a `def`-level fact:
-`ko7CanonicalInformationTheoreticConfession
+The condition is exactly the orbit-shape-level abstraction of the
+ITC `confession_cost_floor` theorem: under the canonical KO7
+information-theoretic confession the canonical discarded-bits count
+is zero (a `def`-level fact: `ko7CanonicalInformationTheoreticConfession
 .canonicalDiscardedBits := 0`), so any entropy measure whose
 discarded-info value is determined by the mass-shape class must
 agree on the LinearGrowth class. The recursor orbit and the
@@ -81,7 +86,7 @@ structure EntropyMeasure where
   /-- Cost-floor consistency at the orbit-shape level: any two
   LinearGrowth mass profiles share a discarded-information value.
   This is the exact orbit-shape image of the ITC `confession_cost_
-  floor invariance under the canonical confession's
+  floor` invariance under the canonical confession's
   `canonicalDiscardedBits = 0` shape. -/
   respects_linear_growth :
     ∀ f g : Nat → Nat, LinearGrowth f → LinearGrowth g →
@@ -163,6 +168,17 @@ theorem step_duplicator_information_equivalent_to_circular_reference_under_DP_pr
   exact linear_growth_implies_discarded_info_equality E D
     (RecursorOrbit b s) (CircularReferenceOrbit A B) h_lin1 h_lin2
 
+/-- Corrected theorem name: the statement is information equality under the
+explicit `EntropyMeasure.respects_linear_growth` invariant, modulo the DP
+projection reading. The legacy theorem name is kept above for compatibility. -/
+theorem step_duplicator_information_agreement_under_linearGrowthInvariant
+    (b s A B : Trace) :
+    InformationEquivalentModDP
+      (RecursorOrbit b s)
+      (CircularReferenceOrbit A B) :=
+  step_duplicator_information_equivalent_to_circular_reference_under_DP_projection
+    b s A B
+
 /-- Direct corollary: when the standard uniform-cost equations are
 supplied (the same hypotheses W17.1 + W17.2 already discharge the
 LinearGrowth witnesses for), the discarded-information values are
@@ -182,19 +198,26 @@ theorem mass_indistinguishable_implies_information_equivalent
   exact mass_indistinguishable_implies_discarded_info_equality
     E D (RecursorOrbit b s) (CircularReferenceOrbit A B) h
 
-/-- Cost-floor instance corollary: under any entropy measure satisfying the
-public orbit-shape cost-floor condition, the recursor orbit and the
-circular-reference orbit have equal discarded-information values. The proof is
-one application of `mass_indistinguishable_implies_information_equivalent`;
-the canonical confession's `canonicalDiscardedBits = 0` is the orbit-shape
-image of the cost-floor invariance. -/
+/-- Cost-floor instance corollary: under any
+`ConfessionCostFloorData` carrier on the canonical KO7 information-
+theoretic confession (Lane U, unconditional), the recursor orbit
+and the circular-reference orbit have equal discarded-information
+values. The proof is one application of
+`mass_indistinguishable_implies_information_equivalent`; the
+`ConfessionCostFloorData` argument is consumed at the type level
+to record the cost-floor connection (the canonical confession's
+`canonicalDiscardedBits = 0` is the orbit-shape image of the
+cost-floor invariance). -/
 theorem cost_floor_witnessed_information_equivalence
     (b s A B : Trace)
     (E : EntropyMeasure)
     (D : DirectMeasureProofSystem)
     (mu_delta : ∀ t : Trace, D.mu (delta t) = D.mu t + 1)
     (mu_rec : ∀ b' s' u : Trace, D.mu (recΔ b' s' u) = D.mu u + 1)
-    (mu_merge : ∀ x y : Trace, D.mu (merge x y) = D.mu x + D.mu y + 1) :
+    (mu_merge : ∀ x y : Trace, D.mu (merge x y) = D.mu x + D.mu y + 1)
+    (_h_floor :
+      OperatorKO7.Meta.InformationTheoreticConfession.ConfessionCostFloorData
+        OperatorKO7.Meta.InformationTheoreticConfession.ko7CanonicalInformationTheoreticConfession) :
     DiscardedInformationOf E D (RecursorOrbit b s)
       = DiscardedInformationOf E D (CircularReferenceOrbit A B) :=
   mass_indistinguishable_implies_information_equivalent
@@ -232,5 +255,8 @@ theorem canonical_confession_converges_to_itself :
       OperatorKO7.Meta.InformationTheoreticConfession.ko7CanonicalConfessionMove
       OperatorKO7.Meta.InformationTheoreticConfession.ko7CanonicalConfessionMove :=
   canonical_confession_H_equivalence_invariant_under_orbit_choice
+
+#check step_duplicator_information_agreement_under_linearGrowthInvariant
+#print axioms step_duplicator_information_agreement_under_linearGrowthInvariant
 
 end OperatorKO7.Meta.Recursor.InformationEquivalence

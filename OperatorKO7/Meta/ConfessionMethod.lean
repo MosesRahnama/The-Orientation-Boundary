@@ -3,16 +3,10 @@ import OperatorKO7.Meta.StepDuplicatingSchema
 /-!
 # Confession Methods: Generic Interface
 
-A **confession method** on a step-duplicating schema is any termination argument
-that extracts a recursive-call relation from the rule structure, projects to a
-descent coordinate (the counter), and declares the payload dimension inert under
-an external soundness metatheorem.
-
-Formally, this is captured by a `ProjectionRank` (already defined in
-`StepDuplicatingSchema.lean`) together with a named soundness justification.
-This module wraps that into a `ConfessionMethod` structure and proves that every
-`ConfessionMethod` yields orientation and sensitivity-violation properties
-inherited from the underlying `ProjectionRank`.
+A confession method combines a `ProjectionRank` with a metadata tag naming an
+intended external soundness result. The rank carries the formal orientation and
+sensitivity-violation fields; the tag carries a label. This module projects the
+rank fields through `ConfessionMethod`.
 -/
 
 namespace OperatorKO7.ConfessionMethodFamily
@@ -20,18 +14,15 @@ namespace OperatorKO7.ConfessionMethodFamily
 open OperatorKO7.StepDuplicating
 open OperatorKO7.StepDuplicating.StepDuplicatingSchema
 
-/-- The external soundness theorem that licenses the confession.
-    Each confession method names a different one. -/
+/-- Metadata labels for external soundness results associated with confession methods. -/
 inductive SoundnessLicense
-  | artsGiesl2000            -- dependency pairs + subterm criterion
-  | subtermCriterionDirect   -- subterm criterion without DP extraction
-  | leeJonesBenAmram2001     -- size-change termination
-  | argumentFilteringSoundness -- argument filtering within DP framework
+  | artsGiesl2000              -- dependency pairs and the subterm criterion
+  | subtermCriterionDirect     -- subterm criterion without DP extraction
+  | leeJonesBenAmram2001       -- size-change termination
+  | argumentFilteringSoundness -- argument filtering in the DP framework
   deriving DecidableEq, Repr
 
-/-- A confession method on a step-duplicating schema: a projection rank
-    together with the name of the external soundness license that
-    justifies dropping the payload dimension. -/
+/-- A projection rank paired with a metadata label for an intended external result. -/
 structure ConfessionMethod (S : StepDuplicatingSchema) extends
     ProjectionRank S where
   license : SoundnessLicense
@@ -53,8 +44,7 @@ theorem confession_orients {S : StepDuplicatingSchema} (C : ConfessionMethod S)
     C.rank (S.wrap s (S.recur b s n)) < C.rank (S.recur b s (S.succ n)) :=
   projection_orients_dup_step C.toProjectionRank b s n
 
-/-- Every confession method violates wrapper sensitivity on the first argument.
-    This is the formal content of "the payload is not tracked." -/
+/-- Project the first-argument sensitivity-violation field from the method rank. -/
 theorem confession_violates_wrap1 {S : StepDuplicatingSchema} (C : ConfessionMethod S) :
     ∃ x y : S.T, ¬ (C.rank (S.wrap x y) > C.rank x) :=
   projection_violates_wrap_subterm1 C.toProjectionRank

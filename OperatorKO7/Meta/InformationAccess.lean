@@ -3,25 +3,13 @@ import Mathlib.Data.Nat.Log
 import Mathlib.Tactic
 
 /-!
-# Information Access, Sequentiality, and Terminal Record
+# Functional access predicates and a primitive-duplicator counting model
 
-Finite-discrete mechanization of Paper 2 Section 2.
-
-This file formalizes two layers.
-
-1. A generic access-based notion of meta/object interaction:
-   - non-vacuous query,
-   - direct retrieval,
-   - sequential uncertainty reduction,
-   - hidden-progress necessity.
-2. A concrete primitive-duplicator progress model:
-   - hidden progress coordinate entropy,
-   - exact recovery channels,
-   - terminal-record persistence,
-   - retrospective recovery of the progress index.
-
-The Shannon-side formulas here are the exact finite/uniform ones needed by the
-paper; they do not rely on a full probability-theory entropy stack.
+The first part defines accessibility by factorization through an observation function and proves
+elementary consequences of that definition. The second part defines explicit arithmetic cost
+functions and counts active `F` sites and `G` frames in canonical syntax trees. Three named recovery
+channels are identity functions. The entropy expressions and zero posterior are stipulated formulas;
+this file defines no probability distribution, stochastic channel, or coding-optimality theorem.
 -/
 
 namespace OperatorKO7.InformationAccess
@@ -69,8 +57,7 @@ def SequentialUncertaintyReduction
     (A : MetaAccessModel α M V T) (k : Nat) : Prop :=
   ¬ A.DirectRetrieval ∧ AccessibleFrom (A.stageAccess k) A.verdict
 
-/-- Paper 2 Proposition 2.3 / 2.12: a non-vacuous query means the verdict is
-not yet accessible to the meta layer. -/
+/-- Unfolding `NonvacuousMetaQuery` yields failure of factorization through `metaView`. -/
 theorem information_seeking_character_of_nonvacuous_query
     (A : MetaAccessModel α M V T) :
     A.NonvacuousMetaQuery ↔ ¬ AccessibleFrom A.metaView A.verdict := by
@@ -119,9 +106,8 @@ theorem sequential_resolution_requires_hidden_terminal_state
     simp [stageAccess, hlift, hdecode, Function.comp]
   exact hseq.1 (A.meta_accessible_implies_directRetrieval hmeta)
 
-/-- Paper 2 Proposition 2.5 / 2.14: sequential resolution yields an explicitly
-hidden verdict-relevant statistic. We may take the terminal trace state itself
-as that statistic. -/
+/-- A sequential-resolution witness supplies the terminal trace as an inaccessible statistic through
+which the verdict factors together with `metaView`. -/
 theorem sequential_resolution_requires_hidden_state
     (A : MetaAccessModel α M V T) {k : Nat}
     (hseq : A.SequentialUncertaintyReduction k) :
@@ -135,12 +121,11 @@ end MetaAccessModel
 
 /-! ## Progress coordinate and channel costs -/
 
-/-- Uniform Shannon entropy in bits of the progress coordinate
-`j ∈ {0, ..., K}`. -/
+/-- The real-valued expression `logb 2 (K + 1)`. No distribution is represented in the type. -/
 noncomputable def progressEntropyBits (K : Nat) : ℝ :=
   Real.logb 2 (K + 1 : ℝ)
 
-/-- Minimal exact binary code length for `K + 1` possibilities. -/
+/-- The arithmetic expression `Nat.clog 2 (K + 1)`. -/
 def optimalRecoveryBits (K : Nat) : Nat :=
   Nat.clog 2 (K + 1)
 
@@ -149,15 +134,15 @@ progress-bearing states with per-state payload width `atomWidth`. -/
 def historyObservationBitCost (atomWidth j : Nat) : Nat :=
   atomWidth * ((j + 1) * (j + 2) / 2)
 
-/-- Structural counting uses only the exact progress index. -/
+/-- Structural-counting cost, defined to equal `optimalRecoveryBits`. -/
 def structuralCountingBitCost (K : Nat) : Nat :=
   optimalRecoveryBits K
 
-/-- Origin comparison also uses only the exact progress index. -/
+/-- Origin-comparison cost, defined to equal `optimalRecoveryBits`. -/
 def originComparisonBitCost (K : Nat) : Nat :=
   optimalRecoveryBits K
 
-/-- Parallel clocking likewise uses only the exact progress index. -/
+/-- Parallel-clock cost, defined to equal `optimalRecoveryBits`. -/
 def parallelClockBitCost (K : Nat) : Nat :=
   optimalRecoveryBits K
 
@@ -200,7 +185,7 @@ theorem history_observation_quadratic_overcost
 
 /-! ## Primitive duplicator syntax and terminal record -/
 
-/-- Minimal syntax for the primitive self-duplicating recursor of Paper 2. -/
+/-- Syntax used by the primitive-duplicator counting model. -/
 inductive PrimitiveDuplicatorTerm
   | seedX
   | seedY
@@ -298,8 +283,7 @@ theorem terminal_record_recovers_progress_exactly (K : Nat) :
     gFrameCount (terminalRecordMap K) = K := by
   rw [terminalRecordMap, gFrameCount_gChain, gFrameCount, Nat.add_zero]
 
-/-- Paper 2 Proposition 2.10 / 2.18: live computation versus terminal record
-for the primitive duplicator. -/
+/-- Collect the four active-site and frame-count equalities for canonical stages and records. -/
 theorem live_computation_vs_terminal_record (K i : Nat) :
     activeFCount (stage K i) = 1
       ∧ gFrameCount (stage K i) = i
@@ -312,17 +296,17 @@ theorem live_computation_vs_terminal_record (K i : Nat) :
 
 end PrimitiveDuplicatorTerm
 
-/-! ## Exact-recovery channels for the hidden progress coordinate -/
+/-! ## Identity functions on the progress coordinate -/
 
-/-- Structural counting recovers the progress coordinate exactly. -/
+/-- Identity function on `Fin (K + 1)`, named for structural counting. -/
 def structuralCountingChannel {K : Nat} : Fin (K + 1) → Fin (K + 1) :=
   fun j => j
 
-/-- Origin comparison recovers the same coordinate exactly. -/
+/-- Identity function on `Fin (K + 1)`, named for origin comparison. -/
 def originComparisonChannel {K : Nat} : Fin (K + 1) → Fin (K + 1) :=
   fun j => j
 
-/-- Parallel clocking recovers the same coordinate exactly. -/
+/-- Identity function on `Fin (K + 1)`, named for parallel clocking. -/
 def parallelClockChannel {K : Nat} : Fin (K + 1) → Fin (K + 1) :=
   fun j => j
 
@@ -341,20 +325,18 @@ def parallelClockChannel {K : Nat} : Fin (K + 1) → Fin (K + 1) :=
   intro a b h
   simpa using h
 
-/-- Prior entropy for the terminal index `K ∈ {1, ..., Kmax}` under the uniform
-prior used in Paper 2. -/
+/-- The stipulated expression `logb 2 Kmax`. No probability distribution is stored. -/
 noncomputable def terminalPriorEntropyBits (Kmax : Nat) : ℝ :=
   Real.logb 2 (Kmax : ℝ)
 
-/-- Posterior entropy after exact recovery from the terminal record. -/
+/-- Posterior entropy value defined to be zero. -/
 noncomputable def terminalPosteriorEntropyBits (_Kmax : Nat) : ℝ := 0
 
-/-- Mutual-information gain at terminal under exact recovery. -/
+/-- Difference between the stipulated prior and posterior expressions. -/
 noncomputable def terminalMutualInformationGainBits (Kmax : Nat) : ℝ :=
   terminalPriorEntropyBits Kmax - terminalPosteriorEntropyBits Kmax
 
-/-- Paper 2 Corollary 2.9: the terminal record recovers the progress index
-exactly, so the full prior entropy is gained. -/
+/-- The stipulated gain equals the stipulated prior because the posterior is defined as zero. -/
 theorem meta_trace_mutual_information_at_terminal (Kmax : Nat) :
     terminalMutualInformationGainBits Kmax = terminalPriorEntropyBits Kmax := by
   simp [terminalMutualInformationGainBits, terminalPriorEntropyBits,

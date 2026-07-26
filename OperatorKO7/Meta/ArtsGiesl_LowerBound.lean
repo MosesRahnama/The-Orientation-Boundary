@@ -1,17 +1,22 @@
 import OperatorKO7.Meta.ArtsGiesl_UpperBound
+import OperatorKO7.Meta.ReverseMathOmega3WellOrdering
 
 /-!
-# Arts--Giesl Lower Bound
+# Arts-Giesl Lower-Bound Profile Records
 
-Coarse theorem-level lower-bound package for the reverse-mathematical profile of
-Arts--Giesl soundness.
+Profile records for proposed reverse-mathematical lower bounds on Arts-Giesl
+soundness.
 
-Honesty constraint: the current artifact does not prove a sharp lower bound in
-reverse mathematics. What it does prove is a stable floor consisting of:
+`ReverseMathLowerBound` stores only a theory profile, an evidence-status tag,
+and a justification string. The theorems in this module establish record
+equalities, comparisons in the finite `FormalTheory` register, and independent
+well-ordering facts about the canonical `ω^3` carrier. A second-order
+derivability relation and an Arts-Giesl reduction lie outside these records.
 
-- a base-theory floor at `RCA₀`;
-- a formula-complexity floor at `Π⁰₂` from the existing proof-theoretic
-  register.
+The initial profile stores:
+
+- the `RCA₀` theory tag;
+- the `Π⁰₂` formula-class tag copied from the imported proof-theoretic register.
 -/
 
 namespace OperatorKO7.ArtsGieslLowerBound
@@ -20,17 +25,15 @@ open OperatorKO7.ProofTheoreticRegister
 open OperatorKO7.ReverseMathFramework
 open OperatorKO7.TerminationPrincipleRegister
 
-/-- Coarse lower-bound profile: no calibration discussed in this repository for
-Arts--Giesl drops below `RCA₀`, and the proof obligation already carries a
-`Π⁰₂` floor from the proof-theoretic register. -/
+/-- Metadata profile assigning the `RCA₀` theory tag and the `Π⁰₂`
+formula-class tag. Its Lean content is limited to those assignments. -/
 def artsGieslPi02FloorProfile : SecondOrderTheoryProfile where
   label := "RCA₀ with Π⁰₂ floor"
   theory := FormalTheory.RCA0
   complexityFloor? := some FormulaClass.pi02
 
-/-- The current theorem-level lower-bound package for Arts--Giesl. This is
-coarse, but it is genuine theorem-backed information rather than a conjectural
-exact target. -/
+/-- Lower-bound metadata record carrying the `theoremLevel` evidence tag. The
+record type enforces only its stored profile, status, and justification fields. -/
 def artsGieslTheoremLowerBound : ReverseMathLowerBound artsGieslPrincipleProfile where
   theoryProfile := artsGieslPi02FloorProfile
   evidenceStatus := EvidenceStatus.theoremLevel
@@ -45,27 +48,27 @@ def artsGieslTheoremLowerBound : ReverseMathLowerBound artsGieslPrincipleProfile
 @[simp] theorem artsGieslPi02FloorProfile_complexity :
     artsGieslPi02FloorProfile.complexityFloor? = some FormulaClass.pi02 := rfl
 
-/-- The lower-bound profile's complexity floor is justified by the existing
-paper-facing proof-theoretic theorem. -/
+/-- The profile's complexity tag equals the Arts-Giesl registry's formula-class tag. -/
 theorem artsGieslPi02FloorProfile_supported :
     artsGieslPi02FloorProfile.complexityFloor? =
       some artsGieslLicenseProfile.complexity := by
   simp [artsGieslPi02FloorProfile, artsGieslLicenseProfile]
 
-/-- The current candidate target theory stays above the coarse `RCA₀` floor. -/
+/-- Constructor-order comparison between the `RCA₀` and
+`RCA₀ + WO(ω^3)` entries of `FormalTheory`. -/
 theorem artsGieslTheoremLowerBound_le_target :
     artsGieslTheoremLowerBound.theoryProfile.theory ≤
       rca0WoOmega3TheoryProfile.theory := by
   decide
 
-/-- The registry principle profile agrees with the lower-bound package's
-complexity tag. -/
+/-- The registry principle profile and lower-bound record carry the same
+formula-class tag. -/
 theorem artsGiesl_registry_profile_matches_lowerBound_floor :
     artsGieslEntry.profile.complexity? = artsGieslTheoremLowerBound.theoryProfile.complexityFloor? := by
   simp [artsGieslEntry, artsGieslTheoremLowerBound, artsGieslPi02FloorProfile,
     artsGieslPrincipleProfile, artsGieslLicenseProfile]
 
-/-- Summary form of the current theorem-level lower-bound package. -/
+/-- Projection summary for the lower-bound metadata record. -/
 theorem artsGieslTheoremLowerBound_supported :
     artsGieslTheoremLowerBound.evidenceStatus = EvidenceStatus.theoremLevel
       ∧ artsGieslTheoremLowerBound.theoryProfile.theory = FormalTheory.RCA0
@@ -79,20 +82,25 @@ theorem artsGieslTheoremLowerBound_supported :
   · rfl
   · exact artsGieslTheoremLowerBound_le_target
 
-/-- The current theorem-level lower bound does not yet hit the exact theory
-target `RCA₀ + WO(ω^3)`. -/
+/-- The coarse profile's theory field differs from the proposed target field. -/
 theorem artsGieslTheoremLowerBound_theory_ne_target :
     artsGieslTheoremLowerBound.theoryProfile.theory ≠ FormalTheory.RCA0_WO_omega3 := by
   simp [artsGieslTheoremLowerBound, artsGieslPi02FloorProfile]
 
-/-- The current theorem-level lower bound does not yet carry the exact ordinal
-target `ω^3`; its ordinal assignment is still absent. -/
+/-- The coarse profile's absent ordinal field differs from the proposed `ω^3` target. -/
 theorem artsGieslTheoremLowerBound_ordinal_ne_target :
-    artsGieslTheoremLowerBound.theoryProfile.ordinalCeiling? ≠ some omegaPowThree := by
+    artsGieslTheoremLowerBound.theoryProfile.ordinalCeiling? ≠ some OperatorKO7.ReverseMathSupport.omegaPowThree := by
   simp [artsGieslTheoremLowerBound, artsGieslPi02FloorProfile]
 
-/-- Sharpening target for a future theorem-level exact lower bound. This records
-the exact deliverable needed on the lower-bound side. -/
+/-- Profile package for a lower-bound claim at the `ω^3` target.
+
+Mechanized content: `omega3Backing` carries well-foundedness of the canonical
+`Ordinal.toType ω^3` carrier and its order-type identity.
+
+External content: an Arts-Giesl-to-well-ordering bridge and an `RCA₀`
+provability predicate lie outside the structure. Its theory and evidence-status
+fields record the calibration attributed to Moser-Schnabl and
+Frittaion-Pelupessy-Steila-Yokoyama. -/
 structure ArtsGieslSharpTheoremLowerBound where
   bound : ReverseMathLowerBound artsGieslPrincipleProfile
   theoryEq : bound.theoryProfile.theory = FormalTheory.RCA0_WO_omega3
@@ -100,8 +108,12 @@ structure ArtsGieslSharpTheoremLowerBound where
     bound.theoryProfile.ordinalCeiling? =
       some OperatorKO7.ReverseMathSupport.omegaPowThree
   theoremLevel : bound.evidenceStatus = EvidenceStatus.theoremLevel
+  /-- Well-foundedness and order-type identity for the canonical `ω^3` carrier.
+  This field is independent of the Arts-Giesl principle. -/
+  omega3Backing : OperatorKO7.ReverseMathOmega3.WOOmega3Backing :=
+    OperatorKO7.ReverseMathOmega3.wo_omega3_backing
 
-/-- Public summary of the lower-bound sharpening target. -/
+/-- Projection of the three profile/status fields from the package. -/
 theorem ArtsGieslSharpTheoremLowerBound.supported
     (L : ArtsGieslSharpTheoremLowerBound) :
     L.bound.theoryProfile.theory = FormalTheory.RCA0_WO_omega3
@@ -110,8 +122,22 @@ theorem ArtsGieslSharpTheoremLowerBound.supported
       ∧ L.bound.evidenceStatus = EvidenceStatus.theoremLevel := by
   exact ⟨L.theoryEq, L.ordinalEq, L.theoremLevel⟩
 
-/-- The current theorem-level lower package is not already a sharp exact-target
-lower bound. -/
+/-- Project the independent `ω^3` well-ordering witness stored in the package. -/
+theorem ArtsGieslSharpTheoremLowerBound.carries_genuine_wo_omega3
+    (L : ArtsGieslSharpTheoremLowerBound) :
+    OperatorKO7.ReverseMathOmega3.WOOmega3Backing :=
+  L.omega3Backing
+
+/-- Pair the SCT profile's `ω^3` field equality with the independent canonical
+`ω^3` well-ordering witness. The conclusion contains only this conjunction. -/
+theorem sctExactCalibration_omega3_genuinely_wellOrdered :
+    sctExactCalibration.targetProfile.ordinalCeiling?
+        = some OperatorKO7.ReverseMathOmega3.omega3
+      ∧ OperatorKO7.ReverseMathOmega3.WOOmega3Backing :=
+  ⟨rfl, OperatorKO7.ReverseMathOmega3.wo_omega3_backing⟩
+
+/-- Theory-tag inequality excludes the coarse lower-bound record from the
+target-profile package. -/
 theorem artsGieslTheoremLowerBound_not_sharp :
     ¬ ∃ L : ArtsGieslSharpTheoremLowerBound, L.bound = artsGieslTheoremLowerBound := by
   rintro ⟨L, hL⟩
@@ -119,7 +145,7 @@ theorem artsGieslTheoremLowerBound_not_sharp :
   rw [hL] at hTheory
   simp [artsGieslTheoremLowerBound, artsGieslPi02FloorProfile] at hTheory
 
-/-- Precise theorem-level lower-bound gap object for the Arts--Giesl program. -/
+/-- Record comparing two lower-bound profile values. -/
 structure ArtsGieslTheoremLowerBoundGap where
   current : ReverseMathLowerBound artsGieslPrincipleProfile
   target : SecondOrderTheoryProfile
@@ -127,9 +153,8 @@ structure ArtsGieslTheoremLowerBoundGap where
   theoryNeTarget : current.theoryProfile.theory ≠ target.theory
   ordinalNeTarget : current.theoryProfile.ordinalCeiling? ≠ target.ordinalCeiling?
 
-/-- Current theorem-level lower-bound gap: the present artifact still exposes
-only the coarse `RCA₀` + `Π⁰₂` floor, not the exact `RCA₀ + WO(ω^3)` target
-profile. -/
+/-- Profile comparison between the coarse record and the proposed
+`RCA₀ + WO(ω^3)` target. -/
 noncomputable def artsGieslCurrentTheoremLowerBoundGap : ArtsGieslTheoremLowerBoundGap where
   current := artsGieslTheoremLowerBound
   target := rca0WoOmega3TheoryProfile
@@ -137,7 +162,7 @@ noncomputable def artsGieslCurrentTheoremLowerBoundGap : ArtsGieslTheoremLowerBo
   theoryNeTarget := artsGieslTheoremLowerBound_theory_ne_target
   ordinalNeTarget := artsGieslTheoremLowerBound_ordinal_ne_target
 
-/-- Public summary of the current theorem-level lower-bound gap. -/
+/-- Projection summary for the lower-bound profile comparison. -/
 theorem artsGieslCurrentTheoremLowerBoundGap_supported :
     artsGieslCurrentTheoremLowerBoundGap.current.evidenceStatus = EvidenceStatus.theoremLevel
       ∧ artsGieslCurrentTheoremLowerBoundGap.current.theoryProfile.theory ≤
@@ -154,8 +179,9 @@ theorem artsGieslCurrentTheoremLowerBoundGap_supported :
   · exact artsGieslCurrentTheoremLowerBoundGap.theoryNeTarget
   · exact artsGieslCurrentTheoremLowerBoundGap.ordinalNeTarget
 
-/-- The exact target for the sharp lower-bound program can be packaged as a
-theorem-level transfer from the already exact SCT calibration target. -/
+/-- Record requiring a lower-bound profile to match the SCT target profile and
+carry the `theoremLevel` status tag. Its fields contain profile and status
+equalities; an SCT-to-Arts-Giesl reduction lies outside this record. -/
 structure ArtsGieslSctSharpLowerTransfer where
   bound : ReverseMathLowerBound artsGieslPrincipleProfile
   theoryEqSct :
@@ -164,8 +190,7 @@ structure ArtsGieslSctSharpLowerTransfer where
     bound.theoryProfile.ordinalCeiling? = sctExactCalibration.targetProfile.ordinalCeiling?
   theoremLevel : bound.evidenceStatus = EvidenceStatus.theoremLevel
 
-/-- Any theorem-level transfer to the exact SCT target yields the desired sharp
-theorem-level lower bound for Arts--Giesl. -/
+/-- Convert the matching-profile record into the corresponding target-profile package. -/
 noncomputable def ArtsGieslSctSharpLowerTransfer.toSharpTheoremLowerBound
     (T : ArtsGieslSctSharpLowerTransfer) :
     ArtsGieslSharpTheoremLowerBound where
@@ -174,7 +199,7 @@ noncomputable def ArtsGieslSctSharpLowerTransfer.toSharpTheoremLowerBound
   ordinalEq := by simpa using T.ordinalEqSct
   theoremLevel := T.theoremLevel
 
-/-- Public summary of the SCT-anchored lower transfer layer. -/
+/-- Projection summary for the SCT-matching lower-bound profile. -/
 theorem ArtsGieslSctSharpLowerTransfer.supported
     (T : ArtsGieslSctSharpLowerTransfer) :
     T.bound.theoryProfile.theory = FormalTheory.RCA0_WO_omega3
@@ -183,31 +208,30 @@ theorem ArtsGieslSctSharpLowerTransfer.supported
       ∧ T.bound.evidenceStatus = EvidenceStatus.theoremLevel := by
   exact T.toSharpTheoremLowerBound.supported
 
-/-- The sharp theorem-level lower-bound witness exists as soon as the missing
-SCT-anchored transfer theorem is supplied. -/
+/-- A matching-profile record yields an inhabitant of the target-profile package. -/
 theorem artsGiesl_sharpLowerBound_exists_if_sctTransfer
     (T : ArtsGieslSctSharpLowerTransfer) :
     ∃ L : ArtsGieslSharpTheoremLowerBound, L.bound = T.bound := by
   exact ⟨T.toSharpTheoremLowerBound, rfl⟩
 
-/-- A theorem-level AG/SCT alignment is sufficient to build the missing sharp
-lower-transfer witness. -/
+/-- Build an SCT-matching lower-bound profile from the target and
+evidence-status fields of an AG/SCT alignment record. The formal result is
+profile bookkeeping. -/
 noncomputable def ArtsGieslSctSharpLowerTransfer.ofTheoremAlignment
-    (_A : ArtsGieslSctTheoremAlignment) :
+    (A : ArtsGieslSctTheoremAlignment) :
     ArtsGieslSctSharpLowerTransfer where
   bound := {
     theoryProfile := sctExactLowerBound.theoryProfile
-    evidenceStatus := EvidenceStatus.theoremLevel
+    evidenceStatus := A.evidenceStatus
     justificationTag := "theorem-level AG/SCT exact-target lower transfer"
   }
   theoryEqSct := by
     rfl
   ordinalEqSct := by
     rfl
-  theoremLevel := rfl
+  theoremLevel := A.theoremLevel
 
-/-- The stronger theorem-level alignment object therefore suffices for a sharp
-lower-bound witness. -/
+/-- A target-alignment record yields a target-profile package. -/
 theorem artsGiesl_sharpLowerBound_exists_if_theoremAlignment
     (A : ArtsGieslSctTheoremAlignment) :
     ∃ L : ArtsGieslSharpTheoremLowerBound,
@@ -215,10 +239,11 @@ theorem artsGiesl_sharpLowerBound_exists_if_theoremAlignment
   exact artsGiesl_sharpLowerBound_exists_if_sctTransfer
     (ArtsGieslSctSharpLowerTransfer.ofTheoremAlignment A)
 
-/-- A witness-bearing exact calibration transport from the exact SCT profile to
-Arts--Giesl yields a sharp theorem-level lower bound immediately. This is
-stronger than the status-only alignment route because it carries an explicit
-transport witness and exact source calibration. -/
+/-- Within the repository's coarse calibration framework, copy the destination
+lower-bound record and source-target equalities from an
+`ExactCalibrationTransfer` into a sharp-profile package. The generic
+`witnessTransport` field is a cost-shape record; the construction copies profile
+fields between the two records. -/
 noncomputable def ArtsGieslSharpTheoremLowerBound.ofExactCalibrationTransfer
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory = FormalTheory.RCA0_WO_omega3)
@@ -235,8 +260,7 @@ noncomputable def ArtsGieslSharpTheoremLowerBound.ofExactCalibrationTransfer
     simpa [OperatorKO7.ReverseMathSupport.omegaPowThree] using hOrdinal
   theoremLevel := T.lowerTheoremLevel
 
-/-- The witness-bearing exact transport route therefore suffices for the sharp
-lower-bound target. -/
+/-- The copied destination record inhabits the sharp-profile package. -/
 theorem artsGiesl_sharpLowerBound_exists_if_exactTransfer
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory = FormalTheory.RCA0_WO_omega3)
@@ -246,10 +270,12 @@ theorem artsGiesl_sharpLowerBound_exists_if_exactTransfer
     ∃ L : ArtsGieslSharpTheoremLowerBound, L.bound = T.dstLower := by
   exact ⟨ArtsGieslSharpTheoremLowerBound.ofExactCalibrationTransfer T hTheory hOrdinal, rfl⟩
 
-/-- Direct theorem-level sharp lower-bound package for Arts--Giesl.
+/-- Direct profile package at the proposed `ω^3` lower-bound target.
 
-This is the direct-side target-hitting lower package, as opposed to the older
-coarse `RCA₀` + `Π⁰₂` floor. -/
+The profile fields record an externally attributed `RCA₀ + WO(ω^3)` calibration.
+The independent `omega3Backing` field proves that the canonical `ω^3` carrier
+is well-founded and has order type `ω^3`. The formal scope ends at this carrier
+fact and the stored profile fields. -/
 noncomputable def artsGieslDirectSharpTheoremLowerBound :
     ArtsGieslSharpTheoremLowerBound where
   bound := {
@@ -279,23 +305,22 @@ theorem artsGieslDirectSharpTheoremLowerBound_supported :
   · rfl
   · rfl
 
-/-- The direct theorem package witnesses that the lower side now independently
-hits the exact target profile. -/
+/-- The direct profile record inhabits the target-profile package. The
+conclusion is a record-existence proposition. -/
 theorem artsGiesl_sharpLowerBound_exists_directly :
     ∃ L : ArtsGieslSharpTheoremLowerBound, L = artsGieslDirectSharpTheoremLowerBound := by
   exact ⟨artsGieslDirectSharpTheoremLowerBound, rfl⟩
 
-/-! ## Generic route-comparison theorems (lower side)
+/-! ## Profile-construction comparison theorems
 
-Mirror of the upper-side route comparison: the direct exact-calibration
-transport `ArtsGieslSharpTheoremLowerBound.ofExactCalibrationTransfer`
-and the theorem-alignment induction
+The calibration-record construction
+`ArtsGieslSharpTheoremLowerBound.ofExactCalibrationTransfer` and the
+alignment-record construction
 `(ArtsGieslSctSharpLowerTransfer.ofTheoremAlignment ...).toSharpTheoremLowerBound`
-agree on every mathematical field and, with the additional
-source-profile hypothesis, agree on the full tag-erased record. -/
+agree on selected metadata fields. With an additional source-profile equality,
+their justification-tag-erased records agree. -/
 
-/-- Generic fieldwise comparison: both routes produce the same
-lower-bound theory. -/
+/-- The two profile constructions produce the same theory field. -/
 theorem ArtsGieslSharpTheoremLowerBound.ofExactCalibrationTransfer_sameTheory
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -315,8 +340,7 @@ theorem ArtsGieslSharpTheoremLowerBound.ofExactCalibrationTransfer_sameTheory
           T hTheory hOrdinal)
       ).toSharpTheoremLowerBound).theoryEq]
 
-/-- Generic fieldwise comparison: both routes produce the same
-lower-bound ordinal ceiling. -/
+/-- The two profile constructions produce the same ordinal field. -/
 theorem ArtsGieslSharpTheoremLowerBound.ofExactCalibrationTransfer_sameOrdinal
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -336,8 +360,7 @@ theorem ArtsGieslSharpTheoremLowerBound.ofExactCalibrationTransfer_sameOrdinal
           T hTheory hOrdinal)
       ).toSharpTheoremLowerBound).ordinalEq]
 
-/-- Generic fieldwise comparison: both routes produce the same
-lower-bound evidence status. -/
+/-- The two profile constructions produce the same evidence-status field. -/
 theorem ArtsGieslSharpTheoremLowerBound.ofExactCalibrationTransfer_sameStatus
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -357,9 +380,8 @@ theorem ArtsGieslSharpTheoremLowerBound.ofExactCalibrationTransfer_sameStatus
           T hTheory hOrdinal)
       ).toSharpTheoremLowerBound).theoremLevel]
 
-/-- Generic tag-erased equality for the lower-side route. Analogous to
-the upper-side theorem: needs the additional source-profile hypothesis
-matching `sctExactLowerBound.theoryProfile` on the nose. -/
+/-- Equality after erasing justification tags, assuming the source target
+profile equals the SCT lower-bound profile. -/
 theorem ArtsGieslSharpTheoremLowerBound.ofExactCalibrationTransfer_eraseTags_eq_ofTheoremAlignment
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =
@@ -380,10 +402,8 @@ theorem ArtsGieslSharpTheoremLowerBound.ofExactCalibrationTransfer_eraseTags_eq_
   · show T.dstLower.evidenceStatus = EvidenceStatus.theoremLevel
     exact T.lowerTheoremLevel
 
-/-- Generic presentation-erased equality for the lower-side route.
-Mirror of the upper-side presentation-erased theorem: only `hTheory`
-and `hOrdinal` are needed, with presentation-level theory-profile
-metadata absorbed by `erasePresentationMetadata`. -/
+/-- Equality after erasing presentation metadata, using only the displayed
+theory, ordinal, and evidence-status equalities. -/
 theorem ArtsGieslSharpTheoremLowerBound.ofExactCalibrationTransfer_erasePresentation_eq_ofTheoremAlignment
     (T : ExactCalibrationTransfer sctPrincipleProfile artsGieslPrincipleProfile)
     (hTheory : T.sourceCalibration.targetProfile.theory =

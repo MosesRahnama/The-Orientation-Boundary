@@ -1,5 +1,6 @@
 import OperatorKO7.Meta.ConfessionMethod_DP
 import OperatorKO7.Meta.DependencyPairs_Works
+import OperatorKO7.Meta.TTT2_CertificateReplay
 
 /-!
 # Phase F+ Internal DP Subterm Criterion and Independent CeTA Support

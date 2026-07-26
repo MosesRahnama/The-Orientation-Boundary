@@ -8,7 +8,7 @@ open OperatorKO7.ConstructionRouteCatalogPayload
 open OperatorKO7.TransformedCallClassification
 open OperatorKO7.BenchmarkedPRCFamily
 
-/-- Paper-facing proposition for the finite canonical route catalog. -/
+/-- Proposition fixing the route and import/transform assignment for all six canonical witnesses. -/
 abbrev CanonicalConstructionRouteCatalog : Prop :=
   ((canonicalWitnessRoute .w1MPO = .W1 ∧ canonicalWitnessW1ImportClass? .w1MPO = some .precedence) ∧
     (canonicalWitnessRoute .w1Polynomial = .W1 ∧
@@ -22,23 +22,23 @@ abbrev CanonicalConstructionRouteCatalog : Prop :=
       (canonicalWitnessRoute .w2FullLinear = .W2 ∧
         canonicalWitnessW2TransformClass? .w2FullLinear = some .benchmarkFamilyTransformedCall))
 
-/-- Paper-facing proposition for the finite canonical payload catalog. -/
+/-- Conjunction of the canonical W1 and W2 payload catalogs. -/
 abbrev CanonicalConstructionPayloadCatalog : Prop :=
   CanonicalW1SuccessPayloadCatalog ∧ CanonicalW2SuccessPayloadCatalog
 
-/-- Paper-facing proposition for the four permitted W1 imports in the finite ledger. -/
+/-- Permitted-import facts for the four canonical W1 witness packages. -/
 abbrev CanonicalConstructionW1Imports : Prop :=
   PermittedW1Import mpo_w1_success.importClass ∧
     PermittedW1Import poly_w1_success.importClass ∧
     PermittedW1Import importedWhole_w1_success.importClass ∧
     PermittedW1Import transparency_w1_success.importClass
 
-/-- Paper-facing proposition for the two permitted W2 transforms in the finite ledger. -/
+/-- Permitted-transform facts for the two canonical W2 witness packages. -/
 abbrev CanonicalConstructionW2Transforms : Prop :=
   PermittedW2Transform fullDuplicating_w2_success.transformClass fullDuplicating_w2_success.target ∧
     PermittedW2Transform fullLinear_w2_success.transformClass fullLinear_w2_success.target
 
-/-- Paper-facing proposition for the full-duplicating direct-search separation facts carried by the ledger. -/
+/-- Direct-search separation facts carried by the full-duplicating W1 and W2 packages. -/
 abbrev FullDuplicatingRoutePayloadSeparation : Prop :=
   (canonicalWitnessW1Success? .w1ImportedWhole = some importedWhole_w1_success ∧
     importedWhole_w1_success.route ≠ .W0 ∧
@@ -49,7 +49,8 @@ abbrev FullDuplicatingRoutePayloadSeparation : Prop :=
       HasTransformedCallWitness fullDuplicating ∧
       ¬ HasDirectWitness fullDuplicating)
 
-/-- Certificate packaging the finite route catalog and its theorem-backed payload layer. -/
+/-- Certificate packaging route assignments, payloads, permitted imports/transforms, and
+full-duplicating separation facts. -/
 structure CanonicalConstructionCertificate where
   routeCatalog : CanonicalConstructionRouteCatalog
   payloadCatalog : CanonicalConstructionPayloadCatalog
@@ -57,7 +58,7 @@ structure CanonicalConstructionCertificate where
   w2Transforms : CanonicalConstructionW2Transforms
   fullDuplicatingSeparation : FullDuplicatingRoutePayloadSeparation
 
-/-- The paper-facing M1 certificate is exactly the finite route and payload ledger already proved. -/
+/-- Assemble the canonical construction certificate from the component theorems. -/
 theorem canonical_construction_certificate : CanonicalConstructionCertificate := by
   exact {
     routeCatalog := canonical_construction_route_catalog

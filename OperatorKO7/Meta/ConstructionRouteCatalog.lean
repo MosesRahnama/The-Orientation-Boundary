@@ -4,9 +4,9 @@ import OperatorKO7.Meta.TransformedCallClassification
 /-!
 # Construction Route Catalog
 
-This module packages the currently formalized canonical construction routes into
-one explicit ledger. It is intentionally finite and theorem-backed: four W1
-witnesses and two W2 witnesses.
+This module defines a finite route-tag catalog with four W1 labels and two W2
+labels. `ConstructionRouteCatalog_Payload.lean` attaches the corresponding
+proof-bearing success objects.
 -/
 
 namespace OperatorKO7.ConstructionRouteCatalog
@@ -15,7 +15,7 @@ open OperatorKO7.ConstructionMethodClassification
 open OperatorKO7.TransformedCallClassification
 open OperatorKO7.BenchmarkedPRCFamily
 
-/-- Explicit catalog of the canonical construction witnesses currently formalized. -/
+/-- Labels for the six canonical construction-route entries. -/
 inductive CanonicalConstructionWitness where
   | w1MPO
   | w1Polynomial
@@ -71,7 +71,7 @@ theorem canonical_w2_route_catalog :
         canonicalWitnessW2TransformClass? .w2FullLinear = some .benchmarkFamilyTransformedCall) := by
   decide
 
-/-- Combined explicit route ledger for the currently formalized canonical witnesses. -/
+/-- Combined route and import/transform assignment for all six canonical labels. -/
 theorem canonical_construction_route_catalog :
     ((canonicalWitnessRoute .w1MPO = .W1 ∧ canonicalWitnessW1ImportClass? .w1MPO = some .precedence) ∧
       (canonicalWitnessRoute .w1Polynomial = .W1 ∧
@@ -86,13 +86,14 @@ theorem canonical_construction_route_catalog :
           canonicalWitnessW2TransformClass? .w2FullLinear = some .benchmarkFamilyTransformedCall)) := by
   exact ⟨canonical_w1_route_catalog, canonical_w2_route_catalog⟩
 
-/-- Every canonical witness currently in the ledger is non-W0. -/
+/-- Each canonical route label has route unequal to W0. -/
 theorem canonical_witness_route_not_w0 (w : CanonicalConstructionWitness) :
     canonicalWitnessRoute w ≠ .W0 := by
   cases w <;> decide
 
-/-- The full duplicating member has both a W1 imported-whole witness and a W2 transformed-call witness. -/
-theorem fullDuplicating_has_w1_and_w2_non_w0_witnesses :
+/-- The canonical imported-whole and full-duplicating transformed-call labels both have
+non-W0 route tags. -/
+theorem fullDuplicating_canonical_route_tags_are_non_w0 :
     canonicalWitnessRoute .w1ImportedWhole ≠ .W0 ∧
       canonicalWitnessRoute .w2FullDuplicating ≠ .W0 := by
   exact ⟨canonical_witness_route_not_w0 .w1ImportedWhole,

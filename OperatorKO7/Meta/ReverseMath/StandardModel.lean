@@ -4,19 +4,9 @@ import OperatorKO7.Meta.ReverseMath.Language
 /-!
 # The standard model of the single-sorted `L2`
 
-The standard `L2`-structure for the OperatorKO7 reverse-math program: the carrier is `ℕ ⊕ Set ℕ`,
-with a number `n` encoded as `Sum.inl n` and a set `S ⊆ ℕ` as `Sum.inr S`. Numbers and sets share one
-sort (Simpson single-sorted encoding); the unary predicate `IsSet` recovers the set part and the
-binary `∈` recovers membership, so the two-sorted second-order reading is faithfully present.
+## Formal Scope
 
-This structure is the shared base for:
-* `RCA0` consistency (standard-model satisfaction of every `RCA₀` axiom — the Gate R5 guard);
-* the faithfulness bridges of `WOOmega3Sentence` and `ArtsGieslSctSoundnessSentence` (their
-  standard-model realizations are the genuine Lean facts they encode).
-
-Arithmetic acts on the number part; on set arguments the functions return the junk value `0`
-(Lean structures are total, and the number-relativized axioms never constrain function values at set
-arguments). No `sorry`, `axiom`, or `native_decide`.
+This module defines the sum carrier, full-powerset set sort, and totalized arithmetic/relation interpretation. Downstream faithfulness and consistency claims require separate theorems.
 -/
 
 set_option autoImplicit false

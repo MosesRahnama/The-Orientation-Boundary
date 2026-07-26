@@ -4,22 +4,9 @@ import OperatorKO7.Meta.ConfessionMethod
 /-!
 # Schema-Generic Forgetting Witness
 
-This module introduces a schema-level `ForgettingWitness S` abstraction and
-proves:
+## Formal Scope
 
-1. Every `ProjectionRank S` (and hence every `ConfessionMethod S`) induces a
-   `ForgettingWitness S`: a schema-generic rank that orients the duplicating
-   step while violating wrapper sensitivity on both payload positions.
-
-2. The KO7 `CertifiedForgettingWitness` defined in
-   [`Meta/OperationalIncompleteness.lean`](OperationalIncompleteness.lean) is
-   a specialization of the generic structure at `ko7Schema`.
-
-The schema-level forgetting-witness abstraction is the central primitive for
-Paper 2's W2 family: all four confession methods (dependency pairs, direct
-counter-projection, SCT, argument filtering) collapse to the same
-`ProjectionRank S` on a step-duplicating schema and therefore share the same
-forgetting-witness data.
+ForgettingWitness packages orientation together with two sensitivity violations. The conjunction alone does not prove a causal claim that orientation succeeds because of those violations, and concrete method coverage requires typed adapters.
 -/
 
 namespace OperatorKO7.StepDuplicating
@@ -30,11 +17,9 @@ namespace StepDuplicatingSchema
 schema that orients the duplicating step and *explicitly* violates wrapper
 sensitivity on each of the two payload positions.
 
-The name "forgetting" reflects that the rank succeeds by discarding the
-wrapper context: any direct whole-term barrier family requires
-`rank (wrap x y) > rank x` and `rank (wrap x y) > rank y`, but the
-wrapper-sensitivity violations here are the formal content of "the rank
-forgets the payload". -/
+The historical name "forgetting" refers to the two stored counterexamples to
+wrapper sensitivity. The structure records those counterexamples together
+with orientation; it does not state that one causes the other. -/
 structure ForgettingWitness (S : StepDuplicatingSchema) where
   rank : S.T → Nat
   orientsDupStep :
@@ -48,10 +33,8 @@ structure ForgettingWitness (S : StepDuplicatingSchema) where
 
 namespace ForgettingWitness
 
-/-- **Every `ProjectionRank S` yields a `ForgettingWitness S`.** This is the
-schema-generic core of Paper 2's "confession method → certified forgetting"
-bridge, replacing the KO7-specific derivation in the current
-`OperationalIncompleteness.lean`. -/
+/-- Package the orientation and sensitivity fields of a `ProjectionRank S` as
+a `ForgettingWitness S`. -/
 def ofProjectionRank {S : StepDuplicatingSchema}
     (R : ProjectionRank S) : ForgettingWitness S where
   rank := R.rank

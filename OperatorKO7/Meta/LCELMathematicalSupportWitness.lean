@@ -7,38 +7,38 @@ import OperatorKO7.Meta.LCELSubstrateMathematics
 import OperatorKO7.Meta.LCELBenchmarkDpComparison
 
 /-!
-# LCEL Mathematical Support Witness
+This module assembles mathematical-support records from supplied translation maps, target facts,
+admissibility, and coherence equations. The resulting theorems certify those record fields.
+Independent semantic transport from source theorems requires a separately proved correspondence.
 
-Workstream C of the LCEL universal-theorem roadmap: a richer comparison
-witness that packages the source-to-target correspondence data required by
-the paper's intended cross-instance identification, replacing the
-inhabitance-only content of `LCELSupportComparisonWitness` with explicit
-correspondence and theorem-strength substrate data wherever it is
-available.
 
-A `LCELMathematicalSupportWitness` carries, in addition to the content of
-`LCELSupportComparisonWitness`:
 
-- an explicit `LCELSemanticSlotCorrespondence` (Workstream A), so that the
-  external-license and reimport-class slot iffs are not opaque but come
-  from typed forward / backward transport functions on the slot data;
-- explicit theorem-strength substrate reversibility objects for all four
-  clauses (base, license, reimport, boundary) on both sides
-  (Workstream B), tied by coherence to the support records;
-- **explicit theorem-object transport functions** that carry each source-side
-  theorem object to a target-side theorem object, together with coherence
-  equations saying that the transport of the canonical source theorem is
-  (definitionally) equal to the canonical target theorem. This is what
-  makes the Gödel theorem genuinely source-to-target: the constructor in
-  `LCELMathematicalStructuralIdentity.lean` consumes the source theorem
-  fields through the transport maps, rather than consuming target fields
-  directly.
 
-The downgrade `toLCELSupportComparisonWitness` makes the new carrier a
-strict strengthening of the existing one: every mathematical support witness
-gives a support-comparison witness whose slot iffs are derived from the
-slot correspondence and whose support-record iffs are the existing
-inhabitance-equivalences repackaged unchanged.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -/
 
 namespace OperatorKO7.LCELMathematical
@@ -51,234 +51,234 @@ open OperatorKO7.LCELSemanticCorrespondence
 open OperatorKO7.LCELSubstrateMathematics
 open OperatorKO7.LCELBenchmarkDpComparison
 
-/-! ## The carrier -/
+/-! Declarations for the section below. -/
 
-/-- Source-to-target mathematical support witness between two LCEL instances.
+/-- Data record whose requirements are the fields displayed below.
 
-This extends `LCELSupportComparisonWitness` with:
 
-- a typed semantic slot correspondence (Workstream A),
-- theorem-strength base-layer reversibility objects on both sides
-  (Workstream B), tied by coherence to the source / target base support
-  records.
 
-The external-license and reimport-class slot iffs of the support-comparison
-witness are required to come from the slot correspondence's forward /
-backward transport functions. -/
+
+
+
+
+
+
+
+-/
 structure LCELMathematicalSupportWitness
     (L₁ L₂ : FormalLCELInstance)
     extends LCELSupportComparisonWitness L₁ L₂ where
-  /-- Explicit typed **strong** semantic slot correspondence between the
-  two instances, carrying preservation laws on all four slots
-  (boundary, external license, reimport class, annotation functor).
-  The plain `LCELSemanticSlotCorrespondence` is recovered by downgrade
-  via `LCELStrongSemanticSlotCorrespondence.toSlotCorrespondence`. -/
+  /-- Field requirements are given by the displayed type.
+
+
+
+-/
   slotCorrespondence : LCELStrongSemanticSlotCorrespondence L₁ L₂
-  /-- The support-comparison witness's external-license biconditional is
-  the strong slot correspondence's external-license iff (after downgrade). -/
+  /-- Field requirements are given by the displayed type.
+-/
   externalLicense_fromCorrespondence :
     externalLicenseEquivalent =
       slotCorrespondence.externalLicense.toExternalLicenseCorrespondence.toIff
-  /-- The support-comparison witness's reimport-class biconditional is
-  the strong slot correspondence's reimport-class iff (after downgrade). -/
+  /-- Field requirements are given by the displayed type.
+-/
   reimportClass_fromCorrespondence :
     reimportClassEquivalent =
       slotCorrespondence.reimportClass.toReimportClassCorrespondence.toIff
-  /-- Theorem-strength base-layer reversibility object on the source side. -/
+  /-- Field requirements are given by the displayed type. -/
   sourceBaseTheorem : BaseReversibilityTheorem L₁
-  /-- Theorem-strength base-layer reversibility object on the target side. -/
+  /-- Field requirements are given by the displayed type. -/
   targetBaseTheorem : BaseReversibilityTheorem L₂
-  /-- Coherence: the source-side theorem-strength object extracts from the
-  source support record via `baseReversibilityTheorem_of_support`. -/
+  /-- Field requirements are given by the displayed type.
+-/
   sourceBaseTheorem_fromSupport :
     sourceBaseTheorem = baseReversibilityTheorem_of_support sourceBaseSupport
-  /-- Coherence: the target-side theorem-strength object extracts from the
-  target support record via `baseReversibilityTheorem_of_support`. -/
+  /-- Field requirements are given by the displayed type.
+-/
   targetBaseTheorem_fromSupport :
     targetBaseTheorem = baseReversibilityTheorem_of_support targetBaseSupport
-  /-- Theorem-strength license-side irreversibility object on the source. -/
+  /-- Field requirements are given by the displayed type. -/
   sourceLicenseTheorem : LicenseIrreversibilityTheorem L₁
-  /-- Theorem-strength license-side irreversibility object on the target. -/
+  /-- Field requirements are given by the displayed type. -/
   targetLicenseTheorem : LicenseIrreversibilityTheorem L₂
-  /-- Coherence: the source license theorem extracts from the source
-  license support record. -/
+  /-- Field requirements are given by the displayed type.
+-/
   sourceLicenseTheorem_fromSupport :
     sourceLicenseTheorem =
       licenseIrreversibilityTheorem_of_support sourceLicenseSupport
-  /-- Coherence: the target license theorem extracts from the target
-  license support record. -/
+  /-- Field requirements are given by the displayed type.
+-/
   targetLicenseTheorem_fromSupport :
     targetLicenseTheorem =
       licenseIrreversibilityTheorem_of_support targetLicenseSupport
-  /-- Theorem-strength reimport-side reversibility object on the source. -/
+  /-- Field requirements are given by the displayed type. -/
   sourceReimportTheorem : ReimportReversibilityTheorem L₁
-  /-- Theorem-strength reimport-side reversibility object on the target. -/
+  /-- Field requirements are given by the displayed type. -/
   targetReimportTheorem : ReimportReversibilityTheorem L₂
-  /-- Coherence: the source reimport theorem extracts from the source
-  reimport support record. -/
+  /-- Field requirements are given by the displayed type.
+-/
   sourceReimportTheorem_fromSupport :
     sourceReimportTheorem =
       reimportReversibilityTheorem_of_support sourceReimportSupport
-  /-- Coherence: the target reimport theorem extracts from the target
-  reimport support record. -/
+  /-- Field requirements are given by the displayed type.
+-/
   targetReimportTheorem_fromSupport :
     targetReimportTheorem =
       reimportReversibilityTheorem_of_support targetReimportSupport
-  /-- Theorem-strength boundary-factorization object on the source. -/
+  /-- Field requirements are given by the displayed type. -/
   sourceBoundaryTheorem : BoundaryFactorizationTheorem L₁
-  /-- Theorem-strength boundary-factorization object on the target. -/
+  /-- Field requirements are given by the displayed type. -/
   targetBoundaryTheorem : BoundaryFactorizationTheorem L₂
-  /-- Coherence: the source boundary theorem extracts from the source
-  boundary support record. -/
+  /-- Field requirements are given by the displayed type.
+-/
   sourceBoundaryTheorem_fromSupport :
     sourceBoundaryTheorem =
       boundaryFactorizationTheorem_of_support sourceBoundarySupport
-  /-- Coherence: the target boundary theorem extracts from the target
-  boundary support record. -/
+  /-- Field requirements are given by the displayed type.
+-/
   targetBoundaryTheorem_fromSupport :
     targetBoundaryTheorem =
       boundaryFactorizationTheorem_of_support targetBoundarySupport
-  /-- Explicit transport of a source-side base reversibility theorem into a
-  target-side base reversibility theorem. This is the cross-instance
-  relation the checker flagged: the target theorem is produced from the
-  source theorem (plus whatever extra target-side data the transport
-  function needs), not merely co-bundled. -/
+  /-- Field requirements are given by the displayed type.
+
+
+
+-/
   transportBase :
     BaseReversibilityTheorem L₁ → BaseReversibilityTheorem L₂
-  /-- Coherence: the transport of the canonical source-side base theorem is
-  equal to the canonical target-side base theorem. With this equation the
-  strong-theorem constructor can use `transportBase sourceBaseTheorem`
-  everywhere it currently uses `targetBaseTheorem`, and the two are
-  provably the same object. -/
+  /-- Field requirements are given by the displayed type.
+
+
+
+-/
   transportBase_source :
     transportBase sourceBaseTheorem = targetBaseTheorem
-  /-- Explicit transport of a source-side license irreversibility theorem
-  into a target-side license irreversibility theorem. -/
+  /-- Field requirements are given by the displayed type.
+-/
   transportLicense :
     LicenseIrreversibilityTheorem L₁ → LicenseIrreversibilityTheorem L₂
-  /-- Coherence for the license-theorem transport. -/
+  /-- Field requirements are given by the displayed type. -/
   transportLicense_source :
     transportLicense sourceLicenseTheorem = targetLicenseTheorem
-  /-- Explicit transport of a source-side reimport reversibility theorem
-  into a target-side reimport reversibility theorem. -/
+  /-- Field requirements are given by the displayed type.
+-/
   transportReimport :
     ReimportReversibilityTheorem L₁ → ReimportReversibilityTheorem L₂
-  /-- Coherence for the reimport-theorem transport. -/
+  /-- Field requirements are given by the displayed type. -/
   transportReimport_source :
     transportReimport sourceReimportTheorem = targetReimportTheorem
-  /-- Explicit transport of a source-side boundary factorization theorem
-  into a target-side boundary factorization theorem. -/
+  /-- Field requirements are given by the displayed type.
+-/
   transportBoundary :
     BoundaryFactorizationTheorem L₁ → BoundaryFactorizationTheorem L₂
-  /-- Coherence for the boundary-theorem transport. -/
+  /-- Field requirements are given by the displayed type. -/
   transportBoundary_source :
     transportBoundary sourceBoundaryTheorem = targetBoundaryTheorem
 
 namespace LCELMathematicalSupportWitness
 
-/-- Extraction: the strong slot correspondence. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def toStrongSemanticSlotCorrespondence
     {L₁ L₂ : FormalLCELInstance}
     (W : LCELMathematicalSupportWitness L₁ L₂) :
     LCELStrongSemanticSlotCorrespondence L₁ L₂ :=
   W.slotCorrespondence
 
-/-- Extraction: the plain slot correspondence (downgrade of the strong
-correspondence), used by downstream code that expects the plain form. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def toSemanticSlotCorrespondence
     {L₁ L₂ : FormalLCELInstance}
     (W : LCELMathematicalSupportWitness L₁ L₂) :
     LCELSemanticSlotCorrespondence L₁ L₂ :=
   W.slotCorrespondence.toSlotCorrespondence
 
-/-- Extraction: the source-side theorem-strength base reversibility object. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def toSourceBaseReversibilityTheorem
     {L₁ L₂ : FormalLCELInstance}
     (W : LCELMathematicalSupportWitness L₁ L₂) :
     BaseReversibilityTheorem L₁ :=
   W.sourceBaseTheorem
 
-/-- Extraction: the target-side theorem-strength base reversibility object. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def toTargetBaseReversibilityTheorem
     {L₁ L₂ : FormalLCELInstance}
     (W : LCELMathematicalSupportWitness L₁ L₂) :
     BaseReversibilityTheorem L₂ :=
   W.targetBaseTheorem
 
-/-- Extraction: the source-side theorem-strength license irreversibility
-object. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def toSourceLicenseIrreversibilityTheorem
     {L₁ L₂ : FormalLCELInstance}
     (W : LCELMathematicalSupportWitness L₁ L₂) :
     LicenseIrreversibilityTheorem L₁ :=
   W.sourceLicenseTheorem
 
-/-- Extraction: the target-side theorem-strength license irreversibility
-object. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def toTargetLicenseIrreversibilityTheorem
     {L₁ L₂ : FormalLCELInstance}
     (W : LCELMathematicalSupportWitness L₁ L₂) :
     LicenseIrreversibilityTheorem L₂ :=
   W.targetLicenseTheorem
 
-/-- Extraction: the source-side theorem-strength reimport reversibility
-object. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def toSourceReimportReversibilityTheorem
     {L₁ L₂ : FormalLCELInstance}
     (W : LCELMathematicalSupportWitness L₁ L₂) :
     ReimportReversibilityTheorem L₁ :=
   W.sourceReimportTheorem
 
-/-- Extraction: the target-side theorem-strength reimport reversibility
-object. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def toTargetReimportReversibilityTheorem
     {L₁ L₂ : FormalLCELInstance}
     (W : LCELMathematicalSupportWitness L₁ L₂) :
     ReimportReversibilityTheorem L₂ :=
   W.targetReimportTheorem
 
-/-- Extraction: the source-side theorem-strength boundary-factorization
-object. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def toSourceBoundaryFactorizationTheorem
     {L₁ L₂ : FormalLCELInstance}
     (W : LCELMathematicalSupportWitness L₁ L₂) :
     BoundaryFactorizationTheorem L₁ :=
   W.sourceBoundaryTheorem
 
-/-- Extraction: the target-side theorem-strength boundary-factorization
-object. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def toTargetBoundaryFactorizationTheorem
     {L₁ L₂ : FormalLCELInstance}
     (W : LCELMathematicalSupportWitness L₁ L₂) :
     BoundaryFactorizationTheorem L₂ :=
   W.targetBoundaryTheorem
 
-/-! ### Transported target theorems
+/-! Declarations for the section below.
 
-The following four extractions **transport** the canonical source theorem to
-the target side via the witness's explicit transport functions. By the
-coherence equations (`transportBase_source` etc.) these are provably equal
-to the corresponding target-side canonical theorem fields, but the
-construction is operationally source-to-target: every target-side package
-used by the strong constructor is obtained by running the transport on a
-source-side theorem object. -/
 
-/-- Target base theorem obtained by transporting the source base theorem. -/
+
+
+
+
+
+-/
+
+/-- Definition with formal content given by the displayed type and body. -/
 def transportedTargetBaseTheorem
     {L₁ L₂ : FormalLCELInstance}
     (W : LCELMathematicalSupportWitness L₁ L₂) :
     BaseReversibilityTheorem L₂ :=
   W.transportBase W.sourceBaseTheorem
 
-/-- The transported target base theorem agrees with the declared target
-base theorem field. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem transportedTargetBaseTheorem_eq
     {L₁ L₂ : FormalLCELInstance}
     (W : LCELMathematicalSupportWitness L₁ L₂) :
     W.transportedTargetBaseTheorem = W.targetBaseTheorem :=
   W.transportBase_source
 
-/-- Target license theorem obtained by transporting the source. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def transportedTargetLicenseTheorem
     {L₁ L₂ : FormalLCELInstance}
     (W : LCELMathematicalSupportWitness L₁ L₂) :
@@ -291,7 +291,7 @@ theorem transportedTargetLicenseTheorem_eq
     W.transportedTargetLicenseTheorem = W.targetLicenseTheorem :=
   W.transportLicense_source
 
-/-- Target reimport theorem obtained by transporting the source. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def transportedTargetReimportTheorem
     {L₁ L₂ : FormalLCELInstance}
     (W : LCELMathematicalSupportWitness L₁ L₂) :
@@ -304,7 +304,7 @@ theorem transportedTargetReimportTheorem_eq
     W.transportedTargetReimportTheorem = W.targetReimportTheorem :=
   W.transportReimport_source
 
-/-- Target boundary theorem obtained by transporting the source. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def transportedTargetBoundaryTheorem
     {L₁ L₂ : FormalLCELInstance}
     (W : LCELMathematicalSupportWitness L₁ L₂) :
@@ -319,65 +319,65 @@ theorem transportedTargetBoundaryTheorem_eq
 
 end LCELMathematicalSupportWitness
 
-/-! ## Correspondence-driven theorem-object transport constructors
+/-! Declarations for the section below.
 
-These generic constructors take a source theorem object plus a packaged
-strong slot correspondence and produce a target theorem object whose
-every field is built through the correspondence's preservation laws,
-using source structural facts plus (where the types require it)
-target-side supplied "provability side" data such as the target's own
-`blockedLicensedAdmission`. They are the source-informed analogues of
-the old constant canonical transports: the output is constructed, not
-returned as an opaque target constant.
 
-The four constructors are:
 
-- `baseReversibilityTheorem_transport_viaStrongSlot`: consumes
-  `T.provedSentence` and `T.provedSentence_proved` through the strong
-  slot correspondence's `baseSentence` field (typed sentence
-  translation + provability preservation); consumes the source's
-  designated boundary witness through the strong boundary
-  correspondence's `translate_preserves_not_provable` and
-  `translate_preserves_true` preservation laws.
-- `licenseIrreversibilityTheorem_transport_viaStrongSlot`: consumes
-  `T.externalLicenseHolds` through the strong external-license
-  correspondence's forward transport and its `forward_preserves_*`
-  preservation laws.
-- `reimportReversibilityTheorem_transport_viaStrongSlot`: consumes
-  `T.reimportClassHolds` through the strong reimport-class
-  correspondence's forward transport and preservation laws;
-  **and consumes the strong annotation correspondence** through its
-  `translate_annotate_witness`, `translate_preserves_decodes_to_imported`,
-  and `translate_preserves_witness_certifies_decoded` laws for the
-  annotation-side fields.
-- `boundaryFactorizationTheorem_transport`: structurally destructures
-  `T`: the output's `visible` and `sensitive` fields are the results of
-  running the reimport and license transport constructors on
-  `T.visible` and `T.sensitive`.
 
-On the manuscript-critical Gödel ↔ native DP canonical pair, where the
-target-side canonical theorem is itself extracted from a target support
-record via `baseReversibilityTheorem_of_support` etc. and the
-correspondence's translate maps are constant, each transport's output
-reduces definitionally to the canonical target theorem, so every
-`transport...Source` coherence equation holds by `rfl`. The structural
-dependency on the source input is real for `transportBoundary` (it
-destructures `T.visible` and `T.sensitive`) and is type-level real for
-the other three (each consumes named source fields through preservation
-laws).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -/
 
 open OperatorKO7.ReflectionSchema in
-/-- Transport a source-side base reversibility theorem to the target side
-through a packaged strong slot correspondence. The source theorem's
-**`provedSentence` and `provedSentence_proved` fields are consumed**
-via the correspondence's `baseSentence` translation and its provability
-preservation law; the source theorem's `unprovedSentence_eq` side is
-threaded through the strong boundary correspondence's typed translate
-map and preservation laws. No target-specific fallback parameter is
-taken: every target theorem field is either constructed from the
-correspondence applied to source data, or directly forced by a
-correspondence law. -/
+/-- Definition with formal content given by the displayed type and body.
+
+
+
+
+
+
+
+
+-/
 def baseReversibilityTheorem_transport_viaStrongSlot
     {L₁ L₂ : FormalLCELInstance}
     (C : LCELStrongSemanticSlotCorrespondence L₁ L₂)
@@ -409,15 +409,15 @@ def baseReversibilityTheorem_transport_viaStrongSlot
     exact C.baseSentence.translateProvedSentence_preserves_provable
       T.provedSentence T.provedSentence_proved
 
-/-- Transport a source-side license irreversibility theorem to the
-target through a packaged strong slot correspondence. The source
-theorem's **`externalLicenseHolds` field is consumed**: it is fed
-through the strong external-license correspondence's forward
-transport and preservation laws to derive the target theorem's
-non-provability, stronger-reflects, externalLicenseHolds, and
-licenseExtendsBase content. The target's `blocked_true` and
-`blocked_licensedAdmission` fields come from target-side reflection
-content since they are forced by the content's own structural laws. -/
+/-- Definition with formal content given by the displayed type and body.
+
+
+
+
+
+
+
+-/
 def licenseIrreversibilityTheorem_transport_viaStrongSlot
     {L₁ L₂ : FormalLCELInstance}
     (C : LCELStrongSemanticSlotCorrespondence L₁ L₂)
@@ -441,15 +441,15 @@ def licenseIrreversibilityTheorem_transport_viaStrongSlot
     ⟨C.externalLicense.forward_preserves_blocked_not_provable T.externalLicenseHolds,
       C.externalLicense.forward_preserves_stronger_reflects T.externalLicenseHolds⟩
 
-/-- Transport a source-side reimport reversibility theorem to the
-target through a packaged strong slot correspondence. The source
-theorem's **`reimportClassHolds` field is consumed** through the strong
-reimport-class correspondence's forward transport and preservation
-laws. The strong annotation functor correspondence's preservation
-laws (`translate_preserves_witness_certifies_decoded` and
-`translate_preserves_decoded_true`) supply the target's annotation
-fields directly, so the annotation slot is now operationally consumed
-by the transport (not just carried as landed infrastructure). -/
+/-- Definition with formal content given by the displayed type and body.
+
+
+
+
+
+
+
+-/
 def reimportReversibilityTheorem_transport_viaStrongSlot
     {L₁ L₂ : FormalLCELInstance}
     (C : LCELStrongSemanticSlotCorrespondence L₁ L₂)
@@ -464,31 +464,31 @@ def reimportReversibilityTheorem_transport_viaStrongSlot
   reimportClassHolds :=
     C.reimportClass.toReimportClassCorrespondence.forward T.reimportClassHolds
   annotationDecodes_imported := by
-    -- Derive the target `decode (annotate target.witness) = importedSentence`
-    -- coherence by first rewriting `annotate target.witness` via the strong
-    -- annotation correspondence's `translate_annotate_witness`, then applying
-    -- the correspondence's `translate_preserves_decodes_to_imported` law.
+    --
+    --
+    --
+    --
     have h := C.annotation.toAnnotationFunctorCorrespondence.translate_annotate_witness
     have pres := C.annotation.translate_preserves_decodes_to_imported
     rw [h] at pres
     exact pres
   annotationCertifiesDecoded := by
-    -- Derive the target `certifies witness (decode (annotate target.witness))`
-    -- by taking the strong annotation correspondence's
-    -- `translate_preserves_witness_certifies_decoded` — which speaks of the
-    -- **translated-source** annotation's decode — and rewriting through
-    -- `translate_annotate_witness` to the target-side `annotate target.witness`.
+    --
+    --
+    --
+    --
+    --
     have h := C.annotation.toAnnotationFunctorCorrespondence.translate_annotate_witness
     have pres := C.annotation.translate_preserves_witness_certifies_decoded
     rw [h] at pres
     exact pres
 
-/-- Transport a source-side boundary factorization theorem to the target
-by structural recursion: the output's `visible` and `sensitive` fields
-are built by running the reimport / license transport constructors on
-the source theorem's `visible` / `sensitive` fields. This is the
-genuinely source-structural transport — different source theorems with
-different `visible` / `sensitive` fields produce different outputs. -/
+/-- Definition with formal content given by the displayed type and body.
+
+
+
+
+-/
 def boundaryFactorizationTheorem_transport
     {L₁ L₂ : FormalLCELInstance}
     (reimportTransport :
@@ -512,23 +512,23 @@ def boundaryFactorizationTheorem_transport
   reflectionBlockedEqImported := targetReflectionBlockedEqImported
   boundaryRealized := targetBoundaryRealized
 
-/-! ## Canonical mathematical support witnesses
+/-! Declarations for the section below.
 
-For each of the three paper-facing canonical pairs we construct a
-mathematical support witness by combining:
 
-- the canonical support-comparison witness already in
-  `LCELStructuralIdentity.lean` or `LCELBenchmarkDpComparison.lean`,
-  rebased with slot iffs that come from the slot correspondence (the two
-  iffs are equal definitionally because the correspondence's forward /
-  backward transports are the existing inhabitance-style iffs);
-- the canonical slot correspondence from Workstream A;
-- the canonical theorem-strength base reversibility objects from
-  Workstream B.
+
+
+
+
+
+
+
+
+
+
 -/
 
-/-- Mathematical support witness between the Gödel 1931 and benchmark-transport
-LCEL instances. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def godel_benchmark_lcelMathematicalSupportWitness :
     LCELMathematicalSupportWitness
       godel1931LCELInstance
@@ -588,8 +588,8 @@ def godel_benchmark_lcelMathematicalSupportWitness :
       T
   transportBoundary_source := rfl
 
-/-- Mathematical support witness between the Gödel 1931 and native DP / emitter
-LCEL instances. This is the manuscript-critical endpoint. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def godel_dp_lcelMathematicalSupportWitness :
     LCELMathematicalSupportWitness
       godel1931LCELInstance

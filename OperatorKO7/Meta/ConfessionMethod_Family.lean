@@ -8,16 +8,15 @@ import OperatorKO7.Meta.ContextClosed_SN_Full
 /-!
 # The Confession-Method Family: Collected Results
 
-This module collects the four formalized confession methods on the KO7
-step-duplicating schema and proves family-level theorems about their
-shared structure.
+This module collects four `ConfessionMethod` values on the KO7
+step-duplicating schema. It proves finite-list facts about their shared rank,
+distinct license tags, duplicating-step orientation, wrapper-sensitivity
+violations, and conversion to `CertifiedForgettingWitness`.
 
-The central result is `confession_is_a_class`: on the step-duplicating
-schema, four methods with four distinct soundness licenses all converge
-to the same projection core and all satisfy the `CertifiedForgettingWitness`
-interface. The important point is not just that the ranks are equal, but
-that the non-DP routes now reach that equality through route-local witness
-objects and derived projection ranks rather than by direct alias assignment.
+The capstone `confession_is_a_class` states three facts: the list has
+four members, every member has the DP rank function, and the four enum-valued
+license fields are pairwise distinct. These field equalities and inequalities
+remain separate from external soundness and methodological-equivalence results.
 
 The four methods are:
 1. Dependency pairs + subterm criterion (Arts-Giesl 2000)
@@ -39,12 +38,12 @@ open OperatorKO7.MetaOperationalIncompleteness
 def allConfessionMethods : List (ConfessionMethod ko7Schema) :=
   [dpConfession, counterProjectionConfession, sctConfession, argumentFilteringConfession]
 
-/-- The family has exactly four members. -/
+/-- The family list has length four. -/
 theorem family_size : allConfessionMethods.length = 4 := by rfl
 
-/-- Every confession method in the family produces the same rank on
-    the KO7 schema. This is now proved through the route-local convergence
-    theorems, not by immediate alias collapse. -/
+/-- Every listed confession method has the same rank function as
+`dpConfession`. The other three cases use their route-specific equality
+theorems. -/
 theorem family_rank_agreement :
     ∀ C ∈ allConfessionMethods,
       C.rank = dpConfession.rank := by
@@ -65,8 +64,8 @@ theorem family_orients_dup_step :
   intro C hC b s n
   exact confession_orients C b s n
 
-/-- Every confession method in the family violates wrapper sensitivity.
-    This is the formal content of "the payload is declared inert." -/
+/-- Every listed rank has witnesses showing failure of strict wrapper
+sensitivity in each payload position. -/
 theorem family_violates_sensitivity :
     ∀ C ∈ allConfessionMethods,
       (∃ x y : Trace, ¬ (C.rank (app x y) > C.rank x))
@@ -74,8 +73,8 @@ theorem family_violates_sensitivity :
   intro C hC
   exact ⟨confession_violates_wrap1 C, confession_violates_wrap2 C⟩
 
-/-- Every confession method in the family is a certified-forgetting
-    witness in the sense of `OperationalIncompleteness.lean`. -/
+/-- Every listed method converts to a `CertifiedForgettingWitness`, whose fields
+are duplicating-step orientation and two wrapper-sensitivity violations. -/
 theorem family_certified_forgetting :
     ∀ C ∈ allConfessionMethods,
       ∃ fw : CertifiedForgettingWitness,
@@ -83,9 +82,9 @@ theorem family_certified_forgetting :
   intro C hC
   exact ⟨CertifiedForgettingWitness.ofConfessionMethod C, rfl⟩
 
-/-- The same certified-forgetting conclusion can now be witnessed through the
-    richer route-local evidence packages, not only through the generic
-    `ofConfessionMethod` adapter. -/
+/-- Construct certified-forgetting records through the four route-evidence
+adapters. The conclusion compares their retained rank fields; route-specific
+evidence fields remain in the source records. -/
 theorem family_certified_forgetting_via_route_evidence :
     ∀ C ∈ allConfessionMethods,
       ∃ fw : CertifiedForgettingWitness,
@@ -98,24 +97,25 @@ theorem family_certified_forgetting_via_route_evidence :
   · exact ⟨sctRouteEvidenceCertifiedForgettingWitness, rfl⟩
   · exact ⟨argumentFilteringRouteEvidenceCertifiedForgettingWitness, rfl⟩
 
-/-- The four confession methods have four distinct soundness licenses.
-    This confirms they are genuinely different methods that happen to
-    share the same rank on this schema, not four names for one method. -/
+/-- The four enum-valued license fields are pairwise distinct. The proposition
+is a finite tag inequality; external soundness requires separate theorem
+adapters. -/
 theorem family_distinct_licenses :
     (allConfessionMethods.map (·.license)).Nodup := by
   decide
 
-/-- The non-DP confession routes each converge to the same projection core as
-    the canonical DP route. -/
+/-- The three alternatively tagged instances have the same rank function as
+the DP instance. -/
 theorem family_single_core :
     counterProjectionConfession.rank = dpConfession.rank
     ∧ sctConfession.rank = dpConfession.rank
     ∧ argumentFilteringConfession.rank = dpConfession.rank := by
   exact ⟨counterProjection_eq_dp_rank, sct_eq_dp_rank, argumentFiltering_eq_dp_rank⟩
 
-/-- The family exhibits both ingredients of the strong target:
-    distinct entry licenses and a single convergent projection core. -/
-theorem family_independent_entries_and_single_core :
+/-- Bundle pairwise distinct license tags with equality of the other three rank
+functions to the DP rank. This proposition concerns enum tags and rank
+functions. -/
+theorem family_distinct_license_tags_and_single_core :
     (allConfessionMethods.map (·.license)).Nodup
     ∧ counterProjectionConfession.rank = dpConfession.rank
     ∧ sctConfession.rank = dpConfession.rank
@@ -124,77 +124,58 @@ theorem family_independent_entries_and_single_core :
     ⟨_, _, _, _, hCounter, hSCT, hFilter⟩
   exact ⟨family_distinct_licenses, hCounter, hSCT, hFilter⟩
 
-/-- **Main theorem: Confession methods form a structural class.**
-
-    On the step-duplicating schema:
-    - four methods with distinct soundness licenses exist;
-    - the non-DP routes converge to the same common rank (counter projection)
-      as the canonical DP route;
-    - all satisfy the certified-forgetting interface;
-    - the licenses are pairwise distinct.
-
-    This is the formal content behind *Operational Inexpressibility at the
-    Primitive-Recursion Orientation Boundary*'s central claim that the
-    construction/confession boundary separates method *classes*, not
-    individual methods. The confession class is defined by a structural
-    shape (extract recursive calls, project to descent coordinate,
-    declare payload inert) that is invariant under changes of extraction
-    mechanism and soundness license. -/
+/-- Capstone for the finite family: list length four, rank-function agreement,
+and pairwise distinct license tags. Certified-forgetting conversion is proved
+separately by `family_certified_forgetting`. -/
 theorem confession_is_a_class :
     allConfessionMethods.length = 4
     ∧ (∀ C ∈ allConfessionMethods, C.rank = dpConfession.rank)
     ∧ (allConfessionMethods.map (·.license)).Nodup := by
   exact ⟨family_size, family_rank_agreement, family_distinct_licenses⟩
 
-/-- The confession family provides four independently licensed entry routes
-    into one shared projection core resolving KO7's operational
-    incompleteness at the payload dimension. -/
-theorem confession_family_resolves_operational_incompleteness :
+/-- Every listed method supplies a `CertifiedForgettingWitness` with the same
+rank. External licenses and source-system termination require their respective
+adapters. -/
+theorem confession_family_supplies_certified_forgetting_witnesses :
     ∀ C ∈ allConfessionMethods,
       ∃ fw : CertifiedForgettingWitness, fw.rank = C.rank :=
   family_certified_forgetting
 
-/-! ## Full-system termination via the confession family
+/-! ## Extracted-pair and polynomial termination facts
 
-    Each confession method proves termination of the *extracted pair problem*,
-    not just orientation of the duplicating step. The bridge from pair-problem
-    well-foundedness to full-system termination is the external soundness
-    metatheorem named by each method's `SoundnessLicense`.
+For every listed method, rank agreement transfers `dpPair_decreases` to that
+method's rank on the fixed KO7 dependency-pair relation. The reverse relation is
+well founded by `wf_DPPairRev`. Source-system termination requires an external
+transport theorem.
 
-    Since all four methods share the same rank on this schema, they all
-    inherit the same pair-problem well-foundedness proof (`wf_DPPairRev`
-    from `DependencyPairs_Works.lean`). The full KO7 root-step termination
-    then follows by any of three independent routes:
-
-    - The DP route: `wf_DPPairRev` + Arts-Giesl soundness (external)
-    - The polynomial route: `wf_StepRev_poly` (internal, construction method)
-    - The MPO route: `wf_StepRev_mpo` (internal, construction method)
-
-    All three are already formalized in the artifact. The confession family
-    inherits the DP route because the pair problem is the same for all four
-    methods.
+The root-step and context-closed termination theorems below restate polynomial
+proofs imported from their respective modules. Their proof terms use those
+imports directly.
 -/
 
-/-- Every confession method in the family terminates the extracted KO7
-    dependency-pair problem. Since all four share the same rank, they
-    share the same well-foundedness proof. -/
+/-- For every listed method, its rank decreases on every pair in the fixed KO7
+dependency-pair relation, whose reverse relation is well founded. -/
 theorem family_terminates_pair_problem :
     ∀ C ∈ allConfessionMethods,
-      WellFounded (fun a b : Trace =>
-        OperatorKO7.MetaDependencyPairs.DPPair b a) := by
-  intro C _
-  exact OperatorKO7.MetaDependencyPairs.wf_DPPairRev
+      (∀ {a b : Trace},
+        OperatorKO7.MetaDependencyPairs.DPPair a b → C.rank b < C.rank a)
+      ∧ WellFounded (fun a b : Trace =>
+          OperatorKO7.MetaDependencyPairs.DPPair b a) := by
+  intro C hC
+  constructor
+  · intro a b hPair
+    rw [family_rank_agreement C hC]
+    exact OperatorKO7.MetaDependencyPairs.dpPair_decreases hPair
+  · exact OperatorKO7.MetaDependencyPairs.wf_DPPairRev
 
-/-- The full KO7 root relation is terminating. This is the existing
-    `wf_StepRev_poly` theorem, restated here to confirm that the
-    confession family's pair-problem termination is consistent with
-    (and subsumed by) the full-system termination already in the
-    artifact. -/
+/-- Restatement of the imported polynomial proof that the reverse KO7 root-step
+relation is well founded. -/
 theorem ko7_full_system_terminates :
     WellFounded (fun a b : Trace => Step b a) :=
   OperatorKO7.PolyInterpretation.wf_StepRev_poly
 
-/-- The full KO7 context-closed relation is also terminating. -/
+/-- Restatement of the imported polynomial proof that the full context-closed
+reverse relation is well founded. -/
 theorem ko7_full_context_closed_terminates :
     WellFounded MetaSN_KO7.StepCtxFullRev :=
   MetaSN_KO7.wf_StepCtxFullRev_poly

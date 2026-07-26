@@ -1,22 +1,23 @@
 import OperatorKO7.Meta.StepDuplicatingSchema
 
 /-!
-# Concrete Alternating / Delayed Duplication Case
+# Alternating immediate duplication and two-step compounding
 
-This file implements one explicit alternating two-function example.  No single root rule
-duplicates the step argument.  Duplication appears only after composing two steps:
+This file implements an alternating two-function example. Each successor root rule duplicates the
+step argument `s`: it occurs once in the source and twice in the target, once as the left argument of
+`wrap` and once inside the recursive call.
 
 - `recurA b s (succ n) → wrap s (recurB b s n)`
 - `recurB b s (succ n) → wrap s (recurA b s n)`
 
-Starting from `recurA b s (succ (succ n))`, one root step plus one step under the right
-argument of `wrap` yields
+Starting from `recurA b s (succ (succ n))`, one root step plus one step under the right argument of
+`wrap` yields
 
 `wrap s (wrap s (recurA b s n))`.
 
-This two-step shape already exhibits the same additive
-duplication obstruction directly: the composite target carries three copies of the step
-payload measure against one copy on the source side.
+The two-step target contains three occurrences of `s`, compounding the immediate duplication in
+each root rule. The final theorem proves failure of uniform orientation for the displayed two-step
+source and target under the declared additive measure family.
 -/
 
 namespace OperatorKO7.MutualDuplicationCase
@@ -35,20 +36,19 @@ deriving DecidableEq, Repr
 
 open AltTerm
 
-/-- The alternating root rules: no single rule duplicates the step argument. -/
+/-- Alternating root rules, each duplicating the step argument from one occurrence to two. -/
 inductive AltStep : AltTerm → AltTerm → Prop
 | R_A_zero : ∀ b s, AltStep (recurA b s base) b
 | R_A_succ : ∀ b s n, AltStep (recurA b s (succ n)) (wrap s (recurB b s n))
 | R_B_zero : ∀ b s, AltStep (recurB b s base) b
 | R_B_succ : ∀ b s n, AltStep (recurB b s (succ n)) (wrap s (recurA b s n))
 
-/-- Minimal context closure needed to realize the delayed duplicate:
-we may reduce under the right argument of the wrapper. -/
+/-- Root steps together with closure under the right argument of `wrap`. -/
 inductive AltStepCtx : AltTerm → AltTerm → Prop
 | root : ∀ {a b}, AltStep a b → AltStepCtx a b
 | wrap_right : ∀ s {a b}, AltStepCtx a b → AltStepCtx (wrap s a) (wrap s b)
 
-/-- One explicit two-step realization of the delayed duplicate. -/
+/-- A two-step realization whose target contains three occurrences of the step argument. -/
 theorem alternating_dup2_realized (b s n : AltTerm) :
     ∃ u,
       AltStepCtx (recurA b s (succ (succ n))) u ∧
@@ -115,7 +115,7 @@ lemma eval_wrapIter_ge (M : AdditiveAlternatingMeasure) (k : Nat) :
     (StepDuplicatingSchema.eval_wrapIter_ge
       (S := alternatingPumpSchema) (M := M.toPumpMeasure) k)
 
-/-- Additive measures still cannot orient the delayed-duplication composite uniformly. -/
+/-- The displayed two-step composite is not uniformly oriented by any declared additive measure. -/
 theorem no_additive_orients_alternating_dup2_step (M : AdditiveAlternatingMeasure) :
     ¬ (∀ (b s n : AltTerm),
       M.eval (wrap s (wrap s (recurA b s n))) <

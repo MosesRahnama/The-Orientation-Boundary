@@ -334,6 +334,85 @@ theorem retainedCoordinate_factorsThrough_counter
   intro t
   rw [P.mu'_factors_counter (P.pi t), hfactor t]
 
+
+
+/-! ### Exact maximality of the counter-factorisation hypothesis -/
+
+/-- Boolean source step used to show that retained-coordinate factorisation is
+not automatic.  The source type has two points while the static counter below
+is constant. -/
+def retainedCoordinateCounterexampleStep : RDRSStep Unit Unit Unit Bool where
+  lhs := fun _ _ _ => false
+  rhs := fun _ _ _ => true
+
+/-- A valid projection transaction whose retained coordinate is the identity on
+`Bool`.  It satisfies every field of `ProjectionTransaction`; what fails is
+factorisation of that coordinate through a constant `Nat` counter. -/
+def retainedCoordinateCounterexampleTransaction :
+    ProjectionTransaction retainedCoordinateCounterexampleStep where
+  T' := Bool
+  pi := id
+  Rproj := retainedCoordinateCounterexampleStep
+  pi_commutes_lhs := by intro b s n; rfl
+  pi_commutes_rhs := by intro b s n; rfl
+  A' := Bool
+  mu' := id
+  ltA' := fun _ _ => False
+  PayloadCarrier := Bool
+  seedCollapse := SeedCollapse.id Bool
+  pi_factors_seedCollapse := {
+    factor := id
+    obs_eq := by intro t; rfl
+  }
+  CounterIndex := Bool
+  counterFactor := id
+  retainedCoordinate := id
+  mu'_factors_counter := by intro t; rfl
+
+/-- The unrestricted factor-map assertion is false.  Consequently the explicit
+factor-map premise of `retainedCoordinate_factorsThrough_counter` cannot be
+removed from a theorem quantified over arbitrary projection transactions and
+static retained-coordinate packages. -/
+theorem retainedCoordinate_unconditional_factorization_false :
+    ¬ (∀ (P : ProjectionTransaction retainedCoordinateCounterexampleStep)
+        (SH : StaticRetainedHypotheses retainedCoordinateCounterexampleStep),
+        ∃ factor : Nat → P.CounterIndex,
+          ∀ t, P.retainedCoordinate (P.pi t) = factor (SH.counter t)) := by
+  intro h
+  rcases h retainedCoordinateCounterexampleTransaction
+      (StaticRetainedHypotheses.trivial retainedCoordinateCounterexampleStep) with
+    ⟨factor, hf⟩
+  have hfalse := hf false
+  have htrue := hf true
+  change false = factor 0 at hfalse
+  change true = factor 0 at htrue
+  have hbad : false = true := hfalse.trans htrue.symm
+  cases hbad
+
+/-- Exact boundary package: the factor-map premise is sufficient for
+measure-level counter factorisation, and a concrete valid transaction proves
+that the premise is not derivable uniformly. -/
+structure RetainedCoordinateFactorizationExactBoundary : Prop where
+  sufficient :
+    ∀ {B S N T : Type} {R : RDRSStep B S N T}
+      (P : ProjectionTransaction R)
+      (SH : StaticRetainedHypotheses R),
+      (∃ factor : Nat → P.CounterIndex,
+        ∀ t, P.retainedCoordinate (P.pi t) = factor (SH.counter t)) →
+      ∃ factorFromCounter : Nat → P.A',
+        ∀ t, P.mu' (P.pi t) = factorFromCounter (SH.counter t)
+  unrestrictedFalse :
+    ¬ (∀ (P : ProjectionTransaction retainedCoordinateCounterexampleStep)
+        (SH : StaticRetainedHypotheses retainedCoordinateCounterexampleStep),
+        ∃ factor : Nat → P.CounterIndex,
+          ∀ t, P.retainedCoordinate (P.pi t) = factor (SH.counter t))
+
+/-- Fully proved maximality certificate for retained-coordinate factorisation. -/
+theorem retainedCoordinate_factorization_exact_boundary :
+    RetainedCoordinateFactorizationExactBoundary where
+  sufficient := fun P SH h => retainedCoordinate_factorsThrough_counter P SH h
+  unrestrictedFalse := retainedCoordinate_unconditional_factorization_false
+
 /-- Audit anchor for the U3 retained-coordinate factorisation surface.
 Downstream classifiers cite this String when wiring the retained-
 coordinate branch through the projection-transaction surface. -/

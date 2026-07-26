@@ -11,44 +11,9 @@ import OperatorKO7.Meta.LCELMathematicalSupportWitness
 /-!
 # LCEL Structural Identity via Mathematical Support Witness
 
-Workstream D of the LCEL universal-theorem roadmap: the strong restricted
-theorem that takes a `LCELMathematicalSupportWitness` as input and delivers
-a universal quasi-functor whose slot-level and substrate output is built
-**operationally from the mathematical support fields**, not by downgrading
-to the weaker support-comparison witness.
+## Formal Scope
 
-The main constructor `lcelUniversalQuasiFunctor_ofMathematicalComparison`
-consumes:
-
-- the slot correspondence `W.slotCorrespondence` (Workstream A) together
-  with the stagewise equivalence, to build the slot-level `LCELQuasiFunctor`
-  via `LCELComparisonWitness.ofSemanticSlotCorrespondence`; and
-- **the source-side theorem-strength substrate objects together with the
-  witness's explicit theorem-object transport functions**
-  (`transportBase W.sourceBaseTheorem`,
-  `transportLicense W.sourceLicenseTheorem`,
-  `transportReimport W.sourceReimportTheorem`,
-  `transportBoundary W.sourceBoundaryTheorem` from Workstream B and the
-  cross-instance transport layer added on top of it)
-  to build the target-side reversibility-asymmetry and boundary-
-  factorization packages via the substrate-downgrade lemmas.
-
-The target-side theorem fields `W.targetBaseTheorem` etc. are still
-present on the witness (they are what makes the support comparison
-biconditional honest), but the constructor never uses them directly: by
-the transport coherence equations (`transportBase_source` etc.) the
-transported source theorem is equal to the target field anyway, so the
-constructor-level switch is a mathematical upgrade, not just a refactor.
-
-The earlier downgrade route `toLCELSupportComparisonWitness →
-lcelUniversalQuasiFunctor_ofComparison` remains available as
-`lcelUniversalQuasiFunctor_ofMathematicalComparison_viaSupportDowngrade`
-and is provably equivalent to the stronger construction on the canonical
-instances.
-
-Canonical corollaries are supplied for the two manuscript-critical canonical
-pairs (Gödel ↔ benchmark-transport and Gödel ↔ native DP / emitter) via
-the stronger operational route.
+The main constructor projects transport and coherence fields supplied by its input witness. The theorem with the stronger premise is a specialization, not a logically stronger conclusion.
 -/
 
 namespace OperatorKO7.LCELMathematicalStructuralIdentity
@@ -86,7 +51,7 @@ both the four `source...Theorem` fields and the four `transport...`
 transport functions enter the constructor body. The target-side theorem
 fields `W.target...Theorem` are no longer mentioned; by the transport
 coherence equations they are equal to the transported source theorems,
-so the conclusion is unchanged, but the mathematical route is now
+so the conclusion is unchanged, but the mathematical route is here
 source-to-target.
 -/
 
@@ -197,12 +162,9 @@ theorem transportReimport_importedSentence_eq_targetReimportImported
       = L₂.comparison.reimportContent.importedSentence :=
   (W.transportReimport W.sourceReimportTheorem).importedSentence_eq
 
-/-- Earlier downgrade route: build the universal quasi-functor by downgrading
-the mathematical support witness to the weaker support-comparison witness
-and applying `lcelUniversalQuasiFunctor_ofComparison`. This construction
-is preserved as a reference point showing that the strong restricted
-theorem dominates the earlier universal theorem: any mathematical support
-witness yields the same conclusion through either route. -/
+/-- Alternative construction obtained by forgetting the additional fields of
+the mathematical support witness and applying
+`lcelUniversalQuasiFunctor_ofComparison`. -/
 def lcelUniversalQuasiFunctor_ofMathematicalComparison_viaSupportDowngrade
     {A₁ A₂ : AdmissibleLCELInstance}
     (W :
@@ -211,22 +173,11 @@ def lcelUniversalQuasiFunctor_ofMathematicalComparison_viaSupportDowngrade
     LCELUniversalQuasiFunctor A₁ A₂ :=
   lcelUniversalQuasiFunctor_ofComparison W.toLCELSupportComparisonWitness
 
-/-! ## The strong restricted theorem -/
+/-! ## Construction from Mathematical Support -/
 
-/-- **LCEL strong restricted structural-identity theorem (Workstream D).**
-
-For every pair of admissible LCEL instances `A₁`, `A₂` equipped with a
-mathematical support witness `W` between their underlying LCEL instances,
-there exists a universal quasi-functor whose target-side reversibility-
-asymmetry and boundary-factorization packages are obtained by genuine
-source-to-target transport through `W`.
-
-This is strictly stronger than
-`lcel_universal_structural_identity_of_comparison`: the input carries the
-mathematical slot correspondence (Workstream A) and the theorem-strength
-base reversibility objects (Workstream B) in addition to the content of the
-plain `LCELSupportComparisonWitness`. The earlier universal theorem is a
-special case obtained by ignoring the extra fields. -/
+/-- A mathematical support witness supplies the fields used to construct an
+`LCELUniversalQuasiFunctor`. The premise contains more data than the plain
+support-comparison premise, while the conclusion has the same type. -/
 theorem lcel_structural_identity_of_mathematicalComparison
     {A₁ A₂ : AdmissibleLCELInstance}
     (W :
@@ -235,7 +186,7 @@ theorem lcel_structural_identity_of_mathematicalComparison
     Nonempty (LCELUniversalQuasiFunctor A₁ A₂) :=
   ⟨lcelUniversalQuasiFunctor_ofMathematicalComparison W⟩
 
-/-- Constructive form of the strong restricted theorem. -/
+/-- Constructor-valued form of the preceding theorem. -/
 def lcel_structural_identity_of_mathematicalComparison_witness
     {A₁ A₂ : AdmissibleLCELInstance}
     (W :
@@ -244,19 +195,10 @@ def lcel_structural_identity_of_mathematicalComparison_witness
     LCELUniversalQuasiFunctor A₁ A₂ :=
   lcelUniversalQuasiFunctor_ofMathematicalComparison W
 
-/-! ## Derivation of the earlier universal theorem as a corollary
+/-! ## Construction through the Support-Comparison Projection -/
 
-Any `LCELMathematicalSupportWitness` extends an `LCELSupportComparisonWitness`,
-so the earlier universal theorem
-`lcel_universal_structural_identity_of_comparison` applies and delivers the
-same conclusion. This shows that the strong restricted theorem dominates
-the earlier universal theorem: every mathematical support witness yields
-the same conclusion through either route. -/
-
-/-- Demotion of the earlier universal theorem: any mathematical support
-witness yields universal structural identity through the earlier
-`lcel_universal_structural_identity_of_comparison` as well, because the
-underlying support-comparison witness is available by extension. -/
+/-- The support-comparison projection of a mathematical witness supplies the
+premise of `lcel_universal_structural_identity_of_comparison`. -/
 theorem lcel_universal_structural_identity_of_mathematicalComparison_via_earlier
     {A₁ A₂ : AdmissibleLCELInstance}
     (W :
@@ -281,7 +223,7 @@ def godel_dp_mathematical_universal_quasiFunctor :
 
 /-- Universal structural identity between the Gödel 1931 side and the native
 DP / emitter side, via the mathematical support witness route. This is the
-manuscript-critical corollary of the strong restricted theorem. -/
+paper-critical corollary of the strong restricted theorem. -/
 theorem godel_dp_mathematical_universal_structural_identity :
     Nonempty
       (LCELUniversalQuasiFunctor

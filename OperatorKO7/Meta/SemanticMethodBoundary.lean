@@ -1,12 +1,12 @@
 import OperatorKO7.Meta.ConstructionRouteCatalog_Certificate
 
 /-!
-# Semantic Method Boundary
+This module defines a three-constructor method registry, assigns route and status metadata by
+constructor, and packages imported support propositions. Catalog coverage ranges over this local
+enum. The subsumption lemma establishes list-length arithmetic only.
 
-This module replaces the old prose-only semantic-method exclusion with a small
-theorem-backed carrier. It records the currently supported semantic lanes:
-transparent whole-term comparison, import-dependent semantic lifting, and a
-certificate-emitting external procedure route.
+
+
 -/
 
 namespace OperatorKO7.SemanticMethodBoundary
@@ -16,42 +16,42 @@ open OperatorKO7.ConstructionMethodClassification
 open OperatorKO7.ConstructionRouteCatalog
 open OperatorKO7.ConstructionRouteCatalogCertificate
 
-/-- Finite carrier for the semantic method classes tracked by the current
-boundary catalog. -/
+/-- Carrier with the constructors displayed below.
+-/
 inductive SemanticMethodClass where
   | transparentWholeTermMeasure
   | importedModelLogicalRelation
-  | certifiedExternalProcedure
+  | certifiedExternalEngine
   deriving DecidableEq, Repr
 
-/-- Finite inventory of the semantic method classes. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def semanticMethodClasses : List SemanticMethodClass :=
   [ .transparentWholeTermMeasure
   , .importedModelLogicalRelation
-  , .certifiedExternalProcedure
+  , .certifiedExternalEngine
   ]
 
-/-- Route projection carried by a semantic method class when one is already
-licensed by the current theorem surface. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def semanticMethodBoundaryRoute? : SemanticMethodClass → Option ConstructionRoute
   | .transparentWholeTermMeasure => some .W0
   | .importedModelLogicalRelation => some .W1
-  | .certifiedExternalProcedure => none
+  | .certifiedExternalEngine => none
 
-/-- Boundary-status vocabulary for the semantic method carrier. -/
+/-- Carrier with the constructors displayed below. -/
 inductive SemanticMethodBoundaryStatus where
   | reducedToExistingTheorem (route : ConstructionRoute)
   | licensedEscape (route : ConstructionRoute)
   | certifiedSuccess
   deriving DecidableEq, Repr
 
-/-- Status classification currently carried by each semantic method class. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def semanticMethodBoundaryStatus : SemanticMethodClass → SemanticMethodBoundaryStatus
   | .transparentWholeTermMeasure => .reducedToExistingTheorem .W0
   | .importedModelLogicalRelation => .licensedEscape .W1
-  | .certifiedExternalProcedure => .certifiedSuccess
+  | .certifiedExternalEngine => .certifiedSuccess
 
-/-- The theorem-backed payload currently available for each semantic method row. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def SemanticMethodSupported : SemanticMethodClass → Prop
   | .transparentWholeTermMeasure =>
       HasDirectWitness fullLinear
@@ -60,11 +60,11 @@ def SemanticMethodSupported : SemanticMethodClass → Prop
         importedWhole_w1_success.route ≠ .W0 ∧
         HasImportedWholeWitness fullDuplicating ∧
         ¬ HasDirectWitness fullDuplicating
-  | .certifiedExternalProcedure =>
+  | .certifiedExternalEngine =>
       CanonicalConstructionCertificate
 
-/-- Every semantic-method row in the finite inventory has theorem-backed
-support. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem semanticMethodSupported_holds (cls : SemanticMethodClass) :
     SemanticMethodSupported cls := by
   cases cls with
@@ -75,47 +75,47 @@ theorem semanticMethodSupported_holds (cls : SemanticMethodClass) :
         importedWhole_w1_success_separates_from_w0.1,
         importedWhole_w1_success_separates_from_w0.2.1,
         importedWhole_w1_success_separates_from_w0.2.2⟩
-  | certifiedExternalProcedure =>
+  | certifiedExternalEngine =>
       exact canonical_construction_certificate
 
-/-- The semantic-method inventory has no duplicate rows. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem semanticMethodClasses_nodup :
     semanticMethodClasses.Nodup := by
   decide
 
-/-- The semantic-method inventory has exact size three. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem semanticMethodClasses_length :
     semanticMethodClasses.length = 3 := by
   rfl
 
-/-- Exact membership characterization for the semantic-method inventory. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem semanticMethodClasses_complete_exact
     (cls : SemanticMethodClass) :
     cls ∈ semanticMethodClasses ↔
       cls = .transparentWholeTermMeasure ∨
       cls = .importedModelLogicalRelation ∨
-      cls = .certifiedExternalProcedure := by
+      cls = .certifiedExternalEngine := by
   cases cls <;> simp [semanticMethodClasses]
 
-/-- Route projection for each semantic-method row is exact. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem semanticMethodBoundaryRoute_exact (cls : SemanticMethodClass) :
     semanticMethodBoundaryRoute? cls =
       match cls with
       | .transparentWholeTermMeasure => some .W0
       | .importedModelLogicalRelation => some .W1
-      | .certifiedExternalProcedure => none := by
+      | .certifiedExternalEngine => none := by
   cases cls <;> rfl
 
-/-- Status projection for each semantic-method row is exact. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem semanticMethodBoundaryStatus_exact (cls : SemanticMethodClass) :
     semanticMethodBoundaryStatus cls =
       match cls with
       | .transparentWholeTermMeasure => .reducedToExistingTheorem .W0
       | .importedModelLogicalRelation => .licensedEscape .W1
-      | .certifiedExternalProcedure => .certifiedSuccess := by
+      | .certifiedExternalEngine => .certifiedSuccess := by
   cases cls <;> rfl
 
-/-- Paper-facing proposition for the finite semantic-method boundary catalog. -/
+/-- Abbreviation for the displayed type. -/
 abbrev SemanticMethodBoundaryCatalog : Prop :=
   ∀ cls : SemanticMethodClass,
     cls ∈ semanticMethodClasses ∧
@@ -124,10 +124,10 @@ abbrev SemanticMethodBoundaryCatalog : Prop :=
         match cls with
         | .transparentWholeTermMeasure => .reducedToExistingTheorem .W0
         | .importedModelLogicalRelation => .licensedEscape .W1
-        | .certifiedExternalProcedure => .certifiedSuccess
+        | .certifiedExternalEngine => .certifiedSuccess
 
-/-- The finite semantic-method boundary catalog is fully realized by the current
-theorem-backed rows. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem semanticMethodBoundaryCatalog_exact : SemanticMethodBoundaryCatalog := by
   intro cls
   refine ⟨?_, semanticMethodSupported_holds cls, ?_⟩
@@ -135,75 +135,75 @@ theorem semanticMethodBoundaryCatalog_exact : SemanticMethodBoundaryCatalog := b
       cases cls <;> simp
   · exact semanticMethodBoundaryStatus_exact cls
 
-/-- The catalog projects the theorem-backed payload for each semantic row. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem semanticMethodBoundaryCatalog_projects_support
     (h : SemanticMethodBoundaryCatalog) (cls : SemanticMethodClass) :
     SemanticMethodSupported cls :=
   (h cls).2.1
 
-/-- The catalog projects the exact status for each semantic row. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem semanticMethodBoundaryCatalog_projects_status
     (h : SemanticMethodBoundaryCatalog) (cls : SemanticMethodClass) :
     semanticMethodBoundaryStatus cls =
       match cls with
       | .transparentWholeTermMeasure => .reducedToExistingTheorem .W0
       | .importedModelLogicalRelation => .licensedEscape .W1
-      | .certifiedExternalProcedure => .certifiedSuccess :=
+      | .certifiedExternalEngine => .certifiedSuccess :=
   (h cls).2.2
 
-/-- Import-dependent semantic methods are licensed escapes rather than direct
-W0 barriers. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem importedSemanticMethod_is_licensed_escape :
     semanticMethodBoundaryStatus .importedModelLogicalRelation = .licensedEscape .W1 :=
   rfl
 
-/-- Import-dependent semantic methods are not classified as direct W0 routes. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem importedSemanticMethod_not_direct_w0 :
     semanticMethodBoundaryRoute? .importedModelLogicalRelation ≠ some .W0 := by
   decide
 
-/-- Certificate packaging the exact semantic boundary catalog together with the
-import-dependent non-W0 classification. -/
+/-- Data record whose requirements are the fields displayed below.
+-/
 structure SemanticMethodBoundaryCertificate where
   catalog : SemanticMethodBoundaryCatalog
   importedNotW0 : semanticMethodBoundaryRoute? .importedModelLogicalRelation ≠ some .W0
 
-/-- The semantic boundary certificate is realized by the current theorem-backed
-catalog and the import-dependent non-W0 separation theorem. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem semanticMethodBoundaryCertificate_exact : SemanticMethodBoundaryCertificate := by
   exact {
     catalog := semanticMethodBoundaryCatalog_exact
     importedNotW0 := importedSemanticMethod_not_direct_w0
   }
 
-/-- The boundary certificate projects the exact semantic catalog. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem semanticMethodBoundaryCertificate_projects_catalog :
     SemanticMethodBoundaryCatalog :=
   semanticMethodBoundaryCertificate_exact.catalog
 
-/-- The boundary certificate projects the import-dependent non-W0 separation theorem. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem semanticMethodBoundaryCertificate_projects_importedNotW0 :
     semanticMethodBoundaryRoute? .importedModelLogicalRelation ≠ some .W0 :=
   semanticMethodBoundaryCertificate_exact.importedNotW0
 
-/-! ### Lane D LONG-22 additive note
+/-! Declarations for the section below.
 
-The three-row `SemanticMethodClass` boundary catalog is now in
-correspondence with the three-constructor exact grammar in
-`Meta/SemanticMethodGrammar.lean`
-(`OperatorKO7.SemanticMethodGrammar.SemanticMethod`). The exact grammar
-classifies every semantic method as W1-licensed escape (importing
-semantic structure from outside the source rewrite system); the boundary
-catalog here predates that classification and mixes a transparent W0
-reduction with a W1 import and an external certificate. The embedding
-theorem
-`OperatorKO7.SemanticMethodGrammar.semantic_boundary_classification_via_grammar`
-documents the classification image without claiming a 1:1 isomorphism
-between the boundary catalog and the exact grammar.
 
-The single additive lemma below records the size relation; the embedding
-itself lives in the grammar module to keep the boundary file
-import-acyclic. -/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-/
 
 theorem semanticMethodClasses_subsumed_by_exact_grammar :
     semanticMethodClasses.length = 3

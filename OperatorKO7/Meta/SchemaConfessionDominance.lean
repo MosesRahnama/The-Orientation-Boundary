@@ -3,36 +3,36 @@ import Mathlib.Analysis.SpecificLimits.Basic
 import Mathlib.Tactic
 
 /-!
-# Confession Dominance and Proof-Entropy Monotonicity
+This module proves arithmetic identities, inequalities, and limits for stipulated burden and
+entropy functions. Those functions form an abstract numeric model. A bridge to observations on
+canonical trace terms requires separate declarations.
 
-Schema-level mechanization of Paper 2 Propositions 3.4, 3.7, and 3.11, together
-with the asymptote in Remark 3.5.
 
-Given a step-duplicating system with an explicit base rule (see
-`BaseDuplicatingSystem` in `SchemaCanonicalTrace.lean`), we define:
 
-- the residual proof work along the canonical trace, `Res(k) = k`;
-- the confessed structural burden
-  `Con(k, p) = (k+1)(k+2)/2 · p` in the paper; we work with the *doubled*
-  quantity `2·Con(k, p) = (k+1)(k+2)·p` throughout, which avoids natural-number
-  division and exposes the same content via the product identity;
-- the total confessed burden with respect to a wrapper-cell weight
-  `w = |G| + |b|` as in Def 3.9–3.10;
-- the proof-entropy fraction `H_proof(t_i)` via a cross-multiplied natural-
-  number inequality.
 
-We prove:
 
-- Proposition 3.4 (confession dominance) via the doubled identity
-  `2 · confessedBurden k p = (k+1)(k+2) · p` together with the closed form
-  of the payload-size summation.
-- Remark 3.5 (quadratic asymptote) as the same doubled product identity.
-- Proposition 3.7 (proof-entropy monotonicity) as a cross-multiplied
-  inequality with an explicit non-negative difference.
-- Proposition 3.11 (total confessed burden) as the wrapper-cell specialization
-  of the same doubled identity.
 
-No natural-number division appears in any proof below.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -/
 
 namespace OperatorKO7.StepDuplicating
@@ -43,15 +43,15 @@ namespace BaseDuplicatingSystem
 
 open scoped Real
 
-/-- Residual proof work along the canonical trace: one strict subterm descent
-per recursive step. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def residualProofWork (k : Nat) : Nat := k
 
-/-- Doubled confessed structural burden: `2 · Con(k, p) = (k+1)(k+2) · p`.
-We carry the doubling to avoid natural-number division. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def confessedBurdenDoubled (k p : Nat) : Nat := (k + 1) * (k + 2) * p
 
-/-- Doubled total confessed burden with wrapper-cell weight `w`. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def totalConfessedBurdenDoubled (k w : Nat) : Nat := (k + 1) * (k + 2) * w
 
 @[simp] theorem residualProofWork_eq (k : Nat) : residualProofWork k = k := rfl
@@ -62,8 +62,8 @@ def totalConfessedBurdenDoubled (k w : Nat) : Nat := (k + 1) * (k + 2) * w
 @[simp] theorem totalConfessedBurdenDoubled_eq (k w : Nat) :
     totalConfessedBurdenDoubled k w = (k + 1) * (k + 2) * w := rfl
 
-/-- **Paper 2 Proposition 3.4 (payload-size summation closed form).**
-The doubled sum `2 · ∑_{i=0}^{k}(i+1)·p` equals `(k+1)(k+2)·p`. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem sum_payloads_doubled (k p : Nat) :
     2 * ((Finset.range (k + 1)).sum (fun i => (i + 1) * p))
       = confessedBurdenDoubled k p := by
@@ -74,43 +74,43 @@ theorem sum_payloads_doubled (k p : Nat) :
       unfold confessedBurdenDoubled
       ring
 
-/-- **Paper 2 Proposition 3.11 (total confessed burden, wrapper-cell form).**
-The same identity with wrapper-cell weight `w` in place of payload size `p`. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem total_confessed_burden_doubled (k w : Nat) :
     2 * ((Finset.range (k + 1)).sum (fun i => (i + 1) * w))
       = totalConfessedBurdenDoubled k w :=
   sum_payloads_doubled k w
 
-/-! ## Real-valued asymptotic normalizers for Props. 3.4, 3.7, and 3.11 -/
+/-! Declarations for the section below. -/
 
-/-- Real-valued quadratic normalizer for the payload confession burden:
-`Con(k,p) / (k+1)^2`. This is the exact quantity appearing in
-Remark 3.5. -/
+/-- Definition with formal content given by the displayed type and body.
+
+-/
 noncomputable def confessionQuadraticInvariant (k p : Nat) : ℝ :=
   (confessedBurdenDoubled k p : ℝ) / (2 * (k + 1 : ℝ) ^ 2)
 
-/-- Real-valued linear normalizer for the confession ratio:
-`Con(k+1,p) / Res(k+1)^2`. This is the shifted version of the
-`Con(k,p) / Res(k)` asymptotic from Proposition 3.4, normalized by the
-trace length so the limit is finite. -/
+/-- Definition with formal content given by the displayed type and body.
+
+
+-/
 noncomputable def confessionLinearNormalizer (k p : Nat) : ℝ :=
   (confessedBurdenDoubled (k + 1) p : ℝ) / (2 * (k + 1 : ℝ) ^ 2)
 
-/-- Wrapper-cell analogue of `confessionLinearNormalizer`, used for
-Proposition 3.11. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 noncomputable def totalConfessionLinearNormalizer (k w : Nat) : ℝ :=
   (totalConfessedBurdenDoubled (k + 1) w : ℝ) / (2 * (k + 1 : ℝ) ^ 2)
 
-/-- Real-valued proof entropy for a fixed canonical-trace stage `i`,
-payload size `payloadSize`, wrapper size `wrapSize`, and constant overhead
-`cStar`. -/
+/-- Definition with formal content given by the displayed type and body.
+
+-/
 def proofEntropyTotalSize
     (k i payloadSize wrapSize cStar : Nat) : Nat :=
   i * (wrapSize + payloadSize) + (k - i) + cStar
 
-/-- Real-valued proof entropy for a fixed canonical-trace stage `i`,
-payload size `payloadSize`, wrapper size `wrapSize`, and constant overhead
-`cStar`. -/
+/-- Definition with formal content given by the displayed type and body.
+
+-/
 noncomputable def proofEntropyValue
     (k i payloadSize wrapSize cStar : Nat) : ℝ :=
   (i * payloadSize : ℝ) /
@@ -142,8 +142,8 @@ noncomputable def proofEntropyValue
   field_simp [hk]
   ring
 
-/-- **Paper 2 Remark 3.5 (quadratic asymptote, exact limit form).**
-The normalized payload confession burden tends to `|b| / 2`. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem confession_quadratic_invariant_tendsto (p : Nat) :
     Filter.Tendsto (fun k : Nat => confessionQuadraticInvariant k p)
       Filter.atTop (nhds ((p : ℝ) / 2)) := by
@@ -163,9 +163,9 @@ theorem confession_quadratic_invariant_tendsto (p : Nat) :
   exact hmul.congr' <| Filter.Eventually.of_forall fun k =>
     (confessionQuadraticInvariant_eq k p).symm
 
-/-- **Paper 2 Proposition 3.4 (linear asymptotic, normalized form).**
-The shifted ratio `Con(k+1,p) / Res(k+1)^2` tends to `|b| / 2`. This is
-equivalent to the paper's statement `Con(k,p) / Res(k) ~ k|b|/2`. -/
+/-- The displayed proposition follows from the stated hypotheses.
+
+-/
 theorem confession_linear_asymptotic_tendsto (p : Nat) :
     Filter.Tendsto (fun k : Nat => confessionLinearNormalizer k p)
       Filter.atTop (nhds ((p : ℝ) / 2)) := by
@@ -195,9 +195,9 @@ theorem confession_linear_asymptotic_tendsto (p : Nat) :
   exact hmul.congr' <| Filter.Eventually.of_forall fun k =>
     (confessionLinearNormalizer_eq k p).symm
 
-/-- **Paper 2 Proposition 3.4 (arbitrary-factor domination form).**
-For any fixed positive payload size, the confession ratio eventually exceeds
-any prescribed factor. -/
+/-- The displayed proposition follows from the stated hypotheses.
+
+-/
 theorem confession_ratio_eventually_dominates
     (p N : Nat) (hp : 1 ≤ p) :
     ∃ K : Nat, ∀ k ≥ K,
@@ -215,8 +215,8 @@ theorem confession_ratio_eventually_dominates
   simpa [mul_assoc, mul_left_comm, mul_comm] using (show (2 * (k + 1) * N : ℝ) ≤
       (confessedBurdenDoubled (k + 1) p : ℝ) by exact_mod_cast hnat)
 
-/-- **Paper 2 Proposition 3.11 (linear asymptotic, wrapper-cell form).**
-The shifted ratio `Con_total(k+1,w) / Res(k+1)^2` tends to `w / 2`. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem total_confession_linear_asymptotic_tendsto (w : Nat) :
     Filter.Tendsto (fun k : Nat => totalConfessionLinearNormalizer k w)
       Filter.atTop (nhds ((w : ℝ) / 2)) := by
@@ -251,15 +251,15 @@ theorem total_confession_linear_asymptotic_tendsto (w : Nat) :
     proofEntropyValue k 0 payloadSize wrapSize cStar = 0 := by
   simp [proofEntropyValue]
 
-/-- Fixed-stage overhead carried by the non-payload part of the
-`proofEntropyValue` denominator. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def proofEntropyOverhead (k i wrapSize cStar : Nat) : Nat :=
   i * wrapSize + (k - i) + cStar
 
-/-- **Paper 2 Proposition 3.7 (fixed-stage payload limit form).**
-For each fixed nonzero stage `i`, the proof entropy tends to `1` as the
-payload size tends to infinity. We shift the payload parameter by `+1` to
-avoid the vacuous zero-payload edge case. -/
+/-- The displayed proposition follows from the stated hypotheses.
+
+
+-/
 theorem proof_entropy_tendsto_one
     (k i wrapSize cStar : Nat) (hi : 1 ≤ i) :
     Filter.Tendsto (fun payloadSize : Nat =>
@@ -361,33 +361,33 @@ theorem proof_entropy_tendsto_one
     simpa using tendsto_const_nhds.sub hgap
   simpa using hsub.congr' hrewrite.symm
 
-/-- **Paper 2 Proposition 3.4 (ratio dominance form).** For `k ≥ 1`, the
-doubled confessed burden dominates the residual work multiplied by `2k`:
-concretely `confessedBurdenDoubled k p = (k+1)(k+2)·p` and
-`2·k·residualProofWork k = 2k²`. The ratio
-`confessedBurdenDoubled / (2·residualProofWork) → ∞` as `k·p → ∞`. We
-state the product form that is equivalent in `Nat`. -/
+/-- The displayed proposition follows from the stated hypotheses.
+
+
+
+
+-/
 theorem confession_dominance_product (k p : Nat) :
     confessedBurdenDoubled k p
       = (k + 1) * (k + 2) * p := rfl
 
-/-- **Paper 2 Remark 3.5 (quadratic asymptote).** The doubled confessed
-burden equals `(k+1)(k+2)·p`, so the paper's asymptote
-`Con(k, p) / (Res(k)+1)² → p/2` is the same statement once divided by
-`2(k+1)²`. In `Nat`, the equivalent product identity is `2 · Con = (k+1)(k+2)·p`. -/
+/-- The displayed proposition follows from the stated hypotheses.
+
+
+-/
 theorem confession_doubled_eq_product (k p : Nat) :
     confessedBurdenDoubled k p = (k + 1) * (k + 2) * p := rfl
 
-/-- Proof-entropy denominator at step `i` along the canonical trace:
-`D_i := i·wrapperCellWeight + (k - i) + cStar`. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def proofEntropyDenominator (k i wrapperCellWeight cStar : Nat) : Nat :=
   i * wrapperCellWeight + (k - i) + cStar
 
 /-- Proof-entropy numerator at step `i`: `i · payloadSize`. -/
 def proofEntropyNumerator (i payloadSize : Nat) : Nat := i * payloadSize
 
-/-- Cross-multiplied non-decreasing-ness predicate: the proof-entropy
-fraction is non-decreasing going from step `i` to step `i+1`. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def ProofEntropyNonDecreasing
     (k payloadSize wrapperCellWeight cStar : Nat) : Prop :=
   ∀ i,
@@ -396,13 +396,13 @@ def ProofEntropyNonDecreasing
     ≤ proofEntropyNumerator (i + 1) payloadSize
       * proofEntropyDenominator k i wrapperCellWeight cStar
 
-/-- **Paper 2 Proposition 3.7 (proof-entropy monotonicity).** The
-proof-entropy fraction `H_proof(t_i)` is monotonically non-decreasing
-along the canonical trace, as a cross-multiplied natural-number inequality.
-The difference `RHS - LHS` is non-negative in both cases:
+/-- The displayed proposition follows from the stated hypotheses.
 
-- when `i + 1 ≤ k`, the difference equals `p · (k + cStar)`;
-- when `i ≥ k`, the difference equals `p · cStar`. -/
+
+
+
+
+-/
 theorem proof_entropy_nondecreasing
     (k payloadSize wrapperCellWeight cStar : Nat) :
     ProofEntropyNonDecreasing k payloadSize wrapperCellWeight cStar := by
@@ -415,7 +415,7 @@ theorem proof_entropy_nondecreasing
     rw [hkI]
     nlinarith [Nat.zero_le m, Nat.zero_le wrapperCellWeight,
                Nat.zero_le payloadSize, Nat.zero_le i, Nat.zero_le cStar]
-  · -- Trailing regime: i ≥ k, so k - i = 0 and k - (i+1) = 0.
+  · --
     have h1 : k - i = 0 := by omega
     have h2 : k - (i + 1) = 0 := by omega
     rw [h1, h2]

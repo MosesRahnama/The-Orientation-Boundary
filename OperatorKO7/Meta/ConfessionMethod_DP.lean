@@ -5,18 +5,17 @@ import OperatorKO7.Meta.DependencyPairs_Works
 /-!
 # Confession Method Instance: Dependency Pairs + Subterm Criterion
 
-The canonical confession method on the KO7 step-duplicating schema.
+This module packages the KO7 dependency-pair route. The imported pair relation
+contains the recursive pair
+`recΔ b s (delta n) -> recΔ b s n`. Lean proves that `dpProjection` strictly
+decreases on every pair in that relation and that the reverse pair relation is
+well founded.
 
-Dependency pairs extract the recursive-call relation from the rules,
-construct the dependency-pair graph, and apply the subterm criterion with
-projection π(recΔ♯) = 3 to certify that the counter coordinate strictly
-decreases. The wrapper `app(s, ·)` and the duplicated payload `s` are
-dropped from the proof obligation. Soundness is licensed by the
-Arts–Giesl 2000 theorem.
-
-The underlying `ProjectionRank` is `dpProjectionRank` from
-`CompositionalMeasure_Impossibility.lean`, already fully formalized.
-This module packages it as a `ConfessionMethod` instance.
+`dpConfession` pairs `dpProjectionRank` with the `artsGiesl2000` license tag.
+That tag records the intended external dependency-pair soundness theorem; it is
+data, not a formalized source-system transport theorem. No dependency graph or
+general dependency-pair processor soundness theorem is constructed in this
+file.
 -/
 
 namespace OperatorKO7.ConfessionMethodFamily
@@ -27,9 +26,8 @@ open OperatorKO7.StepDuplicating.StepDuplicatingSchema
 open OperatorKO7.CompositionalImpossibility
 open OperatorKO7.MetaDependencyPairs
 
-/-- A route-local dependency-pair witness on the marked recursive symbol.
-    On KO7, the marked pair still carries the three original recursor
-    coordinates, and the third coordinate is the unique descent-bearing one. -/
+/-- Witness selecting the third, counter coordinate of the marked recursive
+symbol. The structure records the selected position; uniqueness is not a field. -/
 structure DPWitness where
   selectedCoordinate : Fin 3
   selectedCoordinate_is_counter : selectedCoordinate = ⟨2, by decide⟩
@@ -54,10 +52,9 @@ structure DPPairShapeEvidence where
   callerShape : ∃ b s n, caller = recΔ b s (delta n)
   calleeShape : ∃ b s n, callee = recΔ b s n
 
-/-- Stronger pair-problem semantics for the DP route: the marked pair comes
-    directly from the KO7 `rec_succ` rule instance, is an extracted dependency
-    pair, strictly decreases the DP rank, and lives in a well-founded reverse
-    pair problem. -/
+/-- Evidence that a caller-to-right-hand-side KO7 step yields the stated
+dependency pair and that the pair strictly decreases `dpRank`. Well-foundedness
+of the full reverse pair relation is stored separately in `DPRouteEvidence`. -/
 structure DPPairProblemEvidence where
   caller : Trace
   rhs : Trace
@@ -84,33 +81,35 @@ def schemaDPPairShapeEvidence (b s n : Trace) : DPPairShapeEvidence where
   callerShape := ⟨b, s, n, rfl⟩
   calleeShape := ⟨b, s, n, rfl⟩
 
-/-- Dependency pairs + subterm criterion as a confession method on KO7. -/
+/-- Pair `dpProjectionRank` with the `artsGiesl2000` license tag. The tag names
+the external route and does not itself prove its soundness theorem. -/
 def dpConfession : ConfessionMethod ko7Schema where
   toProjectionRank := dpProjectionRank
   license := SoundnessLicense.artsGiesl2000
 
-/-- The DP confession is the canonical confession-core route on KO7. -/
+/-- The DP confession contains `dpProjectionRank` definitionally. -/
 theorem dpConfession_is_canonical :
     dpConfession.toProjectionRank = dpProjectionRank := rfl
 
-/-- The DP witness selects the counter coordinate as the descent-bearing
-    argument on the marked recursive pair. -/
+/-- The DP witness designates the counter coordinate of the marked recursive
+symbol. Pair-rank descent is proved separately in `DPPairProblemEvidence`. -/
 theorem dpWitness_selects_counter_coordinate :
     schemaDPWitness.selectedCoordinate = ⟨2, by decide⟩ :=
   schemaDPWitness.selectedCoordinate_is_counter
 
-/-- The DP route realizes the canonical confession core directly. -/
+/-- The DP confession and `dpProjectionRank` have the same rank function
+definitionally. -/
 theorem dpWitness_realizes_projection_core :
     dpConfession.rank = dpProjectionRank.rank := rfl
 
-/-- The DP witness induces the canonical intermediate confession core. -/
+/-- The witness's packaged confession core converts to `dpProjectionRank`. -/
 theorem dpWitness_toConfessionCoreWitness_eq_core :
     schemaDPWitness.toConfessionCoreWitness.toProjectionRank = dpProjectionRank := by
   rfl
 
-/-- Richer route-local evidence for the DP entry route. This packages the
-    selected coordinate together with concrete local facts about the marked
-    recursive-pair shape that are stronger than mere final rank equality. -/
+/-- Route evidence bundling the selected coordinate, marked-pair shape,
+caller-step extraction, pair-rank descent, wrapper erasure, and well-foundedness
+of the reverse pair relation. -/
 structure DPRouteEvidence where
   witness : DPWitness
   markedPairShape : Trace → Trace → Trace → DPPairShapeEvidence
@@ -123,7 +122,7 @@ structure DPRouteEvidence where
     ∀ (x y : Trace), witness.toConfessionCoreWitness.rank (app x y) = 0
   pairProblemWellFounded : WellFounded MetaDependencyPairs.DPPairRev
 
-/-- The concrete rich DP route evidence on KO7. -/
+/-- Concrete DP route evidence for the KO7 extracted pair relation. -/
 def schemaDPRouteEvidence : DPRouteEvidence where
   witness := schemaDPWitness
   markedPairShape := schemaDPPairShapeEvidence
@@ -136,8 +135,8 @@ def schemaDPRouteEvidence : DPRouteEvidence where
     rfl
   pairProblemWellFounded := wf_DPPairRev
 
-/-- Forget the DP-specific witness vocabulary and keep only the generic
-    schema-semantic profile. -/
+/-- Forget the pair-problem fields and retain the generic projection-rank
+profile carried by the witness. -/
 def DPRouteEvidence.toRouteEvidence (E : DPRouteEvidence) : RouteEvidence ko7Schema where
   rank := E.witness.toConfessionCoreWitness.rank
   rank_base := E.witness.toConfessionCoreWitness.rank_base
@@ -149,7 +148,8 @@ def DPRouteEvidence.toRouteEvidence (E : DPRouteEvidence) : RouteEvidence ko7Sch
 abbrev schemaDPGenericRouteEvidence : RouteEvidence ko7Schema :=
   schemaDPRouteEvidence.toRouteEvidence
 
-/-- The richer DP route evidence already entails the generic semantic profile. -/
+/-- The witness component satisfies the four generic projection-rank equations.
+The pair-problem fields are not used in this theorem. -/
 theorem dpRouteEvidence_implies_semantic_profile :
     NormalizedAtBase ko7Schema schemaDPRouteEvidence.witness.toConfessionCoreWitness.rank
     ∧ TracksSuccessorDepth ko7Schema schemaDPRouteEvidence.witness.toConfessionCoreWitness.rank
@@ -157,7 +157,7 @@ theorem dpRouteEvidence_implies_semantic_profile :
     ∧ FollowsRecursiveCounter ko7Schema schemaDPRouteEvidence.witness.toConfessionCoreWitness.rank := by
   exact schemaDPRouteEvidence.witness.toConfessionCoreWitness.satisfies_semantic_profile
 
-/-- The DP witness directly satisfies the generic semantic confession profile. -/
+/-- The witness's packaged projection rank satisfies the generic profile. -/
 theorem dpWitness_has_semantic_profile :
     NormalizedAtBase ko7Schema schemaDPWitness.toConfessionCoreWitness.rank
     ∧ TracksSuccessorDepth ko7Schema schemaDPWitness.toConfessionCoreWitness.rank

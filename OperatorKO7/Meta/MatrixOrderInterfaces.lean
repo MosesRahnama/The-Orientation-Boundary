@@ -29,8 +29,9 @@ def ParetoProductOrder.family {d : Nat}
     (_ : ParetoProductOrder d) : MatrixResidualFamily :=
   .paretoProduct
 
-/-- Theorem-visible interface for lex-priority orders whose primary tracked coordinate is
-explicit. -/
+/-- Strong tracked-primary interface requiring weak decrease at every
+coordinate and strict decrease at the head coordinate. This is narrower than a
+conventional lexicographic relation. -/
 structure LexPriorityOrder (d : Nat) where
   rel : MatrixVec d → MatrixVec d → Prop
   priority : List (Fin d)
@@ -61,7 +62,7 @@ def PermutationLexPriorityOrder.family {d : Nat}
     (_ : PermutationLexPriorityOrder d) : MatrixResidualFamily :=
   .permutationLexPriority
 
-/-- Scalarizable matrix orders are the exact subfamily already reducible to the existing
+/-- Scalarizable matrix orders carry the dominance premise consumed by the
 scalar-dominance theorem. -/
 structure ScalarizableMatrixOrder (d : Nat) where
   rel : MatrixVec d → MatrixVec d → Prop
@@ -72,8 +73,7 @@ def ScalarizableMatrixOrder.family {d : Nat}
     (_ : ScalarizableMatrixOrder d) : MatrixResidualFamily :=
   .scalarizableWeight
 
-/-- Imported matrix orders are classified only through their external witness/certificate
-dependency. -/
+/-- Tags describing the source of an imported matrix-order witness. -/
 inductive MatrixImportLicense
   | externalCertificate
   | globalWeightSearch
@@ -81,6 +81,8 @@ inductive MatrixImportLicense
   | oracleWitness
   deriving DecidableEq, Repr
 
+/-- Imported relation metadata with an inhabited witness type. Relation
+validity, well-foundedness, and license adequacy require additional laws. -/
 structure ImportDependentMatrixOrder (d : Nat) where
   rel : MatrixVec d → MatrixVec d → Prop
   license : MatrixImportLicense
@@ -138,8 +140,8 @@ theorem permutationLexPriority_projection_payload :
   intro u v h
   exact matrixScalarize_le_of_pointwise_le weight u v (O.weak_all h)
 
-/-- The scalarizable-weight family already carries the exact scalar-dominance certificate
-needed by the arbitrary-matrix barrier. -/
+/-- The scalarizable-weight family carries the scalar-dominance certificate
+consumed by the arbitrary-matrix barrier. -/
 abbrev ScalarizableWeightReductionPayload : Prop :=
   ∀ {d : Nat} (O : ScalarizableMatrixOrder d),
     MatrixScalarDominance O.weight O.rel
@@ -184,7 +186,9 @@ theorem import_dependent_matrix_is_licensed_escape
     matrixResidualClosureStatus O.family = MatrixClosureStatus.licensedEscape := by
   rfl
 
-/-- Theorem-visible licensed-escape payload for imported matrix orders. -/
+/-- Field-tag equality assigning the imported family to
+`MatrixClosureStatus.licensedEscape`. This proposition concerns the closed
+status table rather than relation validity. -/
 abbrev ImportDependentMatrixLicensedEscapePayload : Prop :=
   ∀ {d : Nat} (O : ImportDependentMatrixOrder d),
     matrixResidualClosureStatus O.family = MatrixClosureStatus.licensedEscape

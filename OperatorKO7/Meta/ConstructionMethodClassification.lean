@@ -7,11 +7,10 @@ import OperatorKO7.Meta.BoundaryFactorization
 /-!
 # Construction-Method Classification
 
-This module starts the M1 construction-side classification layer. It does not claim a
-universal theorem about all first-order methods. It packages explicit W1 successes already
-present in the artifact and records which structural import each one uses.
+This module packages four explicit W1 construction witnesses and records the structural
+import carried by each package. It does not classify all first-order methods.
 
-The W1 envelope here is intentionally narrow and theorem-backed:
+The theorem-backed W1 envelope in this module is deliberately narrow:
 
 - precedence import through the KO7 MPO witness;
 - nonlinear/global polynomial import through the `W` witness;
@@ -26,7 +25,7 @@ open OperatorKO7.Trace
 open OperatorKO7.StepDuplicating
 open OperatorKO7.CompositionalImpossibility
 
-/-- Small route vocabulary for the paper's W0/W1/W2 discussion. -/
+/-- Route vocabulary for the W0/W1/W2 classification. -/
 inductive ConstructionRoute where
   | W0
   | W1
@@ -54,8 +53,8 @@ theorem fullDuplicating_imported_whole_not_w0_direct :
   exact ⟨BenchmarkedPRCFamily.fullDuplicating_has_imported_whole_witness,
     BenchmarkedPRCFamily.fullDuplicating_has_no_direct_witness⟩
 
-/-- The KO7 recursor-step MPO proof uses the strict precedence comparison `app < recΔ`. -/
-theorem mpo_recursor_step_uses_precedence :
+/-- The strict precedence comparison required by the KO7 MPO recursor-step proof holds. -/
+theorem mpo_recursor_step_precedence_holds :
     MetaMPO.symPrec MetaMPO.Sym.app MetaMPO.Sym.recΔ := by
   simp [MetaMPO.symPrec, MetaMPO.rank]
 
@@ -85,14 +84,14 @@ inductive W1ImportEvidence : W1ImportClass → Type where
       (violatesTransparency : ¬ StepDuplicatingSchema.TransparentAtBase ko7Schema PolyInterpretation.W) →
       W1ImportEvidence .transparencyEssentiality
 
-/-- A first-class W1 construction success carries theorem-level evidence of its permitted import. -/
+/-- A packaged W1 construction witness carries theorem-level evidence for one catalogued import. -/
 structure W1ConstructionSuccess where
   route : ConstructionRoute
   route_is_w1 : route = .W1
   importClass : W1ImportClass
   evidence : W1ImportEvidence importClass
 
-/-- The permitted W1 imports restated as a proposition carrying the theorem payload. -/
+/-- Proposition-valued counterpart of `W1ImportEvidence`, retaining the theorem payload. -/
 inductive PermittedW1Import : W1ImportClass → Prop where
   | precedence :
     (recursorStepPrecedence : MetaMPO.symPrec MetaMPO.Sym.app MetaMPO.Sym.recΔ) →
@@ -118,8 +117,8 @@ inductive PermittedW1Import : W1ImportClass → Prop where
       (violatesTransparency : ¬ StepDuplicatingSchema.TransparentAtBase ko7Schema PolyInterpretation.W) →
       PermittedW1Import .transparencyEssentiality
 
-/-- Any theorem-backed W1 success must realize one of the permitted structural imports. -/
-theorem w1_success_requires_permitted_import (S : W1ConstructionSuccess) :
+/-- Re-expose the permitted import already encoded by a `W1ConstructionSuccess` value. -/
+theorem packaged_w1_success_exposes_permitted_import (S : W1ConstructionSuccess) :
     PermittedW1Import S.importClass := by
   rcases S with ⟨_, _, _, evidence⟩
   cases evidence with
@@ -137,7 +136,7 @@ def mpo_w1_success : W1ConstructionSuccess where
   route := .W1
   route_is_w1 := rfl
   importClass := .precedence
-  evidence := .precedenceImport mpo_recursor_step_uses_precedence MetaMPO.mpo_orients_step
+  evidence := .precedenceImport mpo_recursor_step_precedence_holds MetaMPO.mpo_orients_step
 
 /-- Canonical W1 success witness using the nonlinear/global polynomial witness. -/
 def poly_w1_success : W1ConstructionSuccess where
@@ -171,24 +170,24 @@ def transparency_w1_success : W1ConstructionSuccess where
 /-- The canonical MPO witness extracts the explicit precedence-side import. -/
 theorem mpo_w1_success_requires_precedence_import :
     PermittedW1Import .precedence := by
-  simpa [mpo_w1_success] using w1_success_requires_permitted_import mpo_w1_success
+  simpa [mpo_w1_success] using packaged_w1_success_exposes_permitted_import mpo_w1_success
 
 /-- The canonical polynomial witness extracts the global-polynomial import. -/
 theorem poly_w1_success_requires_global_polynomial_import :
     PermittedW1Import .globalPolynomial := by
-  simpa [poly_w1_success] using w1_success_requires_permitted_import poly_w1_success
+  simpa [poly_w1_success] using packaged_w1_success_exposes_permitted_import poly_w1_success
 
 /-- The canonical imported-whole witness extracts the imported-whole lane. -/
 theorem importedWhole_w1_success_requires_imported_whole :
     PermittedW1Import .importedWholeWitness := by
   simpa [importedWhole_w1_success] using
-    w1_success_requires_permitted_import importedWhole_w1_success
+    packaged_w1_success_exposes_permitted_import importedWhole_w1_success
 
 /-- The canonical transparency witness extracts the transparency-essentiality lane. -/
 theorem transparency_w1_success_requires_transparency_import :
     PermittedW1Import .transparencyEssentiality := by
   simpa [transparency_w1_success] using
-    w1_success_requires_permitted_import transparency_w1_success
+    packaged_w1_success_exposes_permitted_import transparency_w1_success
 
 /-- The imported-whole W1 witness stays outside the W0 direct-witness lane. -/
 theorem importedWhole_w1_success_separates_from_w0 :
@@ -212,7 +211,7 @@ theorem poly_w1_success_escapes_direct_additive_affine_surface :
   exact ⟨poly_not_transparent_at_base,
     ⟨PolyInterpretation.W_not_additive, PolyInterpretation.W_not_affine⟩⟩
 
-/-- Combined catalog for the canonical theorem-backed W1 witnesses currently formalized here. -/
+/-- Combined catalog for the four theorem-backed W1 witness packages in this module. -/
 theorem canonical_w1_witness_catalog :
     (mpo_w1_success.importClass = .precedence ∧ PermittedW1Import .precedence) ∧
       (poly_w1_success.importClass = .globalPolynomial ∧ PermittedW1Import .globalPolynomial) ∧

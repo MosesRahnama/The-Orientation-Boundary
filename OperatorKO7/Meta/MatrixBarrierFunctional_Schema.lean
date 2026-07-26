@@ -4,17 +4,9 @@ import OperatorKO7.Meta.MatrixBarrierMix2_Schema
 /-!
 # Positive-Functional Matrix Barrier
 
-This module unifies the tracked-coordinate and balanced-sum matrix barriers through
-a fixed scalar projection. A vector-valued direct measure may use arbitrary finite
-dimension, but if a nonzero natural-weighted projection of that measure satisfies
-the scalar affine barrier interface, then strict componentwise orientation of the
-duplicating step is impossible.
+## Formal Scope
 
-This still does not cover arbitrary matrix orders or arbitrary mixed-coordinate
-interpretations. The theorem remains a projection barrier. Its value is that one
-proof now covers tracked single-coordinate projections, aggregate-sum projections,
-and any other fixed nonzero natural-weighted scalar projection whose constructor laws
-factor through the affine interface.
+The functional barriers use an explicit scalar projection and retain every affine/unboundedness hypothesis. They do not cover matrix orders lacking that projection.
 -/
 
 open scoped BigOperators

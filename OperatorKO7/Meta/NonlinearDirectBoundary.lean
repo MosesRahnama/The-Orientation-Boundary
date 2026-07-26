@@ -21,7 +21,9 @@ open OperatorKO7.NonlinearResidualTaxonomy
 open OperatorKO7.NonlinearTransparentProjection
 open OperatorKO7.NonlinearUnconstrainedSplit
 
-/-- Theorem-backed support payload for each nonlinear residual family in the E3 split. -/
+/-- Row-specific payload for each nonlinear residual family. The payloads
+include unconditional theorems, hypothesis-exact barriers, a licensed W1 row, and an
+explicit exact law-carrier row. -/
 def NonlinearDirectBoundarySupported : NonlinearResidualFamily → Prop
   | .boundedDegreeDirectTransparentPolynomial =>
       nonlinearResidualStatus .boundedDegreeDirectTransparentPolynomial =
@@ -57,13 +59,13 @@ def NonlinearDirectBoundarySupported : NonlinearResidualFamily → Prop
         ∧ poly_w1_success.importClass = .globalPolynomial
         ∧ PermittedW1Import .globalPolynomial
   | .unconstrainedNonlinearDirect =>
-      nonlinearResidualStatus .unconstrainedNonlinearDirect = .openResidualClass
+      nonlinearResidualStatus .unconstrainedNonlinearDirect = .exactLawCarrierBoundary
         ∧ NonlinearUnconstrainedSplitCatalog
         ∧ ∀ (R : NonlinearRelation),
-            unsupported_arbitrary_relation_boundary R
+            arbitrary_relation_law_boundary R
 
-/-- The transparent-specific polynomial row now carries the concrete witness-class closure theorem
-while preserving the legacy projection-required status equation for downstream compatibility. -/
+/-- The transparent-polynomial row combines its recorded status, finite
+catalogs, and the conditional dominance-witness barrier. -/
 theorem boundedDegreeDirectTransparentPolynomial_closed_by_concrete_dominance_witness_class :
     NonlinearDirectBoundarySupported .boundedDegreeDirectTransparentPolynomial := by
   exact ⟨rfl,
@@ -72,12 +74,12 @@ theorem boundedDegreeDirectTransparentPolynomial_closed_by_concrete_dominance_wi
     transparent_polynomial_conditional_closure_catalog,
     transparent_polynomial_dominance_universal_unconditional⟩
 
-/-- Backward-compatible theorem name for downstream files that still refer to the old boundary label. -/
+/-- Alias for the transparent-polynomial support theorem. -/
 theorem boundedDegreeDirectTransparentPolynomial_requires_projection :
     NonlinearDirectBoundarySupported .boundedDegreeDirectTransparentPolynomial :=
   boundedDegreeDirectTransparentPolynomial_closed_by_concrete_dominance_witness_class
 
-/-- The bounded cross-term quadratic fragment is blocked by an existing KO7 barrier theorem. -/
+/-- Hypothesis-exact barrier for bounded cross-term quadratic measures. -/
 theorem boundedCrossTermQuadratic_blocked :
     NonlinearDirectBoundarySupported .boundedCrossTermQuadratic := by
   exact
@@ -87,7 +89,7 @@ theorem boundedCrossTermQuadratic_blocked :
       ¬ StepDuplicatingSchema.GlobalOrients CompositionalImpossibility.ko7System M.eval (· < ·) from
         QuadraticCrossTermBarrier.no_global_step_orientation_cross_quadratic_of_unbounded)
 
-/-- The bounded multilinear fragment is blocked by an existing KO7 barrier theorem. -/
+/-- Hypothesis-exact barrier for bounded multilinear measures. -/
 theorem boundedMultilinear_blocked :
     NonlinearDirectBoundarySupported .boundedMultilinear := by
   exact
@@ -97,7 +99,7 @@ theorem boundedMultilinear_blocked :
       ¬ StepDuplicatingSchema.GlobalOrients CompositionalImpossibility.ko7System M.eval (· < ·) from
         MultilinearBarrier.no_global_step_orientation_multilinear_of_unbounded)
 
-/-- The direct WPO polynomial branch is blocked by the existing KO7 corollary. -/
+/-- Hypothesis-exact barrier for the direct WPO polynomial branch. -/
 theorem wpoPolynomialBranch_blocked :
     NonlinearDirectBoundarySupported .wpoPolynomialBranch := by
   exact
@@ -108,7 +110,7 @@ theorem wpoPolynomialBranch_blocked :
         (fun x y => W.gt y x) from
         WPOPolynomialBarrier.no_global_step_orientation_wpoPolynomialDirect_of_unbounded)
 
-/-- The max-plus direct fragment is blocked by the existing KO7 max barrier. -/
+/-- Hypothesis-exact barrier for the max-plus direct fragment. -/
 theorem maxPlusDirectFragment_blocked :
     NonlinearDirectBoundarySupported .maxPlusDirectFragment := by
   exact
@@ -117,7 +119,8 @@ theorem maxPlusDirectFragment_blocked :
       ¬ StepDuplicatingSchema.GlobalOrients CompositionalImpossibility.ko7System M.eval (· < ·) from
         MaxBarrier.no_global_step_orientation_max_of_unbounded)
 
-/-- The global cross-coupled nonlinear witness is licensed as a W1 escape, not as a W0 barrier theorem. -/
+/-- The global cross-coupled witness carries a licensed W1 status and its
+permitted-import proof. -/
 theorem globalCrossCoupledWitness_licensed_escape :
     NonlinearDirectBoundarySupported .globalCrossCoupledWitness := by
   exact
@@ -127,14 +130,16 @@ theorem globalCrossCoupledWitness_licensed_escape :
       ∧ PermittedW1Import .globalPolynomial from
         ⟨rfl, rfl, rfl, poly_w1_success_requires_global_polynomial_import⟩)
 
-/-- The unrestricted nonlinear direct class remains open after splitting off the theorem-backed fragments. -/
-theorem unconstrainedNonlinearDirect_remains_open :
+/-- The unrestricted nonlinear row carries the declared exact boundary status and the
+arbitrary-relation split predicate. -/
+theorem unconstrainedNonlinearDirect_exactLawBoundary :
     NonlinearDirectBoundarySupported .unconstrainedNonlinearDirect := by
   exact ⟨rfl,
     nonlinear_unconstrained_split_catalog,
-    unsupported_arbitrary_relation_no_first_order_method_or_licensed_escape⟩
+    arbitrary_relation_law_no_first_order_method_or_licensed_escape⟩
 
-/-- Every nonlinear residual family carries the exact theorem-backed support recorded by the E3 split. -/
+/-- Case analysis supplies the row-specific payload for every constructor of
+`NonlinearResidualFamily`. -/
 theorem nonlinear_direct_boundary_supported (family : NonlinearResidualFamily) :
     NonlinearDirectBoundarySupported family := by
   cases family with
@@ -151,16 +156,18 @@ theorem nonlinear_direct_boundary_supported (family : NonlinearResidualFamily) :
   | globalCrossCoupledWitness =>
       exact globalCrossCoupledWitness_licensed_escape
   | unconstrainedNonlinearDirect =>
-      exact unconstrainedNonlinearDirect_remains_open
+      exact unconstrainedNonlinearDirect_exactLawBoundary
 
-/-- Paper-facing proposition for the nonlinear residual boundary projection catalog. -/
+/-- Finite catalog proposition combining family-list membership, row-specific
+support, and status-list membership. -/
 abbrev NonlinearDirectBoundaryProjectionCatalog : Prop :=
   ∀ family : NonlinearResidualFamily,
     family ∈ nonlinearResidualFamilies ∧
       NonlinearDirectBoundarySupported family ∧
       nonlinearResidualStatus family ∈ nonlinearResidualStatuses
 
-/-- The nonlinear residual split has exact boundary support for every listed family. -/
+/-- Every family constructor belongs to the two declared lists and carries its
+row-specific support payload. -/
 theorem nonlinear_direct_boundary_projection_catalog : NonlinearDirectBoundaryProjectionCatalog := by
   intro family
   exact ⟨(nonlinearResidualFamilies_complete_exact family).2 <| by
@@ -168,12 +175,13 @@ theorem nonlinear_direct_boundary_projection_catalog : NonlinearDirectBoundaryPr
     nonlinear_direct_boundary_supported family,
     nonlinearResidualFamily_has_listed_status family⟩
 
-/-- Certificate packaging the nonlinear status catalog and the theorem-backed boundary projections. -/
+/-- Certificate packaging the status catalog and row-specific projection
+catalog. -/
 structure NonlinearDirectBoundaryCertificate where
   statusCatalog : NonlinearResidualStatusCatalog
   projectionCatalog : NonlinearDirectBoundaryProjectionCatalog
 
-/-- The E3 nonlinear split certificate records the finite status list and its theorem-backed boundary projections. -/
+/-- Construction of the certificate from the two catalog theorems. -/
 theorem nonlinear_direct_boundary_certificate : NonlinearDirectBoundaryCertificate := by
   exact {
     statusCatalog := nonlinear_residual_status_catalog
@@ -185,7 +193,7 @@ theorem nonlinear_direct_boundary_certificate_projects_status_catalog :
     NonlinearResidualStatusCatalog :=
   nonlinear_direct_boundary_certificate.statusCatalog
 
-/-- The nonlinear boundary certificate projects the theorem-backed boundary catalog. -/
+/-- Projection of the row-specific boundary catalog. -/
 theorem nonlinear_direct_boundary_certificate_projects_projection_catalog :
     NonlinearDirectBoundaryProjectionCatalog :=
   nonlinear_direct_boundary_certificate.projectionCatalog

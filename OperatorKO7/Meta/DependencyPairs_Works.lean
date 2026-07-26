@@ -6,16 +6,17 @@ import Mathlib.Order.WellFounded
 /-!
 # Dependency Pairs Work on the KO7 Duplicating Recursor
 
-This module gives a minimal formal witness that the KO7 duplicating recursor is
-handled by a dependency-pair style argument:
+This module gives a minimal formal witness that the pair problem associated
+with the KO7 duplicating rule is handled by a dependency-pair style argument:
 
-- Extract the single recursive-call dependency pair from `rec_succ`.
+- State the single recursive-call pair corresponding to `rec_succ`.
 - Use the DP projection rank (track only the recursion counter argument).
 - Prove strict decrease on every DP step.
 - Conclude well-foundedness of the reverse DP relation via `Nat.lt`.
 
-This is intentionally narrow: it formalizes the DP-chain termination core for
-the duplicating rule, not a full generic DP framework library.
+The scope is the manually stated dependency-pair relation for the displayed
+duplicating rule. Source-system transport and a generic DP framework require
+additional definitions.
 -/
 
 namespace OperatorKO7.MetaDependencyPairs
@@ -24,7 +25,7 @@ open OperatorKO7 Trace
 open OperatorKO7.CompositionalImpossibility
 open OperatorKO7.DependencyPairsFragment
 
-/-- The dependency pair relation extracted from `rec_succ`:
+/-- The dependency-pair relation stated for `rec_succ`:
 `recΔ b s (delta n) ↦ recΔ b s n`. -/
 inductive DPPair : Trace → Trace → Prop
 | rec_succ : ∀ b s n, DPPair (recΔ b s (delta n)) (recΔ b s n)
@@ -38,7 +39,7 @@ theorem dpPair_decreases : ∀ {a b : Trace}, DPPair a b → dpRank b < dpRank a
   | _, _, DPPair.rec_succ b s n => by
       simp [dpRank, dpProjection]
 
-/-- KO7's extracted pair problem as an instance of the reusable DP projection fragment. -/
+/-- KO7's one-pair problem as an instance of the reusable DP projection fragment. -/
 def ko7ProjectionProblem : DPProjection Trace where
   Pair := DPPair
   rank := dpRank
@@ -54,12 +55,12 @@ lemma dpPairRev_sub_rank :
     Subrelation DPPairRev (fun x y => dpRank x < dpRank y) :=
   ko7ProjectionProblem.rev_sub_rank
 
-/-- Well-foundedness of reverse dependency pairs:
-no infinite KO7 DP chain is possible for the extracted pair problem. -/
+/-- Well-foundedness of the reverse relation for the extracted KO7 pair
+problem. -/
 theorem wf_DPPairRev : WellFounded DPPairRev := by
   simpa [DPPairRev] using ko7ProjectionProblem.wfRev
 
-/-- The extracted pair comes directly from the `rec_succ` rule instance. -/
+/-- The `rec_succ` source step and its corresponding manually stated pair both hold. -/
 theorem rec_succ_extracts_dependency_pair (b s n : Trace) :
     Step (recΔ b s (delta n)) (app s (recΔ b s n))
     ∧ DPPair (recΔ b s (delta n)) (recΔ b s n) := by

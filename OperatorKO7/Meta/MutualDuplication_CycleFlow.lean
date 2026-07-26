@@ -50,7 +50,7 @@ def toDupSchema (S : StepDuplicatingSchema) (copies : Nat) : StepDuplicatingSche
   wrap := fun s t => wrapNest S s copies t
   recur := S.recur
 
-/-- Exact one-cycle witness for the induced minimal contextual relation. -/
+/-- One-cycle witness for the induced minimal contextual relation. -/
 structure CycleWitness (S : StepDuplicatingSchema) (copies : Nat) where
   StepCtx : S.T → S.T → Prop
   cycle_realized :
@@ -328,8 +328,8 @@ def toDupMeasure {S : StepDuplicatingSchema} (CM : CompositionalMeasure S)
 
 end CompositionalOps
 
-/-- A transparent-compositional measure also cannot orient the delayed one-cycle profile,
-provided successor is transparent at the base point. -/
+/-- Orientation by a transparent-compositional measure yields a contradiction
+when successor is transparent at the base point. -/
 theorem no_compositional_orients_cycle_composite_transparent
     {S : StepDuplicatingSchema} (CM : CompositionalMeasure S) {copies : Nat}
     (hcopies : 0 < copies) (htrans : CM.c_succ CM.c_base = CM.c_base) :

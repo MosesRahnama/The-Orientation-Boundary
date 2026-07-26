@@ -2,16 +2,12 @@ import OperatorKO7.Meta.MutualDuplication_General
 import OperatorKO7.Meta.ScalarProjectionBarrier
 
 /-!
-# Transparent-Compositional and Projection SCC Extensions
+# Transparent-compositional and projected SCC barriers
 
-This module extends the bounded SCC program in two staged directions:
-
-- a Tier-2 transparent-compositional composite barrier;
-- a projection-based matrix-style corollary for the same alternating composite profile.
-
-The point is not to cover arbitrary matrix orders. The matrix extension is deliberately
-restricted to subclasses whose chosen scalar projection is already blocked by the affine
-barrier on the derived two-step schema.
+This module proves a transparent-compositional barrier for an alternating SCC
+and a matrix-functional corollary obtained through a weighted scalar projection.
+The matrix result applies to measures carrying the declared projection and
+unbounded weighted-range hypotheses.
 -/
 
 namespace OperatorKO7.MutualDuplicationTransparent
@@ -74,7 +70,8 @@ lemma succ_transparent_at_base_twice {S : AlternatingDupSchema}
     CM.toDup2Measure.c_succ CM.toDup2Measure.c_base = CM.toDup2Measure.c_base := by
   simp [CompositionalMeasure.toDup2Measure, htrans]
 
-/-- No transparent-compositional measure can orient the bounded SCC composite profile. -/
+/-- Uniform orientation of the bounded SCC composites by a
+transparent-successor compositional measure leads to a contradiction. -/
 theorem no_compositional_orients_alternating_dup2_composite_transparent
     {S : AlternatingDupSchema} (CM : CompositionalMeasure S)
     (htrans : CM.c_succ CM.c_base = CM.c_base) :
@@ -86,8 +83,8 @@ theorem no_compositional_orients_alternating_dup2_composite_transparent
       (S := S.toDup2Schema) (CM := CM.toDup2Measure)
       (succ_transparent_at_base_twice CM htrans))
 
-/-- Consequently no transparent-compositional measure globally orients the minimal SCC context
-relation when successor is transparent at the base point. -/
+/-- Global orientation of the minimal SCC context relation leads to a
+contradiction when successor is transparent at the base point. -/
 theorem no_global_orients_ctx_compositional_transparent
     {Sys : AlternatingDupSchema.AlternatingDupSystem}
     (CM : CompositionalMeasure (AlternatingDupSchema.AlternatingDupSystem.toAlternatingDupSchema Sys))
@@ -115,11 +112,8 @@ theorem no_global_orients_ctx_compositional_transparent
     no_compositional_orients_alternating_dup2_composite_transparent
       (S := AlternatingDupSchema.AlternatingDupSystem.toAlternatingDupSchema Sys) CM htrans hcomp
 
-/-- Projection-based matrix extension of the bounded SCC barrier.
-
-This is the staged matrix-style deliverable: any alternating SCC orienter whose chosen
-weighted scalar projection falls under the affine barrier on the derived two-step schema
-is blocked. -/
+/-- Matrix-functional barrier obtained by applying the affine obstruction to
+the supplied weighted scalar projection and unbounded-range witness. -/
 theorem no_global_orients_ctx_matrixFunctional_of_projected_unbounded
     {Sys : AlternatingDupSchema.AlternatingDupSystem} {d : Nat}
     (M : StepDuplicatingSchema.MatrixFunctionalMeasure

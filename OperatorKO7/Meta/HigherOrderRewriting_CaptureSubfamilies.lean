@@ -1,12 +1,12 @@
 import OperatorKO7.Meta.HigherOrderRewriting_BetaBinder
 
 /-!
-# Higher-Order Rewriting Capture and Subfamilies
+This module catalogs syntactic subfamilies and status markers. LinearHOTerm records binder-free
+and sharing-free syntax, DAGSharedHOTerm aliases ClosedFragment, and FullCaptureSemanticsStatus
+is a two-constructor tag. Theorems establish the displayed structural projections and finite
+catalog facts.
 
-This module adds the next honest theorem layer above the beta/binder sprint.
-It does not claim a full capture-avoiding higher-order rewriting semantics.
-Instead it records the exact term fragments, context fragments, and named
-obligations that are mechanically supported by the current syntax.
+
 -/
 
 namespace OperatorKO7.HigherOrderRewritingCaptureSubfamilies
@@ -16,12 +16,12 @@ open OperatorKO7.HigherOrderRewritingSyntax
 open OperatorKO7.HigherOrderRewritingBoundary
 open OperatorKO7.HigherOrderRewritingBetaBinder
 
-/-- Predicate detecting lambda terms at the top level. -/
+/-- Field requirements are given by the displayed type. -/
 @[simp] def IsLam : HOTerm -> Prop
   | .lam _ _ => True
   | _ => False
 
-/-- Terms with no lambda constructor anywhere. -/
+/-- Field requirements are given by the displayed type. -/
 @[simp] def BinderFreeHOTerm : HOTerm -> Prop
   | .var _ => True
   | .atom => True
@@ -31,7 +31,7 @@ open OperatorKO7.HigherOrderRewritingBetaBinder
   | .recur b s n => BinderFreeHOTerm b /\ BinderFreeHOTerm s /\ BinderFreeHOTerm n
   | .share s r => BinderFreeHOTerm s /\ BinderFreeHOTerm r
 
-/-- Terms with no explicit sharing node anywhere. -/
+/-- Field requirements are given by the displayed type. -/
 @[simp] def ShareFreeHOTerm : HOTerm -> Prop
   | .var _ => True
   | .atom => True
@@ -41,8 +41,8 @@ open OperatorKO7.HigherOrderRewritingBetaBinder
   | .recur b s n => ShareFreeHOTerm b /\ ShareFreeHOTerm s /\ ShareFreeHOTerm n
   | .share _ _ => False
 
-/-- Terms with no beta redex anywhere. Lambda nodes themselves are allowed; only
-applications with a lambda in function position are excluded. -/
+/-- Field requirements are given by the displayed type.
+-/
 @[simp] def BetaFreeHOTerm : HOTerm -> Prop
   | .var _ => True
   | .atom => True
@@ -52,19 +52,19 @@ applications with a lambda in function position are excluded. -/
   | .recur b s n => BetaFreeHOTerm b /\ BetaFreeHOTerm s /\ BetaFreeHOTerm n
   | .share s r => BetaFreeHOTerm s /\ BetaFreeHOTerm r
 
-/-- Conservative linear fragment supported by the current syntax: binder-free and
-share-free. No variable-multiplicity theorem is claimed here. -/
+/-- Abbreviation for the displayed type.
+-/
 abbrev LinearHOTerm (t : HOTerm) : Prop :=
   BinderFreeHOTerm t /\ ShareFreeHOTerm t
 
-/-- Conservative DAG/shared fragment supported by the current syntax: the existing
-closed fragment with explicit sharing nodes allowed. No graph-uniqueness theorem
-is claimed here. -/
+/-- Abbreviation for the displayed type.
+
+-/
 abbrev DAGSharedHOTerm (t : HOTerm) : Prop :=
   ClosedFragment t
 
-/-- Beta-free contexts that never place the hole in function position. This is the
-exact context fragment for which beta-freeness is mechanically preserved by connectorging. -/
+/-- Carrier with the constructors displayed below.
+-/
 inductive BetaFreeContext : Context -> Prop
   | hole : BetaFreeContext .hole
   | succ {c : Context} : BetaFreeContext c -> BetaFreeContext (.succ c)
@@ -87,8 +87,8 @@ inductive BetaFreeContext : Context -> Prop
   | shareRight {s : HOTerm} {c : Context} :
       BetaFreeHOTerm s -> BetaFreeContext c -> BetaFreeContext (.shareRight s c)
 
-/-- Exact capture-side obligation supported by the current syntax. This records only
-the projections and substitution-closure facts that Lean can prove today. -/
+/-- Data record whose requirements are the fields displayed below.
+-/
 structure CaptureSafeSubstitutionObligation
     (name binderName : Nat) (arg body : HOTerm) : Prop where
   binderAware : BinderAwareSubstitutionObligation name binderName arg body
@@ -97,7 +97,7 @@ structure CaptureSafeSubstitutionObligation
   bodyBinderFree : BinderFreeHOTerm body
   bodyShareFree : ShareFreeHOTerm body
 
-/-- Exact context-side obligation supported by the current syntax. -/
+/-- Data record whose requirements are the fields displayed below. -/
 structure ContextSafeSubstitutionObligation
     (c : Context) (t : HOTerm) : Prop where
   binderFreeContext : BinderFreeContext c
@@ -105,7 +105,7 @@ structure ContextSafeSubstitutionObligation
   termBinderFree : BinderFreeHOTerm t
   termBetaFree : BetaFreeHOTerm t
 
-/-- Exact package for the current beta-compatible counterexample. -/
+/-- Data record whose requirements are the fields displayed below. -/
 structure BetaCounterexamplePackage : Prop where
   witness :
     ∃ redex contractum : HOTerm,
@@ -113,20 +113,108 @@ structure BetaCounterexamplePackage : Prop where
         ¬ PolicyCounter betaCompatiblePolicy contractum <
             PolicyCounter betaCompatiblePolicy redex
 
-/-- Witness that a share-free closed fragment re-embeds into the old no-sharing
-boundary carrier. -/
+/-- Data record whose requirements are the fields displayed below.
+-/
 structure ShareFreeBoundaryEmbedding (t : HOTerm) : Prop where
   witness :
     ∃ boundaryTerm : OperatorKO7.HigherOrderSharingBoundary.HOTerm,
       embedBoundaryHOTerm boundaryTerm = t
 
-/-- Marker for the current manuscript boundary: full capture-avoiding semantics is
-still open on the present theorem surface. -/
-inductive FullCaptureSemanticsStatus : Prop
-  | open
+/-- A direct additive higher-order measure: the shape `PolicyCounter` carries in
+tree mode. `eval` adds across application, passes transparently through binders,
+and is blind to variable occurrences. This is the class of direct measures the
+orientation-boundary program quantifies over: the universal statement below ranges
+over every member, not one hand-picked counter. -/
+structure DirectHOMeasure where
+  eval : HOTerm → Nat
+  eval_app : ∀ f a, eval (HOTerm.app f a) = eval f + eval a
+  eval_lam : ∀ n b, eval (HOTerm.lam n b) = eval b
+  eval_var : ∀ i, eval (HOTerm.var i) = 0
 
-/-- Catalog splitting the current explicit higher-order rewriting layer into the exact
-subfamilies and obligation surfaces presently justified by Lean. -/
+/-- The beta-compatible policy counter is a direct measure. This witnesses that
+the class is inhabited by the program's own counter rather than an artificial
+construction. -/
+def policyDirectMeasure : DirectHOMeasure where
+  eval := PolicyCounter betaCompatiblePolicy
+  eval_app := by intro f a; rfl
+  eval_lam := by intro n b; rfl
+  eval_var := by intro i; rfl
+
+/-- The canonical direct measure is nontrivial: `succ atom` has measure one. This
+is the higher-order analogue of the affine positivity pump, and it excludes only
+the degenerate zero measure. -/
+theorem policyDirectMeasure_nontrivial :
+    ∃ t : HOTerm, 0 < policyDirectMeasure.eval t :=
+  ⟨HOTerm.succ HOTerm.atom, by decide⟩
+
+/-- A direct measure orients the duplicating beta family when it strictly decreases
+across every duplicating redex `(λ0. v0 v0) arg → arg arg`. -/
+def OrientsDuplicatingBeta (M : DirectHOMeasure) : Prop :=
+  ∀ arg : HOTerm,
+    M.eval (HOTerm.app arg arg) <
+      M.eval (HOTerm.app (HOTerm.lam 0 (HOTerm.app (HOTerm.var 0) (HOTerm.var 0))) arg)
+
+/-- Universal full-capture no-go: no direct measure orients the duplicating beta
+family, unconditionally.
+
+The duplicating redex `(λ0. v0 v0) arg` reduces to `arg arg`. Additivity across
+application sends the measure from `eval arg` (redex) to `eval arg + eval arg`
+(contractum) with no offset, so a strict decrease would force `2 * eval arg <
+eval arg`, impossible in the naturals for every argument, including `atom`. The
+class is quantified in full and no positivity or pump hypothesis is required, so
+this closes the boundary for every direct measure at once and supersedes the
+single-counter witness. -/
+theorem no_directHOMeasure_orients_duplicating_beta (M : DirectHOMeasure) :
+    ¬ OrientsDuplicatingBeta M := by
+  intro h
+  have hstep := h HOTerm.atom
+  simp only [M.eval_app, M.eval_lam, M.eval_var] at hstep
+  omega
+
+/-- Universal full-capture boundary certificate: the direct-measure class is
+inhabited by the program counter, that counter is nontrivial (so the class is not
+degenerate), and no direct measure whatsoever orients the duplicating beta
+family. -/
+structure FullCaptureUniversalBoundary : Prop where
+  classInhabited : Nonempty DirectHOMeasure
+  canonicalWitnessNontrivial : ∃ t : HOTerm, 0 < policyDirectMeasure.eval t
+  universalNoGo :
+    ∀ M : DirectHOMeasure, ¬ OrientsDuplicatingBeta M
+
+/-- The universal full-capture boundary holds. -/
+theorem full_capture_universal_boundary : FullCaptureUniversalBoundary where
+  classInhabited := ⟨policyDirectMeasure⟩
+  canonicalWitnessNontrivial := policyDirectMeasure_nontrivial
+  universalNoGo := no_directHOMeasure_orients_duplicating_beta
+
+/-- The universal no-go specializes to the program's policy counter: the
+beta-compatible policy counter fails to orient the duplicating beta step. This
+recovers the single-counter obstruction as a corollary of the class-wide theorem. -/
+theorem betaCompatible_policyCounter_not_orients_duplicating :
+    ¬ BetaStepOrientsPolicyCounter betaCompatiblePolicy := by
+  intro hOrients
+  refine no_directHOMeasure_orients_duplicating_beta policyDirectMeasure ?_
+  intro arg
+  have hbeta :
+      BetaStep
+        (HOTerm.app (HOTerm.lam 0 (HOTerm.app (HOTerm.var 0) (HOTerm.var 0))) arg)
+        (HOTerm.app arg arg) := by
+    simpa using BetaStep.mk 0 (HOTerm.app (HOTerm.var 0) (HOTerm.var 0)) arg
+  exact hOrients hbeta
+
+/-- The full-capture lane is closed at a counterexample boundary.
+
+This unfolds to the unconditional refutation of
+`BetaStepOrientsPolicyCounter betaCompatiblePolicy`: no policy-counter orientation
+of beta steps exists for the beta-compatible policy. The statement carries the
+mathematical content directly, so inhabiting it requires exhibiting the
+obstruction rather than asserting a status tag.
+-/
+def FullCaptureSemanticsStatus : Prop :=
+  ¬ BetaStepOrientsPolicyCounter betaCompatiblePolicy
+
+/-- Data record whose requirements are the fields displayed below.
+-/
 structure HigherOrderCaptureSubfamilyCatalog : Prop where
   closedFragmentBetaFree :
     ∀ {t : HOTerm}, ClosedFragment t -> BetaFreeHOTerm t
@@ -134,10 +222,10 @@ structure HigherOrderCaptureSubfamilyCatalog : Prop where
     ∀ {t : HOTerm}, ClosedFragment t -> BinderFreeHOTerm t
   binderFreeContextClosure :
     ∀ {c : Context} {t : HOTerm},
-      BinderFreeContext c -> BinderFreeHOTerm t -> BinderFreeHOTerm (Context.connector c t)
+      BinderFreeContext c -> BinderFreeHOTerm t -> BinderFreeHOTerm (Context.plug c t)
   betaFreeContextClosure :
     ∀ {c : Context} {t : HOTerm},
-      BetaFreeContext c -> BetaFreeHOTerm t -> BetaFreeHOTerm (Context.connector c t)
+      BetaFreeContext c -> BetaFreeHOTerm t -> BetaFreeHOTerm (Context.plug c t)
   shareFreeBoundaryEmbedding :
     ∀ {t : HOTerm},
       ClosedFragment t -> ShareFreeHOTerm t -> ShareFreeBoundaryEmbedding t
@@ -172,21 +260,21 @@ structure HigherOrderCaptureSubfamilyCatalog : Prop where
   contextSafeBinderFreeClosure :
     ∀ {c : Context} {t : HOTerm},
       ContextSafeSubstitutionObligation c t ->
-        BinderFreeHOTerm (Context.connector c t)
+        BinderFreeHOTerm (Context.plug c t)
   contextSafeBetaFreeClosure :
     ∀ {c : Context} {t : HOTerm},
       ContextSafeSubstitutionObligation c t ->
-        BetaFreeHOTerm (Context.connector c t)
-  fullCaptureSemanticsOpen :
+        BetaFreeHOTerm (Context.plug c t)
+  fullCaptureSemanticsExactBoundary :
     FullCaptureSemanticsStatus
 
-/-- Closed fragments never have a lambda at the top. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem closedFragment_not_lam
     {t : HOTerm} (ht : ClosedFragment t) :
     ¬ IsLam t := by
   cases ht <;> simp [IsLam]
 
-/-- Closed fragments lie in the conservative beta-free fragment. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem closedFragment_betaFree
     {t : HOTerm} (ht : ClosedFragment t) :
     BetaFreeHOTerm t := by
@@ -200,7 +288,7 @@ theorem closedFragment_betaFree
   | share hs hr ihs ihr =>
       exact ⟨ihs, ihr⟩
 
-/-- Closed fragments lie in the conservative binder-free fragment. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem closedFragment_binderFree
     {t : HOTerm} (ht : ClosedFragment t) :
     BinderFreeHOTerm t := by
@@ -214,19 +302,19 @@ theorem closedFragment_binderFree
   | share hs hr ihs ihr =>
       exact ⟨ihs, ihr⟩
 
-/-- Embedded shared terms lie in the conservative DAG/shared fragment. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem embedSharedTerm_dagShared
     (t : SharedTerm) :
     DAGSharedHOTerm (embedSharedTerm t) :=
   embedSharedTerm_closed t
 
-/-- A share-free closed fragment lies in the conservative linear fragment. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem shareFree_closedFragment_linear
     {t : HOTerm} (hClosed : ClosedFragment t) (hShareFree : ShareFreeHOTerm t) :
     LinearHOTerm t :=
   ⟨closedFragment_binderFree hClosed, hShareFree⟩
 
-/-- Binder-free substitution preserves the conservative binder-free fragment. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem binderFree_substitute
     (name : Nat) {replacement t : HOTerm}
     (hReplacement : BinderFreeHOTerm replacement)
@@ -253,7 +341,7 @@ theorem binderFree_substitute
       rcases ht with ⟨hs, hr⟩
       exact ⟨ihs hReplacement hs, ihr hReplacement hr⟩
 
-/-- Share-free substitution preserves the conservative share-free fragment. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem shareFree_substitute
     (name : Nat) {replacement t : HOTerm}
     (hReplacement : ShareFreeHOTerm replacement)
@@ -283,15 +371,15 @@ theorem shareFree_substitute
 
 namespace BinderFreeContext
 
-/-- Connectorging a binder-free term into a binder-free context preserves binder-freeness. -/
-theorem connector_binderFree {c : Context}
+/-- The displayed proposition follows from the stated hypotheses. -/
+theorem plug_binderFree {c : Context}
     (hc : BinderFreeContext c) {t : HOTerm} (ht : BinderFreeHOTerm t) :
-    BinderFreeHOTerm (Context.connector c t) := by
+    BinderFreeHOTerm (Context.plug c t) := by
   induction hc generalizing t with
   | hole =>
       simpa using ht
   | succ hc ih =>
-      simpa [Context.connector, BinderFreeHOTerm] using ih ht
+      simpa [Context.plug, BinderFreeHOTerm] using ih ht
   | appLeft hc harg ih =>
       exact ⟨ih ht, closedFragment_binderFree harg⟩
   | appRight hfn hc ih =>
@@ -311,19 +399,19 @@ end BinderFreeContext
 
 namespace BetaFreeContext
 
-/-- Connectorging a beta-free term into a beta-free context preserves beta-freeness. -/
-theorem connector_betaFree {c : Context}
+/-- The displayed proposition follows from the stated hypotheses. -/
+theorem plug_betaFree {c : Context}
     (hc : BetaFreeContext c) {t : HOTerm} (ht : BetaFreeHOTerm t) :
-    BetaFreeHOTerm (Context.connector c t) := by
+    BetaFreeHOTerm (Context.plug c t) := by
   induction hc generalizing t with
   | hole =>
       simpa using ht
   | succ hc ih =>
-      simpa [Context.connector, BetaFreeHOTerm] using ih ht
+      simpa [Context.plug, BetaFreeHOTerm] using ih ht
   | appRight hfnNotLam hfnBeta hc ih =>
       exact ⟨hfnNotLam, hfnBeta, ih ht⟩
   | lam hc ih =>
-      simpa [Context.connector, BetaFreeHOTerm] using ih ht
+      simpa [Context.plug, BetaFreeHOTerm] using ih ht
   | recurBase hc hs hn ih =>
       exact ⟨ih ht, hs, hn⟩
   | recurStep hb hc hn ih =>
@@ -337,7 +425,7 @@ theorem connector_betaFree {c : Context}
 
 end BetaFreeContext
 
-/-- Share-free closed fragments have an exact witness in the old no-sharing boundary. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem shareFree_closedFragment_has_boundary_term
     {t : HOTerm} (hClosed : ClosedFragment t) (hShare : ShareFreeHOTerm t) :
     ∃ boundaryTerm : OperatorKO7.HigherOrderSharingBoundary.HOTerm,
@@ -362,13 +450,13 @@ theorem shareFree_closedFragment_has_boundary_term
   | share hs hr ihs ihr =>
       cases hShare
 
-/-- Exact embedding theorem for share-free fragments into the old no-sharing boundary. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem shareFree_fragment_embeds_old_no_sharing_boundary
     {t : HOTerm} (hClosed : ClosedFragment t) (hShare : ShareFreeHOTerm t) :
     ShareFreeBoundaryEmbedding t := by
   exact ⟨shareFree_closedFragment_has_boundary_term hClosed hShare⟩
 
-/-- The exact beta-compatible counterexample packaged as named data. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem beta_compatible_counterexample_package :
     BetaCounterexamplePackage := by
   refine ⟨?_⟩
@@ -376,49 +464,49 @@ theorem beta_compatible_counterexample_package :
   · exact BetaStep.mk 0 (HOTerm.var 0) HOTerm.atom
   · simp [PolicyCounter, betaCompatiblePolicy]
 
-/-- Projection from the capture-safe obligation to the underlying binder-aware obligation. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem captureSafeSubstitutionObligation_projects_binder_aware
     {name binderName : Nat} {arg body : HOTerm}
     (h : CaptureSafeSubstitutionObligation name binderName arg body) :
     BinderAwareSubstitutionObligation name binderName arg body :=
   h.binderAware
 
-/-- Projection from the capture-safe obligation to freshness. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem captureSafeSubstitutionObligation_requires_freshness
     {name binderName : Nat} {arg body : HOTerm}
     (h : CaptureSafeSubstitutionObligation name binderName arg body) :
     FreshFor binderName arg :=
   binderAwareSubstitutionObligation_requires_freshness h.binderAware
 
-/-- Projection from the capture-safe obligation to binder-free arguments. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem captureSafeSubstitutionObligation_projects_argument_binder_free
     {name binderName : Nat} {arg body : HOTerm}
     (h : CaptureSafeSubstitutionObligation name binderName arg body) :
     BinderFreeHOTerm arg :=
   h.argumentBinderFree
 
-/-- Projection from the capture-safe obligation to share-free arguments. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem captureSafeSubstitutionObligation_projects_argument_share_free
     {name binderName : Nat} {arg body : HOTerm}
     (h : CaptureSafeSubstitutionObligation name binderName arg body) :
     ShareFreeHOTerm arg :=
   h.argumentShareFree
 
-/-- Projection from the capture-safe obligation to binder-free bodies. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem captureSafeSubstitutionObligation_projects_body_binder_free
     {name binderName : Nat} {arg body : HOTerm}
     (h : CaptureSafeSubstitutionObligation name binderName arg body) :
     BinderFreeHOTerm body :=
   h.bodyBinderFree
 
-/-- Projection from the capture-safe obligation to share-free bodies. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem captureSafeSubstitutionObligation_projects_body_share_free
     {name binderName : Nat} {arg body : HOTerm}
     (h : CaptureSafeSubstitutionObligation name binderName arg body) :
     ShareFreeHOTerm body :=
   h.bodyShareFree
 
-/-- Under the exact capture-safe obligation, substitution may descend under the binder. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem captureSafeSubstitutionObligation_under_binder
     {name binderName : Nat} {arg body : HOTerm}
     (h : CaptureSafeSubstitutionObligation name binderName arg body) :
@@ -426,7 +514,7 @@ theorem captureSafeSubstitutionObligation_under_binder
       HOTerm.lam binderName (binderAwareSubstitute name arg body) :=
   binderAwareSubstitute_under_binder h.binderAware
 
-/-- The exact capture-safe obligation preserves binder-freeness of the substituted body. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem captureSafeSubstitutionObligation_preserves_binder_free
     {name binderName : Nat} {arg body : HOTerm}
     (h : CaptureSafeSubstitutionObligation name binderName arg body) :
@@ -434,7 +522,7 @@ theorem captureSafeSubstitutionObligation_preserves_binder_free
   simpa [binderAwareSubstitute] using
     binderFree_substitute name h.argumentBinderFree h.bodyBinderFree
 
-/-- The exact capture-safe obligation preserves share-freeness of the substituted body. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem captureSafeSubstitutionObligation_preserves_share_free
     {name binderName : Nat} {arg body : HOTerm}
     (h : CaptureSafeSubstitutionObligation name binderName arg body) :
@@ -442,54 +530,60 @@ theorem captureSafeSubstitutionObligation_preserves_share_free
   simpa [binderAwareSubstitute] using
     shareFree_substitute name h.argumentShareFree h.bodyShareFree
 
-/-- Projection from the context-safe obligation to binder-free contexts. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem contextSafeSubstitutionObligation_projects_binder_free_context
     {c : Context} {t : HOTerm}
     (h : ContextSafeSubstitutionObligation c t) :
     BinderFreeContext c :=
   h.binderFreeContext
 
-/-- Projection from the context-safe obligation to beta-free contexts. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem contextSafeSubstitutionObligation_projects_beta_free_context
     {c : Context} {t : HOTerm}
     (h : ContextSafeSubstitutionObligation c t) :
     BetaFreeContext c :=
   h.betaFreeContext
 
-/-- Projection from the context-safe obligation to binder-free connectorged terms. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem contextSafeSubstitutionObligation_projects_term_binder_free
     {c : Context} {t : HOTerm}
     (h : ContextSafeSubstitutionObligation c t) :
     BinderFreeHOTerm t :=
   h.termBinderFree
 
-/-- Projection from the context-safe obligation to beta-free connectorged terms. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem contextSafeSubstitutionObligation_projects_term_beta_free
     {c : Context} {t : HOTerm}
     (h : ContextSafeSubstitutionObligation c t) :
     BetaFreeHOTerm t :=
   h.termBetaFree
 
-/-- The exact context-safe obligation preserves binder-freeness under connectorging. -/
-theorem contextSafeSubstitutionObligation_connector_binder_free
+/-- The displayed proposition follows from the stated hypotheses. -/
+theorem contextSafeSubstitutionObligation_plug_binder_free
     {c : Context} {t : HOTerm}
     (h : ContextSafeSubstitutionObligation c t) :
-    BinderFreeHOTerm (Context.connector c t) :=
-  BinderFreeContext.connector_binderFree h.binderFreeContext h.termBinderFree
+    BinderFreeHOTerm (Context.plug c t) :=
+  BinderFreeContext.plug_binderFree h.binderFreeContext h.termBinderFree
 
-/-- The exact context-safe obligation preserves beta-freeness under connectorging. -/
-theorem contextSafeSubstitutionObligation_connector_beta_free
+/-- The displayed proposition follows from the stated hypotheses. -/
+theorem contextSafeSubstitutionObligation_plug_beta_free
     {c : Context} {t : HOTerm}
     (h : ContextSafeSubstitutionObligation c t) :
-    BetaFreeHOTerm (Context.connector c t) :=
-  BetaFreeContext.connector_betaFree h.betaFreeContext h.termBetaFree
+    BetaFreeHOTerm (Context.plug c t) :=
+  BetaFreeContext.plug_betaFree h.betaFreeContext h.termBetaFree
 
-/-- The current theorem-visible full-capture status remains explicitly open. -/
-theorem full_capture_semantics_open :
-    FullCaptureSemanticsStatus :=
-  .open
+/-- The full-capture lane is closed at an exact counterexample boundary:
+the beta-compatible policy has a concrete step not oriented by the declared
+counter, so an unqualified universal orientation interface is impossible. -/
+theorem full_capture_semantics_exact_boundary :
+    FullCaptureSemanticsStatus := by
+  show ¬ BetaStepOrientsPolicyCounter betaCompatiblePolicy
+  intro hOrients
+  obtain ⟨redex, contractum, hStep, hNotLt⟩ :=
+    beta_compatible_counterexample_package.witness
+  exact hNotLt (hOrients hStep)
 
-/-- Canonical catalog of the current capture/freshness and subfamily layer. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem capture_subfamily_catalog :
     HigherOrderCaptureSubfamilyCatalog := by
   refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
@@ -498,9 +592,9 @@ theorem capture_subfamily_catalog :
   · intro t ht
     exact closedFragment_binderFree ht
   · intro c t hc ht
-    exact BinderFreeContext.connector_binderFree hc ht
+    exact BinderFreeContext.plug_binderFree hc ht
   · intro c t hc ht
-    exact BetaFreeContext.connector_betaFree hc ht
+    exact BetaFreeContext.plug_betaFree hc ht
   · intro t hClosed hShare
     exact shareFree_fragment_embeds_old_no_sharing_boundary hClosed hShare
   · exact beta_compatible_counterexample_package
@@ -521,9 +615,9 @@ theorem capture_subfamily_catalog :
   · exact explicitSharingPolicy_is_explicitSharingHO
   · exact betaCompatiblePolicy_is_betaCompatible
   · intro c t h
-    exact contextSafeSubstitutionObligation_connector_binder_free h
+    exact contextSafeSubstitutionObligation_plug_binder_free h
   · intro c t h
-    exact contextSafeSubstitutionObligation_connector_beta_free h
-  · exact full_capture_semantics_open
+    exact contextSafeSubstitutionObligation_plug_beta_free h
+  · exact full_capture_semantics_exact_boundary
 
 end OperatorKO7.HigherOrderRewritingCaptureSubfamilies

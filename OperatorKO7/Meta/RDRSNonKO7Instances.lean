@@ -1,4 +1,7 @@
 import OperatorKO7.Meta.RightDuplicatingRecursorSchema
+import OperatorKO7.Meta.RDRSSemanticDirectMeasure
+import OperatorKO7.Meta.RDRSSemanticPayloadSensitivity
+import OperatorKO7.Meta.RDRSSemanticArbitraryClassifier
 
 /-!
 # Non-KO7 RDRS Instances
@@ -10,21 +13,26 @@ instances that are deliberately not KO7. The point is to prevent vacuous
 universality: the RDRS shell of `Meta/RightDuplicatingRecursorSchema.lean`
 must classify more than one named system before any later canonical-witness
 universality claim is honest. The three instances also exercise the three
-shapes the roadmap (`THEORY_EXPANSION.md` Phase A.3) names:
+shapes the roadmap names:
 
 1. `textbookRDRS` -- the standard duplicating rule `f(x, s(y)) -> g(x, f(x, y))`.
 2. `taggedBinaryRDRS` -- a binary-tag recursor with `Bit0` and `Bit1` branches.
 3. `depthCounterRDRS` -- a depth-counter recursor whose distinguished payload
    is a depth coordinate, not a step argument carried over from KO7.
 
-These are small structural witnesses, not full termination developments. No
-direct measure barrier is proved here. The RDRS interface contracts
-(`lhs_has_payload`, `rhs_duplicates_payload`, `firesOnClosedTerms`) are the
-only obligations discharged.
+The original Phase A.3 layer proved only the structural witness surface. This
+file now keeps those witnesses and adds the semantic non-KO7 instantiation
+theorem `rdrs_non_ko7_instances_unconditional`: for each named non-KO7 RDRS
+step below, every certified semantic direct measure is blocked from being a
+decisive payload-sensitive orienter by the generic payload-erasure barrier.
+That is the exact sense in which the RDRS direct-measure framework is about
+the RDRS class rather than a KO7-only artifact.
 
 The module touches no existing 12-base-class theorem name or signature and uses
 no proof placeholders.
 -/
+
+set_option autoImplicit false
 
 namespace OperatorKO7.StepDuplicating
 namespace RDRSNonKO7Instances
@@ -111,7 +119,7 @@ def textbookRDRS : RightDuplicatingRecursorSchema where
   lhs_has_payload := TextbookTerm.lhs_x_count_eq_one
   rhs_duplicates_payload := by
     rw [TextbookTerm.rhs_x_count_eq_two]; decide
-  firesOnClosedTerms := True
+  declaredClosedFirability := True
 
 -- ---------------------------------------------------------------------------
 -- Instance 2: tagged-binary recursor with `Bit0` / `Bit1` branches
@@ -190,7 +198,7 @@ def taggedBinaryRDRS : RightDuplicatingRecursorSchema where
   lhs_has_payload := TaggedBinaryTerm.lhs_s_count_eq_one
   rhs_duplicates_payload := by
     rw [TaggedBinaryTerm.rhs_s_count_eq_two]; decide
-  firesOnClosedTerms := True
+  declaredClosedFirability := True
 
 -- ---------------------------------------------------------------------------
 -- Instance 3: depth-counter recursor whose duplicated payload is a depth
@@ -270,7 +278,7 @@ def depthCounterRDRS : RightDuplicatingRecursorSchema where
   lhs_has_payload := DepthCounterTerm.lhs_d_count_eq_one
   rhs_duplicates_payload := by
     rw [DepthCounterTerm.rhs_d_count_eq_two]; decide
-  firesOnClosedTerms := True
+  declaredClosedFirability := True
 
 -- ---------------------------------------------------------------------------
 -- Per-instance smoke theorems: the RDRS contracts hold and the duplication
@@ -303,6 +311,181 @@ theorem depthCounterRDRS_rhs_strict :
     depthCounterRDRS.payloadCount depthCounterRDRS.distinguishedPayload depthCounterRDRS.lhs <
       depthCounterRDRS.payloadCount depthCounterRDRS.distinguishedPayload depthCounterRDRS.rhs :=
   depthCounterRDRS.rhs_count_gt_lhs_count
+
+-- ---------------------------------------------------------------------------
+-- Semantic RDRS-step witnesses: three named non-KO7 systems realized as
+-- concrete `RDRSStep` carriers with payload-erasure interfaces.
+-- ---------------------------------------------------------------------------
+
+open OperatorKO7.RDRSDescentLens
+open OperatorKO7.RDRSSemanticDirectMeasure
+open OperatorKO7.RDRSSemanticPayloadSensitivity
+open OperatorKO7.RDRSSemanticArbitraryClassifier
+
+/-- Semantic `RDRSStep` view of the textbook duplication rule.
+Base data is trivial; the payload is the first argument and the counter is the
+second argument. -/
+def textbookRDRSStep : RDRSStep Unit TextbookTerm TextbookTerm TextbookTerm where
+  lhs _ s n := .f s (.succ n)
+  rhs _ s n := .g s (.f s n)
+
+/-- Root-shape payload erasure for the textbook RDRS step.
+Only the two step shapes need to erase to the neutral payload for the barrier
+theorem; all other terms are left unchanged. -/
+def eraseTextbookPayload (neutral : TextbookTerm) : TextbookTerm → TextbookTerm
+  | .f _ (.succ n) => .f neutral (.succ n)
+  | .g _ (.f _ n) => .g neutral (.f neutral n)
+  | t => t
+
+/-- Payload-erasure witness for the textbook non-KO7 RDRS step. -/
+def textbookPayloadErasure : PayloadErasure textbookRDRSStep where
+  erase := eraseTextbookPayload .zero
+  neutralPayload := .zero
+  lhs_erase := by
+    intro b s n
+    cases b
+    rfl
+  rhs_erase := by
+    intro b s n
+    cases b
+    rfl
+
+/-- Semantic `RDRSStep` view of the tagged-binary `Bit1` branch.
+The payload is the first argument and the counter is the binary suffix. -/
+def taggedBinaryRDRSStep :
+    RDRSStep Unit TaggedBinaryTerm TaggedBinaryTerm TaggedBinaryTerm where
+  lhs _ s n := .recBin s (.bit1 n)
+  rhs _ s n := .pair s (.recBin s n)
+
+/-- Root-shape payload erasure for the tagged-binary non-KO7 RDRS step. -/
+def eraseTaggedBinaryPayload (neutral : TaggedBinaryTerm) :
+    TaggedBinaryTerm → TaggedBinaryTerm
+  | .recBin _ (.bit1 n) => .recBin neutral (.bit1 n)
+  | .pair _ (.recBin _ n) => .pair neutral (.recBin neutral n)
+  | t => t
+
+/-- Payload-erasure witness for the tagged-binary non-KO7 RDRS step. -/
+def taggedBinaryPayloadErasure : PayloadErasure taggedBinaryRDRSStep where
+  erase := eraseTaggedBinaryPayload .nVar
+  neutralPayload := .nVar
+  lhs_erase := by
+    intro b s n
+    cases b
+    rfl
+  rhs_erase := by
+    intro b s n
+    cases b
+    rfl
+
+/-- Semantic `RDRSStep` view of the depth-counter recursor.
+The payload is the depth parameter and the counter is the recursive suffix. -/
+def depthCounterRDRSStep :
+    RDRSStep Unit DepthCounterTerm DepthCounterTerm DepthCounterTerm where
+  lhs _ d n := .recDepth d (.succ n)
+  rhs _ d n := .g d (.recDepth d n)
+
+/-- Root-shape payload erasure for the depth-counter non-KO7 RDRS step. -/
+def eraseDepthCounterPayload (neutral : DepthCounterTerm) :
+    DepthCounterTerm → DepthCounterTerm
+  | .recDepth _ (.succ n) => .recDepth neutral (.succ n)
+  | .g _ (.recDepth _ n) => .g neutral (.recDepth neutral n)
+  | t => t
+
+/-- Payload-erasure witness for the depth-counter non-KO7 RDRS step. -/
+def depthCounterPayloadErasure : PayloadErasure depthCounterRDRSStep where
+  erase := eraseDepthCounterPayload .zero
+  neutralPayload := .zero
+  lhs_erase := by
+    intro b d n
+    cases b
+    rfl
+  rhs_erase := by
+    intro b d n
+    cases b
+    rfl
+
+/--
+Proves: on the textbook non-KO7 RDRS instance, every certified semantic direct
+measure is blocked from being decisively payload-sensitive. This is the
+non-KO7 textbook instantiation of the generic payload-erasure barrier.
+Does not prove: non-orientation of every measure; orienting measures may still
+exist, but only in the counter-dominated branch.
+Relation: `textbookRDRSStep`, a concrete non-KO7 `RDRSStep`.
+Closure: root single-step.
+Strategy: not applicable.
+Trust: kernel-only.
+Scope: every `SemanticDirectMeasure TextbookTerm`.
+-/
+theorem textbookRDRSStep_not_direct_decisive_payload_sensitive
+    (M : SemanticDirectMeasure TextbookTerm) :
+    ¬ PayloadSensitiveDecisive textbookRDRSStep M.data :=
+  no_direct_decisive_payload_sensitive_of_payload_erasure textbookPayloadErasure M
+
+/--
+Proves: on the tagged-binary non-KO7 RDRS instance, every certified semantic
+direct measure is blocked from being decisively payload-sensitive.
+Does not prove: non-orientation of every measure; orienting measures may still
+exist, but only in the counter-dominated branch.
+Relation: `taggedBinaryRDRSStep`, a concrete non-KO7 `RDRSStep`.
+Closure: root single-step.
+Strategy: not applicable.
+Trust: kernel-only.
+Scope: every `SemanticDirectMeasure TaggedBinaryTerm`.
+-/
+theorem taggedBinaryRDRSStep_not_direct_decisive_payload_sensitive
+    (M : SemanticDirectMeasure TaggedBinaryTerm) :
+    ¬ PayloadSensitiveDecisive taggedBinaryRDRSStep M.data :=
+  no_direct_decisive_payload_sensitive_of_payload_erasure taggedBinaryPayloadErasure M
+
+/--
+Proves: on the depth-counter non-KO7 RDRS instance, every certified semantic
+direct measure is blocked from being decisively payload-sensitive.
+Does not prove: non-orientation of every measure; orienting measures may still
+exist, but only in the counter-dominated branch.
+Relation: `depthCounterRDRSStep`, a concrete non-KO7 `RDRSStep`.
+Closure: root single-step.
+Strategy: not applicable.
+Trust: kernel-only.
+Scope: every `SemanticDirectMeasure DepthCounterTerm`.
+-/
+theorem depthCounterRDRSStep_not_direct_decisive_payload_sensitive
+    (M : SemanticDirectMeasure DepthCounterTerm) :
+    ¬ PayloadSensitiveDecisive depthCounterRDRSStep M.data :=
+  no_direct_decisive_payload_sensitive_of_payload_erasure depthCounterPayloadErasure M
+
+/--
+Proves: the RDRS direct-measure barrier is genuinely about the RDRS class,
+not only about KO7. On each named non-KO7 instance in this module (textbook,
+tagged-binary, depth-counter), every certified semantic direct measure is
+blocked from being decisively payload-sensitive by the generic payload-erasure
+theorem.
+Does not prove: that these instances share KO7's syntax or that every semantic
+measure fails to orient. The conclusion is the precise barrier statement: any
+orienting direct measure must lie in the counter-dominated branch.
+Relation: the three concrete non-KO7 `RDRSStep` witnesses in this module.
+Closure: root single-step.
+Strategy: not applicable.
+Trust: kernel-only.
+Scope: every certified semantic direct measure on each named non-KO7 instance.
+-/
+theorem rdrs_non_ko7_instances_unconditional :
+    (∀ M : SemanticDirectMeasure TextbookTerm,
+        ¬ PayloadSensitiveDecisive textbookRDRSStep M.data) ∧
+      (∀ M : SemanticDirectMeasure TaggedBinaryTerm,
+        ¬ PayloadSensitiveDecisive taggedBinaryRDRSStep M.data) ∧
+      (∀ M : SemanticDirectMeasure DepthCounterTerm,
+        ¬ PayloadSensitiveDecisive depthCounterRDRSStep M.data) := by
+  refine ⟨?_, ?_, ?_⟩
+  · intro M
+    exact textbookRDRSStep_not_direct_decisive_payload_sensitive M
+  · intro M
+    exact taggedBinaryRDRSStep_not_direct_decisive_payload_sensitive M
+  · intro M
+    exact depthCounterRDRSStep_not_direct_decisive_payload_sensitive M
+
+/-- Audit anchor for the upgraded non-KO7 semantic-instantiation module. -/
+def audit_theory_expansion_rdrs_non_ko7_instances_module_anchor : String :=
+  "OperatorKO7.StepDuplicating.RDRSNonKO7Instances.rdrs_non_ko7_instances_unconditional"
 
 end RDRSNonKO7Instances
 end OperatorKO7.StepDuplicating

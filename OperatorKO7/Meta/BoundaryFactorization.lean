@@ -5,16 +5,15 @@ import OperatorKO7.Meta.SharingBarrierLift
 /-!
 # Boundary Factorization
 
-This module packages the three ablation-style facts that explain why the KO7
-orientation barrier sits where it does:
+This module packages four ablation facts about the KO7 orientation barrier:
 
 * removing step duplication dissolves the direct barrier;
-* simple typing by itself does not dissolve the barrier;
+* simple typing preserves the barrier in the stated typed variants;
 * sharing-aware semantics can dissolve the tree-specific obstruction.
 
-Together these support the paper-facing claim that the load-bearing structural
-feature is step-payload duplication under tree semantics, not recursion in
-general and not merely the absence of simple typing.
+Their conjunction compares step-payload duplication under tree semantics within
+the displayed variants. The result is an ablation package for these four
+constructions rather than a universal causal classification.
 -/
 
 namespace OperatorKO7.BarrierFactorization
@@ -31,8 +30,8 @@ theorem recursion_alone_not_sufficient_for_barrier :
   intro a b h
   exact simpleSize_orients_linearStep h
 
-/-- Simple typing is not, by itself, an escape mechanism for the additive
-direct-measure barrier. -/
+/-- Simple typing preserves the additive direct-measure barrier in this typed
+variant. -/
 theorem simple_typing_not_escape_mechanism_additive :
     ∀ M : TypedBarrierSurvival.AdditiveMeasure,
       ¬ (∀ (b : TypedBarrierSurvival.Term TypedBarrierSurvival.Ty.res)
@@ -56,7 +55,8 @@ theorem simple_typing_not_escape_mechanism_affine :
   intro M hpump
   exact TypedBarrierSurvival.no_affine_orients_typed_recSucc_of_stepPump M hpump
 
-/-- Sharing-aware semantics can dissolve the tree-specific direct barrier. -/
+/-- The `SharedTerm` surrogate supplies a sharing-aware witness whose direct
+counter orients the displayed step. -/
 theorem sharing_can_break_tree_barrier :
     ∀ b s n : SharingBarrierLift.SharedTerm,
       SharingBarrierLift.sharedCounter (SharingBarrierLift.SharedTerm.shareApp s
@@ -66,9 +66,10 @@ theorem sharing_can_break_tree_barrier :
   intro b s n
   exact SharingBarrierLift.sharing_breaks_tree_barrier b s n
 
-/-- Packaged cross-manuscript factorization theorem: the KO7 boundary is explained
-by step-payload duplication under tree semantics. -/
-theorem ko7_barrier_is_duplication :
+/-- Conjunction of the linear-recursion witness, the two typed impossibility
+results, and the `SharedTerm` surrogate witness. The proposition records these
+four displayed variants as an ablation package. -/
+theorem ko7_barrier_ablation_facts :
     (∃ μ : Trace → Nat,
         ∀ {a b : Trace}, LinearStep a b → μ b < μ a) ∧
       (∀ M : TypedBarrierSurvival.AdditiveMeasure,

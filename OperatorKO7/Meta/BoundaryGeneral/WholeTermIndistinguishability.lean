@@ -1,46 +1,39 @@
 /-!
-# Theory III: Whole-term indistinguishability strengthening
+# Shared affine mass profiles
 
-Boundary-general cross-paper packet, Theory III. A whole-term mass observer sees a trace's total
-mass but not its role labels (which occurrence is step, payload, or control). Two trace families
-with the same affine mass profile (same linear coefficient and offset) are therefore identical to
-such an observer at every depth: the terminating duplicating recursor and a circular-reference
-carrier, both growing one whole-term unit per step, cannot be separated by whole-term mass. A
-coordinate projection that names the step argument *can* separate traces the mass observer
-identifies.
+`TraceFamily` supplies an arbitrary depth-indexed carrier and a natural-valued
+mass function. If two families are separately assumed to satisfy the same
+affine equation, `whole_term_indistinguishable` proves equality of their mass
+values by rewriting those assumptions. The theorem does not construct a
+recursor family, a circular family, or a semantics of role labels.
 
-`whole_term_indistinguishable` is the barrier (mass observer cannot separate); `projection_escape`
-is the escape (a step-coordinate projection separates equal-mass traces).
-
-No `sorry`, `axiom`, or `native_decide`.
+`projection_escape` is an independent finite witness: two pairs of natural
+numbers can have equal first coordinates and unequal second coordinates. It
+does not connect those pairs to `TraceFamily`.
 -/
 
 set_option autoImplicit false
 
 namespace OperatorKO7.Meta.BoundaryGeneral.WholeTermIndistinguishability
 
-/-- A trace family with a whole-term mass observer: `mass n t` is the total mass of trace `t` at
-depth `n`, invariant under internal role labels. -/
+/-- A depth-indexed carrier equipped with a natural-valued observation function. -/
 structure TraceFamily where
   Trace : Nat → Type
   mass : (n : Nat) → Trace n → Nat
 
-/-- The family has an affine mass profile `mass = c·n + d`. -/
+/-- Every observation in the family is assumed equal to `c * n + d` at depth `n`. -/
 def AffineMass (F : TraceFamily) (c d : Nat) : Prop :=
   ∀ n (t : F.Trace n), F.mass n t = c * n + d
 
-/-- **Whole-term indistinguishability (Theorem 3.4).** Two families with the same affine mass
-coefficient and offset have identical mass at every depth: a whole-term mass observer returns the
-same value on both, so it cannot decide whether a repeated occurrence is control or payload. -/
+/-- Two families satisfying the same affine observation equation have equal observations at a
+chosen depth. -/
 theorem whole_term_indistinguishable (R C : TraceFamily) (c d : Nat)
     (hR : AffineMass R c d) (hC : AffineMass C c d)
     (n : Nat) (tr : R.Trace n) (tc : C.Trace n) :
     R.mass n tr = C.mass n tc := by
   rw [hR n tr, hC n tc]
 
-/-- **Projection escape (Theorem 3.5).** A coordinate projection that names the step argument can
-separate traces that a whole-term mass observer identifies: there exist two traces (modeled as
-`(whole-term mass, step projection)` pairs) with equal mass but different projected step values. -/
+/-- Two pairs of natural numbers can agree in their first coordinate and differ in their second. -/
 theorem projection_escape :
     ∃ t₁ t₂ : Nat × Nat, t₁.1 = t₂.1 ∧ t₁.2 ≠ t₂.2 :=
   ⟨(5, 0), (5, 1), rfl, by decide⟩

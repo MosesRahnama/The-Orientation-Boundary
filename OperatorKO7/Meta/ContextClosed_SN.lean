@@ -2,11 +2,12 @@ import OperatorKO7.Meta.SafeStep_Ctx
 import Mathlib.Logic.Relation
 
 /-!
-Context-closed strong normalization for the KO7 safe fragment.
+Strong normalization for the selected-context closure of the KO7 safe fragment.
 
-This module proves unconditional well-foundedness of `SafeStepCtxRev` (the
-reverse of the partial context closure `SafeStepCtx`) via a direct numeric
-interpretation `ctxFuel` (exponential weights). The main theorem is
+This module proves unconditional well-foundedness of `SafeStepCtxRev`, the
+reverse of `SafeStepCtx`, via the numeric interpretation `ctxFuel`. The relation
+closes safe root steps under `integrate`, `merge`, `app`, and recursor arguments;
+`delta` and `eqW` remain root-step constructors. The main theorem is
 `wf_SafeStepCtxRev : WellFounded (fun a b => SafeStepCtx b a)`.
 
 Infrastructure:
@@ -16,9 +17,8 @@ Infrastructure:
   (`recB`, `recS`, `recN`, `appL/R`, `mergeL/R`, `integrate`).
 - `Acc` pullback along `InvImage`.
 
-The unconditional proof (no `sorry`) works by showing `ctxFuel` strictly
-decreases on every `SafeStepCtx` step (`ctxFuel_decreases_ctx`), reducing
-well-foundedness to `Nat.lt`.
+The proof shows that `ctxFuel` strictly decreases on every `SafeStepCtx` step
+(`ctxFuel_decreases_ctx`), reducing well-foundedness to `Nat.lt`.
 -/
 
 open OperatorKO7 Trace
@@ -167,7 +167,7 @@ lemma acc_rec_arg_of_acc {b s n : Trace}
     acc_invImage_of_acc (f := fun x => recΔ b s x) h rfl
   exact Acc.of_subrelation (sub_recN b s) hInv
 
-/-! ### Constructor closure lemmas (forward-step accessibility) -/
+/-! ### Accessibility under the selected constructor contexts -/
 
 theorem acc_ctx_void : Acc SafeStepCtxRev void := by
   refine Acc.intro _ ?_
@@ -319,7 +319,7 @@ theorem acc_ctx_rec_delta_of_acc
                   have hnone : safeStepWitness? (delta n) = none := by simp [safeStepWitness?]
                   exact (safeStepWitness?_none_no_step hnone _ hsDelta).elim
 
-/-- Remaining recursor-specific obligation for full context-closure SN. -/
+/-- Recursor accessibility proposition used by the conditional decomposition below. -/
 def RecCtxAccObligation : Prop :=
   ∀ (b s n : Trace),
     Acc SafeStepCtxRev b →
@@ -357,11 +357,11 @@ theorem wf_SafeStepCtxRev_of_rec_obligation
   simpa [SafeStepCtxRev] using acc_ctx_all_of_rec_obligation hrec t
 
 /-
-Unconditional context-closure SN via a direct numeric interpretation.
+Unconditional selected-context strong normalization via a direct numeric interpretation.
 
-`ctxFuel` is chosen to be strictly monotone under all context constructors and
-to strictly decrease on every safe root rule; this yields strict decrease for
-`SafeStepCtx` by induction on the context derivation.
+`ctxFuel` is strictly monotone under every constructor exposed by `SafeStepCtx`
+and strictly decreases on every safe root rule. Induction on the context
+derivation therefore yields strict decrease for `SafeStepCtx`.
 -/
 
 @[simp] def ctxFuel : Trace → Nat

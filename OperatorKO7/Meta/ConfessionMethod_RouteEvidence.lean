@@ -6,7 +6,7 @@ import OperatorKO7.Meta.ConfessionMethod_Unification
 This module is the shared boundary for the generic `RouteEvidence` layer above
 the four concrete KO7 confession-method entry routes.
 
-It packages the route-local evidence story in one import:
+It packages the route-local evidence in one import:
 
 - the four concrete route witnesses,
 - their generic `RouteEvidence` adapters,
@@ -14,14 +14,13 @@ It packages the route-local evidence story in one import:
 - the KO7-local unification theorems showing that all four routes factor
   through one common generic route-evidence object.
 
-The underlying definitions still live where they belong:
+The underlying definitions are provided by:
 
 - the abstract `RouteEvidence` interface in `StepDuplicatingSchema.lean`,
 - the method-specific witness records in the four route files,
 - the convergence results in `ConfessionMethod_Unification.lean`.
 
-This file exists to give that distributed layer a single import boundary for
-downstream users and for the later public API split.
+This file gives the distributed layer a single import boundary.
 -/
 
 namespace OperatorKO7.ConfessionMethodFamily
@@ -84,14 +83,15 @@ theorem confessionRouteConvergencePackage_projects_common_forgetting_witness :
     confessionRouteConvergencePackage.commonForgettingWitness.rank = dpConfession.rank := by
   rfl
 
-/-! Exact data required for a usable-rules confession route to join the KO7
-convergence package honestly. LONG-34 closes the bridge by packaging the
-already-shared route evidence together with an explicit standalone soundness
-carrier. -/
+/-! Data required for a usable-rules confession route to join the KO7
+convergence package. Route-evidence agreement and dependency-pair
+well-foundedness are support data. Admission also requires a theorem
+transporting dependency-pair well-foundedness to root termination of the
+original `Step` relation. -/
 
 /-- Route-local witness field for the usable-rules bridge. It records that the
-candidate already lives on the same generic route-evidence surface as the four
-landed confession routes. -/
+candidate lies on the same generic route-evidence surface as the four
+confession routes. -/
 structure UsableRulesRouteLocalWitnessField : Type where
   commonRoute_eq_generic :
     confessionRouteConvergencePackage.commonRouteEvidence = confessionGenericRouteEvidence
@@ -110,78 +110,36 @@ theorem usableRulesRouteLocalWitnessField_inhabited :
     Nonempty UsableRulesRouteLocalWitnessField :=
   ⟨usableRulesCommonRouteLocalWitnessField⟩
 
-/-- Standalone soundness package for the usable-rules bridge. It records the
-existing Arts-Giesl-licensed DP soundness substrate already carried by the
-shared route-evidence object. -/
-structure UsableRulesStandaloneSoundnessTheorem : Prop where
+/-- Dependency-pair substrate available to a usable-rules bridge. It records
+rank agreement, well-foundedness of the extracted pair relation, and the
+external-license tag. It does not prove dependency-pair-to-source transport or
+usable-rules processor soundness. -/
+structure UsableRulesDPSubstrateEvidence : Prop where
   commonRoute_rank_eq_dpConfession :
     confessionRouteConvergencePackage.commonRouteEvidence.rank = dpConfession.rank
   pairProblemWellFounded : WellFounded OperatorKO7.MetaDependencyPairs.DPPairRev
   dpLicense_is_artsGiesl2000 :
     dpConfession.license = SoundnessLicense.artsGiesl2000
 
-theorem usableRulesStandaloneSoundnessTheorem_witness :
-    UsableRulesStandaloneSoundnessTheorem := by
+/-- The shared route package supplies dependency-pair substrate evidence. -/
+theorem usableRulesDPSubstrateEvidence_witness :
+    UsableRulesDPSubstrateEvidence := by
   refine ⟨?_, ?_, rfl⟩
   · exact confessionRouteConvergencePackage.commonForgettingWitness_rank.symm.trans
       confessionRouteConvergencePackage_projects_common_forgetting_witness
   exact OperatorKO7.MetaDependencyPairs.wf_DPPairRev
 
-/-- Certification state for a usable-rules bridge. `opaqueBridge` preserves the
-conditional theorem surface; `verified` would require the exact route-local
-witness field and standalone soundness theorem that are currently absent. -/
-inductive UsableRulesBridgeCertification where
-  | opaqueBridge
-  | verified
-      (routeLocalWitness : UsableRulesRouteLocalWitnessField)
-      (standaloneSoundness : UsableRulesStandaloneSoundnessTheorem)
+/-- Source-soundness transport required for the usable-rules route. The statement concerns the
+original root relation rather than only the extracted dependency-pair problem. The type records the
+implication but does not encode whether its proof comes from a usable-rules processor or from an
+independent source-termination proof. -/
+structure UsableRulesSourceSoundnessTransport : Prop where
+  pairProblemWellFounded_implies_sourceRootTermination :
+    WellFounded OperatorKO7.MetaDependencyPairs.DPPairRev →
+      WellFounded (fun a b : OperatorKO7.Trace => OperatorKO7.Step b a)
 
-/-- Honest admission predicate for a usable-rules bridge certification. -/
-def UsableRulesBridgeCertification.IsVerified :
-    UsableRulesBridgeCertification → Prop
-  | .opaqueBridge => False
-  | .verified _ _ => True
-
-theorem usableRulesBridgeCertification_opaque_not_verified :
-    ¬ UsableRulesBridgeCertification.opaqueBridge.IsVerified := by
-  simp [UsableRulesBridgeCertification.IsVerified]
-
-def usableRulesBridgeCertification_verified_requires_routeLocalWitnessField
-  {cert : UsableRulesBridgeCertification}
-  (h : cert.IsVerified) :
-  UsableRulesRouteLocalWitnessField := by
-  cases cert with
-  | opaqueBridge =>
-    cases h
-  | verified routeLocalWitness _ =>
-    exact routeLocalWitness
-
-theorem usableRulesBridgeCertification_verified_requires_standaloneSoundnessTheorem
-  {cert : UsableRulesBridgeCertification}
-  (h : cert.IsVerified) :
-  UsableRulesStandaloneSoundnessTheorem := by
-  cases cert with
-  | opaqueBridge =>
-    cases h
-  | verified _ standaloneSoundnessProof =>
-    exact standaloneSoundnessProof
-
-theorem usableRulesBridgeCertification_isVerified_iff
-    {cert : UsableRulesBridgeCertification} :
-    cert.IsVerified ↔
-      ∃ routeLocalWitness : UsableRulesRouteLocalWitnessField,
-        ∃ standaloneSoundness : UsableRulesStandaloneSoundnessTheorem,
-          cert = .verified routeLocalWitness standaloneSoundness := by
-  cases cert with
-  | opaqueBridge =>
-      simp [UsableRulesBridgeCertification.IsVerified]
-  | verified routeLocalWitness standaloneSoundness =>
-      constructor
-      · intro _
-        exact ⟨routeLocalWitness, standaloneSoundness, rfl⟩
-      · intro _
-        simp [UsableRulesBridgeCertification.IsVerified]
-
+/-- Residual package combining a route-local witness, agreement with the canonical core and route,
+and an explicit dependency-pair-to-source well-foundedness implication. -/
 structure UsableRulesConfessionRouteResidualObligation where
   Witness : Type
   witness : Witness
@@ -191,18 +149,15 @@ structure UsableRulesConfessionRouteResidualObligation where
     (toConfessionCoreWitness witness).toProjectionRank = confessionProjectionCore
   route_agrees :
     toRouteEvidence witness = confessionGenericRouteEvidence
-  SoundnessTheorem : Prop
-  soundnessTheorem : SoundnessTheorem
-  bridgeCertification : UsableRulesBridgeCertification
+  sourceSoundnessTransport : UsableRulesSourceSoundnessTransport
 
-/-- The usable-rules confession gap is closed exactly when the residual
-package above is inhabited. -/
+/-- Existence of a usable-rules residual package carrying explicit dependency-pair-to-source
+transport. This proposition records no provenance condition for the transport proof. -/
 abbrev HasUsableRulesConfessionRoute : Prop :=
-  ∃ R : UsableRulesConfessionRouteResidualObligation,
-    R.bridgeCertification.IsVerified
+  Nonempty UsableRulesConfessionRouteResidualObligation
 
 /-- Any solution of the usable-rules residual package would project to the same
-common generic route-evidence object used by the four landed routes. -/
+common generic route-evidence object used by the four routes. -/
 theorem usableRulesRouteResidual_projects_common_route
     (R : UsableRulesConfessionRouteResidualObligation) :
     R.toRouteEvidence R.witness = confessionRouteConvergencePackage.commonRouteEvidence := by
@@ -210,16 +165,12 @@ theorem usableRulesRouteResidual_projects_common_route
 
 /-! ## Convergence-package projection corollaries
 
-The package fields above are stated as raw equalities. The four corollaries
-below repackage that data in the form most convenient for downstream callers:
-the common route-evidence rank, the pairwise agreement of all four routes, and
-the rank-recovery of every route to the canonical DP confession rank. They
-follow directly from `confessionRouteConvergencePackage`'s own agreement
-fields and `confessionGenericRouteEvidence`'s definition; no new mathematical
-content is introduced. -/
+The package fields above are raw equalities. The following corollaries derive
+the common route-evidence rank, pairwise agreement of all four routes, and rank
+recovery of every route to the canonical DP confession rank. -/
 
-/-- The convergence package's common route-evidence rank function is exactly
-the canonical DP projection. -/
+/-- The convergence package's common route-evidence rank function equals the
+canonical DP projection. -/
 theorem confessionRouteConvergencePackage_commonRouteEvidence_rank :
     confessionRouteConvergencePackage.commonRouteEvidence.rank = dpProjection := rfl
 

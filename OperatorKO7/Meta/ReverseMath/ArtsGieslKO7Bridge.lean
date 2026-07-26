@@ -2,30 +2,23 @@ import OperatorKO7.Meta.ReverseMathOmega3WellOrdering
 import OperatorKO7.Meta.DependencyPairs_Works
 
 /-!
-# KO7-relevance bridge (roadmap R2): the SCT soundness principle certifies the KO7 recursor
+# Natural-number measure descent for the KO7 dependency-pair relation
 
-Roadmap R2 closes the "relevance gap": the formal SCT/AG soundness content must certify the **actual**
-KO7 step-duplicating recursor, not merely an abstract transition system. This module provides the
-genuine, non-vacuous bridge.
+The formal principle in this module is generic natural-number measure descent. It is not a
+formalization of external SCT soundness or the Arts-Giesl dependency-pair theorem.
 
-* `SctDescentSoundness` is the formal size-change-termination soundness principle (ω-bounded form):
+* `SctDescentSoundness` is the natural-number measure-descent principle:
   any `ℕ`-valued measure that strictly decreases along a relation certifies well-foundedness. Its
-  well-ordering strength is `ω³` (the `ReverseMathOmega3` layer).
+  proof embeds the natural-number measure below the separately defined `ω³` carrier.
 * `actualSctSoundness_certifies_ko7_recursor` instantiates that principle at the KO7 recursor's
-  dependency-pair rank `dpRank`, yielding `WellFounded DPPairRev` -- the genuine termination
-  statement for the duplicating recursor. The hypothesis is genuinely **used** (instantiated at the
-  KO7 measure), so this is not a vacuous certification.
+  dependency-pair rank `dpRank`, yielding `WellFounded DPPairRev`.
 
-## Orientation note
+## Relation orientation
 
 `OperatorKO7.MetaDependencyPairs.DPPairRev` is the converse of the forward dependency pair `DPPair`
-(`dpPairRev_sub_rank : DPPairRev x y → dpRank x < dpRank y`). The genuine termination statement is
-`WellFounded DPPairRev` (`dpRank` strictly decreases along reverse-DP descending chains). The
-roadmap R2 text `WellFounded (fun a b => DPPairRev b a)` double-reverses to `WellFounded DPPair`,
-which is the *non-terminating* orientation (rank would have to increase without bound); this module
-targets the correct `WellFounded DPPairRev`, matching the already-proven `wf_DPPairRev`.
-
-No `sorry`, `axiom`, or `native_decide`.
+(`dpPairRev_sub_rank : DPPairRev x y → dpRank x < dpRank y`). The termination target used here is
+`WellFounded DPPairRev`, with `dpRank` decreasing along reverse-DP descending chains. Applying an
+additional converse would instead target `WellFounded DPPair`.
 -/
 
 set_option autoImplicit false
@@ -36,33 +29,36 @@ namespace OperatorKO7.ReverseMath
 
 open OperatorKO7.ReverseMathOmega3 (nat_measure_terminates_within_omega3)
 
-/-- The formal SCT/measure-descent soundness principle (ω-bounded): any `ℕ`-valued measure `μ` that
+/-- Any `ℕ`-valued measure `μ` that
 strictly decreases along `R` (`R a b → μ b < μ a`) certifies that the reversed relation
-`fun a b => R b a` is well-founded. This is the abstract size-change-termination soundness
-statement; its well-ordering strength is `ω³`. -/
+`fun a b => R b a` is well-founded. -/
 def SctDescentSoundness : Prop :=
   ∀ {α : Type u} (μ : α → Nat) (R : α → α → Prop),
     (∀ a b, R a b → μ b < μ a) → WellFounded (fun a b => R b a)
 
-/-- The SCT descent-soundness principle is a genuine theorem (it is the `ω³`-bounded measure-descent
-soundness of `ReverseMathOmega3`). -/
+/-- The natural-number measure principle follows by embedding each measure value below `ω³`. -/
 theorem sctDescentSoundness_holds : SctDescentSoundness.{u} :=
   fun μ _R hdesc => nat_measure_terminates_within_omega3 μ hdesc
 
-/-- **R2 bridge.** The formal SCT soundness principle certifies the actual KO7 duplicating recursor:
-instantiated at the recursor's dependency-pair rank `dpRank`, it yields well-foundedness of the
-reverse dependency-pair relation `DPPairRev`. The hypothesis is genuinely instantiated at the KO7
-measure, so the certification is non-vacuous. -/
+/-- Instantiate the natural-number measure principle at `dpRank` to obtain well-foundedness of the
+reverse dependency-pair relation `DPPairRev`. -/
 theorem actualSctSoundness_certifies_ko7_recursor (h : SctDescentSoundness.{0}) :
     WellFounded OperatorKO7.MetaDependencyPairs.DPPairRev :=
   h OperatorKO7.MetaDependencyPairs.dpRank
     (fun x y => OperatorKO7.MetaDependencyPairs.DPPairRev y x)
     (fun _ _ hab => OperatorKO7.MetaDependencyPairs.dpPairRev_sub_rank hab)
 
-/-- Corollary: the KO7 duplicating recursor terminates, certified through the SCT soundness
-principle (an independent derivation of `wf_DPPairRev` routed through the `ω³` framework). -/
+/-- Well-foundedness of `DPPairRev` obtained from `dpRank` through the natural-number measure
+principle. -/
 theorem ko7_recursor_terminates_via_sct :
     WellFounded OperatorKO7.MetaDependencyPairs.DPPairRev :=
   actualSctSoundness_certifies_ko7_recursor sctDescentSoundness_holds
+
+#check sctDescentSoundness_holds
+#print axioms sctDescentSoundness_holds
+#check actualSctSoundness_certifies_ko7_recursor
+#print axioms actualSctSoundness_certifies_ko7_recursor
+#check ko7_recursor_terminates_via_sct
+#print axioms ko7_recursor_terminates_via_sct
 
 end OperatorKO7.ReverseMath

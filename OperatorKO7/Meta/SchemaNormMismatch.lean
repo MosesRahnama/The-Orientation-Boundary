@@ -8,16 +8,9 @@ import Mathlib.Tactic
 /-!
 # Norm Mismatch, Gauge Entropy, and Inefficiency Coefficient
 
-Schema-level mechanization of Paper 2:
+## Formal Scope
 
-- Proposition 3.15 `‖v_i‖_{ℓ⁰, ℓ¹, ℓ^∞}` on the diagonal.
-- Definition 3.16 gauge-orbit entropy `H_gauge(i) = log₂(i + 1)`.
-- Definition 3.18 inefficiency coefficient `η(k, w)`.
-- Proposition 3.19 `η(k, w) → ∞`.
-- Proposition 3.20 Shannon-uniqueness via an explicit description bound.
-
-The three norm readings are computed directly from the constant-payload
-wrapper stack (`v_i = (b, …, b) ∈ B^i`).
+ell0NormOnDiagonal is a seed-rank coordinate, while diagonalSupportCount is the support count. Entropy and inefficiency functions are stipulated numerical models; the file proves arithmetic bounds and asymptotic comparisons, not Shannon uniqueness or a Tendsto statement.
 -/
 
 namespace OperatorKO7.StepDuplicating
@@ -38,10 +31,25 @@ size `p`: `p` for `i ≥ 1`, `0` for `i = 0`. We express it compactly as
 def ellInfNormOnDiagonal (p : Nat) (i : Nat) : Nat :=
   if i = 0 then 0 else p
 
-/-- `ℓ⁰` "norm" of the constant-payload wrapper stack: rank of the diagonal,
-which is `0` for the empty stack and `1` otherwise. -/
+/-- Diagonal seed rank: one shared payload generator for every nonempty stack.
+This is a rank coordinate, rather than the standard support-count `ell0`. -/
 def ell0NormOnDiagonal (i : Nat) : Nat :=
   if i = 0 then 0 else 1
+
+/-- Corrected public name for the rank coordinate formerly described as an
+`ell0` norm. -/
+def diagonalSeedRank (i : Nat) : Nat := ell0NormOnDiagonal i
+
+/-- Standard support count of an `i`-cell constant tuple with payload weight
+`p`: every cell contributes when `p` is positive. -/
+def diagonalSupportCount (p i : Nat) : Nat := if p = 0 then 0 else i
+
+theorem diagonalSupportCount_of_pos (p i : Nat) (hp : 0 < p) :
+    diagonalSupportCount p i = i := by simp [diagonalSupportCount, Nat.ne_of_gt hp]
+
+theorem diagonalSeedRank_eq_one (i : Nat) (hi : 0 < i) :
+    diagonalSeedRank i = 1 := by
+  simp [diagonalSeedRank, ell0NormOnDiagonal, Nat.ne_of_gt hi]
 
 @[simp] theorem ell1NormOnDiagonal_eq (p i : Nat) :
     ell1NormOnDiagonal p i = i * p := rfl
@@ -58,19 +66,17 @@ def ell0NormOnDiagonal (i : Nat) : Nat :=
   have : i ≠ 0 := Nat.one_le_iff_ne_zero.mp hi
   simp [this]
 
-/-- Exact values of the three canonical norm readings on a nonempty diagonal
-wrapper stack. -/
+/-- Values of the seed-rank, maximum, and additive coordinates on a nonempty
+diagonal wrapper stack. -/
 theorem diagonal_norm_values (p i : Nat) (hi : 1 ≤ i) :
     ell0NormOnDiagonal i = 1
       ∧ ellInfNormOnDiagonal p i = p
       ∧ ell1NormOnDiagonal p i = i * p := by
   exact ⟨ell0NormOnDiagonal_pos i hi, ellInfNormOnDiagonal_pos p i hi, rfl⟩
 
-/-- **Paper 2 Proposition 3.15 (norm mismatch).** For every `i ≥ 1` and
-payload size `p ≥ 1`, the three norms of the constant-payload wrapper stack
-`v_i = (b, …, b) ∈ B^i` are pairwise distinct whenever `i ≥ 2` and
-`p ≥ 2`, exhibiting the direct-carrier overcount of `ℓ¹` relative to
-`ℓ^∞` and the rank-like `ℓ⁰` reading. -/
+/-- For `i ≥ 2` and `p ≥ 2`, the seed-rank coordinate, maximum coordinate,
+and additive coordinate are strictly ordered. The first coordinate is not the
+standard support-count `ell0`. -/
 theorem norm_mismatch_pairwise
     (p i : Nat) (hi : 2 ≤ i) (hp : 2 ≤ p) :
     ell0NormOnDiagonal i < ellInfNormOnDiagonal p i
@@ -104,7 +110,7 @@ theorem norm0_le_normInf_of_posSize (p i : Nat) (hp : 1 ≤ p) :
   · simp [hi]
   · simp [hi]; omega
 
-/-! ## Def 3.16 gauge entropy and Def 3.18 inefficiency coefficient
+/-! ## Stipulated Entropy and Inefficiency Models
 
 These are real-valued quantities; we use `Real` via Mathlib here. The
 inefficiency-coefficient divergence proposition is a limit statement, so
@@ -113,16 +119,24 @@ this module is the one place where we leave the pure-`Nat` setting. -/
 open Asymptotics Filter
 open scoped Real
 
-/-- **Paper 2 Def 3.16 (gauge-orbit entropy).** Under the uniform coding
-convention on the `i + 1` payload-bearing positions, the Shannon entropy
-is `log₂(i + 1)`. -/
+/-- Stipulated logarithmic model for `i + 1` uniformly weighted active-locus
+positions. No probability distribution is formalized by this definition. -/
 noncomputable def gaugeEntropy (i : Nat) : ℝ :=
   Real.logb 2 (i + 1 : ℝ)
 
-/-- **Paper 2 Def 3.18 (inefficiency coefficient).** Compares the syntactic
-doubled structural mass `(k+1)(k+2) · w` carried by the direct whole-term
-observer to the coding-theoretic information content
-`ln 2 · H_gauge(k) = ln(k + 1)`. -/
+/-- Alias for the stipulated pointed-active-locus logarithmic model. -/
+noncomputable def pointedActiveLocusEntropy (i : Nat) : ℝ := gaugeEntropy i
+
+/-- The unpointed permutation orbit of a constant tuple is a singleton, hence
+its Hartley entropy vanishes. -/
+noncomputable def unpointedConstantTupleOrbitEntropy (_i : Nat) : ℝ := 0
+
+theorem unpointedConstantTupleOrbitEntropy_eq_zero (i : Nat) :
+    unpointedConstantTupleOrbitEntropy i = 0 := rfl
+
+/-- Stipulated ratio of the displayed quadratic mass expression to
+`2 * log (k + 1)`. Links to syntax mass or coding semantics require separate
+theorems. -/
 noncomputable def inefficiencyCoefficient (k w : Nat) : ℝ :=
   ((k + 1) * (k + 2) * w : ℝ) / (2 * Real.log (k + 1))
 
@@ -133,11 +147,9 @@ noncomputable def inefficiencyCoefficient (k w : Nat) : ℝ :=
     inefficiencyCoefficient k w
       = ((k + 1) * (k + 2) * w : ℝ) / (2 * Real.log (k + 1)) := rfl
 
-/-- **Paper 2 Proposition 3.19 (divergence of the direct-carrier inefficiency
-coefficient).** The numerator-side monotonicity statement: for fixed
+/-- Numerator-side growth statement: for fixed
 `w ≥ 1`, the doubled confessed burden grows at least quadratically in `k`.
-This is the arithmetic core of the divergence claim without invoking real-
-analysis limit infrastructure. -/
+This is an arithmetic lower bound rather than a real-analysis limit theorem. -/
 theorem inefficiency_doubled_burden_lower_bound
     (k w : Nat) (hw : 1 ≤ w) :
     k * k ≤ confessedBurdenDoubled k w := by
@@ -167,10 +179,9 @@ theorem inefficiencyCoefficient_lower_linear
     _ ≤ ((k + 1 : ℝ) * (k + 2) * w) := by
       nlinarith
 
-/-- **Paper 2 Proposition 3.19 (schema-mechanized form).** For every target
-bound `N`, the direct-carrier inefficiency coefficient eventually exceeds `N`
-along the odd subsequence `k = 2N + 1`. This is a concrete unboundedness
-theorem for `η(k,w)`. -/
+/-- For every target bound `N`, the stipulated coefficient reaches at least
+`N` at the displayed odd index `k = 2N + 1`. This proves cofinal
+unboundedness, not convergence to infinity. -/
 theorem inefficiencyCoefficient_unbounded
     (w : Nat) (hw : 1 ≤ w) (N : Nat) :
     (N : ℝ) ≤ inefficiencyCoefficient (2 * N + 1) w := by
@@ -200,7 +211,7 @@ theorem inefficiencyCoefficient_unbounded_atTop
   intro N
   exact ⟨2 * N + 1, inefficiencyCoefficient_unbounded w hw N⟩
 
-/-! ## Exact asymptotic rate of inefficiency divergence -/
+/-! ## Asymptotic Comparison Rates -/
 
 /-- Quadratic comparison model for the direct-carrier inefficiency coefficient. -/
 noncomputable def inefficiencyQuadraticComparison (k w : Nat) : ℝ :=
@@ -284,7 +295,7 @@ theorem inefficiencyCoefficient_le_six_mul_quadraticComparison
     nlinarith
   · exact hden_nonneg
 
-/-- The inefficiency coefficient has exact `Θ(k^2 w / log(k+1))` growth. -/
+/-- The stipulated coefficient has `Theta(k^2 w / log(k+1))` growth. -/
 theorem inefficiencyCoefficient_isTheta_quadraticLog
     (w : Nat) (_hw : 1 ≤ w) :
     (fun k : Nat => inefficiencyCoefficient k w)
@@ -331,7 +342,7 @@ theorem inefficiencyQuadraticComparison_div_eq_linearComparison
     field_simp [hkR, hlog_ne]
     ring
 
-/-- The per-residual inefficiency rate has exact `Θ(k w / log(k+1))` growth. -/
+/-- The per-residual ratio has `Theta(k w / log(k+1))` growth. -/
 theorem inefficiencyCoefficient_perResidual_isTheta_linearLog
     (w : Nat) (hw : 1 ≤ w) :
     (fun k : Nat => inefficiencyCoefficient k w / k)
@@ -353,7 +364,7 @@ theorem inefficiencyCoefficient_perResidual_isTheta_linearLog
         ring)
   exact hdiv.trans_eventuallyEq hEq
 
-/-- The per-step inefficiency rate has exact `Θ(k w / log(k+1))` growth when
+/-- The per-step ratio has `Theta(k w / log(k+1))` growth when
 normalized by the `k + 1` canonical trace stages. -/
 theorem inefficiencyCoefficient_perStep_isTheta_linearLog
     (w : Nat) (hw : 1 ≤ w) :
@@ -458,7 +469,7 @@ theorem explicitDescriptionLength_upper_bound
   omega
 
 /-- The repeated carrier mass and explicit description length differ by an
-exact linear term plus the logarithmic index code. -/
+specified linear term plus the logarithmic index code. -/
 theorem repeatedCarrierMass_description_balance
     (wrapSize paySize glue i : Nat) :
     i * (wrapSize + paySize) + explicitDescriptionLength wrapSize paySize glue i
@@ -466,10 +477,8 @@ theorem repeatedCarrierMass_description_balance
   unfold repeatedCarrierMass explicitDescriptionLength
   ring
 
-/-- **Paper 2 Proposition 3.20 (schema-mechanized form).** After subtracting
-the explicit description length, the repeated-carrier envelope retains an
-exact linear gap `i · (|b| + |G|)` up to the logarithmic index code
-`Nat.size (i + 1)` and fixed glue overhead. -/
+/-- Arithmetic rearrangement of the repeated-carrier and description-length
+definitions. It is not a coding-uniqueness theorem. -/
 theorem explicitDescription_linear_gap
     (wrapSize paySize glue i : Nat) :
     i * (wrapSize + paySize)

@@ -1,18 +1,19 @@
 import OperatorKO7.Meta.DependencyPairs_TPDBExtraction
 
 /-!
-# Generic First-Order Dependency-Pair Extraction
+# Finite first-order rule-head call-graph extraction
 
-This module abstracts the concrete TPDB-side extraction layer to a generic finite
-first-order TRS presentation with arbitrary symbol and variable types. From a finite rule
-list it computes:
+From a finite first-order rule array with arbitrary symbol and variable types, this module computes:
 
 - the defined heads (left-hand side root symbols),
 - the defined call-heads appearing in right-hand sides, and
-- the corresponding array-backed extracted call graph.
+- an array-backed direct call graph obtained by matching those heads.
 
-The TPDB-specific extractor can then be seen as one frontend into this generic layer,
-instead of being the theorem shape itself.
+Each input rule contributes at most one node, and `allHeads` retains every defined symbol occurring
+anywhere in its right-hand side as a `Finset`, so repeated occurrences of one head collapse. The
+declarations do not construct marked dependency pairs or prove semantic correspondence between the
+resulting graph and a rewrite relation. The TPDB bridge only converts syntax and proves root-head
+preservation.
 -/
 
 namespace OperatorKO7.DependencyPairsFragment
@@ -54,7 +55,7 @@ def lhsHead? (r : FORule σ ν) : Option σ :=
 
 end FORule
 
-/-- Extracted dependency-pair node data for a first-order rule. -/
+/-- Rule-head and right-hand-side successor-key data for one first-order rule. -/
 structure ExtractedFORuleNode (σ ν : Type) [DecidableEq σ] where
   rule : FORule σ ν
   nodeKey : σ
@@ -70,7 +71,7 @@ def foDefinedHeads {σ ν : Type} [DecidableEq σ] (rules : Array (FORule σ ν)
       | none => acc)
     ∅
 
-/-- Extract one dependency-pair call-graph node from a first-order rule. -/
+/-- Build one call-graph node when the rule's left-hand side has a function head. -/
 def extractFORuleNode? {σ ν : Type} [DecidableEq σ]
     (defined : Finset σ) (r : FORule σ ν) : Option (ExtractedFORuleNode σ ν) :=
   match FORule.lhsHead? r with
@@ -81,13 +82,13 @@ def extractFORuleNode? {σ ν : Type} [DecidableEq σ]
           nodeKey := f
           succKeys := (FOTerm.allHeads r.rhs).filter (· ∈ defined) }
 
-/-- Extracted dependency-pair call-graph nodes for a finite first-order TRS. -/
+/-- Build one call-graph node for each rule with a function-headed left-hand side. -/
 def extractFORuleNodes {σ ν : Type} [DecidableEq σ]
     (rules : Array (FORule σ ν)) : Array (ExtractedFORuleNode σ ν) :=
   let defined := foDefinedHeads rules
   rules.filterMap (extractFORuleNode? defined)
 
-/-- Array-backed extracted call graph induced by a finite first-order TRS. -/
+/-- Array-backed direct call graph induced by the rule-head data. -/
 def foExtractedCallGraph {σ ν : Type} [DecidableEq σ]
     (rules : Array (FORule σ ν)) : FiniteExtractedCallGraph σ :=
   FiniteExtractedCallGraph.ofArrayMap
@@ -123,12 +124,12 @@ namespace KO7FirstOrder
 
 open OperatorKO7
 
-/-- Generic first-order variable shorthands for the KO7 full-step TRS. -/
+/-- First-order variable shorthands for the KO7 rule-array fixture. -/
 def x : FOTerm String String := .var "x"
 def y : FOTerm String String := .var "y"
 def z : FOTerm String String := .var "z"
 
-/-- Generic first-order constructor / function shorthands for KO7. -/
+/-- First-order constructor and function shorthands for the KO7 rule-array fixture. -/
 def void : FOTerm String String := .app "void" []
 def delta (t : FOTerm String String) : FOTerm String String := .app "delta" [t]
 def integrate (t : FOTerm String String) : FOTerm String String := .app "integrate" [t]
@@ -137,7 +138,9 @@ def app (a b : FOTerm String String) : FOTerm String String := .app "app" [a, b]
 def recD (b s n : FOTerm String String) : FOTerm String String := .app "recD" [b, s, n]
 def eqW (a b : FOTerm String String) : FOTerm String String := .app "eqW" [a, b]
 
-/-- The KO7 full-step TRS as a generic first-order rule list. -/
+/-- Unconditional first-order rule-array over-approximation of the KO7 root rules. The final `eqW`
+rule omits the disequality premise of the guarded source constructor, and this module proves no
+equivalence with the original `Step` relation. -/
 def ko7FullStepFORules : Array (FORule String String) :=
   #[ ⟨integrate (delta x), void⟩
    , ⟨merge void x, x⟩
@@ -148,27 +151,49 @@ def ko7FullStepFORules : Array (FORule String String) :=
    , ⟨eqW x x, void⟩
    , ⟨eqW x y, integrate (merge x y)⟩ ]
 
-/-- Concrete extracted nodes for the generic first-order KO7 rule list. -/
+/-- Rule-head nodes computed from `ko7FullStepFORules`. -/
 def ko7FullStepExtractedNodes : Array (ExtractedFORuleNode String String) :=
   extractFORuleNodes ko7FullStepFORules
 
-/-- Concrete extracted call graph for the generic first-order KO7 rule list. -/
+/-- Direct key-matching call graph computed from `ko7FullStepFORules`. -/
 def ko7FullStepExtractedCallGraph : FiniteExtractedCallGraph String :=
   foExtractedCallGraph ko7FullStepFORules
 
 theorem ko7_full_step_extracted_node_count :
     ko7FullStepExtractedNodes.size = 8 := by
-  native_decide
+  decide
 
 theorem ko7_full_step_defined_heads :
     foDefinedHeads ko7FullStepFORules =
       ({ "integrate", "merge", "recD", "eqW" } : Finset String) := by
-  native_decide
+  decide
 
+/-- The recursive rule supplies the sixth extracted node. Its right-hand side
+contains `app` and `recD`; filtering by defined heads retains `recD`. -/
 theorem ko7_full_step_has_recD_successor :
     ∃ n ∈ ko7FullStepExtractedNodes.toList,
       n.nodeKey = "recD" ∧ n.succKeys = ({ "recD" } : Finset String) := by
-  native_decide
+  have hsize : 5 < ko7FullStepExtractedNodes.size := by
+    rw [ko7_full_step_extracted_node_count]
+    decide
+  let n := ko7FullStepExtractedNodes[5]
+  refine ⟨n, Array.getElem_mem_toList hsize, rfl, ?_⟩
+  have hsucc : n.succKeys =
+      (FOTerm.allHeads (app y (recD x y z))).filter
+        (· ∈ foDefinedHeads ko7FullStepFORules) := by
+    rfl
+  rw [hsucc, ko7_full_step_defined_heads]
+  apply Finset.ext
+  intro f
+  simp [FOTerm.allHeads, app, recD, x, y, z]
+  constructor
+  · rintro ⟨hf, hd⟩
+    rcases hf with rfl | rfl
+    · simp at hd
+    · rfl
+  · intro h
+    subst f
+    simp
 
 end KO7FirstOrder
 

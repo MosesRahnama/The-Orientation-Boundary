@@ -6,13 +6,13 @@ open OperatorKO7.StepDuplicating
 open OperatorKO7.StepDuplicating.StepDuplicatingSchema
 open OperatorKO7.CompositionalImpossibility
 
-/-- Smallest syntactic witness family for the transparent polynomial row. -/
+/-- The successor-identity conditions together with an additional empty-monomial premise. -/
 def TrivialMonomialDominanceWitness
     (M : BoundedPolynomialMeasure ko7Schema) : Prop :=
   M.monomials = [] ∧ M.succ_bias = 0 ∧ M.succ_scale = 1
 
-/-- Explicit frozen-affine witness class: the source and target frozen polynomials
-are both affine in the pumped step value, and the target dominates coefficientwise. -/
+/-- Supplied affine formulas for the source and target frozen evaluations, together with
+coefficientwise inequalities. -/
 def WrapDominantFrozenAffineWitness
     (M : BoundedPolynomialMeasure ko7Schema) : Prop :=
   ∃ sourceConst sourceCoeff targetConst targetCoeff : Nat,
@@ -21,13 +21,12 @@ def WrapDominantFrozenAffineWitness
     sourceConst ≤ targetConst ∧
     sourceCoeff ≤ targetCoeff
 
-/-- Broader transparent family: the successor contributes no extra base drift, so the
-target frozen polynomial subsumes the source frozen polynomial directly. -/
+/-- The two successor parameters are fixed to bias zero and scale one. -/
 def SuccessorIdentityDominanceWitness
     (M : BoundedPolynomialMeasure ko7Schema) : Prop :=
   M.succ_bias = 0 ∧ M.succ_scale = 1
 
-/-- T.2: an explicit coefficientwise frozen-affine dominance witness closes the row. -/
+/-- The supplied affine formulas and coefficient inequalities imply base-level eventual dominance. -/
 theorem wrap_dominant_eventually_dominated_at_base
     (M : BoundedPolynomialMeasure ko7Schema)
     (hwitness : WrapDominantFrozenAffineWitness M) :
@@ -39,8 +38,8 @@ theorem wrap_dominant_eventually_dominated_at_base
   rw [hsource Sval, htarget Sval]
   exact Nat.add_le_add hconst (Nat.mul_le_mul_right Sval hcoeff)
 
-/-- T.3: if the successor is transparent at the base, the target frozen polynomial is
-the wrapped source frozen polynomial plus nonnegative drift. -/
+/-- Bias zero and scale one make the target frozen evaluation the wrapped source evaluation plus
+nonnegative terms. -/
 theorem successor_identity_eventually_dominated_at_base
     (M : BoundedPolynomialMeasure ko7Schema)
     (h_succ_bias : M.succ_bias = 0)
@@ -65,7 +64,8 @@ theorem successor_identity_eventually_dominated_at_base
       _ = M.wrap_right * M.sourceFrozenAtBase Sval := by rw [Nat.mul_comm]
   exact le_trans hsource_le_scaled (Nat.le_add_left _ _)
 
-/-- T.1: the trivial monomial family is eventually dominated at the base. -/
+/-- A compatibility wrapper around `successor_identity_eventually_dominated_at_base`. The
+empty-monomial premise is retained in this signature but is not needed by the proof. -/
 theorem trivial_monomial_eventually_dominated_at_base
     (M : BoundedPolynomialMeasure ko7Schema)
     (_hmonomials : M.monomials = [])
@@ -74,14 +74,14 @@ theorem trivial_monomial_eventually_dominated_at_base
     EventuallyDominatedAtBase M := by
   exact successor_identity_eventually_dominated_at_base M h_succ_bias h_succ_scale
 
-/-- T.4: concrete witness class used by the transparent-row universal closure. -/
+/-- Union of three sufficient witness predicates. The first predicate is contained in the third. -/
 def TransparentDominanceWitnessClass
     (M : BoundedPolynomialMeasure ko7Schema) : Prop :=
   TrivialMonomialDominanceWitness M ∨
     WrapDominantFrozenAffineWitness M ∨
     SuccessorIdentityDominanceWitness M
 
-/-- Any member of the concrete witness class carries the missing base-dominance witness. -/
+/-- Each branch of `TransparentDominanceWitnessClass` implies base-level eventual dominance. -/
 theorem transparent_dominance_witness_class_eventually_dominated_at_base
     (M : BoundedPolynomialMeasure ko7Schema)
     (hwitness : TransparentDominanceWitnessClass M) :

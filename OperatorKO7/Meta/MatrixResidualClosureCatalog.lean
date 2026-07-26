@@ -1,14 +1,15 @@
 import OperatorKO7.Meta.ToolSearchFragmentCoverage_Status
 import OperatorKO7.Meta.MatrixOrderInterfaces
 import OperatorKO7.Meta.MatrixBarrierArcticTropical_Schema
+import OperatorKO7.Meta.MatrixUnrestrictedSplitCore
 
 /-!
-# Matrix Residual Closure Catalog
+# Matrix residual closure catalog
 
-This module packages the accepted exact residual-matrix split as a final catalog.
-It records only the accepted honest status labels from the existing taxonomy and
-status layers. It does not claim new arbitrary, full arctic, or full tropical
-closure theorems.
+This ten-row catalog is theorem-backed throughout.  The two compatibility rows
+for the formerly unconstrained relation both carry the unconditional six-kind
+split proved in `MatrixUnrestrictedSplitCore`; no row is supported by `True` and
+no live row has an open or not-yet-method-class status.
 -/
 
 namespace OperatorKO7.MatrixResidualClosureCatalog
@@ -18,19 +19,13 @@ open OperatorKO7.StepDuplicating.StepDuplicatingSchema
 open OperatorKO7.MatrixResidualTaxonomy
 open OperatorKO7.MatrixOrderInterfaces
 open OperatorKO7.ToolSearchFragmentCoverageStatus
+open OperatorKO7.MatrixUnrestrictedSplit
 
-/-- Exact final-catalog rows for the matrix residual subfamilies.
+/-- Rows of the finite residual-matrix status catalog.
 
-LONG-22 Lane X additive extension: the
-`unconstrainedRelationClosedByUnrestrictedSplit` row records that the
-unconstrained-relation subfamily, previously labeled
-`notYetMethodClass` at the row level, is now closed by the named
-theorem
-`OperatorKO7.MatrixUnrestrictedSplit.unrestricted_matrix_classes_split_final_catalog_unconditional`.
-The legacy `unconstrainedRelationNotYetMethodClass` row is preserved
-verbatim for backward compatibility with the existing
-`MatrixResidualStatusCatalog` ledger; the new row sits alongside
-it as the LONG-22-X-vintage closure carrier. -/
+The two compatibility rows both point to the theorem-backed
+`unconstrainedRelationClosed` family.  One preserves the location of the former
+legacy row; the other preserves the explicitly named closed row. -/
 inductive MatrixResidualClosureCatalogRow where
   | componentwiseWeakStrictReduction
   | paretoProductReduction
@@ -40,11 +35,11 @@ inductive MatrixResidualClosureCatalogRow where
   | arcticFullLicensedEscape
   | tropicalFullLicensedEscape
   | importDependentMatrixLicensedEscape
-  | unconstrainedRelationNotYetMethodClass
+  | unconstrainedRelationLegacyScopeBoundary
   | unconstrainedRelationClosedByUnrestrictedSplit
   deriving DecidableEq, Repr
 
-/-- Exact finite row inventory for the matrix residual closure catalog. -/
+/-- Ten-row inventory for the matrix residual status catalog. -/
 def matrixResidualClosureCatalogRows : List MatrixResidualClosureCatalogRow :=
   [ .componentwiseWeakStrictReduction
   , .paretoProductReduction
@@ -54,11 +49,11 @@ def matrixResidualClosureCatalogRows : List MatrixResidualClosureCatalogRow :=
   , .arcticFullLicensedEscape
   , .tropicalFullLicensedEscape
   , .importDependentMatrixLicensedEscape
-  , .unconstrainedRelationNotYetMethodClass
+  , .unconstrainedRelationLegacyScopeBoundary
   , .unconstrainedRelationClosedByUnrestrictedSplit
   ]
 
-/-- The exact residual-matrix family represented by each final-catalog row. -/
+/-- Family label assigned to each row. -/
 def matrixResidualClosureCatalogRowFamily :
     MatrixResidualClosureCatalogRow → MatrixResidualFamily
   | .componentwiseWeakStrictReduction => .componentwiseWeakStrict
@@ -69,10 +64,10 @@ def matrixResidualClosureCatalogRowFamily :
   | .arcticFullLicensedEscape => .arcticFull
   | .tropicalFullLicensedEscape => .tropicalFull
   | .importDependentMatrixLicensedEscape => .importDependentMatrix
-  | .unconstrainedRelationNotYetMethodClass => .unconstrainedRelation
+  | .unconstrainedRelationLegacyScopeBoundary => .unconstrainedRelationClosed
   | .unconstrainedRelationClosedByUnrestrictedSplit => .unconstrainedRelationClosed
 
-/-- The accepted honest closure status represented by each final-catalog row. -/
+/-- Status label assigned to each row. -/
 def matrixResidualClosureCatalogRowStatus :
     MatrixResidualClosureCatalogRow → MatrixClosureStatus
   | .componentwiseWeakStrictReduction => .reducedToExistingTheorem
@@ -83,23 +78,19 @@ def matrixResidualClosureCatalogRowStatus :
   | .arcticFullLicensedEscape => .licensedEscape
   | .tropicalFullLicensedEscape => .licensedEscape
   | .importDependentMatrixLicensedEscape => .licensedEscape
-  | .unconstrainedRelationNotYetMethodClass => .notYetMethodClass
+  | .unconstrainedRelationLegacyScopeBoundary =>
+      .closedByUnrestrictedSplitFinalCatalog
   | .unconstrainedRelationClosedByUnrestrictedSplit =>
       .closedByUnrestrictedSplitFinalCatalog
 
-/-- Exact support classes explaining why each matrix closure row is honest.
-
-LONG-22 Lane X additive extension (`closedByNamedTheorem`): records that
-a row's closure is discharged by a named upstream theorem (rather than a
-projection-scalarization or licensed-escape certificate). -/
+/-- Three support-kind labels; the proof itself is carried by `matrixResidualClosureCatalogRowSupport`. -/
 inductive MatrixResidualClosureSupportKind
   | projectionScalarization
   | licensedEscapeCertificate
-  | explicitOpenStatus
   | closedByNamedTheorem
   deriving DecidableEq, Repr
 
-/-- Each matrix closure row projects to one exact support class. -/
+/-- Support-kind label assigned to each row. -/
 def matrixResidualClosureCatalogRowSupportKind :
     MatrixResidualClosureCatalogRow → MatrixResidualClosureSupportKind
   | .componentwiseWeakStrictReduction => .projectionScalarization
@@ -110,7 +101,7 @@ def matrixResidualClosureCatalogRowSupportKind :
   | .arcticFullLicensedEscape => .licensedEscapeCertificate
   | .tropicalFullLicensedEscape => .licensedEscapeCertificate
   | .importDependentMatrixLicensedEscape => .licensedEscapeCertificate
-  | .unconstrainedRelationNotYetMethodClass => .explicitOpenStatus
+  | .unconstrainedRelationLegacyScopeBoundary => .closedByNamedTheorem
   | .unconstrainedRelationClosedByUnrestrictedSplit => .closedByNamedTheorem
 
 /-- Payload alias for the certificate-backed arctic escape theorem. -/
@@ -137,21 +128,15 @@ abbrev TropicalFullLicensedEscapePayload : Prop :=
       C.lt (M.eval (S.wrap s (S.recur b s n)))
         (M.eval (S.recur b s (S.succ n))))
 
-/-- Payload alias for the LONG-22 Lane X closed-by-named-theorem row.
-The Prop is `True`-inhabited at this layer because the named theorem
-(LONG-22 X.5
-`unrestricted_matrix_classes_split_final_catalog_unconditional`) lives
-in `OperatorKO7.MatrixUnrestrictedSplit`, which IMPORTS this catalog
-file; a Prop-level cite of the named theorem's body would be a
-dependency cycle. The catalog therefore carries the row + status flip
-+ support-kind label `closedByNamedTheorem`, and the
-LONG-22 Lane X file ships the actual theorem. The link between this
-row and the named theorem is the row's name plus the
-`MatrixResidualClosureCatalogRowSupportKind.closedByNamedTheorem`
-projection. -/
-abbrev UnconstrainedRelationClosedByUnrestrictedSplitPayload : Prop := True
+/-- Exact payload of the unconditional six-kind matrix split. -/
+abbrev UnconstrainedRelationClosedByUnrestrictedSplitPayload : Prop :=
+  matrixCertificateKinds.length = 6
+    ∧ matrixCertificateKinds.Nodup
+    ∧ MatrixUnrestrictedSplitFinalCatalog
+    ∧ (∀ M : MatrixRelation, ∃! kind : MatrixCertificateKind,
+        matrixRelationKind M = kind)
 
-/-- The exact theorem/certificate payload backing each matrix closure row. -/
+/-- Proposition assigned as support for each row. Both final branches carry the six-kind split theorem. -/
 def matrixResidualClosureCatalogRowSupport :
     MatrixResidualClosureCatalogRow → Prop
   | .componentwiseWeakStrictReduction => ComponentwiseWeakStrictProjectionPayload
@@ -162,7 +147,8 @@ def matrixResidualClosureCatalogRowSupport :
   | .arcticFullLicensedEscape => ArcticFullLicensedEscapePayload
   | .tropicalFullLicensedEscape => TropicalFullLicensedEscapePayload
   | .importDependentMatrixLicensedEscape => ImportDependentMatrixLicensedEscapePayload
-  | .unconstrainedRelationNotYetMethodClass => UnconstrainedRelationNotYetMethodClassPayload
+  | .unconstrainedRelationLegacyScopeBoundary =>
+      UnconstrainedRelationClosedByUnrestrictedSplitPayload
   | .unconstrainedRelationClosedByUnrestrictedSplit =>
       UnconstrainedRelationClosedByUnrestrictedSplitPayload
 
@@ -176,18 +162,17 @@ theorem tropicalFull_licensedEscape_payload : TropicalFullLicensedEscapePayload 
   exact no_tropicalMatrix_orients_dup_step_of_scalar_dominance_pump
     M C hweight hscalarize hunbounded
 
-/-- The exact final-catalog row inventory has no duplicates. -/
+/-- The ten-row inventory has no duplicates. -/
 theorem matrixResidualClosureCatalogRows_nodup :
     matrixResidualClosureCatalogRows.Nodup := by
   decide
 
-/-- The exact final-catalog row inventory has length ten (LONG-22 Lane X
-extension: +1 row for `unconstrainedRelationClosedByUnrestrictedSplit`). -/
+/-- The row inventory has length ten. -/
 theorem matrixResidualClosureCatalogRows_length :
     matrixResidualClosureCatalogRows.length = 10 := by
   rfl
 
-/-- Exact membership characterization for the final-catalog row inventory. -/
+/-- Membership characterization for the row inventory. -/
 theorem matrixResidualClosureCatalogRows_complete_exact
     (row : MatrixResidualClosureCatalogRow) :
     row ∈ matrixResidualClosureCatalogRows ↔
@@ -199,38 +184,34 @@ theorem matrixResidualClosureCatalogRows_complete_exact
       row = .arcticFullLicensedEscape ∨
       row = .tropicalFullLicensedEscape ∨
       row = .importDependentMatrixLicensedEscape ∨
-      row = .unconstrainedRelationNotYetMethodClass ∨
+      row = .unconstrainedRelationLegacyScopeBoundary ∨
       row = .unconstrainedRelationClosedByUnrestrictedSplit := by
   cases row <;> decide
 
-/-- Every final-catalog row projects to an accepted family in the taxonomy inventory. -/
+/-- Every row's assigned family belongs to the imported family inventory. -/
 theorem matrixResidualClosureCatalogRowFamily_mem_inventory
     (row : MatrixResidualClosureCatalogRow) :
     matrixResidualClosureCatalogRowFamily row ∈ matrixResidualFamilies := by
   cases row <;> decide
 
-/-- Every final-catalog row matches the accepted taxonomy status assignment exactly. -/
+/-- Each row's status assignment agrees definitionally with the imported taxonomy function. -/
 theorem matrixResidualClosureCatalogRow_matches_taxonomy
     (row : MatrixResidualClosureCatalogRow) :
     matrixResidualClosureCatalogRowStatus row =
       matrixResidualClosureStatus (matrixResidualClosureCatalogRowFamily row) := by
   cases row <;> rfl
 
-/-- Every final-catalog row uses one of the accepted honest status labels.
-
-LONG-22 Lane X additive extension: the disjunction now includes the
-`closedByUnrestrictedSplitFinalCatalog` label for the new
-`unconstrainedRelationClosedByUnrestrictedSplit` row. -/
+/-- Every live row has a theorem-reduction, licensed-escape, or exact
+unrestricted-split status. -/
 theorem matrixResidualClosureCatalogRow_uses_honest_status
     (row : MatrixResidualClosureCatalogRow) :
     matrixResidualClosureCatalogRowStatus row = .reducedToExistingTheorem ∨
       matrixResidualClosureCatalogRowStatus row = .licensedEscape ∨
-      matrixResidualClosureCatalogRowStatus row = .notYetMethodClass ∨
       matrixResidualClosureCatalogRowStatus row =
         .closedByUnrestrictedSplitFinalCatalog := by
   cases row <;> simp [matrixResidualClosureCatalogRowStatus]
 
-/-- Every matrix closure row carries an exact theorem/certificate/open payload. -/
+/-- Every row's assigned support proposition is inhabited by a theorem-backed payload. -/
 theorem matrixResidualClosureCatalogRow_has_support
     (row : MatrixResidualClosureCatalogRow) :
     matrixResidualClosureCatalogRowSupport row := by
@@ -243,33 +224,25 @@ theorem matrixResidualClosureCatalogRow_has_support
   · exact arcticFull_licensedEscape_payload
   · exact tropicalFull_licensedEscape_payload
   · exact importDependentMatrix_licensedEscape_payload
-  · exact unconstrainedRelation_notYetMethodClass_payload
-  · exact (trivial : UnconstrainedRelationClosedByUnrestrictedSplitPayload)
+  · exact unrestricted_matrix_classes_split_final_catalog_unconditional
+  · exact unrestricted_matrix_classes_split_final_catalog_unconditional
 
-/-- The support-kind projection agrees with the row's honest status label.
-
-LONG-22 Lane X additive extension: the new `closedByNamedTheorem`
-support-kind projects to the `closedByUnrestrictedSplitFinalCatalog`
-status. -/
+/-- Support-kind labels project to their theorem-backed status classes. -/
 theorem matrixResidualClosureCatalogRowSupportKind_projects_status
     (row : MatrixResidualClosureCatalogRow) :
     (matrixResidualClosureCatalogRowSupportKind row = .projectionScalarization →
       matrixResidualClosureCatalogRowStatus row = .reducedToExistingTheorem)
     ∧ (matrixResidualClosureCatalogRowSupportKind row = .licensedEscapeCertificate →
       matrixResidualClosureCatalogRowStatus row = .licensedEscape)
-    ∧ (matrixResidualClosureCatalogRowSupportKind row = .explicitOpenStatus →
-      matrixResidualClosureCatalogRowStatus row = .notYetMethodClass)
     ∧ (matrixResidualClosureCatalogRowSupportKind row = .closedByNamedTheorem →
       matrixResidualClosureCatalogRowStatus row =
         .closedByUnrestrictedSplitFinalCatalog) := by
   cases row <;>
-    simp [matrixResidualClosureCatalogRowSupportKind, matrixResidualClosureCatalogRowStatus]
+    simp [matrixResidualClosureCatalogRowSupportKind,
+      matrixResidualClosureCatalogRowStatus]
 
-/-- Paper-facing proposition for the exact final residual-matrix closure catalog.
-
-LONG-22 Lane X additive extension: the disjunction now includes the
-`closedByUnrestrictedSplitFinalCatalog` label so the new row satisfies
-the catalog. -/
+/-- Finite metadata predicate combining row membership, definitional status agreement, inhabited
+support, and membership in the four-label status disjunction. -/
 abbrev MatrixResidualClosureFinalCatalog : Prop :=
   ∀ row : MatrixResidualClosureCatalogRow,
     row ∈ matrixResidualClosureCatalogRows ∧
@@ -278,11 +251,10 @@ abbrev MatrixResidualClosureFinalCatalog : Prop :=
       matrixResidualClosureCatalogRowSupport row ∧
       (matrixResidualClosureCatalogRowStatus row = .reducedToExistingTheorem ∨
         matrixResidualClosureCatalogRowStatus row = .licensedEscape ∨
-        matrixResidualClosureCatalogRowStatus row = .notYetMethodClass ∨
         matrixResidualClosureCatalogRowStatus row =
           .closedByUnrestrictedSplitFinalCatalog)
 
-/-- The exact final residual-matrix closure catalog is realized by the accepted rows. -/
+/-- The finite metadata predicate holds for every row by enumeration and the assigned support proofs. -/
 theorem matrixResidualClosureFinalCatalog_exact : MatrixResidualClosureFinalCatalog := by
   intro row
   constructor
@@ -293,34 +265,30 @@ theorem matrixResidualClosureFinalCatalog_exact : MatrixResidualClosureFinalCata
   · exact matrixResidualClosureCatalogRow_has_support row
   · exact matrixResidualClosureCatalogRow_uses_honest_status row
 
-/-- Certificate packaging the exact final matrix residual catalog and the accepted
-paper-facing status projection. -/
+/-- Pair of the finite metadata catalog proof and the imported status catalog. -/
 structure MatrixResidualClosureCertificate where
   finalCatalog : MatrixResidualClosureFinalCatalog
   statusCatalog : MatrixResidualStatusCatalog
 
-/-- The matrix residual closure certificate packages the exact rows and the accepted
-status projection together. -/
+/-- Construct the pair from the two catalog proofs. -/
 theorem matrixResidualClosureCertificate : MatrixResidualClosureCertificate := by
   exact {
     finalCatalog := matrixResidualClosureFinalCatalog_exact
     statusCatalog := matrix_residual_status_catalog
   }
 
-/-- The matrix residual closure certificate projects the exact final catalog. -/
+/-- Project the finite metadata catalog proof. -/
 theorem matrixResidualClosureCertificate_projects_finalCatalog :
     MatrixResidualClosureFinalCatalog :=
   matrixResidualClosureCertificate.finalCatalog
 
-/-- The matrix residual closure certificate projects the exact theorem/certificate/open
-payload for each catalog row. -/
+/-- Project the assigned support proposition for a row. -/
 theorem matrixResidualClosureCertificate_projects_rowSupport
     (row : MatrixResidualClosureCatalogRow) :
     matrixResidualClosureCatalogRowSupport row := by
   exact (matrixResidualClosureCertificate_projects_finalCatalog row).2.2.1
 
-/-- The matrix residual closure certificate projects the accepted paper-facing
-matrix residual status catalog. -/
+/-- Project the imported matrix residual status catalog. -/
 theorem matrixResidualClosureCertificate_projects_statusCatalog :
     MatrixResidualStatusCatalog :=
   matrixResidualClosureCertificate.statusCatalog

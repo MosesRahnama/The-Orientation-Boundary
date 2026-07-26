@@ -1,22 +1,22 @@
 import OperatorKO7.Meta.StepDuplicatingSchema
 
 /-!
-# Canonical Trace Law for the Step-Duplicating Schema
+This module proves reflexive-transitive reachability for a canonical wrapper trace under
+WrapContextClosed. The coordinate functions are independent natural-number definitions with
+arithmetic identities. Length-indexed path counts and term-observation bridges require separate
+declarations.
 
-Schema-level mechanization of Paper 2 Proposition 3.3 (the canonical trace
-law) and Proposition 3.6 (the per-step control/payload exchange) for the
-step-duplicating schema.
 
-Given a `StepDuplicatingSystem Sys` whose `Step` relation contains both the
-base rule `recur b s base → b` and the duplicating rule
-`recur b s (succ n) → wrap s (recur b s n)`, we prove that the canonical
-trace starting from `recur b s (succ^k base)` passes through
-`wrap^i s (recur b s (succ^{k-i} base))` at step `i` and ends at
-`wrap^k s b` after exactly `k+1` steps. Per-step counter/payload coordinates
-along the trace satisfy the expected arithmetic identities.
 
-This is the abstract counterpart of Paper 2's trace law for the primitive
-recursion duplicator; no KO7-specific syntax is used.
+
+
+
+
+
+
+
+
+
 -/
 
 namespace OperatorKO7.StepDuplicating
@@ -32,7 +32,7 @@ namespace BaseDuplicatingSystem
 
 variable {Sys : BaseDuplicatingSystem}
 
-/-- Iterated successor `succ^k base` used as the canonical counter. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def counter (Sys : BaseDuplicatingSystem) : Nat → Sys.T :=
   succIter Sys.toStepDuplicatingSchema
 
@@ -41,8 +41,8 @@ def counter (Sys : BaseDuplicatingSystem) : Nat → Sys.T :=
 @[simp] lemma counter_succ (k : Nat) :
     Sys.counter (k + 1) = Sys.succ (Sys.counter k) := rfl
 
-/-- Left-nested wrapper chain `wrap s (wrap s (... r ...))` carrying the
-same step argument `s` along with a seed `r`. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def wrapChain (Sys : BaseDuplicatingSystem) (s : Sys.T) : Nat → Sys.T → Sys.T
   | 0, r => r
   | n + 1, r => Sys.wrap s (wrapChain Sys s n r)
@@ -52,7 +52,7 @@ def wrapChain (Sys : BaseDuplicatingSystem) (s : Sys.T) : Nat → Sys.T → Sys.
 @[simp] lemma wrapChain_succ (s r : Sys.T) (n : Nat) :
     Sys.wrapChain s (n + 1) r = Sys.wrap s (Sys.wrapChain s n r) := rfl
 
-/-- Canonical trace state at step `i` starting from `recur b s (succ^k base)`. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def canonicalTrace (Sys : BaseDuplicatingSystem) (b s : Sys.T) (k i : Nat) : Sys.T :=
   Sys.wrapChain s i (Sys.recur b s (Sys.counter (k - i)))
 
@@ -60,7 +60,7 @@ def canonicalTrace (Sys : BaseDuplicatingSystem) (b s : Sys.T) (k i : Nat) : Sys
     Sys.canonicalTrace b s k 0 = Sys.recur b s (Sys.counter k) := by
   simp [canonicalTrace]
 
-/-- Reflexive/transitive closure of the system's step relation. -/
+/-- Carrier with the constructors displayed below. -/
 inductive StepStar {Sys : BaseDuplicatingSystem} : Sys.T → Sys.T → Prop
   | refl (t) : StepStar t t
   | tail {a b c} : StepStar a b → Sys.Step b c → StepStar a c
@@ -75,10 +75,10 @@ lemma StepStar.trans {Sys : BaseDuplicatingSystem} {a b c : Sys.T}
   | refl => exact hab
   | tail _ hstep ih => exact StepStar.tail ih hstep
 
-/-- Explicit wrap-context closure for systems where the root step may be lifted
-under a wrapper layer. This is not built into `StepDuplicatingSystem`
-itself because many barrier theorems never need it, but the full canonical
-trace law does. -/
+/-- Definition with formal content given by the displayed type and body.
+
+
+-/
 def WrapContextClosed (Sys : BaseDuplicatingSystem) : Prop :=
   ∀ (s : Sys.T) {a b : Sys.T}, Sys.Step a b → Sys.Step (Sys.wrap s a) (Sys.wrap s b)
 
@@ -109,16 +109,16 @@ lemma StepStar.wrapChain {Sys : BaseDuplicatingSystem}
       simpa [wrapChain] using StepStar.wrap (Sys := Sys) hwrap s (ih hab)
 
 /-
-The schema `Step` relation is an arbitrary relation containing only the
-root dup rule and (for `BaseDuplicatingSystem`) the root base rule. Context
-closure under `wrap` is *not* automatic. Systems that admit wrap-context
-closure can supply it as an explicit hypothesis. The canonical trace law
-below is stated at the root of each stage, so context closure is not
-needed.
+
+
+
+
+
+
 -/
 
-/-- One canonical step at stage `i < k`: from `recur b s (succ^{k-i} base)`
-to `wrap s (recur b s (succ^{k-i-1} base))`. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 lemma canonical_dup_step (Sys : BaseDuplicatingSystem)
     (b s : Sys.T) {k i : Nat} (hik : i < k) :
     Sys.Step
@@ -136,12 +136,12 @@ lemma canonical_dup_step (Sys : BaseDuplicatingSystem)
     omega
   simpa [hm', hmsub] using hstep
 
-/-- The canonical base step at stage `k`: from `recur b s base` to `b`. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 lemma canonical_base_step (Sys : BaseDuplicatingSystem) (b s : Sys.T) :
     Sys.Step (Sys.recur b s Sys.base) b := Sys.base_step b s
 
-/-- One full canonical transition from stage `i` to stage `i + 1`, assuming
-the system admits wrap-context closure. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem canonical_stage_step (Sys : BaseDuplicatingSystem)
     (hwrap : WrapContextClosed Sys) (b s : Sys.T) {k i : Nat} (hik : i < k) :
     StepStar
@@ -157,8 +157,8 @@ theorem canonical_stage_step (Sys : BaseDuplicatingSystem)
   have hsub : k - i - 1 = k - (i + 1) := by omega
   simpa [hsub, wrapChain_push] using hlift
 
-/-- The canonical trace reaches the base-site stage `wrap^k s (recur b s base)`
-under wrap-context closure. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem canonical_trace_to_base_stage (Sys : BaseDuplicatingSystem)
     (hwrap : WrapContextClosed Sys) (b s : Sys.T) (k : Nat) :
     StepStar
@@ -187,9 +187,9 @@ theorem canonical_trace_to_base_stage (Sys : BaseDuplicatingSystem)
         exact StepStar.trans hprev hstep
   exact hprefix k (Nat.le_refl _)
 
-/-- Full canonical trace law under wrap-context closure: the trace starts at
-`recur b s (succ^k base)`, reaches the base-site stage `wrap^k s (recur b s base)`,
-and then lands on `wrap^k s b`. -/
+/-- The displayed proposition follows from the stated hypotheses.
+
+-/
 theorem canonical_trace_full (Sys : BaseDuplicatingSystem)
     (hwrap : WrapContextClosed Sys) (b s : Sys.T) (k : Nat) :
     StepStar
@@ -212,7 +212,7 @@ theorem canonical_trace_full (Sys : BaseDuplicatingSystem)
     (by simpa [canonicalTrace, hkk, counter_zero] using htrace)
     (by simpa using hlift)
 
-/-- Counter-height coordinate along the canonical trace: `ctr(t_i) = k - i`. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def trace_ctr (k i : Nat) : Nat := k - i
 
 @[simp] lemma trace_ctr_zero (k : Nat) : trace_ctr k 0 = k := by simp [trace_ctr]
@@ -222,8 +222,8 @@ lemma trace_ctr_step (k i : Nat) :
   unfold trace_ctr
   omega
 
-/-- Payload-multiplicity coordinate along the canonical trace:
-`pay(t_i) = i + 1` (the `i` wrapper copies plus the one active copy). -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def trace_pay (i : Nat) : Nat := i + 1
 
 @[simp] lemma trace_pay_zero : trace_pay 0 = 1 := rfl
@@ -231,9 +231,9 @@ def trace_pay (i : Nat) : Nat := i + 1
 lemma trace_pay_step (i : Nat) :
     trace_pay (i + 1) = trace_pay i + 1 := by simp [trace_pay]
 
-/-- Per-step control/payload exchange (Paper 2 Proposition 3.6): one firing
-of the duplicating rule consumes exactly one unit of counter structure and
-creates exactly one additional payload slot. -/
+/-- The displayed proposition follows from the stated hypotheses.
+
+-/
 theorem per_step_exchange (k i : Nat) (hik : i < k) :
     trace_ctr k i = trace_ctr k (i + 1) + 1
       ∧ trace_pay (i + 1) = trace_pay i + 1 := by
@@ -241,8 +241,8 @@ theorem per_step_exchange (k i : Nat) (hik : i < k) :
   unfold trace_ctr
   omega
 
-/-- Per-step offset invariant (Paper 2 Proposition 3.8): along the canonical
-trace, `trace_pay(i) - trace_wraps(i) = 1`, where `trace_wraps(i) := i`. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def trace_wraps (i : Nat) : Nat := i
 
 @[simp] lemma trace_wraps_zero : trace_wraps 0 = 0 := rfl

@@ -3,18 +3,13 @@ import OperatorKO7.Kernel
 namespace OperatorKO7
 
 /-!
-Lean-side export of the full KO7 root TRS to the concrete TPDB / TTT2 syntax
-used by the checked external artifact in `Artifacts/ttt2/KO7_full_step.trs`.
+Lean-side rendering of the full KO7 root TRS in TPDB / TTT2 syntax.
 
-Why this file exists:
-- Provides a minimal audited bridge from the Lean kernel presentation of KO7 to
-  the exact first-order TRS submitted to TTT2 / CeTA.
-- Keeps the bridge intentionally small: one concrete exporter for KO7, not a
-  generic TPDB library.
-- Proves that the generated text matches the checked artifact text byte-for-byte
-  modulo Lean's exact string literal.
-- Makes the external tool input part of the reviewed formal artifact rather than
-  a manually maintained side file only.
+Module role:
+- Defines one concrete first-order rule list and renderer.
+- Proves equality between the renderer output and an embedded reference literal.
+- Leaves parity with `Artifacts/ttt2/KO7_full_step.trs` to an external byte or
+  hash comparison; Lean does not read that filesystem artifact in this module.
 -/
 
 /-- Minimal first-order TPDB term syntax for the exported KO7 problem. -/
@@ -84,15 +79,15 @@ def ko7FullStepTpdbRules : List TpdbRule :=
   , ⟨teqW tx ty, tintegrate (tmerge tx ty)⟩
   ]
 
-/-- The exact TPDB / TTT2 text for the full KO7 root TRS. -/
+/-- Concrete TPDB / TTT2 text for the full KO7 root TRS. -/
 def ko7_full_step_tpdb : String :=
   "(VAR x y z)\n" ++
   "(RULES\n" ++
   renderRuleBlock ko7FullStepTpdbRules ++
   ")\n"
 
-/-- Checked artifact text for `Artifacts/ttt2/KO7_full_step.trs`. -/
-def ko7_full_step_tpdb_artifact_text : String :=
+/-- Embedded reference literal for the expected TPDB rendering. -/
+def ko7_full_step_tpdb_embedded_reference : String :=
   "(VAR x y z)\n" ++
   "(RULES\n" ++
   "  integrate(delta(x)) -> void\n" ++
@@ -105,12 +100,21 @@ def ko7_full_step_tpdb_artifact_text : String :=
   "  eqW(x, y) -> integrate(merge(x, y))\n" ++
   ")\n"
 
-/-- The Lean-side exporter matches the checked artifact text exactly. -/
-theorem ko7_full_step_tpdb_matches_artifact_text :
-    ko7_full_step_tpdb = ko7_full_step_tpdb_artifact_text := by
-  native_decide
+/-- Historical compatibility alias. The name does not imply that Lean reads the external file. -/
+abbrev ko7_full_step_tpdb_artifact_text : String :=
+  ko7_full_step_tpdb_embedded_reference
 
-/-- The exported TPDB problem contains exactly the eight full-step kernel rules. -/
+/-- The renderer output is definitionally equal to the embedded reference literal. -/
+theorem ko7_full_step_tpdb_matches_embedded_reference :
+    ko7_full_step_tpdb = ko7_full_step_tpdb_embedded_reference := by
+  rfl
+
+/-- Historical compatibility theorem. External artifact parity is checked outside Lean. -/
+theorem ko7_full_step_tpdb_matches_artifact_text :
+    ko7_full_step_tpdb = ko7_full_step_tpdb_artifact_text :=
+  ko7_full_step_tpdb_matches_embedded_reference
+
+/-- The declared TPDB rule list has length eight. -/
 theorem ko7_full_step_tpdb_rule_count :
     ko7FullStepTpdbRules.length = 8 := rfl
 

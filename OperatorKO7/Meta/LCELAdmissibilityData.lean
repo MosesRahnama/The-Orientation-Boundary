@@ -5,15 +5,11 @@ import OperatorKO7.Meta.LCELStructuralIdentity
 import OperatorKO7.Meta.LCELUniversalTheorem
 
 /-!
-# LCEL Admissibility Data (post-closure Phase P2)
+# LCEL admissibility data
 
-This file factors the data currently inlined into `AdmissibleLCELInstance`
-into a standalone record tied to a single `FormalLCELInstance`. The goal
-is to eliminate hand-written wrapper fragility in the post-closure
-program: once a raw `FormalLCELInstance` has an
-`LCELAdmissibilityData` package, lifting it into an
-`AdmissibleLCELInstance` and bundling a pair into an
-`LCELUnrestrictedMathematicalWitness` is a cheap and uniform operation.
+This file packages the schema realization and four support records associated
+with one `FormalLCELInstance`. `toAdmissibleInstance` projects the package into
+the corresponding `AdmissibleLCELInstance` record.
 
 The carrier `LCELAdmissibilityData L` packages:
 
@@ -22,13 +18,10 @@ The carrier `LCELAdmissibilityData L` packages:
   (`baseSupport`, `licenseSupport`, `reimportSupport`, `boundarySupport`)
   on the instance `L`.
 
-Canonical admissibility-data packages are supplied for the three
-paper-facing canonical LCEL instances.
+Admissibility-data packages are supplied for the three declared LCEL instances.
 
-The coercion `LCELAdmissibilityData.toAdmissibleInstance` lifts an
-admissibility-data package into an `AdmissibleLCELInstance`, and it is
-definitionally equal to the existing hand-written canonical admissible
-instances.
+The named equalities at the end show that these projections reduce
+definitionally to the separately declared admissible instances.
 -/
 
 namespace OperatorKO7.LCELAdmissibility
@@ -78,12 +71,8 @@ end LCELAdmissibilityData
 
 /-! ## Canonical admissibility-data packages
 
-One package per paper-facing canonical LCEL instance, each built from the
-same support records and realization theorem as the corresponding
-canonical admissible instance in `Meta/LCELUniversalTheorem.lean`. The
-resulting admissibility packages coincide definitionally with the
-existing canonical admissible instances — see the named equalities
-below. -/
+Each package uses the same support records and realization theorem as the
+corresponding admissible instance in `Meta/LCELUniversalTheorem.lean`. -/
 
 /-- Gödel 1931-side canonical admissibility data. -/
 def godel1931LCELAdmissibilityData :
@@ -114,8 +103,8 @@ def dpEmitterLCELAdmissibilityData :
 
 /-! ## Coincidence with canonical admissible instances
 
-The lifted admissible instance from canonical admissibility data equals
-the existing canonical admissible instance, definitionally. -/
+Each lifted admissible instance is definitionally equal to its separately
+declared counterpart. -/
 
 /-- Gödel 1931 canonical admissibility data lifts to
 `godel1931AdmissibleLCELInstance`. -/

@@ -16,7 +16,6 @@ Properties:
   classical reasoning is used only in proof terms (Prop-valued well-foundedness arguments).
 - All 8 SafeStep constructors are proven to strictly decrease μ3c.
 - Explicit `Prod.Lex` parameters prevent elaboration issues.
-- No `sorry`, no `admit`, no `unsafe`.
 
 Technical approach:
 The measure μ3c uses lexicographic ordering Lex3c := Prod.Lex (<) (Prod.Lex DM (<))
@@ -52,7 +51,7 @@ open MetaSN_KO7
 open MetaSN_DM
 open scoped Classical
 
-/-! ## Section 1: Computable Natural Rank τ ----------------------------------------------- -/
+/-! ## Section 1: Computable Natural Rank tau -/
 
 /-- **Head-weighted structural size (τ)**
 
@@ -117,7 +116,7 @@ lemma wf_Lex3c : WellFounded Lex3c := by
 /-- Lifting lemma: a DM decrease on κᴹ lifts to the full inner order, regardless of τ. -/
 lemma dm_to_LexDM_c_left {X Y : Multiset Nat} {τ₁ τ₂ : Nat}
     (h : DM X Y) : LexDM_c (X, τ₁) (Y, τ₂) := by
-  -- Use explicit parameters to avoid inference brittleness, mirroring KO7.
+  -- Explicit parameters determine both component relations and endpoints.
   exact
     (Prod.Lex.left
       (α := Multiset Nat) (β := Nat)
@@ -214,7 +213,7 @@ lemma drop_R_merge_void_left_c (t : Trace) (hδ : deltaFlag t = 0) :
       (α := Nat) (β := (Multiset Nat × Nat))
       (ra := (· < ·)) (rb := LexDM_c)
       (a := (0 : Nat)) hin')
-  -- Now prove the main goal: both sides have δ=0 due to guard
+  -- Both sides have δ=0 under the guard.
   unfold Lex3c mu3c
   simp only [deltaFlag] at hδ ⊢
   rw [hδ]
@@ -245,7 +244,7 @@ lemma drop_R_merge_void_right_c (t : Trace) (hδ : deltaFlag t = 0) :
       (α := Nat) (β := (Multiset Nat × Nat))
       (ra := (· < ·)) (rb := LexDM_c)
       (a := (0 : Nat)) hin')
-  -- Now prove the main goal: both sides have δ=0 due to guard
+  -- Both sides have δ=0 under the guard.
   unfold Lex3c mu3c
   simp only [deltaFlag] at hδ ⊢
   rw [hδ]
@@ -341,7 +340,7 @@ lemma drop_R_rec_zero_c (b s : Trace) (hδ : deltaFlag b = 0) :
   classical
   -- Inner: DM-left on κᴹ component
   have hdm : DM (kappaM b) (kappaM (recΔ b s void)) := by
-    -- use the KO7 helper
+    -- `MetaSN_DM.dm_drop_R_rec_zero` supplies the DM decrease.
     simpa [DM] using MetaSN_DM.dm_drop_R_rec_zero b s
   have hin : LexDM_c (kappaM b, tau b)
       (kappaM (recΔ b s void), tau (recΔ b s void)) := by
@@ -355,7 +354,7 @@ lemma drop_R_rec_zero_c (b s : Trace) (hδ : deltaFlag b = 0) :
       (0, (kappaM (recΔ b s void), tau (recΔ b s void))) :=
     (Prod.Lex.right (α := Nat) (β := (Multiset Nat × Nat)) (ra := (· < ·)) (rb := LexDM_c)
       (a := (0 : Nat)) hin)
-  -- Cast the 0-anchored witness to the goal using explicit `change` + `rw` (no simp recursion)
+  -- Cast the 0-anchored witness to the goal with explicit `change` and `rw`.
   change Prod.Lex (· < ·) LexDM_c
       ((MetaSN_KO7.deltaFlag b), (kappaM b, tau b))
       ((MetaSN_KO7.deltaFlag (recΔ b s void)), (kappaM (recΔ b s void), tau (recΔ b s void)))
@@ -390,7 +389,7 @@ lemma drop_R_merge_cancel_c (t : Trace)
   have hcore : Lex3c (0, (kappaM t, tau t)) (0, (kappaM (merge t t), tau (merge t t))) :=
     (Prod.Lex.right (α := Nat) (β := (Multiset Nat × Nat)) (ra := (· < ·)) (rb := LexDM_c)
       (a := (0 : Nat)) hin)
-  -- Cast the 0-anchored witness to the goal using explicit `change` + `rw` (no simp recursion)
+  -- Cast the 0-anchored witness to the goal with explicit `change` and `rw`.
   change Prod.Lex (· < ·) LexDM_c
       ((MetaSN_KO7.deltaFlag t), (kappaM t, tau t))
       ((MetaSN_KO7.deltaFlag (merge t t)), (kappaM (merge t t), tau (merge t t)))
@@ -398,10 +397,9 @@ lemma drop_R_merge_cancel_c (t : Trace)
   exact hcore
 
 
-/-- **MASTER THEOREM: Every SafeStep decreases μ3c**
+/-- **Every SafeStep decreases μ3c.**
 
 Pattern matches all 8 constructors to their decrease proofs.
-This is the heart of the termination argument.
 -/
 lemma measure_decreases_safe_c : ∀ {a b}, MetaSN_KO7.SafeStep a b → Lex3c (mu3c b) (mu3c a)
 | _, _, MetaSN_KO7.SafeStep.R_int_delta t => by simpa using drop_R_int_delta_c t
@@ -433,15 +431,11 @@ theorem wellFounded_of_measure_decreases_R_c
     intro x y hxy; exact hdec hxy
   exact Subrelation.wf hsub wf_measure
 
-/-- **MAIN RESULT: SafeStep is strongly normalizing**
+/-- **SafeStep reverse relation is well-founded.**
 
-Well-foundedness of SafeStepRev proves termination.
-Fully computable, no axioms, no noncomputables.
-
-Implications:
-- No infinite SafeStep chains
-- Normalizer always terminates
-- Confluence + SN = decidable equality
+The computable measure components and their decrease theorem establish
+well-foundedness of `SafeStepRev`. This is the termination component used by
+separate normalization, confluence, and decidable-equality results.
 -/
 theorem wf_SafeStepRev_c : WellFounded MetaSN_KO7.SafeStepRev :=
   wellFounded_of_measure_decreases_R_c (R := MetaSN_KO7.SafeStep)

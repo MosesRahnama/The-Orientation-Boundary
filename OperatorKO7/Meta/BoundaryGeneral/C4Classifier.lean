@@ -1,18 +1,11 @@
 /-!
-# Theory VII: C4 layer classifier for undecidability claims
+# Priority classifier for five boundary-layer labels
 
-Boundary-general cross-paper packet, Theory VII. Failures at a proof interface must be classified by
-layer, not all lumped as "undecidability." The five layers are object-level undecidability, interface
-inexpressibility, licensed-inert payload, resource halt, and external-metatheorem use. The
-classifier is a total computable function on evidence; the duplicating recursor under a direct
-whole-term language classifies as **interface inexpressibility, not object undecidability** (the
-verdict depends on the step argument, a dimension the observation language cannot name).
-
-This prevents a benchmark or reviewer from calling every failure "undecidability" when the precise
-failure is interface loss, license absence, or resource abstention. `classify` is `decide`-checkable,
-so the recursor and external-metatheorem classifications are closed computations.
-
-No `sorry`, `axiom`, or `native_decide`.
+`Evidence` stores six Boolean flags, and `classify` selects a `BoundaryLayer` by a fixed priority
+order. The final branch returns `interfaceInexpr`, so an all-false evidence record receives that
+label by default. `recursorEvidence` and `externalMetaEvidence` are explicit fixtures; their
+classification theorems are closed computations over those records. The formal scope is the
+priority classifier over supplied flags; semantic adapters belong in separate modules.
 -/
 
 set_option autoImplicit false
@@ -37,7 +30,7 @@ structure Evidence where
   resourceStopping : Bool        -- the decisive event is a budget / abstention / stopping rule
   externalMetaUsed : Bool        -- the result uses a metatheorem not internalized
 
-/-- The total computable C4 classifier (Definition 7.3), in priority order. -/
+/-- Select a layer by priority, with `interfaceInexpr` as the all-false default. -/
 def classify (e : Evidence) : BoundaryLayer :=
   if e.objectUndecidable then .objUndec
   else if e.dimensionChangesVerdict && !e.languageNamesDimension then .interfaceInexpr
@@ -46,8 +39,7 @@ def classify (e : Evidence) : BoundaryLayer :=
   else if e.externalMetaUsed then .externalMeta
   else .interfaceInexpr
 
-/-- The duplicating recursor's evidence: the verdict depends on the step argument (a dimension the
-direct whole-term language cannot name), while the object predicate is decidable. -/
+/-- Explicit fixture assigning the dimension-change and language-omission flags. -/
 def recursorEvidence : Evidence where
   objectUndecidable := false
   dimensionChangesVerdict := true
@@ -56,15 +48,14 @@ def recursorEvidence : Evidence where
   resourceStopping := false
   externalMetaUsed := false
 
-/-- **Theorem 7.4.** Under a direct whole-term observation language the duplicating recursor is
-interface inexpressibility, not object undecidability. -/
+/-- Computation of `classify` on `recursorEvidence`. -/
 theorem recursor_is_interfaceInexpr :
     classify recursorEvidence = BoundaryLayer.interfaceInexpr := by decide
 
 theorem recursor_not_objUndec :
     classify recursorEvidence ≠ BoundaryLayer.objUndec := by decide
 
-/-- Evidence that invokes an external metatheorem not internalized in the object language. -/
+/-- Explicit fixture assigning only the external-metatheorem flag. -/
 def externalMetaEvidence : Evidence where
   objectUndecidable := false
   dimensionChangesVerdict := false
@@ -73,8 +64,7 @@ def externalMetaEvidence : Evidence where
   resourceStopping := false
   externalMetaUsed := true
 
-/-- **Theorem 7.5.** External-metatheorem use (with no internal proof object) classifies as the
-external-meta layer, not as object undecidability. -/
+/-- Computation of `classify` on `externalMetaEvidence`. -/
 theorem externalMeta_classified :
     classify externalMetaEvidence = BoundaryLayer.externalMeta := by decide
 

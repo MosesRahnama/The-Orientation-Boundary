@@ -15,40 +15,19 @@ import OperatorKO7.Meta.LCELUnrestrictedClassification
 import OperatorKO7.Meta.LCELRouteSemanticsClassification
 
 /-!
-# LCEL Benchmark ↔ Native DP Unrestricted Universal Theorem
+# LCEL benchmark-to-DP finite correspondence
 
-This module supplies the benchmark-transport ↔ native DP / emitter
-canonical unrestricted mathematical witness and its structural-identity
-corollary, completing the canonical triad of unrestricted witnesses
-(Gödel ↔ DP, Gödel ↔ benchmark, benchmark ↔ DP) closed by Workstream E.
+This module defines a bijection between two two-constructor sentence types and
+uses it to populate the benchmark-to-DP LCEL correspondence records. Boundary,
+annotation, and base-sentence transport use the nonconstant sentence map.
+External-license and reimport-class transport act on proposition proofs and
+return the target instances' supplied proofs.
 
-The construction is **genuinely source-sensitive**, not a bridge-builder
-alias. After the benchmark-side and DP-side semantic carriers are
-upgraded in `Meta/StructuralIdentityComparison.lean` and
-`Meta/LCELDpInstance.lean` so that obstruction witnesses, reimport
-admissions, and annotations all live in the typed sentence spaces
-(`BenchmarkTransportSentenceSemantic` on the benchmark side,
-`DpEmitterSentenceSemantic` on the DP side), the direct benchmark ↔ DP
-boundary, annotation, and base-sentence correspondences are built from
-an explicit typed sentence translation
-`benchmarkTransportSentence_to_dpEmitterSentence` that is non-constant
-on the two-element sentence spaces. The canonical
-`benchmark_dp_lcelMathematicalSupportWitness` then uses the
-correspondence-driven source-informed transport helpers
-(`baseReversibilityTheorem_transport_viaStrongSlot`,
-`licenseIrreversibilityTheorem_transport_viaStrongSlot`,
-`reimportReversibilityTheorem_transport_viaStrongSlot`,
-`boundaryFactorizationTheorem_transport`), and is **no longer**
-definitionally equal to
-`LCELMathematicalSupportWitness.ofBridgeData` on this pair: the
-transport functions of the two constructions differ by the non-constant
-translate map on the two-element sentence spaces.
-
-The benchmark ↔ DP canonical unrestricted corollary
-`benchmark_dp_unrestricted_structural_identity` and the Workstream D
-mathematical corollary
-`benchmark_dp_mathematical_universal_structural_identity` are derived
-directly from this source-sensitive witness.
+The later witness and quasi-functor declarations are record constructions from
+these finite correspondences and the imported admissibility packages. In
+particular, the declarations establish inhabitation of the named LCEL record
+types; they do not establish a semantic equivalence between an independently
+defined benchmark execution relation and dependency-pair rewriting.
 -/
 
 namespace OperatorKO7.LCELBenchmarkDpUnrestrictedTheorem
@@ -72,23 +51,14 @@ open OperatorKO7.ReflectionSchema
 
 /-! ## Typed sentence translation between benchmark and native DP
 
-With the benchmark-side and native-DP-side semantic carriers upgraded
-in `Meta/StructuralIdentityComparison.lean` and `Meta/LCELDpInstance.lean`
-so that boundary witnesses, reimport admissions, and annotations all
-live in the typed sentence spaces `BenchmarkTransportSentenceSemantic`
-and `DpEmitterSentenceSemantic`, we can supply a genuinely non-constant
-typed sentence translation between the two sides:
+The two finite sentence types are related by the following constructor map:
 
 - `.benchmarkBaseSentence ↦ .baseSystem`
 - `.transformedWitnessSentence ↦ .licensedProjection`
 
-This map is bijective on the two-element sentence spaces, distinguishes
-the base-theory-proved sentence from the designated-blocked sentence on
-both sides, and sends the designated source obstruction/reimport
-witness to the designated target obstruction/reimport witness. It is
-the core mathematical content that lets the direct benchmark ↔ DP
-correspondence layer be non-constant, not an alias of the generic
-bridge builder. -/
+The inverse below proves that this map is a bijection on these two finite
+carriers. The map itself supplies no execution or rewriting semantics beyond
+the meanings already assigned to the constructors by the imported instances. -/
 
 /-- Typed sentence translation from the benchmark-transport sentence
 space to the native DP/emitter sentence space. -/
@@ -118,7 +88,7 @@ theorem benchmarkTransportSentence_to_dpEmitterSentence_witness :
     benchmarkTransportSentence_to_dpEmitterSentence .transformedWitnessSentence
       = .licensedProjection := rfl
 
-/-! ### Required non-constancy regression theorems -/
+/-! ### Constructor equations and nonconstancy -/
 
 /-- Boundary correspondence: on the benchmark base-theory sentence,
 the translate map lands on the DP base system. -/
@@ -170,13 +140,11 @@ theorem benchmarkTransportSentence_to_dpEmitterSentence_nonconstant :
   intro h
   exact DpEmitterSentenceSemantic.noConfusion h
 
-/-! ## Canonical direct non-constant benchmark ↔ DP correspondences
+/-! ## Direct benchmark-to-DP correspondence records
 
-Each slot correspondence is built from the typed sentence translation
-above (or from the matching constant forward transport of the
-propositional slot witness for the external-license and reimport-class
-slots), so every correspondence that can be non-constant IS non-constant
-on this pair. -/
+The boundary, annotation, and base-sentence records use the finite sentence
+map. The external-license and reimport-class records map proof inputs to the
+target instances' supplied proofs. -/
 
 /-- Direct non-constant boundary correspondence: the translate map is
 the typed sentence translation, which distinguishes benchmark
@@ -189,8 +157,8 @@ def benchmark_dp_boundaryCorrespondence :
   translate_designated := rfl
 
 /-- Direct non-constant annotation correspondence: the translate map is
-the typed sentence translation, matching `annotate` being the identity
-on sentences after the admission-carrier upgrade. -/
+the typed sentence translation; `annotate` is the identity on sentences in
+the two imported instances. -/
 def benchmark_dp_annotationCorrespondence :
     AnnotationFunctorCorrespondence
       benchmarkTransportLCELInstance
@@ -284,8 +252,7 @@ def benchmark_dp_strongReimportClassCorrespondence :
 
 /-- Strengthened benchmark ↔ DP annotation-functor correspondence
 built on the non-constant direct annotation correspondence. Because
-the `annotate` map on both sides is the identity on sentences after
-the admission-carrier upgrade, and `decode` is the identity as well,
+the `annotate` and `decode` maps on both imported instances are identities,
 the preservation laws reduce on the canonical designated witness to
 `.licensedProjection = .licensedProjection` (or `True` for the
 reference-model truth law); `rfl` after reducing the structure field
@@ -339,18 +306,13 @@ def benchmark_dp_strongSemanticSlotCorrespondence :
   annotation := benchmark_dp_strongAnnotationFunctorCorrespondence
   baseSentence := benchmark_dp_baseSentenceCorrespondence
 
-/-! ## Canonical benchmark ↔ DP pairwise bridge data
+/-! ## Pairwise bridge data
 
-The stagewise equivalence is reused from the existing Workstream F
-support-comparison witness
-`benchmark_dpEmitter_lcelSupportComparisonWitness`, which was built by
-composition through the Gödel side using transitivity of
-`StagewiseEquivalent`. -/
+The stagewise-equivalence field is taken from
+`benchmark_dpEmitter_lcelSupportComparisonWitness`; the strong-slot field is
+the finite correspondence package defined above. -/
 
-/-- Canonical benchmark ↔ DP pairwise bridge data (weak route,
-constant-target transports on the generic builder). Retained for
-reference; the authoritative route on this pair is
-`benchmark_dp_transportBridgeData` below. -/
+/-- Benchmark-to-DP raw pair bridge data. -/
 def benchmark_dp_bridgeData :
     LCELRawPairBridgeData
       benchmarkTransportLCELInstance
@@ -359,22 +321,14 @@ def benchmark_dp_bridgeData :
   stagewise :=
     benchmark_dpEmitter_lcelSupportComparisonWitness.comparisonStagewise
 
-/-! ## Canonical benchmark ↔ DP **strong** transport-bridge data
+/-! ## Transport-bridge data
 
-Unlike the weak `benchmark_dp_bridgeData`, this strong bridge carries
-the four correspondence-driven theorem-object transport functions
-(non-constant on this pair, driven by
-`benchmarkTransportSentence_to_dpEmitterSentence`) together with their
-coherence equations tying the canonical source support-extracted
-theorems to the canonical target support-extracted theorems. It is the
-authoritative bridge data on the benchmark ↔ DP pair and feeds the
-`LCELMathematicalSupportWitness.ofTransportBridgeData` generic
-strong-route builder. -/
+This record combines the strong slot correspondence, the imported stagewise
+equivalence, target-side support fields, and four coherence equations. -/
 
-/-- Canonical benchmark ↔ DP source-sensitive route semantics. This isolates the
-pair-generic route pattern now used by the strong transport-bridge construction:
-the strong slot correspondence, the stagewise equivalence, and the target-side
-structural laws needed by the four theorem-object transport helpers. -/
+/-- Benchmark-to-DP route-semantics record containing the strong slot
+correspondence, stagewise equivalence, and target-side support fields required
+by the four transport helpers. -/
 def benchmark_dp_sourceSensitiveRouteSemantics :
     LCELSourceSensitiveRouteSemantics
       benchmarkTransportLCELInstance
@@ -459,59 +413,33 @@ theorem benchmark_dp_transportBridgeData_toRawPairBridgeData_eq_bridgeData :
     benchmark_dp_transportBridgeData.toRawPairBridgeData = benchmark_dp_bridgeData :=
   rfl
 
-/-! ## Canonical mathematical support witness (genuinely source-sensitive)
+/-! ## Support and unrestricted-witness records
 
-The canonical benchmark ↔ DP mathematical support witness is written
-field-by-field using the correspondence-driven transport helpers
-`baseReversibilityTheorem_transport_viaStrongSlot`,
-`licenseIrreversibilityTheorem_transport_viaStrongSlot`,
-`reimportReversibilityTheorem_transport_viaStrongSlot`, and
-`boundaryFactorizationTheorem_transport`, matching the shape of the
-Gödel-facing canonical mathematical support witnesses at the
-definition site.
+The support witness is produced by the generic route-semantics builder. Its
+sentence-valued boundary, annotation, and base-sentence fields use the
+nonconstant two-constructor map. Its proposition-valued license and reimport
+fields transport supplied proofs. -/
 
-Unlike the earlier constant-map bridge route, this construction is
-genuinely source-sensitive: the direct benchmark ↔ DP boundary,
-annotation, and base-sentence correspondences are built from the
-**non-constant** typed sentence translation
-`benchmarkTransportSentence_to_dpEmitterSentence`, which distinguishes
-`.benchmarkBaseSentence` from `.transformedWitnessSentence` and sends
-each to a different target sentence. The witness is therefore **not**
-definitionally equal to
-`LCELMathematicalSupportWitness.ofBridgeData` on this pair (the
-transport functions of the two constructions differ on the non-designated
-sentence input), and the Workstream D corollary below is a substantive
-nonconstant transport theorem on the benchmark ↔ DP pair, not merely
-an alias of the generic bridge builder. -/
-
-/-- Canonical benchmark ↔ DP mathematical support witness, now built
-through the generic `LCELMathematicalSupportWitness.ofTransportBridgeData`
-strong-route builder on the canonical
-`benchmark_dp_transportBridgeData`. The transport fields are the
-bridge's own correspondence-driven, source-informed helpers — not
-constant-target closures — so this witness is the concrete benchmark ↔
-DP instance of the new generic strong route. -/
+/-- Benchmark-to-DP support witness constructed from
+`benchmark_dp_routeSemanticsLiftData`. -/
 def benchmark_dp_lcelMathematicalSupportWitness :
     LCELMathematicalSupportWitness
       benchmarkTransportLCELInstance
       dpEmitterLCELInstance :=
   benchmark_dp_routeSemanticsLiftData.toMathematicalSupportWitness
 
-/-- Canonical benchmark ↔ DP unrestricted mathematical witness, built
-through the generic route-semantics lift on the canonical benchmark ↔ DP
-source-sensitive route. This keeps the canonical pair pinned to the L4
-generic lift surface without weakening the existing theorem boundary. -/
+/-- Benchmark-to-DP unrestricted-witness record constructed by the generic
+route-semantics lift. -/
 def benchmark_dp_unrestrictedMathematicalWitness :
     LCELUnrestrictedMathematicalWitness
       benchmarkTransportLCELInstance
       dpEmitterLCELInstance :=
   benchmark_dp_routeSemanticsLiftData.toUnrestrictedMathematicalWitness
 
-/-! ## Canonical benchmark ↔ DP unrestricted structural identity -/
+/-! ## Quasi-functor inhabitation from the supplied witness -/
 
-/-- **Benchmark ↔ native DP unrestricted structural-identity theorem.**
-Closes the canonical triad of unrestricted universal corollaries
-(Gödel ↔ DP, Gödel ↔ benchmark, benchmark ↔ DP). -/
+/-- The supplied benchmark-to-DP witness yields an inhabited
+`LCELUniversalQuasiFunctor` type. -/
 theorem benchmark_dp_unrestricted_structural_identity :
     Nonempty
       (LCELUniversalQuasiFunctor
@@ -519,7 +447,8 @@ theorem benchmark_dp_unrestricted_structural_identity :
         benchmark_dp_unrestrictedMathematicalWitness.targetAdmissibleInstance) :=
   benchmark_dp_routeSemanticsLiftData.lcel_unrestricted_structural_identity
 
-/-- Bidirectional benchmark ↔ DP unrestricted structural identity. -/
+/-- The supplied witness yields inhabited quasi-functor types in both
+directions. -/
 theorem benchmark_dp_unrestricted_structural_identity_bidirectional :
     Nonempty
         (LCELUniversalQuasiFunctor
@@ -532,9 +461,8 @@ theorem benchmark_dp_unrestricted_structural_identity_bidirectional :
   lcel_unrestricted_structural_identity_of_mathematicalWitness_bidirectional
     benchmark_dp_unrestrictedMathematicalWitness
 
-/-- Benchmark ↔ DP route-semantics lift in the existence-form structural-identity
-surface. This remains conditional on the canonical admissibility packages and
-the four route-coherence equations, so it does not claim P4C. -/
+/-- Existence form of the quasi-functor construction, with source and target
+instances equal to the two imported LCEL instances. -/
 theorem benchmark_dp_existsStructuralIdentityFromRouteSemantics :
     ∃ A₁ A₂ : AdmissibleLCELInstance,
       A₁.instance_ = benchmarkTransportLCELInstance
@@ -542,7 +470,8 @@ theorem benchmark_dp_existsStructuralIdentityFromRouteSemantics :
         ∧ Nonempty (LCELUniversalQuasiFunctor A₁ A₂) :=
   benchmark_dp_routeSemanticsLiftData.lcel_exists_structural_identity
 
-/-- Benchmark ↔ DP raw pair admits an unrestricted mathematical witness. -/
+/-- The raw pair satisfies the library's `AdmitsLCELUnrestrictedWitness`
+predicate through the route-semantics data. -/
 theorem benchmark_dp_admitsUnrestrictedWitness :
     AdmitsLCELUnrestrictedWitness
       benchmarkTransportLCELInstance
@@ -581,22 +510,10 @@ theorem benchmark_dp_admitsUnrestrictedWitness_viaTransportBridge :
     dpEmitterLCELAdmissibilityData
     benchmark_dp_transportBridgeData
 
-/-! ## Canonical Workstream D corollary on the benchmark ↔ DP pair
+/-! ## Quasi-functor built from the support witness
 
-With the source-informed canonical mathematical support witness in
-hand, the benchmark ↔ DP pair admits a Workstream D structural-identity
-corollary directly at the theorem boundary: running the canonical
-mathematical support witness through
-`lcel_structural_identity_of_mathematicalComparison`. This is the
-benchmark ↔ DP analogue of
-`godel_dp_mathematical_universal_structural_identity` and
-`godel_benchmark_mathematical_universal_structural_identity`, and
-because the underlying witness is built from the non-constant typed
-sentence translation `benchmarkTransportSentence_to_dpEmitterSentence`
-and the correspondence-driven transport helpers (not from constant-target
-closures), the Workstream D corollary below is a substantive non-constant
-transport theorem on this pair — not an alias of the generic bridge
-builder. -/
+The following definitions apply the generic LCEL constructors to the supplied
+admissibility data and support witness. -/
 
 /-- Canonical benchmark-transport admissible instance. -/
 private def benchmark_dp_sourceAdmissibleInstance :
@@ -608,9 +525,8 @@ private def benchmark_dp_targetAdmissibleInstance :
     OperatorKO7.LCELUniversalTheorem.AdmissibleLCELInstance :=
   dpEmitterLCELAdmissibilityData.toAdmissibleInstance
 
-/-- Universal quasi-functor from benchmark-transport to native DP via
-the Workstream D strong restricted theorem, consuming the
-source-informed canonical mathematical support witness. -/
+/-- Quasi-functor record from benchmark transport to native DP constructed
+from the two admissibility packages and the support witness. -/
 def benchmark_dp_mathematical_universal_quasiFunctor :
     OperatorKO7.LCELUniversalTheorem.LCELUniversalQuasiFunctor
       benchmark_dp_sourceAdmissibleInstance
@@ -620,12 +536,8 @@ def benchmark_dp_mathematical_universal_quasiFunctor :
     (A₂ := benchmark_dp_targetAdmissibleInstance)
     benchmark_dp_lcelMathematicalSupportWitness
 
-/-- **Benchmark ↔ native DP mathematical universal structural-identity
-theorem.** Closes the canonical triad at the Workstream D (strong
-restricted) level: the universal quasi-functor is built from the
-source-informed theorem-object transport functions of the canonical
-mathematical support witness, not from constant-target transports and
-not only through the composed support-comparison witness. -/
+/-- Inhabitation of the quasi-functor type constructed from the support
+witness. -/
 theorem benchmark_dp_mathematical_universal_structural_identity :
     Nonempty
       (OperatorKO7.LCELUniversalTheorem.LCELUniversalQuasiFunctor
@@ -638,12 +550,9 @@ theorem benchmark_dp_mathematical_universal_structural_identity :
 
 /-! ## Named transport-coherence regressions on the benchmark ↔ DP pair
 
-These are the benchmark ↔ DP analogues of the transport-coherence
-regression theorems in `Meta/LCELMathematicalStructuralIdentity.lean`.
-They assert that the canonical source-informed transport functions on
-this pair actually reduce to the canonical target theorems on the
-canonical source theorems, which exercises the strong slot
-correspondence's preservation laws on the benchmark ↔ DP direction. -/
+These equations state that each transport function maps its distinguished
+source support object to the corresponding distinguished target support
+object. -/
 
 theorem benchmark_dp_transportBase_canonical :
     benchmark_dp_lcelMathematicalSupportWitness.transportBase

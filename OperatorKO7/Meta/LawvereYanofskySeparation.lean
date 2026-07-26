@@ -157,6 +157,16 @@ theorem primitive_duplicator_dp_confession_not_lawvere_yanofsky_schema :
     ¬ primitiveDuplicatorDpConfessionStructure.FurnishesLawvereYanofskySchema := by
   simp [DpConfessionStructure.FurnishesLawvereYanofskySchema, primitiveDuplicatorDpConfessionStructure]
 
+/-- **Scope (CB08, honest framing).** This proves that the *constructed* DP
+confession object `primitiveDuplicatorDpConfessionStructure` carries none of the
+three Lawvere--Yanofsky ingredients (internal code object, evaluation map,
+fixed-point-free endomap), because it was built without them: the DP confession
+enters via the reflection register, not a diagonal fixed-point construction
+(prop:not-diagonal as a MODELING statement). It is NOT a general impossibility
+theorem that no Lawvere--Yanofsky schema could exist for the duplicator; the
+genuine non-trivial content is the singleton pair-graph (card = 1) plus
+well-foundedness and the external-license shape (see
+`primitive_duplicator_dp_confession_semantic_profile`). -/
 theorem primitive_duplicator_dp_confession_semantically_separated_from_lawvere_yanofsky :
     primitiveDuplicatorDpConfessionStructure.SemanticallySeparatedFromLawvereYanofsky := by
   refine ⟨⟨PrimitiveDuplicatorPairNode.recSucc⟩, ?_, ?_, ?_, ?_⟩

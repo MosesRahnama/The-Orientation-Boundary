@@ -1,17 +1,17 @@
 import OperatorKO7.Meta.StepDuplicatingSchema
 
 /-!
-# Dimension-Parametric Componentwise Matrix Barrier
+This module proves a conditional barrier for finite-dimensional affine measures through one
+tracked natural-number coordinate. Every projection, dominance, and pump hypothesis appears in
+the theorem types.
 
-This module generalizes the tracked-component componentwise barrier from dimension `2` to
-arbitrary fixed finite dimension.
 
-The proof remains deliberately modest: if one tracked coordinate already satisfies the scalar
-affine barrier hypotheses, then strict componentwise decrease is impossible, because it would
-force strict decrease in that coordinate.
 
-This is a dimension-parametric extension of the tracked-component barrier, not a full theorem
-about arbitrary mixed matrix interpretations.
+
+
+
+
+
 -/
 
 namespace OperatorKO7.StepDuplicating
@@ -22,7 +22,7 @@ namespace StepDuplicatingSchema
 def VecLt {d : Nat} (u v : Fin d → Nat) : Prop :=
   ∀ i : Fin d, u i < v i
 
-/-- A finite-dimensional matrix-style measure with one tracked affine coordinate. -/
+/-- Data record whose requirements are the fields displayed below. -/
 structure MatrixMeasureD (S : StepDuplicatingSchema) (d : Nat) (tracked : Fin d) where
   eval : S.T → Fin d → Nat
   c_base : Nat
@@ -50,7 +50,7 @@ structure MatrixMeasureD (S : StepDuplicatingSchema) (d : Nat) (tracked : Fin d)
   h_wrap_left_pos : 1 ≤ wrap_left
   h_wrap_right_pos : 1 ≤ wrap_right
 
-/-- Project the tracked coordinate to the scalar affine barrier infrastructure. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def MatrixMeasureD.trackedAffine
     {S : StepDuplicatingSchema} {d : Nat} {tracked : Fin d}
     (M : MatrixMeasureD S d tracked) : AffineMeasure S where
@@ -72,14 +72,14 @@ def MatrixMeasureD.trackedAffine
   h_wrap_left_pos := M.h_wrap_left_pos
   h_wrap_right_pos := M.h_wrap_right_pos
 
-/-- Unbounded pump in the tracked coordinate. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def HasUnboundedRangeTracked
     {S : StepDuplicatingSchema} {d : Nat} {tracked : Fin d}
     (M : MatrixMeasureD S d tracked) : Prop :=
   ∀ k : Nat, ∃ t : S.T, k ≤ M.eval t tracked
 
-/-- A tracked affine failure already rules out strict componentwise orientation in any
-fixed finite dimension. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_matrixD_orients_dup_step_of_componentwise_pump
     {S : StepDuplicatingSchema} {d : Nat} {tracked : Fin d}
     (M : MatrixMeasureD S d tracked)
@@ -101,7 +101,7 @@ theorem no_matrixD_orients_dup_step_of_componentwise_pump
     no_affine_orients_dup_step_of_unbounded
       (S := S) M.trackedAffine hunbounded' htracked
 
-/-- Successor-pump corollary for the tracked coordinate. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem no_matrixD_orients_dup_step_of_succ_pump
     {S : StepDuplicatingSchema} {d : Nat} {tracked : Fin d}
     (M : MatrixMeasureD S d tracked)
@@ -119,7 +119,7 @@ theorem no_matrixD_orients_dup_step_of_succ_pump
     no_affine_orients_dup_step_of_succ_pump
       (S := S) M.trackedAffine h_succ_bias h_succ_scale htracked
 
-/-- Wrap-pump corollary for the tracked coordinate. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem no_matrixD_orients_dup_step_of_wrap_pump
     {S : StepDuplicatingSchema} {d : Nat} {tracked : Fin d}
     (M : MatrixMeasureD S d tracked)
@@ -137,7 +137,7 @@ theorem no_matrixD_orients_dup_step_of_wrap_pump
     no_affine_orients_dup_step_of_wrap_pump
       (S := S) M.trackedAffine h_wrap_bias htracked
 
-/-- The tracked-component componentwise barrier also lifts to global root orientation. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem no_global_orients_matrixD_of_componentwise_pump
     {Sys : StepDuplicatingSystem} {d : Nat} {tracked : Fin d}
     (M : MatrixMeasureD Sys.toStepDuplicatingSchema d tracked)

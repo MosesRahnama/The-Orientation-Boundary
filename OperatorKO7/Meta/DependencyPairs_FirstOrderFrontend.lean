@@ -1,24 +1,18 @@
 import OperatorKO7.Meta.DependencyPairs_FirstOrderExtraction
 
 /-!
-# Rule-Record Frontend for Generic First-Order Extraction
+# Rule-Record Call-Head Frontend
 
-This module removes one more packaging layer from the generic first-order dependency-pair
-extraction stack. Instead of first converting a procedure-specific rule record to the
-uniform `FORule` structure, callers can provide:
-
-- a finite array of rule records,
-- a left-hand side extractor into `FOTerm`, and
-- a right-hand side extractor into `FOTerm`.
-
-The defined-head computation, extracted call-head node array, and array-backed call graph
-are then built directly from that rule-record frontend.
+Callers provide a finite array of rule records and left- and right-hand side
+maps into `FOTerm`. The module constructs one rule-level call-head record for
+each function-headed left side, together with its graph and SCC search surface.
+Pair-level dependency-pair extraction and source-soundness require additional
+structure beyond this frontend.
 -/
 
 namespace OperatorKO7.DependencyPairsFragment
 
-/-- Extracted dependency-pair node data for an arbitrary rule record over first-order
-left- and right-hand side extractors. -/
+/-- Rule-level call-head data for a record with first-order side extractors. -/
 structure ExtractedRuleFrontendNode (ρ σ : Type) [DecidableEq σ] where
   rule : ρ
   nodeKey : σ
@@ -34,8 +28,7 @@ def foDefinedHeadsOf {ρ σ ν : Type} [DecidableEq σ]
       | none => acc)
     ∅
 
-/-- Extract one dependency-pair node from an arbitrary rule record, when the left-hand
-side has a function head. -/
+/-- Construct one call-head record when the rule's left side has a function head. -/
 def extractRuleFrontendNode? {ρ σ ν : Type} [DecidableEq σ]
     (lhs : ρ → FOTerm σ ν) (rhs : ρ → FOTerm σ ν)
     (defined : Finset σ) (r : ρ) : Option (ExtractedRuleFrontendNode ρ σ) :=
@@ -47,14 +40,14 @@ def extractRuleFrontendNode? {ρ σ ν : Type} [DecidableEq σ]
           nodeKey := f
           succKeys := (FOTerm.allHeads (rhs r)).filter (· ∈ defined) }
 
-/-- Extracted dependency-pair call-head nodes for a finite rule-record frontend. -/
+/-- Call-head records constructed from a finite rule-record frontend. -/
 def extractRuleFrontendNodes {ρ σ ν : Type} [DecidableEq σ]
     (rules : Array ρ) (lhs : ρ → FOTerm σ ν) (rhs : ρ → FOTerm σ ν) :
     Array (ExtractedRuleFrontendNode ρ σ) :=
   let defined := foDefinedHeadsOf rules lhs
   rules.filterMap (extractRuleFrontendNode? lhs rhs defined)
 
-/-- Array-backed extracted call graph induced directly from a rule-record frontend. -/
+/-- Array-backed call graph induced by the constructed call-head records. -/
 def foExtractedCallGraphOf {ρ σ ν : Type} [DecidableEq σ]
     (rules : Array ρ) (lhs : ρ → FOTerm σ ν) (rhs : ρ → FOTerm σ ν) :
     FiniteExtractedCallGraph σ :=
@@ -63,13 +56,13 @@ def foExtractedCallGraphOf {ρ σ ν : Type} [DecidableEq σ]
     (nodeKey := ExtractedRuleFrontendNode.nodeKey)
     (succKeys := ExtractedRuleFrontendNode.succKeys)
 
-/-- Direct SCC search surface from a rule-record frontend. -/
+/-- SCC search over the graph constructed from a rule-record frontend. -/
 noncomputable abbrev findNontrivialSCCPair?Of {ρ σ ν : Type} [DecidableEq σ]
     (rules : Array ρ) (lhs : ρ → FOTerm σ ν) (rhs : ρ → FOTerm σ ν) :
     Option ((foExtractedCallGraphOf rules lhs rhs).Node × (foExtractedCallGraphOf rules lhs rhs).Node) :=
   (foExtractedCallGraphOf rules lhs rhs).findNontrivialSCCPair?
 
-/-- SCC existence predicate from a rule-record frontend. -/
+/-- SCC existence predicate for the constructed call graph. -/
 abbrev HasNontrivialSCCOf {ρ σ ν : Type} [DecidableEq σ]
     (rules : Array ρ) (lhs : ρ → FOTerm σ ν) (rhs : ρ → FOTerm σ ν) : Prop :=
   (foExtractedCallGraphOf rules lhs rhs).HasNontrivialSCC
@@ -92,7 +85,7 @@ theorem hasNontrivialSCCOf_of_findNontrivialSCCPair?_eq_some {ρ σ ν : Type} [
     (FiniteExtractedCallGraph.hasNontrivialSCC_of_findNontrivialSCCPair?_eq_some
       (G := foExtractedCallGraphOf rules lhs rhs) h)
 
-/-- Standard SCC witness recovered directly from a rule-record frontend. -/
+/-- Standard SCC witness recovered from a supplied SCC existence proof. -/
 noncomputable abbrev toSCCCycleOf {ρ σ ν : Type} [DecidableEq σ]
     (rules : Array ρ) (lhs : ρ → FOTerm σ ν) (rhs : ρ → FOTerm σ ν)
     (h : HasNontrivialSCCOf rules lhs rhs) :

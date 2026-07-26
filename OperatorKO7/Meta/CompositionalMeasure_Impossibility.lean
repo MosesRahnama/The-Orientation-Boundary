@@ -5,14 +5,14 @@ import OperatorKO7.Meta.Conjecture_Boundary
 /-!
 # Compositional Measure Impossibility Theorem
 
-This module defines a precise axiom system for "compositional measures" - termination
-measures that compute the value of a compound term by aggregating the values of its
-subterms - and proves that NO such measure can orient the duplicating recursor rule
-`recΔ b s (delta n) → app s (recΔ b s n)` for all instantiations.
+This module defines two axiom systems for compositional candidate measures, whose
+compound-term values aggregate subterm values. It proves the duplicating-rule barrier
+for additive measures, for abstract compositional measures with transparent `delta` at
+`void`, and for affine measures with positive wrapper sensitivity and unbounded range.
 
-The module then shows that the Dependency Pair framework (TTT2's subterm criterion with
-projection π(recD#) = 3) escapes the impossibility by violating the compositionality
-axioms: it projects to a single argument instead of aggregating all subterm contributions.
+The module also defines the counter projection associated with the dependency-pair
+subterm route. This projection orients the duplicating rule and lies outside the
+compositional classes because it discards wrapper subterm contributions.
 
 Structure:
 
@@ -24,15 +24,16 @@ Structure:
 - **Section 6**: DP projection escape clause
 - **Section 7**: Instance witnesses (simpleSize, tau, nodeCount)
 - **Section 8**: `GlobalOrients` integration
+- **Section 9**: Affine constructor-local measures
 
 Results:
 
-- `no_additive_compositional_orients_rec_succ`: No additive compositional measure orients rec_succ
-- `no_compositional_orients_rec_succ_transparent_delta`: No abstract compositional measure
-  with transparent delta orients rec_succ
-- `no_global_step_orientation_compositional_transparent_delta`: No abstract compositional
-  measure with transparent delta globally orients full `Step`
-- `dp_projection_orients_rec_succ`: DP projection DOES orient rec_succ
+- `no_additive_compositional_orients_rec_succ`: additive compositional measures fail on rec_succ
+- `no_compositional_orients_rec_succ_transparent_delta`: abstract compositional measures
+  with transparent delta fail on rec_succ
+- `no_global_step_orientation_compositional_transparent_delta`: abstract compositional
+  measures with transparent delta fail to orient full `Step`
+- `dp_projection_orients_rec_succ`: the counter projection orients rec_succ
 - `dp_projection_violates_sensitivity`: DP projection violates the subterm/sensitivity axiom
 
 References:
@@ -64,8 +65,8 @@ def ko7System : StepDuplicatingSchema.StepDuplicatingSystem where
 
 /-! Section 1: Iterated App Constructor -/
 
-/-- Build `app(app(...(void)...), void)` with `k` nestings.
-This is the "pump" that makes `μ(s)` arbitrarily large for any compositional measure. -/
+/-- Build `app(app(...(void)...), void)` with `k` nestings. This supplies the pump used
+for additive compositional measures with positive `app` weight. -/
 def appIter : Nat → Trace :=
   StepDuplicatingSchema.wrapIter ko7Schema
 
@@ -74,9 +75,9 @@ def appIter : Nat → Trace :=
 /-- An additive compositional measure assigns a fixed base weight to each KO7 constructor.
 The measure of a compound term is the constructor's weight plus the sum of its subterms' measures.
 
-This axiom system captures `simpleSize`, `tau`, `nodeCount`, `linearWeight`, `treeDepth`,
-and all parameter choices thereof. The constraint `hw_app_pos` (app adds at least 1)
-forces the measure to grow under the `app` constructor. -/
+This axiom system contains `simpleSize`, `tau`, `nodeCount`, the additive
+`treeDepth_ACM` surrogate below, and `linearWeight` instances whose `app` coefficient is
+positive. The constraint `hw_app_pos` makes the measure grow under `app`. -/
 structure AdditiveCompositionalMeasure where
   w_void      : Nat
   w_delta     : Nat
@@ -124,7 +125,7 @@ lemma eval_appIter_ge (M : AdditiveCompositionalMeasure) (k : Nat) :
 
 /-! Section 3: Tier 1 Impossibility Theorem -/
 
-/-- **IMPOSSIBILITY THEOREM (Additive Measures)**
+/-- **Additive compositional barrier.**
 
 No additive compositional measure can orient the duplicating recursor rule
 `recΔ b s (delta n) → app s (recΔ b s n)` for all instantiations of `b`, `s`, `n`.
@@ -135,7 +136,7 @@ while the LHS `recΔ void s (delta void)` contains `M.eval s` only ONCE.
 The duplication adds `M.eval s ≥ w_delta` to the RHS, while the LHS gains only `w_delta`
 from the delta wrapper. Since `w_app ≥ 1`, the RHS is at least as large as the LHS.
 
-This subsumes all 12 failure witnesses in the catalog under a single theorem. -/
+This theorem covers every instance represented by `AdditiveCompositionalMeasure`. -/
 theorem no_additive_compositional_orients_rec_succ (M : AdditiveCompositionalMeasure) :
     ¬ (∀ (b s n : Trace),
       M.eval (app s (recΔ b s n)) < M.eval (recΔ b s (delta n))) := by
@@ -194,13 +195,13 @@ def CompositionalMeasure.toSchemaMeasure
 
 /-! Section 5: Tier 2 Impossibility (Transparent Delta) -/
 
-/-- **IMPOSSIBILITY THEOREM (Abstract Compositional, Transparent Delta)**
+/-- **Abstract compositional barrier with transparent delta.**
 
 When `c_delta(c_void) = c_void` (delta is transparent at base level - as in `tau` where
 `tau(delta t) = tau t`), no compositional measure with subterm properties for `c_app`
 can orient the duplicating recursor.
 
-**Proof** (4 lines): Set `b = void, n = void, s = void`. Then:
+**Proof:** Set `b = void, n = void, s = void`. Then:
 - LHS = `c_recΔ(V, V, c_delta(V))` = `c_recΔ(V, V, V)` (by transparency)
 - RHS = `c_app(V, c_recΔ(V, V, V))`
 - By `app_subterm2`: `c_app(V, R) > R` where `R = c_recΔ(V, V, V)` = LHS
@@ -216,9 +217,9 @@ theorem no_compositional_orients_rec_succ_transparent_delta
 
 /-! Section 6: DP Projection Escape -/
 
-/-- A projection-based measure that tracks only delta-nesting depth.
-This is the measure implicitly used by TTT2's subterm criterion with π(recD#) = 3.
-It projects to the recursion counter and IGNORES all other structure. -/
+/-- A projection-based measure that tracks only delta-nesting depth. It represents the
+counter argument selected by the subterm projection `π(recD#) = 3` and discards all
+other structure. -/
 @[simp] def dpProjection : Trace → Nat
   | void        => 0
   | delta t     => dpProjection t + 1
@@ -236,7 +237,7 @@ def dpProjectionRank : StepDuplicatingSchema.ProjectionRank ko7Schema where
   rank_wrap := by intro x y; rfl
   rank_recur := by intro b s n; rfl
 
-/-- The DP projection DOES orient rec_succ: the 3rd argument strictly decreases
+/-- The DP projection orients rec_succ: the third argument strictly decreases
 from `delta n` (depth k+1) to `n` (depth k). -/
 theorem dp_projection_orients_rec_succ (b s n : Trace) :
     dpProjection (app s (recΔ b s n)) < dpProjection (recΔ b s (delta n)) := by
@@ -244,20 +245,20 @@ theorem dp_projection_orients_rec_succ (b s n : Trace) :
     (StepDuplicatingSchema.projection_orients_dup_step
       (S := ko7Schema) dpProjectionRank b s n)
 
-/-- The DP projection VIOLATES the subterm property for `app`.
-Specifically, `dpProjection(app x y)` is NOT always > `dpProjection(x)`.
+/-- The DP projection violates the first subterm property for `app`.
+Specifically, `dpProjection(app x y) > dpProjection(x)` fails on a concrete pair.
 Counterexample: `x = delta void` (dpProjection = 1), `y = void` (dpProjection = 0),
 `app x y` has dpProjection = 0 < 1 = dpProjection(x).
 
-This is the precise axiom that DP violates, escaping the impossibility theorem. -/
+This failed axiom places the projection outside the abstract compositional class. -/
 theorem dp_projection_violates_sensitivity :
     ∃ x y : Trace, ¬ (dpProjection (app x y) > dpProjection x) := by
   simpa [ko7Schema, dpProjectionRank] using
     (StepDuplicatingSchema.projection_violates_wrap_subterm1
       (S := ko7Schema) dpProjectionRank)
 
-/-- The DP projection also violates the second subterm property.
-`dpProjection(app x y)` = 0 is NOT always > `dpProjection(y)`. -/
+/-- The DP projection also violates the second subterm property; a concrete pair satisfies
+`dpProjection(app x y) ≤ dpProjection(y)`. -/
 theorem dp_projection_violates_subterm2 :
     ∃ x y : Trace, ¬ (dpProjection (app x y) > dpProjection y) := by
   simpa [ko7Schema, dpProjectionRank] using
@@ -302,13 +303,9 @@ def nodeCount_ACM : AdditiveCompositionalMeasure where
   w_eq        := 1
   hw_app_pos  := by omega
 
-/-- Additive constructor-count surrogate sometimes used as a "depth-like" witness.
-
-This is intentionally *not* the standard max-based tree depth used elsewhere in the
-artifact: every non-`void` constructor contributes `1`, so the value adds across
-siblings instead of taking a maximum. The historical name is retained here only for
-backward compatibility with the surrounding no-go catalog.
--/
+/-- Additive constructor-count surrogate named `treeDepth_ACM`. Every non-`void`
+constructor contributes `1`, so the value adds across siblings. This differs from the
+max-based tree-depth measure used elsewhere. -/
 def treeDepth_ACM : AdditiveCompositionalMeasure where
   w_void      := 0
   w_delta     := 1
@@ -460,21 +457,20 @@ theorem no_global_step_orientation_affine_of_unbounded
 
 The impossibility theorem establishes:
 
-1. **Compositional measures fail**: Any measure satisfying the compositionality axioms
-   (additive weight structure with w_app ≥ 1, or abstract combining functions with
-   subterm properties) CANNOT orient the duplicating recursor for all term instantiations.
+1. **Compositional barriers**: additive measures with `w_app ≥ 1` fail to orient the
+   duplicating rule. Abstract combining functions with the two `app` subterm properties
+   satisfy the same barrier under the transparent-delta hypothesis.
 
 2. **Affine/linear measures fail**: Constructor-local affine measures with positive
    wrapper sensitivity and unbounded range also cannot orient the duplicating recursor.
 
-3. **DP projection succeeds**: The subterm criterion with projection π(recΔ#) = 3
-   DOES orient the recursor, but it escapes the impossibility by violating the
-   compositionality axioms - it projects to one argument and ignores the others.
+3. **DP projection succeeds**: the counter projection `π(recΔ#) = 3` orients the
+   recursor. It lies outside the compositional classes because it projects to one
+   argument and discards the others.
 
-4. **The boundary is at Axiom `app_subterm`**: Compositional measures must satisfy
-   `c_app(x, y) > x` and `c_app(x, y) > y`. DP projection satisfies neither.
-   This is exactly where the "multiplicity-aware vs. multiplicity-blind" distinction
-   manifests as a formal axiom.
+4. **Projection leaves the compositional class at `app_subterm`**: the abstract class
+   requires `c_app(x, y) > x` and `c_app(x, y) > y`, while the counter projection
+   satisfies neither. These axioms encode sensitivity to duplicated subterm mass.
 -/
 
 end OperatorKO7.CompositionalImpossibility

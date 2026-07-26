@@ -11,8 +11,6 @@ every bound variable `i : Fin n` by a term `σ i`, with the correct lifting unde
 realization lemma, plus the special case `instantiateTop` (instantiate the outermost bound variable
 with a term) needed for the first-order specialization axiom and existential introduction of the
 `DeductionFO` object derivation.
-
-No `sorry`, `axiom`, or `native_decide`.
 -/
 
 set_option autoImplicit false

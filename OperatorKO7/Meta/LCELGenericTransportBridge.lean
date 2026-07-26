@@ -1,21 +1,21 @@
 import OperatorKO7.Meta.LCELUnrestrictedClassification
 
 /-!
-# LCEL Generic Transport Bridge
+This module constructs transport records from caller-supplied source correspondence,
+admissibility, target facts, and coherence equalities. Every result is conditional on those
+fields.
 
-L4 pair-generic source-sensitive route semantics for the strong transport-bridge
-stack.
 
-The existing strong bridge layer (`LCELTransportBridgeData`) already packages
-explicit theorem-object transport functions plus canonical coherence equations.
-What it does not package separately is the **route semantics pattern** used by
-the benchmark ↔ DP canonical case: a strong slot correspondence, stagewise
-equivalence, and the target-side structural laws needed to build the four
-source-sensitive theorem transports by the generic helper constructors.
 
-This file isolates that pattern into a reusable record and supplies theorem-backed
-builders from route semantics to `LCELTransportBridgeData` and then to
-`LCELMathematicalSupportWitness`.
+
+
+
+
+
+
+
+
+
 -/
 
 namespace OperatorKO7.LCELGenericTransportBridge
@@ -28,9 +28,9 @@ open OperatorKO7.LCELAdmissibility
 open OperatorKO7.LCELUnrestrictedClassification
 open OperatorKO7.ReflectionSchema
 
-/-- Pair-generic source-sensitive route semantics for the four theorem-object
-transport helpers. This is the reusable data that the benchmark ↔ DP canonical
-case was spelling out directly at the bridge-definition site. -/
+/-- Data record whose requirements are the fields displayed below.
+
+-/
 structure LCELSourceSensitiveRouteSemantics
     (L₁ L₂ : FormalLCELInstance) : Type 1 where
   strongSlot : LCELStrongSemanticSlotCorrespondence L₁ L₂
@@ -51,14 +51,14 @@ structure LCELSourceSensitiveRouteSemantics
 
 namespace LCELSourceSensitiveRouteSemantics
 
-/-- Source-sensitive base-theorem transport induced by the route semantics. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def transportBase
     {L₁ L₂ : FormalLCELInstance}
   (R : OperatorKO7.LCELGenericTransportBridge.LCELSourceSensitiveRouteSemantics L₁ L₂) :
     BaseReversibilityTheorem L₁ → BaseReversibilityTheorem L₂ :=
   fun T => baseReversibilityTheorem_transport_viaStrongSlot R.strongSlot T
 
-/-- Source-sensitive license-theorem transport induced by the route semantics. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def transportLicense
     {L₁ L₂ : FormalLCELInstance}
     (R : OperatorKO7.LCELGenericTransportBridge.LCELSourceSensitiveRouteSemantics L₁ L₂) :
@@ -67,14 +67,14 @@ def transportLicense
     licenseIrreversibilityTheorem_transport_viaStrongSlot
       R.strongSlot R.targetLicensedAdmission T
 
-/-- Source-sensitive reimport-theorem transport induced by the route semantics. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def transportReimport
     {L₁ L₂ : FormalLCELInstance}
   (R : OperatorKO7.LCELGenericTransportBridge.LCELSourceSensitiveRouteSemantics L₁ L₂) :
     ReimportReversibilityTheorem L₁ → ReimportReversibilityTheorem L₂ :=
   fun T => reimportReversibilityTheorem_transport_viaStrongSlot R.strongSlot T
 
-/-- Source-sensitive boundary-theorem transport induced by the route semantics. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def transportBoundary
     {L₁ L₂ : FormalLCELInstance}
     (R : OperatorKO7.LCELGenericTransportBridge.LCELSourceSensitiveRouteSemantics L₁ L₂) :
@@ -88,11 +88,11 @@ def transportBoundary
       R.targetBoundaryRealized
       T
 
-/-- Build a strong transport bridge from pair-generic source-sensitive route
-semantics once the canonical coherence equations are supplied. This isolates the
-remaining obligation exactly: route semantics alone does not fix the target's
-canonical theorem objects, so admissibility data and coherence proofs are still
-required. -/
+/-- Definition with formal content given by the displayed type and body.
+
+
+
+-/
 def toTransportBridgeData
     {L₁ L₂ : FormalLCELInstance}
   (R : OperatorKO7.LCELGenericTransportBridge.LCELSourceSensitiveRouteSemantics L₁ L₂)
@@ -122,8 +122,8 @@ def toTransportBridgeData
   transportReimport_canonical := hReimport
   transportBoundary_canonical := hBoundary
 
-/-- Build a mathematical support witness directly from route semantics, via the
-strong transport-bridge builder. -/
+/-- Definition with formal content given by the displayed type and body.
+-/
 def toMathematicalSupportWitness
     {L₁ L₂ : FormalLCELInstance}
   (R : OperatorKO7.LCELGenericTransportBridge.LCELSourceSensitiveRouteSemantics L₁ L₂)

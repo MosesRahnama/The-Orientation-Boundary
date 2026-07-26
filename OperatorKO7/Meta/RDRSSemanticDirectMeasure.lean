@@ -1,25 +1,21 @@
 import OperatorKO7.Meta.RDRSDescentLens
 
 /-!
-# RDRS Semantic Direct Measure (Milestone S1)
+# RDRS semantic direct-measure certificates
 
-Semantic direct-measure interface for the semantic universal
-payload-sensitive direct-measure lane.
-
-This file intentionally separates:
+This file separates:
 
 * the bare measure data `(A, ltA, wf_ltA, μ)`;
-* proof-carrying directness evidence excluding rewrite-oracle,
-  transformed-relation, arbitrary semantic-quotient, DP-processor, and
-  external-proof-language routes;
+* caller-selected propositions labeled as directness evidence, together with
+  proofs of those propositions;
 * the final `SemanticDirectMeasure`, which packages both.
 
-The first agent version encoded these exclusions as unconditional `True`
-tags by field absence. That was too weak for the roadmap and failed the
-Lean audit source-of-truth rule against overclaiming. This version makes
-the exclusions explicit proof obligations stored in `DirectnessEvidence`.
+`DirectnessEvidence` does not connect its propositions structurally to the
+body of `M.μ`. A caller may instantiate every proposition with `True`, as
+`natConstantDirectMeasure` does. The package therefore records self-attested
+evidence rather than verified source-level directness.
 
-## Audit slots
+## Formal scope
 
 ```
 Relation: abstract term type `T`; not a concrete Step / SafeStep /
@@ -81,13 +77,9 @@ inductive DirectEvidenceKind
   deriving DecidableEq, Repr
 
 /--
-Proves: proof-carrying evidence that a bare semantic measure is being used
-  as a direct measure rather than as a rewrite oracle, transformed-system
-  method, arbitrary quotient, DP processor, or external proof-language
-  witness.
-Does not prove: syntactic inspection of the Lean body of `M.μ`. Lean does
-  not expose a general source-code semantics for arbitrary functions here;
-  therefore directness is an explicit certificate obligation.
+Packages five caller-selected propositions and proofs of those propositions.
+The fields are not structurally related to the Lean body of `M.μ`, so the
+structure is a self-attested directness certificate.
 Relation: certificate over `SemanticMeasureData T`; not a rewriting relation.
 Closure: not applicable.
 Strategy: not applicable.
@@ -96,9 +88,9 @@ Scope: each field is a concrete proof obligation supplied by the measure
   constructor.
 -/
 structure DirectnessEvidence {T : Type} (M : SemanticMeasureData T) : Type where
-  /-- Direct evidence kind, used for audits and coverage ledgers. -/
+  /-- Caller-selected category for the certificate. -/
   kind : DirectEvidenceKind
-  /-- Human-readable certificate note for audit reports. -/
+  /-- Human-readable certificate note. -/
   note : String
   /-- No rewrite-closure or term-algebra oracle is used as the decisive
   strict ordering. -/
@@ -318,7 +310,7 @@ theorem semantic_direct_measure_nonvacuous :
     Nonempty (SemanticDirectMeasure Nat) :=
   ⟨natConstantDirectMeasure⟩
 
-/-- Audit anchor for the semantic-direct-measure interface. -/
+/-- Stable declaration-name string for the semantic-direct-measure interface. -/
 def rdrs_semantic_direct_measure_anchor : String :=
   "OperatorKO7.RDRSSemanticDirectMeasure.SemanticDirectMeasure"
 

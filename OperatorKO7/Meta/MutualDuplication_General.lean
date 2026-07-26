@@ -4,11 +4,9 @@ import OperatorKO7.Meta.DependencyPairs_Fragment
 /-!
 # Bounded SCC-Level Composite Duplication
 
-This module lifts the concrete alternating two-recursors example to a bounded theorem-level
-generalization. Each root rule already duplicates the payload once. The point of the result
-is different: a fixed two-node mutually recursive SCC yields a stable two-step composite
-profile and an induced minimal context relation on which the additive and affine barrier
-arguments still go through.
+## Formal Scope
+
+Each root rule duplicates the payload once; the full two-node composite exposes two copies. The barrier theorems remain restricted to the displayed additive and affine measure families.
 -/
 
 namespace OperatorKO7.MutualDuplicationGeneral
@@ -82,7 +80,7 @@ def AdditiveMeasure.toPumpMeasure {S : AlternatingDupSchema}
   eval_recur := M.eval_recurA
   h_wrap_pos := M.h_wrap_pos
 
-/-- The ordinary wrapper-chain pump still grows additive measures on the alternating schema. -/
+/-- The ordinary wrapper-chain pump remains grows additive measures on the alternating schema. -/
 lemma eval_wrapIter_ge {S : AlternatingDupSchema} (M : AdditiveMeasure S) (k : Nat) :
     M.eval (S.wrapIter k) ≥ k := by
   simpa [AlternatingDupSchema.wrapIter, AdditiveMeasure.toPumpMeasure] using

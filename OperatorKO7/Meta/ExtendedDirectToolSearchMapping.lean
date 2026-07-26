@@ -6,23 +6,18 @@ import OperatorKO7.Meta.WPO_PolynomialBarrier_Schema
 /-!
 # Extended Direct Tool Search Mapping
 
-This module extends the reviewer-facing direct scalar search mapping surface
-without strengthening any underlying barrier theorem.
-
-Covered fragments:
+This module packages hypotheses for three direct scalar families and specializes imported barrier
+theorems to those packages:
 
 - bounded cross-term quadratic direct fragments with explicit unbounded,
   successor-pump, or wrap-pump witnesses;
 - max-plus direct fragments with explicit unbounded, successor-pump, or
   wrap-pump witnesses;
-- WPO-facing direct polynomial fragments with explicit unbounded,
-  successor-pump, wrap-pump, or base-dominance-failure escape surfaces.
+- WPO-facing direct polynomial fragments with explicit unboundedness, successor-pump, wrap-pump, or
+  base-dominance hypotheses.
 
-Still open:
-
-- unrestricted nonlinear direct families without the theorem-backed boundedness,
-  pump, or dominance hypotheses carried here;
-- matrix, LCEL, and root/API exposures that belong to other lanes.
+The quantified universe is restricted to the represented structures and their stated fields;
+unrestricted nonlinear families, matrix orders, and LCEL constructions require separate interfaces.
 -/
 
 namespace OperatorKO7.ExtendedDirectToolSearchMapping
@@ -89,15 +84,13 @@ structure WPOPolynomialDirectBaseDominanceFailureFragment (Sys : StepDuplicating
   order : WPOPolynomialDirectOrder Sys.toStepDuplicatingSchema
   unbounded : HasUnboundedRangePoly order.measure
 
-/-- Bounded cross-term quadratic fragments with an explicit unbounded witness are blocked by
-the existing global cross-term quadratic barrier. -/
+/-- Apply the global cross-term quadratic barrier to the packaged hypotheses. -/
 theorem crossQuadraticUnbounded_fragment_no_global_orientation
     {Sys : StepDuplicatingSystem} (F : CrossQuadraticUnboundedFragment Sys) :
     ¬ GlobalOrients Sys F.measure.eval (· < ·) := by
   exact no_global_orients_cross_quadratic_of_unbounded (Sys := Sys) F.measure F.unbounded F.bounded
 
-/-- Bounded cross-term quadratic fragments with an explicit successor pump are blocked by the
-existing global cross-term quadratic successor-pump barrier. -/
+/-- Apply the cross-term quadratic successor-pump barrier to the packaged hypotheses. -/
 theorem crossQuadraticSuccPump_fragment_no_global_orientation
     {Sys : StepDuplicatingSystem} (F : CrossQuadraticSuccPumpFragment Sys) :
     ¬ GlobalOrients Sys F.measure.eval (· < ·) := by
@@ -105,22 +98,19 @@ theorem crossQuadraticSuccPump_fragment_no_global_orientation
     no_global_orients_cross_quadratic_of_succ_pump
       (Sys := Sys) F.measure F.succ_bias_pos F.succ_scale_pos F.bounded
 
-/-- Bounded cross-term quadratic fragments with an explicit wrap pump are blocked by the
-existing global cross-term quadratic wrap-pump barrier. -/
+/-- Apply the cross-term quadratic wrap-pump barrier to the packaged hypotheses. -/
 theorem crossQuadraticWrapPump_fragment_no_global_orientation
     {Sys : StepDuplicatingSystem} (F : CrossQuadraticWrapPumpFragment Sys) :
     ¬ GlobalOrients Sys F.measure.eval (· < ·) := by
   exact no_global_orients_cross_quadratic_of_wrap_pump (Sys := Sys) F.measure F.wrap_bias_pos F.bounded
 
-/-- Max-plus fragments with an explicit unbounded witness are blocked by the existing global
-max barrier. -/
+/-- Apply the global max barrier to the packaged unboundedness witness. -/
 theorem maxUnbounded_fragment_no_global_orientation
     {Sys : StepDuplicatingSystem} (F : MaxUnboundedFragment Sys) :
     ¬ GlobalOrients Sys F.measure.eval (· < ·) := by
   exact no_global_orients_max_of_unbounded (Sys := Sys) F.measure F.unbounded
 
-/-- Max-plus fragments with an explicit successor pump are blocked by lifting the existing
-step-level max successor-pump theorem through `Sys.dup_step`. -/
+/-- Lift the max successor-pump theorem through `Sys.dup_step`. -/
 theorem maxSuccPump_fragment_no_global_orientation
     {Sys : StepDuplicatingSystem} (F : MaxSuccPumpFragment Sys) :
     ¬ GlobalOrients Sys F.measure.eval (· < ·) := by
@@ -132,8 +122,7 @@ theorem maxSuccPump_fragment_no_global_orientation
       F.succ_const_pos
       (fun b s n => h (Sys.dup_step b s n))
 
-/-- Max-plus fragments with an explicit wrap pump are blocked by lifting the existing
-step-level max wrap-pump theorem through `Sys.dup_step`. -/
+/-- Lift the max wrap-pump theorem through `Sys.dup_step`. -/
 theorem maxWrapPump_fragment_no_global_orientation
     {Sys : StepDuplicatingSystem} (F : MaxWrapPumpFragment Sys) :
     ¬ GlobalOrients Sys F.measure.eval (· < ·) := by
@@ -145,8 +134,7 @@ theorem maxWrapPump_fragment_no_global_orientation
       F.wrap_drift_pos
       (fun b s n => h (Sys.dup_step b s n))
 
-/-- WPO-direct polynomial fragments with an explicit unbounded witness are blocked by the
-existing global WPO-direct polynomial barrier. -/
+/-- Apply the global WPO-direct polynomial barrier to the packaged hypotheses. -/
 theorem wpoPolynomialDirectUnbounded_fragment_no_global_orientation
     {Sys : StepDuplicatingSystem} (F : WPOPolynomialDirectUnboundedFragment Sys) :
     ¬ GlobalOrients Sys (fun t => t) (fun x y => F.order.gt y x) := by
@@ -154,8 +142,7 @@ theorem wpoPolynomialDirectUnbounded_fragment_no_global_orientation
     no_global_orients_wpoPolynomialDirect_of_unbounded
       (Sys := Sys) F.order F.unbounded F.dominance
 
-/-- WPO-direct polynomial fragments with an explicit successor pump are blocked by lifting the
-existing step-level successor-pump theorem through `Sys.dup_step`. -/
+/-- Lift the WPO-direct polynomial successor-pump theorem through `Sys.dup_step`. -/
 theorem wpoPolynomialDirectSuccPump_fragment_no_global_orientation
     {Sys : StepDuplicatingSystem} (F : WPOPolynomialDirectSuccPumpFragment Sys) :
     ¬ GlobalOrients Sys (fun t => t) (fun x y => F.order.gt y x) := by
@@ -168,8 +155,7 @@ theorem wpoPolynomialDirectSuccPump_fragment_no_global_orientation
       F.dominance
       (fun b s n => h (Sys.dup_step b s n))
 
-/-- WPO-direct polynomial fragments with an explicit wrap pump are blocked by lifting the
-existing step-level wrap-pump theorem through `Sys.dup_step`. -/
+/-- Lift the WPO-direct polynomial wrap-pump theorem through `Sys.dup_step`. -/
 theorem wpoPolynomialDirectWrapPump_fragment_no_global_orientation
     {Sys : StepDuplicatingSystem} (F : WPOPolynomialDirectWrapPumpFragment Sys) :
     ¬ GlobalOrients Sys (fun t => t) (fun x y => F.order.gt y x) := by

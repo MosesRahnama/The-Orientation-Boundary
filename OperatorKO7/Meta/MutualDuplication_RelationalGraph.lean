@@ -4,18 +4,18 @@ import OperatorKO7.Meta.StepDuplicatingSchema
 import OperatorKO7.Meta.FiniteGraphSCC
 
 /-!
-# Relational Construction of Raw-Graph SCC Systems
+This module constructs delayed and packet-preserving graph systems from relation-level
+presentations. Its theorems forward explicit round-trip, finite-SCC, search, projection, and
+measure hypotheses to imported barrier results.
 
-This module removes the last hand-written graph packaging layer for the SCC barrier story.
-Instead of first building a `GraphDupSystem` or `GraphPacketSystem` manually, a caller can
-start from a smaller relation-level presentation:
 
-- a node type and edge relation,
-- the shared constructor interface, and
-- a local edge-realization theorem for the delayed or preserving step pattern.
 
-From that smaller presentation we construct the raw-graph system automatically and then
-re-export the existing round-trip / finite-round-trip SCC barrier wrappers.
+
+
+
+
+
+
 -/
 
 namespace OperatorKO7.MutualDuplicationRelationalGraph
@@ -64,7 +64,7 @@ abbrev AdditiveMeasure := GraphDupSystem.AdditiveMeasure P.toGraphSystem
 abbrev AffineMeasure := GraphDupSystem.AffineMeasure P.toGraphSystem
 abbrev CompositionalMeasure := GraphDupSystem.CompositionalMeasure P.toGraphSystem
 
-/-- Round-trip SCC wrapper for the additive delayed barrier from a relation-level presentation. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem no_global_orients_ctx_additive_of_roundTrip
     {i j : ι} (hij : Relation.TransGen R i j) (hji : Relation.TransGen R j i)
     (M : P.AdditiveMeasure) :
@@ -72,8 +72,8 @@ theorem no_global_orients_ctx_additive_of_roundTrip
   GraphDupSystem.CyclePath.no_global_orients_ctx_additive_of_roundTrip
     (Sys := P.toGraphSystem) hij hji M
 
-/-- Finite-round-trip SCC wrapper for the additive delayed barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_additive_of_finiteRoundTrip
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     {i j : ι}
@@ -84,7 +84,7 @@ theorem no_global_orients_ctx_additive_of_finiteRoundTrip
   GraphDupSystem.CyclePath.no_global_orients_ctx_additive_of_finiteRoundTrip
     (Sys := P.toGraphSystem) hij hji hne M
 
-/-- Round-trip SCC wrapper for the affine delayed barrier from a relation-level presentation. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem no_global_orients_ctx_affine_of_unbounded_of_roundTrip
     {i j : ι} (hij : Relation.TransGen R i j) (hji : Relation.TransGen R j i)
     (M : P.AffineMeasure)
@@ -98,8 +98,8 @@ theorem no_global_orients_ctx_affine_of_unbounded_of_roundTrip
   GraphDupSystem.CyclePath.no_global_orients_ctx_affine_of_unbounded_of_roundTrip
     (Sys := P.toGraphSystem) hij hji M hunbounded
 
-/-- Finite-round-trip SCC wrapper for the affine delayed barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_affine_of_unbounded_of_finiteRoundTrip
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     {i j : ι}
@@ -118,8 +118,8 @@ theorem no_global_orients_ctx_affine_of_unbounded_of_finiteRoundTrip
   GraphDupSystem.CyclePath.no_global_orients_ctx_affine_of_unbounded_of_finiteRoundTrip
     (Sys := P.toGraphSystem) hij hji hne M hunbounded
 
-/-- Round-trip SCC wrapper for the transparent delayed barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_compositional_transparent_of_roundTrip
     {i j : ι} (hij : Relation.TransGen R i j) (hji : Relation.TransGen R j i)
     (M : P.CompositionalMeasure)
@@ -128,8 +128,8 @@ theorem no_global_orients_ctx_compositional_transparent_of_roundTrip
   GraphDupSystem.CyclePath.no_global_orients_ctx_compositional_transparent_of_roundTrip
     (Sys := P.toGraphSystem) hij hji M htrans
 
-/-- Finite-round-trip SCC wrapper for the transparent delayed barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_compositional_transparent_of_finiteRoundTrip
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     {i j : ι}
@@ -141,8 +141,8 @@ theorem no_global_orients_ctx_compositional_transparent_of_finiteRoundTrip
   GraphDupSystem.CyclePath.no_global_orients_ctx_compositional_transparent_of_finiteRoundTrip
     (Sys := P.toGraphSystem) hij hji hne M htrans
 
-/-- Round-trip scalar-projection wrapper for the delayed barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_of_scalar_projection_affine_of_unbounded_of_roundTrip
     {i j : ι} (hij : Relation.TransGen R i j) (hji : Relation.TransGen R j i)
     {α : Type} (μ : P.T → α) (Q : α → α → Prop) (π : α → Nat)
@@ -157,8 +157,8 @@ theorem no_global_orients_ctx_of_scalar_projection_affine_of_unbounded_of_roundT
   GraphDupSystem.CyclePath.no_global_orients_ctx_of_scalar_projection_affine_of_unbounded_of_roundTrip
     (Sys := P.toGraphSystem) hij hji μ Q π hproj A hπ hunbounded
 
-/-- Finite-round-trip scalar-projection wrapper for the delayed barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_of_scalar_projection_affine_of_unbounded_of_finiteRoundTrip
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     {i j : ι}
@@ -178,7 +178,7 @@ theorem no_global_orients_ctx_of_scalar_projection_affine_of_unbounded_of_finite
   GraphDupSystem.CyclePath.no_global_orients_ctx_of_scalar_projection_affine_of_unbounded_of_finiteRoundTrip
     (Sys := P.toGraphSystem) hij hji hne μ Q π hproj A hπ hunbounded
 
-/-- Finite-SCC wrapper for the additive delayed barrier from a relation-level presentation. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem no_global_orients_ctx_additive_of_hasNontrivialSCC
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     (hSCC : HasNontrivialSCC R)
@@ -188,7 +188,7 @@ theorem no_global_orients_ctx_additive_of_hasNontrivialSCC
     (GraphDupSystem.CyclePath.no_global_orients_ctx_additive_of_hasNontrivialSCC
       (Sys := P.toGraphSystem) hSCC M)
 
-/-- Finite-SCC wrapper for the affine delayed barrier from a relation-level presentation. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem no_global_orients_ctx_affine_of_unbounded_of_hasNontrivialSCC
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     (hSCC : HasNontrivialSCC R)
@@ -210,8 +210,8 @@ theorem no_global_orients_ctx_affine_of_unbounded_of_hasNontrivialSCC
     (GraphDupSystem.CyclePath.no_global_orients_ctx_affine_of_unbounded_of_hasNontrivialSCC
       (Sys := P.toGraphSystem) hSCC M hunbounded)
 
-/-- Finite-SCC wrapper for the transparent delayed barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_compositional_transparent_of_hasNontrivialSCC
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     (hSCC : HasNontrivialSCC R)
@@ -222,8 +222,8 @@ theorem no_global_orients_ctx_compositional_transparent_of_hasNontrivialSCC
     (GraphDupSystem.CyclePath.no_global_orients_ctx_compositional_transparent_of_hasNontrivialSCC
       (Sys := P.toGraphSystem) hSCC M htrans)
 
-/-- Finite-SCC wrapper for the scalar-projection delayed barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_of_scalar_projection_affine_of_unbounded_of_hasNontrivialSCC
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     (hSCC : HasNontrivialSCC R)
@@ -247,8 +247,8 @@ theorem no_global_orients_ctx_of_scalar_projection_affine_of_unbounded_of_hasNon
     (GraphDupSystem.CyclePath.no_global_orients_ctx_of_scalar_projection_affine_of_unbounded_of_hasNontrivialSCC
       (Sys := P.toGraphSystem) hSCC μ Q π hproj A hπ hunbounded)
 
-/-- Search-based finite-SCC wrapper for the additive delayed barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_additive_of_exists_findNontrivialSCCPair?
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     (hfind : ∃ p : ι × ι, findNontrivialSCCPair? (R := R) = some p)
@@ -259,8 +259,8 @@ theorem no_global_orients_ctx_additive_of_exists_findNontrivialSCCPair?
     ((hasNontrivialSCC_iff_exists_findNontrivialSCCPair? (R := R)).2 hfind)
     M
 
-/-- Search-based finite-SCC wrapper for the affine delayed barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_affine_of_unbounded_of_exists_findNontrivialSCCPair?
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     (hfind : ∃ p : ι × ι, findNontrivialSCCPair? (R := R) = some p)
@@ -284,8 +284,8 @@ theorem no_global_orients_ctx_affine_of_unbounded_of_exists_findNontrivialSCCPai
     ((hasNontrivialSCC_iff_exists_findNontrivialSCCPair? (R := R)).2 hfind)
     M hunbounded
 
-/-- Search-based finite-SCC wrapper for the transparent delayed barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_compositional_transparent_of_exists_findNontrivialSCCPair?
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     (hfind : ∃ p : ι × ι, findNontrivialSCCPair? (R := R) = some p)
@@ -297,8 +297,8 @@ theorem no_global_orients_ctx_compositional_transparent_of_exists_findNontrivial
     ((hasNontrivialSCC_iff_exists_findNontrivialSCCPair? (R := R)).2 hfind)
     M htrans
 
-/-- Search-based finite-SCC wrapper for the scalar-projection delayed barrier from a
-relation-level presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_of_scalar_projection_affine_of_unbounded_of_exists_findNontrivialSCCPair?
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     (hfind : ∃ p : ι × ι, findNontrivialSCCPair? (R := R) = some p)
@@ -373,8 +373,8 @@ abbrev AdditiveMeasure := GraphPacketSystem.CyclePath.AdditiveMeasure P.toGraphS
 abbrev AffineMeasure := GraphPacketSystem.CyclePath.AffineMeasure P.toGraphSystem
 abbrev TransparentMeasure := GraphPacketSystem.CyclePath.TransparentMeasure P.toGraphSystem
 
-/-- Round-trip SCC wrapper for the additive preserving barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_additive_of_roundTrip
     {i j : ι} (hij : Relation.TransGen R i j) (hji : Relation.TransGen R j i)
     (M : P.AdditiveMeasure) :
@@ -382,8 +382,8 @@ theorem no_global_orients_ctx_additive_of_roundTrip
   GraphPacketSystem.CyclePath.no_global_orients_ctx_additive_of_roundTrip
     (Sys := P.toGraphSystem) hij hji M
 
-/-- Finite-round-trip SCC wrapper for the additive preserving barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_additive_of_finiteRoundTrip
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     {i j : ι}
@@ -394,8 +394,8 @@ theorem no_global_orients_ctx_additive_of_finiteRoundTrip
   GraphPacketSystem.CyclePath.no_global_orients_ctx_additive_of_finiteRoundTrip
     (Sys := P.toGraphSystem) hij hji hne M
 
-/-- Round-trip SCC wrapper for the affine preserving barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_affine_of_wrapper_dominance_of_roundTrip
     {i j : ι} (hij : Relation.TransGen R i j) (hji : Relation.TransGen R j i)
     (M : P.AffineMeasure)
@@ -408,8 +408,8 @@ theorem no_global_orients_ctx_affine_of_wrapper_dominance_of_roundTrip
   GraphPacketSystem.CyclePath.no_global_orients_ctx_affine_of_wrapper_dominance_of_roundTrip
     (Sys := P.toGraphSystem) hij hji M hdom hunbounded
 
-/-- Finite-round-trip SCC wrapper for the affine preserving barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_affine_of_wrapper_dominance_of_finiteRoundTrip
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     {i j : ι}
@@ -427,8 +427,8 @@ theorem no_global_orients_ctx_affine_of_wrapper_dominance_of_finiteRoundTrip
   GraphPacketSystem.CyclePath.no_global_orients_ctx_affine_of_wrapper_dominance_of_finiteRoundTrip
     (Sys := P.toGraphSystem) hij hji hne M hdom hunbounded
 
-/-- Round-trip SCC wrapper for the transparent preserving barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_transparent_of_roundTrip
     {i j : ι} (hij : Relation.TransGen R i j) (hji : Relation.TransGen R j i)
     (M : P.TransparentMeasure) :
@@ -436,8 +436,8 @@ theorem no_global_orients_ctx_transparent_of_roundTrip
   GraphPacketSystem.CyclePath.no_global_orients_ctx_transparent_of_roundTrip
     (Sys := P.toGraphSystem) hij hji M
 
-/-- Finite-round-trip SCC wrapper for the transparent preserving barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_transparent_of_finiteRoundTrip
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     {i j : ι}
@@ -448,8 +448,8 @@ theorem no_global_orients_ctx_transparent_of_finiteRoundTrip
   GraphPacketSystem.CyclePath.no_global_orients_ctx_transparent_of_finiteRoundTrip
     (Sys := P.toGraphSystem) hij hji hne M
 
-/-- Round-trip scalar-projection wrapper for the preserving barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_of_scalar_projection_transparent_of_roundTrip
     {i j : ι} (hij : Relation.TransGen R i j) (hji : Relation.TransGen R j i)
     {α : Type} (μ : P.T → α) (Q : α → α → Prop) (π : α → Nat)
@@ -460,8 +460,8 @@ theorem no_global_orients_ctx_of_scalar_projection_transparent_of_roundTrip
   GraphPacketSystem.CyclePath.no_global_orients_ctx_of_scalar_projection_transparent_of_roundTrip
     (Sys := P.toGraphSystem) hij hji μ Q π hproj M hπ
 
-/-- Finite-round-trip scalar-projection wrapper for the preserving barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_of_scalar_projection_transparent_of_finiteRoundTrip
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     {i j : ι}
@@ -475,8 +475,8 @@ theorem no_global_orients_ctx_of_scalar_projection_transparent_of_finiteRoundTri
   GraphPacketSystem.CyclePath.no_global_orients_ctx_of_scalar_projection_transparent_of_finiteRoundTrip
     (Sys := P.toGraphSystem) hij hji hne μ Q π hproj M hπ
 
-/-- Finite-SCC wrapper for the additive preserving barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_additive_of_hasNontrivialSCC
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     (hSCC : HasNontrivialSCC R)
@@ -486,8 +486,8 @@ theorem no_global_orients_ctx_additive_of_hasNontrivialSCC
     (GraphPacketSystem.CyclePath.no_global_orients_ctx_additive_of_hasNontrivialSCC
       (Sys := P.toGraphSystem) hSCC M)
 
-/-- Finite-SCC wrapper for the affine preserving barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_affine_of_wrapper_dominance_of_hasNontrivialSCC
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     (hSCC : HasNontrivialSCC R)
@@ -508,8 +508,8 @@ theorem no_global_orients_ctx_affine_of_wrapper_dominance_of_hasNontrivialSCC
     (GraphPacketSystem.CyclePath.no_global_orients_ctx_affine_of_wrapper_dominance_of_hasNontrivialSCC
       (Sys := P.toGraphSystem) hSCC M hdom hunbounded)
 
-/-- Finite-SCC wrapper for the transparent preserving barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_transparent_of_hasNontrivialSCC
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     (hSCC : HasNontrivialSCC R)
@@ -519,8 +519,8 @@ theorem no_global_orients_ctx_transparent_of_hasNontrivialSCC
     (GraphPacketSystem.CyclePath.no_global_orients_ctx_transparent_of_hasNontrivialSCC
       (Sys := P.toGraphSystem) hSCC M)
 
-/-- Finite-SCC wrapper for the scalar-projection preserving barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_of_scalar_projection_transparent_of_hasNontrivialSCC
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     (hSCC : HasNontrivialSCC R)
@@ -533,8 +533,8 @@ theorem no_global_orients_ctx_of_scalar_projection_transparent_of_hasNontrivialS
     (GraphPacketSystem.CyclePath.no_global_orients_ctx_of_scalar_projection_transparent_of_hasNontrivialSCC
       (Sys := P.toGraphSystem) hSCC μ Q π hproj M hπ)
 
-/-- Search-based finite-SCC wrapper for the additive preserving barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_additive_of_exists_findNontrivialSCCPair?
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     (hfind : ∃ p : ι × ι, findNontrivialSCCPair? (R := R) = some p)
@@ -545,8 +545,8 @@ theorem no_global_orients_ctx_additive_of_exists_findNontrivialSCCPair?
     ((hasNontrivialSCC_iff_exists_findNontrivialSCCPair? (R := R)).2 hfind)
     M
 
-/-- Search-based finite-SCC wrapper for the affine preserving barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_affine_of_wrapper_dominance_of_exists_findNontrivialSCCPair?
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     (hfind : ∃ p : ι × ι, findNontrivialSCCPair? (R := R) = some p)
@@ -569,8 +569,8 @@ theorem no_global_orients_ctx_affine_of_wrapper_dominance_of_exists_findNontrivi
     ((hasNontrivialSCC_iff_exists_findNontrivialSCCPair? (R := R)).2 hfind)
     M hdom hunbounded
 
-/-- Search-based finite-SCC wrapper for the transparent preserving barrier from a relation-level
-presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_transparent_of_exists_findNontrivialSCCPair?
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     (hfind : ∃ p : ι × ι, findNontrivialSCCPair? (R := R) = some p)
@@ -581,8 +581,8 @@ theorem no_global_orients_ctx_transparent_of_exists_findNontrivialSCCPair?
     ((hasNontrivialSCC_iff_exists_findNontrivialSCCPair? (R := R)).2 hfind)
     M
 
-/-- Search-based finite-SCC wrapper for the scalar-projection preserving barrier from a
-relation-level presentation. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem no_global_orients_ctx_of_scalar_projection_transparent_of_exists_findNontrivialSCCPair?
     [Fintype ι] [DecidableEq ι] [DecidableRel R]
     (hfind : ∃ p : ι × ι, findNontrivialSCCPair? (R := R) = some p)

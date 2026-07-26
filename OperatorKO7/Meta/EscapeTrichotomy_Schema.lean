@@ -10,10 +10,10 @@ This file isolates the generic `StepDuplicatingSchema` block from
 
 - wrapper-subterm sensitivity,
 - base-level successor transparency,
-- representability by the current Nat-valued direct barrier universe,
+- representability by the Nat-valued direct barrier universe declared below,
 - and the resulting schema-generic escape trichotomy theorem.
 
-The remaining KO7-specific extensions stay in `Meta/EscapeTrichotomy.lean`.
+KO7-specific extensions are declared in `Meta/EscapeTrichotomy.lean`.
 -/
 
 namespace OperatorKO7.StepDuplicating
@@ -29,7 +29,7 @@ def WrapSubtermSensitive (S : StepDuplicatingSchema) (μ : S.T → Nat) : Prop :
 def TransparentAtBase (S : StepDuplicatingSchema) (μ : S.T → Nat) : Prop :=
   μ (S.succ S.base) = μ S.base
 
-/-- The explicit Nat-valued direct universe covered by the current barrier stack. -/
+/-- The Nat-valued direct families represented by this inductive predicate. -/
 inductive NatDirectBarrierRepresentable (S : StepDuplicatingSchema) (μ : S.T → Nat) : Prop
   | additive (M : AdditiveMeasure S) (heval : M.eval = μ)
   | compositionalTransparent (CM : CompositionalMeasure S)
@@ -41,9 +41,8 @@ inductive NatDirectBarrierRepresentable (S : StepDuplicatingSchema) (μ : S.T �
   | polynomialWithPump (M : PolynomialMeasureWithPump S) (heval : M.eval = μ)
   | maxWithPump (M : MaxMeasureWithPump S) (heval : M.eval = μ)
 
-/-- Escape trichotomy for the explicit Nat-valued direct universe:
-any successful orienter must fail wrapper sensitivity, fail base-level transparency,
-or fail representability by the formalized Nat-valued direct barrier families. -/
+/-- For the represented family type, global orientation implies failure of wrapper sensitivity,
+base-level transparency, or membership in `NatDirectBarrierRepresentable`. -/
 theorem nat_direct_escape_trichotomy
     {Sys : StepDuplicatingSystem} {μ : Sys.T → Nat}
     (horient : GlobalOrients Sys μ (· < ·)) :

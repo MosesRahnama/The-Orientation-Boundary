@@ -12,16 +12,15 @@ import OperatorKO7.Meta.FreeStepDuplicatingTraceBridge
 This module isolates the convergence layer for the four confession-method
 entry routes formalized on KO7.
 
-Each route now has its own local witness object and derived projection rank:
+Each route has a local witness object and derived projection rank:
 
 - dependency pairs,
 - direct counter projection,
 - size-change termination,
 - argument filtering.
 
-The theorems here record the second half of the strong target: although the
-routes are independently licensed and enter through different local witness
-objects, they all converge to one shared confession core on KO7.
+The theorems show that routes carrying distinct license tags and local witness
+objects converge to one shared confession core on KO7.
 -/
 
 namespace OperatorKO7.ConfessionMethodFamily
@@ -43,9 +42,9 @@ abbrev counterProjectionCoreWitness := counterProjectionConfession.toConfessionC
 abbrev sctCoreWitness := sctConfession.toConfessionCoreWitness
 abbrev argumentFilteringCoreWitness := argumentFilteringConfession.toConfessionCoreWitness
 
-/-- KO7-local side conditions for the non-schema constructors. These are not
-    part of the primitive step-duplicating schema, but they are needed for a
-    genuine uniqueness theorem on the full `Trace` carrier. -/
+/-- KO7-local side conditions for the three constructors beyond the primitive
+    step-duplicating schema. They complete the uniqueness profile on the full
+    `Trace` carrier. -/
 def CollapsesIntegrate (rank : Trace → Nat) : Prop :=
   ∀ t, rank (Trace.integrate t) = 0
 
@@ -128,8 +127,8 @@ theorem all_route_local_witnesses_share_confession_core :
     sctWitness_toConfessionCoreWitness_eq_core,
     argumentFilteringWitness_toConfessionCoreWitness_eq_core⟩
 
-/-- The route-local witness objects are equal to the common intermediate
-    confession-core witness, not only after projection-rank packaging. -/
+/-- The route-local witness objects equal the common intermediate
+    confession-core witness at the structure level. -/
 theorem all_route_local_witnesses_share_confession_core_witness_exact :
     schemaDPWitness.toConfessionCoreWitness = confessionCoreWitness
     ∧ schemaDirectCounterProjectionWitness.toConfessionCoreWitness = confessionCoreWitness
@@ -194,9 +193,8 @@ theorem all_confession_routes_share_confession_core_witness :
   exact ⟨dp_route_eq_confession_core, counterProjection_route_eq_confession_core,
     sct_route_eq_confession_core, argumentFiltering_route_eq_confession_core⟩
 
-/-- The concrete confession methods also agree with the common intermediate
-    confession-core witness exactly, not only after reprojecting to
-    `ProjectionRank`. -/
+/-- The concrete confession methods equal the common intermediate
+    confession-core witness at the structure level. -/
 theorem all_confession_methods_share_confession_core_witness_exact :
     dpCoreWitness = confessionCoreWitness
     ∧ counterProjectionCoreWitness = confessionCoreWitness
@@ -220,7 +218,7 @@ theorem all_confession_methods_share_confession_core_witness_exact :
       ConfessionMethod.toConfessionCoreWitness, ConfessionCoreWitness.ofProjectionRank] using
       congrFun argumentFilteringRankFn_eq_dpProjection t
 
-/-- Consequently, all four concrete confession methods satisfy the same generic
+/-- All four concrete confession methods satisfy the same generic
     semantic profile once viewed through the intermediate core witness. -/
 theorem all_confession_methods_share_semantic_profile :
     (NormalizedAtBase ko7Schema dpCoreWitness.rank
@@ -247,8 +245,8 @@ theorem all_confession_methods_share_semantic_profile :
   · simpa [hSCT] using confession_core_has_semantic_profile
   · simpa [hFilter] using confession_core_has_semantic_profile
 
-/-- The route-local witness objects also satisfy the generic semantic profile
-    directly, without first passing through equality to the common core. -/
+/-- The route-local witness objects satisfy the generic semantic profile through
+    their witness-local proofs. -/
 theorem all_route_local_witnesses_have_semantic_profile_directly :
     (NormalizedAtBase ko7Schema schemaDPWitness.toConfessionCoreWitness.rank
       ∧ TracksSuccessorDepth ko7Schema schemaDPWitness.toConfessionCoreWitness.rank
@@ -334,9 +332,8 @@ theorem all_route_local_witnesses_have_ko7_extended_semantic_profile :
     · intro x y; rfl
     · intro x y; rfl
 
-/-- KO7-local convergence can now be recovered from route-local semantic
-    premises plus the extended-profile uniqueness theorem, not only from the
-    previously hard-coded rank equalities. -/
+/-- The extended-profile uniqueness theorem derives KO7-local convergence from
+    the route-local semantic premises. -/
 theorem all_route_local_witnesses_converge_by_extended_semantic_profile :
     schemaDPWitness.toConfessionCoreWitness.rank = dpProjection
     ∧ schemaDirectCounterProjectionWitness.toConfessionCoreWitness.rank = dpProjection
@@ -615,9 +612,8 @@ theorem all_route_local_witnesses_yield_semantic_forgetting_witnesses :
     ∧ argumentFilteringSemanticForgettingWitness.rank = argumentFilteringConfession.rank := by
   exact ⟨rfl, rfl, rfl, rfl⟩
 
-/-- The common semantic profile also yields the generic forgetting-witness
-    layer directly, without first appealing to equality with the canonical
-    projection core. -/
+/-- The common semantic profile yields the generic forgetting-witness layer
+    through `ForgettingWitness.ofSemanticProfile`. -/
 theorem confession_core_semantic_profile_yields_forgetting_witness_rank :
     (ForgettingWitness.ofSemanticProfile confessionCoreWitness.rank
       confession_core_has_semantic_profile.1
@@ -640,9 +636,8 @@ theorem all_confession_routes_share_rank_core :
   · simpa [confessionProjectionCore] using argumentFiltering_eq_dp_rank
 
 /-- The common confession core factors through the embedded primitive free
-    fragment. This is the first KO7-facing bridge from the concrete `Trace`
-    carrier back to a schema-generated carrier satisfying
-    `GeneratedByConstructors`. -/
+    fragment, relating the concrete `Trace` carrier to a schema-generated
+    carrier satisfying `GeneratedByConstructors`. -/
 theorem confession_routes_factor_through_free_shadow (t : FreeTerm) :
     dpConfession.rank (embedFreeTerm t) = freeCounterDepth t
     ∧ counterProjectionConfession.rank (embedFreeTerm t) = freeCounterDepth t
@@ -666,8 +661,8 @@ theorem generated_free_shadow_recovers_all_confession_routes
   exact free_semantic_profile_recovers_all_confession_routes_on_embed
     hbase hsucc hwrap hrecur
 
-/-- The same KO7-facing factorization can be stated on the true image shadow
-    sitting inside `Trace` itself. -/
+/-- The same KO7-facing factorization holds on the primitive-image subtype
+    inside `Trace`. -/
 theorem confession_routes_factor_through_primitiveTraceImage
     (x : PrimitiveTraceImage) :
     dpConfession.rank x.1 = primitiveTraceImageCounterDepth x
@@ -676,7 +671,7 @@ theorem confession_routes_factor_through_primitiveTraceImage
     ∧ argumentFilteringConfession.rank x.1 = primitiveTraceImageCounterDepth x := by
   exact all_confession_routes_factor_through_primitiveTraceImage x
 
-/-- On the primitive free fragment, the common confession core is exactly the
+/-- On the primitive free fragment, the common confession core equals the
     canonical free projection rank transported along the embedding. -/
 theorem confession_core_on_embedFreeTerm (t : FreeTerm) :
     confessionCoreWitness.rank (embedFreeTerm t) = freeProjectionRank.rank t := by
@@ -708,8 +703,8 @@ theorem all_confession_routes_factor_through_confession_core_witness :
         argumentFilteringForgettingWitness := by
   exact ⟨rfl, rfl, rfl, rfl⟩
 
-/-- Every confession route also yields a KO7-certified forgetting witness
-    without reusing the canonical DP package by equality. -/
+/-- Each confession method directly constructs a KO7-certified forgetting
+    witness. -/
 theorem all_confession_routes_yield_certified_forgetting_witnesses :
     (OperatorKO7.MetaOperationalIncompleteness.CertifiedForgettingWitness.ofConfessionMethod
       dpConfession).rank = (fun t => dpConfession.rank t)
@@ -723,7 +718,7 @@ theorem all_confession_routes_yield_certified_forgetting_witnesses :
         argumentFilteringConfession.rank := by
   exact ⟨rfl, rfl, rfl, rfl⟩
 
-/-- Strong convergence summary: independent route-local witnesses feed one
+/-- Convergence summary: the four route-local witnesses feed one
     shared confession core on KO7. -/
 theorem confession_routes_converge :
     schemaDPWitness.selectedCoordinate = ⟨2, by decide⟩

@@ -85,6 +85,8 @@ end PayloadObservable
 
 open PayloadObservable
 
+variable {B : Type}
+
 /-- The direct additive `ℓ¹` reading: `O_i^{(1)}(u) = (i+1) · |b|`, where the
 "size" function `|·| : B → Nat` is an arbitrary weight and the argument `u`
 on the diagonal is identified with its shared seed `c ∈ B`. -/

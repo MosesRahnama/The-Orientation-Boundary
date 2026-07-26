@@ -3,12 +3,14 @@ import OperatorKO7.Meta.ReflectionSchema
 /-!
 # Classical Ascent Profile
 
-Paper-facing comparison wrapper above `ReflectionSchema`.
+Structural comparison wrapper above `ReflectionSchema`.
 
-This file packages the already mechanized DP-side profile as a classical-style
-ascent profile and defines the exact compatibility condition any future
-classical-side profile must satisfy before it can legitimately be compared to
-that DP profile.
+The generic records below are interfaces whose propositions and witnesses are
+supplied by an inhabitant. The Gödel-named instance at the end is a synthetic
+finite model with stipulated predicates. Its proved content is stage-shape
+compatibility with the DP profile. Formal PA syntax, arithmetization,
+incompleteness, model-theoretic truth, and reflection principles require
+separate structures and proofs.
 -/
 
 namespace OperatorKO7.ClassicalAscentProfile
@@ -23,16 +25,14 @@ private theorem iff_of_true {P Q : Prop} (hP : P) (hQ : Q) : P ↔ Q := by
   · intro _
     exact hP
 
-/-- Comparison-ready ascent profile. -/
+/-- Six-stage shape, family tag, and optional metadata. -/
 structure AscentProfile where
   shape : SixStepStructuralProfile
   family : AscentFamily
   complexity? : Option FormulaClass := none
   targetTheory? : Option FormalTheory := none
 
-/-- Concrete paper-facing comparison profile with named stage labels. This is a
-disciplined artifact object, not a formalization of the surrounding historical
-arithmetic. -/
+/-- Ascent profile paired with six unconstrained presentation labels. -/
 structure ConcreteComparisonProfile where
   profile : AscentProfile
   baseSystemLabel : String
@@ -42,38 +42,37 @@ structure ConcreteComparisonProfile where
   resolutionLabel : String
   licensedReimportLabel : String
 
-/-- Coarse historical base-system tag for paper-facing comparison objects. -/
+/-- Base-system classification tag. -/
 inductive HistoricalBaseKind
   | peanoArithmetic
   | benchmarkContractKO7
   deriving DecidableEq, Repr
 
-/-- Coarse historical obstruction tag. -/
+/-- Obstruction classification tag. -/
 inductive HistoricalObstructionKind
   | godelSentence
   | noDirectWholeWitness
   deriving DecidableEq, Repr
 
-/-- Coarse historical stronger-framework tag. -/
+/-- Stronger-framework classification tag. -/
 inductive HistoricalFrameworkKind
   | externalReflection
   | transformedCallTransport
   deriving DecidableEq, Repr
 
-/-- Coarse historical resolution tag. -/
+/-- Resolution classification tag. -/
 inductive HistoricalResolutionKind
   | strongerTheoryTruth
   | transformedCallWitness
   deriving DecidableEq, Repr
 
-/-- Coarse historical reimport tag. -/
+/-- Reimport classification tag. -/
 inductive HistoricalReimportKind
   | licensedTruthAdmission
   | contractLicensedWitness
   deriving DecidableEq, Repr
 
-/-- Typed historical annotation sitting above a concrete paper-facing
-comparison profile. This stays deliberately coarse and artifact honest. -/
+/-- Five classification tags stored independently of semantic coherence data. -/
 structure HistoricalComparisonAnnotation where
   baseKind : HistoricalBaseKind
   obstructionKind : HistoricalObstructionKind
@@ -81,33 +80,31 @@ structure HistoricalComparisonAnnotation where
   resolutionKind : HistoricalResolutionKind
   reimportKind : HistoricalReimportKind
 
-/-- Base-theory profile for the richer external classical comparison layer. -/
+/-- Label, optional register value, and a supplied base-system proposition. -/
 structure HistoricalBaseTheoryProfile where
   label : String
   registerApprox? : Option FormalTheory := none
   hasBaseSystem : Prop
 
-/-- Explicit obstruction witness family for the richer external comparison
-layer. -/
+/-- Label with supplied self-obstruction and base-blocking propositions. -/
 structure HistoricalObstructionWitness where
   label : String
   hasSelfObstruction : Prop
   blockedInBase : Prop
 
-/-- Explicit stronger-framework operator for the richer external comparison
-layer. -/
+/-- Label with supplied framework-availability and resolution propositions. -/
 structure HistoricalFrameworkOperator where
   label : String
   frameworkAvailable : Prop
   resolvesInFramework : Prop
 
-/-- Explicit reimport / licensed-admission map for the richer external
-comparison layer. -/
+/-- Label with a supplied licensed-reimport proposition. -/
 structure HistoricalReimportMap where
   label : String
   licensedReimport : Prop
 
-/-- Formal base-theory semantics for the external classical comparison layer. -/
+/-- Abstract sentence carrier and proof predicate with one supplied witness.
+Deductive-calculus and soundness laws are additional interface requirements. -/
 structure FormalHistoricalBaseTheory where
   label : String
   registerApprox? : Option FormalTheory := none
@@ -116,7 +113,8 @@ structure FormalHistoricalBaseTheory where
   witness : Sentence
   witness_provesBaseSystem : provesBaseSystem witness
 
-/-- Formal obstruction semantics for the external classical comparison layer. -/
+/-- Abstract obstruction carrier with supplied predicates and one witness
+satisfying both. -/
 structure FormalHistoricalObstruction where
   label : String
   Witness : Type
@@ -126,8 +124,8 @@ structure FormalHistoricalObstruction where
   witness_isSelfObstruction : isSelfObstruction witness
   witness_blocksBase : blocksBase witness
 
-/-- Formal stronger-framework semantics for the external classical comparison
-layer. -/
+/-- Abstract framework carrier with one availability witness and one supplied
+resolution witness. -/
 structure FormalHistoricalFramework where
   label : String
   Framework : Type
@@ -136,8 +134,7 @@ structure FormalHistoricalFramework where
   resolver : Framework
   resolver_resolves : resolves resolver
 
-/-- Formal reimport / licensed-admission semantics for the external classical
-comparison layer. -/
+/-- Abstract admission carrier with one supplied certification witness. -/
 structure FormalHistoricalReimport where
   label : String
   Admission : Type
@@ -145,8 +142,9 @@ structure FormalHistoricalReimport where
   witness : Admission
   witness_certified : certified witness
 
-/-- Deeper semantic content for the base theory itself: a sentence type,
-an internal proof predicate, and a reference-model truth predicate. -/
+/-- Abstract sentence carrier with arbitrary proof and truth predicates plus
+one sentence satisfying the proof predicate. Model and proof-calculus laws are
+left as additional data. -/
 structure FormalBaseTheorySemantics where
   Sentence : Type
   proves : Sentence → Prop
@@ -154,14 +152,9 @@ structure FormalBaseTheorySemantics where
   baseSentence : Sentence
   baseSentence_proves : proves baseSentence
 
-/-- Semantic content for the stronger framework / reflection operator.
-
-This records an actual blocked sentence at the base layer together with:
-
-- a stronger framework extending the base layer,
-- a semantic reflection/transport operation validating that blocked sentence,
-- and a licensed-admission predicate for reimporting that sentence.
--/
+/-- Abstract blocked-sentence interface. All proof, truth, extension,
+reflection, and admission relations are supplied by the inhabitant; the
+structure leaves metatheoretic soundness and conservativity as additional laws. -/
 structure FormalReflectionOperatorSemantics
     (B : FormalBaseTheorySemantics) where
   Framework : Type
@@ -176,9 +169,8 @@ structure FormalReflectionOperatorSemantics
   stronger_reflects_blocked : reflects strongerFramework blockedSentence
   blocked_licensedAdmission : licensedAdmission blockedSentence
 
-/-- Deeper semantic content for the obstruction layer itself: a witness family,
-an obstruction relation into the base-theory sentence space, and a designated
-blocked sentence carried by the obstruction witness. -/
+/-- Abstract obstruction interface with a designated witness and sentence.
+Its self-reference, obstruction, unprovability, and truth facts are fields. -/
 structure FormalObstructionSemantics
     (B : FormalBaseTheorySemantics) where
   Witness : Type
@@ -191,9 +183,8 @@ structure FormalObstructionSemantics
   blocked_not_provable : ¬ B.proves (blockedBy witness)
   blocked_true : B.trueInReferenceModel (blockedBy witness)
 
-/-- Deeper semantic content for the reimport / licensed-admission layer:
-an admission carrier together with a certification relation on sentences in the
-base-theory semantic space. -/
+/-- Abstract reimport interface with one supplied certification and truth
+witness. -/
 structure FormalReimportSemantics
     (B : FormalBaseTheorySemantics) where
   Admission : Type
@@ -203,152 +194,146 @@ structure FormalReimportSemantics
   witness_certifies_imported : certifies witness importedSentence
   imported_true : B.trueInReferenceModel importedSentence
 
-/-- Derived base-system proposition from the formal base-theory semantics. -/
+/-- Existence of a sentence satisfying the supplied base-system predicate. -/
 def FormalHistoricalBaseTheory.hasBaseSystem
     (B : FormalHistoricalBaseTheory) : Prop :=
   ∃ s, B.provesBaseSystem s
 
-/-- The designated base-theory witness realizes the derived base-system
-proposition. -/
+/-- Package the designated witness into the existential proposition. -/
 theorem FormalHistoricalBaseTheory.realizesBaseSystem
     (B : FormalHistoricalBaseTheory) :
     B.hasBaseSystem := by
   exact ⟨B.witness, B.witness_provesBaseSystem⟩
 
-/-- Derived self-obstruction proposition from the formal obstruction
-semantics. -/
+/-- Existence of a witness satisfying the supplied self-obstruction predicate. -/
 def FormalHistoricalObstruction.hasSelfObstruction
     (O : FormalHistoricalObstruction) : Prop :=
   ∃ w, O.isSelfObstruction w
 
-/-- Derived base-blocking proposition from the formal obstruction semantics. -/
+/-- Existence of a witness satisfying the supplied base-blocking predicate. -/
 def FormalHistoricalObstruction.blockedInBase
     (O : FormalHistoricalObstruction) : Prop :=
   ∃ w, O.blocksBase w
 
-/-- The designated obstruction witness realizes self-obstruction. -/
+/-- Package the designated self-obstruction witness. -/
 theorem FormalHistoricalObstruction.realizesSelfObstruction
     (O : FormalHistoricalObstruction) :
     O.hasSelfObstruction := by
   exact ⟨O.witness, O.witness_isSelfObstruction⟩
 
-/-- The designated obstruction witness realizes the base-blocking property. -/
+/-- Package the designated base-blocking witness. -/
 theorem FormalHistoricalObstruction.realizesBlockedInBase
     (O : FormalHistoricalObstruction) :
     O.blockedInBase := by
   exact ⟨O.witness, O.witness_blocksBase⟩
 
-/-- Derived framework-availability proposition from the formal stronger-framework
-semantics. -/
+/-- Nonemptiness of the supplied framework carrier. -/
 def FormalHistoricalFramework.frameworkAvailable
     (F : FormalHistoricalFramework) : Prop :=
   Nonempty F.Framework
 
-/-- Derived stronger-framework resolution proposition from the formal
-stronger-framework semantics. -/
+/-- Existence of an element satisfying the supplied resolution predicate. -/
 def FormalHistoricalFramework.resolvesInFramework
     (F : FormalHistoricalFramework) : Prop :=
   ∃ x, F.resolves x
 
-/-- The designated framework witness realizes availability. -/
+/-- Package the designated framework element as a nonemptiness witness. -/
 theorem FormalHistoricalFramework.realizesAvailability
     (F : FormalHistoricalFramework) :
     F.frameworkAvailable := by
   exact ⟨F.availableWitness⟩
 
-/-- The designated resolver realizes the stronger-framework resolution
-proposition. -/
+/-- Package the designated resolver into the existential proposition. -/
 theorem FormalHistoricalFramework.realizesResolution
     (F : FormalHistoricalFramework) :
     F.resolvesInFramework := by
   exact ⟨F.resolver, F.resolver_resolves⟩
 
-/-- Derived licensed-reimport proposition from the formal reimport semantics. -/
+/-- Existence of an admission satisfying the supplied certification predicate. -/
 def FormalHistoricalReimport.licensedReimport
     (R : FormalHistoricalReimport) : Prop :=
   ∃ a, R.certified a
 
-/-- The designated reimport witness realizes the licensed-reimport
-proposition. -/
+/-- Package the designated certification witness. -/
 theorem FormalHistoricalReimport.realizesLicensedReimport
     (R : FormalHistoricalReimport) :
     R.licensedReimport := by
   exact ⟨R.witness, R.witness_certified⟩
 
-/-- Derived internal-proof-layer proposition from the deeper base-theory
-semantics. -/
+/-- Existence of a sentence satisfying the supplied proof predicate. -/
 def FormalBaseTheorySemantics.hasInternalProofLayer
     (B : FormalBaseTheorySemantics) : Prop :=
   ∃ s, B.proves s
 
-/-- The designated base sentence realizes the internal proof layer. -/
+/-- Package the designated proved sentence. -/
 theorem FormalBaseTheorySemantics.realizesInternalProofLayer
     (B : FormalBaseTheorySemantics) :
     B.hasInternalProofLayer := by
   exact ⟨B.baseSentence, B.baseSentence_proves⟩
 
-/-- Derived semantic obstruction proposition: some sentence is true in the
-reference model but unprovable in the base layer. -/
+/-- Existence of a sentence satisfying the supplied truth predicate together
+with failure of the supplied proof predicate. -/
 def FormalReflectionOperatorSemantics.hasBlockedSemanticSentence
     {B : FormalBaseTheorySemantics}
-    (R : FormalReflectionOperatorSemantics B) : Prop :=
+  (_R : FormalReflectionOperatorSemantics B) : Prop :=
   ∃ s, ¬ B.proves s ∧ B.trueInReferenceModel s
 
-/-- Derived semantic stronger-framework proposition. -/
+/-- Existence of a framework element satisfying the supplied extension
+predicate. -/
 def FormalReflectionOperatorSemantics.hasReflectionOperator
     {B : FormalBaseTheorySemantics}
     (R : FormalReflectionOperatorSemantics B) : Prop :=
   ∃ F, R.extendsBase F
 
-/-- Derived semantic resolution proposition. -/
+/-- Existence of a framework element that reflects the designated blocked
+sentence according to the supplied relation. -/
 def FormalReflectionOperatorSemantics.resolvesBlockedSemantically
     {B : FormalBaseTheorySemantics}
     (R : FormalReflectionOperatorSemantics B) : Prop :=
-  ∃ F s, R.reflects F s
+  ∃ F, R.reflects F R.blockedSentence
 
-/-- Derived semantic licensed-admission proposition. -/
+/-- Existence of a sentence satisfying the supplied admission predicate. -/
 def FormalReflectionOperatorSemantics.hasLicensedAdmission
     {B : FormalBaseTheorySemantics}
     (R : FormalReflectionOperatorSemantics B) : Prop :=
   ∃ s, R.licensedAdmission s
 
-/-- The designated blocked sentence realizes semantic obstruction. -/
+/-- Package the designated blocked sentence and its two supplied facts. -/
 theorem FormalReflectionOperatorSemantics.realizesBlockedSemanticSentence
     {B : FormalBaseTheorySemantics}
     (R : FormalReflectionOperatorSemantics B) :
     R.hasBlockedSemanticSentence := by
   exact ⟨R.blockedSentence, R.blocked_not_provable, R.blocked_true⟩
 
-/-- The designated stronger framework realizes semantic availability. -/
+/-- Package the designated extending framework. -/
 theorem FormalReflectionOperatorSemantics.realizesReflectionOperator
     {B : FormalBaseTheorySemantics}
     (R : FormalReflectionOperatorSemantics B) :
     R.hasReflectionOperator := by
   exact ⟨R.strongerFramework, R.stronger_extendsBase⟩
 
-/-- The designated stronger framework resolves the blocked sentence
-semantically. -/
+/-- Package the supplied reflection fact for the designated blocked sentence. -/
 theorem FormalReflectionOperatorSemantics.realizesSemanticResolution
     {B : FormalBaseTheorySemantics}
     (R : FormalReflectionOperatorSemantics B) :
     R.resolvesBlockedSemantically := by
-  exact ⟨R.strongerFramework, R.blockedSentence, R.stronger_reflects_blocked⟩
+  exact ⟨R.strongerFramework, R.stronger_reflects_blocked⟩
 
-/-- The designated blocked sentence is licensed for reimport. -/
+/-- Package the supplied admission fact for the designated blocked sentence. -/
 theorem FormalReflectionOperatorSemantics.realizesLicensedAdmission
     {B : FormalBaseTheorySemantics}
     (R : FormalReflectionOperatorSemantics B) :
     R.hasLicensedAdmission := by
   exact ⟨R.blockedSentence, R.blocked_licensedAdmission⟩
 
-/-- Derived semantic obstruction proposition from the deeper obstruction
-semantics. -/
+/-- Existence of a witness and sentence satisfying the four supplied
+obstruction-side predicates. -/
 def FormalObstructionSemantics.hasSemanticObstruction
     {B : FormalBaseTheorySemantics}
     (O : FormalObstructionSemantics B) : Prop :=
   ∃ w s, O.selfReferential w ∧ O.obstructs w s ∧ ¬ B.proves s ∧ B.trueInReferenceModel s
 
-/-- The designated obstruction witness realizes semantic obstruction. -/
+/-- Package the designated obstruction witness and sentence. -/
 theorem FormalObstructionSemantics.realizesSemanticObstruction
     {B : FormalBaseTheorySemantics}
     (O : FormalObstructionSemantics B) :
@@ -356,22 +341,20 @@ theorem FormalObstructionSemantics.realizesSemanticObstruction
   exact ⟨O.witness, O.blockedBy O.witness, O.witness_selfReferential,
     O.witness_obstructs_blocked, O.blocked_not_provable, O.blocked_true⟩
 
-/-- Derived semantic licensed-reimport proposition from the deeper reimport
-semantics. -/
+/-- Existence of an admission and sentence satisfying certification and truth. -/
 def FormalReimportSemantics.hasSemanticReimport
     {B : FormalBaseTheorySemantics}
     (R : FormalReimportSemantics B) : Prop :=
   ∃ a s, R.certifies a s ∧ B.trueInReferenceModel s
 
-/-- The designated admission witness realizes semantic reimport. -/
+/-- Package the designated admission and imported sentence. -/
 theorem FormalReimportSemantics.realizesSemanticReimport
     {B : FormalBaseTheorySemantics}
     (R : FormalReimportSemantics B) :
     R.hasSemanticReimport := by
   exact ⟨R.witness, R.importedSentence, R.witness_certifies_imported, R.imported_true⟩
 
-/-- Coherence data tying the deeper obstruction, reflection, and reimport
-semantics into one staged transfer story. -/
+/-- Equalities and relation fields connecting the three abstract interfaces. -/
 structure FormalSemanticCoherence
     {B : FormalBaseTheorySemantics}
     (O : FormalObstructionSemantics B)
@@ -386,25 +369,25 @@ structure FormalSemanticCoherence
   reimport_certifies_reflection_blocked :
     I.certifies I.witness R.blockedSentence
 
-/-- Derived semantic obstruction-to-reflection transfer proposition. -/
+/-- The reflection relation required by the coherence record. -/
 def FormalSemanticCoherence.obstructionTransfersToReflection
     {B : FormalBaseTheorySemantics}
     {O : FormalObstructionSemantics B}
     {R : FormalReflectionOperatorSemantics B}
     {I : FormalReimportSemantics B}
-    (C : FormalSemanticCoherence O R I) : Prop :=
+    (_C : FormalSemanticCoherence O R I) : Prop :=
   R.reflects R.strongerFramework (O.blockedBy O.witness)
 
-/-- Derived semantic reflection-to-reimport transfer proposition. -/
+/-- The certification relation required by the coherence record. -/
 def FormalSemanticCoherence.reflectionTransfersToReimport
     {B : FormalBaseTheorySemantics}
     {O : FormalObstructionSemantics B}
     {R : FormalReflectionOperatorSemantics B}
     {I : FormalReimportSemantics B}
-    (C : FormalSemanticCoherence O R I) : Prop :=
+    (_C : FormalSemanticCoherence O R I) : Prop :=
   I.certifies I.witness R.blockedSentence
 
-/-- The coherence object realizes the obstruction-to-reflection transfer. -/
+/-- Project the coherence record's reflection field. -/
 theorem FormalSemanticCoherence.realizesObstructionToReflection
     {B : FormalBaseTheorySemantics}
     {O : FormalObstructionSemantics B}
@@ -414,7 +397,7 @@ theorem FormalSemanticCoherence.realizesObstructionToReflection
     C.obstructionTransfersToReflection := by
   exact C.reflection_covers_obstruction
 
-/-- The coherence object realizes the reflection-to-reimport transfer. -/
+/-- Project the coherence record's certification field. -/
 theorem FormalSemanticCoherence.realizesReflectionToReimport
     {B : FormalBaseTheorySemantics}
     {O : FormalObstructionSemantics B}
@@ -424,12 +407,8 @@ theorem FormalSemanticCoherence.realizesReflectionToReimport
     C.reflectionTransfersToReimport := by
   exact C.reimport_certifies_reflection_blocked
 
-/-- Richer external classical comparison object.
-
-This goes beyond labels and annotations: it packages the base-theory profile,
-obstruction witness, stronger-framework operator, and reimport map together
-with a concrete ascent profile and a theorem that the resulting profile is
-compatible with the mechanized DP-side profile. -/
+/-- Bundle four proposition-bearing records with an ascent profile and supplied
+stagewise-compatibility proof. The component propositions remain abstract. -/
 structure ExternalClassicalComparisonObject where
   baseTheory : HistoricalBaseTheoryProfile
   obstruction : HistoricalObstructionWitness
@@ -451,8 +430,10 @@ structure ExternalClassicalComparisonObject where
     StagewiseEquivalent profile.shape dpSixStepStructuralProfile
       ∧ profile.family = AscentFamily.reflection
 
-/-- Stronger external classical comparison object with typed witness semantics
-for the base theory, obstruction, stronger framework, and reimport step. -/
+/-- Bundle the abstract witness interfaces, their coherence record, and a
+supplied stagewise-compatibility proof. The type does not identify these
+interfaces with a historical formal system; such an identification requires an
+adapter. -/
 structure FormalExternalClassicalComparisonObject where
   baseSemantics : FormalHistoricalBaseTheory
   obstructionSemantics : FormalHistoricalObstruction
@@ -480,8 +461,8 @@ structure FormalExternalClassicalComparisonObject where
     StagewiseEquivalent profile.shape dpSixStepStructuralProfile
       ∧ profile.family = AscentFamily.reflection
 
-/-- Forget typed witness semantics and recover the lighter external comparison
-object. -/
+/-- Forget witness carriers and retain their existential propositions, labels,
+and profile data. -/
 def FormalExternalClassicalComparisonObject.toExternalClassicalComparisonObject
     (E : FormalExternalClassicalComparisonObject) :
     ExternalClassicalComparisonObject where
@@ -518,14 +499,15 @@ def FormalExternalClassicalComparisonObject.toExternalClassicalComparisonObject
   profileFamily := E.profileFamily
   compatible := E.compatible
 
-/-- The mechanized DP confession viewed as a comparison-ready ascent profile. -/
+/-- Repackage the DP-side structural record with its family and optional
+metadata fields. -/
 def dpAsClassicalAscentProfile : AscentProfile where
   shape := dpSixStepStructuralProfile
   family := AscentFamily.reflection
   complexity? := some artsGieslLicenseProfile.complexity
   targetTheory? := some artsGieslReverseMathCalibration.target
 
-/-- Compatibility condition for a future classical-side comparison profile. -/
+/-- Stagewise logical equivalence to the DP shape plus equality of family tags. -/
 def CompatibleWithDp (C : AscentProfile) : Prop :=
   StagewiseEquivalent C.shape dpSixStepStructuralProfile
     ∧ C.family = AscentFamily.reflection
@@ -543,9 +525,9 @@ theorem dpAsClassicalAscentProfile_compatible : CompatibleWithDp dpAsClassicalAs
     rfl
   · rfl
 
-/-- Named paper-facing right-hand profile for the Gödel-side comparison. The
-shape is intentionally concrete and fully realized inside the artifact, while
-the surrounding historical interpretation remains outside the Lean claim. -/
+/-- Six-stage all-`True` synthetic profile labelled as a Gödel comparison.
+Its fields are stipulated finite predicates rather than an encoded historical
+theorem. -/
 def godel1931PaperAscentProfile : AscentProfile where
   shape := {
     hasBaseSystem := True
@@ -557,7 +539,7 @@ def godel1931PaperAscentProfile : AscentProfile where
   }
   family := AscentFamily.reflection
 
-/-- Named stage labels for the paper-facing Gödel-side comparison object. -/
+/-- Presentation labels attached to the synthetic all-`True` profile. -/
 def godel1931PaperComparison : ConcreteComparisonProfile where
   profile := godel1931PaperAscentProfile
   baseSystemLabel := "PA"
@@ -567,7 +549,7 @@ def godel1931PaperComparison : ConcreteComparisonProfile where
   resolutionLabel := "truth proved at the stronger level"
   licensedReimportLabel := "externally licensed truth admission"
 
-/-- Typed historical annotation for the paper-facing Gödel-side comparison. -/
+/-- Classification tags attached to the synthetic Gödel-labelled profile. -/
 def godel1931HistoricalAnnotation : HistoricalComparisonAnnotation where
   baseKind := HistoricalBaseKind.peanoArithmetic
   obstructionKind := HistoricalObstructionKind.godelSentence
@@ -579,8 +561,8 @@ theorem godel1931PaperAscentProfile_realizesSixStep :
     RealizesSixStepShape godel1931PaperAscentProfile.shape := by
   simp [godel1931PaperAscentProfile, RealizesSixStepShape]
 
-/-- Concrete theorem-backed classical-side comparison instantiation for the
-paper-facing Gödel profile. -/
+/-- The synthetic all-`True` profile is stagewise equivalent to the DP profile,
+whose six fields are proved true by `structural_identity`. -/
 theorem godel1931PaperAscentProfile_compatible :
     CompatibleWithDp godel1931PaperAscentProfile := by
   rcases structural_identity with
@@ -602,32 +584,29 @@ theorem godel1931PaperAscentProfile_compatible :
         exact iff_of_true trivial hLicensed
   · rfl
 
-/-- Any comparison-ready profile that matches the DP stagewise shape and keeps
-reflection-family status inherits the six-step realization. -/
+/-- Stagewise equivalence transports the DP profile's six supplied facts. -/
 theorem compatibleWithDp_realizesSixStep
     (C : AscentProfile)
     (hC : CompatibleWithDp C) :
     RealizesSixStepShape C.shape := by
   exact hC.1.symm.preserves_realization structural_identity
 
-/-- A compatible profile remains blocked in the base layer exactly when the DP
-profile is blocked in the base layer. -/
+/-- Project stagewise equivalence at `blockedInBase`. -/
 theorem compatibleWithDp_blockedInBase_iff
     (C : AscentProfile)
     (hC : CompatibleWithDp C) :
     C.shape.blockedInBase ↔ dpSixStepStructuralProfile.blockedInBase :=
   hC.1 StructuralStage.blockedInBase
 
-/-- A compatible profile resolves only at the stronger framework stage exactly
-when the DP profile does. -/
+/-- Project stagewise equivalence at `resolvedInFramework`. -/
 theorem compatibleWithDp_resolvedInFramework_iff
     (C : AscentProfile)
     (hC : CompatibleWithDp C) :
     C.shape.resolvedInFramework ↔ dpSixStepStructuralProfile.resolvedInFramework :=
   hC.1 StructuralStage.resolvedInFramework
 
-/-- Any richer external classical comparison object is theorem-backed at the
-profile level. -/
+/-- Repackage the compatibility field as realization, family equality, and
+stagewise equivalence. -/
 theorem ExternalClassicalComparisonObject.supported
     (E : ExternalClassicalComparisonObject) :
     RealizesSixStepShape E.profile.shape
@@ -637,8 +616,7 @@ theorem ExternalClassicalComparisonObject.supported
   · exact E.compatible.2
   · simpa [dpAsClassicalAscentProfile] using E.compatible.1
 
-/-- Any formal external classical comparison object is theorem-backed at the
-profile level. -/
+/-- Apply the same profile result after forgetting witness carriers. -/
 theorem FormalExternalClassicalComparisonObject.supported
     (E : FormalExternalClassicalComparisonObject) :
     RealizesSixStepShape E.profile.shape
@@ -646,8 +624,9 @@ theorem FormalExternalClassicalComparisonObject.supported
       ∧ StagewiseEquivalent E.profile.shape dpAsClassicalAscentProfile.shape := by
   exact E.toExternalClassicalComparisonObject.supported
 
-/-- Any formal external comparison object now also carries theorem-backed
-semantic content for the base theory and the reflection operator themselves. -/
+/-- Collect existential consequences of the object's supplied predicate and
+witness fields. Application to an external historical system requires a
+separate adapter establishing those predicates. -/
 theorem FormalExternalClassicalComparisonObject.semanticSupported
     (E : FormalExternalClassicalComparisonObject) :
     E.baseTheoryContent.hasInternalProofLayer
@@ -665,8 +644,7 @@ theorem FormalExternalClassicalComparisonObject.semanticSupported
     E.reflectionContent.realizesLicensedAdmission,
     E.reimportContent.realizesSemanticReimport⟩
 
-/-- Any formal external comparison object also carries theorem-backed staged
-transfer from obstruction to reflection and from reflection to reimport. -/
+/-- Project the two relation fields from the supplied coherence record. -/
 theorem FormalExternalClassicalComparisonObject.semanticTransferSupported
     (E : FormalExternalClassicalComparisonObject) :
     E.semanticCoherence.obstructionTransfersToReflection
@@ -674,30 +652,32 @@ theorem FormalExternalClassicalComparisonObject.semanticTransferSupported
   exact ⟨E.semanticCoherence.realizesObstructionToReflection,
     E.semanticCoherence.realizesReflectionToReimport⟩
 
-/-- Richer base-theory profile for the paper-facing Gödel-side comparison. -/
+/-- Gödel-labelled base profile whose proposition is stipulated as `True`. -/
 def godel1931BaseTheoryProfile : HistoricalBaseTheoryProfile where
   label := "PA"
   hasBaseSystem := True
 
-/-- Richer obstruction witness for the paper-facing Gödel-side comparison. -/
+/-- Gödel-labelled obstruction profile whose two propositions are stipulated
+as `True`. -/
 def godel1931ObstructionWitness : HistoricalObstructionWitness where
   label := "self-referential Gödel sentence"
   hasSelfObstruction := True
   blockedInBase := True
 
-/-- Richer stronger-framework operator for the paper-facing Gödel-side
-comparison. -/
+/-- Gödel-labelled framework profile whose propositions are stipulated as
+`True`. -/
 def godel1931StrongerFrameworkOperator : HistoricalFrameworkOperator where
   label := "external reflection / stronger metatheory"
   frameworkAvailable := True
   resolvesInFramework := True
 
-/-- Richer reimport map for the paper-facing Gödel-side comparison. -/
+/-- Gödel-labelled reimport profile whose proposition is stipulated as `True`. -/
 def godel1931ReimportMap : HistoricalReimportMap where
   label := "externally licensed truth admission"
   licensedReimport := True
 
-/-- Typed base-theory semantics for the Gödel-side external comparison. -/
+/-- Unit-carrier witness model with a constantly true proof predicate, scoped to
+the synthetic finite comparison. -/
 def godel1931FormalBaseTheory : FormalHistoricalBaseTheory where
   label := "PA"
   Sentence := Unit
@@ -705,19 +685,19 @@ def godel1931FormalBaseTheory : FormalHistoricalBaseTheory where
   witness := ()
   witness_provesBaseSystem := trivial
 
-/-- Semantic sentence layer for the paper-facing Gödel-side comparison. -/
+/-- Two constructor tags used by the synthetic Gödel-labelled model. -/
 inductive GodelSentenceSemantic
   | paBaseSentence
   | godelBlockedSentence
   deriving DecidableEq, Repr
 
-/-- Semantic stronger-framework tag for the paper-facing Gödel-side
-comparison. -/
+/-- One constructor tag used by the synthetic framework model. -/
 inductive GodelFrameworkSemantic
   | externalReflection
   deriving DecidableEq, Repr
 
-/-- Deeper base-theory semantics for the paper-facing Gödel-side comparison. -/
+/-- Synthetic two-sentence model: one proof predicate is true, the other false,
+and the reference-truth predicate is true for both by definition. -/
 def godel1931BaseTheoryContent : FormalBaseTheorySemantics where
   Sentence := GodelSentenceSemantic
   proves
@@ -727,8 +707,8 @@ def godel1931BaseTheoryContent : FormalBaseTheorySemantics where
   baseSentence := .paBaseSentence
   baseSentence_proves := trivial
 
-/-- Deeper reflection-operator semantics for the paper-facing Gödel-side
-comparison. -/
+/-- Synthetic reflection interface whose relations select the blocked-sentence
+tag by definition. A PA reflection theorem would require a separate adapter. -/
 def godel1931ReflectionContent :
     FormalReflectionOperatorSemantics godel1931BaseTheoryContent where
   Framework := GodelFrameworkSemantic
@@ -737,15 +717,15 @@ def godel1931ReflectionContent :
   licensedAdmission s := s = .godelBlockedSentence
   blockedSentence := .godelBlockedSentence
   blocked_not_provable := by
-    simp [godel1931BaseTheoryContent, FormalBaseTheorySemantics.proves]
+    simp [godel1931BaseTheoryContent]
   blocked_true := by
-    simp [godel1931BaseTheoryContent, FormalBaseTheorySemantics.trueInReferenceModel]
+    simp [godel1931BaseTheoryContent]
   strongerFramework := .externalReflection
   stronger_extendsBase := trivial
   stronger_reflects_blocked := rfl
   blocked_licensedAdmission := rfl
 
-/-- Typed obstruction semantics for the Gödel-side external comparison. -/
+/-- Unit-carrier obstruction model with both predicates stipulated as `True`. -/
 def godel1931FormalObstruction : FormalHistoricalObstruction where
   label := "self-referential Gödel sentence"
   Witness := Unit
@@ -755,7 +735,8 @@ def godel1931FormalObstruction : FormalHistoricalObstruction where
   witness_isSelfObstruction := trivial
   witness_blocksBase := trivial
 
-/-- Deeper obstruction semantics for the Gödel-side external comparison. -/
+/-- Synthetic obstruction interface selecting the blocked-sentence tag. Its
+self-reference predicate is stipulated by definition. -/
 def godel1931ObstructionContent :
     FormalObstructionSemantics godel1931BaseTheoryContent where
   Witness := Unit
@@ -766,13 +747,11 @@ def godel1931ObstructionContent :
   witness_selfReferential := trivial
   witness_obstructs_blocked := rfl
   blocked_not_provable := by
-    simpa [godel1931BaseTheoryContent] using
-      godel1931ReflectionContent.blocked_not_provable
+    exact godel1931ReflectionContent.blocked_not_provable
   blocked_true := by
-    simpa [godel1931BaseTheoryContent] using
-      godel1931ReflectionContent.blocked_true
+    exact godel1931ReflectionContent.blocked_true
 
-/-- Typed stronger-framework semantics for the Gödel-side external comparison. -/
+/-- Unit-carrier framework model with resolution stipulated as `True`. -/
 def godel1931FormalFramework : FormalHistoricalFramework where
   label := "external reflection / stronger metatheory"
   Framework := Unit
@@ -781,7 +760,7 @@ def godel1931FormalFramework : FormalHistoricalFramework where
   resolver := ()
   resolver_resolves := trivial
 
-/-- Typed reimport semantics for the Gödel-side external comparison. -/
+/-- Unit-carrier admission model with certification stipulated as `True`. -/
 def godel1931FormalReimport : FormalHistoricalReimport where
   label := "externally licensed truth admission"
   Admission := Unit
@@ -789,7 +768,8 @@ def godel1931FormalReimport : FormalHistoricalReimport where
   witness := ()
   witness_certified := trivial
 
-/-- Deeper semantic reimport layer for the Gödel-side external comparison. -/
+/-- Synthetic reimport interface whose certification predicate selects the
+blocked-sentence tag. -/
 def godel1931ReimportContent :
     FormalReimportSemantics godel1931BaseTheoryContent where
   Admission := Unit
@@ -798,11 +778,9 @@ def godel1931ReimportContent :
   witness := ()
   witness_certifies_imported := rfl
   imported_true := by
-    simpa [godel1931BaseTheoryContent] using
-      godel1931ReflectionContent.blocked_true
+    exact godel1931ReflectionContent.blocked_true
 
-/-- Semantic coherence for the staged Gödel-side transfer:
-obstruction -> reflection -> licensed reimport. -/
+/-- Definitional coherence among the three synthetic interfaces. -/
 def godel1931SemanticCoherence :
     FormalSemanticCoherence
       godel1931ObstructionContent
@@ -811,12 +789,12 @@ def godel1931SemanticCoherence :
   obstruction_blocked_eq_reflection_blocked := rfl
   reflection_blocked_eq_reimported := rfl
   reflection_covers_obstruction := by
-    simpa using godel1931ReflectionContent.stronger_reflects_blocked
+    exact godel1931ReflectionContent.stronger_reflects_blocked
   reimport_certifies_reflection_blocked := by
-    simpa using godel1931ReimportContent.witness_certifies_imported
+    exact godel1931ReimportContent.witness_certifies_imported
 
-/-- Stronger formal external classical comparison object for the paper-facing
-Gödel-side comparison. -/
+/-- Aggregate the synthetic Gödel-labelled interfaces and their stagewise
+compatibility proof. -/
 def godel1931FormalExternalClassicalComparisonObject :
     FormalExternalClassicalComparisonObject where
   baseSemantics := godel1931FormalBaseTheory
@@ -862,8 +840,7 @@ def godel1931FormalExternalClassicalComparisonObject :
           exact iff_of_true godel1931FormalReimport.realizesLicensedReimport hLicensed
     · rfl
 
-/-- The stronger formal Gödel-side external comparison object is theorem-backed
-at the profile level. -/
+/-- Project profile realization and compatibility from the synthetic object. -/
 theorem godel1931FormalExternalClassicalComparison_supported :
     RealizesSixStepShape godel1931FormalExternalClassicalComparisonObject.profile.shape
       ∧ godel1931FormalExternalClassicalComparisonObject.profile.family =
@@ -873,8 +850,8 @@ theorem godel1931FormalExternalClassicalComparison_supported :
           dpAsClassicalAscentProfile.shape := by
   exact godel1931FormalExternalClassicalComparisonObject.supported
 
-/-- The stronger Gödel-side formal comparison object also has theorem-backed
-base-theory and reflection semantics. -/
+/-- Collect existential facts that follow from the synthetic object's
+definition. The conclusion remains within the stipulated finite model. -/
 theorem godel1931FormalExternalClassicalComparison_semanticSupported :
     godel1931FormalExternalClassicalComparisonObject.baseTheoryContent.hasInternalProofLayer
       ∧ godel1931FormalExternalClassicalComparisonObject.obstructionContent.hasSemanticObstruction
@@ -885,15 +862,14 @@ theorem godel1931FormalExternalClassicalComparison_semanticSupported :
       ∧ godel1931FormalExternalClassicalComparisonObject.reimportContent.hasSemanticReimport := by
   exact godel1931FormalExternalClassicalComparisonObject.semanticSupported
 
-/-- The stronger Gödel-side formal comparison object also has theorem-backed
-obstruction-to-reflection and reflection-to-reimport transfer. -/
+/-- Project the synthetic coherence record's two relation fields. -/
 theorem godel1931FormalExternalClassicalComparison_transferSupported :
     godel1931FormalExternalClassicalComparisonObject.semanticCoherence.obstructionTransfersToReflection
       ∧ godel1931FormalExternalClassicalComparisonObject.semanticCoherence.reflectionTransfersToReimport := by
   exact godel1931FormalExternalClassicalComparisonObject.semanticTransferSupported
 
-/-- Richer external classical comparison object for the paper-facing
-Gödel-side comparison. -/
+/-- Forget the synthetic object's witness carriers and retain its profile-level
+fields. -/
 def godel1931ExternalClassicalComparisonObject :
     ExternalClassicalComparisonObject :=
   godel1931FormalExternalClassicalComparisonObject.toExternalClassicalComparisonObject

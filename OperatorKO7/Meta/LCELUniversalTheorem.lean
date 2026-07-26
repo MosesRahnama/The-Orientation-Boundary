@@ -7,7 +7,7 @@ import OperatorKO7.Meta.LCELStructuralIdentity
 # LCEL Universal Structural Identity Theorem
 
 This file closes the universal form of Theorem~\ref{thm:lcel-structural-identity}
-(*Operational Inexpressibility at the Primitive-Recursion Orientation Boundary*) under the admissibility route E1 described
+(Paper C, Failure Floor manuscript) under the admissibility route E1 described
 in `LCEL_UNIVERSAL_THEOREM_ROADMAP.md`, and it closes it **via genuine
 source-to-target transport through an explicit comparison witness**, not by
 target-supplied target packages. The weaker admissibility-only packaging is
@@ -45,7 +45,7 @@ open OperatorKO7.LCELDpInstance
 
 /-- An admissible LCEL instance bundles a typed `FormalLCELInstance` with a
 schema-realization witness and the four proof-carrying substrate support
-records required by the operational-inexpressibility manuscript Propositions 5.8 and 5.9.
+records required by Paper C Propositions 5.8 and 5.9.
 
 Admissibility is not the same as mere instance-inhabitance: it additionally
 packages the four substrate records documented in `Meta/LCELReversibility.lean`,
@@ -345,7 +345,7 @@ supplied by the canonical admissibility packages above.
 
 /-- Canonical comparison witness between the Gödel 1931 admissible LCEL
 instance and the native DP / emitter-side admissible LCEL instance. This is
-the manuscript-critical comparison. -/
+the paper-critical comparison. -/
 def godel_dp_admissibleLCELComparisonWitness :
     AdmissibleLCELComparisonWitness
       godel1931AdmissibleLCELInstance
@@ -374,7 +374,7 @@ def godel_dp_universal_quasiFunctor :
 
 /-- Universal structural identity between the Gödel 1931 side and the native
 DP / emitter side, obtained by genuine source-to-target transport through
-the canonical support-comparison witness. This is the manuscript-critical
+the canonical support-comparison witness. This is the paper-critical
 corollary of the universal theorem. -/
 theorem godel_dp_universal_structural_identity :
     Nonempty

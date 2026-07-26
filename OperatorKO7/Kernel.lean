@@ -1,9 +1,11 @@
+set_option autoImplicit false
+
 namespace OperatorKO7
 
 /-!
 Kernel definitions for the KO7 calculus.
 
-Why this file exists:
+File scope:
 - Defines the core syntax (`Trace`) and the full rewrite relation (`Step`) for the KO7 kernel.
 - `Step` is the *full* kernel relation (8 unconditional rules).
 - The certified artifact is proved for a guarded subrelation `SafeStep` defined in
@@ -38,7 +40,7 @@ inductive StepStar : Trace → Trace → Prop
 | refl : ∀ t, StepStar t t
 | tail : ∀ {a b c}, Step a b → StepStar b c → StepStar a c
 
-/-- Normal forms for the full kernel relation: no outgoing `Step`. -/
+/-- Normal forms for the full kernel relation have zero outgoing `Step` reductions. -/
 def NormalForm (t : Trace) : Prop := ¬ ∃ u, Step t u
 
 /-- Transitivity of `StepStar` (concatenation of two multi-step reductions). -/
@@ -51,7 +53,7 @@ theorem stepstar_trans {a b c : Trace} (h1 : StepStar a b) (h2 : StepStar b c) :
 theorem stepstar_of_step {a b : Trace} (h : Step a b) : StepStar a b :=
   StepStar.tail h (StepStar.refl b)
 
-/-- If `a` is a normal form, then any `a ⇒* b` must be trivial (`b = a`). -/
+/-- A `StepStar` path beginning at normal form `a` ends at `a`. -/
 theorem nf_no_stepstar_forward {a b : Trace} (hnf : NormalForm a) (h : StepStar a b) : a = b :=
   match h with
   | StepStar.refl _ => rfl

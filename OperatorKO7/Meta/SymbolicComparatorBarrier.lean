@@ -2,19 +2,11 @@ import OperatorKO7.Meta.SymbolicComparatorBarrier_Schema
 import OperatorKO7.Kernel
 
 /-!
-# Symbolic Variable-Condition Barrier
+This module instantiates the imported symbolic duplicating terms in `Trace` and
+proves the two displayed definitional equalities. The comparator interface and
+its variable-condition obstruction are proved in the imported schema module;
+this module adds only the concrete term interpretation.
 
-This module isolates a symbolic obstruction behind direct KBO-style comparators.
-The only axiom used is the standard variable condition: if `x ≻ y`, then every
-variable occurs in `y` at most as often as in `x`.
-
-For the duplicating schema step
-
-`recur(b,s,succ(n)) -> wrap(s, recur(b,s,n))`
-
-the payload variable `s` occurs once on the source side and twice on the target
-side. Any symbolic comparator satisfying the variable condition therefore fails
-on this step.
 -/
 
 namespace OperatorKO7.SymbolicComparatorBarrier

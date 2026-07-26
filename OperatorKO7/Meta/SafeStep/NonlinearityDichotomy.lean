@@ -1,4 +1,5 @@
 import OperatorKO7.Meta.SafeStep.EqWVoidAnomaly
+import OperatorKO7.Meta.PolyInterpretation_FullStep
 
 set_option autoImplicit false
 
@@ -22,8 +23,9 @@ fork it produces (`EqWVoidAnomaly`).
 
 Necessity (linearizing either side dissolves the corresponding boundary) is the
 existing ablation surface: `Meta/LinearRec_Ablation.lean` for termination and the
-guarded-confluence / SafeStep results for confluence. Sufficiency is not claimed and
-does not hold in general; that gap is a real fact, not a missing proof.
+guarded-confluence / SafeStep results for confluence.  Non-sufficiency is proved
+below: the right-duplicating KO7 rule belongs to a globally well-founded source
+relation, witnessed by the full nonlinear polynomial interpretation.
 
 No `sorry`, no new `axiom`, no `native_decide`, no `@[csimp]`; the public theorems
 are spot-checked with `#print axioms` (baseline whitelist or fewer).
@@ -115,6 +117,33 @@ theorem ko7_raw_mechanism_correspondence : RawMechanismCorrespondence where
   confluence_rule_left_nonlinear := eqwRefl_leftNonlinear
   termination_rule_right_duplicating := recdSucc_rightDuplicating
   confluence_fork := local_confluence_fails_at_eqW_void_void
+
+
+
+/-- Right duplication is not sufficient for nontermination: the KO7 successor
+recursor rule is right-duplicating, yet the entire unguarded KO7 root relation is
+well-founded in reverse. -/
+theorem rightDuplication_not_sufficient_for_nontermination :
+    RightDuplicating recdSuccLhs recdSuccRhs ∧
+      WellFounded (fun a b : Trace => Step b a) :=
+  ⟨recdSucc_rightDuplicating,
+    OperatorKO7.PolyInterpretation.wf_StepRev_poly⟩
+
+/-- Exact structural boundary: the repeated-variable mechanism is present, the
+confluence-side critical pair is real, and the termination-side duplication
+still coexists with a universal source-termination proof. -/
+structure NonlinearityDichotomyExactBoundary : Prop where
+  rawCorrespondence : RawMechanismCorrespondence
+  rightDuplicationCompatibleWithTermination :
+    RightDuplicating recdSuccLhs recdSuccRhs ∧
+      WellFounded (fun a b : Trace => Step b a)
+
+/-- Complete theorem package for the KO7 nonlinearity dichotomy. -/
+theorem nonlinearity_dichotomy_exact_boundary :
+    NonlinearityDichotomyExactBoundary where
+  rawCorrespondence := ko7_raw_mechanism_correspondence
+  rightDuplicationCompatibleWithTermination :=
+    rightDuplication_not_sufficient_for_nontermination
 
 #print axioms eqwRefl_leftNonlinear
 #print axioms recdSucc_rightDuplicating

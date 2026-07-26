@@ -1,0 +1,44 @@
+import OperatorKO7.Meta.LicensedBoundaryCalculus.Integrated.SemanticNoGo
+
+/-!
+# Reach gate for integrated LBC boundary transactions
+
+Pins the construction-only builder, derived profiles and ledger, universal
+composition laws, and the orientation/distinction non-vacuity fixtures.
+-/
+
+set_option autoImplicit false
+
+open OperatorKO7.Meta.LicensedBoundaryCalculus
+open OperatorKO7.Meta.LicensedBoundaryCalculus.IntegratedBoundaryTransaction
+open OperatorKO7.Meta.LicensedBoundaryCalculus.IntegratedBuilders
+
+#check @BoundaryConstructionData
+#check @IntegratedBoundaryTransaction
+#check @IntegratedBoundaryTransaction.build
+#check @IntegratedBoundaryTransaction.outputs_eq_derived
+#check @CompositeSemanticCapability
+#check @IntegratedBoundaryTransaction.comp
+#check @IntegratedBoundaryTransaction.comp_ledger
+#check @IntegratedBoundaryTransaction.quantitative_composition_universal
+#check @IntegratedBoundaryTransaction.quantitative_composition_pointwise
+#check @IntegratedBoundaryTransaction.resourceVector_composition_universal
+#check orientationTransaction_fixture
+#check distinctionTransaction_fixture
+#check orientation_transaction_profile_exact
+#check distinction_transaction_profile_exact
+#check integrated_orientation_distinction_nonvacuous
+#check orientationTransaction_twoAlternatives_fixture
+#check same_morphism_trace_different_profile_fixture
+#check no_morphism_trace_only_semanticProfile_fixture
+
+#print axioms IntegratedBoundaryTransaction.outputs_eq_derived
+#print axioms IntegratedBoundaryTransaction.comp_ledger
+#print axioms IntegratedBoundaryTransaction.quantitative_composition_universal
+#print axioms IntegratedBoundaryTransaction.quantitative_composition_pointwise
+#print axioms IntegratedBoundaryTransaction.resourceVector_composition_universal
+#print axioms orientation_transaction_profile_exact
+#print axioms distinction_transaction_profile_exact
+#print axioms integrated_orientation_distinction_nonvacuous
+#print axioms same_morphism_trace_different_profile_fixture
+#print axioms no_morphism_trace_only_semanticProfile_fixture

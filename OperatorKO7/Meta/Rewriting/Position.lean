@@ -1,24 +1,24 @@
 import OperatorKO7.Meta.Rewriting.Term
 
 /-!
-# Positions in first-order terms
+This module defines positions, subterm lookup, replacement, valid positions, and
+parallel-position commutation for first-order terms. The proofs use structural recursion over
+terms and argument lists.
 
-Roadmap source: `ROADMAP-01-generic-critical-pair-lemma.md`, sections 4 and 5
-(`Meta/Rewriting/Position.lean`). A position is a list of argument indices
-(`Pos := List Nat`); the empty position denotes the whole term, and `i :: p`
-descends into argument `i` and then continues at `p`.
 
-This module provides:
-- `subtermAt`: read the subterm at a position, `none` when the path leaves the
-  term;
-- `replaceAt`: replace the subterm at a valid position, leaving the term
-  unchanged when the path is invalid;
-- `Pos.parallel`: two positions with neither a prefix of the other;
-- the round-trip lemma `subtermAt_replaceAt_same` and the commutation lemma
-  `replaceAt_parallel_comm`, both stated so later waves (critical-pair analysis)
-  can apply them directly.
 
-Trust: kernel-only; baseline-only under `#print axioms`.
+
+
+
+
+
+
+
+
+
+
+
+
 -/
 
 set_option autoImplicit false
@@ -27,18 +27,18 @@ namespace OperatorKO7.Meta.Rewriting
 
 universe u v
 
-/-- A position is a path of argument indices into a term. The empty path denotes
-the whole term. -/
+/-- Abbreviation for the displayed type.
+-/
 abbrev Pos := List Nat
 
 namespace Term
 
 variable {sigma : Type u} {nu : Type v}
 
-/-- The subterm at a position: `[]` returns the whole term, `i :: p` descends
-into argument `i` then continues at `p`. Returns `none` when the path leaves the
-term (a variable with a nonempty path, or an out-of-range index). The position
-is matched first so the `[]` case reduces definitionally. -/
+/-- Definition with formal content given by the displayed type and body.
+
+
+-/
 def subtermAt : Term sigma nu → Pos → Option (Term sigma nu)
   | t, [] => some t
   | .var _, _ :: _ => none
@@ -60,15 +60,15 @@ theorem subtermAt_app_cons (f : sigma) (args : List (Term sigma nu)) (i : Nat) (
       | some a => subtermAt a p := rfl
 
 mutual
-/-- Replace the subterm at a position. `[]` replaces the whole term; `i :: p`
-descends into argument `i` and replaces there. An out-of-range index or a
-variable with a nonempty path leaves the term unchanged. Uses an auxiliary list
-form `replaceAtList` so the nested recursion is structural. -/
+/-- Definition with formal content given by the displayed type and body.
+
+
+-/
 def replaceAt : Term sigma nu → Pos → Term sigma nu → Term sigma nu
   | _, [], s => s
   | .var x, _ :: _, _ => .var x
   | .app f args, i :: p, s => .app f (replaceAtList args i p s)
-/-- Replace inside the argument list at index `i`, position `p`. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def replaceAtList : List (Term sigma nu) → Nat → Pos → Term sigma nu → List (Term sigma nu)
   | [], _, _, _ => []
   | a :: as, 0, p, s => replaceAt a p s :: as
@@ -96,7 +96,7 @@ end
     (i : Nat) (p : Pos) (s : Term sigma nu) :
     replaceAtList (a :: as) (i + 1) p s = a :: replaceAtList as i p s := rfl
 
-/-- The length of an argument list is preserved by `replaceAtList`. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem length_replaceAtList (args : List (Term sigma nu)) (i : Nat) (p : Pos)
     (s : Term sigma nu) : (replaceAtList args i p s).length = args.length := by
   induction args generalizing i with
@@ -106,8 +106,8 @@ theorem length_replaceAtList (args : List (Term sigma nu)) (i : Nat) (p : Pos)
       | zero => simp
       | succ i => simp [ih]
 
-/-- Reading index `i` after replacing at index `i` returns the recursively
-replaced argument. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem getElem?_replaceAtList_self (args : List (Term sigma nu)) (i : Nat) (p : Pos)
     (s : Term sigma nu) (hi : i < args.length) :
     (replaceAtList args i p s)[i]? = some (replaceAt args[i] p s) := by
@@ -122,7 +122,7 @@ theorem getElem?_replaceAtList_self (args : List (Term sigma nu)) (i : Nat) (p :
           rw [ih i hi']
           simp
 
-/-- Reading an index `j` different from the replaced index `i` is unaffected. -/
+/-- The displayed proposition follows from the stated hypotheses. -/
 theorem getElem?_replaceAtList_ne (args : List (Term sigma nu)) (i j : Nat) (p : Pos)
     (s : Term sigma nu) (hij : i ≠ j) :
     (replaceAtList args i p s)[j]? = args[j]? := by
@@ -141,16 +141,16 @@ theorem getElem?_replaceAtList_ne (args : List (Term sigma nu)) (i j : Nat) (p :
               simp only [replaceAtList_cons_succ, List.getElem?_cons_succ]
               exact ih i j (by omega)
 
-/-! ## Validity and the round-trip lemma -/
+/-! Declarations for the section below. -/
 
-/-- A position is valid in a term when `subtermAt` finds a subterm there. -/
+/-- Definition with formal content given by the displayed type and body. -/
 def ValidPos (t : Term sigma nu) (p : Pos) : Prop := (subtermAt t p).isSome
 
 theorem validPos_nil (t : Term sigma nu) : ValidPos t [] := by
   simp [ValidPos]
 
-/-- Replacing at a valid position and then reading the same position returns the
-inserted term. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem subtermAt_replaceAt_same :
     ∀ (t : Term sigma nu) (p : Pos) (s : Term sigma nu),
       ValidPos t p → subtermAt (replaceAt t p s) p = some s := by
@@ -167,7 +167,7 @@ theorem subtermAt_replaceAt_same :
       | nil => simp
       | cons i p =>
           simp only [ValidPos, subtermAt_app_cons] at hp
-          -- `hp` forces `args[i]?` to be `some a` with `p` valid in `a`
+          --
           rw [replaceAt_app_cons, subtermAt_app_cons]
           cases hgi : args[i]? with
           | none => rw [hgi] at hp; simp at hp
@@ -188,18 +188,18 @@ theorem subtermAt_replaceAt_same :
 /-- One position is a prefix of another when it is an initial segment. -/
 def Pos.IsPrefix (p q : Pos) : Prop := ∃ r, q = p ++ r
 
-/-- Two positions are parallel when neither is a prefix of the other. In
-particular distinct argument indices at the same depth are parallel, so
-replacements in different arguments do not interfere. -/
+/-- Definition with formal content given by the displayed type and body.
+
+-/
 def Pos.parallel (p q : Pos) : Prop := ¬ Pos.IsPrefix p q ∧ ¬ Pos.IsPrefix q p
 
 theorem Pos.parallel_comm {p q : Pos} (h : Pos.parallel p q) : Pos.parallel q p :=
   ⟨h.2, h.1⟩
 
-/-- Parallel positions have a first index at which they differ: either both are
-nonempty with distinct heads, or one descends where the other does and the tails
-are parallel. The empty position is a prefix of everything, so a parallel pair
-is never empty. -/
+/-- The displayed proposition follows from the stated hypotheses.
+
+
+-/
 theorem parallel_cons_cases {p q : Pos} (h : Pos.parallel p q) :
     ∃ i j p' q', p = i :: p' ∧ q = j :: q' ∧
       (i ≠ j ∨ (i = j ∧ Pos.parallel p' q')) := by
@@ -219,8 +219,8 @@ theorem parallel_cons_cases {p q : Pos} (h : Pos.parallel p q) :
               exact h.2 ⟨r, by simp [hr]⟩
           · exact Or.inl hij
 
-/-- Replacements at distinct argument indices commute, by direct induction on
-the list and the two indices. The positions and inserted terms are arbitrary. -/
+/-- The displayed proposition follows from the stated hypotheses.
+-/
 theorem replaceAtList_comm_ne (args : List (Term sigma nu)) :
     ∀ (i j : Nat) (p' q' : Pos) (a b : Term sigma nu), i ≠ j →
       replaceAtList (replaceAtList args i p' a) j q' b
@@ -241,9 +241,9 @@ theorem replaceAtList_comm_ne (args : List (Term sigma nu)) :
               simp only [replaceAtList_cons_succ]
               rw [ih i j p' q' a b (by omega)]
 
-/-- Replacements at the same argument index with the (parallel) tails `p'` and
-`q'` commute, given the term-level commutation at those tails for every
-argument. -/
+/-- The displayed proposition follows from the stated hypotheses.
+
+-/
 theorem replaceAtList_comm_eq (args : List (Term sigma nu)) (p' q' : Pos)
     (hcomm : ∀ a ∈ args, ∀ (x y : Term sigma nu),
       replaceAt (replaceAt a p' x) q' y = replaceAt (replaceAt a q' y) p' x) :
@@ -289,7 +289,7 @@ end Term
 
 end OperatorKO7.Meta.Rewriting
 
-/-! ## Axiom audit -/
+/-! Declarations for the section below. -/
 
 #print axioms OperatorKO7.Meta.Rewriting.Term.subtermAt
 #print axioms OperatorKO7.Meta.Rewriting.Term.replaceAt

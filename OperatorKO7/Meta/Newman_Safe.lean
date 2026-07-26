@@ -79,8 +79,8 @@ theorem join_step_star_of_join_star_star
 
 /-! ### Star–star join by Acc recursion and Newman's lemma -/
 
--- Main procedure: star–star join at a fixed source, by Acc recursion on SafeStepRev at the source.
-/-- Core procedure: join two `SafeStepStar` paths out of `x` by `Acc` recursion on `SafeStepRev x`. -/
+-- Main engine: star–star join at a fixed source, by Acc recursion on SafeStepRev at the source.
+/-- Core engine: join two `SafeStepStar` paths out of `x` by `Acc` recursion on `SafeStepRev x`. -/
 private theorem join_star_star_at
   (locAll : ∀ a, LocalJoinAt a)
   : ∀ x, Acc SafeStepRev x → ∀ {y z : Trace}, SafeStepStar x y → SafeStepStar x z → ∃ d, SafeStepStar y d ∧ SafeStepStar z d := by

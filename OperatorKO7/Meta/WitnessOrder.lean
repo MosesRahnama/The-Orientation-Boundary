@@ -9,14 +9,14 @@ import Mathlib.Order.WellFounded
 /-!
 # Witness-order split for KO7
 
-This module starts the authoritative Phase 1 repair for the cross-manuscript
+This module starts the authoritative Phase 1 repair for the cross-paper
 witness-order story.
 
 The immediate goal is to separate three layers that the manuscripts must not
 collapse into one:
 
 - `directWhole`     : explicit direct whole-term witness families formalized in
-  the the orientation-boundary manuscript barrier stack;
+  the Paper A barrier stack;
 - `importedWhole`   : mathematically sound witnesses over the original KO7
   relation that import structure from outside those direct families;
 - `transformedCall` : witnesses that first arise after explicit passage to the
@@ -31,8 +31,8 @@ At this stage the module is intentionally narrow and authoritative:
 - the transformed-call layer is populated by the existing dependency-pair
   proof and its linear base-order note.
 
-This is enough to block the specific cross-manuscript ambiguity now:
-the operational-inexpressibility manuscript must not present the contract layer as if it were the truth layer.
+This is enough to block the specific cross-paper ambiguity now:
+Paper C must not present the contract layer as if it were the truth layer.
 -/
 
 namespace OperatorKO7.WitnessOrder
@@ -40,7 +40,7 @@ namespace OperatorKO7.WitnessOrder
 open OperatorKO7
 open OperatorKO7.Trace
 
-/-- Coarse witness-language levels used by the KO7 cross-manuscript bridge. -/
+/-- Coarse witness-language levels used by the KO7 cross-paper bridge. -/
 inductive WLevel
   | directWhole
   | importedWhole
@@ -97,13 +97,13 @@ def benchmarkContract : TaskContract where
     | .transformedCall => True
     | .externalCert => True
 
-/-- The explicit direct witness universe already formalized in the orientation-boundary manuscript's KO7
+/-- The explicit direct witness universe already formalized in Paper A's KO7
     barrier stack. -/
 def DirectWholeWitness : Prop :=
   ∃ O : OperatorKO7.EscapeTrichotomy.KO7DirectOrienter,
     OperatorKO7.EscapeTrichotomy.KO7DirectBarrierRepresentable O ∧ O.Orients
 
-/-- KO7 witness tower used by the cross-manuscript repair. -/
+/-- KO7 witness tower used by the cross-paper repair. -/
 def ko7Tower : WitnessTower
   | .directWhole => DirectWholeWitness
   | .importedWhole => WellFounded (fun a b : Trace => Step b a)
