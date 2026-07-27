@@ -24,10 +24,11 @@ the barrier by **structural induction over the grammar**:
 * `counter_orients`: the payload-blind counter projection *does* orient the step. This is the escape
   side of the boundary (the dependency-pair / counter-projection route).
 
-Together these give a grammar-level orientation boundary: orientation requires payload-blindness,
-and every measure that genuinely reads the duplicated payload is blocked. The counter projection
-provides an orienting payload-blind witness. The theorem applies to each named measure family that
-is represented by this grammar.
+Together these give a grammar-level orientation boundary. Over the full grammar, orientation is
+equivalent to payload-blindness plus strict counter response. Equivalently, on the independently
+defined counter-admissible class, orientation holds exactly when the measure is payload-blind.
+The counter projection provides a non-vacuous inhabitant of that class. The theorem applies to each
+named measure family represented by this grammar.
 -/
 
 set_option autoImplicit false
@@ -527,6 +528,19 @@ coordinate. This is the only way a grammar measure can orient the duplicating st
 def PayloadBlind (m : Nat → Nat → Nat) : Prop :=
   ∀ c p p', m c p = m c p'
 
+/-- A measure has strict counter response when increasing the counter by one strictly increases its
+value while the payload is held fixed. This is independent of orientation: it tests only the
+counter coordinate and contains no duplicated-payload comparison. It is the minimal missing
+condition in the false unrestricted implication `PayloadBlind m → OrientsDupStep m`. -/
+def CounterStrict (m : Nat → Nat → Nat) : Prop :=
+  ∀ c p, m c p < m (c + 1) p
+
+/-- A grammar expression is counter-admissible when its denotation has strict counter response.
+This predicate does not assume orientation and is non-vacuous, as witnessed below by the counter
+projection. -/
+def CounterAdmissible (e : MeasureExpr) : Prop :=
+  CounterStrict e.eval
+
 /-- **Structural dichotomy.** At every fixed counter `c`, a grammar measure's payload section is
 either constant or unbounded: the grammar has no cap-from-above operation, so no section is bounded
 and nonconstant. Induction over the seven constructors; payload-monotonicity drives the product and
@@ -644,6 +658,82 @@ orienting witness inside the payload-blind class. -/
 theorem counter_is_payload_blind : PayloadBlind MeasureExpr.counter.eval :=
   fun _ _ _ => rfl
 
+/-- Orientation itself forces strict counter response for grammar expressions. Monotonicity first
+compares payload `p` with `p + 1`; orientation of the duplicating step supplies the strict second
+leg. Thus `CounterStrict` is necessary, not an arbitrary strengthening introduced for sufficiency. -/
+theorem orients_implies_counterStrict (e : MeasureExpr)
+    (h : OrientsDupStep e.eval) : CounterStrict e.eval := by
+  intro c p
+  have hmono : e.eval c p ≤ e.eval c (p + 1) :=
+    eval_payloadMonotone e c p (p + 1) (by omega)
+  exact lt_of_le_of_lt hmono (h c p 1 (by omega))
+
+/-- Payload-blindness and strict counter response are jointly sufficient for orientation. Payload
+blindness erases the duplicated payload on the target, leaving exactly the strict counter
+comparison. This lemma is carrier-level and does not use the grammar. -/
+theorem payloadBlind_and_counterStrict_implies_orients {m : Nat → Nat → Nat}
+    (hblind : PayloadBlind m) (hcounter : CounterStrict m) :
+    OrientsDupStep m := by
+  intro c p L _
+  rw [hblind c (p + L) p]
+  exact hcounter c p
+
+/-- **Exact scalar grammar characterization.** A reflected grammar measure orients the duplicating
+step if and only if it is both payload-blind and strictly responsive to the counter. Neither
+conjunct can be removed: payload-reading measures are blocked, while payload-blind constants fail
+strict counter response. -/
+theorem orients_iff_payloadBlind_and_counterStrict (e : MeasureExpr) :
+    OrientsDupStep e.eval ↔ PayloadBlind e.eval ∧ CounterStrict e.eval := by
+  constructor
+  · intro h
+    exact ⟨orients_implies_payload_blind e h, orients_implies_counterStrict e h⟩
+  · rintro ⟨hblind, hcounter⟩
+    exact payloadBlind_and_counterStrict_implies_orients hblind hcounter
+
+/-- **Payload-blindness biconditional on the counter-admissible class.** Once the independent
+counter-response requirement is fixed, payload-blindness is necessary and sufficient for
+orientation. This is the paper-facing pure biconditional; its scope is explicitly
+`CounterAdmissible e`. -/
+theorem counterAdmissible_orients_iff_payloadBlind (e : MeasureExpr)
+    (hadmissible : CounterAdmissible e) :
+    OrientsDupStep e.eval ↔ PayloadBlind e.eval := by
+  constructor
+  · exact orients_implies_payload_blind e
+  · intro hblind
+    exact payloadBlind_and_counterStrict_implies_orients hblind hadmissible
+
+/-- The counter projection has strict counter response. -/
+theorem counter_is_counterStrict : CounterStrict MeasureExpr.counter.eval := by
+  intro c p
+  show c < c + 1
+  omega
+
+/-- The counter projection witnesses that the counter-admissible class is inhabited. -/
+theorem counter_is_counterAdmissible : CounterAdmissible MeasureExpr.counter :=
+  counter_is_counterStrict
+
+/-- Non-vacuity witness for the pure biconditional: the counter projection is counter-admissible,
+payload-blind, and therefore orients the duplicating step. -/
+theorem counter_orients_via_exact_boundary : OrientsDupStep MeasureExpr.counter.eval :=
+  (counterAdmissible_orients_iff_payloadBlind MeasureExpr.counter
+    counter_is_counterAdmissible).2 counter_is_payload_blind
+
+/-- Sharpness witness for the extra condition: the constant-zero expression is payload-blind. -/
+theorem const_zero_is_payloadBlind : PayloadBlind (MeasureExpr.const 0).eval :=
+  fun _ _ _ => rfl
+
+/-- The constant-zero expression is not counter-admissible. -/
+theorem const_zero_not_counterStrict : ¬ CounterStrict (MeasureExpr.const 0).eval := by
+  intro h
+  have hzero := h 0 0
+  simp [MeasureExpr.eval] at hzero
+
+/-- Consequently, bare payload-blindness is not sufficient outside the counter-admissible class. -/
+theorem const_zero_not_orients : ¬ OrientsDupStep (MeasureExpr.const 0).eval := by
+  intro h
+  have hzero := h 0 0 1 (by omega)
+  simp [MeasureExpr.eval] at hzero
+
 /-- The `PayloadUnbounded` hypothesis of `grammar_measure_blocked` is one way to witness
 non-blindness, so the earlier hypothesis form is the special case of the literal closure. -/
 theorem unbounded_not_payload_blind (e : MeasureExpr)
@@ -674,5 +764,11 @@ theorem payloadEffective?_not_payloadBlind (e : MeasureExpr)
 #print axioms orients_implies_payload_blind
 #print axioms payload_reading_measure_blocked
 #print axioms payloadEffective?_not_payloadBlind
+#print axioms orients_implies_counterStrict
+#print axioms payloadBlind_and_counterStrict_implies_orients
+#print axioms orients_iff_payloadBlind_and_counterStrict
+#print axioms counterAdmissible_orients_iff_payloadBlind
+#print axioms counter_orients_via_exact_boundary
+#print axioms const_zero_not_orients
 
 end OperatorKO7.Meta.BoundaryGeneral.DirectMeasureGrammarClosure

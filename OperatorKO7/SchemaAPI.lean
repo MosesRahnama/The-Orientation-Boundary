@@ -28,10 +28,6 @@ import OperatorKO7.Meta.MatrixBarrierLexPermD
 import OperatorKO7.Meta.MatrixBarrierMix2
 import OperatorKO7.Meta.MatrixBarrierFunctional
 import OperatorKO7.Meta.MatrixBarrierArbitrary
-import OperatorKO7.Meta.ContextClosedBarrier
-import OperatorKO7.Meta.ContextClosedBarrier_FullClosure
-import OperatorKO7.Meta.BoundaryGeneral.DirectMeasureGrammarClosure
-import OperatorKO7.Meta.BoundaryGeneral.VectorGrammarClosure
 import OperatorKO7.Meta.MatrixBarrierArbitrary_Instances
 import OperatorKO7.Meta.MatrixBarrierArcticTropical
 import OperatorKO7.Meta.MatrixBarrierArcticTropical_Instances

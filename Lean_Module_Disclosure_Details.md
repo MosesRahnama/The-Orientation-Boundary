@@ -8,7 +8,7 @@ This repository is the public Lean companion for exactly three manuscripts:
 - *Operational Inexpressibility at the Primitive-Recursion Orientation Boundary.*
 - *The Confluence-Preservation Boundary for Diagonal Identity Queries: Non-Left-Linearity, Signature Inexpressibility, and External Guarding.*
 
-As of 2026-07-26, after the second release delta below, the `OperatorKO7\` tree contains 679 Lean source files. A file is included only when it is directly named by one of the three manuscripts, owns a declaration cited by one of them, or lies in the recursive project-owned import closure of such a file. Repository metadata, proof artifacts, and Lake configuration are retained as supporting release infrastructure.
+As of 2026-07-27, after the payload-boundary release delta below, the `OperatorKO7\` tree contains 683 Lean source files. The three-manuscript proof union contains 679 files. Four additional Paper A support modules provide the aggregate import surface, its `Wavepacket` dependency, and its two reach gates. Repository metadata, proof artifacts, and Lake configuration are retained as supporting release infrastructure.
 
 No NDA, qualified-reviewer restriction, or separate access grant applies to the retained public-release copies. The separate NDA-controlled inventory at the end governs excluded/private material and records the six historical paths whose manuscript-required public copies remain public.
 
@@ -20,6 +20,7 @@ No NDA, qualified-reviewer restriction, or separate access grant applies to the 
 | Operational Inexpressibility (quantitative manuscript) | 500 files: 197 manuscript-named modules, 11 cited-declaration owners, and 292 recursive imports |
 | Confluence-Preservation Boundary | 263 files: 158 public module-map seeds plus 105 recursive imports |
 | Deduplicated three-manuscript union | 679 files |
+| Public tree total | 683 files: 679 proof-union files plus 4 Paper A support modules |
 
 The Operational-Inexpressibility count rose by eleven on 2026-07-26 with the gap-closure modules recorded in the second release delta below. All eleven are named by the manuscript's appendix module map, and each one's project-owned imports were already public, so the closure grows by exactly eleven.
 
@@ -38,6 +39,42 @@ The three per-manuscript closure figures are carried forward from the previous r
 The Orientation count includes `OperatorKO7\Meta\ComputableMeasure_Verification.lean`, which is named without a `.lean` suffix in the manuscript and was omitted from the earlier 382-file parser receipt.
 
 The Confluence-Preservation count rose by one on 2026-07-26 with the addition of `OperatorKO7\Meta\DistinctionBoundary\ContextualDiagonalScope.lean`, a new module-map seed named by the Distinction Boundary manuscript.
+
+The 2026-07-27 delta leaves the three manuscript-closure figures unchanged. The theorem owner
+`OperatorKO7\Meta\BoundaryGeneral\DirectMeasureGrammarClosure.lean` and
+`OperatorKO7\OrientationBoundaryAPI.lean` already belonged to the Orientation Boundary closure.
+The public tree gains the aggregate `BoundaryGeneral.lean` surface, its previously absent
+`BoundaryGeneral/Wavepacket.lean` dependency, and two reach gates under the release policy that every
+task-modified Lean module and every dependency required to elaborate it receives a source-synchronized
+public copy.
+
+**Tree audit, 2026-07-27.** All 683 public Lean files were compared by SHA-256 with the corresponding
+source files: 683 identical, zero differing, zero absent from the source repository. The audit also
+reconciled `OperatorKO7\SchemaAPI.lean` to the source-authoritative version described in the prior
+receipt.
+
+## Release Delta 2026-07-27: scalar payload-blindness biconditional
+
+The scalar grammar owner proves two forms of the boundary. Across the full grammar, orientation is
+equivalent to payload-blindness together with strict response to a one-step counter increment. On
+the independently defined `CounterAdmissible` subclass, orientation is equivalent to
+payload-blindness. The counter projection inhabits that subclass; the payload-blind constant-zero
+expression has equal values at adjacent counters and fails orientation.
+
+| Public path | Change | Release role | Trusted base |
+|---|---|---|---|
+| `OperatorKO7\Meta\BoundaryGeneral\DirectMeasureGrammarClosure.lean` | extended | theorem owner for `orients_iff_payloadBlind_and_counterStrict` and `counterAdmissible_orients_iff_payloadBlind` | `{propext, Quot.sound}`; carrier-level sufficiency is axiom-free |
+| `OperatorKO7\OrientationBoundaryAPI.lean` | extended | imports the scalar grammar owner through the Paper A public root | n/a (API) |
+| `OperatorKO7\Meta\BoundaryGeneral.lean` | added to public tree | aggregate boundary-general import surface | n/a (aggregate) |
+| `OperatorKO7\Meta\BoundaryGeneral\Wavepacket.lean` | added to public tree | project-owned dependency required by the aggregate | `{propext, Classical.choice, Quot.sound}` or fewer |
+| `OperatorKO7\Test\BoundaryGeneralReach.lean` | added to public tree | declaration reach for the theorem owner and witnesses | n/a (gate) |
+| `OperatorKO7\Test\OrientationBoundaryAPIReach.lean` | added to public tree | declaration reach through the Paper A API | n/a (gate) |
+| `OperatorKO7\SchemaAPI.lean` | source-synchronized | removes the four public-only imports recorded by the 2026-07-26 tree audit | n/a (API) |
+
+The manuscript abstract, theorem statement, conclusion, Lean module map, and claim-to-code index name
+the full-grammar conjunction and the counter-admissible payload-blindness biconditional. Targeted
+source and public builds cover the owner, both APIs, the aggregate, its `Wavepacket` dependency, and
+both reach gates.
 
 ## Release Delta 2026-07-26
 
