@@ -159,7 +159,7 @@ def u6ClassOf : RDRSMethodFamily → U6Classification
   | .lambdaFreeKBO                    => .payloadSensitiveBlocked
   -- DP projection-transaction escape (7)
   | .subtermCoefficientKBO            => .projectionTransactionEscape
-  -- Path-order construction escape (4)
+  -- Path-order construction escape (5)
   | .acRPO                            => .constructionEscape
   | .rpoModuloPermutation             => .constructionEscape
   | .popStarFamily                    => .constructionEscape

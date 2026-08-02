@@ -66,4 +66,71 @@ theorem rec_succ_extracts_dependency_pair (b s n : Trace) :
     ∧ DPPair (recΔ b s (delta n)) (recΔ b s n) := by
   exact ⟨Step.R_rec_succ b s n, DPPair.rec_succ b s n⟩
 
+/-! ## A concrete countdown embedded in the actual pair relation -/
+
+/-- Iterated `delta` counter used to expose the full natural-number countdown
+inside the actual KO7 dependency-pair relation. -/
+@[simp] def dpCounterTower : Nat → Trace
+  | 0 => void
+  | n + 1 => delta (dpCounterTower n)
+
+/-- A recursive-call term whose counter is the encoded natural number. -/
+def dpCounterEncoding (n : Nat) : Trace :=
+  recΔ void void (dpCounterTower n)
+
+/-- The projection reads the iterated counter tower as its natural height. -/
+@[simp] theorem dpProjection_dpCounterTower (n : Nat) :
+    dpProjection (dpCounterTower n) = n := by
+  induction n with
+  | zero => rfl
+  | succ n ih =>
+      simp [dpProjection, ih]
+
+/-- The actual DP rank of the encoded call is exactly the encoded natural
+number. -/
+@[simp] theorem dpRank_dpCounterEncoding (n : Nat) :
+    dpRank (dpCounterEncoding n) = n := by
+  simp [dpCounterEncoding, dpRank, dpProjection]
+
+/-- One successor in the encoding is one edge of the actual reverse pair
+relation.  This is not a synthetic relation: the proof constructor is exactly
+`DPPair.rec_succ`. -/
+theorem dpCounterEncoding_succ_pairRev (n : Nat) :
+    DPPairRev (dpCounterEncoding n) (dpCounterEncoding (n + 1)) := by
+  exact DPPair.rec_succ void void (dpCounterTower n)
+
+/-- Every strict natural decrease is represented by a nonempty path in the
+actual reverse dependency-pair relation. -/
+theorem dpCounterEncoding_transGen_of_lt {m n : Nat} (h : m < n) :
+    Relation.TransGen DPPairRev
+      (dpCounterEncoding m) (dpCounterEncoding n) := by
+  induction n with
+  | zero => omega
+  | succ n ih =>
+      have hle : m ≤ n := Nat.le_of_lt_succ h
+      rcases Nat.lt_or_eq_of_le hle with hlt | heq
+      · exact Relation.TransGen.tail (ih hlt)
+          (by simpa [Nat.succ_eq_add_one] using
+            dpCounterEncoding_succ_pairRev n)
+      · subst m
+        exact Relation.TransGen.single
+          (by simpa [Nat.succ_eq_add_one] using
+            dpCounterEncoding_succ_pairRev n)
+
+/-- A well-foundedness certificate for the actual reverse KO7 pair relation
+supplies well-founded induction on naturals through the concrete countdown
+embedding.  The input certificate is the well-founded relation used by the
+proof, rather than an ignored argument. -/
+theorem natLt_wellFounded_of_DPPairRev
+    (hPair : WellFounded DPPairRev) :
+    WellFounded (fun m n : Nat => m < n) := by
+  have hEncoded : WellFounded
+      (fun m n : Nat =>
+        Relation.TransGen DPPairRev
+          (dpCounterEncoding m) (dpCounterEncoding n)) :=
+    InvImage.wf (f := dpCounterEncoding) hPair.transGen
+  exact Subrelation.wf
+    (fun hlt => dpCounterEncoding_transGen_of_lt hlt)
+    hEncoded
+
 end OperatorKO7.MetaDependencyPairs

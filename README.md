@@ -12,11 +12,11 @@ It contains the public Lean 4 source package, selected external proof artifacts,
 
 ## Disclosure Scope
 
-The release contains the exact 665-file deduplicated union of the three manuscript stacks: 383 files for Orientation Boundary, 489 for Operational Inexpressibility, and 262 for Confluence-Preservation Boundary. Every retained file is present and source-synchronized.
+The current release contains 738 Lean files under `OperatorKO7/`. The 2026-08-02 Tier-17B closure mirrors all 50 modified or new private Lean files exactly, including the generated theorem-naming snapshot, and kernel-checks the three API roots plus the complete reviewer-gate stack. The exact paths, SHA-256 values, and validation status are recorded in `TIER17B-PUBLIC-MIRROR-RECEIPT-2026-08-02.{md,csv}`; the 2026-08-01 receipt remains the historical static-only seed record.
 
 No NDA, reviewer qualification, or separate access grant applies to retained public-release copies. Product-facing Supervisory Engine modules and other listed private material outside the three manuscript stacks are excluded by scope and covered by the NDA inventory at the end of `Lean_Module_Disclosure_Details.md`.
 
-The proof-foundation audit promotes every former NDA-listed manuscript dependency into the public stack: six historical NDA paths are disclosed publicly, while the remaining 57 have zero manuscript references and zero import edges from the public proof closure. No disclosed proof depends on an NDA-only module.
+The proof-foundation audit now leaves 50 historical NDA-inventory paths excluded and provides public overlap copies for the other 13. No module in the current public root and reviewer-gate static closure imports an excluded path.
 
 For the current disclosure policy and the full module-to-manuscript map, see [Lean_Module_Disclosure_Details.md](./Lean_Module_Disclosure_Details.md).
 
@@ -29,6 +29,8 @@ OperatorKO7.lean                   public library root
 OperatorKO7/
   Kernel.lean                     KO7 kernel
   CrossPaperAPI.lean              cross-manuscript bridge surface
+  OrientationBoundaryAPI.lean     Paper A reviewer surface
+  InformationalIncompletenessAPI.lean  information-theoretic support surface
   PrimitiveSchemaAPI.lean         primitive-schema surface
   SchemaAPI.lean                  schema-barrier surface
   SchemaExtendedAPI.lean          extended-schema surface
@@ -78,7 +80,7 @@ lake exe cache get
 lake build OperatorKO7
 ```
 
-The public package is source-closed for the API roots imported by `OperatorKO7.lean`.
+The public package is source-closed for the seven API roots imported by `OperatorKO7.lean`. The Tier-17B reviewer surface has been targeted-kernel-verified on Lean 4.22.0-rc4: `Tier17BClaimReach` passes 190 checks, `Tier17BAxiomAudit` passes 149 declaration audits within `{propext, Classical.choice, Quot.sound}`, and all preservation gates exit 0. No bare whole-package build was used.
 
 ---
 

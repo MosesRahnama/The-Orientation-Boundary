@@ -1,9 +1,14 @@
-import OperatorKO7.Meta.EqW_Guard_Barrier
+import OperatorKO7.Meta.DistinctionBoundary.DiagonalJoinObstruction
 
 set_option autoImplicit false
 
 /-!
 # Semantics-preserving maximality of the SafeStep repair
+
+Legacy compatibility status: the definition-driven maximality declarations in
+this module remain for downstream source compatibility. New paper-facing
+claims must use `AdmissibleDiagonalRepair` and `SafeStepPolicyMaximality`, whose
+premise is the independently defined local admissibility condition.
 
 This module implements the comparison-interface and SafeStep-maximality target from
 `ROADMAP-04-comparison-interface-and-safestep-maximality.md`.
@@ -61,40 +66,8 @@ theorem equalityMode_canDiagonalFork_iff (m : EqualityMode) :
     EqualityMode.CanDiagonalFork m ↔ m = EqualityMode.unguardedTotalizedRewrite := by
   cases m <;> simp [EqualityMode.CanDiagonalFork]
 
-/-! ## Ambient join facts for the `eqW` diagonal -/
-
-/-- Local join at a fixed source, measured in the ambient full kernel closure. -/
-def LocalJoinRel (R : Trace -> Trace -> Prop) (a : Trace) : Prop :=
-  ∀ {b c}, R a b -> R a c -> ∃ d, StepStar b d ∧ StepStar c d
-
-/-- `void` is a full-kernel normal form. -/
-theorem normalForm_void : NormalForm void := by
-  intro ex
-  rcases ex with ⟨u, hu⟩
-  cases hu
-
-/-- The two diagonal `eqW` verdicts have no common full-kernel reduct. -/
-theorem void_integrate_merge_self_not_joinable (a : Trace) :
-    ¬ ∃ d, StepStar void d ∧ StepStar (integrate (merge a a)) d := by
-  intro h
-  rcases h with ⟨d, hv, hi⟩
-  have hd_eq_void : d = void := (nf_no_stepstar_forward normalForm_void hv).symm
-  have hd_eq_int : d = integrate (merge a a) :=
-    (nf_no_stepstar_forward
-      (OperatorKO7.Meta.EqW_Guard_Barrier.normalForm_integrate_merge_self a) hi).symm
-  exact OperatorKO7.Meta.EqW_Guard_Barrier.void_ne_integrate_merge_self a
-    (hd_eq_void.symm.trans hd_eq_int)
-
-/-- If the reflexive diagonal branch is retained, local join forces the diagonal
-difference branch away. -/
-theorem confluence_forces_no_diagonal_diff
-    {R : Trace -> Trace -> Prop} {a : Trace}
-    (href : R (eqW a a) void)
-    (hjoin : LocalJoinRel R (eqW a a)) :
-    ¬ R (eqW a a) (integrate (merge a a)) := by
-  intro hdiff
-  rcases hjoin href hdiff with ⟨d, hv, hi⟩
-  exact void_integrate_merge_self_not_joinable a ⟨d, hv, hi⟩
+/-! The independent `LocalJoinRel` and diagonal non-joinability results are
+imported from `DiagonalJoinObstruction`. -/
 
 /-! ## Semantics-preserving subrelations and maximality -/
 

@@ -3,11 +3,10 @@ import OperatorKO7.Meta.DistinctionBoundary.Pillar
 import OperatorKO7.Meta.DistinctionBoundary.SharedRoot
 import OperatorKO7.Meta.DistinctionBoundary.CostDual
 import OperatorKO7.Meta.DistinctionBoundary.AxisDualityFunctor
-import OperatorKO7.Meta.DistinctionBoundary.SemanticsPreservingMaximality
+import OperatorKO7.Meta.DistinctionBoundary.DiagonalJoinObstruction
 import OperatorKO7.Meta.DistinctionBoundary.SingleBadCriticalPair
-import OperatorKO7.Meta.DistinctionBoundary.TerminalRepair
-import OperatorKO7.Meta.DistinctionBoundary.RepairCategory
-import OperatorKO7.Meta.DistinctionBoundary.GuardingComonad
+import OperatorKO7.Meta.DistinctionBoundary.AdmissibleDiagonalRepair
+import OperatorKO7.Meta.DistinctionBoundary.SafeStepPolicyMaximality
 import OperatorKO7.Meta.DistinctionBoundary.FiniteGluingObstruction
 import OperatorKO7.Meta.DistinctionBoundary.DirectedReductionSpace
 import OperatorKO7.Meta.DistinctionBoundary.FiniteCechDiagonalObstruction
@@ -117,12 +116,12 @@ namespace OperatorKO7.Test.DistinctionBoundaryClaimLiveness
 #check @OperatorKO7.Meta.DistinctionBoundary.CostDual.inert_route_zero_retained_charge
 #check @OperatorKO7.Meta.DistinctionBoundary.CostDual.verdict_retaining_cost_dual_nonvacuous
 
--- Comparison-interface classification and SafeStep maximality.
+-- Comparison-interface classification and independent finite-fiber repair.
 #check @OperatorKO7.Meta.DistinctionBoundary.equalityMode_canDiagonalFork_iff
 #check @OperatorKO7.Meta.DistinctionBoundary.confluence_forces_no_diagonal_diff
-#check @OperatorKO7.Meta.DistinctionBoundary.semantics_preserving_subrel_subset_safestep
-#check @OperatorKO7.Meta.DistinctionBoundary.semantics_preserving_subrel_eq_safestep
-#check @OperatorKO7.Meta.DistinctionBoundary.safeStep_is_maximal_semantics_preserving_repair
+#check @OperatorKO7.Meta.DistinctionBoundary.admissibleAtDiagonal_excludes_difference
+#check @OperatorKO7.Meta.DistinctionBoundary.admissibleDiagonalCriticalPolicy_iff_semantic_admissibility
+#check @OperatorKO7.Meta.DistinctionBoundary.canonicalDiagonalCriticalPolicy_is_greatest_semantic
 
 -- The generic first-order Critical Pair Lemma library and the metatheoretic calibration.
 #check @OperatorKO7.Meta.Rewriting.critical_pair_lemma
@@ -145,7 +144,7 @@ namespace OperatorKO7.Test.DistinctionBoundaryClaimLiveness
 
 -- ROADMAP-06 theorem sprint: finite formal cores for the ambitious review additions.
 #check @OperatorKO7.Meta.DistinctionBoundary.SingleBadCriticalPair.ko7_single_bad_pair_package
-#check @OperatorKO7.Meta.DistinctionBoundary.TerminalRepair.safeStep_terminal_repair
+#check @OperatorKO7.Meta.DistinctionBoundary.admissibleAtDiagonal_excludes_difference
 #check @OperatorKO7.Meta.SafeStep.UniversalGuardCompletion.canonical_refuses_diag_diff
 #check @OperatorKO7.Meta.SafeStep.RecordSurfaceGenerator.ProductiveRecordSurface.toDistinctionGenerator
 #check @OperatorKO7.Meta.DistinctionBoundary.FiniteGluingObstruction.raw_diagonal_sections_fail_to_glue
@@ -207,8 +206,8 @@ namespace OperatorKO7.Test.DistinctionBoundaryClaimLiveness
 #check @OperatorKO7.Meta.DistinctionBoundary.KolmogorovBranchCertificate.finite_guarded_branch_kolmogorov_drop_exact
 #check @OperatorKO7.Meta.DistinctionBoundary.CostScalingDimension.orientation_bulk_quadratic_doubled
 #check @OperatorKO7.Meta.DistinctionBoundary.CostScalingDimension.bulk_boundary_scaling_diverge
-#check @OperatorKO7.Meta.DistinctionBoundary.RepairCategory.safeStepFinalObject
-#check @OperatorKO7.Meta.DistinctionBoundary.GuardingComonad.guarding_comonad_value_is_maximal_repair
+#check @OperatorKO7.Meta.DistinctionBoundary.canonicalCriticalRepair_isTerminal
+#check @OperatorKO7.Meta.DistinctionBoundary.criticalGuard_idempotent
 
 -- Baseline-axiom inventory on the headline theorems (each ⊆ {propext, Classical.choice, Quot.sound}).
 #print axioms OperatorKO7.Meta.DistinctionBoundary.CriticalPairCompleteness.eqW_diagonal_is_the_unique_root_obstruction
@@ -223,9 +222,9 @@ namespace OperatorKO7.Test.DistinctionBoundaryClaimLiveness
 #print axioms OperatorKO7.Meta.DistinctionBoundary.CostDual.inert_route_zero_retained_charge
 #print axioms OperatorKO7.Meta.DistinctionBoundary.CostDual.verdict_retaining_cost_dual_nonvacuous
 #print axioms OperatorKO7.Meta.DistinctionBoundary.confluence_forces_no_diagonal_diff
-#print axioms OperatorKO7.Meta.DistinctionBoundary.semantics_preserving_subrel_subset_safestep
-#print axioms OperatorKO7.Meta.DistinctionBoundary.semantics_preserving_subrel_eq_safestep
-#print axioms OperatorKO7.Meta.DistinctionBoundary.safeStep_is_maximal_semantics_preserving_repair
+#print axioms OperatorKO7.Meta.DistinctionBoundary.admissibleAtDiagonal_excludes_difference
+#print axioms OperatorKO7.Meta.DistinctionBoundary.admissibleDiagonalCriticalPolicy_iff_semantic_admissibility
+#print axioms OperatorKO7.Meta.DistinctionBoundary.canonicalDiagonalCriticalPolicy_is_greatest_semantic
 #print axioms OperatorKO7.Meta.DistinctionBoundary.SingleBadCriticalPair.ko7_single_bad_pair_package
 #print axioms OperatorKO7.Meta.SafeStep.RefusalLoadMinimum.ko7_refusal_load_is_minimum
 #print axioms OperatorKO7.Meta.DistinctionBoundary.LawvereObstruction.eqW_void_void_finite_fixed_point_obstruction
@@ -245,7 +244,7 @@ namespace OperatorKO7.Test.DistinctionBoundaryClaimLiveness
 #print axioms OperatorKO7.Meta.DistinctionBoundary.SafeStepCtxDerivationLength.safeStepCtx_derivation_length_single_exponential
 #print axioms OperatorKO7.Meta.DistinctionBoundary.KolmogorovBranchCertificate.finite_guarded_branch_kolmogorov_drop_exact
 #print axioms OperatorKO7.Meta.DistinctionBoundary.CostScalingDimension.bulk_boundary_scaling_diverge
-#print axioms OperatorKO7.Meta.DistinctionBoundary.RepairCategory.safeStepFinalObject
-#print axioms OperatorKO7.Meta.DistinctionBoundary.GuardingComonad.guarding_comonad_value_is_maximal_repair
+#print axioms OperatorKO7.Meta.DistinctionBoundary.canonicalCriticalRepair_isTerminal
+#print axioms OperatorKO7.Meta.DistinctionBoundary.criticalGuard_idempotent
 
 end OperatorKO7.Test.DistinctionBoundaryClaimLiveness

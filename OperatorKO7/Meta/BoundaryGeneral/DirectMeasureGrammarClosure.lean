@@ -753,6 +753,29 @@ theorem payloadEffective?_not_payloadBlind (e : MeasureExpr)
     (h : e.payloadEffective? = true) : ¬ PayloadBlind e.eval :=
   unbounded_not_payload_blind e (payloadEffective_payloadUnbounded (payloadEffective?_sound e h))
 
+/-- The reflected effective-payload checker rejects `payload * counter`. -/
+theorem payload_mul_counter_checker_rejects :
+    (MeasureExpr.mul MeasureExpr.payload MeasureExpr.counter).payloadEffective? = false := by
+  rfl
+
+/-- Although the checker rejects it, `payload * counter` reads the payload whenever the counter is
+positive.  The witness at counter one separates payload zero from payload one. -/
+theorem payload_mul_counter_reads_payload :
+    (MeasureExpr.mul MeasureExpr.payload MeasureExpr.counter).eval 1 0 ≠
+      (MeasureExpr.mul MeasureExpr.payload MeasureExpr.counter).eval 1 1 := by
+  norm_num [MeasureExpr.eval]
+
+/-- The executable checker is not complete for semantic payload dependence.  This is a named,
+machine-checked false-negative witness, distinct from the checker's proved soundness direction. -/
+theorem payloadEffective?_semantic_completeness_gap :
+    ∃ e : MeasureExpr,
+      e.payloadEffective? = false ∧
+        ∃ counter payload₀ payload₁ : Nat,
+          e.eval counter payload₀ ≠ e.eval counter payload₁ := by
+  refine ⟨MeasureExpr.mul MeasureExpr.payload MeasureExpr.counter,
+    payload_mul_counter_checker_rejects, 1, 0, 1, ?_⟩
+  exact payload_mul_counter_reads_payload
+
 #print axioms eval_payloadMonotone
 #print axioms grammar_measure_blocked
 #print axioms payloadEffective_measures_blocked
@@ -764,6 +787,9 @@ theorem payloadEffective?_not_payloadBlind (e : MeasureExpr)
 #print axioms orients_implies_payload_blind
 #print axioms payload_reading_measure_blocked
 #print axioms payloadEffective?_not_payloadBlind
+#print axioms payload_mul_counter_checker_rejects
+#print axioms payload_mul_counter_reads_payload
+#print axioms payloadEffective?_semantic_completeness_gap
 #print axioms orients_implies_counterStrict
 #print axioms payloadBlind_and_counterStrict_implies_orients
 #print axioms orients_iff_payloadBlind_and_counterStrict

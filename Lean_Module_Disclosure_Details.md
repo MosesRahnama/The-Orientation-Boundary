@@ -8,19 +8,21 @@ This repository is the public Lean companion for exactly three manuscripts:
 - *Operational Inexpressibility at the Primitive-Recursion Orientation Boundary.*
 - *The Confluence-Preservation Boundary for Diagonal Identity Queries: Non-Left-Linearity, Signature Inexpressibility, and External Guarding.*
 
-As of 2026-07-27, after the payload-boundary release delta below, the `OperatorKO7\` tree contains 683 Lean source files. The three-manuscript proof union contains 679 files. Four additional Paper A support modules provide the aggregate import surface, its `Wavepacket` dependency, and its two reach gates. Repository metadata, proof artifacts, and Lake configuration are retained as supporting release infrastructure.
+As of 2026-08-01, after the Tier-17 prior-art-repair delta below, the `OperatorKO7\` tree contains 728 Lean source files. The delta synchronized 50 source paths, 45 added and 5 updated, and separately wired the Paper A and Informational Incompleteness API roots into `OperatorKO7.lean`. Repository metadata, proof artifacts, and Lake configuration are retained as supporting release infrastructure.
 
-No NDA, qualified-reviewer restriction, or separate access grant applies to the retained public-release copies. The separate NDA-controlled inventory at the end governs excluded/private material and records the six historical paths whose manuscript-required public copies remain public.
+No NDA, qualified-reviewer restriction, or separate access grant applies to the retained public-release copies. The historical 63-path NDA inventory at the end now records 13 paths with public overlap copies and 50 paths that remain excluded.
 
 ## Closure Receipt
 
-| Manuscript | Project-owned Lean closure |
+The first four rows are the last per-manuscript decomposition, computed on 2026-07-27 before the Tier-17 delta. They are retained as a historical baseline and are not presented as current per-paper denominators. The current exact denominator is the 728-file public tree plus the row-level Tier-17 receipt.
+
+| Manuscript / release surface | Project-owned Lean closure |
 |---|---:|
-| Orientation Boundary | 383 files: 273 manuscript-named modules plus 110 recursive imports |
-| Operational Inexpressibility (quantitative manuscript) | 500 files: 197 manuscript-named modules, 11 cited-declaration owners, and 292 recursive imports |
-| Confluence-Preservation Boundary | 263 files: 158 public module-map seeds plus 105 recursive imports |
-| Deduplicated three-manuscript union | 679 files |
-| Public tree total | 683 files: 679 proof-union files plus 4 Paper A support modules |
+| Orientation Boundary, 2026-07-27 baseline | 383 files: 273 manuscript-named modules plus 110 recursive imports |
+| Operational Inexpressibility, 2026-07-27 baseline | 500 files: 197 manuscript-named modules, 11 cited-declaration owners, and 292 recursive imports |
+| Confluence-Preservation Boundary, 2026-07-27 baseline | 263 files: 158 public module-map seeds plus 105 recursive imports |
+| Deduplicated three-manuscript union, 2026-07-27 baseline | 679 files |
+| Public tree total, 2026-08-01 | 728 files: 683-file prior public tree plus 45 newly added Tier-17 files |
 
 The Operational-Inexpressibility count rose by eleven on 2026-07-26 with the gap-closure modules recorded in the second release delta below. All eleven are named by the manuscript's appendix module map, and each one's project-owned imports were already public, so the closure grows by exactly eleven.
 
@@ -34,7 +36,7 @@ find OperatorKO7 -name '*.lean' | wc -l
 
 The three per-manuscript closure figures are carried forward from the previous receipt with the gap-closure delta applied. They were not recomputed from the current manuscript sources, so regenerate them if the manuscripts change again before publication.
 
-**Excluded material.** The NDA-controlled inventory at the end of this document was re-checked against the tree after synchronization: none of the 22 Supervisory Engine files, the `MetaHalt` family, the excluded `InformationalIncompleteness` modules, or the excluded reviewer test files are present. The `SupervisoryEngine\` directory does not exist in this repository.
+**Excluded material.** The NDA-controlled inventory at the end of this document was reconciled after Tier-17 synchronization. Seven formerly excluded Informational Incompleteness or reviewer-gate paths now have public overlap copies because the current proof and audit surface requires them. The 22 product-facing Supervisory Engine files, all 26 Operational-Inexpressibility legacy paths, and the two remaining confluence-reviewer paths stay excluded. The `SupervisoryEngine\` directory does not exist in this repository.
 
 The Orientation count includes `OperatorKO7\Meta\ComputableMeasure_Verification.lean`, which is named without a `.lean` suffix in the manuscript and was omitted from the earlier 382-file parser receipt.
 
@@ -52,6 +54,31 @@ public copy.
 source files: 683 identical, zero differing, zero absent from the source repository. The audit also
 reconciled `OperatorKO7\SchemaAPI.lean` to the source-authoritative version described in the prior
 receipt.
+
+## Release Delta 2026-08-01: Tier-17 prior-art repair and reviewer gates
+
+The source implementation currently has 36 changed/new Lean files. All 36 are copied here byte-for-byte. Recursive import inspection required 14 further synchronizations: 13 previously absent dependencies and the source-authoritative update to `Meta\BoundaryGeneral\DirectMeasureGrammarClosure.lean`. The resulting 50-file delta consists of 40 theorem modules, 3 API roots, and 7 reviewer reach/axiom gates. Forty-five files are new to the public tree and five replace stale public copies.
+
+`OperatorKO7.lean` now imports `OperatorKO7.OrientationBoundaryAPI` and `OperatorKO7.InformationalIncompletenessAPI` in addition to the existing cross-paper root. A static walk from that root plus the seven reviewer gates reaches 604 public files over 1,622 local import edges with zero missing paths. A second walk from the 36 source seeds reaches 555 files over 1,414 local import edges with zero missing paths and zero source/public SHA-256 mismatches.
+
+The reviewer gates include the dedicated Tier-17 claim reach, orientation reach, API-preservation, and axiom-audit modules, together with the migrated Distinction Boundary, hallucination-detection, and Informational Incompleteness gates. There was no changed/new non-Lean build script, Lake manifest, lakefile, or toolchain file in the source worktree.
+
+**Trust status.** No Lean, Lake, elaboration, compiler, or build command was run for this synchronization. The Tier-17 declarations remain `PENDING_EXTERNAL_G01`; this delta establishes byte identity and static source closure, not kernel verification. Exact paths, actions, and SHA-256 values are in `TIER17-PUBLIC-MIRROR-RECEIPT-2026-08-01.md` and its matching CSV.
+
+## Release Delta 2026-08-02: Tier-17B kernel closure
+
+This delta supersedes the preceding trust status while preserving it as a
+historical record. Every one of the 50 modified or new Lean files in the live
+private worktree is present here with the same SHA-256, including the generated
+theorem-naming snapshot. The public tree now contains 738 Lean files.
+
+The final reviewer gates elaborate on Lean 4.22.0-rc4: 190 declarations in
+`Tier17BClaimReach`, 149 declaration-level `#print axioms` checks in
+`Tier17BAxiomAudit`, all three API roots, and every prior-art, liveness,
+preservation, informational-incompleteness, and semantic-coverage reach gate.
+Every reported axiom surface is a subset of
+`{propext, Classical.choice, Quot.sound}` and no `sorryAx` appears. Exact paths,
+hashes, and commands are in `TIER17B-PUBLIC-MIRROR-RECEIPT-2026-08-02.{md,csv}`.
 
 ## Release Delta 2026-07-27: scalar payload-blindness biconditional
 
@@ -121,11 +148,11 @@ A full editorial audit of `Rahnama_Operational_Inexpressibility_Quant.tex` found
 
 **Synchronization.** All eleven paths above are present in this tree and byte-identical to the source repository. Their prerequisite imports (`Kernel.lean`, `Meta\Recursor\CircularIdentity.lean`, `Meta\Recursor\GaugeCost.lean`, `Meta\Recursor\SchemaTraceKernel.lean`, `Meta\RecordEmissionNecessity.lean`) were already public, so the release closure required no further additions.
 
-## Foundational Former-NDA Files Disclosed Publicly
+## Former-NDA Overlap Files Disclosed Publicly
 
 No proof-foundational file may remain NDA-only. Any module directly named by a manuscript, owning a cited declaration, or imported recursively by a manuscript proof must be included in the public release before the corresponding formal claim is presented as publicly reproducible.
 
-The 2026-07-26 proof-closure audit identified six paths in the historical NDA inventory that meet that rule. All six are present and source-synchronized in this repository:
+The 2026-07-26 proof-closure audit identified six paths in the historical NDA inventory that meet that rule. The 2026-08-01 Tier-17 repair required seven additional overlap paths. All thirteen are present and source-synchronized in this repository:
 
 | Public path | Proof relationship |
 |---|---|
@@ -135,8 +162,15 @@ The 2026-07-26 proof-closure audit identified six paths in the historical NDA in
 | `OperatorKO7\Meta\BoundaryOperator\TypedRefusalCompleteness.lean` | Imported by `Meta\BoundaryOperator\EngineContract.lean` and `Meta\Universal\ClassifyUniversal.lean` |
 | `OperatorKO7\Meta\InformationalIncompleteness\RecursorPayloadErasure.lean` | Imported by `Meta\LicensedBoundaryCalculus\Core.lean` |
 | `OperatorKO7\Meta\InformationalIncompleteness\SharpnessCounterexample.lean` | Imported by `Meta\LicensedBoundaryCalculus\Core.lean` |
+| `OperatorKO7\Meta\InformationalIncompleteness\CarrierCapacity.lean` | Required by the conditional addressability repair surface |
+| `OperatorKO7\Meta\InformationalIncompleteness\ForcedTrilemma.lean` | Required by the scoped no-decisive-support replacement |
+| `OperatorKO7\Meta\InformationalIncompleteness\LicensedFactorisation.lean` | Imported by the Informational Incompleteness API root |
+| `OperatorKO7\Meta\InformationalIncompleteness\SemanticWitnessBridge.lean` | Tier-17 bridge owner imported by the public APIs |
+| `OperatorKO7\Meta\InformationalIncompleteness\UnivDeficitViaChar.lean` | Imported by the Informational Incompleteness API root |
+| `OperatorKO7\Meta\InformationalIncompleteness\UniversalDeficit.lean` | Imported by the Informational Incompleteness API root |
+| `OperatorKO7\Test\InformationalIncompletenessReach.lean` | Reviewer reach and axiom gate for the repaired information surface |
 
-The other 57 NDA-controlled paths have zero exact path/module references in the three manuscripts and zero import edges from the 665-file public proof stack. They are not required to elaborate the disclosed proofs.
+The other 50 historical NDA-inventory paths remain excluded. None is reached by the current seven-root public API plus Tier-17 reviewer-gate static closure.
 
 ## Supervisory Engine Boundary
 
@@ -158,9 +192,9 @@ lake build OperatorKO7
 
 ## NDA-Controlled File Inventory
 
-**Reinstated 2026-07-26.** This final section preserves the exact 63-path NDA inventory from the earlier disclosure: 22 direct Supervisory Engine files, 3 engine bridge dependencies, 26 Operational-Inexpressibility legacy files, and 12 confluence reviewer files.
+**Reinstated 2026-07-26; reconciled 2026-08-01.** This final section preserves the exact 63-path historical NDA inventory: 22 direct Supervisory Engine files, 3 engine bridge dependencies, 26 Operational-Inexpressibility legacy files, and 12 confluence reviewer files.
 
-Fifty-seven paths are NDA-controlled and excluded from this public repository. The six foundational overlaps are disclosed in the main section above and already have public release copies; those copies remain public, while non-public product variants and associated private material remain NDA-controlled. Reinstating this inventory does not add excluded source files back into the repository.
+Fifty paths remain NDA-controlled and excluded from this public repository. Thirteen proof or reviewer overlaps are disclosed in the main section above and have public release copies; those copies remain public, while non-public product variants and associated private material remain NDA-controlled.
 
 ### Direct Supervisory Engine Files (22)
 
@@ -233,14 +267,14 @@ Fifty-seven paths are NDA-controlled and excluded from this public repository. T
 | Path | Status |
 |---|---|
 | `OperatorKO7\Meta\BoundaryOperator\TypedRefusalCompleteness.lean` | Public manuscript-overlap copy; private product variants remain NDA-controlled |
-| `OperatorKO7\Meta\InformationalIncompleteness\CarrierCapacity.lean` | NDA-controlled, excluded |
-| `OperatorKO7\Meta\InformationalIncompleteness\ForcedTrilemma.lean` | NDA-controlled, excluded |
-| `OperatorKO7\Meta\InformationalIncompleteness\LicensedFactorisation.lean` | NDA-controlled, excluded |
+| `OperatorKO7\Meta\InformationalIncompleteness\CarrierCapacity.lean` | Public Tier-17 overlap copy |
+| `OperatorKO7\Meta\InformationalIncompleteness\ForcedTrilemma.lean` | Public Tier-17 overlap copy |
+| `OperatorKO7\Meta\InformationalIncompleteness\LicensedFactorisation.lean` | Public Tier-17 overlap copy |
 | `OperatorKO7\Meta\InformationalIncompleteness\RecursorPayloadErasure.lean` | Public manuscript-overlap copy; private product variants remain NDA-controlled |
-| `OperatorKO7\Meta\InformationalIncompleteness\SemanticWitnessBridge.lean` | NDA-controlled, excluded |
+| `OperatorKO7\Meta\InformationalIncompleteness\SemanticWitnessBridge.lean` | Public Tier-17 overlap copy |
 | `OperatorKO7\Meta\InformationalIncompleteness\SharpnessCounterexample.lean` | Public manuscript-overlap copy; private product variants remain NDA-controlled |
-| `OperatorKO7\Meta\InformationalIncompleteness\UnivDeficitViaChar.lean` | NDA-controlled, excluded |
-| `OperatorKO7\Meta\InformationalIncompleteness\UniversalDeficit.lean` | NDA-controlled, excluded |
+| `OperatorKO7\Meta\InformationalIncompleteness\UnivDeficitViaChar.lean` | Public Tier-17 overlap copy |
+| `OperatorKO7\Meta\InformationalIncompleteness\UniversalDeficit.lean` | Public Tier-17 overlap copy |
 | `OperatorKO7\Meta\SafeStep\GaugeFixingGuardMetaHalt.lean` | NDA-controlled, excluded |
 | `OperatorKO7\Test\DistinctionBoundaryReach.lean` | NDA-controlled, excluded |
-| `OperatorKO7\Test\InformationalIncompletenessReach.lean` | NDA-controlled, excluded |
+| `OperatorKO7\Test\InformationalIncompletenessReach.lean` | Public Tier-17 reviewer gate |

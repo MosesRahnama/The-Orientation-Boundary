@@ -94,6 +94,10 @@ open OperatorKO7.RDRSSemanticProjectionTransaction
 open OperatorKO7.RDRSSemanticClassifier
 open OperatorKO7.RDRSSemanticCounterexampleAudit
 open OperatorKO7.RDRSSemanticProjectionTransactionAudit
+open OperatorKO7.RDRSWitnessTransport
+open OperatorKO7.RDRSBoundaryBottleneck
+open OperatorKO7.RDRSSearchBudgetInvariance
+open OperatorKO7.RDRSSeedCollapse
 
 /-! ## 1. Per-row metadata enums -/
 
@@ -474,6 +478,310 @@ def semanticCoverageLedger : List CoverageRow :=
     s6p5_bottleneck_row,
     s6p5_search_invariance_row ]
 
+/-! ## 4.1 Typed row-to-evidence bridge
+
+The metadata ledger above is retained for stable counting and classifier
+queries.  This section adds the proof-bearing layer required for a literal
+reading of "every projection-escape row is backed by projection-transaction
+evidence".  The evidence-backed ledger has the same sixteen rows in the same
+order.  Its six projection rows store an eliminator into an anchor-indexed
+evidence type; applying that eliminator produces a genuine payload-forgetting
+`SemanticProjectionTransactionEscape counterFirstLex_R`, the complete hardened
+receipt, and the exact receipt named by the row's S6.5 anchor.  The ten
+non-projection rows have an empty eliminator domain.
+
+This does not assert that every method named by the separate 76-row method
+atlas has a family-specific semantic transaction.  That atlas is metadata and
+is deliberately kept separate from this sixteen-row semantic witness ledger.
+-/
+
+/-- Unambiguous local name for the genuine payload-bearing counter-first-lex
+step used by the S6.5 audit. -/
+abbrev semanticCounterFirstLexStep : RDRSStep Unit Nat Nat (Nat × Nat) :=
+  OperatorKO7.RDRSSemanticPayloadSensitivity.counterFirstLex_R
+
+/-- The complete four-obligation hardening receipt plus source-step witness
+transport for a concrete semantic projection escape. -/
+def SemanticProjectionHardeningReceipt
+    (E : SemanticProjectionTransactionEscape semanticCounterFirstLexStep) : Prop :=
+  (Nonempty (SemanticMeasureData E.transaction.T') ∧
+      (∃ (PayloadCarrier : Type)
+          (sc : SeedCollapse PayloadCarrier (Nat × Nat)),
+        Nonempty (FactorsThroughSeedCollapse sc E.transaction.pi)) ∧
+      WellFounded E.transaction.semanticMeasure.ltA ∧
+      Orients E.transaction.Rproj
+        E.transaction.semanticMeasure.μ
+        E.transaction.semanticMeasure.ltA) ∧
+    Orients semanticCounterFirstLexStep
+      E.liftedMeasure E.transaction.semanticMeasure.ltA
+
+/-- The concrete DP-packaging receipt for the same semantic escape. -/
+def SemanticCanonicalDPReceipt
+    (E : SemanticProjectionTransactionEscape semanticCounterFirstLexStep) : Prop :=
+  ∃ D : DPProjectionEscape semanticCounterFirstLexStep,
+    Orients semanticCounterFirstLexStep
+      E.liftedMeasure E.transaction.semanticMeasure.ltA ∧
+    Orients semanticCounterFirstLexStep
+      D.toProjectionTransactionEscape.liftedMeasure
+      D.toProjectionTransactionEscape.transaction.ltA'
+
+/-- The exact W0/W2 bottleneck receipt for the supplied semantic escape. -/
+def SemanticBoundaryBottleneckReceipt
+    (E : SemanticProjectionTransactionEscape semanticCounterFirstLexStep) : Prop :=
+  let BB := BoundaryBottleneck.ofProjectionTransactionEscape E.toLegacy
+  kappa_boundary BB.w0_witness = false ∧
+    kappa_boundary BB.w2_witness = true
+
+/-- The exact all-budget W0/W2 receipt for the supplied semantic escape. -/
+def SemanticSearchBudgetReceipt
+    (E : SemanticProjectionTransactionEscape semanticCounterFirstLexStep) : Prop :=
+  ∀ (search : W0Search semanticCounterFirstLexStep), IsW0Bounded search →
+    ∀ budget : Nat,
+      kappa_boundary (search budget) = false ∧
+        kappa_boundary
+          (BoundaryBottleneck.ofProjectionTransactionEscape
+            E.toLegacy).w2_witness = true
+
+/-- A real canonical witness shared by the six semantic projection rows.
+
+It fixes the source relation to `counterFirstLex_R`, fixes the projection to
+the concrete `Prod.fst` transaction, proves that changing only the payload
+does not change the projection, and stores the complete hardened receipt.
+The relation is root single-step orientation; no SN theorem is claimed. -/
+structure CanonicalSemanticProjectionWitness : Type 1 where
+  escape : SemanticProjectionTransactionEscape semanticCounterFirstLexStep
+  payloadForgetting :
+    ∀ n p q : Nat,
+      escape.transaction.pi (n, p) = escape.transaction.pi (n, q)
+  hardening : SemanticProjectionHardeningReceipt escape
+
+/-- Concrete payload-forgetting semantic projection witness used by every
+positive row in the evidence-backed ledger. -/
+def canonicalSemanticProjectionWitness : CanonicalSemanticProjectionWitness where
+  escape := counterFirstLex_dpSemanticTransactionEscape
+  payloadForgetting := fun _ _ _ => rfl
+  hardening :=
+    semantic_projection_transaction_escape_sound_hardened
+      counterFirstLex_dpSemanticTransactionEscape
+
+/-- Anchor-indexed typed evidence.  There is intentionally no constructor for
+any non-hardened classification anchor.  Each constructor stores the common
+canonical transaction witness and, where the anchor names a distinct theorem,
+the exact theorem-shaped receipt for that anchor. -/
+inductive TypedProjectionAnchorEvidence : ClassificationAnchor → Type 1
+  | hardened
+      (core : CanonicalSemanticProjectionWitness) :
+      TypedProjectionAnchorEvidence
+        .s6p5_semantic_projection_transaction_escape_sound_hardened
+  | dpCanonical
+      (core : CanonicalSemanticProjectionWitness)
+      (receipt : SemanticCanonicalDPReceipt core.escape) :
+      TypedProjectionAnchorEvidence
+        .s6p5_semantic_dp_projection_transaction_canonical
+  | bottleneck
+      (core : CanonicalSemanticProjectionWitness)
+      (receipt : SemanticBoundaryBottleneckReceipt core.escape) :
+      TypedProjectionAnchorEvidence
+        .s6p5_semantic_boundary_bottleneck_w0_blocked_w2_succeeds
+  | searchBudget
+      (core : CanonicalSemanticProjectionWitness)
+      (receipt : SemanticSearchBudgetReceipt core.escape) :
+      TypedProjectionAnchorEvidence
+        .s6p5_semantic_search_budget_invariance
+  | notPlainErasure
+      (core : CanonicalSemanticProjectionWitness)
+      (receipt :
+        Nonempty (SemanticMeasureData core.escape.transaction.T') ∧
+        (∃ (PayloadCarrier : Type)
+            (sc : SeedCollapse PayloadCarrier (Nat × Nat)),
+          Nonempty
+            (FactorsThroughSeedCollapse sc core.escape.transaction.pi)) ∧
+        WellFounded core.escape.transaction.semanticMeasure.ltA ∧
+        Orients core.escape.transaction.Rproj
+          core.escape.transaction.semanticMeasure.μ
+          core.escape.transaction.semanticMeasure.ltA) :
+      TypedProjectionAnchorEvidence
+        .s6p5_semantic_projection_escape_not_plain_erasure
+
+/-- Typed evidence for the hardened-soundness anchor. -/
+def typed_hardened_projection_evidence :
+    TypedProjectionAnchorEvidence
+      .s6p5_semantic_projection_transaction_escape_sound_hardened :=
+  .hardened canonicalSemanticProjectionWitness
+
+/-- Typed evidence for the canonical DP anchor. -/
+def typed_dp_canonical_projection_evidence :
+    TypedProjectionAnchorEvidence
+      .s6p5_semantic_dp_projection_transaction_canonical :=
+  .dpCanonical canonicalSemanticProjectionWitness
+    ⟨counterFirstLex_dpProjectionEscape,
+      counterFirstLex_dpSemanticTransactionEscape.lifted_orients,
+      dpWitnessTransport_sound counterFirstLex_dpProjectionEscape⟩
+
+/-- Typed evidence for the boundary-bottleneck anchor. -/
+def typed_bottleneck_projection_evidence :
+    TypedProjectionAnchorEvidence
+      .s6p5_semantic_boundary_bottleneck_w0_blocked_w2_succeeds :=
+  .bottleneck canonicalSemanticProjectionWitness
+    (semantic_boundary_bottleneck_w0_blocked_w2_succeeds
+      counterFirstLex_dpSemanticTransactionEscape)
+
+/-- Typed evidence for the search-budget-invariance anchor. -/
+def typed_search_budget_projection_evidence :
+    TypedProjectionAnchorEvidence
+      .s6p5_semantic_search_budget_invariance :=
+  .searchBudget canonicalSemanticProjectionWitness
+    (fun search h budget =>
+      semantic_search_budget_invariance
+        counterFirstLex_dpSemanticTransactionEscape search h budget)
+
+/-- Typed evidence for the no-plain-erasure anchor. -/
+def typed_not_plain_erasure_projection_evidence :
+    TypedProjectionAnchorEvidence
+      .s6p5_semantic_projection_escape_not_plain_erasure :=
+  .notPlainErasure canonicalSemanticProjectionWitness
+    (semantic_projection_escape_not_plain_erasure
+      counterFirstLex_dpSemanticTransactionEscape)
+
+/-- A semantic coverage row together with a typed evidence eliminator.
+
+For projection rows the domain is inhabited and applying the field returns
+anchor-indexed proof data.  For every other row the equality premise is false,
+so no fake projection witness is manufactured. -/
+structure EvidenceBackedCoverageRow : Type 1 where
+  row : CoverageRow
+  projectionEvidence :
+    row.classifierLabel =
+        SemanticCertificateClass.SemanticProjectionTransactionEscape →
+      TypedProjectionAnchorEvidence row.classificationAnchor
+
+/-- Package a non-projection row. -/
+def evidenceBackedNonProjectionRow
+    (row : CoverageRow)
+    (h : row.classifierLabel ≠
+      SemanticCertificateClass.SemanticProjectionTransactionEscape) :
+    EvidenceBackedCoverageRow where
+  row := row
+  projectionEvidence := fun hp => False.elim (h hp)
+
+/-- Package a positive projection row with its exact indexed evidence. -/
+def evidenceBackedProjectionRow
+    (row : CoverageRow)
+    (_h : row.classifierLabel =
+      SemanticCertificateClass.SemanticProjectionTransactionEscape)
+    (evidence : TypedProjectionAnchorEvidence row.classificationAnchor) :
+    EvidenceBackedCoverageRow where
+  row := row
+  projectionEvidence := fun _ => evidence
+
+def typed_s0_adjudication_row : EvidenceBackedCoverageRow :=
+  evidenceBackedNonProjectionRow s0_adjudication_row (by decide)
+
+def typed_s3_lens_pump_row : EvidenceBackedCoverageRow :=
+  evidenceBackedNonProjectionRow s3_lens_pump_row (by decide)
+
+def typed_s5_classifier_row : EvidenceBackedCoverageRow :=
+  evidenceBackedNonProjectionRow s5_classifier_row (by decide)
+
+def typed_s6_counterFirstLex_row : EvidenceBackedCoverageRow :=
+  evidenceBackedNonProjectionRow s6_counterFirstLex_row (by decide)
+
+def typed_s6_termAlgebraRewriteClosure_row : EvidenceBackedCoverageRow :=
+  evidenceBackedNonProjectionRow s6_termAlgebraRewriteClosure_row (by decide)
+
+def typed_s6_nonlinearCounterPayloadCoupling_row : EvidenceBackedCoverageRow :=
+  evidenceBackedNonProjectionRow s6_nonlinearCounterPayloadCoupling_row (by decide)
+
+def typed_s6_dpProjection_row : EvidenceBackedCoverageRow :=
+  evidenceBackedProjectionRow s6_dpProjection_row rfl
+    typed_dp_canonical_projection_evidence
+
+def typed_s6_argumentFiltering_row : EvidenceBackedCoverageRow :=
+  evidenceBackedProjectionRow s6_argumentFiltering_row rfl
+    typed_not_plain_erasure_projection_evidence
+
+def typed_s6_fullMonotoneAlgebra_row : EvidenceBackedCoverageRow :=
+  evidenceBackedNonProjectionRow s6_fullMonotoneAlgebra_row (by decide)
+
+def typed_s6_mspoWitness_row : EvidenceBackedCoverageRow :=
+  evidenceBackedNonProjectionRow s6_mspoWitness_row (by decide)
+
+def typed_s6_fullWpoGwpoWitness_row : EvidenceBackedCoverageRow :=
+  evidenceBackedNonProjectionRow s6_fullWpoGwpoWitness_row (by decide)
+
+def typed_s6_semanticLabeling_row : EvidenceBackedCoverageRow :=
+  evidenceBackedNonProjectionRow s6_semanticLabeling_row (by decide)
+
+def typed_s6p5_hardening_row : EvidenceBackedCoverageRow :=
+  evidenceBackedProjectionRow s6p5_hardening_row rfl
+    typed_hardened_projection_evidence
+
+def typed_s6p5_dp_canonical_row : EvidenceBackedCoverageRow :=
+  evidenceBackedProjectionRow s6p5_dp_canonical_row rfl
+    typed_dp_canonical_projection_evidence
+
+def typed_s6p5_bottleneck_row : EvidenceBackedCoverageRow :=
+  evidenceBackedProjectionRow s6p5_bottleneck_row rfl
+    typed_bottleneck_projection_evidence
+
+def typed_s6p5_search_invariance_row : EvidenceBackedCoverageRow :=
+  evidenceBackedProjectionRow s6p5_search_invariance_row rfl
+    typed_search_budget_projection_evidence
+
+/-- The proof-bearing mirror of the entire sixteen-row semantic ledger. -/
+def semanticCoverageEvidenceLedger : List EvidenceBackedCoverageRow :=
+  [ typed_s0_adjudication_row,
+    typed_s3_lens_pump_row,
+    typed_s5_classifier_row,
+    typed_s6_counterFirstLex_row,
+    typed_s6_termAlgebraRewriteClosure_row,
+    typed_s6_nonlinearCounterPayloadCoupling_row,
+    typed_s6_dpProjection_row,
+    typed_s6_argumentFiltering_row,
+    typed_s6_fullMonotoneAlgebra_row,
+    typed_s6_mspoWitness_row,
+    typed_s6_fullWpoGwpoWitness_row,
+    typed_s6_semanticLabeling_row,
+    typed_s6p5_hardening_row,
+    typed_s6p5_dp_canonical_row,
+    typed_s6p5_bottleneck_row,
+    typed_s6p5_search_invariance_row ]
+
+/-- The typed ledger contains all sixteen metadata rows, in the same order. -/
+theorem semanticCoverageEvidenceLedger_length :
+    semanticCoverageEvidenceLedger.length = 16 := by decide
+
+/-- Forgetting proof data recovers the original metadata ledger exactly. -/
+theorem semanticCoverageEvidenceLedger_rows :
+    semanticCoverageEvidenceLedger.map (fun backed => backed.row) =
+      semanticCoverageLedger := rfl
+
+/-- Every metadata row has a corresponding proof-bearing row. -/
+theorem semanticCoverageRow_has_evidence_backing
+    (row : CoverageRow) (hrow : row ∈ semanticCoverageLedger) :
+    ∃ backed ∈ semanticCoverageEvidenceLedger, backed.row = row := by
+  rw [← semanticCoverageEvidenceLedger_rows] at hrow
+  exact List.mem_map.mp hrow
+
+/-- Literal row-to-witness closure for every projection row in the
+sixteen-row semantic ledger.  The conclusion points to a row that stores an
+actual anchor-indexed evidence object, not a String theorem name. -/
+theorem semantic_projection_escape_row_has_typed_evidence
+    (row : CoverageRow) (hrow : row ∈ semanticCoverageLedger)
+    (hprojection : row.classifierLabel =
+      SemanticCertificateClass.SemanticProjectionTransactionEscape) :
+    ∃ backed ∈ semanticCoverageEvidenceLedger,
+      backed.row = row ∧
+        Nonempty
+          (TypedProjectionAnchorEvidence
+            backed.row.classificationAnchor) := by
+  obtain ⟨backed, hbacked, hbackedRow⟩ :=
+    semanticCoverageRow_has_evidence_backing row hrow
+  subst row
+  exact
+    ⟨backed, hbacked, rfl,
+      ⟨backed.projectionEvidence hprojection⟩⟩
+
 /-! ## 5. Per-bucket extractors -/
 
 /-- Rows classified `SemanticPayloadSensitiveBlocked`. -/
@@ -725,6 +1033,19 @@ structure SemanticCoverageLedgerClosed : Prop where
               ClassificationAnchor.s6p5_semantic_search_budget_invariance
           ∨ r.classificationAnchor =
               ClassificationAnchor.s6p5_semantic_projection_escape_not_plain_erasure)
+  evidenceRowCount                  : semanticCoverageEvidenceLedger.length = 16
+  evidenceRowsExact                 :
+    semanticCoverageEvidenceLedger.map (fun backed => backed.row) =
+      semanticCoverageLedger
+  projectionEscapeTypedEvidence     :
+    ∀ row ∈ semanticCoverageLedger,
+      row.classifierLabel =
+          SemanticCertificateClass.SemanticProjectionTransactionEscape →
+        ∃ backed ∈ semanticCoverageEvidenceLedger,
+          backed.row = row ∧
+            Nonempty
+              (TypedProjectionAnchorEvidence
+                backed.row.classificationAnchor)
 
 /--
 Proves: the S7 semantic coverage ledger is closed. Bundles all
@@ -749,6 +1070,10 @@ theorem semantic_coverage_ledger_closed : SemanticCoverageLedgerClosed where
   zeroAxiomFootprintRows         := coverage_zero_axiom_footprint
   partitionTotal                 := coverage_partition_total
   noPlainErasureProjectionEscape := coverage_no_plain_erasure_projection_escape
+  evidenceRowCount               := semanticCoverageEvidenceLedger_length
+  evidenceRowsExact              := semanticCoverageEvidenceLedger_rows
+  projectionEscapeTypedEvidence  :=
+    semantic_projection_escape_row_has_typed_evidence
 
 /-- Audit anchor for the S7 semantic coverage ledger surface. -/
 def rdrs_semantic_coverage_ledger_anchor : String :=
