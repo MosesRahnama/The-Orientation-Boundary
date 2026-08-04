@@ -27,7 +27,8 @@ open OperatorKO7.Meta.LCELDPInstance
 /-! ## Proof-carrying Gödel-shaped fixture -/
 
 /-- Three sentences make the fixture nonconstant: a base theorem, a licensed
-boundary theorem, and a sentence proved by neither layer. -/
+boundary theorem, and a negative control whose non-derivability is proved
+below. -/
 inductive GodelCanonicalSentence where
   | basic
   | boundary
@@ -53,6 +54,58 @@ def godelCanonicalBaseTheory : TypedTheory where
 def godelCanonicalExtensionTheory : TypedTheory where
   Sentence := GodelCanonicalSentence
   Derivation := godelCanonicalExtensionDerivation
+
+/-- Exact base-layer derivability: the base theory proves precisely `basic`. -/
+theorem godelCanonical_base_derivable_iff
+    (phi : GodelCanonicalSentence) :
+    Nonempty (godelCanonicalBaseTheory.Derivation phi) ↔
+      phi = GodelCanonicalSentence.basic := by
+  cases phi with
+  | basic =>
+      constructor
+      · intro _
+        rfl
+      · intro _
+        exact ⟨PUnit.unit⟩
+  | boundary =>
+      constructor
+      · rintro ⟨d⟩
+        exact PEmpty.elim d
+      · intro h
+        cases h
+  | unlicensed =>
+      constructor
+      · rintro ⟨d⟩
+        exact PEmpty.elim d
+      · intro h
+        cases h
+
+/-- Exact licensed-layer derivability: the extension proves precisely `basic`
+and `boundary`, and it still does not prove the negative control. -/
+theorem godelCanonical_extension_derivable_iff
+    (phi : GodelCanonicalSentence) :
+    Nonempty (godelCanonicalExtensionTheory.Derivation phi) ↔
+      phi = GodelCanonicalSentence.basic ∨
+        phi = GodelCanonicalSentence.boundary := by
+  cases phi with
+  | basic =>
+      constructor
+      · intro _
+        exact Or.inl rfl
+      · intro _
+        exact ⟨PUnit.unit⟩
+  | boundary =>
+      constructor
+      · intro _
+        exact Or.inr rfl
+      · intro _
+        exact ⟨PUnit.unit⟩
+  | unlicensed =>
+      constructor
+      · rintro ⟨d⟩
+        exact PEmpty.elim d
+      · intro h
+        rcases h with h | h <;> cases h
 
 /-- Inclusion of the genuine base proof object into the licensed theory. -/
 def godelCanonicalTheoryExtension :
@@ -149,15 +202,69 @@ def godelCanonicalBoundaryAnnotatedProof :
   reimportAnnotated GodelReflectionLicense.reflection
     godelCanonicalBoundaryExtensionProof
 
-/-- The third sentence pins non-vacuity: the proof-carrying annotated predicate
-does not prove every sentence. -/
+/-- Exact annotated-layer derivability: annotations preserve the two extension
+theorems and manufacture no proof of the negative control. -/
+theorem godelCanonical_annotated_derivable_iff
+    (phi : GodelCanonicalSentence) :
+    godelCanonicalAnnotatedClauses.annotatedProvesBase phi ↔
+      phi = GodelCanonicalSentence.basic ∨
+        phi = GodelCanonicalSentence.boundary := by
+  constructor
+  · rintro ⟨d⟩
+    cases d with
+    | base baseProof =>
+        exact Or.inl
+          ((godelCanonical_base_derivable_iff phi).mp ⟨baseProof⟩)
+    | licensed _ extensionProof =>
+        exact (godelCanonical_extension_derivable_iff phi).mp
+          ⟨extensionProof⟩
+  · intro h
+    rcases h with hbasic | hboundary
+    · subst phi
+      exact ⟨annotateBase PUnit.unit⟩
+    · subst phi
+      exact ⟨godelCanonicalBoundaryAnnotatedProof⟩
+
+/-- The negative control has no derivation in the base theory. -/
+theorem godelCanonical_unlicensed_not_base :
+    ¬ Nonempty
+      (godelCanonicalBaseTheory.Derivation
+        GodelCanonicalSentence.unlicensed) := by
+  rintro ⟨d⟩
+  exact PEmpty.elim d
+
+/-- The negative control remains underivable in the licensed extension. -/
+theorem godelCanonical_unlicensed_not_extension :
+    ¬ Nonempty
+      (godelCanonicalExtensionTheory.Derivation
+        GodelCanonicalSentence.unlicensed) := by
+  rintro ⟨d⟩
+  exact PEmpty.elim d
+
+/-- The negative control is also underivable in the proof-carrying annotated
+union of the two layers. -/
 theorem godelCanonical_unlicensed_not_annotated :
     ¬ godelCanonicalAnnotatedClauses.annotatedProvesBase
       GodelCanonicalSentence.unlicensed := by
-  rintro ⟨d⟩
-  cases d with
-  | base baseProof => exact PEmpty.elim baseProof
-  | licensed _ extensionProof => exact PEmpty.elim extensionProof
+  intro h
+  rcases (godelCanonical_annotated_derivable_iff
+      GodelCanonicalSentence.unlicensed).mp h with h | h <;> cases h
+
+/-- Paper-facing metatheorem: the third sentence is not an unfinished proof.
+Its non-derivability is proved separately in the base theory, licensed
+extension, and annotated union. -/
+theorem godelCanonical_unlicensed_nonderivability :
+    (¬ Nonempty
+      (godelCanonicalBaseTheory.Derivation
+        GodelCanonicalSentence.unlicensed)) ∧
+    (¬ Nonempty
+      (godelCanonicalExtensionTheory.Derivation
+        GodelCanonicalSentence.unlicensed)) ∧
+    (¬ godelCanonicalAnnotatedClauses.annotatedProvesBase
+      GodelCanonicalSentence.unlicensed) :=
+  ⟨godelCanonical_unlicensed_not_base,
+    godelCanonical_unlicensed_not_extension,
+    godelCanonical_unlicensed_not_annotated⟩
 
 /-- Boundary reimport preserves its payload and cannot erase to a base proof. -/
 theorem godelCanonical_boundary_reimport_receipt :
@@ -234,9 +341,15 @@ theorem dpCanonical_plainBase_reimport_impossible
 section AuditChecks
 
 #check @godelCanonicalAnnotatedClauses
+#check @godelCanonical_base_derivable_iff
+#check @godelCanonical_extension_derivable_iff
 #check @godelCanonical_boundary_reimport_overlap
 #check @godelCanonicalBoundaryAnnotatedProof
+#check @godelCanonical_annotated_derivable_iff
+#check @godelCanonical_unlicensed_not_base
+#check @godelCanonical_unlicensed_not_extension
 #check @godelCanonical_unlicensed_not_annotated
+#check @godelCanonical_unlicensed_nonderivability
 #check @godelCanonical_boundary_reimport_receipt
 #check @dpCanonicalAnnotatedClauses
 #check @dpCanonical_boundary_reimport_overlap
@@ -244,7 +357,13 @@ section AuditChecks
 #check @dpCanonical_plainBase_reimport_impossible
 
 #print axioms godelCanonical_boundary_reimport_overlap
+#print axioms godelCanonical_base_derivable_iff
+#print axioms godelCanonical_extension_derivable_iff
+#print axioms godelCanonical_annotated_derivable_iff
+#print axioms godelCanonical_unlicensed_not_base
+#print axioms godelCanonical_unlicensed_not_extension
 #print axioms godelCanonical_unlicensed_not_annotated
+#print axioms godelCanonical_unlicensed_nonderivability
 #print axioms godelCanonical_boundary_reimport_receipt
 #print axioms dpCanonical_boundary_reimport_overlap
 #print axioms canonicalAnnotatedClauseInstances_inhabited

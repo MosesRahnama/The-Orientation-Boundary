@@ -80,7 +80,7 @@ lake exe cache get
 lake build OperatorKO7
 ```
 
-The public package is source-closed for the seven API roots imported by `OperatorKO7.lean`. The Tier-17B reviewer surface has been targeted-kernel-verified on Lean 4.22.0-rc4: `Tier17BClaimReach` passes 190 checks, `Tier17BAxiomAudit` passes 149 declaration audits within `{propext, Classical.choice, Quot.sound}`, and all preservation gates exit 0. No bare whole-package build was used.
+The public package is source-closed for the seven API roots imported by `OperatorKO7.lean`. The Tier-17B reviewer surface has been targeted-kernel-verified on Lean 4.22.0-rc4: `Tier17BClaimReach` passes 196 checks, `Tier17BAxiomAudit` passes 155 declaration audits within `{propext, Classical.choice, Quot.sound}`, and all preservation gates exit 0. No bare whole-package build was used.
 
 ---
 

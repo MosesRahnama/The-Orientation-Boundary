@@ -72,8 +72,8 @@ historical record. Every one of the 50 modified or new Lean files in the live
 private worktree is present here with the same SHA-256, including the generated
 theorem-naming snapshot. The public tree now contains 738 Lean files.
 
-The final reviewer gates elaborate on Lean 4.22.0-rc4: 190 declarations in
-`Tier17BClaimReach`, 149 declaration-level `#print axioms` checks in
+The final reviewer gates elaborate on Lean 4.22.0-rc4: 196 declarations in
+`Tier17BClaimReach`, 155 declaration-level `#print axioms` checks in
 `Tier17BAxiomAudit`, all three API roots, and every prior-art, liveness,
 preservation, informational-incompleteness, and semantic-coverage reach gate.
 Every reported axiom surface is a subset of
