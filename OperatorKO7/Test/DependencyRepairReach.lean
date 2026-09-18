@@ -1,0 +1,84 @@
+import OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair
+
+/-! Reach and axiom check for the `
+DependencyRepair
+` module. Permanent. -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.card_subsetRepairs
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.card_subsetRepairs
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g3_eq_bayesRisk_uniform
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g3_eq_bayesRisk_uniform
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g1Count_eq_sum_fiber
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g1Count_eq_sum_fiber
+
+/-! ## Complete public-surface reach and axiom parity -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.mem_every_repair_iff_fiber_constant
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.exists_repair_mem
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.subsetRepairs
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.maxLicensedCard
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.fiberCount
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.cellCount
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g3Count
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g2Count
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g1Count
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g3
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g2
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g1
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.maxLicensedCard_le_card
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.exists_licensedOn_card_eq_max
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.maxLicensedCard_eq_sum
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.uniformPrior
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.uniformPrior_nonneg
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.uniformPrior_sum
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.refusedMass_uniform
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g2Count_eq_card_sub_certain
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g3Count_le_g2Count
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g1Count_le_card_mul_g2Count
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g1_le_g2
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g3_le_g2
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.licensed_iff_g1Count_eq_zero
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.licensed_iff_g2Count_eq_zero
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.licensed_iff_g3Count_eq_zero
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.repairFixtureObserver
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.repairFixtureTarget
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.repairFixture_card
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.repairFixture_measures
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.answerFixtureObserver
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.answerFixtureTarget
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.answerFixture_certain
+
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.mem_every_repair_iff_fiber_constant
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.exists_repair_mem
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.subsetRepairs
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.maxLicensedCard
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.fiberCount
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.cellCount
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g3Count
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g2Count
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g1Count
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g3
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g2
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g1
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.maxLicensedCard_le_card
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.exists_licensedOn_card_eq_max
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.maxLicensedCard_eq_sum
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.uniformPrior
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.uniformPrior_nonneg
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.uniformPrior_sum
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.refusedMass_uniform
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g2Count_eq_card_sub_certain
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g3Count_le_g2Count
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g1Count_le_card_mul_g2Count
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g1_le_g2
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g3_le_g2
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.licensed_iff_g1Count_eq_zero
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.licensed_iff_g2Count_eq_zero
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.licensed_iff_g3Count_eq_zero
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.repairFixtureObserver
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.repairFixtureTarget
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.repairFixture_card
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.repairFixture_measures
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.answerFixtureObserver
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.answerFixtureTarget
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.answerFixture_certain

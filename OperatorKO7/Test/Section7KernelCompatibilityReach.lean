@@ -1,0 +1,20 @@
+import OperatorKO7.Meta.UniqueNormalization.Section7KernelCompatibility
+
+/-!
+# Reach gate for Section 7 support-kernel constructor compatibility
+-/
+
+#check @OperatorKO7.Meta.UniqueNormalization.RootPeelPath.eq_of_conTopped
+#print axioms OperatorKO7.Meta.UniqueNormalization.RootPeelPath.eq_of_conTopped
+#check @OperatorKO7.Meta.UniqueNormalization.RootPeeledSeed.constructorCompatible
+#print axioms OperatorKO7.Meta.UniqueNormalization.RootPeeledSeed.constructorCompatible
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.pairSetRel_supportSuccSet_constructorCompatible
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.pairSetRel_supportSuccSet_constructorCompatible
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.pairSetRel_supportIter_constructorCompatible
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.pairSetRel_supportIter_constructorCompatible
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.diagonalSupportSeed_constructorCompatible
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.diagonalSupportSeed_constructorCompatible
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_constructorCompatible
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_constructorCompatible
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_constructor_apps_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_constructor_apps_iff

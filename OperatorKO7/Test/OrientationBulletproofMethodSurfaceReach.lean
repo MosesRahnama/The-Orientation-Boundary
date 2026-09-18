@@ -1,0 +1,1427 @@
+import OperatorKO7.Meta.Methods.PathOrderRows
+import OperatorKO7.Meta.Methods.AlgebraicInterpretationRows
+import OperatorKO7.Meta.Methods.SemanticStructuralRows
+import OperatorKO7.Meta.Methods.DependencyPairTypedRows
+import OperatorKO7.Meta.Methods.AdmittanceInapplicabilityRows
+import OperatorKO7.Meta.Methods.SubstrateChangeRows
+import OperatorKO7.Meta.Methods.ExactPromotionCarriers
+import OperatorKO7.Meta.RDRSCoverageEvidenceLedger
+
+set_option autoImplicit false
+
+/-!
+# Exact source-to-reach-to-axiom gate
+
+Generated from the explicit public declarations of the eight owned Orientation
+Bulletproof method/evidence modules. Every source declaration below has a paired
+fully qualified `#check @` and `#print axioms`. The generator rejects namespace
+stack errors and duplicate fully qualified names; this file is accepted only
+after Lean elaborates every generated identifier.
+-/
+
+-- SOURCE: C:\Users\Moses\OperatorKO7\OperatorKO7\Meta\Methods\PathOrderRows.lean
+#check @OperatorKO7.Methods.PathOrderRows.MethodSymbol
+#print axioms OperatorKO7.Methods.PathOrderRows.MethodSymbol
+#check @OperatorKO7.Methods.PathOrderRows.stermSize
+#print axioms OperatorKO7.Methods.PathOrderRows.stermSize
+#check @OperatorKO7.Methods.PathOrderRows.weightedSizeOrder
+#print axioms OperatorKO7.Methods.PathOrderRows.weightedSizeOrder
+#check @OperatorKO7.Methods.PathOrderRows.weightedSizeOrder_nondegenerate
+#print axioms OperatorKO7.Methods.PathOrderRows.weightedSizeOrder_nondegenerate
+#check @OperatorKO7.Methods.PathOrderRows.ArgStatus
+#print axioms OperatorKO7.Methods.PathOrderRows.ArgStatus
+#check @OperatorKO7.Methods.PathOrderRows.KBOWithStatusOrder
+#print axioms OperatorKO7.Methods.PathOrderRows.KBOWithStatusOrder
+#check @OperatorKO7.Methods.PathOrderRows.KBOWithStatusRowClaim
+#print axioms OperatorKO7.Methods.PathOrderRows.KBOWithStatusRowClaim
+#check @OperatorKO7.Methods.PathOrderRows.kboWithStatus_row_anchor
+#print axioms OperatorKO7.Methods.PathOrderRows.kboWithStatus_row_anchor
+#check @OperatorKO7.Methods.PathOrderRows.kboWithStatusWitness
+#print axioms OperatorKO7.Methods.PathOrderRows.kboWithStatusWitness
+#check @OperatorKO7.Methods.PathOrderRows.GeneralizedKBOOrder
+#print axioms OperatorKO7.Methods.PathOrderRows.GeneralizedKBOOrder
+#check @OperatorKO7.Methods.PathOrderRows.GeneralizedKBORowClaim
+#print axioms OperatorKO7.Methods.PathOrderRows.GeneralizedKBORowClaim
+#check @OperatorKO7.Methods.PathOrderRows.generalizedKBO_row_anchor
+#print axioms OperatorKO7.Methods.PathOrderRows.generalizedKBO_row_anchor
+#check @OperatorKO7.Methods.PathOrderRows.generalizedKBOWitness
+#print axioms OperatorKO7.Methods.PathOrderRows.generalizedKBOWitness
+#check @OperatorKO7.Methods.PathOrderRows.ACRearrange
+#print axioms OperatorKO7.Methods.PathOrderRows.ACRearrange
+#check @OperatorKO7.Methods.PathOrderRows.countVar_acRearrange
+#print axioms OperatorKO7.Methods.PathOrderRows.countVar_acRearrange
+#check @OperatorKO7.Methods.PathOrderRows.countVar_acRearrange_star
+#print axioms OperatorKO7.Methods.PathOrderRows.countVar_acRearrange_star
+#check @OperatorKO7.Methods.PathOrderRows.ACKBOOrder
+#print axioms OperatorKO7.Methods.PathOrderRows.ACKBOOrder
+#check @OperatorKO7.Methods.PathOrderRows.ACKBORowClaim
+#print axioms OperatorKO7.Methods.PathOrderRows.ACKBORowClaim
+#check @OperatorKO7.Methods.PathOrderRows.acKBO_row_anchor
+#print axioms OperatorKO7.Methods.PathOrderRows.acKBO_row_anchor
+#check @OperatorKO7.Methods.PathOrderRows.stermSize_acRearrange
+#print axioms OperatorKO7.Methods.PathOrderRows.stermSize_acRearrange
+#check @OperatorKO7.Methods.PathOrderRows.weightedCount_acRearrange_unit
+#print axioms OperatorKO7.Methods.PathOrderRows.weightedCount_acRearrange_unit
+#check @OperatorKO7.Methods.PathOrderRows.stermSize_acRearrange_star
+#print axioms OperatorKO7.Methods.PathOrderRows.stermSize_acRearrange_star
+#check @OperatorKO7.Methods.PathOrderRows.acKBOWitness
+#print axioms OperatorKO7.Methods.PathOrderRows.acKBOWitness
+#check @OperatorKO7.Methods.PathOrderRows.TransfiniteKBOOrder
+#print axioms OperatorKO7.Methods.PathOrderRows.TransfiniteKBOOrder
+#check @OperatorKO7.Methods.PathOrderRows.TransfiniteKBORowClaim
+#print axioms OperatorKO7.Methods.PathOrderRows.TransfiniteKBORowClaim
+#check @OperatorKO7.Methods.PathOrderRows.transfiniteKBO_row_anchor
+#print axioms OperatorKO7.Methods.PathOrderRows.transfiniteKBO_row_anchor
+#check @OperatorKO7.Methods.PathOrderRows.transfiniteKBOWitness
+#print axioms OperatorKO7.Methods.PathOrderRows.transfiniteKBOWitness
+#check @OperatorKO7.Methods.PathOrderRows.AppTerm
+#print axioms OperatorKO7.Methods.PathOrderRows.AppTerm
+#check @OperatorKO7.Methods.PathOrderRows.curry
+#print axioms OperatorKO7.Methods.PathOrderRows.curry
+#check @OperatorKO7.Methods.PathOrderRows.countVarApp
+#print axioms OperatorKO7.Methods.PathOrderRows.countVarApp
+#check @OperatorKO7.Methods.PathOrderRows.appTermSize
+#print axioms OperatorKO7.Methods.PathOrderRows.appTermSize
+#check @OperatorKO7.Methods.PathOrderRows.countVarApp_curry
+#print axioms OperatorKO7.Methods.PathOrderRows.countVarApp_curry
+#check @OperatorKO7.Methods.PathOrderRows.LambdaFreeKBOOrder
+#print axioms OperatorKO7.Methods.PathOrderRows.LambdaFreeKBOOrder
+#check @OperatorKO7.Methods.PathOrderRows.LambdaFreeKBORowClaim
+#print axioms OperatorKO7.Methods.PathOrderRows.LambdaFreeKBORowClaim
+#check @OperatorKO7.Methods.PathOrderRows.lambdaFreeKBO_row_anchor
+#print axioms OperatorKO7.Methods.PathOrderRows.lambdaFreeKBO_row_anchor
+#check @OperatorKO7.Methods.PathOrderRows.lambdaFreeKBOWitness
+#print axioms OperatorKO7.Methods.PathOrderRows.lambdaFreeKBOWitness
+#check @OperatorKO7.Methods.PathOrderRows.lambdaFreeKBOWitness_nondegenerate
+#print axioms OperatorKO7.Methods.PathOrderRows.lambdaFreeKBOWitness_nondegenerate
+#check @OperatorKO7.Methods.PathOrderRows.PolynomialKBOOrder
+#print axioms OperatorKO7.Methods.PathOrderRows.PolynomialKBOOrder
+#check @OperatorKO7.Methods.PathOrderRows.PolynomialKBORowClaim
+#print axioms OperatorKO7.Methods.PathOrderRows.PolynomialKBORowClaim
+#check @OperatorKO7.Methods.PathOrderRows.polynomialKBO_row_anchor
+#print axioms OperatorKO7.Methods.PathOrderRows.polynomialKBO_row_anchor
+#check @OperatorKO7.Methods.PathOrderRows.polynomialKBOWitness
+#print axioms OperatorKO7.Methods.PathOrderRows.polynomialKBOWitness
+#check @OperatorKO7.Methods.PathOrderRows.ACRPORowClaim
+#print axioms OperatorKO7.Methods.PathOrderRows.ACRPORowClaim
+#check @OperatorKO7.Methods.PathOrderRows.lpoOrder_KO7_wellFounded
+#print axioms OperatorKO7.Methods.PathOrderRows.lpoOrder_KO7_wellFounded
+#check @OperatorKO7.Methods.PathOrderRows.acRPO_row_anchor
+#print axioms OperatorKO7.Methods.PathOrderRows.acRPO_row_anchor
+#check @OperatorKO7.Methods.PathOrderRows.EquationalPathOrderCertificate
+#print axioms OperatorKO7.Methods.PathOrderRows.EquationalPathOrderCertificate
+#check @OperatorKO7.Methods.PathOrderRows.TraceAppACOne
+#print axioms OperatorKO7.Methods.PathOrderRows.TraceAppACOne
+#check @OperatorKO7.Methods.PathOrderRows.W_traceAppACOne
+#print axioms OperatorKO7.Methods.PathOrderRows.W_traceAppACOne
+#check @OperatorKO7.Methods.PathOrderRows.TraceAppAC
+#print axioms OperatorKO7.Methods.PathOrderRows.TraceAppAC
+#check @OperatorKO7.Methods.PathOrderRows.W_traceAppAC
+#print axioms OperatorKO7.Methods.PathOrderRows.W_traceAppAC
+#check @OperatorKO7.Methods.PathOrderRows.traceAppAC_nontrivial
+#print axioms OperatorKO7.Methods.PathOrderRows.traceAppAC_nontrivial
+#check @OperatorKO7.Methods.PathOrderRows.ko7AppACReductionOrder
+#print axioms OperatorKO7.Methods.PathOrderRows.ko7AppACReductionOrder
+#check @OperatorKO7.Methods.PathOrderRows.ko7AppACReductionOrder_nontrivial
+#print axioms OperatorKO7.Methods.PathOrderRows.ko7AppACReductionOrder_nontrivial
+#check @OperatorKO7.Methods.PathOrderRows.ko7EmptyEquationalRPO
+#print axioms OperatorKO7.Methods.PathOrderRows.ko7EmptyEquationalRPO
+#check @OperatorKO7.Methods.PathOrderRows.ko7EmptyEquationalRPO_equiv_iff_eq
+#print axioms OperatorKO7.Methods.PathOrderRows.ko7EmptyEquationalRPO_equiv_iff_eq
+#check @OperatorKO7.Methods.PathOrderRows.PermutationStatus
+#print axioms OperatorKO7.Methods.PathOrderRows.PermutationStatus
+#check @OperatorKO7.Methods.PathOrderRows.RPOModuloPermutationRowClaim
+#print axioms OperatorKO7.Methods.PathOrderRows.RPOModuloPermutationRowClaim
+#check @OperatorKO7.Methods.PathOrderRows.rpoModuloPermutation_row_anchor
+#print axioms OperatorKO7.Methods.PathOrderRows.rpoModuloPermutation_row_anchor
+#check @OperatorKO7.Methods.PathOrderRows.PermutationRPOCertificate
+#print axioms OperatorKO7.Methods.PathOrderRows.PermutationRPOCertificate
+#check @OperatorKO7.Methods.PathOrderRows.permuteApp
+#print axioms OperatorKO7.Methods.PathOrderRows.permuteApp
+#check @OperatorKO7.Methods.PathOrderRows.identityPermutationStatus
+#print axioms OperatorKO7.Methods.PathOrderRows.identityPermutationStatus
+#check @OperatorKO7.Methods.PathOrderRows.swapAppPermutationStatus
+#print axioms OperatorKO7.Methods.PathOrderRows.swapAppPermutationStatus
+#check @OperatorKO7.Methods.PathOrderRows.swapAppPermutationStatus_moves_zero
+#print axioms OperatorKO7.Methods.PathOrderRows.swapAppPermutationStatus_moves_zero
+#check @OperatorKO7.Methods.PathOrderRows.swapAppPermutationStatus_nonidentity
+#print axioms OperatorKO7.Methods.PathOrderRows.swapAppPermutationStatus_nonidentity
+#check @OperatorKO7.Methods.PathOrderRows.permuteApp_swap
+#print axioms OperatorKO7.Methods.PathOrderRows.permuteApp_swap
+#check @OperatorKO7.Methods.PathOrderRows.ko7PermutationRPO
+#print axioms OperatorKO7.Methods.PathOrderRows.ko7PermutationRPO
+#check @OperatorKO7.Methods.PathOrderRows.ArgKind
+#print axioms OperatorKO7.Methods.PathOrderRows.ArgKind
+#check @OperatorKO7.Methods.PathOrderRows.ko7ArgKind
+#print axioms OperatorKO7.Methods.PathOrderRows.ko7ArgKind
+#check @OperatorKO7.Methods.PathOrderRows.rootSafeCount
+#print axioms OperatorKO7.Methods.PathOrderRows.rootSafeCount
+#check @OperatorKO7.Methods.PathOrderRows.PredicativeSafeLinear
+#print axioms OperatorKO7.Methods.PathOrderRows.PredicativeSafeLinear
+#check @OperatorKO7.Methods.PathOrderRows.rootSafeCount_dupSrc_s
+#print axioms OperatorKO7.Methods.PathOrderRows.rootSafeCount_dupSrc_s
+#check @OperatorKO7.Methods.PathOrderRows.rootSafeCount_dupTgt_s
+#print axioms OperatorKO7.Methods.PathOrderRows.rootSafeCount_dupTgt_s
+#check @OperatorKO7.Methods.PathOrderRows.dup_rule_not_predicative_safe_linear
+#print axioms OperatorKO7.Methods.PathOrderRows.dup_rule_not_predicative_safe_linear
+#check @OperatorKO7.Methods.PathOrderRows.KO7POPStarCertificate
+#print axioms OperatorKO7.Methods.PathOrderRows.KO7POPStarCertificate
+#check @OperatorKO7.Methods.PathOrderRows.no_ko7POPStarCertificate
+#print axioms OperatorKO7.Methods.PathOrderRows.no_ko7POPStarCertificate
+#check @OperatorKO7.Methods.PathOrderRows.PopStarFamilyRowClaim
+#print axioms OperatorKO7.Methods.PathOrderRows.PopStarFamilyRowClaim
+#check @OperatorKO7.Methods.PathOrderRows.popStarFamily_row_anchor
+#print axioms OperatorKO7.Methods.PathOrderRows.popStarFamily_row_anchor
+#check @OperatorKO7.Methods.PathOrderRows.SimpleTerminationOrderTypeRowClaim
+#print axioms OperatorKO7.Methods.PathOrderRows.SimpleTerminationOrderTypeRowClaim
+#check @OperatorKO7.Methods.PathOrderRows.simpleTerminationOrderType_row_anchor
+#print axioms OperatorKO7.Methods.PathOrderRows.simpleTerminationOrderType_row_anchor
+#check @OperatorKO7.Methods.PathOrderRows.CichonSlowGrowingRowClaim
+#print axioms OperatorKO7.Methods.PathOrderRows.CichonSlowGrowingRowClaim
+#check @OperatorKO7.Methods.PathOrderRows.cichonSlowGrowing_row_anchor
+#print axioms OperatorKO7.Methods.PathOrderRows.cichonSlowGrowing_row_anchor
+-- SOURCE: C:\Users\Moses\OperatorKO7\OperatorKO7\Meta\Methods\AlgebraicInterpretationRows.lean
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.LinearPolyQRowClaim
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.LinearPolyQRowClaim
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.linearPolyQ_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.linearPolyQ_row_anchor
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.LinearPolyRRowClaim
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.LinearPolyRRowClaim
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.linearPolyR_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.linearPolyR_row_anchor
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.TruncatedAffineMeasure
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.TruncatedAffineMeasure
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.NegativeCoefficientPolynomialRowClaim
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.NegativeCoefficientPolynomialRowClaim
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.negativeCoefficientPolynomial_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.negativeCoefficientPolynomial_row_anchor
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.MaxPolynomialRowClaim
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.MaxPolynomialRowClaim
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.maxPolynomial_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.maxPolynomial_row_anchor
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.NonlinearHigherDegreePolynomialRowClaim
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.NonlinearHigherDegreePolynomialRowClaim
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.nonlinearHigherDegreePolynomial_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.nonlinearHigherDegreePolynomial_row_anchor
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.MultilinearInterpretationRowClaim
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.MultilinearInterpretationRowClaim
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.multilinearInterpretation_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.multilinearInterpretation_row_anchor
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.MatrixNScalarProjectionRowClaim
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.MatrixNScalarProjectionRowClaim
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.matrixNScalarProjection_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.matrixNScalarProjection_row_anchor
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.MatrixQRScalarProjectionRowClaim
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.MatrixQRScalarProjectionRowClaim
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.matrixQRScalarProjection_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.matrixQRScalarProjection_row_anchor
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.ArcticScalarProjectionRowClaim
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.ArcticScalarProjectionRowClaim
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.arcticScalarProjection_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.arcticScalarProjection_row_anchor
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.TropicalScalarProjectionRowClaim
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.TropicalScalarProjectionRowClaim
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.tropicalScalarProjection_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.tropicalScalarProjection_row_anchor
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.UpperTriangular
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.UpperTriangular
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.TriangularMatrixRowClaim
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.TriangularMatrixRowClaim
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.triangularMatrix_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.triangularMatrix_row_anchor
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.CostSizeTupleInterpretation
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.CostSizeTupleInterpretation
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.TupleInterpretationStrictSRowClaim
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.TupleInterpretationStrictSRowClaim
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.tupleInterpretationStrictS_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.tupleInterpretationStrictS_row_anchor
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.HigherOrderTupleRestriction
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.HigherOrderTupleRestriction
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.HigherOrderTupleInterpretationRowClaim
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.HigherOrderTupleInterpretationRowClaim
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.higherOrderTupleInterpretation_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.higherOrderTupleInterpretation_row_anchor
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.HigherOrderTupleRestriction.eval_restriction_first
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.HigherOrderTupleRestriction.eval_restriction_first
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.ArchimedeanMonotoneAlgebra
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.ArchimedeanMonotoneAlgebra
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.archimedean_unbounded
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.archimedean_unbounded
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.StrictMonotoneAlgebraArchimedeanRowClaim
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.StrictMonotoneAlgebraArchimedeanRowClaim
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.strictMonotoneAlgebraArchimedean_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.strictMonotoneAlgebraArchimedean_row_anchor
+-- SOURCE: C:\Users\Moses\OperatorKO7\OperatorKO7\Meta\Methods\SemanticStructuralRows.lean
+#check @OperatorKO7.Methods.SemanticStructuralRows.ExtendedMonotoneAlgebra
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.ExtendedMonotoneAlgebra
+#check @OperatorKO7.Methods.SemanticStructuralRows.ExtendedMonotoneAlgebraRowClaim
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.ExtendedMonotoneAlgebraRowClaim
+#check @OperatorKO7.Methods.SemanticStructuralRows.extendedMonotoneAlgebra_row_anchor
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.extendedMonotoneAlgebra_row_anchor
+#check @OperatorKO7.Methods.SemanticStructuralRows.FiniteModelInterpretation
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.FiniteModelInterpretation
+#check @OperatorKO7.Methods.SemanticStructuralRows.finiteModel_rank_bounded
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.finiteModel_rank_bounded
+#check @OperatorKO7.Methods.SemanticStructuralRows.FiniteModelTerminationRowClaim
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.FiniteModelTerminationRowClaim
+#check @OperatorKO7.Methods.SemanticStructuralRows.finiteModelTermination_row_anchor
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.finiteModelTermination_row_anchor
+#check @OperatorKO7.Methods.SemanticStructuralRows.finiteModel_wrapDouble_rank_strict
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.finiteModel_wrapDouble_rank_strict
+#check @OperatorKO7.Methods.SemanticStructuralRows.finiteModel_wrapDouble_rank_lower
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.finiteModel_wrapDouble_rank_lower
+#check @OperatorKO7.Methods.SemanticStructuralRows.finiteModelInterpretation_impossible
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.finiteModelInterpretation_impossible
+#check @OperatorKO7.Methods.SemanticStructuralRows.CertifiesLinearComplexity
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.CertifiesLinearComplexity
+#check @OperatorKO7.Methods.SemanticStructuralRows.no_linear_complexity_certificate
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.no_linear_complexity_certificate
+#check @OperatorKO7.Methods.SemanticStructuralRows.MatchBoundsRowClaim
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.MatchBoundsRowClaim
+#check @OperatorKO7.Methods.SemanticStructuralRows.matchBounds_row_anchor
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.matchBounds_row_anchor
+#check @OperatorKO7.Methods.SemanticStructuralRows.RaiseConsistencyMatchBoundsRowClaim
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.RaiseConsistencyMatchBoundsRowClaim
+#check @OperatorKO7.Methods.SemanticStructuralRows.raiseConsistencyMatchBounds_row_anchor
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.raiseConsistencyMatchBounds_row_anchor
+#check @OperatorKO7.Methods.SemanticStructuralRows.RaiseConsistentMatchBoundCertificate
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.RaiseConsistentMatchBoundCertificate
+#check @OperatorKO7.Methods.SemanticStructuralRows.no_raiseConsistentMatchBoundCertificate
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.no_raiseConsistentMatchBoundCertificate
+#check @OperatorKO7.Methods.SemanticStructuralRows.leftLinearDup
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.leftLinearDup
+#check @OperatorKO7.Methods.SemanticStructuralRows.leftLinearDup_holds
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.leftLinearDup_holds
+#check @OperatorKO7.Methods.SemanticStructuralRows.LeftLinearMatchBoundsRowClaim
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.LeftLinearMatchBoundsRowClaim
+#check @OperatorKO7.Methods.SemanticStructuralRows.leftLinearMatchBounds_row_anchor
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.leftLinearMatchBounds_row_anchor
+#check @OperatorKO7.Methods.SemanticStructuralRows.Labelling
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.Labelling
+#check @OperatorKO7.Methods.SemanticStructuralRows.LabelledSTerm
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.LabelledSTerm
+#check @OperatorKO7.Methods.SemanticStructuralRows.labelTerm
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.labelTerm
+#check @OperatorKO7.Methods.SemanticStructuralRows.eraseLabels
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.eraseLabels
+#check @OperatorKO7.Methods.SemanticStructuralRows.eraseLabels_labelTerm
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.eraseLabels_labelTerm
+#check @OperatorKO7.Methods.SemanticStructuralRows.countVarLabelled
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.countVarLabelled
+#check @OperatorKO7.Methods.SemanticStructuralRows.countVarLabelled_labelTerm
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.countVarLabelled_labelTerm
+#check @OperatorKO7.Methods.SemanticStructuralRows.labelling_preserves_duplication
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.labelling_preserves_duplication
+#check @OperatorKO7.Methods.SemanticStructuralRows.labelled_variable_condition_refuses
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.labelled_variable_condition_refuses
+#check @OperatorKO7.Methods.SemanticStructuralRows.SemanticLabelingRowClaim
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.SemanticLabelingRowClaim
+#check @OperatorKO7.Methods.SemanticStructuralRows.semanticLabeling_row_anchor
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.semanticLabeling_row_anchor
+#check @OperatorKO7.Methods.SemanticStructuralRows.ErasureFactoredVariableCondition
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.ErasureFactoredVariableCondition
+#check @OperatorKO7.Methods.SemanticStructuralRows.erasureFactoredVariableCondition_refuses
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.erasureFactoredVariableCondition_refuses
+#check @OperatorKO7.Methods.SemanticStructuralRows.rootLabelValue
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.rootLabelValue
+#check @OperatorKO7.Methods.SemanticStructuralRows.RootLabelGt
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.RootLabelGt
+#check @OperatorKO7.Methods.SemanticStructuralRows.rootLabelGt_wellFounded
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.rootLabelGt_wellFounded
+#check @OperatorKO7.Methods.SemanticStructuralRows.rootLabelGt_transitive
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.rootLabelGt_transitive
+#check @OperatorKO7.Methods.SemanticStructuralRows.constructorRootLabelling
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.constructorRootLabelling
+#check @OperatorKO7.Methods.SemanticStructuralRows.boolLabelValue
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.boolLabelValue
+#check @OperatorKO7.Methods.SemanticStructuralRows.constructorRootLabelling_orients_duplication
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.constructorRootLabelling_orients_duplication
+#check @OperatorKO7.Methods.SemanticStructuralRows.constructorRootLabelling_not_erasureFactored
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.constructorRootLabelling_not_erasureFactored
+#check @OperatorKO7.Methods.SemanticStructuralRows.SuccContextCompatible
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.SuccContextCompatible
+#check @OperatorKO7.Methods.SemanticStructuralRows.rootLabelGt_not_succContextCompatible
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.rootLabelGt_not_succContextCompatible
+#check @OperatorKO7.Methods.SemanticStructuralRows.semanticLabeling_exact_boundary
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.semanticLabeling_exact_boundary
+#check @OperatorKO7.Methods.SemanticStructuralRows.PredictiveLabelingRowClaim
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.PredictiveLabelingRowClaim
+#check @OperatorKO7.Methods.SemanticStructuralRows.predictiveLabeling_row_anchor
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.predictiveLabeling_row_anchor
+#check @OperatorKO7.Methods.SemanticStructuralRows.predictiveLabelling
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.predictiveLabelling
+#check @OperatorKO7.Methods.SemanticStructuralRows.RootLabelingRowClaim
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.RootLabelingRowClaim
+#check @OperatorKO7.Methods.SemanticStructuralRows.rootLabeling_row_anchor
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.rootLabeling_row_anchor
+#check @OperatorKO7.Methods.SemanticStructuralRows.SelfLabelingEquationalRowClaim
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.SelfLabelingEquationalRowClaim
+#check @OperatorKO7.Methods.SemanticStructuralRows.selfLabelingEquational_row_anchor
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.selfLabelingEquational_row_anchor
+#check @OperatorKO7.Methods.SemanticStructuralRows.selfLabelling
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.selfLabelling
+#check @OperatorKO7.Methods.SemanticStructuralRows.selfLabelling_dup_root_labels_ne
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.selfLabelling_dup_root_labels_ne
+#check @OperatorKO7.Methods.SemanticStructuralRows.NotApplicableRecord
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.NotApplicableRecord
+#check @OperatorKO7.Methods.SemanticStructuralRows.stepIsFunctional
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.stepIsFunctional
+#check @OperatorKO7.Methods.SemanticStructuralRows.step_not_functional
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.step_not_functional
+#check @OperatorKO7.Methods.SemanticStructuralRows.categoricalToposRecord
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.categoricalToposRecord
+#check @OperatorKO7.Methods.SemanticStructuralRows.CategoricalToposTerminationRowClaim
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.CategoricalToposTerminationRowClaim
+#check @OperatorKO7.Methods.SemanticStructuralRows.categoricalToposTermination_row_anchor
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.categoricalToposTermination_row_anchor
+#check @OperatorKO7.Methods.SemanticStructuralRows.RelationalCategoryCarrier
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.RelationalCategoryCarrier
+#check @OperatorKO7.Methods.SemanticStructuralRows.stepStar_W_le
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.stepStar_W_le
+#check @OperatorKO7.Methods.SemanticStructuralRows.stepStar_W_lt_of_ne
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.stepStar_W_lt_of_ne
+#check @OperatorKO7.Methods.SemanticStructuralRows.ko7RelationalCategory
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.ko7RelationalCategory
+#check @OperatorKO7.Methods.SemanticStructuralRows.relationalCategory_contains_equality_fork
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.relationalCategory_contains_equality_fork
+#check @OperatorKO7.Methods.SemanticStructuralRows.deterministic_graph_obstruction_not_categorical_obstruction
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.deterministic_graph_obstruction_not_categorical_obstruction
+#check @OperatorKO7.Methods.SemanticStructuralRows.DeterministicGraphTransport
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.DeterministicGraphTransport
+#check @OperatorKO7.Methods.SemanticStructuralRows.no_deterministicGraphTransport
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.no_deterministicGraphTransport
+#check @OperatorKO7.Methods.SemanticStructuralRows.rightLinearDup
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.rightLinearDup
+#check @OperatorKO7.Methods.SemanticStructuralRows.dup_not_rightLinear
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.dup_not_rightLinear
+#check @OperatorKO7.Methods.SemanticStructuralRows.forwardClosuresRecord
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.forwardClosuresRecord
+#check @OperatorKO7.Methods.SemanticStructuralRows.ForwardClosuresRowClaim
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.ForwardClosuresRowClaim
+#check @OperatorKO7.Methods.SemanticStructuralRows.forwardClosures_row_anchor
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.forwardClosures_row_anchor
+#check @OperatorKO7.Methods.SemanticStructuralRows.QuasiDecreasingnessRowClaim
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.QuasiDecreasingnessRowClaim
+#check @OperatorKO7.Methods.SemanticStructuralRows.quasiDecreasingness_row_anchor
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.quasiDecreasingness_row_anchor
+#check @OperatorKO7.Methods.SemanticStructuralRows.AbstractQuasiDecreasing
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.AbstractQuasiDecreasing
+#check @OperatorKO7.Methods.SemanticStructuralRows.NoConditionalPremise
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.NoConditionalPremise
+#check @OperatorKO7.Methods.SemanticStructuralRows.abstractQuasiDecreasing_noConditions_iff
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.abstractQuasiDecreasing_noConditions_iff
+-- SOURCE: C:\Users\Moses\OperatorKO7\OperatorKO7\Meta\Methods\DependencyPairTypedRows.lean
+#check @OperatorKO7.Methods.DependencyPairTypedRows.CounterProjectionCore
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.CounterProjectionCore
+#check @OperatorKO7.Methods.DependencyPairTypedRows.dppair_iff_recSucc_shape
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.dppair_iff_recSucc_shape
+#check @OperatorKO7.Methods.DependencyPairTypedRows.counterProjectionCore_holds
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.counterProjectionCore_holds
+#check @OperatorKO7.Methods.DependencyPairTypedRows.DPProcessorClassificationRowClaim
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.DPProcessorClassificationRowClaim
+#check @OperatorKO7.Methods.DependencyPairTypedRows.dpProcessorClassification_row_anchor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.dpProcessorClassification_row_anchor
+#check @OperatorKO7.Methods.DependencyPairTypedRows.DPArgumentFilteringRowClaim
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.DPArgumentFilteringRowClaim
+#check @OperatorKO7.Methods.DependencyPairTypedRows.dpArgumentFiltering_row_anchor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.dpArgumentFiltering_row_anchor
+#check @OperatorKO7.Methods.DependencyPairTypedRows.ReductionPair
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.ReductionPair
+#check @OperatorKO7.Methods.DependencyPairTypedRows.counterReductionPair
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.counterReductionPair
+#check @OperatorKO7.Methods.DependencyPairTypedRows.doubledCounterReductionPair
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.doubledCounterReductionPair
+#check @OperatorKO7.Methods.DependencyPairTypedRows.reductionPairs_differ
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.reductionPairs_differ
+#check @OperatorKO7.Methods.DependencyPairTypedRows.DPReductionPairProcessorRowClaim
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.DPReductionPairProcessorRowClaim
+#check @OperatorKO7.Methods.DependencyPairTypedRows.dpReductionPairProcessor_row_anchor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.dpReductionPairProcessor_row_anchor
+#check @OperatorKO7.Methods.DependencyPairTypedRows.ReductionTriple
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.ReductionTriple
+#check @OperatorKO7.Methods.DependencyPairTypedRows.counterReductionTriple
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.counterReductionTriple
+#check @OperatorKO7.Methods.DependencyPairTypedRows.DPReductionTriplesRowClaim
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.DPReductionTriplesRowClaim
+#check @OperatorKO7.Methods.DependencyPairTypedRows.dpReductionTriples_row_anchor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.dpReductionTriples_row_anchor
+#check @OperatorKO7.Methods.DependencyPairTypedRows.ConcreteDPProcessor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.ConcreteDPProcessor
+#check @OperatorKO7.Methods.DependencyPairTypedRows.IsNeutralDPProcessor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.IsNeutralDPProcessor
+#check @OperatorKO7.Methods.DependencyPairTypedRows.identityDPProcessor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.identityDPProcessor
+#check @OperatorKO7.Methods.DependencyPairTypedRows.identityDPProcessor_neutral
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.identityDPProcessor_neutral
+#check @OperatorKO7.Methods.DependencyPairTypedRows.DPNeutralProcessorsRowClaim
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.DPNeutralProcessorsRowClaim
+#check @OperatorKO7.Methods.DependencyPairTypedRows.dpNeutralProcessors_row_anchor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.dpNeutralProcessors_row_anchor
+#check @OperatorKO7.Methods.DependencyPairTypedRows.FormativeRulesRowClaim
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.FormativeRulesRowClaim
+#check @OperatorKO7.Methods.DependencyPairTypedRows.formativeRules_row_anchor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.formativeRules_row_anchor
+#check @OperatorKO7.Methods.DependencyPairTypedRows.FormativePairTag
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.FormativePairTag
+#check @OperatorKO7.Methods.DependencyPairTypedRows.FormativePair
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.FormativePair
+#check @OperatorKO7.Methods.DependencyPairTypedRows.formativePair_iff_dppair
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.formativePair_iff_dppair
+#check @OperatorKO7.Methods.DependencyPairTypedRows.formativePair_decreases
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.formativePair_decreases
+#check @OperatorKO7.Methods.DependencyPairTypedRows.wf_FormativePairRev
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.wf_FormativePairRev
+#check @OperatorKO7.Methods.DependencyPairTypedRows.TypeIntroductionRowClaim
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.TypeIntroductionRowClaim
+#check @OperatorKO7.Methods.DependencyPairTypedRows.typeIntroduction_row_anchor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.typeIntroduction_row_anchor
+#check @OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.eraseCnt
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.eraseCnt
+#check @OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.eraseStep
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.eraseStep
+#check @OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.eraseRes
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.eraseRes
+#check @OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.TypedRecSuccStep
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.TypedRecSuccStep
+#check @OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.typedRecSuccStep_iff
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.typedRecSuccStep_iff
+#check @OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.eraseRes_typedRecSuccStep
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.eraseRes_typedRecSuccStep
+#check @OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.typedRecSuccStep_wellFounded
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.typedRecSuccStep_wellFounded
+#check @OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.typedRecSuccStep_nonempty
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.typedRecSuccStep_nonempty
+#check @OperatorKO7.Methods.DependencyPairTypedRows.ManySortedPersistenceRowClaim
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.ManySortedPersistenceRowClaim
+#check @OperatorKO7.Methods.DependencyPairTypedRows.manySortedPersistence_row_anchor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.manySortedPersistence_row_anchor
+#check @OperatorKO7.Methods.DependencyPairTypedRows.OrderSortedDPRowClaim
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.OrderSortedDPRowClaim
+#check @OperatorKO7.Methods.DependencyPairTypedRows.orderSortedDP_row_anchor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.orderSortedDP_row_anchor
+#check @OperatorKO7.Methods.DependencyPairTypedRows.ReplacementMap
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.ReplacementMap
+#check @OperatorKO7.Methods.DependencyPairTypedRows.counterOnlyReplacement
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.counterOnlyReplacement
+#check @OperatorKO7.Methods.DependencyPairTypedRows.ContextSensitiveStep
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.ContextSensitiveStep
+#check @OperatorKO7.Methods.DependencyPairTypedRows.contextSensitiveStep_sub_stepCtxFull
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.contextSensitiveStep_sub_stepCtxFull
+#check @OperatorKO7.Methods.DependencyPairTypedRows.contextSensitiveStep_wellFounded
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.contextSensitiveStep_wellFounded
+#check @OperatorKO7.Methods.DependencyPairTypedRows.counterOnly_delta_active
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.counterOnly_delta_active
+#check @OperatorKO7.Methods.DependencyPairTypedRows.counterOnly_recur_counter_active
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.counterOnly_recur_counter_active
+#check @OperatorKO7.Methods.DependencyPairTypedRows.counterOnly_recur_base_frozen
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.counterOnly_recur_base_frozen
+#check @OperatorKO7.Methods.DependencyPairTypedRows.counterOnly_recur_payload_frozen
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.counterOnly_recur_payload_frozen
+#check @OperatorKO7.Methods.DependencyPairTypedRows.counterOnly_wrap_payload_frozen
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.counterOnly_wrap_payload_frozen
+#check @OperatorKO7.Methods.DependencyPairTypedRows.counterOnly_wrap_continuation_active
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.counterOnly_wrap_continuation_active
+#check @OperatorKO7.Methods.DependencyPairTypedRows.counterOnly_contextSensitiveStep_cases
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.counterOnly_contextSensitiveStep_cases
+#check @OperatorKO7.Methods.DependencyPairTypedRows.ContextSensitiveDPRowClaim
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.ContextSensitiveDPRowClaim
+#check @OperatorKO7.Methods.DependencyPairTypedRows.contextSensitiveDP_row_anchor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.contextSensitiveDP_row_anchor
+#check @OperatorKO7.Methods.DependencyPairTypedRows.KO7RootRuleTag
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.KO7RootRuleTag
+#check @OperatorKO7.Methods.DependencyPairTypedRows.rootRuleConditions
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.rootRuleConditions
+#check @OperatorKO7.Methods.DependencyPairTypedRows.KO7RuleInstance
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.KO7RuleInstance
+#check @OperatorKO7.Methods.DependencyPairTypedRows.step_to_KO7RuleInstance
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.step_to_KO7RuleInstance
+#check @OperatorKO7.Methods.DependencyPairTypedRows.KO7RuleInstance_to_step
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.KO7RuleInstance_to_step
+#check @OperatorKO7.Methods.DependencyPairTypedRows.step_iff_KO7RuleInstance
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.step_iff_KO7RuleInstance
+#check @OperatorKO7.Methods.DependencyPairTypedRows.KO7IsUnconditional
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.KO7IsUnconditional
+#check @OperatorKO7.Methods.DependencyPairTypedRows.ko7_is_unconditional
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.ko7_is_unconditional
+#check @OperatorKO7.Methods.DependencyPairTypedRows.TwoDDimension
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.TwoDDimension
+#check @OperatorKO7.Methods.DependencyPairTypedRows.KO7TwoDDP
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.KO7TwoDDP
+#check @OperatorKO7.Methods.DependencyPairTypedRows.ko7TwoDDP_dependency_iff
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.ko7TwoDDP_dependency_iff
+#check @OperatorKO7.Methods.DependencyPairTypedRows.ko7TwoDDP_condition_empty
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.ko7TwoDDP_condition_empty
+#check @OperatorKO7.Methods.DependencyPairTypedRows.KO7TwoDDPAny
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.KO7TwoDDPAny
+#check @OperatorKO7.Methods.DependencyPairTypedRows.ko7TwoDDPAny_iff_DPPair
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.ko7TwoDDPAny_iff_DPPair
+#check @OperatorKO7.Methods.DependencyPairTypedRows.wf_KO7TwoDDPAnyRev
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.wf_KO7TwoDDPAnyRev
+#check @OperatorKO7.Methods.DependencyPairTypedRows.TwoDDPForCTRSRowClaim
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.TwoDDPForCTRSRowClaim
+#check @OperatorKO7.Methods.DependencyPairTypedRows.twoDDPForCTRS_row_anchor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.twoDDPForCTRS_row_anchor
+#check @OperatorKO7.Methods.DependencyPairTypedRows.ConditionsHold
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.ConditionsHold
+#check @OperatorKO7.Methods.DependencyPairTypedRows.KO7ConditionalOperationalStep
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.KO7ConditionalOperationalStep
+#check @OperatorKO7.Methods.DependencyPairTypedRows.ko7ConditionalOperationalStep_iff_step
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.ko7ConditionalOperationalStep_iff_step
+#check @OperatorKO7.Methods.DependencyPairTypedRows.ko7ConditionalOperationalStep_eq_step
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.ko7ConditionalOperationalStep_eq_step
+#check @OperatorKO7.Methods.DependencyPairTypedRows.ko7ConditionalOperationalTermination_iff
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.ko7ConditionalOperationalTermination_iff
+#check @OperatorKO7.Methods.DependencyPairTypedRows.ko7ConditionalOperationalTermination
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.ko7ConditionalOperationalTermination
+#check @OperatorKO7.Methods.DependencyPairTypedRows.OperationalTerminationCTRSRowClaim
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.OperationalTerminationCTRSRowClaim
+#check @OperatorKO7.Methods.DependencyPairTypedRows.operationalTerminationCTRS_row_anchor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.operationalTerminationCTRS_row_anchor
+#check @OperatorKO7.Methods.DependencyPairTypedRows.ConstrainedCounterCertificate
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.ConstrainedCounterCertificate
+#check @OperatorKO7.Methods.DependencyPairTypedRows.ko7ConstrainedCertificate
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.ko7ConstrainedCertificate
+#check @OperatorKO7.Methods.DependencyPairTypedRows.ConstrainedDPPair
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.ConstrainedDPPair
+#check @OperatorKO7.Methods.DependencyPairTypedRows.constrainedDPPair_iff_DPPair
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.constrainedDPPair_iff_DPPair
+#check @OperatorKO7.Methods.DependencyPairTypedRows.constrainedDPPair_decreases
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.constrainedDPPair_decreases
+#check @OperatorKO7.Methods.DependencyPairTypedRows.wf_ConstrainedDPPairRev
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.wf_ConstrainedDPPairRev
+#check @OperatorKO7.Methods.DependencyPairTypedRows.IntegerTermRewritingRowClaim
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.IntegerTermRewritingRowClaim
+#check @OperatorKO7.Methods.DependencyPairTypedRows.integerTermRewriting_row_anchor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.integerTermRewriting_row_anchor
+#check @OperatorKO7.Methods.DependencyPairTypedRows.LCTRSRowClaim
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.LCTRSRowClaim
+#check @OperatorKO7.Methods.DependencyPairTypedRows.lctrs_row_anchor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.lctrs_row_anchor
+#check @OperatorKO7.Methods.DependencyPairTypedRows.encodeTraceHO
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.encodeTraceHO
+#check @OperatorKO7.Methods.DependencyPairTypedRows.decodeTraceHO
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.decodeTraceHO
+#check @OperatorKO7.Methods.DependencyPairTypedRows.decodeTraceHO_encodeTraceHO
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.decodeTraceHO_encodeTraceHO
+#check @OperatorKO7.Methods.DependencyPairTypedRows.encodeTraceHO_injective
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.encodeTraceHO_injective
+#check @OperatorKO7.Methods.DependencyPairTypedRows.encodeTraceHO_closed
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.encodeTraceHO_closed
+#check @OperatorKO7.Methods.DependencyPairTypedRows.higherOrderCounter
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.higherOrderCounter
+#check @OperatorKO7.Methods.DependencyPairTypedRows.higherOrderCounter_encodeTraceHO
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.higherOrderCounter_encodeTraceHO
+#check @OperatorKO7.Methods.DependencyPairTypedRows.HigherOrderConstrainedDPPair
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.HigherOrderConstrainedDPPair
+#check @OperatorKO7.Methods.DependencyPairTypedRows.higherOrderConstrainedDPPair_on_image_iff
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.higherOrderConstrainedDPPair_on_image_iff
+#check @OperatorKO7.Methods.DependencyPairTypedRows.higherOrderConstrainedDPPair_decreases
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.higherOrderConstrainedDPPair_decreases
+#check @OperatorKO7.Methods.DependencyPairTypedRows.HigherOrderConstraint
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.HigherOrderConstraint
+#check @OperatorKO7.Methods.DependencyPairTypedRows.higherOrderConstrainedDPPair_source_constrained
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.higherOrderConstrainedDPPair_source_constrained
+#check @OperatorKO7.Methods.DependencyPairTypedRows.wf_HigherOrderConstrainedDPPairRev
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.wf_HigherOrderConstrainedDPPairRev
+#check @OperatorKO7.Methods.DependencyPairTypedRows.HigherOrderLCTRSRowClaim
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.HigherOrderLCTRSRowClaim
+#check @OperatorKO7.Methods.DependencyPairTypedRows.higherOrderLCTRS_row_anchor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.higherOrderLCTRS_row_anchor
+#check @OperatorKO7.Methods.DependencyPairTypedRows.Tier
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.Tier
+#check @OperatorKO7.Methods.DependencyPairTypedRows.ko7Tier
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.ko7Tier
+#check @OperatorKO7.Methods.DependencyPairTypedRows.BellantoniCookSplitRowClaim
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.BellantoniCookSplitRowClaim
+#check @OperatorKO7.Methods.DependencyPairTypedRows.bellantoniCookSplit_row_anchor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.bellantoniCookSplit_row_anchor
+-- SOURCE: C:\Users\Moses\OperatorKO7\OperatorKO7\Meta\Methods\AdmittanceInapplicabilityRows.lean
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.counterDepth
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.counterDepth
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.counterDescent
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.counterDescent
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.matchedCounter
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.matchedCounter
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.recursiveCallCounter
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.recursiveCallCounter
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.dupSrc_matchedCounter
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.dupSrc_matchedCounter
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.dupTgt_recursiveCallCounter
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.dupTgt_recursiveCallCounter
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.StrictSubterm
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.StrictSubterm
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.strictSubterm_size_lt
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.strictSubterm_size_lt
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.strictSubterm_wellFounded
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.strictSubterm_wellFounded
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.ko7_recursive_counter_strict_subterm
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.ko7_recursive_counter_strict_subterm
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.AdmittanceCriterion
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.AdmittanceCriterion
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.structuralDescentCriterion
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.structuralDescentCriterion
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.HorpoAdmittanceRowClaim
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.HorpoAdmittanceRowClaim
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.horpoAdmittance_row_anchor
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.horpoAdmittance_row_anchor
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.CpoAdmittanceRowClaim
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.CpoAdmittanceRowClaim
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.cpoAdmittance_row_anchor
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.cpoAdmittance_row_anchor
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.FirstOrderComputabilityClosure
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.FirstOrderComputabilityClosure
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.firstOrderComputabilityClosure_iff
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.firstOrderComputabilityClosure_iff
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.firstOrderComputabilityClosure_wellFounded
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.firstOrderComputabilityClosure_wellFounded
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.ko7_recursive_counter_in_computabilityClosure
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.ko7_recursive_counter_in_computabilityClosure
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.GeneralSchemaAdmittanceRowClaim
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.GeneralSchemaAdmittanceRowClaim
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.generalSchemaAdmittance_row_anchor
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.generalSchemaAdmittance_row_anchor
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.SizedDescent
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.SizedDescent
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.SizedTypesAdmittanceRowClaim
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.SizedTypesAdmittanceRowClaim
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.sizedTypesAdmittance_row_anchor
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.sizedTypesAdmittance_row_anchor
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.guardSatisfied
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.guardSatisfied
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.CoqGuardAdmittanceRowClaim
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.CoqGuardAdmittanceRowClaim
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.coqGuardAdmittance_row_anchor
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.coqGuardAdmittance_row_anchor
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.LinearTypable
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.LinearTypable
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.dup_not_linearTypable
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.dup_not_linearTypable
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.dupSrc_leftLinear
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.dupSrc_leftLinear
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.LinearLogicTypingBarrierRowClaim
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.LinearLogicTypingBarrierRowClaim
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.linearLogicTypingBarrier_row_anchor
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.linearLogicTypingBarrier_row_anchor
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.LeivantTier
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.LeivantTier
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.RamifiedAdmissible
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.RamifiedAdmissible
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.no_ramified_assignment
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.no_ramified_assignment
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.RamifiedRecursionTypingBarrierRowClaim
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.RamifiedRecursionTypingBarrierRowClaim
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.ramifiedRecursionTypingBarrier_row_anchor
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.ramifiedRecursionTypingBarrier_row_anchor
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.AbstractInterpretationAdmittanceRowClaim
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.AbstractInterpretationAdmittanceRowClaim
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.abstractInterpretationAdmittance_row_anchor
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.abstractInterpretationAdmittance_row_anchor
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.SizeChangeTerminationEscapeRowClaim
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.SizeChangeTerminationEscapeRowClaim
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.sizeChangeTerminationEscape_row_anchor
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.sizeChangeTerminationEscape_row_anchor
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.InfinitaryRewritingTerminationRowClaim
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.InfinitaryRewritingTerminationRowClaim
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.infinitaryRewritingTermination_row_anchor
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.infinitaryRewritingTermination_row_anchor
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.FiniteTraceInduction
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.FiniteTraceInduction
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.finiteTraceInduction_holds
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.finiteTraceInduction_holds
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.InfiniteForwardReduction
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.InfiniteForwardReduction
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.no_infinite_stepCtxFull_reduction
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.no_infinite_stepCtxFull_reduction
+-- SOURCE: C:\Users\Moses\OperatorKO7\OperatorKO7\Meta\Methods\SubstrateChangeRows.lean
+#check @OperatorKO7.Methods.SubstrateChangeRows.SubstrateChange
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.SubstrateChange
+#check @OperatorKO7.Methods.SubstrateChangeRows.CertifiedSubstrateChange
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.CertifiedSubstrateChange
+#check @OperatorKO7.Methods.SubstrateChangeRows.CertifiedSubstrateChange.source_wellFounded
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.CertifiedSubstrateChange.source_wellFounded
+#check @OperatorKO7.Methods.SubstrateChangeRows.ExactStrictSubstrateExtension
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.ExactStrictSubstrateExtension
+#check @OperatorKO7.Methods.SubstrateChangeRows.ExactStrictSubstrateExtension.source_wellFounded
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.ExactStrictSubstrateExtension.source_wellFounded
+#check @OperatorKO7.Methods.SubstrateChangeRows.forgetBoolReadBack
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.forgetBoolReadBack
+#check @OperatorKO7.Methods.SubstrateChangeRows.forgetBoolReadBack_not_injective
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.forgetBoolReadBack_not_injective
+#check @OperatorKO7.Methods.SubstrateChangeRows.forgetBoolSubstrate
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.forgetBoolSubstrate
+#check @OperatorKO7.Methods.SubstrateChangeRows.BoolSelfLoop
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.BoolSelfLoop
+#check @OperatorKO7.Methods.SubstrateChangeRows.boolSelfLoop_not_wellFounded
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.boolSelfLoop_not_wellFounded
+#check @OperatorKO7.Methods.SubstrateChangeRows.noninjective_readBack_alone_does_not_certify_termination
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.noninjective_readBack_alone_does_not_certify_termination
+#check @OperatorKO7.Methods.SubstrateChangeRows.SharedTerm
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.SharedTerm
+#check @OperatorKO7.Methods.SubstrateChangeRows.sharedSize
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.sharedSize
+#check @OperatorKO7.Methods.SubstrateChangeRows.unshare
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.unshare
+#check @OperatorKO7.Methods.SubstrateChangeRows.unshare_not_injective
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.unshare_not_injective
+#check @OperatorKO7.Methods.SubstrateChangeRows.unshare_shared_eq_node
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.unshare_shared_eq_node
+#check @OperatorKO7.Methods.SubstrateChangeRows.sharingSubstrate
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.sharingSubstrate
+#check @OperatorKO7.Methods.SubstrateChangeRows.sharedSize_shared_lt_node
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.sharedSize_shared_lt_node
+#check @OperatorKO7.Methods.SubstrateChangeRows.SharedSizeFactorsThroughReadBack
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.SharedSizeFactorsThroughReadBack
+#check @OperatorKO7.Methods.SubstrateChangeRows.sharedSize_not_factors_through_unshare
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.sharedSize_not_factors_through_unshare
+#check @OperatorKO7.Methods.SubstrateChangeRows.SharingNonConservativityRowClaim
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.SharingNonConservativityRowClaim
+#check @OperatorKO7.Methods.SubstrateChangeRows.sharingNonConservativity_row_anchor
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.sharingNonConservativity_row_anchor
+#check @OperatorKO7.Methods.SubstrateChangeRows.mergeLeft
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.mergeLeft
+#check @OperatorKO7.Methods.SubstrateChangeRows.mergeRight
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.mergeRight
+#check @OperatorKO7.Methods.SubstrateChangeRows.merge_terms_distinct
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.merge_terms_distinct
+#check @OperatorKO7.Methods.SubstrateChangeRows.RootNormal
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.RootNormal
+#check @OperatorKO7.Methods.SubstrateChangeRows.mergeLeft_rootNormal
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.mergeLeft_rootNormal
+#check @OperatorKO7.Methods.SubstrateChangeRows.mergeRight_rootNormal
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.mergeRight_rootNormal
+#check @OperatorKO7.Methods.SubstrateChangeRows.MergeCommutativityEquation
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.MergeCommutativityEquation
+#check @OperatorKO7.Methods.SubstrateChangeRows.merge_commutativity_identifies_witness
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.merge_commutativity_identifies_witness
+#check @OperatorKO7.Methods.SubstrateChangeRows.EquationalQuotientNonConservativityRowClaim
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.EquationalQuotientNonConservativityRowClaim
+#check @OperatorKO7.Methods.SubstrateChangeRows.equationalQuotientNonConservativity_row_anchor
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.equationalQuotientNonConservativity_row_anchor
+#check @OperatorKO7.Methods.SubstrateChangeRows.QuasiInterpretation
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.QuasiInterpretation
+#check @OperatorKO7.Methods.SubstrateChangeRows.constantQuasiInterpretation
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.constantQuasiInterpretation
+#check @OperatorKO7.Methods.SubstrateChangeRows.quasiInterpretation_never_strict
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.quasiInterpretation_never_strict
+#check @OperatorKO7.Methods.SubstrateChangeRows.quasiInterpretation_axioms_do_not_force_strict
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.quasiInterpretation_axioms_do_not_force_strict
+#check @OperatorKO7.Methods.SubstrateChangeRows.QuasiInterpretationPathPair
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.QuasiInterpretationPathPair
+#check @OperatorKO7.Methods.SubstrateChangeRows.ko7QuasiInterpretationPathPair
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.ko7QuasiInterpretationPathPair
+#check @OperatorKO7.Methods.SubstrateChangeRows.QuasiInterpretationsSharingAwareRowClaim
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.QuasiInterpretationsSharingAwareRowClaim
+#check @OperatorKO7.Methods.SubstrateChangeRows.quasiInterpretationsSharingAware_row_anchor
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.quasiInterpretationsSharingAware_row_anchor
+#check @OperatorKO7.Methods.SubstrateChangeRows.GraphNode
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.GraphNode
+#check @OperatorKO7.Methods.SubstrateChangeRows.graphReadBack
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.graphReadBack
+#check @OperatorKO7.Methods.SubstrateChangeRows.graphReadBack_not_injective
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.graphReadBack_not_injective
+#check @OperatorKO7.Methods.SubstrateChangeRows.typeGraphSubstrate
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.typeGraphSubstrate
+#check @OperatorKO7.Methods.SubstrateChangeRows.graphEncode
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.graphEncode
+#check @OperatorKO7.Methods.SubstrateChangeRows.graphReadBack_graphEncode
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.graphReadBack_graphEncode
+#check @OperatorKO7.Methods.SubstrateChangeRows.graphEncode_injective
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.graphEncode_injective
+#check @OperatorKO7.Methods.SubstrateChangeRows.EncodedGraphNode
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.EncodedGraphNode
+#check @OperatorKO7.Methods.SubstrateChangeRows.graphImageEquiv
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.graphImageEquiv
+#check @OperatorKO7.Methods.SubstrateChangeRows.graphImageEquiv_step_iff
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.graphImageEquiv_step_iff
+#check @OperatorKO7.Methods.SubstrateChangeRows.graphForeign
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.graphForeign
+#check @OperatorKO7.Methods.SubstrateChangeRows.graphForeign_not_encoded
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.graphForeign_not_encoded
+#check @OperatorKO7.Methods.SubstrateChangeRows.graphForeignSource
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.graphForeignSource
+#check @OperatorKO7.Methods.SubstrateChangeRows.graphForeignSource_not_encoded
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.graphForeignSource_not_encoded
+#check @OperatorKO7.Methods.SubstrateChangeRows.graphLiftStep_has_foreign_source
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.graphLiftStep_has_foreign_source
+#check @OperatorKO7.Methods.SubstrateChangeRows.graphWeight
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.graphWeight
+#check @OperatorKO7.Methods.SubstrateChangeRows.graphLiftStep_weight_decreases
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.graphLiftStep_weight_decreases
+#check @OperatorKO7.Methods.SubstrateChangeRows.GraphLiftStep
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.GraphLiftStep
+#check @OperatorKO7.Methods.SubstrateChangeRows.graphLiftStep_readBack
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.graphLiftStep_readBack
+#check @OperatorKO7.Methods.SubstrateChangeRows.graphLiftStep_iff
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.graphLiftStep_iff
+#check @OperatorKO7.Methods.SubstrateChangeRows.graphLiftStep_wellFounded
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.graphLiftStep_wellFounded
+#check @OperatorKO7.Methods.SubstrateChangeRows.weightedTypeGraphTransport
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.weightedTypeGraphTransport
+#check @OperatorKO7.Methods.SubstrateChangeRows.WeightedTypeGraphEscapeRowClaim
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.WeightedTypeGraphEscapeRowClaim
+#check @OperatorKO7.Methods.SubstrateChangeRows.weightedTypeGraphEscape_row_anchor
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.weightedTypeGraphEscape_row_anchor
+#check @OperatorKO7.Methods.SubstrateChangeRows.GeneralizedWeightedTypeGraphsRowClaim
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.GeneralizedWeightedTypeGraphsRowClaim
+#check @OperatorKO7.Methods.SubstrateChangeRows.generalizedWeightedTypeGraphs_row_anchor
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.generalizedWeightedTypeGraphs_row_anchor
+#check @OperatorKO7.Methods.SubstrateChangeRows.LabelledGraphNode
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.LabelledGraphNode
+#check @OperatorKO7.Methods.SubstrateChangeRows.labelledGraphEncode
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.labelledGraphEncode
+#check @OperatorKO7.Methods.SubstrateChangeRows.labelledGraphReadBack
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.labelledGraphReadBack
+#check @OperatorKO7.Methods.SubstrateChangeRows.labelledGraphReadBack_encode
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.labelledGraphReadBack_encode
+#check @OperatorKO7.Methods.SubstrateChangeRows.labelledGraphEncode_injective
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.labelledGraphEncode_injective
+#check @OperatorKO7.Methods.SubstrateChangeRows.LabelledGraphStep
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.LabelledGraphStep
+#check @OperatorKO7.Methods.SubstrateChangeRows.labelledGraphStep_encode_iff
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.labelledGraphStep_encode_iff
+#check @OperatorKO7.Methods.SubstrateChangeRows.labelledGraphStep_rank_decreases
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.labelledGraphStep_rank_decreases
+#check @OperatorKO7.Methods.SubstrateChangeRows.labelledGraphStep_wellFounded
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.labelledGraphStep_wellFounded
+#check @OperatorKO7.Methods.SubstrateChangeRows.boolLabelledGraphReadBack_not_injective
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.boolLabelledGraphReadBack_not_injective
+#check @OperatorKO7.Methods.SubstrateChangeRows.ProcessTerm
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.ProcessTerm
+#check @OperatorKO7.Methods.SubstrateChangeRows.processReadBack
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.processReadBack
+#check @OperatorKO7.Methods.SubstrateChangeRows.processReadBack_not_injective
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.processReadBack_not_injective
+#check @OperatorKO7.Methods.SubstrateChangeRows.processEncode
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.processEncode
+#check @OperatorKO7.Methods.SubstrateChangeRows.processReadBack_processEncode
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.processReadBack_processEncode
+#check @OperatorKO7.Methods.SubstrateChangeRows.processEncode_injective
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.processEncode_injective
+#check @OperatorKO7.Methods.SubstrateChangeRows.EncodedProcessTerm
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.EncodedProcessTerm
+#check @OperatorKO7.Methods.SubstrateChangeRows.processImageEquiv
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.processImageEquiv
+#check @OperatorKO7.Methods.SubstrateChangeRows.processImageEquiv_step_iff
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.processImageEquiv_step_iff
+#check @OperatorKO7.Methods.SubstrateChangeRows.processForeign
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.processForeign
+#check @OperatorKO7.Methods.SubstrateChangeRows.processForeign_not_encoded
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.processForeign_not_encoded
+#check @OperatorKO7.Methods.SubstrateChangeRows.processForeignSource
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.processForeignSource
+#check @OperatorKO7.Methods.SubstrateChangeRows.processForeignSource_not_encoded
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.processForeignSource_not_encoded
+#check @OperatorKO7.Methods.SubstrateChangeRows.processLiftStep_has_foreign_source
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.processLiftStep_has_foreign_source
+#check @OperatorKO7.Methods.SubstrateChangeRows.processRank
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.processRank
+#check @OperatorKO7.Methods.SubstrateChangeRows.processLiftStep_rank_decreases
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.processLiftStep_rank_decreases
+#check @OperatorKO7.Methods.SubstrateChangeRows.ProcessLiftStep
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.ProcessLiftStep
+#check @OperatorKO7.Methods.SubstrateChangeRows.processLiftStep_readBack
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.processLiftStep_readBack
+#check @OperatorKO7.Methods.SubstrateChangeRows.processLiftStep_iff
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.processLiftStep_iff
+#check @OperatorKO7.Methods.SubstrateChangeRows.processLiftStep_wellFounded
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.processLiftStep_wellFounded
+#check @OperatorKO7.Methods.SubstrateChangeRows.piCalculusTransport
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.piCalculusTransport
+#check @OperatorKO7.Methods.SubstrateChangeRows.PiCalculusTerminationTranslationRowClaim
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.PiCalculusTerminationTranslationRowClaim
+#check @OperatorKO7.Methods.SubstrateChangeRows.piCalculusTerminationTranslation_row_anchor
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.piCalculusTerminationTranslation_row_anchor
+#check @OperatorKO7.Methods.SubstrateChangeRows.CPSTerm
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.CPSTerm
+#check @OperatorKO7.Methods.SubstrateChangeRows.cpsReadBack
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.cpsReadBack
+#check @OperatorKO7.Methods.SubstrateChangeRows.cpsEncode
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.cpsEncode
+#check @OperatorKO7.Methods.SubstrateChangeRows.cpsReadBack_cpsEncode
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.cpsReadBack_cpsEncode
+#check @OperatorKO7.Methods.SubstrateChangeRows.cpsEncode_injective
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.cpsEncode_injective
+#check @OperatorKO7.Methods.SubstrateChangeRows.EncodedCPSTerm
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.EncodedCPSTerm
+#check @OperatorKO7.Methods.SubstrateChangeRows.cpsImageEquiv
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.cpsImageEquiv
+#check @OperatorKO7.Methods.SubstrateChangeRows.cpsImageEquiv_step_iff
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.cpsImageEquiv_step_iff
+#check @OperatorKO7.Methods.SubstrateChangeRows.cpsForeign
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.cpsForeign
+#check @OperatorKO7.Methods.SubstrateChangeRows.cpsForeign_not_encoded
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.cpsForeign_not_encoded
+#check @OperatorKO7.Methods.SubstrateChangeRows.cpsForeignSource
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.cpsForeignSource
+#check @OperatorKO7.Methods.SubstrateChangeRows.cpsForeignSource_not_encoded
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.cpsForeignSource_not_encoded
+#check @OperatorKO7.Methods.SubstrateChangeRows.cpsLiftStep_has_foreign_source
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.cpsLiftStep_has_foreign_source
+#check @OperatorKO7.Methods.SubstrateChangeRows.cpsRank
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.cpsRank
+#check @OperatorKO7.Methods.SubstrateChangeRows.cpsLiftStep_rank_decreases
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.cpsLiftStep_rank_decreases
+#check @OperatorKO7.Methods.SubstrateChangeRows.cpsReadBack_not_injective
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.cpsReadBack_not_injective
+#check @OperatorKO7.Methods.SubstrateChangeRows.CPSLiftStep
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.CPSLiftStep
+#check @OperatorKO7.Methods.SubstrateChangeRows.cpsLiftStep_readBack
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.cpsLiftStep_readBack
+#check @OperatorKO7.Methods.SubstrateChangeRows.cpsLiftStep_iff
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.cpsLiftStep_iff
+#check @OperatorKO7.Methods.SubstrateChangeRows.cpsLiftStep_wellFounded
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.cpsLiftStep_wellFounded
+#check @OperatorKO7.Methods.SubstrateChangeRows.lambdaMuCPSTransport
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.lambdaMuCPSTransport
+#check @OperatorKO7.Methods.SubstrateChangeRows.weightedTypeGraphTransport_exactStrict
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.weightedTypeGraphTransport_exactStrict
+#check @OperatorKO7.Methods.SubstrateChangeRows.piCalculusTransport_exactStrict
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.piCalculusTransport_exactStrict
+#check @OperatorKO7.Methods.SubstrateChangeRows.lambdaMuCPSTransport_exactStrict
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.lambdaMuCPSTransport_exactStrict
+#check @OperatorKO7.Methods.SubstrateChangeRows.graph_process_cps_exact_strict_extensions
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.graph_process_cps_exact_strict_extensions
+#check @OperatorKO7.Methods.SubstrateChangeRows.LambdaMuSNViaCPSRowClaim
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.LambdaMuSNViaCPSRowClaim
+#check @OperatorKO7.Methods.SubstrateChangeRows.lambdaMuSNViaCPS_row_anchor
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.lambdaMuSNViaCPS_row_anchor
+-- SOURCE: C:\Users\Moses\OperatorKO7\OperatorKO7\Meta\Methods\ExactPromotionCarriers.lean
+#check @OperatorKO7.Methods.ExactPromotionCarriers.KO7ArgumentFilteringMethod
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7ArgumentFilteringMethod
+#check @OperatorKO7.Methods.ExactPromotionCarriers.KO7ArgumentFilteringMethod.constructorFilter
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7ArgumentFilteringMethod.constructorFilter
+#check @OperatorKO7.Methods.ExactPromotionCarriers.KO7ArgumentFilteringMethod.witness
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7ArgumentFilteringMethod.witness
+#check @OperatorKO7.Methods.ExactPromotionCarriers.KO7ArgumentFilteringMethod.rank
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7ArgumentFilteringMethod.rank
+#check @OperatorKO7.Methods.ExactPromotionCarriers.ArgumentFilteringCertifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.ArgumentFilteringCertifies
+#check @OperatorKO7.Methods.ExactPromotionCarriers.argumentFiltering_certifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.argumentFiltering_certifies
+#check @OperatorKO7.Methods.ExactPromotionCarriers.ArgumentFilteringExactRowClaim
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.ArgumentFilteringExactRowClaim
+#check @OperatorKO7.Methods.ExactPromotionCarriers.KO7NeutralDPProcessorMethod
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7NeutralDPProcessorMethod
+#check @OperatorKO7.Methods.ExactPromotionCarriers.KO7NeutralDPProcessorMethod.processor
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7NeutralDPProcessorMethod.processor
+#check @OperatorKO7.Methods.ExactPromotionCarriers.NeutralDPProcessorCertifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.NeutralDPProcessorCertifies
+#check @OperatorKO7.Methods.ExactPromotionCarriers.neutralDPProcessor_certifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.neutralDPProcessor_certifies
+#check @OperatorKO7.Methods.ExactPromotionCarriers.NeutralDPProcessorExactRowClaim
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.NeutralDPProcessorExactRowClaim
+#check @OperatorKO7.Methods.ExactPromotionCarriers.KO7SizeChangeMethod
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7SizeChangeMethod
+#check @OperatorKO7.Methods.ExactPromotionCarriers.KO7SizeChangeMethod.graph
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7SizeChangeMethod.graph
+#check @OperatorKO7.Methods.ExactPromotionCarriers.KO7SizeChangeMethod.rank
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7SizeChangeMethod.rank
+#check @OperatorKO7.Methods.ExactPromotionCarriers.SizeChangeCertifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.SizeChangeCertifies
+#check @OperatorKO7.Methods.ExactPromotionCarriers.sizeChange_certifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.sizeChange_certifies
+#check @OperatorKO7.Methods.ExactPromotionCarriers.SizeChangeExactRowClaim
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.SizeChangeExactRowClaim
+#check @OperatorKO7.Methods.ExactPromotionCarriers.KO7CichonSlowGrowingMethod
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7CichonSlowGrowingMethod
+#check @OperatorKO7.Methods.ExactPromotionCarriers.KO7CichonSlowGrowingMethod.note
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7CichonSlowGrowingMethod.note
+#check @OperatorKO7.Methods.ExactPromotionCarriers.KO7CichonSlowGrowingMethod.bound
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7CichonSlowGrowingMethod.bound
+#check @OperatorKO7.Methods.ExactPromotionCarriers.CichonSlowGrowingCertifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.CichonSlowGrowingCertifies
+#check @OperatorKO7.Methods.ExactPromotionCarriers.cichonSlowGrowing_certifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.cichonSlowGrowing_certifies
+#check @OperatorKO7.Methods.ExactPromotionCarriers.CichonSlowGrowingExactRowClaim
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.CichonSlowGrowingExactRowClaim
+#check @OperatorKO7.Methods.ExactPromotionCarriers.KO7EquationalQuotientMethod
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7EquationalQuotientMethod
+#check @OperatorKO7.Methods.ExactPromotionCarriers.KO7EquationalQuotientMethod.equation
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7EquationalQuotientMethod.equation
+#check @OperatorKO7.Methods.ExactPromotionCarriers.EquationalQuotientCertifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.EquationalQuotientCertifies
+#check @OperatorKO7.Methods.ExactPromotionCarriers.equationalQuotient_certifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.equationalQuotient_certifies
+#check @OperatorKO7.Methods.ExactPromotionCarriers.EquationalQuotientExactRowClaim
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.EquationalQuotientExactRowClaim
+#check @OperatorKO7.Methods.ExactPromotionCarriers.KO7SharingMethod
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7SharingMethod
+#check @OperatorKO7.Methods.ExactPromotionCarriers.KO7SharingMethod.readBack
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7SharingMethod.readBack
+#check @OperatorKO7.Methods.ExactPromotionCarriers.KO7SharingMethod.size
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7SharingMethod.size
+#check @OperatorKO7.Methods.ExactPromotionCarriers.SharingCertifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.SharingCertifies
+#check @OperatorKO7.Methods.ExactPromotionCarriers.sharing_certifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.sharing_certifies
+#check @OperatorKO7.Methods.ExactPromotionCarriers.SharingExactRowClaim
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.SharingExactRowClaim
+#check @OperatorKO7.Methods.ExactPromotionCarriers.argumentFiltering_sizeChange_rank_eq_dpProjection
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.argumentFiltering_sizeChange_rank_eq_dpProjection
+#check @OperatorKO7.Methods.ExactPromotionCarriers.argumentFiltering_sizeChange_share_confession_core
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.argumentFiltering_sizeChange_share_confession_core
+-- SOURCE: C:\Users\Moses\OperatorKO7\OperatorKO7\Meta\RDRSCoverageEvidenceLedger.lean
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.SchemaSymbol
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SchemaSymbol
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBO
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBO
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.schemaKBOWeight
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.schemaKBOWeight
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.SchemaVariableCondition
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SchemaVariableCondition
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.STerm.matches
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.STerm.matches
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.SuccIterationOfVar
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SuccIterationOfVar
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.SchemaKBOGt
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SchemaKBOGt
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.SchemaKBOGt.variableCondition
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SchemaKBOGt.variableCondition
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.finiteStandardKBO
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.finiteStandardKBO
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.finiteStandardKBO_orients_strictWeight_witness
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.finiteStandardKBO_orients_strictWeight_witness
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.finiteStandardKBO_orients_precedence_witness
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.finiteStandardKBO_orients_precedence_witness
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBORecSuccObstruction
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBORecSuccObstruction
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.standardKBO_no_ko7_rec_succ
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.standardKBO_no_ko7_rec_succ
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBORowClaim
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBORowClaim
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.DPSubtermCriterionRowClaim
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.DPSubtermCriterionRowClaim
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7_dpSubtermCriterion_row_anchor
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7_dpSubtermCriterion_row_anchor
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.KO7RootRule
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RootRule
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.allKO7RootRules
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.allKO7RootRules
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.allKO7RootRules_nodup
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.allKO7RootRules_nodup
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.allKO7RootRules_complete
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.allKO7RootRules_complete
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.KO7DefinedRoot
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7DefinedRoot
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7RuleRoot
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7RuleRoot
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.traceDefinedRoots
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.traceDefinedRoots
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7RuleLhsTemplate
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7RuleLhsTemplate
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7RuleRhsTemplate
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7RuleRhsTemplate
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.KO7RuleInstance
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RuleInstance
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.step_iff_complete_KO7RuleInstance
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.step_iff_complete_KO7RuleInstance
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7RuleTemplate_is_ruleInstance
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7RuleTemplate_is_ruleInstance
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7RuleTemplate_is_actual_step
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7RuleTemplate_is_actual_step
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7RootDirectCallB
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7RootDirectCallB
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.KO7RootDirectCall
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RootDirectCall
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.KO7RootClosed
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RootClosed
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7CanonicalUsableRules
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7CanonicalUsableRules
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7CanonicalUsableRules_nodup
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7CanonicalUsableRules_nodup
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.recSucc_directlyCalls_recZero
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.recSucc_directlyCalls_recZero
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.recSucc_directlyCalls_recSucc
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.recSucc_directlyCalls_recSucc
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7CanonicalUsableRules_rootClosed
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7CanonicalUsableRules_rootClosed
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7CanonicalUsableRules_retains_recSucc
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7CanonicalUsableRules_retains_recSucc
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7CanonicalUsableRules_least
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7CanonicalUsableRules_least
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7CanonicalUsableRules_retained_recSucc_step
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7CanonicalUsableRules_retained_recSucc_step
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7DPRhsSchema
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7DPRhsSchema
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.schemaDefinedRoots
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.schemaDefinedRoots
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7DPRhsSchema_definedRoots
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7DPRhsSchema_definedRoots
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.DPPair_rhs_schema_extraction
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.DPPair_rhs_schema_extraction
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7RulesAtSchemaRoots
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7RulesAtSchemaRoots
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7RootClosureStep
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7RootClosureStep
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7GeneratedUsableRules
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7GeneratedUsableRules
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7RulesAtDPRhsRoots_exact
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7RulesAtDPRhsRoots_exact
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7GeneratedUsableRules_exact
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7GeneratedUsableRules_exact
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7GeneratedUsableRules_fixedPoint
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7GeneratedUsableRules_fixedPoint
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7GeneratedUsableRules_rootClosed
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7GeneratedUsableRules_rootClosed
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7GeneratedUsableRules_least
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7GeneratedUsableRules_least
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.retainedDPProjection
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.retainedDPProjection
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.ko7_usableRules_rootClosure_minimality_anchor
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7_usableRules_rootClosure_minimality_anchor
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.UsableRulesConcreteRowClaim
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.UsableRulesConcreteRowClaim
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.RowClaim
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.RowClaim
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.MethodInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.MethodInterpretation
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.interpretedFamily
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.interpretedFamily
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.interpretedFamily_eq_index
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.interpretedFamily_eq_index
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.dpCarrier
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.dpCarrier
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.dpCarrier_eq_ko7DPSubtermCriterionExact
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.dpCarrier_eq_ko7DPSubtermCriterionExact
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.AnchorInstanceHolds
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.AnchorInstanceHolds
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.rowClaim_of_interpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.rowClaim_of_interpretation
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.anchorInstance_of_rowClaim
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.anchorInstance_of_rowClaim
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.anchorInstance_holds
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.anchorInstance_holds
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.TheoremBackedEvidence
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.TheoremBackedEvidence
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.TheoremBackedEvidence.interpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.TheoremBackedEvidence.interpretation
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.TheoremBackedEvidence.anchorInstance
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.TheoremBackedEvidence.anchorInstance
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.TheoremBackedEvidence.rowClaim
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.TheoremBackedEvidence.rowClaim
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedEvidenceOf
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedEvidenceOf
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.standardKBOInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.standardKBOInterpretation
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.subtermCoefficientKBOInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.subtermCoefficientKBOInterpretation
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.cichonSlowGrowingInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.cichonSlowGrowingInterpretation
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.dpArgumentFilteringInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.dpArgumentFilteringInterpretation
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.dpNeutralProcessorInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.dpNeutralProcessorInterpretation
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.usableRulesInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.usableRulesInterpretation
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.sharingInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.sharingInterpretation
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.equationalQuotientInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.equationalQuotientInterpretation
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.cycleRewritingInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.cycleRewritingInterpretation
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.stringRewritingInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.stringRewritingInterpretation
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.sizeChangeInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.sizeChangeInterpretation
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.curatedReason?
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curatedReason?
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.curated_row_has_no_semantic_claim
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curated_row_has_no_semantic_claim
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.CuratedDisposition
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CuratedDisposition
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.curatedDisposition_of_reason
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curatedDisposition_of_reason
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.RowDisposition
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.RowDisposition
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.RowDisposition.isTheoremBacked
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.RowDisposition.isTheoremBacked
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.rowDisposition
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.rowDisposition
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.curatedRows
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curatedRows
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows_mem_iff
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows_mem_iff
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.curatedRows_mem_iff
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curatedRows_mem_iff
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows_nodup
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows_nodup
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.curatedRows_nodup
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curatedRows_nodup
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.buckets_disjoint
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.buckets_disjoint
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.buckets_complete
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.buckets_complete
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows_count
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows_count
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.curatedRows_count
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curatedRows_count
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.split_total
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.split_total
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows_nonempty
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows_nonempty
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows_eq
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows_eq
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.curatedRowsWithReason
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curatedRowsWithReason
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.curated_noTransportAdapter_count
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curated_noTransportAdapter_count
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.curated_externalNonLane_count
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curated_externalNonLane_count
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.curated_substrateChange_count
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curated_substrateChange_count
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.curated_importDependent_count
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curated_importDependent_count
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.curated_reason_partition
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curated_reason_partition
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.rowDisposition_matches_split
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.rowDisposition_matches_split
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows_eq_disposition_filter
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows_eq_disposition_filter
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.curatedRows_eq_disposition_filter
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curatedRows_eq_disposition_filter
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.buckets_append_perm_allMethodFamilies
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.buckets_append_perm_allMethodFamilies
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.buckets_append_mem_iff
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.buckets_append_mem_iff
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.theoremBacked_rows_have_interpretations
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBacked_rows_have_interpretations
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.theoremBacked_rows_have_evidence
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBacked_rows_have_evidence
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.theoremBacked_rows_inhabit_rowClaim
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBacked_rows_inhabit_rowClaim
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.CoverageEvidenceLedgerClosed
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CoverageEvidenceLedgerClosed
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.rdrs_coverage_evidence_ledger_closed
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.rdrs_coverage_evidence_ledger_closed
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.rdrs_coverage_evidence_ledger_anchor
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.rdrs_coverage_evidence_ledger_anchor
+
+-- Current public declarations added after the original gate inventory.
+#check @OperatorKO7.Methods.PathOrderRows.swapFin2
+#print axioms OperatorKO7.Methods.PathOrderRows.swapFin2
+#check @OperatorKO7.Methods.PathOrderRows.swapAppPermutationStatus_app
+#print axioms OperatorKO7.Methods.PathOrderRows.swapAppPermutationStatus_app
+#check @OperatorKO7.Methods.PathOrderRows.swapFin2_moves_zero
+#print axioms OperatorKO7.Methods.PathOrderRows.swapFin2_moves_zero
+#check @OperatorKO7.Methods.PathOrderRows.swapFin2_nonidentity
+#print axioms OperatorKO7.Methods.PathOrderRows.swapFin2_nonidentity
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.unitAffineNatEval
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.unitAffineNatEval
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.unitAffineNatMeasure
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.unitAffineNatMeasure
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.unitAffineNatMeasure_nonconstant
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.unitAffineNatMeasure_nonconstant
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.unitRationalAffine
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.unitRationalAffine
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.unitRealAffine
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.unitRealAffine
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.unitRationalAffine_nonconstant
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.unitRationalAffine_nonconstant
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.unitRealAffine_nonconstant
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.unitRealAffine_nonconstant
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.truncatedAffine_wrap_debt_bound
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.truncatedAffine_wrap_debt_bound
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.truncatedAffine_succIter_ge
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.truncatedAffine_succIter_ge
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.crossCoupledTupleEval
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.crossCoupledTupleEval
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.crossCoupledTupleEval_orients
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.crossCoupledTupleEval_orients
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.crossCoupledTupleEval_not_affine_first_component
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.crossCoupledTupleEval_not_affine_first_component
+#check @OperatorKO7.Methods.AlgebraicInterpretationRows.tupleInterpretationStrictS_exact_boundary
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.tupleInterpretationStrictS_exact_boundary
+#check @OperatorKO7.Methods.DependencyPairTypedRows.scaledCounterReductionPair
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.scaledCounterReductionPair
+#check @OperatorKO7.Methods.DependencyPairTypedRows.scaledCounterReductionPair_probe
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.scaledCounterReductionPair_probe
+#check @OperatorKO7.Methods.DependencyPairTypedRows.scaledCounterReductionPair_rank_injective
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.scaledCounterReductionPair_rank_injective
+#check @OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.TypedDPPair
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.TypedDPPair
+#check @OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.eraseRes_typedDPPair
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.eraseRes_typedDPPair
+#check @OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.typedDPPair_wellFounded
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.SortedTransport.typedDPPair_wellFounded
+#check @OperatorKO7.Methods.DependencyPairTypedRows.OrderSortedTerm
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.OrderSortedTerm
+#check @OperatorKO7.Methods.DependencyPairTypedRows.orderSortRank
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.orderSortRank
+#check @OperatorKO7.Methods.DependencyPairTypedRows.OrderSubsort
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.OrderSubsort
+#check @OperatorKO7.Methods.DependencyPairTypedRows.orderSubsort_refl
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.orderSubsort_refl
+#check @OperatorKO7.Methods.DependencyPairTypedRows.orderSubsort_trans
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.orderSubsort_trans
+#check @OperatorKO7.Methods.DependencyPairTypedRows.orderSubsort_cnt_step
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.orderSubsort_cnt_step
+#check @OperatorKO7.Methods.DependencyPairTypedRows.orderSubsort_step_res
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.orderSubsort_step_res
+#check @OperatorKO7.Methods.DependencyPairTypedRows.orderSortOf
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.orderSortOf
+#check @OperatorKO7.Methods.DependencyPairTypedRows.OrderSortedDPPair
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.OrderSortedDPPair
+#check @OperatorKO7.Methods.DependencyPairTypedRows.orderSortedDPPair_res_iff
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.orderSortedDPPair_res_iff
+#check @OperatorKO7.Methods.DependencyPairTypedRows.orderSortedDPPair_result_sorted
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.orderSortedDPPair_result_sorted
+#check @OperatorKO7.Methods.DependencyPairTypedRows.eraseOrderSorted
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.eraseOrderSorted
+#check @OperatorKO7.Methods.DependencyPairTypedRows.eraseOrderSorted_pair
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.eraseOrderSorted_pair
+#check @OperatorKO7.Methods.DependencyPairTypedRows.orderSortedDPRank
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.orderSortedDPRank
+#check @OperatorKO7.Methods.DependencyPairTypedRows.orderSortedDPPair_decreases
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.orderSortedDPPair_decreases
+#check @OperatorKO7.Methods.DependencyPairTypedRows.orderSortedDPPair_wellFounded
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.orderSortedDPPair_wellFounded
+#check @OperatorKO7.Methods.DependencyPairTypedRows.orderSortedDPPair_nonempty
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.orderSortedDPPair_nonempty
+#check @OperatorKO7.Methods.DependencyPairTypedRows.BellantoniCookAdmissible
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.BellantoniCookAdmissible
+#check @OperatorKO7.Methods.DependencyPairTypedRows.no_bellantoniCookAdmissible
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.no_bellantoniCookAdmissible
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.ResourceSoundRuleTyping
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.ResourceSoundRuleTyping
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.no_resourceSoundRuleTyping_derives_dup
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.no_resourceSoundRuleTyping_derives_dup
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.maximalResourceSoundRuleTyping
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.maximalResourceSoundRuleTyping
+#check @OperatorKO7.Methods.AdmittanceInapplicabilityRows.maximalResourceSoundRuleTyping_accepts_identity
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.maximalResourceSoundRuleTyping_accepts_identity
+#check @OperatorKO7.Methods.SubstrateChangeRows.step_to_graphLiftStep_encode
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.step_to_graphLiftStep_encode
+#check @OperatorKO7.Methods.SubstrateChangeRows.labelledGraphRank
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.labelledGraphRank
+#check @OperatorKO7.Methods.SubstrateChangeRows.step_to_processLiftStep_encode
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.step_to_processLiftStep_encode
+#check @OperatorKO7.Methods.SubstrateChangeRows.step_to_cpsLiftStep_encode
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.step_to_cpsLiftStep_encode
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.RetainedProjectionDecreases
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.RetainedProjectionDecreases
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.retainedProjection_decreases_on_DPPair
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.retainedProjection_decreases_on_DPPair
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.KO7DPPairUsableRulesCertificate
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7DPPairUsableRulesCertificate
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.rationalAffineInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.rationalAffineInterpretation
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.realAffineInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.realAffineInterpretation
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.naturalMatrixInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.naturalMatrixInterpretation
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.triangularMatrixInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.triangularMatrixInterpretation
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.CuratedReason
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CuratedReason
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.curated_methodInterpretation_isEmpty
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curated_methodInterpretation_isEmpty
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.InterpretationResolution
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.InterpretationResolution
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.interpretationResolution
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.interpretationResolution
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.interpretationResolution_total
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.interpretationResolution_total
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.curated_rows_have_no_interpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curated_rows_have_no_interpretation

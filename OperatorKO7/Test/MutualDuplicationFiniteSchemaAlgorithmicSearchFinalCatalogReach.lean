@@ -1,0 +1,72 @@
+import OperatorKO7.Meta.MutualDuplication_FiniteSchema_AlgorithmicSearch_FinalCatalog
+import OperatorKO7.Meta.MutualDuplication_FiniteSchema_API
+
+namespace MutualDuplicationFiniteSchemaAlgorithmicSearchFinalCatalogReach
+
+open OperatorKO7
+
+#check OperatorKO7.MutualDuplicationFiniteSchema.FiniteCycleAlgorithmicSearchFinalCatalog
+#check OperatorKO7.MutualDuplicationFiniteSchema.finite_cycle_algorithmic_search_final_catalog
+#check OperatorKO7.MutualDuplicationFiniteSchema.final_catalog_projects_search_soundness
+#check OperatorKO7.MutualDuplicationFiniteSchema.final_catalog_projects_finite_completeness
+#check OperatorKO7.MutualDuplicationFiniteSchema.final_catalog_projects_missing_successor_edge_boundary
+#check OperatorKO7.MutualDuplicationFiniteSchema.final_catalog_projects_cycle_realization_transport
+#check OperatorKO7.MutualDuplicationFiniteSchema.final_catalog_projects_additive_barrier_transport
+#check OperatorKO7.MutualDuplicationFiniteSchema.final_catalog_projects_affine_barrier_transport
+#check OperatorKO7.MutualDuplicationFiniteSchema.final_catalog_projects_closeout_catalog
+
+#check OperatorKO7.MutualDuplicationFiniteSchemaAPI.EncodedSearchSpace
+#check OperatorKO7.MutualDuplicationFiniteSchemaAPI.CycleCandidate
+#check OperatorKO7.MutualDuplicationFiniteSchemaAPI.MissingSuccessorEdgeStatus
+#check OperatorKO7.MutualDuplicationFiniteSchemaAPI.AlgorithmicFinalCatalog
+#check OperatorKO7.MutualDuplicationFiniteSchemaAPI.CloseoutCatalog
+#check OperatorKO7.MutualDuplicationFiniteSchemaAPI.searchCycle?
+#check OperatorKO7.MutualDuplicationFiniteSchemaAPI.algorithmic_final_catalog
+#check OperatorKO7.MutualDuplicationFiniteSchemaAPI.closeout_catalog
+#check OperatorKO7.MutualDuplicationFiniteSchemaAPI.executable_search_sound
+#check OperatorKO7.MutualDuplicationFiniteSchemaAPI.finite_completeness
+#check OperatorKO7.MutualDuplicationFiniteSchemaAPI.missing_successor_edge_boundary
+#check OperatorKO7.MutualDuplicationFiniteSchemaAPI.algorithmic_cycle_realization
+#check OperatorKO7.MutualDuplicationFiniteSchemaAPI.algorithmic_additive_barrier
+#check OperatorKO7.MutualDuplicationFiniteSchemaAPI.algorithmic_affine_barrier
+#check OperatorKO7.MutualDuplicationFiniteSchemaAPI.two_rule_encoded_search_space
+#check OperatorKO7.MutualDuplicationFiniteSchemaAPI.three_rule_encoded_search_space
+#check OperatorKO7.MutualDuplicationFiniteSchemaAPI.two_rule_algorithmic_search_succeeds
+#check OperatorKO7.MutualDuplicationFiniteSchemaAPI.three_rule_algorithmic_search_succeeds
+
+example :
+    OperatorKO7.MutualDuplicationFiniteSchema.FiniteCycleAlgorithmicSearchFinalCatalog
+      OperatorKO7.MutualDuplicationFiniteSchema.FiniteCycleGraphSearch.KCycleSystem.twoRuleWitnessEncodedSearchSpace :=
+  OperatorKO7.MutualDuplicationFiniteSchema.finite_cycle_algorithmic_search_final_catalog _
+
+example :
+    ∃ W : OperatorKO7.MutualDuplicationFiniteSchema.FiniteCycleGraphSearch.EncodedSearchSpace.CycleCandidate
+      OperatorKO7.MutualDuplicationFiniteSchema.FiniteCycleGraphSearch.KCycleSystem.twoRuleWitnessEncodedSearchSpace,
+      OperatorKO7.MutualDuplicationFiniteSchema.FiniteCycleGraphSearch.EncodedSearchSpace.searchCycle?
+        OperatorKO7.MutualDuplicationFiniteSchema.FiniteCycleGraphSearch.KCycleSystem.twoRuleWitnessEncodedSearchSpace = some W :=
+  OperatorKO7.MutualDuplicationFiniteSchema.final_catalog_projects_finite_completeness
+    (OperatorKO7.MutualDuplicationFiniteSchema.finite_cycle_algorithmic_search_final_catalog _)
+    (by
+      intro i
+      simp [OperatorKO7.MutualDuplicationFiniteSchema.FiniteCycleGraphSearch.KCycleSystem.twoRuleWitnessEncodedSearchSpace,
+        OperatorKO7.MutualDuplicationFiniteSchema.Constructors.TwoRuleData.toEncodedSearchSpace,
+        OperatorKO7.MutualDuplicationFiniteSchema.FiniteCycleGraphSearch.EncodedSearchSpace.Edge,
+        Finset.mem_filter])
+
+example :
+    ∃ W : OperatorKO7.MutualDuplicationFiniteSchemaAPI.CycleCandidate
+      OperatorKO7.MutualDuplicationFiniteSchemaAPI.two_rule_encoded_search_space,
+      OperatorKO7.MutualDuplicationFiniteSchemaAPI.searchCycle?
+        OperatorKO7.MutualDuplicationFiniteSchemaAPI.two_rule_encoded_search_space = some W :=
+  OperatorKO7.MutualDuplicationFiniteSchemaAPI.two_rule_algorithmic_search_succeeds
+
+example : OperatorKO7.MutualDuplicationFiniteSchemaCloseout.MutualDuplicationFiniteSchemaCloseoutCatalog :=
+  OperatorKO7.MutualDuplicationFiniteSchema.final_catalog_projects_closeout_catalog
+    (OperatorKO7.MutualDuplicationFiniteSchema.finite_cycle_algorithmic_search_final_catalog
+      OperatorKO7.MutualDuplicationFiniteSchema.FiniteCycleGraphSearch.KCycleSystem.twoRuleWitnessEncodedSearchSpace)
+
+example : OperatorKO7.MutualDuplicationFiniteSchemaAPI.CloseoutCatalog :=
+  OperatorKO7.MutualDuplicationFiniteSchemaAPI.closeout_catalog
+    OperatorKO7.MutualDuplicationFiniteSchemaAPI.two_rule_encoded_search_space
+
+end MutualDuplicationFiniteSchemaAlgorithmicSearchFinalCatalogReach

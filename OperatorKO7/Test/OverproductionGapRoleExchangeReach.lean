@@ -1,0 +1,66 @@
+import OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange
+
+/-!
+# Reach gate: m-ary role exchange
+
+Pins every public declaration of
+`OperatorKO7/Meta/BoundaryGeneral/OverproductionGapRoleExchange.lean`.
+Import-and-check only.
+-/
+
+set_option autoImplicit false
+
+namespace OperatorKO7.Test.OverproductionGapRoleExchangeReach
+
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.starStep
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.starStep
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.star_terminal_normal
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.star_terminal_normal
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.star_reach_source
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.star_reach_source
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.star_reach_terminal
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.star_reach_terminal
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.star_source_not_normal
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.star_source_not_normal
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.star_terminalSupport
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.star_terminalSupport
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.star_terminalMultiplicity
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.star_terminalMultiplicity
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.star_terminalHartleyEntropy
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.star_terminalHartleyEntropy
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.star_zero_source_normal
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.star_zero_source_normal
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.star_zero_terminalMultiplicity
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.star_zero_terminalMultiplicity
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.uniformRoleWeights
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.uniformRoleWeights
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.uniformRoleWeights_sum_one
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.uniformRoleWeights_sum_one
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.roleEcho
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.roleEcho
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.roleResolving
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.roleResolving
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.roleBlind_gap_log
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.roleBlind_gap_log
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.roleEcho_gap_log
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.roleEcho_gap_log
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.roleResolving_mixture_eq_uniform
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.roleResolving_mixture_eq_uniform
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.roleResolving_condEntropyDirect
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.roleResolving_condEntropyDirect
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.roleResolving_residual_zero
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.roleResolving_residual_zero
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.roleResolving_deficit_log
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.roleResolving_deficit_log
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.roleResolving_deficitBits_log
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.roleResolving_deficitBits_log
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.roleResolving_gap_zero_m
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.roleResolving_gap_zero_m
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.m_ary_role_exchange
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.m_ary_role_exchange
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.role_entropy_eq_gap
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.role_entropy_eq_gap
+#check @OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.binary_case
+#print axioms OperatorKO7.Meta.BoundaryGeneral.OverproductionGapRoleExchange.binary_case
+
+end OperatorKO7.Test.OverproductionGapRoleExchangeReach

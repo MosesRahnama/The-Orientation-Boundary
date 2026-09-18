@@ -1,0 +1,27 @@
+import OperatorKO7.Meta.DistinctionBoundary.GodelPrimitiveRecursiveBetaBridge
+
+namespace OperatorKO7.Test.GodelPrimitiveRecursiveBetaBridgeReach
+open OperatorKO7.Meta.DistinctionBoundary.GodelArith
+
+#check @proofRelCheckB
+#print axioms proofRelCheckB
+#check @proofRelCheck_primrec
+#print axioms proofRelCheck_primrec
+#check @proofRelCheckB_encode_iff_check
+#print axioms proofRelCheckB_encode_iff_check
+#check @proofRelCheckB_encode_iff_betaRel
+#print axioms proofRelCheckB_encode_iff_betaRel
+#check @PrimitiveRecursiveBetaClosure
+#print axioms PrimitiveRecursiveBetaClosure
+#check @PrimitiveRecursiveBetaClosure.mk
+#print axioms PrimitiveRecursiveBetaClosure.mk
+#check @PrimitiveRecursiveBetaClosure.numbering
+#print axioms PrimitiveRecursiveBetaClosure.numbering
+#check @PrimitiveRecursiveBetaClosure.betaCheckerPR
+#print axioms PrimitiveRecursiveBetaClosure.betaCheckerPR
+#check @PrimitiveRecursiveBetaClosure.canonicalAgreement
+#print axioms PrimitiveRecursiveBetaClosure.canonicalAgreement
+#check @primitiveRecursiveBetaClosure
+#print axioms primitiveRecursiveBetaClosure
+
+end OperatorKO7.Test.GodelPrimitiveRecursiveBetaBridgeReach

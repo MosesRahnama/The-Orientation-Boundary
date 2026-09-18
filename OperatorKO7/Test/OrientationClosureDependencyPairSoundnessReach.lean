@@ -1,0 +1,134 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.DependencyPairSoundness
+
+/-! # DependencyPairSoundness reach and axiom check -/
+
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.SN
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.SN
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.ArgStep
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.ArgStep
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.not_argStep_nil
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.not_argStep_nil
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.argStep_cons_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.argStep_cons_iff
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.step_app_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.step_app_iff
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.lhs_eq_app
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.lhs_eq_app
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.not_step_var
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.not_step_var
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.sn_of_step
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.sn_of_step
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.sn_arg
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.sn_arg
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.sn_subst_var
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.sn_subst_var
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.acc_cons_of
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.acc_cons_of
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.accArgs
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.accArgs
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.argStep_sn
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.argStep_sn
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.IsDefined
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.IsDefined
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.not_rootStep_of_not_defined
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.not_rootStep_of_not_defined
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.sn_app_of_not_defined
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.sn_app_of_not_defined
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.IsSubterm
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.IsSubterm
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.IsSubterm.of_app_arg_aux
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.IsSubterm.of_app_arg_aux
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.IsSubterm.of_app_arg
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.IsSubterm.of_app_arg
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.IsSubterm.vars_subset
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.IsSubterm.vars_subset
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.MinChainStep
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.MinChainStep
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.sn_of_minChain_acc
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.sn_of_minChain_acc
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.terminating_of_minChain_wf
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.terminating_of_minChain_wf
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.wellFounded_step_of_minChain_wf
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.wellFounded_step_of_minChain_wf
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.CallReductionPair
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.CallReductionPair
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.reach_weak
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.reach_weak
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.minChainStep_strict
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.minChainStep_strict
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.terminating_of_callReductionPair
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.terminating_of_callReductionPair
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freshRule
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freshRule
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freshTRS
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freshTRS
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freshTRS_no_pairs
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freshTRS_no_pairs
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freshTRS_loop
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freshTRS_loop
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.fresh_variable_control
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.fresh_variable_control
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.ImmSub
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.ImmSub
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.StepOrSub
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.StepOrSub
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.step_lift_subterm
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.step_lift_subterm
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.acc_stepOrSub_of_subterm
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.acc_stepOrSub_of_subterm
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.acc_stepOrSub_of_sn
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.acc_stepOrSub_of_sn
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.ProperSubterm
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.ProperSubterm
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.IsSubterm.subst
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.IsSubterm.subst
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.ProperSubterm.subst
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.ProperSubterm.subst
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.IsSubterm.reflTransGen
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.IsSubterm.reflTransGen
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.ProperSubterm.transGen
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.ProperSubterm.transGen
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.steps_reflTransGen
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.steps_reflTransGen
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.argStep_getElem?
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.argStep_getElem?
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.argSteps_getElem?
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.argSteps_getElem?
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.projArg
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.projArg
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.SubtermCriterion
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.SubtermCriterion
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.minChainStep_proj
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.minChainStep_proj
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.minChain_wf_of_subtermCriterion
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.minChain_wf_of_subtermCriterion
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.terminating_of_subtermCriterion
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.terminating_of_subtermCriterion
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.not_isSubterm_app_var
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.not_isSubterm_app_var
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.FreeSym
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.FreeSym
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.zeroRule
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.zeroRule
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.succRule
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.succRule
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freeRecursorTRS
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freeRecursorTRS
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freeRecursorTRS_vars
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freeRecursorTRS_vars
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freeRecursorTRS_defined_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freeRecursorTRS_defined_iff
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.succRule_rhs_recur_subterm
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.succRule_rhs_recur_subterm
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freeProj
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freeProj
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freeRecursorTRS_subtermCriterion
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freeRecursorTRS_subtermCriterion
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freeRecursorTRS_terminating
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freeRecursorTRS_terminating
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freeRecursorTRS_wellFounded
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freeRecursorTRS_wellFounded
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freeRecursorTRS_wrap_not_defined
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freeRecursorTRS_wrap_not_defined
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freeRecursor_no_wrapper_target
+#print axioms OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freeRecursor_no_wrapper_target

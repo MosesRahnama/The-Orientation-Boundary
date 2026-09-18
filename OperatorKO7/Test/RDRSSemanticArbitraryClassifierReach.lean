@@ -1,0 +1,31 @@
+import OperatorKO7.Meta.RDRSSemanticArbitraryClassifier
+
+set_option autoImplicit false
+
+namespace OperatorKO7.RDRSSemanticArbitraryClassifierReach
+
+open OperatorKO7.RDRSSemanticArbitraryClassifier
+
+#check @PayloadErasure
+#check @orienting_measure_counter_dominated_of_payload_erasure
+#check @no_decisive_payload_sensitive_of_payload_erasure
+#check @no_direct_decisive_payload_sensitive_of_payload_erasure
+#check @semantic_lens_pump_witness_of_not_orients
+#check @orients_of_no_semantic_lens_pump_witness
+#check @ArbitrarySemanticClassification
+#check @ArbitrarySemanticLabel
+#check @classifyArbitrarySemantic
+#check @classifyArbitrarySemantic_total
+#check @classifyArbitrarySemantic_label_total
+#check @arbitrarySemanticClassification_sound
+#check @classifyArbitrarySemantic_sound
+#check @counterFirstLexPayloadErasure
+#check @counterFirstLex_arbitrary_orienting_measure_counter_dominated
+#check @counterFirstLex_no_arbitrary_decisive_payload_sensitive
+#check @counterFirstLex_no_arbitrary_direct_decisive_payload_sensitive
+#check @counterFirstLex_classify_arbitrary_semantic
+#check @counterFirstLex_classify_arbitrary_semantic_total
+#check @counterFirstLex_classify_arbitrary_semantic_label_total
+#check @rdrs_semantic_arbitrary_classifier_anchor
+
+end OperatorKO7.RDRSSemanticArbitraryClassifierReach

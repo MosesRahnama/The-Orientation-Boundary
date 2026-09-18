@@ -1,0 +1,99 @@
+import OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse
+
+/-! Permanent reach and axiom audit for `LiftOrRefuse`. -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.LicensedOn
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.correctSet
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.MaximalLicensedOn
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.FiberAttained
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.licensedOn_univ_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.LicensedOn.mono
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.licensedOn_correctSet
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.collision_lifted_or_refused
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.collision_separated_by_lift
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.collision_refused
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.retainedDecoder
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.retainedDecoder_of_mem
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.retainedDecoder_fiberAttained
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.licensedOn_iff_subset_correctSet
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.maximalLicensedOn_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.maximal_refusals_of_collision
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.lift_relabel_of_collision
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.exists_injOn_fin
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.mixed_repair_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.exists_exchange
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.refusedMass
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.correctFinset
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.coe_correctFinset
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.refusedMass_nonneg
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.refusedMass_antitone
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.refusedMass_ge_min_of_collision
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.refusedMass_correctFinset_eq_risk
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.least_refusal_eq_bayesRisk
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.least_lift_eq_fiberMultiplicity
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.fiberMultiplicity_const
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.boundedMenus
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.empty_menu_mem_boundedMenus
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.menuRefusedMass
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.repairFrontier
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.menuRefusedMass_eq_refusedMass
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.menuRefusedMass_nonneg
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.repairFrontier_attained
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.repairFrontier_le_refusedMass
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.repairFrontier_antitone
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.repairFrontier_nonneg
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.repairFrontier_zero
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.repairFrontier_one_eq_bayesRisk
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.repairFrontier_eq_zero_of_fiberMultiplicity_le
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.fiberMultiplicity_le_of_repairFrontier_eq_zero
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.repairFrontier_convex
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.lift_or_refuse
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.twoVoids_lift_or_refuse
+
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.LicensedOn
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.correctSet
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.MaximalLicensedOn
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.FiberAttained
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.licensedOn_univ_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.LicensedOn.mono
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.licensedOn_correctSet
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.collision_lifted_or_refused
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.collision_separated_by_lift
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.collision_refused
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.retainedDecoder
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.retainedDecoder_of_mem
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.retainedDecoder_fiberAttained
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.licensedOn_iff_subset_correctSet
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.maximalLicensedOn_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.maximal_refusals_of_collision
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.lift_relabel_of_collision
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.exists_injOn_fin
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.mixed_repair_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.exists_exchange
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.refusedMass
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.correctFinset
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.coe_correctFinset
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.refusedMass_nonneg
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.refusedMass_antitone
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.refusedMass_ge_min_of_collision
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.refusedMass_correctFinset_eq_risk
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.least_refusal_eq_bayesRisk
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.least_lift_eq_fiberMultiplicity
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.fiberMultiplicity_const
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.boundedMenus
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.empty_menu_mem_boundedMenus
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.menuRefusedMass
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.repairFrontier
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.menuRefusedMass_eq_refusedMass
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.menuRefusedMass_nonneg
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.repairFrontier_attained
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.repairFrontier_le_refusedMass
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.repairFrontier_antitone
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.repairFrontier_nonneg
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.repairFrontier_zero
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.repairFrontier_one_eq_bayesRisk
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.repairFrontier_eq_zero_of_fiberMultiplicity_le
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.fiberMultiplicity_le_of_repairFrontier_eq_zero
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.repairFrontier_convex
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.lift_or_refuse
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.twoVoids_lift_or_refuse

@@ -1,0 +1,54 @@
+import OperatorKO7.Meta.HigherOrderRewriting_BetaBinder
+
+namespace HigherOrderRewritingBetaBinderReach
+
+open OperatorKO7
+
+#check OperatorKO7.HigherOrderRewritingBetaBinder.binderAwareSubstitute
+#check OperatorKO7.HigherOrderRewritingBetaBinder.binderFreeSubstitute
+#check OperatorKO7.HigherOrderRewritingBetaBinder.BetaStep
+#check OperatorKO7.HigherOrderRewritingBetaBinder.BetaStepOrientsPolicyCounter
+#check OperatorKO7.HigherOrderRewritingBetaBinder.ContextualBetaStep
+#check OperatorKO7.HigherOrderRewritingBetaBinder.FreeVarOccurs
+#check OperatorKO7.HigherOrderRewritingBetaBinder.FreshFor
+#check OperatorKO7.HigherOrderRewritingBetaBinder.BinderAwareSubstitutionObligation
+#check OperatorKO7.HigherOrderRewritingBetaBinder.BinderFreeContext
+#check OperatorKO7.HigherOrderRewritingBetaBinder.closedFragment_substitute_eq
+#check OperatorKO7.HigherOrderRewritingBetaBinder.closedFragment_binderFreeSubstitute_eq
+#check OperatorKO7.HigherOrderRewritingBetaBinder.closedFragment_binderFreeSubstitute_closed
+#check OperatorKO7.HigherOrderRewritingBetaBinder.BinderFreeContext.plug_closed
+#check OperatorKO7.HigherOrderRewritingBetaBinder.tree_policy_binder_free_substitution_closed
+#check OperatorKO7.HigherOrderRewritingBetaBinder.shared_policy_binder_free_substitution_closed
+#check OperatorKO7.HigherOrderRewritingBetaBinder.explicit_sharing_policy_binder_free_substitution_closed
+#check OperatorKO7.HigherOrderRewritingBetaBinder.tree_policy_binder_free_context_closed
+#check OperatorKO7.HigherOrderRewritingBetaBinder.shared_policy_binder_free_context_closed
+#check OperatorKO7.HigherOrderRewritingBetaBinder.explicit_sharing_policy_binder_free_context_closed
+#check OperatorKO7.HigherOrderRewritingBetaBinder.beta_step_rewriteStep
+#check OperatorKO7.HigherOrderRewritingBetaBinder.beta_step_contextual_closure
+#check OperatorKO7.HigherOrderRewritingBetaBinder.binderAwareSubstitutionObligation_requires_freshness
+#check OperatorKO7.HigherOrderRewritingBetaBinder.binderAwareSubstitute_under_binder
+#check OperatorKO7.HigherOrderRewritingBetaBinder.beta_compatible_policy_counterexample
+#check OperatorKO7.HigherOrderRewritingBetaBinder.beta_compatible_policy_does_not_orient_beta_steps
+#check OperatorKO7.HigherOrderRewritingBetaBinder.PolicyBranchSplitStatus
+#check OperatorKO7.HigherOrderRewritingBetaBinder.policy_branch_split_status
+
+example : OperatorKO7.HigherOrderRewritingBetaBinder.BinderFreeContext
+    OperatorKO7.HigherOrderRewritingSyntax.Context.hole :=
+  OperatorKO7.HigherOrderRewritingBetaBinder.BinderFreeContext.hole
+
+example : OperatorKO7.HigherOrderRewritingBetaBinder.PolicyBranchSplitStatus :=
+  OperatorKO7.HigherOrderRewritingBetaBinder.policy_branch_split_status
+
+example : ¬ OperatorKO7.HigherOrderRewritingBetaBinder.BetaStepOrientsPolicyCounter
+    OperatorKO7.HigherOrderRewritingSyntax.betaCompatiblePolicy :=
+  OperatorKO7.HigherOrderRewritingBetaBinder.beta_compatible_policy_does_not_orient_beta_steps
+
+example : ∃ a b : OperatorKO7.HigherOrderRewritingSyntax.HOTerm,
+    OperatorKO7.HigherOrderRewritingBetaBinder.BetaStep a b ∧
+      ¬ OperatorKO7.HigherOrderRewritingBoundary.PolicyCounter
+          OperatorKO7.HigherOrderRewritingSyntax.betaCompatiblePolicy b <
+        OperatorKO7.HigherOrderRewritingBoundary.PolicyCounter
+          OperatorKO7.HigherOrderRewritingSyntax.betaCompatiblePolicy a :=
+  OperatorKO7.HigherOrderRewritingBetaBinder.beta_compatible_policy_counterexample
+
+end HigherOrderRewritingBetaBinderReach

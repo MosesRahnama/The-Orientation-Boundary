@@ -1,0 +1,436 @@
+import OperatorKO7.Meta.RDRSCoverageLedger
+import OperatorKO7.Meta.RDRSCoverageLedgerSeed
+import OperatorKO7.Meta.RDRSCoverageEvidenceLedger
+import OperatorKO7.Meta.RDRSDPProcessorClassification
+import OperatorKO7.Meta.PayloadExposureMatrix
+import OperatorKO7.Meta.MatrixOverPolynomialReduction
+import OperatorKO7.Meta.TupleDecomposition
+import OperatorKO7.Meta.RDRSPathOrderDichotomy
+import OperatorKO7.Meta.MatrixBarrierArbitrary
+import OperatorKO7.Meta.MatrixBarrierArcticTropical
+import OperatorKO7.Meta.PolynomialBarrierGeneral
+import OperatorKO7.Meta.MaxBarrier
+import OperatorKO7.Meta.MultilinearBarrier
+import OperatorKO7.Meta.RDRSSemanticStructuralAtlas
+import OperatorKO7.Meta.RDRSAlgebraicInterpretationAtlas
+import OperatorKO7.Meta.RDRSConditionalTypedAtlas
+import OperatorKO7.Meta.RDRSNonConservativeEscapeAtlas
+import OperatorKO7.Meta.Methods.UnarySignatureInapplicability
+import OperatorKO7.Meta.Methods.PathOrderRows
+import OperatorKO7.Meta.Methods.AlgebraicInterpretationRows
+import OperatorKO7.Meta.Methods.SemanticStructuralRows
+import OperatorKO7.Meta.Methods.DependencyPairTypedRows
+import OperatorKO7.Meta.Methods.AdmittanceInapplicabilityRows
+import OperatorKO7.Meta.Methods.SubstrateChangeRows
+import OperatorKO7.Meta.Methods.ExactPromotionCarriers
+
+/-!
+# Axiom-inventory check for U6 + U3 seed + Phase C capstones
+
+Per the Lean Agent Audit Source of Truth, Gate R1 / R7: report the
+trusted-base closure of every capstone theorem written in this session.
+
+Re-running `lake env lean
+OperatorKO7/Test/RDRSCoverageLedgerAxiomCheck.lean` prints the axiom
+closure of every listed declaration to stdout. The allowed-axiom set
+for this project is `{propext, Classical.choice, Quot.sound}`; any
+other axiom appearing in any closure must be treated as a critical
+audit finding per the bible's Gate R1.
+-/
+
+-- U6 (Milestone U6: Generated Coverage Ledger)
+#print axioms OperatorKO7.RDRSCoverageLedger.Full.rdrs_coverage_ledger_closed
+#print axioms OperatorKO7.RDRSCoverageLedger.Full.u6ClassOf_total
+#print axioms OperatorKO7.RDRSCoverageLedger.Full.temporary_unclassified_count
+#print axioms OperatorKO7.RDRSCoverageLedger.Full.u6_partition_total
+#print axioms OperatorKO7.RDRSCoverageLedger.Full.rdrsFullCoverageLedger_length
+#print axioms OperatorKO7.RDRSCoverageLedger.Full.ledgerRow_classification_correct
+#print axioms OperatorKO7.RDRSCoverageLedger.Full.ledgerRow_family_correct
+#print axioms OperatorKO7.RDRSCoverageLedger.Full.ledgerRow_leanTheoremIdentifier_correct
+
+-- U3 seed (Milestone U3 prerequisite: coverage seed)
+#print axioms OperatorKO7.RDRSCoverageLedger.rdrs_coverage_ledger_seed_closed
+#print axioms OperatorKO7.RDRSCoverageLedger.coverageClassOf_total
+#print axioms OperatorKO7.RDRSCoverageLedger.coverage_partition_total
+#print axioms OperatorKO7.RDRSCoverageLedger.rdrsDirectUniverseRows_length
+#print axioms OperatorKO7.RDRSCoverageLedger.ledgerRow_classification_correct
+
+-- WP-5 (RDRS coverage evidence ledger: semantic layer over the U6 status ledger)
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.rdrs_coverage_evidence_ledger_closed
+
+-- Dispatch ORIENTATION native-semantic complement and 76/0 capstone.
+#print axioms OperatorKO7.Methods.OrientationClosure.NativeSemanticCoverage.MissingNativeRowClaim
+#print axioms OperatorKO7.Methods.OrientationClosure.NativeSemanticCoverage.missingNativeEvidence
+#print axioms OperatorKO7.Methods.OrientationClosure.NativeSemanticCoverage.missingNativeRows_count
+#print axioms OperatorKO7.Methods.OrientationClosure.NativeSemanticCoverage.legacyNativeRows_count
+#print axioms OperatorKO7.Methods.OrientationClosure.NativeSemanticCoverage.missingNativeRows_have_evidence
+#print axioms OperatorKO7.Methods.OrientationClosure.NativeSemanticCoverage.missing_native_coverage_closed
+#print axioms OperatorKO7.Methods.OrientationClosure.ResearchPackages.ori1_closed
+#print axioms OperatorKO7.Methods.OrientationClosure.ResearchPackages.ori2_closed
+#print axioms OperatorKO7.Methods.OrientationClosure.ResearchPackages.ori3_closed
+#print axioms OperatorKO7.Methods.OrientationClosure.ResearchPackages.ori4_closed
+#print axioms OperatorKO7.Methods.OrientationClosure.ResearchPackages.ori5_closed
+#print axioms OperatorKO7.Methods.OrientationClosure.ResearchPackages.ori6_closed
+#print axioms OperatorKO7.Methods.OrientationClosure.ResearchPackages.orientation_research_packages_closed
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.Native.NativeRowClaim
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.Native.nativeRowClaim_closed
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.Native.NativeMethodEvidence
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.Native.nativeMethodEvidence
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.Native.nativeTheoremBackedRows_count
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.Native.nativeCuratedRows_count
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.Native.every_native_row_has_evidence
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.Native.rdrs_native_coverage_evidence_ledger_closed
+#print axioms OperatorKO7.Methods.OrderedMatrixInterpretationRows.rational_real_matrix_exact_row
+#print axioms OperatorKO7.Methods.OrderedMatrixInterpretationRows.fractionalMatrixMethod_entry_not_nat
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SchemaSymbol
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SchemaSymbol.base
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SchemaSymbol.succ
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SchemaSymbol.wrap
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SchemaSymbol.recur
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBO
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBO.mk
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBO.variableWeight
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBO.variableWeight_pos
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBO.symbolWeight
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBO.constantWeight_ge_variable
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBO.precedenceRank
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBO.precedenceRank_injective
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBO.zeroWeightOnlySucc
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBO.zeroWeightSuccMaximal
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.schemaKBOWeight
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SchemaVariableCondition
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.STerm.matches
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SuccIterationOfVar
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SuccIterationOfVar.once
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SuccIterationOfVar.more
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SchemaKBOGt
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SchemaKBOGt.weight
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SchemaKBOGt.unaryVariable
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SchemaKBOGt.precedence
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SchemaKBOGt.succLex
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SchemaKBOGt.wrapLeftLex
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SchemaKBOGt.wrapRightLex
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SchemaKBOGt.recurFirstLex
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SchemaKBOGt.recurSecondLex
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SchemaKBOGt.recurThirdLex
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.SchemaKBOGt.variableCondition
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.finiteStandardKBO
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.finiteStandardKBO_orients_strictWeight_witness
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.finiteStandardKBO_orients_precedence_witness
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBORecSuccObstruction
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBORecSuccObstruction.mk
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBORecSuccObstruction.noSchemaOrientation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBORecSuccObstruction.sourceInstantiation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBORecSuccObstruction.targetInstantiation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBORecSuccObstruction.actualRootStep
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.standardKBO_no_ko7_rec_succ
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.StandardKBORowClaim
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.DPSubtermCriterionRowClaim
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7_dpSubtermCriterion_row_anchor
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RootRule
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RootRule.intDelta
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RootRule.mergeVoidLeft
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RootRule.mergeVoidRight
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RootRule.mergeCancel
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RootRule.recZero
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RootRule.recSucc
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RootRule.eqRefl
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RootRule.eqDiff
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.allKO7RootRules
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.allKO7RootRules_nodup
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.allKO7RootRules_complete
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7DefinedRoot
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7DefinedRoot.integrate
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7DefinedRoot.merge
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7DefinedRoot.recursor
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7DefinedRoot.equality
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7RuleRoot
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.traceDefinedRoots
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7RuleLhsTemplate
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7RuleRhsTemplate
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RuleInstance
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RuleInstance.intDelta
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RuleInstance.mergeVoidLeft
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RuleInstance.mergeVoidRight
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RuleInstance.mergeCancel
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RuleInstance.recZero
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RuleInstance.recSucc
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RuleInstance.eqRefl
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RuleInstance.eqDiff
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.step_iff_complete_KO7RuleInstance
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7RuleTemplate_is_ruleInstance
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7RuleTemplate_is_actual_step
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7RootDirectCallB
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RootDirectCall
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7RootClosed
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7CanonicalUsableRules
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7CanonicalUsableRules_nodup
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.recSucc_directlyCalls_recZero
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.recSucc_directlyCalls_recSucc
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7CanonicalUsableRules_rootClosed
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7CanonicalUsableRules_retains_recSucc
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7CanonicalUsableRules_least
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7CanonicalUsableRules_retained_recSucc_step
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7DPRhsSchema
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.schemaDefinedRoots
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7DPRhsSchema_definedRoots
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.DPPair_rhs_schema_extraction
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7RulesAtSchemaRoots
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7RootClosureStep
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7GeneratedUsableRules
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7RulesAtDPRhsRoots_exact
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7GeneratedUsableRules_exact
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7GeneratedUsableRules_fixedPoint
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7GeneratedUsableRules_rootClosed
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7GeneratedUsableRules_least
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.retainedDPProjection
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.RetainedProjectionDecreases
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.retainedProjection_decreases_on_DPPair
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7DPPairUsableRulesCertificate
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7DPPairUsableRulesCertificate.mk
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7DPPairUsableRulesCertificate.rhsSchemaExact
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7DPPairUsableRulesCertificate.extractedRootsExact
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7DPPairUsableRulesCertificate.rulesGenerated
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7DPPairUsableRulesCertificate.everyPairExtracts
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7DPPairUsableRulesCertificate.rulesExact
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7DPPairUsableRulesCertificate.fixedPoint
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7DPPairUsableRulesCertificate.rootClosed
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7DPPairUsableRulesCertificate.leastRootClosed
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7DPPairUsableRulesCertificate.retainsDuplicatingRule
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7DPPairUsableRulesCertificate.completeStepEnumeration
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7DPPairUsableRulesCertificate.retainedProjectionStrict
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.KO7DPPairUsableRulesCertificate.reversePairWellFounded
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.UsableRulesConcreteRowClaim
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7_usableRules_rootClosure_minimality_anchor
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.RowClaim
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.MethodInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.MethodInterpretation.kboVariableConditionOrder
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.MethodInterpretation.subtermCoefficientKBOOrder
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.MethodInterpretation.cichonSlowGrowingMethod
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.MethodInterpretation.dpSubtermProjectionRow
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.MethodInterpretation.dpArgumentFilteringMethod
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.MethodInterpretation.dpNeutralProcessorMethod
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.MethodInterpretation.usableRulesConcreteRow
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.MethodInterpretation.sharingMethod
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.MethodInterpretation.equationalQuotientMethod
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.MethodInterpretation.cycleRewritingUnaryKill
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.MethodInterpretation.stringRewritingUnaryKill
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.MethodInterpretation.sizeChangeMethod
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.interpretedFamily
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.interpretedFamily_eq_index
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.dpCarrier
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.dpCarrier_eq_ko7DPSubtermCriterionExact
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.AnchorInstanceHolds
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.rowClaim_of_interpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.anchorInstance_of_rowClaim
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.anchorInstance_holds
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.TheoremBackedEvidence
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.TheoremBackedEvidence.interpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.TheoremBackedEvidence.anchorInstance
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.TheoremBackedEvidence.rowClaim
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedEvidenceOf
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.standardKBOInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.subtermCoefficientKBOInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.cichonSlowGrowingInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.dpArgumentFilteringInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.dpNeutralProcessorInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.usableRulesInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.sharingInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.equationalQuotientInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.cycleRewritingInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.stringRewritingInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.sizeChangeInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CuratedReason
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CuratedReason.noTransportAdapter
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CuratedReason.externalNonLane
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CuratedReason.substrateChange
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CuratedReason.importDependent
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curatedReason?
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curated_row_has_no_semantic_claim
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curated_methodInterpretation_isEmpty
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CuratedDisposition
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CuratedDisposition.mk
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CuratedDisposition.reasonAssigned
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CuratedDisposition.noSemanticClaim
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CuratedDisposition.noInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CuratedDisposition.definiteClass
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curatedDisposition_of_reason
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.RowDisposition
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.RowDisposition.theoremBacked
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.RowDisposition.curated
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.RowDisposition.isTheoremBacked
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.rowDisposition
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.InterpretationResolution
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.interpretationResolution
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.interpretationResolution_total
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.rowDisposition_matches_split
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curatedRows
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows_mem_iff
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curatedRows_mem_iff
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curated_rows_have_no_interpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows_nodup
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curatedRows_nodup
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.buckets_disjoint
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.buckets_complete
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows_count
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curatedRows_count
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.split_total
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows_nonempty
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows_eq
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curatedRowsWithReason
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curated_noTransportAdapter_count
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curated_externalNonLane_count
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curated_substrateChange_count
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curated_importDependent_count
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curated_reason_partition
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows_eq_disposition_filter
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curatedRows_eq_disposition_filter
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.buckets_append_perm_allMethodFamilies
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.buckets_append_mem_iff
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBacked_rows_have_interpretations
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBacked_rows_have_evidence
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBacked_rows_inhabit_rowClaim
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CoverageEvidenceLedgerClosed
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CoverageEvidenceLedgerClosed.mk
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CoverageEvidenceLedgerClosed.dispositionTotal
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CoverageEvidenceLedgerClosed.theoremBackedFilterExact
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CoverageEvidenceLedgerClosed.curatedFilterExact
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CoverageEvidenceLedgerClosed.disjoint
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CoverageEvidenceLedgerClosed.complete
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CoverageEvidenceLedgerClosed.bucketPermutation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CoverageEvidenceLedgerClosed.theoremBackedCount
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CoverageEvidenceLedgerClosed.curatedCount
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CoverageEvidenceLedgerClosed.totalRows
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CoverageEvidenceLedgerClosed.theoremBackedNonempty
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CoverageEvidenceLedgerClosed.everyTheoremBackedRowHasAdapter
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CoverageEvidenceLedgerClosed.everyTheoremBackedRowInhabitsClaim
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CoverageEvidenceLedgerClosed.everyCuratedRowHasNoInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CoverageEvidenceLedgerClosed.everyRowHasResolution
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CoverageEvidenceLedgerClosed.noCuratedRowClaimsSemantics
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.CoverageEvidenceLedgerClosed.zeroUnclassified
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.rdrs_coverage_evidence_ledger_anchor
+
+-- WP-5 exact-carrier promotion layer. Every public declaration introduced by
+-- `Meta/Methods/ExactPromotionCarriers.lean` is axiom-inventoried here.
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7ArgumentFilteringMethod
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7ArgumentFilteringMethod.counterOnly
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7ArgumentFilteringMethod.constructorFilter
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7ArgumentFilteringMethod.witness
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7ArgumentFilteringMethod.rank
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.ArgumentFilteringCertifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.argumentFiltering_certifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.ArgumentFilteringExactRowClaim
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7NeutralDPProcessorMethod
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7NeutralDPProcessorMethod.identity
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7NeutralDPProcessorMethod.processor
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.NeutralDPProcessorCertifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.neutralDPProcessor_certifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.NeutralDPProcessorExactRowClaim
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7SizeChangeMethod
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7SizeChangeMethod.schemaSingleCall
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7SizeChangeMethod.graph
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7SizeChangeMethod.rank
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.SizeChangeCertifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.sizeChange_certifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.SizeChangeExactRowClaim
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7CichonSlowGrowingMethod
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7CichonSlowGrowingMethod.guardedContextual
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7CichonSlowGrowingMethod.note
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7CichonSlowGrowingMethod.bound
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.CichonSlowGrowingCertifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.cichonSlowGrowing_certifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.CichonSlowGrowingExactRowClaim
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7EquationalQuotientMethod
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7EquationalQuotientMethod.mergeCommutativity
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7EquationalQuotientMethod.equation
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.EquationalQuotientCertifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.equationalQuotient_certifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.EquationalQuotientExactRowClaim
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7SharingMethod
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7SharingMethod.explicitSharedNode
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7SharingMethod.readBack
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.KO7SharingMethod.size
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.SharingCertifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.sharing_certifies
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.SharingExactRowClaim
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.argumentFiltering_sizeChange_rank_eq_dpProjection
+#print axioms OperatorKO7.Methods.ExactPromotionCarriers.argumentFiltering_sizeChange_share_confession_core
+
+-- WP-5 NameGate: every distinct live ledger anchor must resolve as a declaration,
+-- not as a String. A missing name fails here as well as in the reach file.
+#print axioms OperatorKO7.KBOImpossible.no_kbo_orients_ko7_rec_succ_trace
+#print axioms OperatorKO7.RDRSPathOrderDichotomy.kboBarrierVariant_no_symbolic_orientation
+#print axioms OperatorKO7.MatrixBarrierArbitrary.no_global_step_orientation_matrixArbitrary_of_scalar_dominance_pump
+#print axioms OperatorKO7.MatrixBarrierArcticTropical.no_global_step_orientation_arcticMatrix_of_scalar_dominance_pump
+#print axioms OperatorKO7.MatrixBarrierArcticTropical.no_global_step_orientation_tropicalMatrix_of_scalar_dominance_pump
+#print axioms OperatorKO7.Meta.RDRSSemanticStructuralAtlas.rdrs_semantic_structural_layer_closed
+#print axioms OperatorKO7.PolynomialBarrierGeneral.no_global_step_orientation_polynomial_of_unbounded
+#print axioms OperatorKO7.MaxBarrier.no_global_step_orientation_max_of_unbounded
+#print axioms OperatorKO7.MultilinearBarrier.no_global_step_orientation_multilinear_of_unbounded
+#print axioms OperatorKO7.RDRSAlgebraicInterpretationAtlas.rdrs_algebraic_interpretation_layer_closed
+#print axioms OperatorKO7.RDRSDPProcessorClassification.rdrs_dp_processor_classification_closed
+#print axioms OperatorKO7.RDRSPathOrderDichotomy.rdrs_path_order_layer_closed
+#print axioms OperatorKO7.RDRSConditionalTypedAtlas.rdrs_conditional_typed_layer_closed
+#print axioms OperatorKO7.RDRSNonConservativeEscapeAtlas.rdrs_nonconservative_escape_layer_closed
+#print axioms OperatorKO7.Methods.UnarySignatureInapplicability.cycleRewriting_inapplicable
+#print axioms OperatorKO7.Methods.UnarySignatureInapplicability.stringRewriting_inapplicable
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.standardKBO_no_ko7_rec_succ
+#print axioms OperatorKO7.KBOSubtermCoefficient.subtermCoefficientKBO_no_ko7_rec_succ
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7_dpSubtermCriterion_row_anchor
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.ko7_usableRules_rootClosure_minimality_anchor
+#print axioms OperatorKO7.Methods.PathOrderRows.kboWithStatus_row_anchor
+#print axioms OperatorKO7.Methods.PathOrderRows.generalizedKBO_row_anchor
+#print axioms OperatorKO7.Methods.PathOrderRows.acKBO_row_anchor
+#print axioms OperatorKO7.Methods.PathOrderRows.transfiniteKBO_row_anchor
+#print axioms OperatorKO7.Methods.PathOrderRows.lambdaFreeKBO_row_anchor
+#print axioms OperatorKO7.Methods.PathOrderRows.polynomialKBO_row_anchor
+#print axioms OperatorKO7.Methods.PathOrderRows.acRPO_row_anchor
+#print axioms OperatorKO7.Methods.PathOrderRows.rpoModuloPermutation_row_anchor
+#print axioms OperatorKO7.Methods.PathOrderRows.cichonSlowGrowing_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.linearPolyQ_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.linearPolyR_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.negativeCoefficientPolynomial_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.maxPolynomial_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.nonlinearHigherDegreePolynomial_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.multilinearInterpretation_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.matrixNScalarProjection_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.matrixQRScalarProjection_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.arcticScalarProjection_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.tropicalScalarProjection_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.triangularMatrix_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.tupleInterpretationStrictS_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.higherOrderTupleInterpretation_row_anchor
+#print axioms OperatorKO7.Methods.AlgebraicInterpretationRows.strictMonotoneAlgebraArchimedean_row_anchor
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.extendedMonotoneAlgebra_row_anchor
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.semanticLabeling_row_anchor
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.predictiveLabeling_row_anchor
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.rootLabeling_row_anchor
+#print axioms OperatorKO7.Methods.SemanticStructuralRows.selfLabelingEquational_row_anchor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.dpProcessorClassification_row_anchor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.dpArgumentFiltering_row_anchor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.dpReductionPairProcessor_row_anchor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.dpNeutralProcessors_row_anchor
+#print axioms OperatorKO7.Methods.DependencyPairTypedRows.twoDDPForCTRS_row_anchor
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.generalSchemaAdmittance_row_anchor
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.sizedTypesAdmittance_row_anchor
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.coqGuardAdmittance_row_anchor
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.linearLogicTypingBarrier_row_anchor
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.abstractInterpretationAdmittance_row_anchor
+#print axioms OperatorKO7.Methods.AdmittanceInapplicabilityRows.sizeChangeTerminationEscape_row_anchor
+#print axioms OperatorKO7.Methods.SubstrateChangeRows.equationalQuotientNonConservativity_row_anchor
+#print axioms OperatorKO7.SymbolicComparatorBarrier.instantiate_dupSrc
+#print axioms OperatorKO7.SymbolicComparatorBarrier.instantiate_dupTgt
+#print axioms OperatorKO7.DPSubtermCriterionExactNS.ko7DPSubtermCriterionExact
+
+-- Phase C (theory-expansion sprint 6)
+#print axioms OperatorKO7.StepDuplicating.payloadExposureMatrix_projects_payloadCount
+#print axioms OperatorKO7.StepDuplicating.matrixOverPolynomial_reduces_to_nonlinear_escape
+#print axioms OperatorKO7.StepDuplicating.matrixOverPolynomial_correspondence_certificate
+#print axioms OperatorKO7.StepDuplicating.tupleDecomposition_to_scalar_or_matrix
+#print axioms OperatorKO7.StepDuplicating.phaseC_vector_matrix_tuple_closed
+
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.naturalMatrixInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.triangularMatrixInterpretation
+#print axioms OperatorKO7.Methods.NaturalMatrixInterpretationRows.naturalMatrix_exact_row
+#print axioms OperatorKO7.Methods.NaturalMatrixInterpretationRows.triangularMatrix_exact_row

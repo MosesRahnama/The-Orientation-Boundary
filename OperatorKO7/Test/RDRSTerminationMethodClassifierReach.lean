@@ -1,0 +1,8 @@
+import OperatorKO7.Meta.RDRSTerminationMethodClassifier
+
+namespace OperatorKO7.Test.RDRSTerminationMethodClassifierReach
+
+#check @OperatorKO7.RDRSTerminationMethodClassifier.supersededBy
+#check @OperatorKO7.RDRSTerminationMethodClassifier.rdrs_termination_method_classifier_shim_marker
+
+end OperatorKO7.Test.RDRSTerminationMethodClassifierReach

@@ -1,0 +1,121 @@
+import OperatorKO7.Meta.KBO_SubtermCoefficient
+
+/-!
+# Reach gate: KBO with subterm coefficients (carrier, obstruction, trace bridge)
+
+Pins every public declaration of the modules listed below with a paired
+`#check @name` and `#print axioms name`. Source-to-reach and reach-to-axiom
+differences are empty by construction: this file is generated from the
+namespace-aware declaration inventory of those sources. Every axiom closure must
+be a subset of `{propext, Classical.choice, Quot.sound}` and no closure may
+mention `sorryAx`. This gate is import-and-check only; it proves no new content.
+
+* `OperatorKO7/Meta/KBO_SubtermCoefficient.lean`: 17 public declarations
+* structure constructor and projections pinned explicitly: 31
+-/
+
+set_option autoImplicit false
+
+namespace OperatorKO7.Test.KBOSubtermCoefficientReach
+
+-- OperatorKO7/Meta/KBO_SubtermCoefficient.lean
+#check @OperatorKO7.KBOSubtermCoefficient.SchemaFunctionSymbol
+#print axioms OperatorKO7.KBOSubtermCoefficient.SchemaFunctionSymbol
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO
+#check @OperatorKO7.KBOSubtermCoefficient.subtermCoefficientWeight
+#print axioms OperatorKO7.KBOSubtermCoefficient.subtermCoefficientWeight
+#check @OperatorKO7.KBOSubtermCoefficient.WeightedVariableCondition
+#print axioms OperatorKO7.KBOSubtermCoefficient.WeightedVariableCondition
+#check @OperatorKO7.KBOSubtermCoefficient.STerm.matchesSymbol
+#print axioms OperatorKO7.KBOSubtermCoefficient.STerm.matchesSymbol
+#check @OperatorKO7.KBOSubtermCoefficient.SuccIterationOfVar
+#print axioms OperatorKO7.KBOSubtermCoefficient.SuccIterationOfVar
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt.variableCondition
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt.variableCondition
+#check @OperatorKO7.KBOSubtermCoefficient.sampleCoefficients
+#print axioms OperatorKO7.KBOSubtermCoefficient.sampleCoefficients
+#check @OperatorKO7.KBOSubtermCoefficient.finiteSubtermCoefficientKBO
+#print axioms OperatorKO7.KBOSubtermCoefficient.finiteSubtermCoefficientKBO
+#check @OperatorKO7.KBOSubtermCoefficient.finiteSubtermCoefficientKBO_orients_strictWeight_witness
+#print axioms OperatorKO7.KBOSubtermCoefficient.finiteSubtermCoefficientKBO_orients_strictWeight_witness
+#check @OperatorKO7.KBOSubtermCoefficient.finiteSubtermCoefficientKBO_orients_precedence_witness
+#print axioms OperatorKO7.KBOSubtermCoefficient.finiteSubtermCoefficientKBO_orients_precedence_witness
+#check @OperatorKO7.KBOSubtermCoefficient.subtermCoefficientKBO_no_schema_orientation
+#print axioms OperatorKO7.KBOSubtermCoefficient.subtermCoefficientKBO_no_schema_orientation
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBORecSuccObstruction
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBORecSuccObstruction
+#check @OperatorKO7.KBOSubtermCoefficient.subtermCoefficientKBO_no_ko7_rec_succ
+#print axioms OperatorKO7.KBOSubtermCoefficient.subtermCoefficientKBO_no_ko7_rec_succ
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBORowClaim
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBORowClaim
+#check @OperatorKO7.KBOSubtermCoefficient.no_subtermCoefficientKBO_orients_ko7_rec_succ_trace
+#print axioms OperatorKO7.KBOSubtermCoefficient.no_subtermCoefficientKBO_orients_ko7_rec_succ_trace
+
+-- structure constructor and projections
+#check @OperatorKO7.KBOSubtermCoefficient.SchemaFunctionSymbol.base
+#print axioms OperatorKO7.KBOSubtermCoefficient.SchemaFunctionSymbol.base
+#check @OperatorKO7.KBOSubtermCoefficient.SchemaFunctionSymbol.succ
+#print axioms OperatorKO7.KBOSubtermCoefficient.SchemaFunctionSymbol.succ
+#check @OperatorKO7.KBOSubtermCoefficient.SchemaFunctionSymbol.wrap
+#print axioms OperatorKO7.KBOSubtermCoefficient.SchemaFunctionSymbol.wrap
+#check @OperatorKO7.KBOSubtermCoefficient.SchemaFunctionSymbol.recur
+#print axioms OperatorKO7.KBOSubtermCoefficient.SchemaFunctionSymbol.recur
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO.mk
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO.mk
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO.coefficients
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO.coefficients
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO.variableWeight
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO.variableWeight
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO.variableWeight_pos
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO.variableWeight_pos
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO.symbolWeight
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO.symbolWeight
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO.constantWeight_ge_variable
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO.constantWeight_ge_variable
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO.precedenceRank
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO.precedenceRank
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO.precedenceRank_injective
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO.precedenceRank_injective
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO.zeroWeightOnlySucc
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO.zeroWeightOnlySucc
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO.zeroWeightSuccMaximal
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBO.zeroWeightSuccMaximal
+#check @OperatorKO7.KBOSubtermCoefficient.SuccIterationOfVar.once
+#print axioms OperatorKO7.KBOSubtermCoefficient.SuccIterationOfVar.once
+#check @OperatorKO7.KBOSubtermCoefficient.SuccIterationOfVar.more
+#print axioms OperatorKO7.KBOSubtermCoefficient.SuccIterationOfVar.more
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt.weight
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt.weight
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt.unaryVariable
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt.unaryVariable
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt.precedence
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt.precedence
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt.succLex
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt.succLex
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt.wrapLeftLex
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt.wrapLeftLex
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt.wrapRightLex
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt.wrapRightLex
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt.recurFirstLex
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt.recurFirstLex
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt.recurSecondLex
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt.recurSecondLex
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt.recurThirdLex
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBOGt.recurThirdLex
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBORecSuccObstruction.mk
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBORecSuccObstruction.mk
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBORecSuccObstruction.noSchemaOrientation
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBORecSuccObstruction.noSchemaOrientation
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBORecSuccObstruction.weightedPayloadStrict
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBORecSuccObstruction.weightedPayloadStrict
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBORecSuccObstruction.sourceInstantiation
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBORecSuccObstruction.sourceInstantiation
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBORecSuccObstruction.targetInstantiation
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBORecSuccObstruction.targetInstantiation
+#check @OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBORecSuccObstruction.actualRootStep
+#print axioms OperatorKO7.KBOSubtermCoefficient.SubtermCoefficientKBORecSuccObstruction.actualRootStep
+
+end OperatorKO7.Test.KBOSubtermCoefficientReach

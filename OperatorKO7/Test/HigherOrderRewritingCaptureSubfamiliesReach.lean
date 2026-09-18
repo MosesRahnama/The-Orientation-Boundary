@@ -1,0 +1,277 @@
+import OperatorKO7.Meta.HigherOrderRewriting_CaptureSubfamilies
+
+namespace HigherOrderRewritingCaptureSubfamiliesReach
+
+open OperatorKO7
+
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.IsLam
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.BinderFreeHOTerm
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.ShareFreeHOTerm
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.BetaFreeHOTerm
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.LinearHOTerm
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.DAGSharedHOTerm
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.BetaFreeContext
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.CaptureSafeSubstitutionObligation
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.ContextSafeSubstitutionObligation
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.BetaCounterexamplePackage
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.ShareFreeBoundaryEmbedding
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.FullCaptureSemanticsStatus
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.HigherOrderCaptureSubfamilyCatalog
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.closedFragment_not_lam
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.closedFragment_betaFree
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.closedFragment_binderFree
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.embedSharedTerm_dagShared
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.shareFree_closedFragment_linear
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.binderFree_substitute
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.shareFree_substitute
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.BinderFreeContext.plug_binderFree
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.BetaFreeContext.plug_betaFree
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.shareFree_closedFragment_has_boundary_term
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.shareFree_fragment_embeds_old_no_sharing_boundary
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.beta_compatible_counterexample_package
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.captureSafeSubstitutionObligation_projects_binder_aware
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.captureSafeSubstitutionObligation_requires_freshness
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.captureSafeSubstitutionObligation_projects_argument_binder_free
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.captureSafeSubstitutionObligation_projects_argument_share_free
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.captureSafeSubstitutionObligation_projects_body_binder_free
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.captureSafeSubstitutionObligation_projects_body_share_free
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.captureSafeSubstitutionObligation_under_binder
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.captureSafeSubstitutionObligation_preserves_binder_free
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.captureSafeSubstitutionObligation_preserves_share_free
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.contextSafeSubstitutionObligation_projects_binder_free_context
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.contextSafeSubstitutionObligation_projects_beta_free_context
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.contextSafeSubstitutionObligation_projects_term_binder_free
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.contextSafeSubstitutionObligation_projects_term_beta_free
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.contextSafeSubstitutionObligation_plug_binder_free
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.contextSafeSubstitutionObligation_plug_beta_free
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.full_capture_semantics_exact_boundary
+#check OperatorKO7.HigherOrderRewritingCaptureSubfamilies.capture_subfamily_catalog
+
+example : OperatorKO7.HigherOrderRewritingCaptureSubfamilies.HigherOrderCaptureSubfamilyCatalog :=
+  OperatorKO7.HigherOrderRewritingCaptureSubfamilies.capture_subfamily_catalog
+
+example : OperatorKO7.HigherOrderRewritingCaptureSubfamilies.FullCaptureSemanticsStatus :=
+  OperatorKO7.HigherOrderRewritingCaptureSubfamilies.full_capture_semantics_exact_boundary
+
+example : OperatorKO7.HigherOrderRewritingCaptureSubfamilies.BetaCounterexamplePackage :=
+  OperatorKO7.HigherOrderRewritingCaptureSubfamilies.beta_compatible_counterexample_package
+
+example {t : OperatorKO7.HigherOrderRewritingSyntax.HOTerm}
+    (ht : OperatorKO7.HigherOrderRewritingSyntax.ClosedFragment t) :
+    OperatorKO7.HigherOrderRewritingCaptureSubfamilies.BetaFreeHOTerm t :=
+  OperatorKO7.HigherOrderRewritingCaptureSubfamilies.closedFragment_betaFree ht
+
+example {t : OperatorKO7.HigherOrderRewritingSyntax.HOTerm}
+    (ht : OperatorKO7.HigherOrderRewritingSyntax.ClosedFragment t) :
+    OperatorKO7.HigherOrderRewritingCaptureSubfamilies.BinderFreeHOTerm t :=
+  OperatorKO7.HigherOrderRewritingCaptureSubfamilies.closedFragment_binderFree ht
+
+example {t : OperatorKO7.HigherOrderRewritingSyntax.HOTerm}
+    (ht : OperatorKO7.HigherOrderRewritingSyntax.ClosedFragment t)
+    (hs : OperatorKO7.HigherOrderRewritingCaptureSubfamilies.ShareFreeHOTerm t) :
+    OperatorKO7.HigherOrderRewritingCaptureSubfamilies.ShareFreeBoundaryEmbedding t :=
+  OperatorKO7.HigherOrderRewritingCaptureSubfamilies.shareFree_fragment_embeds_old_no_sharing_boundary ht hs
+
+/-! ## Direct higher-order measure layer and the arbitrary variable-constant family (WP-4) -/
+
+section VarConstantFamilyReach
+
+open OperatorKO7.HigherOrderRewritingSyntax
+open OperatorKO7.HigherOrderRewritingCaptureSubfamilies
+
+#check @DirectHOMeasure
+#check @DirectHOMeasure.eval
+#check @DirectHOMeasure.eval_app
+#check @DirectHOMeasure.eval_lam
+#check @DirectHOMeasure.eval_var
+#check @policyDirectMeasure
+#check @policyDirectMeasure_nontrivial
+#check @OrientsDuplicatingBeta
+#check @no_directHOMeasure_orients_duplicating_beta
+#check @FullCaptureUniversalBoundary
+#check @full_capture_universal_boundary
+#check @betaCompatible_policyCounter_not_orients_duplicating
+
+#check @VarConstantDirectHOMeasure
+#check @VarConstantDirectHOMeasure.eval
+#check @VarConstantDirectHOMeasure.eval_app
+#check @VarConstantDirectHOMeasure.eval_lam
+#check @VarConstantDirectHOMeasure.eval_var
+#check @VarConstantOrientsDuplicatingBeta
+#check @UnboundedRange
+#check @varOccurrenceCount
+#check @varConstantEval
+#check @varConstantEval_app
+#check @varConstantEval_lam
+#check @varConstantEval_var
+#check @varConstantEval_succ
+#check @varConstantEval_atom
+#check @atomSuccPump
+#check @varConstantEval_atomSuccPump
+#check @varConstantWitness
+#check @varConstantWitness_eval
+#check @varConstantWitness_unboundedRange
+#check @varConstant_family_has_unbounded_inhabitant
+#check @varConstant_orientation_forces_threshold
+#check @varConstant_orients_duplicating_beta_iff_below_threshold
+#check @varConstant_threshold_is_attained
+#check @no_varConstantDirectHOMeasure_orients_duplicating_beta
+#check @no_unbounded_varConstantDirectHOMeasure_orients_duplicating_beta
+#check @no_varConstantDirectHOMeasure_zero_orients_duplicating_beta
+#check @DirectHOMeasure.toVarConstantZero
+#check @directHOMeasure_toVarConstantZero_eval
+#check @directHOMeasure_orients_iff_varConstantZero_orients
+#check @VarConstantFamilyBoundary
+#check @VarConstantFamilyBoundary.familyUnboundedInhabitant
+#check @VarConstantFamilyBoundary.unconditionalArbitraryConstantNoGo
+#check @VarConstantFamilyBoundary.conditionalArbitraryConstantNoGo
+#check @VarConstantFamilyBoundary.unconditionalZeroConstantNoGo
+#check @VarConstantFamilyBoundary.adapterRecoversLiveTheorem
+#check @var_constant_family_boundary
+
+#print axioms DirectHOMeasure
+#print axioms policyDirectMeasure
+#print axioms policyDirectMeasure_nontrivial
+#print axioms OrientsDuplicatingBeta
+#print axioms no_directHOMeasure_orients_duplicating_beta
+#print axioms full_capture_universal_boundary
+#print axioms betaCompatible_policyCounter_not_orients_duplicating
+#print axioms full_capture_semantics_exact_boundary
+#print axioms capture_subfamily_catalog
+#print axioms VarConstantDirectHOMeasure
+#print axioms VarConstantDirectHOMeasure.eval
+#print axioms VarConstantDirectHOMeasure.eval_app
+#print axioms VarConstantDirectHOMeasure.eval_lam
+#print axioms VarConstantDirectHOMeasure.eval_var
+#print axioms VarConstantOrientsDuplicatingBeta
+#print axioms UnboundedRange
+#print axioms varOccurrenceCount
+#print axioms varConstantEval
+#print axioms varConstantEval_app
+#print axioms varConstantEval_lam
+#print axioms varConstantEval_var
+#print axioms varConstantEval_succ
+#print axioms varConstantEval_atom
+#print axioms atomSuccPump
+#print axioms varConstantEval_atomSuccPump
+#print axioms varConstantWitness
+#print axioms varConstantWitness_eval
+#print axioms varConstantWitness_unboundedRange
+#print axioms varConstant_family_has_unbounded_inhabitant
+#print axioms varConstant_orientation_forces_threshold
+#print axioms varConstant_orients_duplicating_beta_iff_below_threshold
+#print axioms varConstant_threshold_is_attained
+#print axioms no_varConstantDirectHOMeasure_orients_duplicating_beta
+#print axioms no_unbounded_varConstantDirectHOMeasure_orients_duplicating_beta
+#print axioms no_varConstantDirectHOMeasure_zero_orients_duplicating_beta
+#print axioms DirectHOMeasure.toVarConstantZero
+#print axioms directHOMeasure_toVarConstantZero_eval
+#print axioms directHOMeasure_orients_iff_varConstantZero_orients
+#print axioms VarConstantFamilyBoundary
+#print axioms VarConstantFamilyBoundary.familyUnboundedInhabitant
+#print axioms VarConstantFamilyBoundary.unconditionalArbitraryConstantNoGo
+#print axioms VarConstantFamilyBoundary.conditionalArbitraryConstantNoGo
+#print axioms VarConstantFamilyBoundary.unconditionalZeroConstantNoGo
+#print axioms VarConstantFamilyBoundary.adapterRecoversLiveTheorem
+#print axioms var_constant_family_boundary
+
+/-- Gate: an explicit unbounded inhabitant exists for every `c`, so the conditional no-go is not
+vacuous at any constant. -/
+example : ∀ c : Nat, ∃ M : VarConstantDirectHOMeasure c, UnboundedRange M :=
+  varConstant_family_has_unbounded_inhabitant
+
+/-- Gate: the concrete witness at an arbitrary `c` is the named one and it is unbounded. -/
+example (c : Nat) : UnboundedRange (varConstantWitness c) :=
+  varConstantWitness_unboundedRange c
+
+/-- Gate: the arbitrary-`c` theorem is conditional. Its `UnboundedRange` premise is present in the
+statement and is discharged only by supplying a pump. -/
+example {c : Nat} (M : VarConstantDirectHOMeasure c) (hUnbounded : UnboundedRange M) :
+    ¬ VarConstantOrientsDuplicatingBeta M :=
+  no_unbounded_varConstantDirectHOMeasure_orients_duplicating_beta M hUnbounded
+
+/-- Gate: the `c = 0` theorem is unconditional. No `UnboundedRange` premise appears. -/
+example (M : VarConstantDirectHOMeasure 0) : ¬ VarConstantOrientsDuplicatingBeta M :=
+  no_varConstantDirectHOMeasure_zero_orients_duplicating_beta M
+
+/-- Gate: the exact threshold is `2 * c`. -/
+example {c : Nat} (M : VarConstantDirectHOMeasure c)
+    (hOrients : VarConstantOrientsDuplicatingBeta M) (t : HOTerm) :
+    M.eval t < 2 * c :=
+  varConstant_orientation_forces_threshold M hOrients t
+
+/-- Gate: the pointwise threshold characterization is an equivalence. -/
+example {c : Nat} (M : VarConstantDirectHOMeasure c) :
+    VarConstantOrientsDuplicatingBeta M ↔ ∀ t : HOTerm, M.eval t < 2 * c :=
+  varConstant_orients_duplicating_beta_iff_below_threshold M
+
+/-- Gate: every member attains the threshold, so the arbitrary-`c` boundary is unconditional. -/
+example {c : Nat} (M : VarConstantDirectHOMeasure c) :
+    ¬ VarConstantOrientsDuplicatingBeta M :=
+  no_varConstantDirectHOMeasure_orients_duplicating_beta M
+
+/-- Gate: the adapter is explicit, evaluation-preserving, and recovers the live unconditional
+theorem with its public type unchanged. -/
+example (M : DirectHOMeasure) : ¬ OrientsDuplicatingBeta M :=
+  no_directHOMeasure_orients_duplicating_beta M
+
+/-- Gate: the adapter identifies the two orientation predicates exactly. -/
+example (M : DirectHOMeasure) :
+    OrientsDuplicatingBeta M ↔ VarConstantOrientsDuplicatingBeta M.toVarConstantZero :=
+  directHOMeasure_orients_iff_varConstantZero_orients M
+
+end VarConstantFamilyReach
+
+end HigherOrderRewritingCaptureSubfamiliesReach
+
+/-! ## LASOT 18.2 reach/axiom parity completion (supervisor validation 2026-08-10):
+every checked anchor above now carries a paired axiom print; opens replicated for print-scope resolution. -/
+
+section LasotParityCompletion
+open HigherOrderRewritingCaptureSubfamiliesReach
+open OperatorKO7
+open OperatorKO7.HigherOrderRewritingSyntax
+open OperatorKO7.HigherOrderRewritingCaptureSubfamilies
+
+#print axioms FullCaptureUniversalBoundary
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.beta_compatible_counterexample_package
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.BetaCounterexamplePackage
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.BetaFreeContext
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.BetaFreeContext.plug_betaFree
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.BetaFreeHOTerm
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.binderFree_substitute
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.BinderFreeContext.plug_binderFree
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.BinderFreeHOTerm
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.CaptureSafeSubstitutionObligation
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.captureSafeSubstitutionObligation_preserves_binder_free
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.captureSafeSubstitutionObligation_preserves_share_free
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.captureSafeSubstitutionObligation_projects_argument_binder_free
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.captureSafeSubstitutionObligation_projects_argument_share_free
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.captureSafeSubstitutionObligation_projects_binder_aware
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.captureSafeSubstitutionObligation_projects_body_binder_free
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.captureSafeSubstitutionObligation_projects_body_share_free
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.captureSafeSubstitutionObligation_requires_freshness
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.captureSafeSubstitutionObligation_under_binder
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.closedFragment_betaFree
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.closedFragment_binderFree
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.closedFragment_not_lam
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.ContextSafeSubstitutionObligation
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.contextSafeSubstitutionObligation_plug_beta_free
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.contextSafeSubstitutionObligation_plug_binder_free
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.contextSafeSubstitutionObligation_projects_beta_free_context
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.contextSafeSubstitutionObligation_projects_binder_free_context
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.contextSafeSubstitutionObligation_projects_term_beta_free
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.contextSafeSubstitutionObligation_projects_term_binder_free
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.DAGSharedHOTerm
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.embedSharedTerm_dagShared
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.FullCaptureSemanticsStatus
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.HigherOrderCaptureSubfamilyCatalog
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.IsLam
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.LinearHOTerm
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.shareFree_closedFragment_has_boundary_term
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.shareFree_closedFragment_linear
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.shareFree_fragment_embeds_old_no_sharing_boundary
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.shareFree_substitute
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.ShareFreeBoundaryEmbedding
+#print axioms OperatorKO7.HigherOrderRewritingCaptureSubfamilies.ShareFreeHOTerm
+end LasotParityCompletion

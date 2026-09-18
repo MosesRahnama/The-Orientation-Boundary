@@ -1,0 +1,60 @@
+import OperatorKO7.Meta.UniqueNormalization.HubSplitConditions
+
+/-!
+# Reach and axiom gate for the route-R2 hub-condition validity layer
+
+Pins every explicit public declaration of
+`OperatorKO7/Meta/UniqueNormalization/HubSplitConditions.lean`
+with a paired axiom query. Baseline axioms only.
+-/
+
+#check @OperatorKO7.Meta.UniqueNormalization.encodeHubConditions
+#check @OperatorKO7.Meta.UniqueNormalization.hubConditionTerms
+#check @OperatorKO7.Meta.UniqueNormalization.encodeHubConditions_append
+#check @OperatorKO7.Meta.UniqueNormalization.hubSplitTermAux_conds_trace
+#check @OperatorKO7.Meta.UniqueNormalization.hubSplitListAux_conds_trace
+#check @OperatorKO7.Meta.UniqueNormalization.hubSplitConditions_trace
+#check @OperatorKO7.Meta.UniqueNormalization.VarOccurs.of_mem_varOccurrences
+#check @OperatorKO7.Meta.UniqueNormalization.encodeHubConditions_valid
+#check @OperatorKO7.Meta.UniqueNormalization.encodeHubConditions_valid_top
+#check @OperatorKO7.Meta.UniqueNormalization.hubSplitConditions_valid
+#check @OperatorKO7.Meta.UniqueNormalization.encodeHubOccurrences_fixed_or_cond
+#check @OperatorKO7.Meta.UniqueNormalization.encodeHubOccurrences_fixedOrHub
+#check @OperatorKO7.Meta.UniqueNormalization.encodeHubOccurrences_fixed_or_cond_top
+#check @OperatorKO7.Meta.UniqueNormalization.hubSplitTerm_fixed_or_cond
+#check @OperatorKO7.Meta.UniqueNormalization.hubSplitTerm_fixedOrHub
+#check @OperatorKO7.Meta.UniqueNormalization.NoSeen
+#check @OperatorKO7.Meta.UniqueNormalization.encodeHubConditions_eq_nil_of_nodup
+#check @OperatorKO7.Meta.UniqueNormalization.hubSplitConditions_eq_nil_of_leftLinear
+
+#print axioms OperatorKO7.Meta.UniqueNormalization.encodeHubConditions
+#print axioms OperatorKO7.Meta.UniqueNormalization.hubConditionTerms
+#print axioms OperatorKO7.Meta.UniqueNormalization.encodeHubConditions_append
+#print axioms OperatorKO7.Meta.UniqueNormalization.hubSplitTermAux_conds_trace
+#print axioms OperatorKO7.Meta.UniqueNormalization.hubSplitListAux_conds_trace
+#print axioms OperatorKO7.Meta.UniqueNormalization.hubSplitConditions_trace
+#print axioms OperatorKO7.Meta.UniqueNormalization.VarOccurs.of_mem_varOccurrences
+#print axioms OperatorKO7.Meta.UniqueNormalization.encodeHubConditions_valid
+#print axioms OperatorKO7.Meta.UniqueNormalization.encodeHubConditions_valid_top
+#print axioms OperatorKO7.Meta.UniqueNormalization.hubSplitConditions_valid
+#print axioms OperatorKO7.Meta.UniqueNormalization.encodeHubOccurrences_fixed_or_cond
+#print axioms OperatorKO7.Meta.UniqueNormalization.encodeHubOccurrences_fixedOrHub
+#print axioms OperatorKO7.Meta.UniqueNormalization.encodeHubOccurrences_fixed_or_cond_top
+#print axioms OperatorKO7.Meta.UniqueNormalization.hubSplitTerm_fixed_or_cond
+#print axioms OperatorKO7.Meta.UniqueNormalization.hubSplitTerm_fixedOrHub
+#print axioms OperatorKO7.Meta.UniqueNormalization.NoSeen
+#print axioms OperatorKO7.Meta.UniqueNormalization.encodeHubConditions_eq_nil_of_nodup
+#print axioms OperatorKO7.Meta.UniqueNormalization.hubSplitConditions_eq_nil_of_leftLinear
+
+#check @OperatorKO7.Meta.UniqueNormalization.encodeHubConditions_eq_nil_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.encodeHubConditions_eq_nil_iff
+#check @OperatorKO7.Meta.UniqueNormalization.encodeHubConditions_length_balance
+#print axioms OperatorKO7.Meta.UniqueNormalization.encodeHubConditions_length_balance
+#check @OperatorKO7.Meta.UniqueNormalization.hubSplitConditions_eq_nil_iff_leftLinear
+#print axioms OperatorKO7.Meta.UniqueNormalization.hubSplitConditions_eq_nil_iff_leftLinear
+#check @OperatorKO7.Meta.UniqueNormalization.hubSplitConditions_length_balance
+#print axioms OperatorKO7.Meta.UniqueNormalization.hubSplitConditions_length_balance
+#check @OperatorKO7.Meta.UniqueNormalization.duplicate_seen_without_conditions
+#print axioms OperatorKO7.Meta.UniqueNormalization.duplicate_seen_without_conditions
+#check @OperatorKO7.Meta.UniqueNormalization.repeated_variable_one_condition
+#print axioms OperatorKO7.Meta.UniqueNormalization.repeated_variable_one_condition

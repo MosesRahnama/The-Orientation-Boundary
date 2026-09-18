@@ -1,0 +1,316 @@
+import OperatorKO7.SchemaAPI
+
+/-!
+Sanity check: every newly re-exported schema-level module is reachable
+through a single `import OperatorKO7.SchemaAPI`. This file exists only
+to fail at elaboration time if any of the imports gets dropped from
+the public API.
+-/
+
+open OperatorKO7.StepDuplicating
+open OperatorKO7.StepDuplicating.StepDuplicatingSchema
+open OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.RecordEmissionWitness
+
+section SchemaAPIReach
+
+-- Core
+example : ∀ {S : StepDuplicatingSchema} (M : AdditiveMeasure S),
+    ¬ (∀ b s n, M.eval (S.wrap s (S.recur b s n)) < M.eval (S.recur b s (S.succ n))) :=
+  @no_additive_orients_dup_step
+
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeProjectionRank_unique
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeProjectionRank_unique
+
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.primitiveTraceImageProjectionRank_unique
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.primitiveTraceImageProjectionRank_unique
+
+#check @OperatorKO7.ConfessionMethodFamily.confession_routes_factor_through_primitiveTraceImage
+#print axioms OperatorKO7.ConfessionMethodFamily.confession_routes_factor_through_primitiveTraceImage
+
+#check @OperatorKO7.ConfessionMethodFamily.all_route_local_evidence_yields_certified_forgetting_witnesses
+#print axioms OperatorKO7.ConfessionMethodFamily.all_route_local_evidence_yields_certified_forgetting_witnesses
+
+#check @OperatorKO7.ConfessionMethodFamily.confessionRouteConvergencePackage
+#print axioms OperatorKO7.ConfessionMethodFamily.confessionRouteConvergencePackage
+
+#check @OperatorKO7.ConfessionMethodFamily.confessionRouteConvergencePackage_projects_common_forgetting_witness
+#print axioms OperatorKO7.ConfessionMethodFamily.confessionRouteConvergencePackage_projects_common_forgetting_witness
+
+#check @OperatorKO7.ConfessionMethodFamily.UsableRulesConfessionRouteResidualObligation
+#print axioms OperatorKO7.ConfessionMethodFamily.UsableRulesConfessionRouteResidualObligation
+
+#check @OperatorKO7.ConfessionMethodFamily.HasUsableRulesConfessionRoute
+#print axioms OperatorKO7.ConfessionMethodFamily.HasUsableRulesConfessionRoute
+
+#check @OperatorKO7.ConfessionMethodFamily.usableRulesRouteResidual_projects_common_route
+#print axioms OperatorKO7.ConfessionMethodFamily.usableRulesRouteResidual_projects_common_route
+
+#check @OperatorKO7.ConfessionMethodFamily.usableRulesResidual_projects_core_agreement
+#print axioms OperatorKO7.ConfessionMethodFamily.usableRulesResidual_projects_core_agreement
+
+#check @OperatorKO7.ConfessionMethodFamily.usableRulesResidual_projects_route_agreement
+#print axioms OperatorKO7.ConfessionMethodFamily.usableRulesResidual_projects_route_agreement
+
+#check @OperatorKO7.ConfessionMethodFamily.usableRulesResidual_projects_forgetting_rank
+#print axioms OperatorKO7.ConfessionMethodFamily.usableRulesResidual_projects_forgetting_rank
+
+#check @OperatorKO7.ConfessionMethodFamily.UsableRulesConvergenceExtension
+#print axioms OperatorKO7.ConfessionMethodFamily.UsableRulesConvergenceExtension
+
+#check @OperatorKO7.ConfessionMethodFamily.usableRulesResidual_to_convergence_extension
+#print axioms OperatorKO7.ConfessionMethodFamily.usableRulesResidual_to_convergence_extension
+
+#check @OperatorKO7.ConfessionMethodFamily.hasUsableRulesConfessionRoute_iff_nonempty_convergence_extension
+#print axioms OperatorKO7.ConfessionMethodFamily.hasUsableRulesConfessionRoute_iff_nonempty_convergence_extension
+
+#check @OperatorKO7.ConfessionMethodFamily.no_usableRules_convergence_extension_without_residual
+#print axioms OperatorKO7.ConfessionMethodFamily.no_usableRules_convergence_extension_without_residual
+
+example (h : OperatorKO7.ConfessionMethodFamily.HasUsableRulesConfessionRoute) :
+    Nonempty OperatorKO7.ConfessionMethodFamily.UsableRulesConvergenceExtension := by
+  exact
+    (OperatorKO7.ConfessionMethodFamily.hasUsableRulesConfessionRoute_iff_nonempty_convergence_extension).1 h
+
+example (h :
+    Nonempty OperatorKO7.ConfessionMethodFamily.UsableRulesConvergenceExtension) :
+    OperatorKO7.ConfessionMethodFamily.HasUsableRulesConfessionRoute := by
+  exact
+    (OperatorKO7.ConfessionMethodFamily.hasUsableRulesConfessionRoute_iff_nonempty_convergence_extension).2 h
+
+example (h : ¬ OperatorKO7.ConfessionMethodFamily.HasUsableRulesConfessionRoute) :
+    IsEmpty OperatorKO7.ConfessionMethodFamily.UsableRulesConvergenceExtension := by
+  exact
+    OperatorKO7.ConfessionMethodFamily.no_usableRules_convergence_extension_without_residual h
+
+example (h : ¬ OperatorKO7.ConfessionMethodFamily.HasUsableRulesConfessionRoute)
+    (ext : OperatorKO7.ConfessionMethodFamily.UsableRulesConvergenceExtension) : False := by
+  exact
+    (OperatorKO7.ConfessionMethodFamily.no_usableRules_convergence_extension_without_residual h).false ext
+
+#check @OperatorKO7.ConfessionMethodFamily.schemaDPPairProblemEvidence
+#print axioms OperatorKO7.ConfessionMethodFamily.schemaDPPairProblemEvidence
+
+#check @OperatorKO7.ConfessionMethodFamily.directSubterm_to_originalSymbolSubterm
+#print axioms OperatorKO7.ConfessionMethodFamily.directSubterm_to_originalSymbolSubterm
+
+#check @OperatorKO7.ConfessionMethodFamily.schemaSCTClosureSummary
+#print axioms OperatorKO7.ConfessionMethodFamily.schemaSCTClosureSummary
+
+#check @OperatorKO7.ConfessionMethodFamily.argumentFilterTrace_eq_applyConstructorwiseFilter
+#print axioms OperatorKO7.ConfessionMethodFamily.argumentFilterTrace_eq_applyConstructorwiseFilter
+
+#check @OperatorKO7.Meta.ConfessionMethodUsableRulesFinalStatus.UsableRulesFinalStatusCatalog
+#print axioms OperatorKO7.Meta.ConfessionMethodUsableRulesFinalStatus.UsableRulesFinalStatusCatalog
+
+#check @OperatorKO7.Meta.ConfessionMethodUsableRulesFinalStatus.usableRules_final_status_catalog
+#print axioms OperatorKO7.Meta.ConfessionMethodUsableRulesFinalStatus.usableRules_final_status_catalog
+
+#check @OperatorKO7.Meta.ConfessionMethodUsableRulesFinalStatus.usableRules_s5_full_closure
+#print axioms OperatorKO7.Meta.ConfessionMethodUsableRulesFinalStatus.usableRules_s5_full_closure
+
+-- Tropical continuation
+example : @OperatorKO7.StepDuplicating.StepDuplicatingSchema.no_tropical_primary_orients_dup_step_of_unbounded = @no_tropical_primary_orients_dup_step_of_unbounded := rfl
+
+-- Max-aggregative depth barrier (Category C)
+example : @no_maxDepth_orients_dup_step = @no_maxDepth_orients_dup_step := rfl
+
+-- Affine-bound sharpness
+#check @OperatorKO7.StepDuplicating.affineThresholdMeasure_bound
+#print axioms OperatorKO7.StepDuplicating.affineThresholdMeasure_bound
+
+-- Matrix projection coverage
+#check @no_matrix_orients_dup_step_of_fixed_row_pump
+#print axioms no_matrix_orients_dup_step_of_fixed_row_pump
+
+example {Sys : OperatorKO7.StepDuplicating.StepDuplicatingSchema.StepDuplicatingSystem} :
+    OperatorKO7.ToolSearchFragmentCoverageFinalCatalog.ToolSearchFragmentFinalCatalog Sys :=
+  OperatorKO7.ToolSearchFragmentCoverageFinalCatalog.tool_search_fragment_final_catalog
+    (Sys := Sys)
+
+example :
+    OperatorKO7.ConstructionRouteCatalogCertificate.CanonicalConstructionCertificate :=
+  OperatorKO7.ConstructionRouteCatalogCertificate.canonical_construction_certificate
+
+example :
+    OperatorKO7.ConstructionRouteCatalogPartition.CanonicalConstructionCertificateExactness := by
+  exact
+    OperatorKO7.ConstructionRouteCatalogPartition.canonical_construction_certificate_exactness
+      OperatorKO7.ConstructionRouteCatalogCertificate.canonical_construction_certificate
+
+-- Arbitrary mixed-matrix scalarization barrier
+#check @OperatorKO7.MatrixBarrierArbitrary.no_global_step_orientation_matrixArbitrary_of_scalar_dominance_pump
+#print axioms OperatorKO7.MatrixBarrierArbitrary.no_global_step_orientation_matrixArbitrary_of_scalar_dominance_pump
+
+#check @OperatorKO7.StepDuplicating.MatrixBarrierArbitraryInstances.no_global_step_orientation_matrixArbitrary_rowSum_of_scalar_dominance_pump
+#print axioms OperatorKO7.StepDuplicating.MatrixBarrierArbitraryInstances.no_global_step_orientation_matrixArbitrary_rowSum_of_scalar_dominance_pump
+
+#check @OperatorKO7.MatrixBarrierArcticTropical.no_global_step_orientation_arcticMatrix_of_scalar_dominance_pump
+#print axioms OperatorKO7.MatrixBarrierArcticTropical.no_global_step_orientation_arcticMatrix_of_scalar_dominance_pump
+
+#check @OperatorKO7.MatrixToolSearchMapping.fixedRow_fragment_no_global_orientation
+#print axioms OperatorKO7.MatrixToolSearchMapping.fixedRow_fragment_no_global_orientation
+
+#check @OperatorKO7.MatrixToolSearchMapping.rowSum_fragment_no_global_orientation
+#print axioms OperatorKO7.MatrixToolSearchMapping.rowSum_fragment_no_global_orientation
+
+#check @OperatorKO7.MatrixToolSearchMapping.arcticFixedRow_fragment_no_global_orientation
+#print axioms OperatorKO7.MatrixToolSearchMapping.arcticFixedRow_fragment_no_global_orientation
+
+#check @OperatorKO7.MatrixToolSearchMapping.arcticRowSum_fragment_no_global_orientation
+#print axioms OperatorKO7.MatrixToolSearchMapping.arcticRowSum_fragment_no_global_orientation
+
+#check @OperatorKO7.MatrixToolSearchMapping.tropicalFixedRow_fragment_no_global_orientation
+#print axioms OperatorKO7.MatrixToolSearchMapping.tropicalFixedRow_fragment_no_global_orientation
+
+#check @OperatorKO7.MatrixToolSearchMapping.tropicalRowSum_fragment_no_global_orientation
+#print axioms OperatorKO7.MatrixToolSearchMapping.tropicalRowSum_fragment_no_global_orientation
+
+-- Second schema instance
+#check @OperatorKO7.TextbookDupInstance.textbookSchema
+#print axioms OperatorKO7.TextbookDupInstance.textbookSchema
+
+-- SCC utilities
+#check @OperatorKO7.MutualDuplicationCycleFlow.no_global_orients_ctx_additive
+#print axioms OperatorKO7.MutualDuplicationCycleFlow.no_global_orients_ctx_additive
+
+#check @OperatorKO7.MutualDuplicationSchema.System.no_global_orients_ctx_additive
+#print axioms OperatorKO7.MutualDuplicationSchema.System.no_global_orients_ctx_additive
+
+#check @OperatorKO7.MutualDuplicationFiniteSchema.KCycleSystem.no_global_orients_ctx_affine_of_unbounded
+#print axioms OperatorKO7.MutualDuplicationFiniteSchema.KCycleSystem.no_global_orients_ctx_affine_of_unbounded
+
+#check @OperatorKO7.MutualDuplicationSchema.System.no_global_orients_ctx_of_scalar_projection_affine_of_unbounded
+#print axioms OperatorKO7.MutualDuplicationSchema.System.no_global_orients_ctx_of_scalar_projection_affine_of_unbounded
+
+#check @OperatorKO7.MutualDuplicationPayloadFlow.no_global_orients_ctx_additive
+#print axioms OperatorKO7.MutualDuplicationPayloadFlow.no_global_orients_ctx_additive
+
+-- Graph utilities
+#check @OperatorKO7.GraphPathExtraction.EdgePath
+#print axioms OperatorKO7.GraphPathExtraction.EdgePath
+
+-- DP fragment
+#check @OperatorKO7.DependencyPairsFragment.DPProjection.wfRev
+#print axioms OperatorKO7.DependencyPairsFragment.DPProjection.wfRev
+
+-- Paper 2 schema-level quantitative layer
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.per_step_exchange
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.per_step_exchange
+
+#check terminalExternalizedTraceStorage
+#print axioms terminalExternalizedTraceStorage
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.ExternalizedTraceStorage.Package
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.ExternalizedTraceStorage.Package
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.ExternalizedTraceStorage.CarrierEquivalenceResidual
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.ExternalizedTraceStorage.CarrierEquivalenceResidual
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.RecordEmissionWitness.terminalExternalizedTracePackage
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.RecordEmissionWitness.terminalExternalizedTracePackage
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeRecordEmissionWitness_tracePackage
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeRecordEmissionWitness_tracePackage
+
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.offset_conservation
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.offset_conservation
+
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.RecordEmissionWitness.normalized_storage_description_lower_bound
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.RecordEmissionWitness.normalized_storage_description_lower_bound
+
+example : True := by
+  have := OperatorKO7.StepDuplicating.StepDuplicatingSchema.free_semanticKernel_faithful_emitter_transaction_realizes_bridge
+    (K := 1) (by decide)
+  trivial
+
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.free_semanticKernel_faithful_emitter_transaction_realizes_bridge
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.free_semanticKernel_faithful_emitter_transaction_realizes_bridge
+
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.sum_payloads_doubled
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.sum_payloads_doubled
+
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.proof_entropy_nondecreasing
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.proof_entropy_nondecreasing
+
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.counter_unique_retained_coordinate
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.counter_unique_retained_coordinate
+
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.norm_mismatch_pairwise
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.norm_mismatch_pairwise
+
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.permutation_gauge_symmetry_package
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.permutation_gauge_symmetry_package
+
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.inefficiencyCoefficient_unbounded_atTop
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.inefficiencyCoefficient_unbounded_atTop
+
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.inefficiencyCoefficient_perStep_isTheta_linearLog
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.inefficiencyCoefficient_perStep_isTheta_linearLog
+
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.explicitDescription_linear_gap
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.explicitDescription_linear_gap
+
+-- Paper 2 seed-carrier factorization
+#check @OperatorKO7.SchemaSeedCarrier.PayloadObservable.factorization_criterion
+#print axioms OperatorKO7.SchemaSeedCarrier.PayloadObservable.factorization_criterion
+
+#check @OperatorKO7.SchemaSeedCarrier.additiveObservable_not_factors
+#print axioms OperatorKO7.SchemaSeedCarrier.additiveObservable_not_factors
+
+-- Paper 2 schema forgetting witness
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.ForgettingWitness.ofProjectionRank
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.ForgettingWitness.ofProjectionRank
+
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.RouteEvidence.toProjectionRank
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.RouteEvidence.toProjectionRank
+
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.ForgettingWitness.ofRouteEvidence
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.ForgettingWitness.ofRouteEvidence
+
+-- Paper 2 schema operational incompleteness
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.OperationalIncompleteness.ofProjectionRank
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.OperationalIncompleteness.ofProjectionRank
+
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.construction_confession_exclusive
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.construction_confession_exclusive
+
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.directAggregationQuestion_operationallyIncomplete
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.directAggregationQuestion_operationallyIncomplete
+
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.canonical_operational_instance
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.canonical_operational_instance
+
+-- Paper 2 schema witness order
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.SchemaWitnessTower.OB_iff_no_directWhole
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.SchemaWitnessTower.OB_iff_no_directWhole
+
+-- Generic route-evidence unification layer
+#check @OperatorKO7.ConfessionMethodFamily.all_route_local_evidence_share_generic_route_evidence
+#print axioms OperatorKO7.ConfessionMethodFamily.all_route_local_evidence_share_generic_route_evidence
+
+#check @OperatorKO7.ConfessionMethodFamily.all_generic_route_evidence_yields_forgetting_witnesses
+#print axioms OperatorKO7.ConfessionMethodFamily.all_generic_route_evidence_yields_forgetting_witnesses
+
+-- New SCL-2026-04-26-06 convergence-package projection corollaries
+#check @OperatorKO7.ConfessionMethodFamily.confessionRouteConvergencePackage_commonRouteEvidence_rank
+#print axioms OperatorKO7.ConfessionMethodFamily.confessionRouteConvergencePackage_commonRouteEvidence_rank
+
+#check @OperatorKO7.ConfessionMethodFamily.confessionRouteConvergencePackage_routes_pairwise_agree
+#print axioms OperatorKO7.ConfessionMethodFamily.confessionRouteConvergencePackage_routes_pairwise_agree
+
+#check @OperatorKO7.ConfessionMethodFamily.confessionRouteConvergencePackage_all_routes_recover_dp_rank
+#print axioms OperatorKO7.ConfessionMethodFamily.confessionRouteConvergencePackage_all_routes_recover_dp_rank
+
+-- Transformed-call (W2) classification bridge exported through SchemaAPI
+#check @OperatorKO7.TransformedCallClassification.fullDuplicating_w2_success
+#print axioms OperatorKO7.TransformedCallClassification.fullDuplicating_w2_success
+
+#check @OperatorKO7.TransformedCallClassification.fullDuplicating_w2_success_projects_confession_route_evidence
+#print axioms OperatorKO7.TransformedCallClassification.fullDuplicating_w2_success_projects_confession_route_evidence
+
+#check @OperatorKO7.TransformedCallClassification.canonical_w2_witness_catalog
+#print axioms OperatorKO7.TransformedCallClassification.canonical_w2_witness_catalog
+
+#check @OperatorKO7.ToolSearchFragmentCoverageFinalCatalog.tool_search_fragment_final_catalog
+#print axioms OperatorKO7.ToolSearchFragmentCoverageFinalCatalog.tool_search_fragment_final_catalog
+
+#check @OperatorKO7.ConstructionRouteCatalogPartition.canonical_construction_certificate_exactness
+#print axioms OperatorKO7.ConstructionRouteCatalogPartition.canonical_construction_certificate_exactness
+
+end SchemaAPIReach

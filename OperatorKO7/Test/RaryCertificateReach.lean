@@ -1,0 +1,39 @@
+import OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate
+
+/-! Permanent reach and axiom audit for `RaryCertificate`. -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.rtermDecEq
+#check @OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.rtermListDecEq
+#check @OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.RRootStep
+#check @OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.RRootStep.rStep
+#check @OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.rRootStep_of_rStep_F
+#check @OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.sDepth
+#check @OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.checkRary
+#check @OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.raryZeroCertificate
+#check @OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.rarySuccessorCertificate
+#check @OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.checkRary_sound
+#check @OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.checkRary_zero
+#check @OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.checkRary_successor
+#check @OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.checkSerializedBitsStrictRary
+#check @OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.checkSerializedBitsStrictRary_serializeBits
+#check @OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.exists_strict_binary_certificate_iff_rRootStep
+#check @OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.exists_strict_binary_certificate_iff_rStep_F
+#check @OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.no_strict_certificate_for_G_source
+
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.rtermDecEq
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.rtermListDecEq
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.RRootStep
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.RRootStep.rStep
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.rRootStep_of_rStep_F
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.sDepth
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.checkRary
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.raryZeroCertificate
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.rarySuccessorCertificate
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.checkRary_sound
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.checkRary_zero
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.checkRary_successor
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.checkSerializedBitsStrictRary
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.checkSerializedBitsStrictRary_serializeBits
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.exists_strict_binary_certificate_iff_rRootStep
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.exists_strict_binary_certificate_iff_rStep_F
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RaryCertificate.no_strict_certificate_for_G_source

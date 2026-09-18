@@ -1,0 +1,189 @@
+import OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate
+
+set_option autoImplicit false
+
+open OperatorKO7.Meta.Recursor.DPConfessionLicense
+open OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate
+open OperatorKO7.Meta.DistinctionBoundary.RoleErasureInstance
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channel_index_eq_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channel_index_eq_iff
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.decisionMass
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.decisionMass
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.decisionMass_at_index
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.decisionMass_at_index
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.jointMass
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.jointMass
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channelEvidence_joint_factorization
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channelEvidence_joint_factorization
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channelEvidence_normalized
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channelEvidence_normalized
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channelEvidence_nonnegative
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channelEvidence_nonnegative
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channelEvidence_bayes
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channelEvidence_bayes
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channelEvidence_deficitBits_general
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channelEvidence_deficitBits_general
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channelEvidence_role_gap_general
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channelEvidence_role_gap_general
+
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.children
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.children
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.subtermAt
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.subtermAt
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.LocatedOccurrence
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.LocatedOccurrence
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.FreeBoundaryKernel
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.FreeBoundaryKernel
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.FreeBoundaryKernel.source
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.FreeBoundaryKernel.source
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.FreeBoundaryKernel.callee
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.FreeBoundaryKernel.callee
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.FreeBoundaryKernel.output
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.FreeBoundaryKernel.output
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.FreeBoundaryKernel.extraction
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.FreeBoundaryKernel.extraction
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.FreeBoundaryKernel.step_and_pair
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.FreeBoundaryKernel.step_and_pair
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.generatorPath
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.generatorPath
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.branchPath
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.branchPath
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.generatorPath_distinct
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.generatorPath_distinct
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.generator_at_path
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.generator_at_path
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.generatorOccurrence
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.generatorOccurrence
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.generatorValue
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.generatorValue
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.generatorFrame
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.generatorFrame
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.generatorActive
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.generatorActive
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.freeRecursor_generator_pair_value_diag
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.freeRecursor_generator_pair_value_diag
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.freeRecursor_generator_pair_role_distinct
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.freeRecursor_generator_pair_role_distinct
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.generator_occurrences_distinct
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.generator_occurrences_distinct
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.generator_ne_callee
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.generator_ne_callee
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.actualDPChannel
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.actualDPChannel
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.actualDPChannel_frame
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.actualDPChannel_frame
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.actualDPChannel_active
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.actualDPChannel_active
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.freeRecursor_dp_channel_decodes_active
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.freeRecursor_dp_channel_decodes_active
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.actualDPChannel_injective
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.actualDPChannel_injective
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.freeRecursor_dp_channel_is_exogenous_separator
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.freeRecursor_dp_channel_is_exogenous_separator
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.freeRecursor_dp_channel_not_value_factored
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.freeRecursor_dp_channel_not_value_factored
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channel_decodes_iff_separates
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channel_decodes_iff_separates
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.collapsed_channel_impossible
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.collapsed_channel_impossible
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.HasRecord
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.HasRecord
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.hasRecord_iff_ne
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.hasRecord_iff_ne
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.freeRecursor_value_refusal_role_record
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.freeRecursor_value_refusal_role_record
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.freeRecursor_role_record_is_dp_license
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.freeRecursor_role_record_is_dp_license
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.freeBoundaryKernel_two_actions
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.freeBoundaryKernel_two_actions
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.roleIndexEquiv
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.roleIndexEquiv
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channel_true_iff_index_zero
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channel_true_iff_index_zero
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channelEvidence
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channelEvidence
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channelEvidence_eq_dpChannel_one
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.channelEvidence_eq_dpChannel_one
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.spentBits
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.spentBits
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.spentBits_eq_one
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.spentBits_eq_one
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.freeRecursor_refused_bit_eq_spent_bit
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.freeRecursor_refused_bit_eq_spent_bit
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.all_arity_dp_deficit
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.all_arity_dp_deficit
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.all_arity_frame_residual
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.all_arity_frame_residual
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.freeRecursor_binary_recovery
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorRoleGate.freeRecursor_binary_recovery
+
+example : actualDPChannel ⟨.void, .void, .void⟩ .frame = false := by decide
+
+example : actualDPChannel ⟨.void, .void, .void⟩ .active = true := by decide
+
+example : (generatorOccurrence ⟨.delta .void, .merge .void (.delta .void), .void⟩ .active).value =
+    .merge .void (.delta .void) := rfl
+
+example : subtermAt (.app .void (.recR .void .void .void)) [1, 1] = some .void := rfl
+
+example : subtermAt (.app .void (.recR .void .void .void)) [2] = none := rfl
+
+example : spentBits ⟨.void, .void, .void⟩ = 1 := spentBits_eq_one _
+
+example : ¬ ∃ g : Unit → Bool, ∀ r,
+    g () = actualDPChannel ⟨.void, .void, .void⟩ r := collapsed_channel_impossible _

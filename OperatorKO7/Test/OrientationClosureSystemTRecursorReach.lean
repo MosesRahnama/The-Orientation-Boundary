@@ -1,0 +1,130 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.SystemTRecursor
+
+/-! # SystemTRecursor reach and axiom check -/
+
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.TTerm
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.TTerm
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.TTerm.openAt
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.TTerm.openAt
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.TStep
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.TStep
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iteratorSchema
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iteratorSchema
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.foldWith
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.foldWith
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterFold
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterFold
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterFold_eq_foldWith
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterFold_eq_foldWith
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.unfoldT
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.unfoldT
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.unfoldT_iterFold
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.unfoldT_iterFold
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterFold_injective
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterFold_injective
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.IterFree
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.IterFree
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterFree_iterFold
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterFree_iterFold
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterFold_unfoldT
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterFold_unfoldT
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.mem_range_iterFold_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.mem_range_iterFold_iff
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.tStep_plug
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.tStep_plug
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.tStep_of_rootStep
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.tStep_of_rootStep
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.tStep_of_contextStep
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.tStep_of_contextStep
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterFree_step
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterFree_step
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.tStep_iterFold_closed
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.tStep_iterFold_closed
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.contextStep_iff_tStep
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.contextStep_iff_tStep
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterEmbedding
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterEmbedding
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterRelIso
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterRelIso
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterFold_acc
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterFold_acc
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterFree_acc
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterFree_acc
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterImageSchema
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterImageSchema
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterImageIso
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterImageIso
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterImage_orients_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterImage_orients_iff
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterImage_exact_criterion
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterImage_exact_criterion
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterImage_coupling
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterImage_coupling
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterImage_barrier_cell
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterImage_barrier_cell
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.SchemaHom
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.SchemaHom
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.foldWithHom
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.foldWithHom
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.foldWithHom_var
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.foldWithHom_var
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.schemaHom_eq_foldWith
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.schemaHom_eq_foldWith
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.var_irreducible
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.var_irreducible
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.betaAssignment_not_reflecting
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.betaAssignment_not_reflecting
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.fill2
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.fill2
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterator_wrapper_realizes
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.iterator_wrapper_realizes
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.no_two_hole_wrapper_realizes_recursor
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.no_two_hole_wrapper_realizes_recursor
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.CounterWrapSchema
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.CounterWrapSchema
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.recursorSchema
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.recursorSchema
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.recursorSchema_rule
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.recursorSchema_rule
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.counterBlind
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.counterBlind
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.counterBlind_rule
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.counterBlind_rule
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.wrapperCost3Z
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.wrapperCost3Z
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.counterGain3Z
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.counterGain3Z
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.orients3_all_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.orients3_all_iff
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.retained_wrapper3_forces_counter_coupled_gain
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.retained_wrapper3_forces_counter_coupled_gain
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.no_orientation3_of_counter_bounded_gain
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.no_orientation3_of_counter_bounded_gain
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.no_orientation3_of_payload_bounded_gain
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.no_orientation3_of_payload_bounded_gain
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.schemaWeight
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.schemaWeight
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.schemaWeight_orients_iterator
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.schemaWeight_orients_iterator
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.schemaWeight_recursor_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.schemaWeight_recursor_iff
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.numeral
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.numeral
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.schemaWeight_numeral
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.schemaWeight_numeral
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.schemaWeight_not_orients_recursor
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.schemaWeight_not_orients_recursor
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.tWeight
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.tWeight
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.tWeight_orients_recursor
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.tWeight_orients_recursor
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.tWeight_retains3_and_gain
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.tWeight_retains3_and_gain
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.LamFree
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.LamFree
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.lamFree_step
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.lamFree_step
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.lamFree_acc_aux
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.lamFree_acc_aux
+#check @OperatorKO7.Methods.OrientationClosure.SystemTRecursor.lamFree_acc
+#print axioms OperatorKO7.Methods.OrientationClosure.SystemTRecursor.lamFree_acc

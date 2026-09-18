@@ -1,0 +1,17 @@
+import OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy
+
+/-! Full reach and axiom coverage for the `SoundVerdictEntropy` module. Permanent. -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.SoundVerdict
+#check @OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.SoundVerdict.eq_true
+#check @OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.outputLaw
+#check @OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.outputLaw_eq_pointMass
+#check @OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.outputLaw_entropy_zero
+#check @OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.recursor_soundVerdict_true
+#check @OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.recursor_outputLaw_entropy_zero
+
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.SoundVerdict.eq_true
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.outputLaw_eq_pointMass
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.outputLaw_entropy_zero
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.recursor_soundVerdict_true
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.recursor_outputLaw_entropy_zero

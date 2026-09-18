@@ -1,0 +1,42 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.ControlCatalog
+
+/-! # ControlCatalog reach and axiom check -/
+
+#check @OperatorKO7.Methods.OrientationClosure.ControlCatalog.unitSchema
+#print axioms OperatorKO7.Methods.OrientationClosure.ControlCatalog.unitSchema
+#check @OperatorKO7.Methods.OrientationClosure.ControlCatalog.singleton_schema_control
+#print axioms OperatorKO7.Methods.OrientationClosure.ControlCatalog.singleton_schema_control
+#check @OperatorKO7.Methods.OrientationClosure.ControlCatalog.payload_mul_counter_classified
+#print axioms OperatorKO7.Methods.OrientationClosure.ControlCatalog.payload_mul_counter_classified
+#check @OperatorKO7.Methods.OrientationClosure.ControlCatalog.zero_smul_payload_control
+#print axioms OperatorKO7.Methods.OrientationClosure.ControlCatalog.zero_smul_payload_control
+#check @OperatorKO7.Methods.OrientationClosure.ControlCatalog.counter_recoding_orients
+#print axioms OperatorKO7.Methods.OrientationClosure.ControlCatalog.counter_recoding_orients
+#check @OperatorKO7.Methods.OrientationClosure.ControlCatalog.AscendingStep
+#print axioms OperatorKO7.Methods.OrientationClosure.ControlCatalog.AscendingStep
+#check @OperatorKO7.Methods.OrientationClosure.ControlCatalog.ascendingStep_not_wellFounded
+#print axioms OperatorKO7.Methods.OrientationClosure.ControlCatalog.ascendingStep_not_wellFounded
+#check @OperatorKO7.Methods.OrientationClosure.ControlCatalog.rational_shrinking_control
+#print axioms OperatorKO7.Methods.OrientationClosure.ControlCatalog.rational_shrinking_control
+#check @OperatorKO7.Methods.OrientationClosure.ControlCatalog.LoopExtStep
+#print axioms OperatorKO7.Methods.OrientationClosure.ControlCatalog.LoopExtStep
+#check @OperatorKO7.Methods.OrientationClosure.ControlCatalog.added_self_loop_keeps_barrier
+#print axioms OperatorKO7.Methods.OrientationClosure.ControlCatalog.added_self_loop_keeps_barrier
+#check @OperatorKO7.Methods.OrientationClosure.ControlCatalog.added_self_loop_loses_termination
+#print axioms OperatorKO7.Methods.OrientationClosure.ControlCatalog.added_self_loop_loses_termination
+#check @OperatorKO7.Methods.OrientationClosure.ControlCatalog.alteredSuccRule
+#print axioms OperatorKO7.Methods.OrientationClosure.ControlCatalog.alteredSuccRule
+#check @OperatorKO7.Methods.OrientationClosure.ControlCatalog.alteredTRS
+#print axioms OperatorKO7.Methods.OrientationClosure.ControlCatalog.alteredTRS
+#check @OperatorKO7.Methods.OrientationClosure.ControlCatalog.altered_source_certificate_fails
+#print axioms OperatorKO7.Methods.OrientationClosure.ControlCatalog.altered_source_certificate_fails
+#check @OperatorKO7.Methods.OrientationClosure.ControlCatalog.FanStep
+#print axioms OperatorKO7.Methods.OrientationClosure.ControlCatalog.FanStep
+#check @OperatorKO7.Methods.OrientationClosure.ControlCatalog.fan_acc_some
+#print axioms OperatorKO7.Methods.OrientationClosure.ControlCatalog.fan_acc_some
+#check @OperatorKO7.Methods.OrientationClosure.ControlCatalog.fan_wellFounded
+#print axioms OperatorKO7.Methods.OrientationClosure.ControlCatalog.fan_wellFounded
+#check @OperatorKO7.Methods.OrientationClosure.ControlCatalog.fan_no_natRank
+#print axioms OperatorKO7.Methods.OrientationClosure.ControlCatalog.fan_no_natRank
+#check @OperatorKO7.Methods.OrientationClosure.ControlCatalog.empty_system_boundary
+#print axioms OperatorKO7.Methods.OrientationClosure.ControlCatalog.empty_system_boundary

@@ -1,0 +1,73 @@
+import OperatorKO7.Meta.RDRSNotesReconciliationAddendum
+
+#check OperatorKO7.RDRSNotesReconciliationAddendum.NotesReconciliationClosed
+#check OperatorKO7.RDRSNotesReconciliationAddendum.notesReconciliationRows_length
+#check OperatorKO7.RDRSNotesReconciliationAddendum.notesReconciliationRows_nodup
+#check OperatorKO7.RDRSNotesReconciliationAddendum.notesReconciliationRows_complete
+#check OperatorKO7.RDRSNotesReconciliationAddendum.notesStatus_total
+#check OperatorKO7.RDRSNotesReconciliationAddendum.rdrs_notes_reconciliation_addendum_closed
+#check OperatorKO7.RDRSNotesReconciliationAddendum.rdrs_notes_reconciliation_addendum_closed_anchor
+
+/-! ## Typed substrate carriers replacing the four `True` sentinels (WP-3 item C) -/
+
+section TypedSubstrateCarriers
+
+open OperatorKO7.RDRSNotesReconciliationAddendum
+
+#check SignatureTransformationCarrier
+#check uncurryingSignatureTransformation
+#check signatureTransformationClosed
+#check signatureTransformationClosed_intro
+#check signatureTransformation_is_not_identity
+
+#check ProbabilisticSubstrateCarrier
+#check fairCoinProbabilisticSubstrate
+#check probabilisticASTMethodsClosed
+#check probabilisticASTMethodsClosed_intro
+#check probabilisticSubstrate_has_two_positive_branches
+
+#check UnionSubstrateCarrier
+#check twoComponentUnionSubstrate
+#check modularHierarchicalCommutativeUnionClosed
+#check modularHierarchicalCommutativeUnionClosed_intro
+#check unionSubstrate_has_second_component_rule
+
+#check ComplexityOnlyCarrier
+#check constantComplexityOnlyCarrier
+#check complexityDependencyTupleClosed
+#check complexityDependencyTupleClosed_intro
+#check complexityOnly_has_no_strict_orientation
+
+#print axioms uncurryingSignatureTransformation
+#print axioms SignatureTransformationCarrier
+#print axioms signatureTransformationClosed
+#print axioms signatureTransformationClosed_intro
+#print axioms signatureTransformation_is_not_identity
+#print axioms fairCoinProbabilisticSubstrate
+#print axioms ProbabilisticSubstrateCarrier
+#print axioms probabilisticASTMethodsClosed
+#print axioms probabilisticASTMethodsClosed_intro
+#print axioms probabilisticSubstrate_has_two_positive_branches
+#print axioms twoComponentUnionSubstrate
+#print axioms UnionSubstrateCarrier
+#print axioms modularHierarchicalCommutativeUnionClosed
+#print axioms modularHierarchicalCommutativeUnionClosed_intro
+#print axioms unionSubstrate_has_second_component_rule
+#print axioms constantComplexityOnlyCarrier
+#print axioms ComplexityOnlyCarrier
+#print axioms complexityDependencyTupleClosed
+#print axioms complexityDependencyTupleClosed_intro
+#print axioms complexityOnly_has_no_strict_orientation
+
+end TypedSubstrateCarriers
+
+/-! ## LASOT 18.2 reach/axiom parity completion (supervisor validation 2026-08-10):
+every checked anchor above now carries a paired axiom print. -/
+
+#print axioms OperatorKO7.RDRSNotesReconciliationAddendum.NotesReconciliationClosed
+#print axioms OperatorKO7.RDRSNotesReconciliationAddendum.notesReconciliationRows_complete
+#print axioms OperatorKO7.RDRSNotesReconciliationAddendum.notesReconciliationRows_length
+#print axioms OperatorKO7.RDRSNotesReconciliationAddendum.notesReconciliationRows_nodup
+#print axioms OperatorKO7.RDRSNotesReconciliationAddendum.notesStatus_total
+#print axioms OperatorKO7.RDRSNotesReconciliationAddendum.rdrs_notes_reconciliation_addendum_closed
+#print axioms OperatorKO7.RDRSNotesReconciliationAddendum.rdrs_notes_reconciliation_addendum_closed_anchor

@@ -1,0 +1,11 @@
+import OperatorKO7.Meta.DistinctionBoundary.GodelFixedPointSemantics
+
+set_option autoImplicit false
+
+#check @OperatorKO7.Meta.DistinctionBoundary.GodelArith.eval_bewOf_iff_provable
+#check @OperatorKO7.Meta.DistinctionBoundary.GodelArith.eval_arithGodelSentence_iff_not_provable
+#check @OperatorKO7.Meta.DistinctionBoundary.GodelArith.arithGodelFixedPointSemantics_holds
+
+#print axioms OperatorKO7.Meta.DistinctionBoundary.GodelArith.eval_bewOf_iff_provable
+#print axioms OperatorKO7.Meta.DistinctionBoundary.GodelArith.eval_arithGodelSentence_iff_not_provable
+#print axioms OperatorKO7.Meta.DistinctionBoundary.GodelArith.arithGodelFixedPointSemantics_holds

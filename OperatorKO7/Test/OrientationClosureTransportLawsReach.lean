@@ -1,0 +1,54 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.TransportLaws
+
+/-!
+# TransportLaws reach and axiom check
+
+Paired declaration reach and axiom checks for `TransportLaws.lean`.
+-/
+
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.OrientsRelation
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.OrientsRelation
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.no_orienter_of_subrelation
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.no_orienter_of_subrelation
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.wellFounded_of_subrelation
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.wellFounded_of_subrelation
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.renamedRelation
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.renamedRelation
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.renamedRelation_wellFounded
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.renamedRelation_wellFounded
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.originalRelation_wellFounded_of_renamed
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.originalRelation_wellFounded_of_renamed
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.renamedRelation_wellFounded_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.renamedRelation_wellFounded_iff
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.PositiveSimulation
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.PositiveSimulation
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.source_wellFounded_of_positiveSimulation
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.source_wellFounded_of_positiveSimulation
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.positiveSimulation_injectivity_not_required
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.positiveSimulation_injectivity_not_required
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.ReflexiveSimulation
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.ReflexiveSimulation
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.LoopSource
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.LoopSource
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.EmptyTarget
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.EmptyTarget
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.zeroStepLoopSimulation
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.zeroStepLoopSimulation
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.emptyTarget_wellFounded
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.emptyTarget_wellFounded
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.loopSource_not_wellFounded
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.loopSource_not_wellFounded
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.reflexiveSimulation_does_not_transfer_termination
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.reflexiveSimulation_does_not_transfer_termination
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.PositiveSimulation.mk
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.PositiveSimulation.mk
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.PositiveSimulation.encode
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.PositiveSimulation.encode
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.PositiveSimulation.forward
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.PositiveSimulation.forward
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.ReflexiveSimulation.mk
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.ReflexiveSimulation.mk
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.ReflexiveSimulation.encode
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.ReflexiveSimulation.encode
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.ReflexiveSimulation.forward
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.ReflexiveSimulation.forward

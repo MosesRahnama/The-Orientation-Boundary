@@ -1,0 +1,46 @@
+import OperatorKO7.Meta.BoundaryGeneral.OverproductionGapCapstone
+
+namespace OperatorKO7.Test.OverproductionGapCapstoneReach
+
+open OperatorKO7.Meta.BoundaryGeneral.OverproductionGapCapstone
+
+#check @OmegaTheoryReceipt
+#print axioms OmegaTheoryReceipt
+#check @OmegaTheoryReceipt.mk
+#print axioms OmegaTheoryReceipt.mk
+#check @OmegaTheoryReceipt.schedulerEnvelope
+#print axioms OmegaTheoryReceipt.schedulerEnvelope
+#check @OmegaTheoryReceipt.resolvingSchedulerZero
+#print axioms OmegaTheoryReceipt.resolvingSchedulerZero
+#check @OmegaTheoryReceipt.independentProductAdditive
+#print axioms OmegaTheoryReceipt.independentProductAdditive
+#check @OmegaTheoryReceipt.sequentialCounterexample
+#print axioms OmegaTheoryReceipt.sequentialCounterexample
+#check @OmegaTheoryReceipt.relationIsoInvariant
+#print axioms OmegaTheoryReceipt.relationIsoInvariant
+#check @OmegaTheoryReceipt.fullRelabelInvariant
+#print axioms OmegaTheoryReceipt.fullRelabelInvariant
+#check @OmegaTheoryReceipt.simulationCounterexample
+#print axioms OmegaTheoryReceipt.simulationCounterexample
+#check @OmegaTheoryReceipt.releaseIsoInsufficient
+#print axioms OmegaTheoryReceipt.releaseIsoInsufficient
+#check @OmegaTheoryReceipt.signCharacterization
+#print axioms OmegaTheoryReceipt.signCharacterization
+#check @OmegaTheoryReceipt.negativeWitness
+#print axioms OmegaTheoryReceipt.negativeWitness
+#check @OmegaTheoryReceipt.evidenceMonotone
+#print axioms OmegaTheoryReceipt.evidenceMonotone
+#check @OmegaTheoryReceipt.alignedCollapse
+#print axioms OmegaTheoryReceipt.alignedCollapse
+#check @OmegaTheoryReceipt.canonicalForkEvent
+#print axioms OmegaTheoryReceipt.canonicalForkEvent
+#check @OmegaTheoryReceipt.canonicalForkResolved
+#print axioms OmegaTheoryReceipt.canonicalForkResolved
+#check @omegaTheoryReceipt
+#print axioms omegaTheoryReceipt
+#check @omegaCapstone_recovers_original_fork3
+#print axioms omegaCapstone_recovers_original_fork3
+#check @omegaCapstone_recovers_resolving_falsifier
+#print axioms omegaCapstone_recovers_resolving_falsifier
+
+end OperatorKO7.Test.OverproductionGapCapstoneReach

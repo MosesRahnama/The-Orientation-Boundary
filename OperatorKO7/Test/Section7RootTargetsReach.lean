@@ -1,0 +1,11 @@
+import OperatorKO7.Meta.UniqueNormalization.Section7RootTargets
+
+set_option autoImplicit false
+
+open OperatorKO7.Meta.UniqueNormalization
+
+#check @TermTargetedPGraph.target_parent_is_rootStep
+#check @TermTargetedPGraph.target_rootStep_eqvOn_of_complete
+
+#print axioms TermTargetedPGraph.target_parent_is_rootStep
+#print axioms TermTargetedPGraph.target_rootStep_eqvOn_of_complete

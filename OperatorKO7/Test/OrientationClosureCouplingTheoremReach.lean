@@ -1,0 +1,22 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.CouplingTheorem
+
+/-! # CouplingTheorem reach and axiom check -/
+
+#check @OperatorKO7.Methods.OrientationClosure.CouplingTheorem.wrapperCostZ
+#print axioms OperatorKO7.Methods.OrientationClosure.CouplingTheorem.wrapperCostZ
+#check @OperatorKO7.Methods.OrientationClosure.CouplingTheorem.counterGainZ
+#print axioms OperatorKO7.Methods.OrientationClosure.CouplingTheorem.counterGainZ
+#check @OperatorKO7.Methods.OrientationClosure.CouplingTheorem.orients_instance_iff_wrapperCost_lt_counterGain
+#print axioms OperatorKO7.Methods.OrientationClosure.CouplingTheorem.orients_instance_iff_wrapperCost_lt_counterGain
+#check @OperatorKO7.Methods.OrientationClosure.CouplingTheorem.orients_all_iff_wrapperCost_lt_counterGain
+#print axioms OperatorKO7.Methods.OrientationClosure.CouplingTheorem.orients_all_iff_wrapperCost_lt_counterGain
+#check @OperatorKO7.Methods.OrientationClosure.CouplingTheorem.retained_wrapper_forces_payload_coupled_gain
+#print axioms OperatorKO7.Methods.OrientationClosure.CouplingTheorem.retained_wrapper_forces_payload_coupled_gain
+#check @OperatorKO7.Methods.OrientationClosure.CouplingTheorem.no_orientation_of_retention_bounded_gain_unbounded_payload
+#print axioms OperatorKO7.Methods.OrientationClosure.CouplingTheorem.no_orientation_of_retention_bounded_gain_unbounded_payload
+#check @OperatorKO7.Methods.OrientationClosure.CouplingTheorem.unconstrained_direct_law_barrier
+#print axioms OperatorKO7.Methods.OrientationClosure.CouplingTheorem.unconstrained_direct_law_barrier
+#check @OperatorKO7.Methods.OrientationClosure.CouplingTheorem.main_polynomial_gain_exact
+#print axioms OperatorKO7.Methods.OrientationClosure.CouplingTheorem.main_polynomial_gain_exact
+#check @OperatorKO7.Methods.OrientationClosure.CouplingTheorem.main_polynomial_coupling_tight
+#print axioms OperatorKO7.Methods.OrientationClosure.CouplingTheorem.main_polynomial_coupling_tight

@@ -1,0 +1,61 @@
+import OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice
+
+/-! Permanent reach and axiom audit for `LicenseLattice`. -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerKernel
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerKernel_apply
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerRefines_iff_kernel_le
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.licensed_iff_kernel_le
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerKernel_quotientMk
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.Observer
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.Observer.kernel
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.Observer.le_iff_kernel_le
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.Observer.ofSetoid
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.Observer.kernel_ofSetoid
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.Observer.kernel_surjective
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerKernelPartitionEquiv
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerKernelPartitionEquiv_toAntisymmetrization
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerPartitionOrderIso
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.jointPair
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerKernel_jointPair
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerKernel_jointObserver
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.commonCoarsening
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerKernel_commonCoarsening
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.commonCoarseningFamily
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerKernel_commonCoarseningFamily
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.licensed_meet_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.licensed_meetFamily_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.commonCoarsening_greatest_lower
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.commonCoarsening_eq_iff_eqvGen
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.licensed_join_of_either
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.parityTarget
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.parity_licensed_by_join_only
+
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerKernel
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerKernel_apply
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerRefines_iff_kernel_le
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.licensed_iff_kernel_le
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerKernel_quotientMk
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.Observer
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.Observer.kernel
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.Observer.le_iff_kernel_le
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.Observer.ofSetoid
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.Observer.kernel_ofSetoid
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.Observer.kernel_surjective
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerKernelPartitionEquiv
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerKernelPartitionEquiv_toAntisymmetrization
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerPartitionOrderIso
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.jointPair
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerKernel_jointPair
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerKernel_jointObserver
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.commonCoarsening
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerKernel_commonCoarsening
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.commonCoarseningFamily
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerKernel_commonCoarseningFamily
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.licensed_meet_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.licensed_meetFamily_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.commonCoarsening_greatest_lower
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.commonCoarsening_eq_iff_eqvGen
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.licensed_join_of_either
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.parityTarget
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.parity_licensed_by_join_only

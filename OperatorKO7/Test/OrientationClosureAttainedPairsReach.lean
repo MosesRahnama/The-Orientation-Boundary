@@ -1,0 +1,36 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.AttainedPairs
+
+/-!
+# AttainedPairs reach and axiom check
+
+Paired declaration reach and axiom checks for `AttainedPairs.lean`.
+-/
+
+#check @OperatorKO7.Methods.OrientationClosure.AttainedPairs.succPrefix
+#print axioms OperatorKO7.Methods.OrientationClosure.AttainedPairs.succPrefix
+#check @OperatorKO7.Methods.OrientationClosure.AttainedPairs.counterObservation
+#print axioms OperatorKO7.Methods.OrientationClosure.AttainedPairs.counterObservation
+#check @OperatorKO7.Methods.OrientationClosure.AttainedPairs.payloadObservation
+#print axioms OperatorKO7.Methods.OrientationClosure.AttainedPairs.payloadObservation
+#check @OperatorKO7.Methods.OrientationClosure.AttainedPairs.counterTerm
+#print axioms OperatorKO7.Methods.OrientationClosure.AttainedPairs.counterTerm
+#check @OperatorKO7.Methods.OrientationClosure.AttainedPairs.payloadTerm
+#print axioms OperatorKO7.Methods.OrientationClosure.AttainedPairs.payloadTerm
+#check @OperatorKO7.Methods.OrientationClosure.AttainedPairs.succPrefix_counterTerm
+#print axioms OperatorKO7.Methods.OrientationClosure.AttainedPairs.succPrefix_counterTerm
+#check @OperatorKO7.Methods.OrientationClosure.AttainedPairs.counterObservation_payloadTerm
+#print axioms OperatorKO7.Methods.OrientationClosure.AttainedPairs.counterObservation_payloadTerm
+#check @OperatorKO7.Methods.OrientationClosure.AttainedPairs.payloadObservation_payloadTerm
+#print axioms OperatorKO7.Methods.OrientationClosure.AttainedPairs.payloadObservation_payloadTerm
+#check @OperatorKO7.Methods.OrientationClosure.AttainedPairs.profileMeasure
+#print axioms OperatorKO7.Methods.OrientationClosure.AttainedPairs.profileMeasure
+#check @OperatorKO7.Methods.OrientationClosure.AttainedPairs.successor_profile
+#print axioms OperatorKO7.Methods.OrientationClosure.AttainedPairs.successor_profile
+#check @OperatorKO7.Methods.OrientationClosure.AttainedPairs.every_successor_profile_attained
+#print axioms OperatorKO7.Methods.OrientationClosure.AttainedPairs.every_successor_profile_attained
+#check @OperatorKO7.Methods.OrientationClosure.AttainedPairs.profile_orients_successors_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.AttainedPairs.profile_orients_successors_iff
+#check @OperatorKO7.Methods.OrientationClosure.AttainedPairs.counter_profile_orients_successors
+#print axioms OperatorKO7.Methods.OrientationClosure.AttainedPairs.counter_profile_orients_successors
+#check @OperatorKO7.Methods.OrientationClosure.AttainedPairs.free_successor_orientation_implies_payloadBlind
+#print axioms OperatorKO7.Methods.OrientationClosure.AttainedPairs.free_successor_orientation_implies_payloadBlind
