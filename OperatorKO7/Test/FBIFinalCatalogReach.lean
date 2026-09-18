@@ -1,0 +1,169 @@
+import OperatorKO7.Meta.FBI_FinalCatalog
+
+namespace FBIFinalCatalogReach
+
+open OperatorKO7
+open OperatorKO7.FBIFinalCatalog
+
+#check FBIFinalRouteStatusCatalog
+#check fbi_final_route_status_catalog
+#check FBIResidualAdequacyBoundaryCatalog
+#check fbi_residual_adequacy_boundary_catalog
+#check FBIFinalCoverage
+#check FBIGenericForwardAdequacyData
+#check FBIGenericBackwardAdequacyData
+#check canonicalForwardAdequacyData
+#check canonicalBackwardAdequacyData
+#check FBIAdequacyBoundaryCatalog
+#check fbi_adequacy_boundary_catalog
+#check fbi_adequacy_boundary_catalog_projects_forward_data
+#check fbi_adequacy_boundary_catalog_projects_backward_data
+#check fbi_adequacy_boundary_catalog_projects_forward_universal_coverage
+#check fbi_adequacy_boundary_catalog_projects_backward_universal_coverage
+#check canonicalForwardAdequacyData_projects_directW0
+#check canonicalBackwardAdequacyData_projects_importedWholeW1
+#check FBIClosureRow
+#check fbiClosureRows
+#check FBIClosureRowSupported
+#check fbiClosureRows_nodup
+#check fbiClosureRows_length
+#check fbiClosureRows_complete_exact
+#check fbiClosureRowSupported_holds
+#check FBIClosureCatalog
+#check fbi_closure_catalog
+#check fbi_closure_catalog_projects_forward_adequacy
+#check fbi_closure_catalog_projects_backward_adequacy
+#check fbi_closure_catalog_projects_complete_method_coverage
+#check fbi_closure_catalog_projects_direction_coverage
+#check FBIFinalCatalogCertificate
+#check fbi_final_catalog_certificate
+#check fbi_final_catalog_certificate_projects_route_status_catalog
+#check fbi_final_catalog_certificate_projects_residual_boundary
+#check fbi_final_catalog_certificate_projects_adequacy_boundary
+#check fbi_final_catalog_certificate_projects_closure_catalog
+#check fbi_final_catalog_certificate_projects_no_outside_catalog_method
+#check fbi_final_catalog_certificate_projects_direction_universal
+
+example : FBIFinalRouteStatusCatalog :=
+  fbi_final_route_status_catalog
+
+example : FBIResidualAdequacyBoundaryCatalog :=
+  fbi_residual_adequacy_boundary_catalog
+
+example : FBIAdequacyBoundaryCatalog :=
+  fbi_adequacy_boundary_catalog
+
+example : Nonempty FBIGenericForwardAdequacyData :=
+  fbi_adequacy_boundary_catalog_projects_forward_data
+
+example : Nonempty FBIGenericBackwardAdequacyData :=
+  fbi_adequacy_boundary_catalog_projects_backward_data
+
+example : canonicalForwardAdequacyData.method.successSemantics.route? = some .W0 := by
+  exact canonicalForwardAdequacyData_projects_directW0.1
+
+example : canonicalBackwardAdequacyData.method.successSemantics.closureStatus = .licensedEscape .W1 := by
+  exact canonicalBackwardAdequacyData_projects_importedWholeW1.2
+
+example : ∀ method : FBIMethod,
+    method.successSemantics.closureStatus ∈ OperatorKO7.FBIClassification.fbiClosureStatuses ∧
+      FBIFinalCoverage method := by
+  exact fbi_final_catalog_certificate_projects_no_outside_catalog_method
+
+/-! ## Direction-indexed catalog API: new public anchors (WP-3 item A) -/
+
+#check FBIDirectionalRouteRow
+#check fbiDirectionalRouteRows
+#check fbiDirectionalRow
+#check fbiDirectionalRouteRows_length
+#check fbiDirectionalRouteRows_nodup
+#check fbiDirectionalRouteRows_complete
+#check fbiDirectionalRow_fst
+#check fbiDirectionalRow_legacy_projection
+#check FBIDirectionalRouteStatusCatalog
+#check fbi_directional_route_status_catalog
+#check fbi_directional_coverage_indexed
+#check fbi_forward_directional_coverage
+#check fbi_backward_directional_coverage
+#check FBIExternalToolStatus
+#check fbi_external_ttt2_status_is_maybe
+#check fbi_external_ttt2_status_ne_certifiedYes
+#check FBIDirectionalCatalogCertificate
+#check fbi_directional_catalog_certificate
+
+#print axioms fbiDirectionalRouteRows
+#print axioms FBIDirectionalRouteRow
+#print axioms fbiDirectionalRow
+#print axioms fbiDirectionalRouteRows_length
+#print axioms fbiDirectionalRouteRows_nodup
+#print axioms fbiDirectionalRouteRows_complete
+#print axioms fbiDirectionalRow_fst
+#print axioms fbiDirectionalRow_legacy_projection
+#print axioms fbi_directional_route_status_catalog
+#print axioms FBIDirectionalRouteStatusCatalog
+#print axioms fbi_directional_coverage_indexed
+#print axioms fbi_forward_directional_coverage
+#print axioms fbi_backward_directional_coverage
+#print axioms fbi_external_ttt2_status_is_maybe
+#print axioms FBIExternalToolStatus
+#print axioms fbi_external_ttt2_status_ne_certifiedYes
+#print axioms fbi_directional_catalog_certificate
+#print axioms FBIDirectionalCatalogCertificate
+
+/-- The certificate pins the twelve-row count. -/
+example : fbiDirectionalRouteRows.length = 12 :=
+  fbi_directional_catalog_certificate.rowCount
+
+/-- The certificate keeps the external TTT2 FBI result at MAYBE. -/
+example : OperatorKO7.FBIClassification.fbiExternalTTT2Status = .maybe :=
+  fbi_directional_catalog_certificate.externalStillMaybe
+
+end FBIFinalCatalogReach
+
+/-! ## LASOT 18.2 reach/axiom parity completion (supervisor validation 2026-08-10):
+every checked anchor above now carries a paired axiom print; opens replicated for print-scope resolution. -/
+
+section LasotParityCompletion
+open FBIFinalCatalogReach
+open OperatorKO7
+open OperatorKO7.FBIFinalCatalog
+
+#print axioms canonicalBackwardAdequacyData
+#print axioms canonicalBackwardAdequacyData_projects_importedWholeW1
+#print axioms canonicalForwardAdequacyData
+#print axioms canonicalForwardAdequacyData_projects_directW0
+#print axioms fbi_adequacy_boundary_catalog
+#print axioms fbi_adequacy_boundary_catalog_projects_backward_data
+#print axioms fbi_adequacy_boundary_catalog_projects_backward_universal_coverage
+#print axioms fbi_adequacy_boundary_catalog_projects_forward_data
+#print axioms fbi_adequacy_boundary_catalog_projects_forward_universal_coverage
+#print axioms fbi_closure_catalog
+#print axioms fbi_closure_catalog_projects_backward_adequacy
+#print axioms fbi_closure_catalog_projects_complete_method_coverage
+#print axioms fbi_closure_catalog_projects_direction_coverage
+#print axioms fbi_closure_catalog_projects_forward_adequacy
+#print axioms fbi_final_catalog_certificate
+#print axioms fbi_final_catalog_certificate_projects_adequacy_boundary
+#print axioms fbi_final_catalog_certificate_projects_closure_catalog
+#print axioms fbi_final_catalog_certificate_projects_direction_universal
+#print axioms fbi_final_catalog_certificate_projects_no_outside_catalog_method
+#print axioms fbi_final_catalog_certificate_projects_residual_boundary
+#print axioms fbi_final_catalog_certificate_projects_route_status_catalog
+#print axioms fbi_final_route_status_catalog
+#print axioms fbi_residual_adequacy_boundary_catalog
+#print axioms FBIAdequacyBoundaryCatalog
+#print axioms FBIClosureCatalog
+#print axioms FBIClosureRow
+#print axioms fbiClosureRows
+#print axioms fbiClosureRows_complete_exact
+#print axioms fbiClosureRows_length
+#print axioms fbiClosureRows_nodup
+#print axioms FBIClosureRowSupported
+#print axioms fbiClosureRowSupported_holds
+#print axioms FBIFinalCatalogCertificate
+#print axioms FBIFinalCoverage
+#print axioms FBIFinalRouteStatusCatalog
+#print axioms FBIGenericBackwardAdequacyData
+#print axioms FBIGenericForwardAdequacyData
+#print axioms FBIResidualAdequacyBoundaryCatalog
+end LasotParityCompletion

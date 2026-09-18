@@ -1,0 +1,49 @@
+import OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel
+
+/-! Permanent reach and axiom audit for `ObserverKernel`. -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.observerSetoid
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.ObserverQuotient
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.quotientMap
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.quotientObserver
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.quotientObserver_quotientMap
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.quotientMap_eq_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.FactorsThrough
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.factor
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.factor_quotientMap
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.factorization
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.factor_unique
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.FiniteDistribution
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.pushforward
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.shannonFunctional
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.hartleySupportCard
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.pushforward_eq_of_pointwise
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.pushforward_through_observerKernel
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.shannon_through_observerKernel
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.hartley_through_observerKernel
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.parityObserver_fixture
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.parityObserver_identifies_even_fixture
+#check @OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.parityObserver_separates_parity_fixture
+
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.observerSetoid
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.ObserverQuotient
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.quotientMap
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.quotientObserver
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.quotientObserver_quotientMap
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.quotientMap_eq_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.FactorsThrough
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.factor
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.factor_quotientMap
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.factorization
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.factor_unique
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.FiniteDistribution
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.pushforward
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.shannonFunctional
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.hartleySupportCard
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.pushforward_eq_of_pointwise
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.pushforward_through_observerKernel
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.shannon_through_observerKernel
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.hartley_through_observerKernel
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.parityObserver_fixture
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.parityObserver_identifies_even_fixture
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ObserverKernel.parityObserver_separates_parity_fixture

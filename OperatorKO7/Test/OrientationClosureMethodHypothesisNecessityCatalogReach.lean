@@ -1,0 +1,22 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodHypothesisNecessityCatalog
+
+/-! # MethodHypothesisNecessityCatalog reach and axiom check -/
+
+#check @OperatorKO7.Methods.OrientationClosure.HypothesisNecessity.rowNecessityKind
+#print axioms OperatorKO7.Methods.OrientationClosure.HypothesisNecessity.rowNecessityKind
+#check @OperatorKO7.Methods.OrientationClosure.HypothesisNecessity.RowNecessityStatement
+#print axioms OperatorKO7.Methods.OrientationClosure.HypothesisNecessity.RowNecessityStatement
+#check @OperatorKO7.Methods.OrientationClosure.HypothesisNecessity.rowNecessityEvidence
+#print axioms OperatorKO7.Methods.OrientationClosure.HypothesisNecessity.rowNecessityEvidence
+#check @OperatorKO7.Methods.OrientationClosure.HypothesisNecessity.methodCatalogRows
+#print axioms OperatorKO7.Methods.OrientationClosure.HypothesisNecessity.methodCatalogRows
+#check @OperatorKO7.Methods.OrientationClosure.HypothesisNecessity.methodCatalogRows_eq
+#print axioms OperatorKO7.Methods.OrientationClosure.HypothesisNecessity.methodCatalogRows_eq
+#check @OperatorKO7.Methods.OrientationClosure.HypothesisNecessity.methodCatalogRows_length
+#print axioms OperatorKO7.Methods.OrientationClosure.HypothesisNecessity.methodCatalogRows_length
+#check @OperatorKO7.Methods.OrientationClosure.HypothesisNecessity.methodCatalogRows_nodup
+#print axioms OperatorKO7.Methods.OrientationClosure.HypothesisNecessity.methodCatalogRows_nodup
+#check @OperatorKO7.Methods.OrientationClosure.HypothesisNecessity.methodCatalogRows_complete
+#print axioms OperatorKO7.Methods.OrientationClosure.HypothesisNecessity.methodCatalogRows_complete
+#check @OperatorKO7.Methods.OrientationClosure.HypothesisNecessity.rowNecessityKind_counts
+#print axioms OperatorKO7.Methods.OrientationClosure.HypothesisNecessity.rowNecessityKind_counts

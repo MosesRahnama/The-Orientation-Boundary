@@ -1,0 +1,175 @@
+import OperatorKO7.Meta.DependencyPairs_FirstOrderExtraction
+
+/-!
+# Rule-Record Call-Head Frontend
+
+Callers provide a finite array of rule records and left- and right-hand side
+maps into `FOTerm`. The module constructs one rule-level call-head record for
+each function-headed left side, together with its graph and SCC search surface.
+Pair-level dependency-pair extraction and source-soundness require additional
+structure beyond this frontend.
+-/
+
+namespace OperatorKO7.DependencyPairsFragment
+
+/-- Rule-level call-head data for a record with first-order side extractors. -/
+structure ExtractedRuleFrontendNode (ρ σ : Type) [DecidableEq σ] where
+  rule : ρ
+  nodeKey : σ
+  succKeys : Finset σ
+
+/-- Defined heads of a finite rule-record frontend. -/
+def foDefinedHeadsOf {ρ σ ν : Type} [DecidableEq σ]
+    (rules : Array ρ) (lhs : ρ → FOTerm σ ν) : Finset σ :=
+  rules.foldl
+    (fun acc r =>
+      match FOTerm.head? (lhs r) with
+      | some f => insert f acc
+      | none => acc)
+    ∅
+
+/-- Construct one call-head record when the rule's left side has a function head. -/
+def extractRuleFrontendNode? {ρ σ ν : Type} [DecidableEq σ]
+    (lhs : ρ → FOTerm σ ν) (rhs : ρ → FOTerm σ ν)
+    (defined : Finset σ) (r : ρ) : Option (ExtractedRuleFrontendNode ρ σ) :=
+  match FOTerm.head? (lhs r) with
+  | none => none
+  | some f =>
+      some
+        { rule := r
+          nodeKey := f
+          succKeys := (FOTerm.allHeads (rhs r)).filter (· ∈ defined) }
+
+/-- Call-head records constructed from a finite rule-record frontend. -/
+def extractRuleFrontendNodes {ρ σ ν : Type} [DecidableEq σ]
+    (rules : Array ρ) (lhs : ρ → FOTerm σ ν) (rhs : ρ → FOTerm σ ν) :
+    Array (ExtractedRuleFrontendNode ρ σ) :=
+  let defined := foDefinedHeadsOf rules lhs
+  rules.filterMap (extractRuleFrontendNode? lhs rhs defined)
+
+/-- Array-backed call graph induced by the constructed call-head records. -/
+def foExtractedCallGraphOf {ρ σ ν : Type} [DecidableEq σ]
+    (rules : Array ρ) (lhs : ρ → FOTerm σ ν) (rhs : ρ → FOTerm σ ν) :
+    FiniteExtractedCallGraph σ :=
+  FiniteExtractedCallGraph.ofArrayMap
+    (nodes := extractRuleFrontendNodes rules lhs rhs)
+    (nodeKey := ExtractedRuleFrontendNode.nodeKey)
+    (succKeys := ExtractedRuleFrontendNode.succKeys)
+
+/-- SCC search over the graph constructed from a rule-record frontend. -/
+noncomputable abbrev findNontrivialSCCPair?Of {ρ σ ν : Type} [DecidableEq σ]
+    (rules : Array ρ) (lhs : ρ → FOTerm σ ν) (rhs : ρ → FOTerm σ ν) :
+    Option ((foExtractedCallGraphOf rules lhs rhs).Node × (foExtractedCallGraphOf rules lhs rhs).Node) :=
+  (foExtractedCallGraphOf rules lhs rhs).findNontrivialSCCPair?
+
+/-- SCC existence predicate for the constructed call graph. -/
+abbrev HasNontrivialSCCOf {ρ σ ν : Type} [DecidableEq σ]
+    (rules : Array ρ) (lhs : ρ → FOTerm σ ν) (rhs : ρ → FOTerm σ ν) : Prop :=
+  (foExtractedCallGraphOf rules lhs rhs).HasNontrivialSCC
+
+theorem hasNontrivialSCCOf_iff_exists_findNontrivialSCCPair? {ρ σ ν : Type} [DecidableEq σ]
+    (rules : Array ρ) (lhs : ρ → FOTerm σ ν) (rhs : ρ → FOTerm σ ν) :
+    HasNontrivialSCCOf rules lhs rhs ↔
+      ∃ p : (foExtractedCallGraphOf rules lhs rhs).Node × (foExtractedCallGraphOf rules lhs rhs).Node,
+        findNontrivialSCCPair?Of rules lhs rhs = some p := by
+  simpa [HasNontrivialSCCOf, findNontrivialSCCPair?Of] using
+    (FiniteExtractedCallGraph.hasNontrivialSCC_iff_exists_findNontrivialSCCPair?
+      (G := foExtractedCallGraphOf rules lhs rhs))
+
+theorem hasNontrivialSCCOf_of_findNontrivialSCCPair?_eq_some {ρ σ ν : Type} [DecidableEq σ]
+    (rules : Array ρ) (lhs : ρ → FOTerm σ ν) (rhs : ρ → FOTerm σ ν)
+    {p : (foExtractedCallGraphOf rules lhs rhs).Node × (foExtractedCallGraphOf rules lhs rhs).Node}
+    (h : findNontrivialSCCPair?Of rules lhs rhs = some p) :
+    HasNontrivialSCCOf rules lhs rhs := by
+  simpa [HasNontrivialSCCOf, findNontrivialSCCPair?Of] using
+    (FiniteExtractedCallGraph.hasNontrivialSCC_of_findNontrivialSCCPair?_eq_some
+      (G := foExtractedCallGraphOf rules lhs rhs) h)
+
+/-- Standard SCC witness recovered from a supplied SCC existence proof. -/
+noncomputable abbrev toSCCCycleOf {ρ σ ν : Type} [DecidableEq σ]
+    (rules : Array ρ) (lhs : ρ → FOTerm σ ν) (rhs : ρ → FOTerm σ ν)
+    (h : HasNontrivialSCCOf rules lhs rhs) :
+    SCCCycle (foExtractedCallGraphOf rules lhs rhs).Node :=
+  (foExtractedCallGraphOf rules lhs rhs).toSCCCycle h
+
+theorem not_globalOrients_of_source_le_target_of_findNontrivialSCCPair?Of
+    {ρ σ ν : Type} [DecidableEq σ]
+    (rules : Array ρ) (lhs : ρ → FOTerm σ ν) (rhs : ρ → FOTerm σ ν)
+    {m : (foExtractedCallGraphOf rules lhs rhs).Node → Nat}
+    {p : (foExtractedCallGraphOf rules lhs rhs).Node × (foExtractedCallGraphOf rules lhs rhs).Node}
+    (hfind : findNontrivialSCCPair?Of rules lhs rhs = some p)
+    (hge : m p.1 ≤ m p.2) :
+    ¬ GlobalOrients (foExtractedCallGraphOf rules lhs rhs).toFiniteCallGraph.Edge m (· < ·) := by
+  simpa [findNontrivialSCCPair?Of] using
+    (FiniteExtractedCallGraph.not_globalOrients_of_source_le_target_of_findNontrivialSCCPair?
+      (G := foExtractedCallGraphOf rules lhs rhs) hfind hge)
+
+theorem not_globalOrients_of_source_le_target_of_hasNontrivialSCCOf
+    {ρ σ ν : Type} [DecidableEq σ]
+    (rules : Array ρ) (lhs : ρ → FOTerm σ ν) (rhs : ρ → FOTerm σ ν)
+    {m : (foExtractedCallGraphOf rules lhs rhs).Node → Nat}
+    (h : HasNontrivialSCCOf rules lhs rhs)
+    (hge : m (toSCCCycleOf rules lhs rhs h).source ≤ m (toSCCCycleOf rules lhs rhs h).target) :
+    ¬ GlobalOrients (foExtractedCallGraphOf rules lhs rhs).toFiniteCallGraph.Edge m (· < ·) := by
+  simpa [HasNontrivialSCCOf, toSCCCycleOf] using
+    (FiniteExtractedCallGraph.not_globalOrients_of_source_le_target_of_hasNontrivialSCC
+      (G := foExtractedCallGraphOf rules lhs rhs) h hge)
+
+theorem foDefinedHeadsOf_eq_foDefinedHeads {σ ν : Type} [DecidableEq σ]
+    (rules : Array (FORule σ ν)) :
+    foDefinedHeadsOf rules FORule.lhs = foDefinedHeads rules := by
+  rfl
+
+private def packExtractedFORuleNode {σ ν : Type} [DecidableEq σ] :
+    ExtractedFORuleNode σ ν → ExtractedRuleFrontendNode (FORule σ ν) σ
+  | n => {
+      rule := n.rule
+      nodeKey := n.nodeKey
+      succKeys := n.succKeys
+    }
+
+private theorem extractRuleFrontendNode?_eq_map_extractFORuleNode? {σ ν : Type}
+    [DecidableEq σ] (defined : Finset σ) (r : FORule σ ν) :
+    extractRuleFrontendNode? FORule.lhs FORule.rhs defined r =
+      (extractFORuleNode? defined r).map (packExtractedFORuleNode (σ := σ) (ν := ν)) := by
+  cases h : FOTerm.head? (FORule.lhs r) <;>
+    simp [extractRuleFrontendNode?, extractFORuleNode?, FORule.lhsHead?, h,
+      packExtractedFORuleNode]
+
+private theorem extractRuleFrontendNode?_eq_map_extractFORuleNode {σ ν : Type}
+    [DecidableEq σ] (defined : Finset σ) :
+    extractRuleFrontendNode? FORule.lhs FORule.rhs defined =
+      fun r =>
+        (extractFORuleNode? defined r).map (packExtractedFORuleNode (σ := σ) (ν := ν)) := by
+  funext r
+  exact extractRuleFrontendNode?_eq_map_extractFORuleNode? defined r
+
+theorem extractRuleFrontendNodes_eq_extractFORuleNodes {σ ν : Type} [DecidableEq σ]
+    (rules : Array (FORule σ ν)) :
+    extractRuleFrontendNodes rules FORule.lhs FORule.rhs =
+      (extractFORuleNodes rules).map (packExtractedFORuleNode (σ := σ) (ν := ν)) := by
+  have hlist :
+      (extractRuleFrontendNodes rules FORule.lhs FORule.rhs).toList =
+        ((extractFORuleNodes rules).map (packExtractedFORuleNode (σ := σ) (ν := ν))).toList := by
+    simpa [extractRuleFrontendNodes, extractFORuleNodes, foDefinedHeadsOf_eq_foDefinedHeads,
+      packExtractedFORuleNode, Array.toList_filterMap, Array.toList_map,
+      extractRuleFrontendNode?_eq_map_extractFORuleNode] using
+      (List.map_filterMap (f := extractFORuleNode? (foDefinedHeads rules))
+        (g := packExtractedFORuleNode (σ := σ) (ν := ν)) (l := rules.toList)).symm
+  have hmap :
+      (List.map (packExtractedFORuleNode (σ := σ) (ν := ν))
+        (extractFORuleNodes rules).toList).toArray =
+        (extractFORuleNodes rules).map (packExtractedFORuleNode (σ := σ) (ν := ν)) := by
+    simpa [Array.toList_map] using
+      (Array.toArray_toList
+        (xs := (extractFORuleNodes rules).map (packExtractedFORuleNode (σ := σ) (ν := ν))))
+  calc
+    extractRuleFrontendNodes rules FORule.lhs FORule.rhs =
+        (List.map (packExtractedFORuleNode (σ := σ) (ν := ν))
+          (extractFORuleNodes rules).toList).toArray := by
+            simpa [Array.toArray_toList, Array.toList_map, packExtractedFORuleNode] using
+              congrArg List.toArray hlist
+    _ =
+        (extractFORuleNodes rules).map (packExtractedFORuleNode (σ := σ) (ν := ν)) := hmap
+
+end OperatorKO7.DependencyPairsFragment

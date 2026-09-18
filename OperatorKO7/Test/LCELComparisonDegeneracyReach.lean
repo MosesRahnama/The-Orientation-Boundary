@@ -1,0 +1,34 @@
+import OperatorKO7.Meta.LCELComparisonDegeneracy
+
+/-!
+# Reach gate: LCEL comparison degeneracy
+
+Pins every public declaration of
+`OperatorKO7/Meta/LCELComparisonDegeneracy.lean`.
+Import-and-check only.
+-/
+
+set_option autoImplicit false
+
+namespace OperatorKO7.Test.LCELComparisonDegeneracyReach
+
+#check @OperatorKO7.LCELComparisonDegeneracy.stagewiseLCEL_of_realizes
+#print axioms OperatorKO7.LCELComparisonDegeneracy.stagewiseLCEL_of_realizes
+#check @OperatorKO7.LCELComparisonDegeneracy.contentlessSlotProfile
+#print axioms OperatorKO7.LCELComparisonDegeneracy.contentlessSlotProfile
+#check @OperatorKO7.LCELComparisonDegeneracy.contentless_realizes
+#print axioms OperatorKO7.LCELComparisonDegeneracy.contentless_realizes
+#check @OperatorKO7.LCELComparisonDegeneracy.contentless_stagewise
+#print axioms OperatorKO7.LCELComparisonDegeneracy.contentless_stagewise
+#check @OperatorKO7.LCELComparisonDegeneracy.quasiFunctor_of_realizes
+#print axioms OperatorKO7.LCELComparisonDegeneracy.quasiFunctor_of_realizes
+#check @OperatorKO7.LCELComparisonDegeneracy.contentless_lcel_compares
+#print axioms OperatorKO7.LCELComparisonDegeneracy.contentless_lcel_compares
+#check @OperatorKO7.LCELComparisonDegeneracy.lcelQuasiFunctor_subsingleton
+#print axioms OperatorKO7.LCELComparisonDegeneracy.lcelQuasiFunctor_subsingleton
+#check @OperatorKO7.LCELComparisonDegeneracy.lcelComparison_subsingleton
+#print axioms OperatorKO7.LCELComparisonDegeneracy.lcelComparison_subsingleton
+#check @OperatorKO7.LCELComparisonDegeneracy.lcel_identity_is_classification
+#print axioms OperatorKO7.LCELComparisonDegeneracy.lcel_identity_is_classification
+
+end OperatorKO7.Test.LCELComparisonDegeneracyReach

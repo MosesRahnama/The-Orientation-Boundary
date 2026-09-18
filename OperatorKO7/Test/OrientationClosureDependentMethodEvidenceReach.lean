@@ -1,0 +1,258 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.DependentMethodEvidence
+
+/-!
+# DependentMethodEvidence reach and axiom check
+
+Paired declaration reach and axiom checks for `DependentMethodEvidence.lean`.
+-/
+
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ori1_laws
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ori1_laws
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ori2_laws
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ori2_laws
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ori3_laws
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ori3_laws
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ori4_laws
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ori4_laws
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ori5_laws
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ori5_laws
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ori6_laws
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ori6_laws
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.NativeMethodLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.NativeMethodLaws
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.nativeMethodLaws_closed
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.nativeMethodLaws_closed
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.NativeRowWitness
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.NativeRowWitness
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.nativeRowWitness_closed
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.nativeRowWitness_closed
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.DependentNativeCertificate
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.DependentNativeCertificate
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.dependentNativeCertificate
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.dependentNativeCertificate
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.dependentNativeRows
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.dependentNativeRows
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.dependentNativeRows_eq_missingNativeInterpretationRows
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.dependentNativeRows_eq_missingNativeInterpretationRows
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.dependentNativeRows_count
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.dependentNativeRows_count
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.dependentNativeRows_have_certificate
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.dependentNativeRows_have_certificate
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.mk
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.mk
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.kboBlocked
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.kboBlocked
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.kboWeightWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.kboWeightWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.generalizedWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.generalizedWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.generalizedBlocked
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.generalizedBlocked
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.acBlocked
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.acBlocked
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.acNontrivial
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.acNontrivial
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.transfiniteWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.transfiniteWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.transfiniteBlocked
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.transfiniteBlocked
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.lambdaFreeWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.lambdaFreeWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.lambdaFreeBlocked
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.lambdaFreeBlocked
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.polynomialWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.polynomialWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.polynomialBlocked
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.polynomialBlocked
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.acRpoNontrivial
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.acRpoNontrivial
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.permutationStatusActive
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.permutationStatusActive
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.popStarDataExact
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.popStarDataExact
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.popStarBlocked
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.popStarBlocked
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.simpleTerminationWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI1Laws.simpleTerminationWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.mk
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.mk
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.negativeDebtActive
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.negativeDebtActive
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.maxNonconstant
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.maxNonconstant
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.maxBlocked
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.maxBlocked
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.polynomialInside
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.polynomialInside
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.polynomialOutside
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.polynomialOutside
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.multilinearInside
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.multilinearInside
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.multilinearOutside
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.multilinearOutside
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.rationalNonNat
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.rationalNonNat
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.realNonconstant
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.realNonconstant
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.arcticFinite
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.arcticFinite
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.arcticBlocked
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.arcticBlocked
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.tropicalRoot
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.tropicalRoot
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.tropicalContextBlocked
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.tropicalContextBlocked
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.tupleOrients
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.tupleOrients
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.tupleNotAffine
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.tupleNotAffine
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.higherOrderBinderActive
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.higherOrderBinderActive
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.higherOrderTupleBlocked
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.higherOrderTupleBlocked
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.archimedeanNonconstant
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.archimedeanNonconstant
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.archimedeanBlocked
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI2Laws.archimedeanBlocked
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.mk
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.mk
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.semanticExact
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.semanticExact
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.predictiveExact
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.predictiveExact
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.selfExact
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.selfExact
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.extendedBlocked
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.extendedBlocked
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.finiteWeakInhabited
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.finiteWeakInhabited
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.matchLinear
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.matchLinear
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.semanticOrients
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.semanticOrients
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.semanticContextFailure
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.semanticContextFailure
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.selfDistinguishes
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.selfDistinguishes
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.categoryIdentity
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.categoryIdentity
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.categoryGenerator
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.categoryGenerator
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.forwardRequirementFails
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.forwardRequirementFails
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.quasiWellFounded
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI3Laws.quasiWellFounded
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.mk
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.mk
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.distinctStrictRelations
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.distinctStrictRelations
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.pairOneWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.pairOneWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.pairTwoWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.pairTwoWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.tripleEquivReflexive
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.tripleEquivReflexive
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.formativeExact
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.formativeExact
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.formativeWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.formativeWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.typedWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.typedWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.orderedWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.orderedWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.replacementPayloadFrozen
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.replacementPayloadFrozen
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.replacementCounterActive
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.replacementCounterActive
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.contextSensitiveWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.contextSensitiveWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.conditionDimensionLive
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.conditionDimensionLive
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.operationalConditionalWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.operationalConditionalWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.constrainedWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.constrainedWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.higherOrderConstrainedWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI4Laws.higherOrderConstrainedWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.mk
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.mk
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.horpoCall
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.horpoCall
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.horpoWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.horpoWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.cpoCall
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.cpoCall
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.cpoWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.cpoWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.generalSchemaDescent
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.generalSchemaDescent
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.guard
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.guard
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.sized
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.sized
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.safePositive
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.safePositive
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.safeDupBlocked
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.safeDupBlocked
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.resourcePositive
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.resourcePositive
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.resourceDupBlocked
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.resourceDupBlocked
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.ramifiedPositive
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.ramifiedPositive
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.ramifiedDupBlocked
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.ramifiedDupBlocked
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.abstractCounterDescent
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.abstractCounterDescent
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.infinitaryControl
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI5Laws.infinitaryControl
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.mk
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.mk
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.weightedGraphExact
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.weightedGraphExact
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.weightedGraphWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.weightedGraphWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.generalizedGraphWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.generalizedGraphWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.generalizedWeightActive
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.generalizedWeightActive
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.processExact
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.processExact
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.processWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.processWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.piFragmentWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.piFragmentWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.cpsExact
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.cpsExact
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.cpsWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.cpsWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.lambdaMuSimulation
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.lambdaMuSimulation
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.nativeCPSWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.nativeCPSWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.sharingNonconstant
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.sharingNonconstant
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.sharingWF
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.sharingWF
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.sharingNoninjective
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.ORI6Laws.sharingNoninjective
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.DependentNativeCertificate.mk
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.DependentNativeCertificate.mk
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.DependentNativeCertificate.interpretation
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.DependentNativeCertificate.interpretation
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.DependentNativeCertificate.laws
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.DependentNativeCertificate.laws
+#check @OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.DependentNativeCertificate.rowWitness
+#print axioms OperatorKO7.Methods.OrientationClosure.DependentMethodEvidence.DependentNativeCertificate.rowWitness

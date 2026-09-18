@@ -1,0 +1,30 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.OrientationBoundaryObject
+
+set_option autoImplicit false
+
+#check @OperatorKO7.Methods.OrientationClosure.OrientationBoundaryObject.orientationBoundary_eq
+#print axioms OperatorKO7.Methods.OrientationClosure.OrientationBoundaryObject.orientationBoundary_eq
+
+#check @OperatorKO7.Methods.OrientationClosure.OrientationBoundaryObject.counter_mem_orienters
+#print axioms OperatorKO7.Methods.OrientationClosure.OrientationBoundaryObject.counter_mem_orienters
+
+#check @OperatorKO7.Methods.OrientationClosure.OrientationBoundaryObject.payload_not_mem_orienters
+#print axioms OperatorKO7.Methods.OrientationClosure.OrientationBoundaryObject.payload_not_mem_orienters
+
+#check @OperatorKO7.Methods.OrientationClosure.OrientationBoundaryObject.const_not_mem_orienters
+#print axioms OperatorKO7.Methods.OrientationClosure.OrientationBoundaryObject.const_not_mem_orienters
+
+#check @OperatorKO7.Methods.OrientationClosure.OrientationBoundaryObject.exists_cell
+#print axioms OperatorKO7.Methods.OrientationClosure.OrientationBoundaryObject.exists_cell
+
+#check @OperatorKO7.Methods.OrientationClosure.OrientationBoundaryObject.cell_unique
+#print axioms OperatorKO7.Methods.OrientationClosure.OrientationBoundaryObject.cell_unique
+
+#check @OperatorKO7.Methods.OrientationClosure.OrientationBoundaryObject.barrier_cell_excludes
+#print axioms OperatorKO7.Methods.OrientationClosure.OrientationBoundaryObject.barrier_cell_excludes
+
+#check @OperatorKO7.Methods.OrientationClosure.OrientationBoundaryObject.growthCell_spec
+#print axioms OperatorKO7.Methods.OrientationClosure.OrientationBoundaryObject.growthCell_spec
+
+#check @OperatorKO7.Methods.OrientationClosure.OrientationBoundaryObject.growthCell_eq_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.OrientationBoundaryObject.growthCell_eq_iff

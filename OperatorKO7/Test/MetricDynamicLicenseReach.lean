@@ -1,0 +1,11 @@
+import OperatorKO7.Meta.LicensedBoundaryCalculus.MetricDynamicLicense
+
+open OperatorKO7.Meta.LicensedBoundaryCalculus.MetricDynamicLicense
+
+#check MetricPersistentLicense
+#check metricPersistentLicense_iff_compactUniformSeparation
+#check guardExpiry_pointwise_nonzero_but_unlicensed
+#check metricPersistentLicense_reciprocal_transport
+#print axioms metricPersistentLicense_iff_compactUniformSeparation
+#print axioms guardExpiry_pointwise_nonzero_but_unlicensed
+#print axioms metricPersistentLicense_reciprocal_transport

@@ -1,0 +1,37 @@
+import OperatorKO7.Meta.UniqueNormalization.Section7SameGraphClosure
+
+set_option autoImplicit false
+
+open OperatorKO7.Meta.UniqueNormalization
+
+#check @TermTargetedPGraph.AllGuided
+#check @PGraph.contextAbsorbs_of_sigmaClosedOn
+#check @TermTargetedPGraph.contextAbsorbs_of_complete
+#check @TermTargetedPGraph.universal_iff_sameGraph_root_and_absorption
+#check @exists_equalityComplete_contextAbsorbing_targeted
+#check @RootRepresentationFailure
+#check @PGraph.not_universal_iff_rootRepresentationFailure_of_sigmaClosedOn
+#check @MissingRootArgumentWitness
+#check @RootArgumentFailure
+#check @TermTargetedPGraph.not_universal_iff_rootArgumentFailure
+#check @TermTargetedPGraph.rootStepsRepresented_iff_no_rootArgumentFailure
+#check @exists_sameGraph_section7_classification
+#check @down_transitive_of_finite_complete_targeted_root_models
+#check @conv_iff_down_of_finite_complete_targeted_root_models
+#check @constructorCompatible_conv_of_finite_complete_targeted_root_models
+
+#print axioms TermTargetedPGraph.AllGuided
+#print axioms PGraph.contextAbsorbs_of_sigmaClosedOn
+#print axioms TermTargetedPGraph.contextAbsorbs_of_complete
+#print axioms TermTargetedPGraph.universal_iff_sameGraph_root_and_absorption
+#print axioms exists_equalityComplete_contextAbsorbing_targeted
+#print axioms RootRepresentationFailure
+#print axioms PGraph.not_universal_iff_rootRepresentationFailure_of_sigmaClosedOn
+#print axioms MissingRootArgumentWitness
+#print axioms RootArgumentFailure
+#print axioms TermTargetedPGraph.not_universal_iff_rootArgumentFailure
+#print axioms TermTargetedPGraph.rootStepsRepresented_iff_no_rootArgumentFailure
+#print axioms exists_sameGraph_section7_classification
+#print axioms down_transitive_of_finite_complete_targeted_root_models
+#print axioms conv_iff_down_of_finite_complete_targeted_root_models
+#print axioms constructorCompatible_conv_of_finite_complete_targeted_root_models

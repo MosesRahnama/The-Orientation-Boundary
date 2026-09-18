@@ -1,0 +1,69 @@
+cff-version: 1.2.0
+message: "If you use this artifact, please cite the repository and the associated manuscripts."
+title: "The Orientation Boundary: Lean Companion Artifact for the Orientation Boundary, Observer Determinacy, and Unique Normal Forms Manuscripts"
+type: software
+authors:
+  - family-names: "Rahnama"
+    given-names: "Moses"
+    email: "info@minaanalytics.com"
+    affiliation: "Mina Analytics"
+    orcid: "https://orcid.org/0009-0009-0922-483X"
+repository-code: "https://github.com/MosesRahnama/The-Orientation-Boundary"
+url: "https://github.com/MosesRahnama/The-Orientation-Boundary"
+license: "LicenseRef-OperatorKO7-Source-Available"
+keywords:
+  - lean4
+  - formal-verification
+  - theorem-proving
+  - termination
+  - rewrite-systems
+  - term-rewriting
+  - proof-assistant
+  - orientation-boundary
+  - primitive-recursion
+  - dependency-pairs
+  - confluence
+  - critical-pairs
+abstract: |
+  This repository contains the source-available Lean 4 companion artifact for
+  three manuscripts by Moses Rahnama: "The Orientation Boundary for
+  Step-Duplicating Recursors: Direct Measures, Polynomial Decision, and
+  Dependency-Pair Escape," "Observer Determinacy of Termination Certificates: Sufficient
+  Statistics, Blackwell Comparison, and Simple Projections for Step-Duplicating
+  Recursion," and "Unique
+  Normal Forms: Proof-Graph Counterexamples, Infinite-Carrier Certificates, and
+  Confluence Repair."
+
+  This package contains the Lean 4 modules named by those manuscripts or
+  required to compile them, the TTT2 and CeTA artifacts, and the three
+  claim-to-code indexes.
+references:
+  - type: article
+    title: "The Orientation Boundary for Step-Duplicating Recursors: Direct Measures, Polynomial Decision, and Dependency-Pair Escape"
+    authors:
+      - family-names: "Rahnama"
+        given-names: "Moses"
+        orcid: "https://orcid.org/0009-0009-0922-483X"
+    year: 2026
+    repository-code: "https://github.com/MosesRahnama/The-Orientation-Boundary"
+    notes: "Preprint"
+  - type: article
+    title: "Observer Determinacy of Termination Certificates: Sufficient Statistics, Blackwell Comparison, and Simple Projections for Step-Duplicating Recursion"
+    authors:
+      - family-names: "Rahnama"
+        given-names: "Moses"
+        orcid: "https://orcid.org/0009-0009-0922-483X"
+    year: 2026
+    repository-code: "https://github.com/MosesRahnama/The-Orientation-Boundary"
+    notes: "Preprint"
+  - type: article
+    title: "Unique Normal Forms: Proof-Graph Counterexamples, Infinite-Carrier Certificates, and Confluence Repair"
+    authors:
+      - family-names: "Rahnama"
+        given-names: "Moses"
+        orcid: "https://orcid.org/0009-0009-0922-483X"
+    year: 2026
+    repository-code: "https://github.com/MosesRahnama/The-Orientation-Boundary"
+    notes: "Preprint"
+version: "2026.06.28"
+date-released: "2026-06-28"

@@ -1,0 +1,21 @@
+import OperatorKO7.Meta.OperationalInexpressibility.OrbitSimulation
+
+/-! Permanent reach and axiom audit for `OrbitSimulation`. -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.OrbitSimulation.observerQuotientStep
+#check @OperatorKO7.Meta.OperationalInexpressibility.OrbitSimulation.observerQuotientARS
+#check @OperatorKO7.Meta.OperationalInexpressibility.OrbitSimulation.quotientProjection
+#check @OperatorKO7.Meta.OperationalInexpressibility.OrbitSimulation.quotientProjection_maps_steps
+#check @OperatorKO7.Meta.OperationalInexpressibility.OrbitSimulation.quotientProjection_maps_reach
+#check @OperatorKO7.Meta.OperationalInexpressibility.OrbitSimulation.chainObserver_fixture
+#check @OperatorKO7.Meta.OperationalInexpressibility.OrbitSimulation.chainObserver_edge_fixture
+#check @OperatorKO7.Meta.OperationalInexpressibility.OrbitSimulation.chainObserver_reach_fixture
+
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.OrbitSimulation.observerQuotientStep
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.OrbitSimulation.observerQuotientARS
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.OrbitSimulation.quotientProjection
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.OrbitSimulation.quotientProjection_maps_steps
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.OrbitSimulation.quotientProjection_maps_reach
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.OrbitSimulation.chainObserver_fixture
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.OrbitSimulation.chainObserver_edge_fixture
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.OrbitSimulation.chainObserver_reach_fixture

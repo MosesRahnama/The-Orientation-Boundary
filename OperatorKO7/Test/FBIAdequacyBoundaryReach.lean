@@ -1,0 +1,196 @@
+import OperatorKO7.Meta.FBI_AdequacyBoundary
+
+namespace FBIAdequacyBoundaryReach
+
+open OperatorKO7
+open OperatorKO7.FBIClassification
+open OperatorKO7.FBIAdequacyBoundary
+
+#check FBIFinalCoverage
+#check FBIGenericForwardAdequacyData
+#check FBIGenericForwardAdequacyData.method
+#check FBIGenericForwardAdequacyData.forwardOnly
+#check FBIGenericForwardAdequacyData.coveredRow
+#check FBIGenericForwardAdequacyData.coveredRow_mem
+#check FBIGenericForwardAdequacyData.route_exact
+#check FBIGenericForwardAdequacyData.status_exact
+#check FBIGenericBackwardAdequacyData
+#check FBIGenericBackwardAdequacyData.method
+#check FBIGenericBackwardAdequacyData.backwardOnly
+#check FBIGenericBackwardAdequacyData.coveredRow
+#check FBIGenericBackwardAdequacyData.coveredRow_mem
+#check FBIGenericBackwardAdequacyData.route_exact
+#check FBIGenericBackwardAdequacyData.status_exact
+#check canonicalForwardAdequacyData
+#check canonicalBackwardAdequacyData
+#check fbi_forward_adequacy_data_projects_final_coverage
+#check fbi_backward_adequacy_data_projects_final_coverage
+#check fbi_forward_adequacy_data_has_listed_closure_status
+#check fbi_backward_adequacy_data_has_listed_closure_status
+#check fbi_forward_adequacy_data_implies_existing_status
+#check fbi_backward_adequacy_data_implies_existing_status
+#check fbi_forward_adequacy_data_projects_supported_row
+#check fbi_backward_adequacy_data_projects_supported_row
+#check canonicalForwardAdequacyData_projects_directW0
+#check canonicalBackwardAdequacyData_projects_importedWholeW1
+#check FBIAdequacyBoundaryCatalog
+#check fbi_adequacy_boundary_catalog
+#check fbi_adequacy_boundary_catalog_projects_status
+#check fbi_adequacy_boundary_catalog_projects_forward_data
+#check fbi_adequacy_boundary_catalog_projects_backward_data
+#check fbi_adequacy_boundary_catalog_projects_forward_universal_coverage
+#check fbi_adequacy_boundary_catalog_projects_backward_universal_coverage
+#check FBIAdequacyBoundaryCertificate
+#check fbi_adequacy_boundary_certificate
+#check fbi_adequacy_boundary_certificate_projects_catalog
+#check fbi_adequacy_boundary_certificate_projects_forward_coverage
+#check fbi_adequacy_boundary_certificate_projects_backward_coverage
+#check fbi_adequacy_boundary_certificate_projects_forward_universal_coverage
+#check fbi_adequacy_boundary_certificate_projects_backward_universal_coverage
+#check fbi_adequacy_boundary_certificate_projects_no_outside_catalog
+#check fbi_adequacy_boundary_certificate_projects_generic_coverage
+#check fbi_generic_forward_adequacy_universal_unconditional
+#check fbi_generic_backward_adequacy_universal_unconditional
+#check fbi_no_outside_catalog_method
+#check fbi_generic_adequacy_universal_unconditional
+
+example : FBIFinalCoverage canonicalForwardAdequacyData.method := by
+  exact fbi_forward_adequacy_data_projects_final_coverage canonicalForwardAdequacyData
+
+example : FBIFinalCoverage canonicalBackwardAdequacyData.method := by
+  exact fbi_backward_adequacy_data_projects_final_coverage canonicalBackwardAdequacyData
+
+example : canonicalForwardAdequacyData.method.instantiation = .forwardOnly := by
+  exact canonicalForwardAdequacyData.forwardOnly
+
+example : canonicalBackwardAdequacyData.method.instantiation = .backwardOnly := by
+  exact canonicalBackwardAdequacyData.backwardOnly
+
+example : canonicalForwardAdequacyData.method.successSemantics.closureStatus ∈ fbiClosureStatuses := by
+  exact fbi_forward_adequacy_data_has_listed_closure_status canonicalForwardAdequacyData
+
+example : canonicalBackwardAdequacyData.method.successSemantics.closureStatus ∈ fbiClosureStatuses := by
+  exact fbi_backward_adequacy_data_has_listed_closure_status canonicalBackwardAdequacyData
+
+example : Nonempty FBIGenericForwardAdequacyData := by
+  exact fbi_adequacy_boundary_catalog_projects_forward_data fbi_adequacy_boundary_catalog
+
+example : Nonempty FBIGenericBackwardAdequacyData := by
+  exact fbi_adequacy_boundary_catalog_projects_backward_data fbi_adequacy_boundary_catalog
+
+example : canonicalForwardAdequacyData.method.successSemantics.route? = some .W0 := by
+  exact canonicalForwardAdequacyData_projects_directW0.1
+
+example : canonicalBackwardAdequacyData.method.successSemantics.closureStatus = .licensedEscape .W1 := by
+  exact canonicalBackwardAdequacyData_projects_importedWholeW1.2
+
+example : fbiGenericAdequacyBoundaryStatus .forwardAdequacy =
+    .closedByNamedTheorem fbiGenericForwardAdequacyClosureTheorem := by
+  exact fbi_adequacy_boundary_catalog_projects_status
+    fbi_adequacy_boundary_catalog .forwardAdequacy
+
+example : FBIFinalCatalogRowSupported canonicalBackwardAdequacyData.coveredRow := by
+  exact fbi_backward_adequacy_data_projects_supported_row canonicalBackwardAdequacyData
+
+example : FBIFinalCoverage directForwardFBIMethod := by
+  exact (OperatorKO7.FBIGenericAdequacy.fbi_forward_directional_coverage
+    directForwardFBIMethod rfl).2.2
+
+example : FBIFinalCoverage importedWholeFBIMethod := by
+  exact (OperatorKO7.FBIGenericAdequacy.fbi_backward_directional_coverage
+    importedWholeFBIMethod rfl).2.2
+
+/-! ## Direction-indexed route data: new public anchors (WP-3 item A) -/
+
+#check FBIDirectionalRouteData
+#check FBIDirectionalRouteData.method
+#check FBIDirectionalRouteData.direction
+#check FBIDirectionalRouteData.direction_matches
+#check FBIDirectionalRouteData.row
+#check FBIDirectionalRouteData.row_eq
+#check FBIDirectionalRouteData.row_mem
+#check canonicalForwardDirectionalData
+#check canonicalBackwardDirectionalData
+#check fbi_directional_data_projects_coverage
+#check fbi_directional_data_projects_legacy_tags
+#check fbi_directional_route_status_catalog
+#check fbi_external_ttt2_status_is_maybe
+
+#print axioms canonicalForwardDirectionalData
+#print axioms canonicalBackwardDirectionalData
+#print axioms FBIDirectionalRouteData
+#print axioms FBIDirectionalRouteData.method
+#print axioms FBIDirectionalRouteData.direction
+#print axioms FBIDirectionalRouteData.direction_matches
+#print axioms FBIDirectionalRouteData.row
+#print axioms FBIDirectionalRouteData.row_eq
+#print axioms FBIDirectionalRouteData.row_mem
+#print axioms fbi_directional_data_projects_coverage
+#print axioms fbi_directional_data_projects_legacy_tags
+#print axioms fbi_directional_route_status_catalog
+#print axioms fbi_external_ttt2_status_is_maybe
+
+/-- The forward fixture's stored direction is carried by its row. -/
+example :
+    canonicalForwardDirectionalData.direction ∈
+      (OperatorKO7.FBIClassification.fbiDirectionalRow
+        canonicalForwardDirectionalData.method).1.directions :=
+  (fbi_directional_data_projects_coverage canonicalForwardDirectionalData).1
+
+end FBIAdequacyBoundaryReach
+
+/-! ## LASOT 18.2 reach/axiom parity completion (supervisor validation 2026-08-10):
+every checked anchor above now carries a paired axiom print; opens replicated for print-scope resolution. -/
+
+section LasotParityCompletion
+open FBIAdequacyBoundaryReach
+open OperatorKO7
+open OperatorKO7.FBIClassification
+open OperatorKO7.FBIAdequacyBoundary
+
+#print axioms canonicalBackwardAdequacyData
+#print axioms canonicalBackwardAdequacyData_projects_importedWholeW1
+#print axioms canonicalForwardAdequacyData
+#print axioms canonicalForwardAdequacyData_projects_directW0
+#print axioms fbi_adequacy_boundary_catalog
+#print axioms fbi_adequacy_boundary_catalog_projects_backward_data
+#print axioms fbi_adequacy_boundary_catalog_projects_backward_universal_coverage
+#print axioms fbi_adequacy_boundary_catalog_projects_forward_data
+#print axioms fbi_adequacy_boundary_catalog_projects_forward_universal_coverage
+#print axioms fbi_adequacy_boundary_catalog_projects_status
+#print axioms fbi_adequacy_boundary_certificate
+#print axioms fbi_adequacy_boundary_certificate_projects_backward_coverage
+#print axioms fbi_adequacy_boundary_certificate_projects_backward_universal_coverage
+#print axioms fbi_adequacy_boundary_certificate_projects_catalog
+#print axioms fbi_adequacy_boundary_certificate_projects_forward_coverage
+#print axioms fbi_adequacy_boundary_certificate_projects_forward_universal_coverage
+#print axioms fbi_adequacy_boundary_certificate_projects_generic_coverage
+#print axioms fbi_adequacy_boundary_certificate_projects_no_outside_catalog
+#print axioms fbi_backward_adequacy_data_has_listed_closure_status
+#print axioms fbi_backward_adequacy_data_implies_existing_status
+#print axioms fbi_backward_adequacy_data_projects_final_coverage
+#print axioms fbi_backward_adequacy_data_projects_supported_row
+#print axioms fbi_forward_adequacy_data_has_listed_closure_status
+#print axioms fbi_forward_adequacy_data_implies_existing_status
+#print axioms fbi_forward_adequacy_data_projects_final_coverage
+#print axioms fbi_forward_adequacy_data_projects_supported_row
+#print axioms fbi_generic_adequacy_universal_unconditional
+#print axioms fbi_generic_backward_adequacy_universal_unconditional
+#print axioms fbi_generic_forward_adequacy_universal_unconditional
+#print axioms fbi_no_outside_catalog_method
+#print axioms FBIAdequacyBoundaryCatalog
+#print axioms FBIAdequacyBoundaryCertificate
+#print axioms FBIFinalCoverage
+#print axioms FBIGenericBackwardAdequacyData
+#print axioms FBIGenericBackwardAdequacyData.backwardOnly
+#print axioms FBIGenericBackwardAdequacyData.coveredRow
+#print axioms FBIGenericBackwardAdequacyData.coveredRow_mem
+#print axioms FBIGenericBackwardAdequacyData.route_exact
+#print axioms FBIGenericBackwardAdequacyData.status_exact
+#print axioms FBIGenericForwardAdequacyData
+#print axioms FBIGenericForwardAdequacyData.coveredRow
+#print axioms FBIGenericForwardAdequacyData.coveredRow_mem
+#print axioms FBIGenericForwardAdequacyData.forwardOnly
+#print axioms FBIGenericForwardAdequacyData.route_exact
+#print axioms FBIGenericForwardAdequacyData.status_exact
+end LasotParityCompletion

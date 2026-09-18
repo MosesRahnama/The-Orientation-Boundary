@@ -1,0 +1,135 @@
+import OperatorKO7.Meta.DM_TripleLexExactness_FinalCatalog
+import OperatorKO7.Meta.SafeTrace_TripleLexExactness_FinalCatalog
+import OperatorKO7.Meta.MutualDuplication_FiniteSchema_API
+import OperatorKO7.Meta.HigherOrderSharingBoundary_API
+import OperatorKO7.Meta.BoundaryGeneral.DirectMeasureGrammarClosure
+import OperatorKO7.Meta.BoundaryGeneral.VectorOrderRepair
+import OperatorKO7.Meta.BoundaryGeneral.CheckedNonOrientationCertificate
+import OperatorKO7.Meta.BoundaryGeneral.DeclaredMethodUniverse
+import OperatorKO7.Meta.RDRSMethodCertificate
+import OperatorKO7.Meta.RDRSSemanticCoverageLedger
+import OperatorKO7.Meta.BoundaryGeneral.FamilyGrammarSubsumption
+import OperatorKO7.Meta.RDRSMechanicalDirectness
+import OperatorKO7.Meta.RDRSCoverageEvidenceLedger
+import OperatorKO7.Meta.EscapeRouteRefined
+import OperatorKO7.Meta.EscapeRouteExtractors
+import OperatorKO7.Meta.ClosedCarrierSemanticsAdapters
+import OperatorKO7.Meta.MatrixBarrierTropicalContextClosure_Schema
+import OperatorKO7.Meta.DependencyPairs_Normalization
+import OperatorKO7.Meta.ContextClosed_Nonconfluence
+import OperatorKO7.Meta.RootStrategyNormalization
+import OperatorKO7.Meta.YamadaTupleBarrier_Schema
+import OperatorKO7.Meta.Methods.OrientationClosure.AblationComparisons
+import OperatorKO7.Meta.Methods.OrientationClosure.AlgebraicNativeSemantics
+import OperatorKO7.Meta.Methods.OrientationClosure.AttainedPairs
+import OperatorKO7.Meta.Methods.OrientationClosure.OrientationBoundaryPublicationCapstone
+import OperatorKO7.Meta.Methods.OrientationClosure.OrientationBoundaryObject
+import OperatorKO7.Meta.Methods.OrientationClosure.CaptureAvoidingSubstitution
+import OperatorKO7.Meta.Methods.OrientationClosure.CellClassification
+import OperatorKO7.Meta.Methods.OrientationClosure.CellClassificationFamilies
+import OperatorKO7.Meta.Methods.OrientationClosure.CertificateControls
+import OperatorKO7.Meta.Methods.OrientationClosure.CertificateLanguage
+import OperatorKO7.Meta.Methods.OrientationClosure.ContextLiftMetatheorem
+import OperatorKO7.Meta.Methods.OrientationClosure.ControlCatalog
+import OperatorKO7.Meta.Methods.OrientationClosure.CouplingControls
+import OperatorKO7.Meta.Methods.OrientationClosure.CouplingTheorem
+import OperatorKO7.Meta.Methods.OrientationClosure.DependencyPairNativeSemantics
+import OperatorKO7.Meta.Methods.OrientationClosure.DependencyPairSoundness
+import OperatorKO7.Meta.Methods.OrientationClosure.DependentMethodEvidence
+import OperatorKO7.Meta.Methods.OrientationClosure.DirectFamilyHypothesisNecessity
+import OperatorKO7.Meta.Methods.OrientationClosure.ExistingSixteenGeneralization
+import OperatorKO7.Meta.Methods.OrientationClosure.FreeDerivationalComplexity
+import OperatorKO7.Meta.Methods.OrientationClosure.FreeOrdinalCalibration
+import OperatorKO7.Meta.Methods.OrientationClosure.FreePolynomialTermination
+import OperatorKO7.Meta.Methods.OrientationClosure.GrammarLicenseBridge
+import OperatorKO7.Meta.Methods.OrientationClosure.HigherOrderNativeSemantics
+import OperatorKO7.Meta.Methods.OrientationClosure.HypothesisNecessityBase
+import OperatorKO7.Meta.Methods.OrientationClosure.IncrementCost
+import OperatorKO7.Meta.Methods.OrientationClosure.InterpretationLaws
+import OperatorKO7.Meta.Methods.OrientationClosure.LicenseEvent
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodDataFactoring
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodHypothesisNecessityCatalog
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodRowsConditionalConstrained
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodRowsDependencyPairs
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodRowsGraphCalculi
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodRowsInterpretations
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodRowsKBO
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodRowsLabelingBounds
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodRowsOtherCalculi
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodRowsPathOrders
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodRowsProcessCalculi
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodRowsSemanticFrameworks
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodRowsSortedConstrained
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodRowsSubstrate
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodRowsTypedCalculi
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodRowsTypingDisciplines
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodRowsUsableFormative
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodUniverseClosure
+import OperatorKO7.Meta.Methods.OrientationClosure.NativeSemanticCoverage
+import OperatorKO7.Meta.Methods.OrientationClosure.ObserverRanks
+import OperatorKO7.Meta.Methods.OrientationClosure.ObserverSufficiency
+import OperatorKO7.Meta.Methods.OrientationClosure.OrientationHypothesisNecessityCatalog
+import OperatorKO7.Meta.Methods.OrientationClosure.PathOrderNativeSemantics
+import OperatorKO7.Meta.Methods.OrientationClosure.PolynomialOrientationDecision
+import OperatorKO7.Meta.Methods.OrientationClosure.PolynomialRegion
+import OperatorKO7.Meta.Methods.OrientationClosure.ProcessorCorrespondence
+import OperatorKO7.Meta.Methods.OrientationClosure.ProcessorSemantics
+import OperatorKO7.Meta.Methods.OrientationClosure.RaryCoupling
+import OperatorKO7.Meta.Methods.OrientationClosure.ResearchPackages
+import OperatorKO7.Meta.Methods.OrientationClosure.RowNecessityCalculi
+import OperatorKO7.Meta.Methods.OrientationClosure.RowNecessityDependencyPairsSubstrate
+import OperatorKO7.Meta.Methods.OrientationClosure.RowNecessityInterpretations
+import OperatorKO7.Meta.Methods.OrientationClosure.RowNecessityLabelingSorted
+import OperatorKO7.Meta.Methods.OrientationClosure.RowNecessityOrders
+import OperatorKO7.Meta.Methods.OrientationClosure.ScalarGrammarDecision
+import OperatorKO7.Meta.Methods.OrientationClosure.SchemaCore
+import OperatorKO7.Meta.Methods.OrientationClosure.SemanticStructuralNativeSemantics
+import OperatorKO7.Meta.Methods.OrientationClosure.SeparableSlopes
+import OperatorKO7.Meta.Methods.OrientationClosure.SeparableSlopesAffineStrata
+import OperatorKO7.Meta.Methods.OrientationClosure.SeparableSlopesDecision
+import OperatorKO7.Meta.Methods.OrientationClosure.SeparableSlopesDiophantineBoundary
+import OperatorKO7.Meta.Methods.OrientationClosure.SeparableSlopesMonomialStratum
+import OperatorKO7.Meta.Methods.OrientationClosure.SignatureGeneric
+import OperatorKO7.Meta.Methods.OrientationClosure.SignatureInstances
+import OperatorKO7.Meta.Methods.OrientationClosure.SizeChangeTermination
+import OperatorKO7.Meta.Methods.OrientationClosure.SourceChainSoundness
+import OperatorKO7.Meta.Methods.OrientationClosure.SubstrateChangeNativeSemantics
+import OperatorKO7.Meta.Methods.OrientationClosure.SystemTRecursor
+import OperatorKO7.Meta.Methods.OrientationClosure.TransportLaws
+import OperatorKO7.Meta.Methods.OrientationClosure.VectorComparison
+
+/-!
+# Orientation Boundary API
+
+Narrow public root for the orientation-boundary surfaces used by Paper A.
+
+This file re-exports only the stable theorem-backed orientation surfaces that
+Paper A currently treats as public import boundaries: the final M3
+calibrated-carrier exactness catalog, the safe-trace exactness, range-status,
+image-subtype exactness, safe-step certificate bridge, safe-trace complexity
+bridge, finite certificate audit, safe-trace roadmap closeout, root API export,
+full-carrier obstruction catalogs, the stable H3 finite-cycle and M2 no-sharing
+API wrappers, and the exact scalar grammar characterization of duplicating-step
+orientation.
+
+The Tier-17 `VectorOrderRepair`, `CheckedNonOrientationCertificate`, and
+`DeclaredMethodUniverse` imports passed the targeted Tier-17B elaboration,
+reach, API-preservation, and axiom-audit gates on 2026-08-02.  Their exact
+trust surface remains the one printed by the dated Tier-17B receipt.
+
+`VectorOrderRepair` now also exports
+`primaryFirstLt_not_wellFounded_of_three_le`, the Tier-17B P1 statement for
+every dimension at least three and every primary coordinate.  Importing it
+here records public API reach; the dedicated Tier-17B reach and axiom gates
+record its exact elaborated type and trust surface.
+
+`RDRSSemanticCoverageLedger` exports the proof-bearing mirror of the complete
+sixteen-row semantic ledger.  Its six projection-escape rows now store
+anchor-indexed transaction evidence, while forgetting the proof layer recovers
+the original metadata ledger definitionally.
+
+It excludes the broader schema/tooling surface in `SchemaExtendedAPI` and the
+KO7-facing cross-paper layer in `CrossPaperAPI`. It does not add an exact-order-
+type theorem for every guarded reduction trace, an algorithmic graph-search
+theorem, or a full higher-order impossibility theorem.
+-/

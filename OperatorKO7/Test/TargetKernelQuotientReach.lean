@@ -1,0 +1,60 @@
+import OperatorKO7.Meta.OperationalInexpressibility.TargetKernelQuotient
+
+set_option autoImplicit false
+
+open OperatorKO7.Meta.OperationalInexpressibility.TargetKernel
+
+#check @targetKernelSetoid
+#check @TargetKernelQuotient
+#check @targetKernelQuotientMap
+#check @targetKernelDecoder
+#check @targetKernelDecoder_map
+#check @targetKernelQuotientMap_eq_iff
+#check @targetKernelQuotient_licenses_target
+#check @licensed_iff_refines_targetKernelQuotient
+#check @every_licensed_observer_refines_targetKernelQuotient
+#check @targetKernelQuotient_coarsest_sufficient
+#check @targetKernelQuotient_unique_up_to_kernel
+#check @licensed_and_targetKernel_refines_iff_same_kernel
+#check @parityTarget_fixture
+#check parityTarget_fixture_identifies_even
+#check parityTarget_fixture_separates_odd
+
+#print axioms targetKernelSetoid
+#print axioms TargetKernelQuotient
+#print axioms targetKernelQuotientMap
+#print axioms targetKernelDecoder
+#print axioms targetKernelDecoder_map
+#print axioms targetKernelQuotientMap_eq_iff
+#print axioms targetKernelQuotient_licenses_target
+#print axioms licensed_iff_refines_targetKernelQuotient
+#print axioms every_licensed_observer_refines_targetKernelQuotient
+#print axioms targetKernelQuotient_coarsest_sufficient
+#print axioms targetKernelQuotient_unique_up_to_kernel
+#print axioms licensed_and_targetKernel_refines_iff_same_kernel
+#print axioms parityTarget_fixture
+#print axioms parityTarget_fixture_identifies_even
+#print axioms parityTarget_fixture_separates_odd
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.jointObserver
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.jointObserver
+#check @OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.jointObserver_eq_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.jointObserver_eq_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.refines_jointObserver_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.refines_jointObserver_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.licensed_joint_target_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.licensed_joint_target_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.jointObserver_least_common_refinement
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.jointObserver_least_common_refinement
+#check @OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.licensed_family_iff_refines_jointTargetKernel
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.licensed_family_iff_refines_jointTargetKernel
+#check @OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.targetKernelRangeEquiv
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.targetKernelRangeEquiv
+#check @OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.targetKernelRangeEquiv_map
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.targetKernelRangeEquiv_map
+#check @OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.coordinateObserver
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.coordinateObserver
+#check @OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.joint_coordinateObserver_injective
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.joint_coordinateObserver_injective
+#check @OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.coordinateObserver_neither_licenses_other
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.TargetKernel.coordinateObserver_neither_licenses_other

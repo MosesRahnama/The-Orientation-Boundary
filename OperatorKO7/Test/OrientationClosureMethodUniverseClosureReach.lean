@@ -1,0 +1,64 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodUniverseClosure
+
+/-! # MethodUniverseClosure reach and axiom check -/
+
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.MethodVerdict
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.MethodVerdict
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.MethodData
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.MethodData
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.MethodLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.MethodLaws
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.MethodAccepts
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.MethodAccepts
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.MethodResult
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.MethodResult
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.methodVerdict
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.methodVerdict
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.methodWitness
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.methodWitness
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.methodWitness_laws
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.methodWitness_laws
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.methodWitness_result
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.methodWitness_result
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.MethodSound
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.MethodSound
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.methodSound
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.methodSound
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.MethodFeature
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.MethodFeature
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.methodFeature
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.methodFeature
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.MethodMutation
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.MethodMutation
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.methodMutation
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.methodMutation
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.NamedMethodIdentityRow
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.NamedMethodIdentityRow
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.namedMethodFamily
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.namedMethodFamily
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.NamedMethodIdentity
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.NamedMethodIdentity
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.namedMethodIdentity
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.namedMethodIdentity
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.namedMethodIdentityRows
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.namedMethodIdentityRows
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.namedMethodIdentityRows_length
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.namedMethodIdentityRows_length
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.namedMethodIdentityRows_nodup
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.namedMethodIdentityRows_nodup
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.method_universe_closure
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.method_universe_closure
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.RowCertificate
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.RowCertificate
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.rowCertificate
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.rowCertificate
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.certificates
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.certificates
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.coveredRows
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.coveredRows
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.coveredRows_eq
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.coveredRows_eq
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.coveredRows_length
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.coveredRows_length
+#check @OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.coverage_mutation
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodUniverseClosure.coverage_mutation

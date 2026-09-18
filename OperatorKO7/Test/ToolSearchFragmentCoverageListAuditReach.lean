@@ -1,0 +1,36 @@
+import OperatorKO7.Meta.ToolSearchFragmentCoverage_ListAudit
+
+namespace ToolSearchFragmentCoverageListAuditReach
+
+#check OperatorKO7.ToolSearchFragmentCoverageListAudit.theoremBackedToolSearchFamilies
+#check OperatorKO7.ToolSearchFragmentCoverageListAudit.residualToolSearchFamilies
+#check OperatorKO7.ToolSearchFragmentCoverageListAudit.theoremBackedToolSearchFamilies_complete
+#check OperatorKO7.ToolSearchFragmentCoverageListAudit.theoremBackedToolSearchFamilies_status_covered
+#check OperatorKO7.ToolSearchFragmentCoverageListAudit.theoremBackedToolSearchFamilies_have_certificate
+#check OperatorKO7.ToolSearchFragmentCoverageListAudit.residualToolSearchFamilies_complete
+#check OperatorKO7.ToolSearchFragmentCoverageListAudit.residualToolSearchFamilies_status_residual
+#check OperatorKO7.ToolSearchFragmentCoverageListAudit.tool_search_fragment_audit_catalog
+
+open OperatorKO7.ToolSearchFragmentCoverage
+open OperatorKO7.ToolSearchFragmentCoverageStatus
+open OperatorKO7.ToolSearchFragmentCoveragePerFamily
+open OperatorKO7.ToolSearchFragmentCoverageListAudit
+
+example : ToolSearchFragmentFamily.matrixTropicalFixedRow ∈ theoremBackedToolSearchFamilies := by
+  exact theoremBackedToolSearchFamilies_complete _
+
+example {Sys : OperatorKO7.StepDuplicating.StepDuplicatingSchema.StepDuplicatingSystem} :
+    coveredFragmentFamilyStatus ToolSearchFragmentFamily.directAffine = CoverageStatus.covered
+      ∧ familyCoveredByCertificate Sys ToolSearchFragmentFamily.directAffine := by
+  exact ⟨theoremBackedToolSearchFamilies_status_covered _ (theoremBackedToolSearchFamilies_complete _),
+    theoremBackedToolSearchFamilies_have_certificate (Sys := Sys) _
+      (theoremBackedToolSearchFamilies_complete _)⟩
+
+example : ResidualFragmentFamily.unrestrictedNonlinearDirect ∈ residualToolSearchFamilies := by
+  exact residualToolSearchFamilies_complete _
+
+example : residualFragmentFamilyStatus ResidualFragmentFamily.unrestrictedMatrixClasses =
+    CoverageStatus.residualExclusion := by
+  exact residualToolSearchFamilies_status_residual _ (residualToolSearchFamilies_complete _)
+
+end ToolSearchFragmentCoverageListAuditReach

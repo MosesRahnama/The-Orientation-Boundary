@@ -1,0 +1,41 @@
+import OperatorKO7.Meta.ConstructionRouteCatalog_Partition
+
+namespace ConstructionRouteCatalogExactnessReach
+
+open OperatorKO7.ConstructionRouteCatalog
+open OperatorKO7.ConstructionRouteCatalogAudit
+open OperatorKO7.ConstructionRouteCatalogCertificate
+open OperatorKO7.ConstructionRouteCatalogExactness
+open OperatorKO7.ConstructionRouteCatalogPartition
+
+#check CanonicalConstructionExactnessCatalog
+#check canonicalConstructionWitnesses_nodup
+#check canonicalConstructionWitnesses_length
+#check canonicalConstructionWitnesses_complete_exact
+#check canonicalConstructionWitnesses_all_have_payload
+#check canonicalConstructionWitnesses_all_non_w0
+#check canonical_construction_exactness_catalog
+
+#check CanonicalWitnessIsW1
+#check CanonicalWitnessIsW2
+#check canonical_witness_w1_or_w2
+#check canonical_witness_not_both_w1_w2
+#check canonical_w1_partition_catalog
+#check canonical_w2_partition_catalog
+#check canonical_partition_payload_consistency
+#check CanonicalConstructionCertificateExactness
+#check canonical_construction_certificate_exactness
+
+example : canonicalConstructionWitnesses.length = 6 :=
+  canonicalConstructionWitnesses_length
+
+example : CanonicalWitnessIsW1 .w1Transparency := by
+  simp [CanonicalWitnessIsW1]
+
+example : CanonicalWitnessIsW2 .w2FullLinear := by
+  exact canonical_w2_partition_catalog.2.1
+
+example : CanonicalConstructionCertificateExactness := by
+  exact canonical_construction_certificate_exactness canonical_construction_certificate
+
+end ConstructionRouteCatalogExactnessReach

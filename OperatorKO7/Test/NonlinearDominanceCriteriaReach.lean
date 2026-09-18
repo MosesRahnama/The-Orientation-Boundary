@@ -1,0 +1,52 @@
+import OperatorKO7.Meta.NonlinearDominanceCriteria
+
+namespace NonlinearDominanceCriteriaReach
+
+open OperatorKO7.StepDuplicating
+open OperatorKO7.CompositionalImpossibility
+open OperatorKO7.NonlinearResidualTaxonomy
+open OperatorKO7.NonlinearTransparentProjection
+open OperatorKO7.NonlinearDominanceCriteria
+
+#check TransparentPolynomialProjectionBoundary
+#check TransparentPolynomialProjectionData
+#check TransparentPolynomialProjectionBoundaryHasDominanceData
+#check TransparentPolynomialDominanceCriterion
+#check TransparentPolynomialDominanceCriterion.toProjectionData
+#check transparentPolynomialDominanceCriterion_toProjectionData_boundary_exact
+#check transparentPolynomialDominanceCriterion_requires_projection_status
+#check transparentPolynomialDominanceCriterion_yields_boundaryDominanceData
+#check transparentPolynomialDominanceCriterion_closes_transparent_row
+#check TransparentPolynomialDominanceCriteriaCatalog
+#check transparent_polynomial_dominance_criteria_catalog
+#check TransparentPolynomialConditionalClosureCatalog
+#check transparent_polynomial_conditional_closure_catalog
+
+example (criterion : TransparentPolynomialDominanceCriterion) :
+    TransparentPolynomialProjectionData :=
+  criterion.toProjectionData
+
+example (criterion : TransparentPolynomialDominanceCriterion) :
+    criterion.toProjectionData.toBoundary = criterion.boundary := by
+  exact transparentPolynomialDominanceCriterion_toProjectionData_boundary_exact criterion
+
+example (criterion : TransparentPolynomialDominanceCriterion) :
+    nonlinearResidualStatus .boundedDegreeDirectTransparentPolynomial =
+      .requiresExistingTheoremProjection := by
+  exact transparentPolynomialDominanceCriterion_requires_projection_status criterion
+
+example (criterion : TransparentPolynomialDominanceCriterion) :
+    TransparentPolynomialProjectionBoundaryHasDominanceData criterion.boundary := by
+  exact transparentPolynomialDominanceCriterion_yields_boundaryDominanceData criterion
+
+example (criterion : TransparentPolynomialDominanceCriterion) :
+    ¬ StepDuplicatingSchema.GlobalOrients ko7System criterion.boundary.measure.eval (· < ·) := by
+  exact transparentPolynomialDominanceCriterion_closes_transparent_row criterion
+
+example : TransparentPolynomialDominanceCriteriaCatalog :=
+  transparent_polynomial_dominance_criteria_catalog
+
+example : TransparentPolynomialConditionalClosureCatalog :=
+  transparent_polynomial_conditional_closure_catalog
+
+end NonlinearDominanceCriteriaReach

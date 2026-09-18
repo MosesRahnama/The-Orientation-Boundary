@@ -1,0 +1,13 @@
+import OperatorKO7.Meta.OperationalInexpressibility.RecursorRatioLimits
+
+/-! Full reach and axiom coverage for the `RecursorRatioLimits` module. Permanent. -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.RecursorRatioLimits.two_mul_conMassR_one
+#check @OperatorKO7.Meta.OperationalInexpressibility.RecursorRatioLimits.conMassR_one_div_sq
+#check @OperatorKO7.Meta.OperationalInexpressibility.RecursorRatioLimits.tendsto_conMassR_one_div_sq
+#check @OperatorKO7.Meta.OperationalInexpressibility.RecursorRatioLimits.inefficiencyCoefficient_odd_index_ge
+
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RecursorRatioLimits.two_mul_conMassR_one
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RecursorRatioLimits.conMassR_one_div_sq
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RecursorRatioLimits.tendsto_conMassR_one_div_sq
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RecursorRatioLimits.inefficiencyCoefficient_odd_index_ge

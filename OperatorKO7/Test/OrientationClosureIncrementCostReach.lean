@@ -1,0 +1,58 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.IncrementCost
+
+/-!
+# IncrementCost reach and axiom check
+
+Paired declaration reach and axiom checks for `IncrementCost.lean`.
+-/
+
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.iterate
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.iterate
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.iterate_zero
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.iterate_zero
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.iterate_succ
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.iterate_succ
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.nat_wrapper_orientation_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.nat_wrapper_orientation_iff
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.ordered_wrapper_orientation_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.ordered_wrapper_orientation_iff
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.Attained
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.Attained
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.no_uniform_orientation_of_bounded_increment_unbounded_cost
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.no_uniform_orientation_of_bounded_increment_unbounded_cost
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.nat_one_step_lower_bound_of_orientation
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.nat_one_step_lower_bound_of_orientation
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.iterated_cost_lower_bound
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.iterated_cost_lower_bound
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.geomSum
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.geomSum
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.geomSum_zero
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.geomSum_zero
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.geomSum_succ
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.geomSum_succ
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.geomSum_one
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.geomSum_one
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.geomSum_zero_multiplier
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.geomSum_zero_multiplier
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.iterated_affine_lower_bound
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.iterated_affine_lower_bound
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.affine_one_specialization
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.affine_one_specialization
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.truncated_subtraction_misuse_control
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.truncated_subtraction_misuse_control
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.twoStepRecursor
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.twoStepRecursor
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.unitCost
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.unitCost
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.identityCost
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.identityCost
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.successorCost
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.successorCost
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.coupledRecursor
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.coupledRecursor
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.boundedCost_control
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.boundedCost_control
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.coupledIncrement_control
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.coupledIncrement_control
+#check @OperatorKO7.Methods.OrientationClosure.IncrementCost.collapsedPayloadSet_control
+#print axioms OperatorKO7.Methods.OrientationClosure.IncrementCost.collapsedPayloadSet_control

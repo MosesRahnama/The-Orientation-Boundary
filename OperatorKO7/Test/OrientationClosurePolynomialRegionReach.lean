@@ -1,0 +1,56 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.PolynomialRegion
+
+/-!
+# PolynomialRegion reach and axiom check
+
+Paired declaration reach and axiom checks for `PolynomialRegion.lean`.
+-/
+
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.successorEval
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.successorEval
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.wrapperEval
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.wrapperEval
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.recursorEval
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.recursorEval
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.OrientsSuccessor
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.OrientsSuccessor
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.OrientsZero
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.OrientsZero
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.OrientsBoth
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.OrientsBoth
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.successor_margin
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.successor_margin
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.orientsSuccessor_of_region
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.orientsSuccessor_of_region
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.orientsZero_of_region
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.orientsZero_of_region
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.orientsBoth_of_region
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.orientsBoth_of_region
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.orientsSuccessor_implies_alpha
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.orientsSuccessor_implies_alpha
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.orientsSuccessor_implies_beta
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.orientsSuccessor_implies_beta
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.orientsSuccessor_iff_region
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.orientsSuccessor_iff_region
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.orientsBoth_iff_region
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.orientsBoth_iff_region
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.recursor_strict_base
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.recursor_strict_base
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.recursor_strict_step
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.recursor_strict_step
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.recursor_strict_counter
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.recursor_strict_counter
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.wrapper_strict_left
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.wrapper_strict_left
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.wrapper_strict_right
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.wrapper_strict_right
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.wrapperIterEval
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.wrapperIterEval
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.wrapperIterEval_eq
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.wrapperIterEval_eq
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.nested_wrapper_successor_orients
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.nested_wrapper_successor_orients
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.main_polynomial_construction
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.main_polynomial_construction
+#check @OperatorKO7.Methods.OrientationClosure.PolynomialRegion.nested_wrapper_successor_orients_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.PolynomialRegion.nested_wrapper_successor_orients_iff

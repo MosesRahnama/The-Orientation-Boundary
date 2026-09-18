@@ -1,0 +1,56 @@
+import OperatorKO7.Meta.UniqueNormalization.Section7ConversionCompatibility
+
+/-!
+Reach gate for `Section7ConversionCompatibility`: every public declaration with
+`#check @` and `#print axioms`.
+-/
+
+#check @OperatorKO7.Meta.UniqueNormalization.DestructorRooted
+#check @OperatorKO7.Meta.UniqueNormalization.ConstructorRules.destructorRooted
+#check @OperatorKO7.Meta.UniqueNormalization.rootStep_source_destructor_of_destructorRooted
+#check @OperatorKO7.Meta.UniqueNormalization.step_of_conTopped
+#check @OperatorKO7.Meta.UniqueNormalization.constructor_step_preserves_head
+#check @OperatorKO7.Meta.UniqueNormalization.constructor_convStep_compatible
+#check @OperatorKO7.Meta.UniqueNormalization.stepStar_of_conTopped
+#check @OperatorKO7.Meta.UniqueNormalization.constructorCompatible_joinable
+#check @OperatorKO7.Meta.UniqueNormalization.constructorCompatible_conv_of_conTopped_joinable
+#check @OperatorKO7.Meta.UniqueNormalization.constructorCompatible_conv_of_confluent
+#check @OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.dConst
+#check @OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.cOne
+#check @OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.cTwo
+#check @OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.ruleOne
+#check @OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.ruleTwo
+#check @OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.system
+#check @OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.system_constructorRules
+#check @OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.step_dConst_cOne
+#check @OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.step_dConst_cTwo
+#check @OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.cOne_conv_cTwo
+#check @OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.not_constructorCompatible_conv
+#check @OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.system_not_confluent
+#check @OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.system_joinable_constructorCompatible
+#check @OperatorKO7.Meta.UniqueNormalization.exists_constructorRules_not_constructorCompatible_conv
+
+#print axioms OperatorKO7.Meta.UniqueNormalization.DestructorRooted
+#print axioms OperatorKO7.Meta.UniqueNormalization.ConstructorRules.destructorRooted
+#print axioms OperatorKO7.Meta.UniqueNormalization.rootStep_source_destructor_of_destructorRooted
+#print axioms OperatorKO7.Meta.UniqueNormalization.step_of_conTopped
+#print axioms OperatorKO7.Meta.UniqueNormalization.constructor_step_preserves_head
+#print axioms OperatorKO7.Meta.UniqueNormalization.constructor_convStep_compatible
+#print axioms OperatorKO7.Meta.UniqueNormalization.stepStar_of_conTopped
+#print axioms OperatorKO7.Meta.UniqueNormalization.constructorCompatible_joinable
+#print axioms OperatorKO7.Meta.UniqueNormalization.constructorCompatible_conv_of_conTopped_joinable
+#print axioms OperatorKO7.Meta.UniqueNormalization.constructorCompatible_conv_of_confluent
+#print axioms OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.dConst
+#print axioms OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.cOne
+#print axioms OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.cTwo
+#print axioms OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.ruleOne
+#print axioms OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.ruleTwo
+#print axioms OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.system
+#print axioms OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.system_constructorRules
+#print axioms OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.step_dConst_cOne
+#print axioms OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.step_dConst_cTwo
+#print axioms OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.cOne_conv_cTwo
+#print axioms OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.not_constructorCompatible_conv
+#print axioms OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.system_not_confluent
+#print axioms OperatorKO7.Meta.UniqueNormalization.ConvCounterexample.system_joinable_constructorCompatible
+#print axioms OperatorKO7.Meta.UniqueNormalization.exists_constructorRules_not_constructorCompatible_conv

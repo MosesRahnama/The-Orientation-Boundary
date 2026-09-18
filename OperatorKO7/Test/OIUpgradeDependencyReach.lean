@@ -1,0 +1,674 @@
+import OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense
+import OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair
+import OperatorKO7.Meta.OperationalInexpressibility.KTryVulnerability
+import OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty
+import OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic
+import OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement
+import OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency
+import OperatorKO7.Meta.OperationalInexpressibility.SnellEnvelope
+import OperatorKO7.Meta.OperationalInexpressibility.BethDefinability
+import OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances
+import OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts
+import OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence
+import OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy
+import OperatorKO7.Meta.OperationalInexpressibility.RecursorRatioLimits
+import OperatorKO7.Meta.ReverseMath.RCA0DerivationSharpness
+import OperatorKO7.Meta.ReverseMath.ArtsGieslUpperSemantic
+import OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse
+import OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice
+import OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary
+import OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarLicense
+import OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery
+import OperatorKO7.Meta.OperationalInexpressibility.SufficiencyInstance
+import OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification
+import OperatorKO7.Meta.OperationalInexpressibility.CostComparison
+import OperatorKO7.Meta.Decision.RecursorStopping
+import OperatorKO7.Meta.Methods.OrientationClosure.DependencyPairSoundness
+import OperatorKO7.Meta.Rewriting.ParallelReductionConfluence
+import OperatorKO7.Meta.InformationalIncompleteness.ShannonFinite
+import OperatorKO7.Meta.Recursor.RaryDuplicator
+import OperatorKO7.Meta.SchemaNormMismatch
+import OperatorKO7.Meta.LCELFactorization
+import OperatorKO7.Meta.ArtsGiesl_ProofLengthBySize
+import OperatorKO7.Meta.InformationAccess
+import OperatorKO7.Meta.ConfessionCrossingPoint
+import OperatorKO7.Meta.Confluence_Safe
+import Mathlib.Analysis.NormedSpace.HahnBanach.Separation
+import Mathlib.Analysis.Convex.Combination
+import Mathlib.Analysis.Convex.Topology
+import Mathlib.Data.Fintype.BigOperators
+import Mathlib.Data.Finset.Pi
+import Mathlib.Data.Finset.Lattice.Fold
+import Mathlib.Data.Fintype.Card
+import Mathlib.Order.OrderIsoNat
+import Mathlib.Order.WellFounded
+import Mathlib.Order.Monotone.Basic
+import Mathlib.Logic.Relation
+import Mathlib.Topology.Algebra.Module.LocallyConvex
+import Mathlib.LinearAlgebra.Pi
+import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+import Mathlib.Analysis.SpecificLimits.Basic
+
+/-! Permanent reach and name gate for the U0.3 upstream identifier surface of the
+Operational Inexpressibility upgrade. One `#check` per identifier named in Section 3.4. -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.LicensedOn
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.licensedOn_univ_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.LicensedOn.mono
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.jointPair
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseCriterion.Licensed
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseCriterion.ObserverRefines
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.MaximalLicensedOn
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.maximalLicensedOn_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.maximal_refusals_of_collision
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.FiberAttained
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.correctSet
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.licensedOn_correctSet
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.retainedDecoder
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.retainedDecoder_of_mem
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.retainedDecoder_fiberAttained
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.refusedMass
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.least_refusal_eq_bayesRisk
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiberDeficit.fiberVerdicts
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiberDeficit.mem_fiberVerdicts
+#check @OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.OperationallyInexpressibleAt
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.deterministicModel
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk
+#check @OperatorKO7.Meta.OperationalInexpressibility.ExecutableResolvingChannel.Enumeration
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.repairFrontier
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.boundedMenus
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.menuRefusedMass
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.empty_menu_mem_boundedMenus
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.repairFrontier_one_eq_bayesRisk
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.repairFrontier_convex
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftOrRefuse.twoVoids_lift_or_refuse
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerKernel
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerKernel_jointPair
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.observerRefines_iff_kernel_le
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.licensed_iff_kernel_le
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.commonCoarsening
+#check @OperatorKO7.Meta.OperationalInexpressibility.LicenseLattice.commonCoarsening_eq_iff_eqvGen
+#check @OperatorKO7.Meta.OperationalInexpressibility.SufficiencyInstance.Sufficient
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.joint
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.observationMass
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.posterior?
+#check @OperatorKO7.Meta.Decision.EchoStopping.Stochastic.Model
+#check @OperatorKO7.Meta.Decision.EchoStopping.Stochastic.expected
+#check @OperatorKO7.Meta.Decision.EchoStopping.Stochastic.expected_mono
+#check @OperatorKO7.Meta.Decision.EchoStopping.Stochastic.expected_congr
+#check @OperatorKO7.Meta.Decision.EchoStopping.Stochastic.choices
+#check @OperatorKO7.Meta.Decision.EchoStopping.Stochastic.choices_nonempty
+#check @OperatorKO7.Meta.Decision.EchoStopping.Stochastic.mem_choices
+#check @OperatorKO7.Meta.Decision.EchoStopping.Stochastic.choiceValue
+#check @OperatorKO7.Meta.Decision.EchoStopping.Stochastic.bellman
+#check @OperatorKO7.Meta.Decision.EchoStopping.Stochastic.value
+#check @OperatorKO7.Meta.Decision.EchoStopping.Stochastic.stop_le_bellman
+#check @OperatorKO7.Meta.Decision.EchoStopping.Stochastic.expected_le_bellman
+#check @OperatorKO7.Meta.Decision.EchoStopping.Stochastic.Policy
+#check @OperatorKO7.Meta.Decision.EchoStopping.Stochastic.Policy.value
+#check @OperatorKO7.Meta.Decision.EchoStopping.Stochastic.value_isGreatest
+#check @OperatorKO7.Meta.Decision.RecursorStopping.recursorStoppingModel
+#check @OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.ObservedLanguage
+#check @OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.ObservedLanguage.Sound
+#check @OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.ObservedLanguage.Complete
+#check @OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.unsoundStatementLanguage
+#check @OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.constantStatementLanguage
+#check @OperatorKO7.Meta.BoundaryGeneral.DirectMeasureGrammarClosure.MeasureExpr
+#check @OperatorKO7.Meta.BoundaryGeneral.DirectMeasureGrammarClosure.MeasureExpr.eval
+#check @OperatorKO7.Meta.BoundaryGeneral.DirectMeasureGrammarClosure.OrientsDupStep
+#check @OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.DirectGrammarDerivable
+#check @OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.payloadSensitiveOrienter
+#check @OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.payloadSensitiveOrienter_orients
+#check @OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.payloadSensitiveOrienter_not_grammar_denotable
+#check @OperatorKO7.Meta.BoundaryGeneral.DirectMeasureGrammarClosure.orients_implies_payload_blind
+#check @OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.directGrammar_orienting_denotations_licensed_by_counter
+#check @OperatorKO7.Meta.Rewriting.Term
+#check @OperatorKO7.Meta.Rewriting.Term.rec'
+#check @OperatorKO7.Meta.Rewriting.Term.vars
+#check @OperatorKO7.Meta.Rewriting.Term.vars_app
+#check @OperatorKO7.Meta.Rewriting.Term.mem_varsList_iff
+#check @OperatorKO7.Meta.Rewriting.Subst.apply
+#check @OperatorKO7.Meta.Rewriting.Subst.applyList_eq_map
+#check @OperatorKO7.Meta.Rewriting.rootStep
+#check @OperatorKO7.Meta.Rewriting.Step
+#check @OperatorKO7.Meta.Rewriting.matchAgainst
+#check @OperatorKO7.Meta.Rewriting.matchAgainst_sound
+#check @OperatorKO7.Meta.Rewriting.matchAgainst_complete
+#check @OperatorKO7.Meta.Rewriting.apply_congr_of_eq_on_vars
+#check @OperatorKO7.Meta.Rewriting.Step.at_pos
+#check @OperatorKO7.Meta.Rewriting.Step.exists_pos_rootStep
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.ArgStep
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.argStep_cons_iff
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.not_argStep_nil
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.step_app_iff
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.not_step_var
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.SN
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.MinChainStep
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.StepOrSub
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.terminating_of_minChain_wf
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.acc_stepOrSub_of_sn
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.IsSubterm.subst
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.IsSubterm.reflTransGen
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.steps_reflTransGen
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.fresh_variable_control
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.terminating_of_subtermCriterion
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freeRecursorTRS
+#check @OperatorKO7.Methods.OrientationClosure.DependencyPairSoundness.freeRecursorTRS_terminating
+#check @OperatorKO7.Meta.InformationalIncompleteness.ShannonFinite.H
+#check @OperatorKO7.Meta.InformationalIncompleteness.ShannonFinite.pointMass
+#check @OperatorKO7.Meta.InformationalIncompleteness.ShannonFinite.H_pointMass
+#check @OperatorKO7.Meta.Recursor.RaryDuplicator.conMassR
+#check @OperatorKO7.Meta.Recursor.RaryDuplicator.L10_con_r_closed
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.inefficiencyCoefficient
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.inefficiencyCoefficient_lower_linear
+#check @OperatorKO7.Meta.ArtsGieslProofLengthBySize.agProofLength_recursor_closed_form
+#check @OperatorKO7.Meta.ArtsGieslProofLengthBySize.confessionCertificateLength_recursor
+#check @OperatorKO7.Meta.LCELFactorization.ko7_dpRank_does_not_determine_wrapperParity
+#check @OperatorKO7.Meta.ConfessionCrossingPoint.crossingPoint_is_least_derived_budget
+#check @OperatorKO7.Meta.ConfessionCrossingPoint.carry_exceeds_iff_crossingPoint_le
+#check @OperatorKO7.Meta.ConfessionCrossingPoint.no_crossing_of_zero_payload
+#check @OperatorKO7.Meta.OperationalInexpressibility.CostComparison.weakCrossingPoint
+#check @OperatorKO7.Meta.OperationalInexpressibility.CostComparison.weak_tie_iff_strict_threshold_next
+#check @OperatorKO7.Meta.OperationalInexpressibility.CostComparison.zero_payload_never_strict
+#check @OperatorKO7.Meta.OperationalInexpressibility.CostComparison.zero_payload_tie_iff
+#check @MetaSN_KO7.not_localJoinStep_eqW_void_void
+#check @_root_.geometric_hahn_banach_closed_point
+#check @convex_convexHull
+#check @subset_convexHull
+#check @Set.Finite.isClosed_convexHull
+#check @mem_convexHull_iff_exists_fintype
+#check @LinearMap.pi_apply_eq_sum_univ
+#check @Set.finite_range
+#check @Finset.exists_mem_eq_sup'
+#check @Finset.exists_mem_eq_inf'
+#check @Finset.exists_mem_eq_sup
+#check @Finset.card_pi
+#check @Fintype.prod_prod_type
+#check @Finset.card_bij
+#check @Finset.mem_pi
+#check @Finset.sum_fiberwise_of_maps_to
+#check @Finset.card_eq_sum_card_fiberwise
+#check @Finset.exists_superset_card_eq
+#check @RelEmbedding.exists_not_acc_lt_of_not_acc
+#check @WellFounded.not_rel_apply_succ
+#check @strictMono_nat_of_lt_succ
+#check @tendsto_const_div_atTop_nhds_zero_nat
+#check @Relation.ReflTransGen.symmetric
+#check @Equivalence.eqvGen_iff
+#check @Pi.locallyConvexSpace
+
+/-! ## U1 surface: DependencyLicense and DependencyRepair -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.restrictTo
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.restrictTo_eq_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.FDHoldsOn
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.fdHoldsOn_iff_licensedOn
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.fdHoldsOn_of_subset
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.FDHoldsOn.augment
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.FDHoldsOn.trans
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.fdHoldsOn_union_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.licensedOn_jointPair_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.licensedOn_pi_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.FD
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.ArmstrongDerivable
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.ArmstrongDerivable.member
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.ArmstrongDerivable.refl
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.ArmstrongDerivable.augment
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.ArmstrongDerivable.trans
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.SemanticallyImplies
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.TwoTupleImplies
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.armstrongDerivable_sound
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.ArmstrongDerivable.union
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.ArmstrongDerivable.mono_right
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.armstrongDerivable_iff_forall_singleton
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.armstrongDerivable_of_twoTupleImplies
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.armstrongDerivable_iff_semanticallyImplies
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.oneTuple_satisfies_every_dependency
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.twoTuple_family_is_required
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.FDListHoldsOn
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.fdListHoldsOn_iff_licensedOn_each
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.familyTuples
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.familyDependencies
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.fdListHoldsOn_familyDependencies_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.mem_every_repair_iff_fiber_constant
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.exists_repair_mem
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.subsetRepairs
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.card_subsetRepairs
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.maxLicensedCard
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.fiberCount
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.cellCount
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g3Count
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g2Count
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g1Count
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g3
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g2
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g1
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.maxLicensedCard_le_card
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.exists_licensedOn_card_eq_max
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.maxLicensedCard_eq_sum
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.uniformPrior
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.uniformPrior_nonneg
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.uniformPrior_sum
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.refusedMass_uniform
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g3_eq_bayesRisk_uniform
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g2Count_eq_card_sub_certain
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g3Count_le_g2Count
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g1Count_le_card_mul_g2Count
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g1_le_g2
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g3_le_g2
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g1Count_eq_sum_fiber
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.licensed_iff_g1Count_eq_zero
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.licensed_iff_g2Count_eq_zero
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.licensed_iff_g3Count_eq_zero
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.repairFixtureObserver
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.repairFixtureTarget
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.repairFixture_card
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.repairFixture_measures
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.answerFixtureObserver
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.answerFixtureTarget
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.answerFixture_certain
+
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.armstrongDerivable_iff_semanticallyImplies
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyLicense.fdListHoldsOn_familyDependencies_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.card_subsetRepairs
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.maxLicensedCard_eq_sum
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g3_eq_bayesRisk_uniform
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyRepair.g1Count_eq_sum_fiber
+
+/-! ## U2 surface: KTryVulnerability -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.KTryVulnerability.keptMass
+#check @OperatorKO7.Meta.OperationalInexpressibility.KTryVulnerability.menuRefusedMass_eq_sub_sum_keptMass
+#check @OperatorKO7.Meta.OperationalInexpressibility.KTryVulnerability.keptMass_mono
+#check @OperatorKO7.Meta.OperationalInexpressibility.KTryVulnerability.boundedLists
+#check @OperatorKO7.Meta.OperationalInexpressibility.KTryVulnerability.empty_mem_boundedLists
+#check @OperatorKO7.Meta.OperationalInexpressibility.KTryVulnerability.kTryVulnerability
+#check @OperatorKO7.Meta.OperationalInexpressibility.KTryVulnerability.repairFrontier_eq_sub_kTryVulnerability
+#check @OperatorKO7.Meta.OperationalInexpressibility.KTryVulnerability.repairFrontier_eq_one_sub_kTryVulnerability
+#check @OperatorKO7.Meta.OperationalInexpressibility.KTryVulnerability.kTryVulnerability_one
+#check @OperatorKO7.Meta.OperationalInexpressibility.KTryVulnerability.kTryVulnerability_concave
+#check @OperatorKO7.Meta.OperationalInexpressibility.KTryVulnerability.exactLists
+#check @OperatorKO7.Meta.OperationalInexpressibility.KTryVulnerability.exactLists_nonempty
+#check @OperatorKO7.Meta.OperationalInexpressibility.KTryVulnerability.kTryVulnerability_eq_exact
+#check @OperatorKO7.Meta.OperationalInexpressibility.KTryVulnerability.twoVoids_kTryVulnerability
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.KTryVulnerability.menuRefusedMass_eq_sub_sum_keptMass
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.KTryVulnerability.repairFrontier_eq_sub_kTryVulnerability
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.KTryVulnerability.kTryVulnerability_one
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.KTryVulnerability.kTryVulnerability_concave
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.KTryVulnerability.kTryVulnerability_eq_exact
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.KTryVulnerability.twoVoids_kTryVulnerability
+
+/-! ## U3 surface: LiftUniversalProperty -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.jointPair_greatest_licensingRefinement
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.licensingRefinement_iff_kernel_le
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.observerKernel_eq_of_universal
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.exists_greatest_licensedOn_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.no_greatest_licensedOn_of_collision
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.twoVoids_no_greatest_refusal
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.jointPair_greatest_licensingRefinement
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.licensingRefinement_iff_kernel_le
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.observerKernel_eq_of_universal
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.exists_greatest_licensedOn_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.no_greatest_licensedOn_of_collision
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.twoVoids_no_greatest_refusal
+
+/-! ## U4 surface: BlackwellStochastic -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.RealExperiment
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.decisionValue
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.IsGarbling
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.Dominates
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.dominates_of_isGarbling
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.garblingPoint
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.experimentPoint
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.isGarbling_of_mem_convexHull
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.continuousLinearMap_apply_eq_sum
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.isGarbling_of_dominates
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.isGarbling_iff_dominates
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.RealExperiment.ofObserver
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.isGarbling_ofObserver_iff_refines
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.RealExperiment.ofRational
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.gainVulnerability
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.dominates_iff_gainVulnerability_le
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.nonempty_output_is_required
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.noisyBinaryExperiment
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.noisy_isGarbling_perfect_not_conversely
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.dominates_of_isGarbling
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.isGarbling_of_mem_convexHull
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.continuousLinearMap_apply_eq_sum
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.isGarbling_of_dominates
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.isGarbling_iff_dominates
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.isGarbling_ofObserver_iff_refines
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.dominates_iff_gainVulnerability_le
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.nonempty_output_is_required
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellStochastic.noisy_isGarbling_perfect_not_conversely
+
+/-! ## U5 surface: AumannAgreement, FiniteFamilySufficiency, SnellEnvelope -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.massOf
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.AssignsFiberRatio
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.AssignsProbability
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.assignsFiberRatio_iff_assignsProbability
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.MeetCell
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.CommonKnowledgeAt
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.commonKnowledgeAt_iff_meetCell
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.massOf_eq_mul_of_saturated
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.meetCell_saturated_left
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.meetCell_saturated_right
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.agreement_of_commonKnowledge_fiberRatio
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.agreement_of_commonKnowledge
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.agreement_positive_mass_is_required
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.agreement_commonKnowledge_is_required
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.commonKnowledgeAt_iff_meetCell
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.massOf_eq_mul_of_saturated
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.assignsFiberRatio_iff_assignsProbability
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.agreement_of_commonKnowledge_fiberRatio
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.agreement_of_commonKnowledge
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.agreement_positive_mass_is_required
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.agreement_commonKnowledge_is_required
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.FiniteFamily
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.familyModel
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.joint_familyModel
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.observationMass_familyModel
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.FactorizationSufficient
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.LikelihoodProportional
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.p_eq_zero_of_observationMass_eq_zero
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.posterior?_familyModel_eq_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.sufficient_familyModel_iff_factorization
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.posterior_minimalSufficient
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.fullSupport_is_required
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.joint_familyModel
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.observationMass_familyModel
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.posterior?_familyModel_eq_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.sufficient_familyModel_iff_factorization
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.posterior_minimalSufficient
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.fullSupport_is_required
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.SnellEnvelope.IsExcessiveMajorant
+#check @OperatorKO7.Meta.OperationalInexpressibility.SnellEnvelope.value_isExcessiveMajorant
+#check @OperatorKO7.Meta.OperationalInexpressibility.SnellEnvelope.value_le_of_isExcessiveMajorant
+#check @OperatorKO7.Meta.OperationalInexpressibility.SnellEnvelope.value_isLeast_excessiveMajorant
+#check @OperatorKO7.Meta.OperationalInexpressibility.SnellEnvelope.exists_action_of_value_ne_stop
+#check @OperatorKO7.Meta.OperationalInexpressibility.SnellEnvelope.envelopePolicy
+#check @OperatorKO7.Meta.OperationalInexpressibility.SnellEnvelope.envelopePolicy_value
+#check @OperatorKO7.Meta.OperationalInexpressibility.SnellEnvelope.envelopePolicy_stops_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.SnellEnvelope.value_isExcessiveMajorant
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.SnellEnvelope.value_le_of_isExcessiveMajorant
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.SnellEnvelope.value_isLeast_excessiveMajorant
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.SnellEnvelope.exists_action_of_value_ne_stop
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.SnellEnvelope.envelopePolicy_value
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.SnellEnvelope.envelopePolicy_stops_iff
+
+/-! ## U6 surface: BethDefinability and BethDefinabilityInstances -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.ObservedLanguage.ExplicitlyDefines
+#check @OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.ObservedLanguage.BethPropertyOn
+#check @OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.ObservedLanguage.PostcompositionClosed
+#check @OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.ObservedLanguage.licensed_of_explicitlyDefines
+#check @OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.ObservedLanguage.not_explicitlyDefines_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.ObservedLanguage.not_explicitlyDefines_iff_not_licensed
+#check @OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.ObservedLanguage.bethPropertyOn_of_complete
+#check @OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.ObservedLanguage.padoa_sound_is_required
+#check @OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.ObservedLanguage.beth_complete_is_required
+#check @OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.ObservedLanguage.identityStatementLanguage
+#check @OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.ObservedLanguage.beth_postcomposition_is_required
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.ObservedLanguage.licensed_of_explicitlyDefines
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.ObservedLanguage.not_explicitlyDefines_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.ObservedLanguage.not_explicitlyDefines_iff_not_licensed
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.ObservedLanguage.bethPropertyOn_of_complete
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.ObservedLanguage.padoa_sound_is_required
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.ObservedLanguage.beth_complete_is_required
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DefinitionUnification.ObservedLanguage.beth_postcomposition_is_required
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.Orienting
+#check @OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.grammarLanguage
+#check @OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.projectionLanguage
+#check @OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.grammar_fullReading_not_bethProperty
+#check @OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.grammar_counter_sound_on_orienting
+#check @OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.measureExpr_eval_mono_counter
+#check @OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.measureExpr_double_step
+#check @OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.bethGap
+#check @OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.bethGap_orienting
+#check @OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.bethGap_not_grammar_denotable
+#check @OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.grammar_counter_not_bethProperty
+#check @OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.projection_sound
+#check @OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.projection_bethProperty_on_orienting
+#check @OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.projection_explicitlyDefines_iff_licensed
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.grammar_fullReading_not_bethProperty
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.grammar_counter_sound_on_orienting
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.measureExpr_eval_mono_counter
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.measureExpr_double_step
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.bethGap_orienting
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.bethGap_not_grammar_denotable
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.grammar_counter_not_bethProperty
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.projection_sound
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.projection_bethProperty_on_orienting
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BethDefinabilityInstances.projection_explicitlyDefines_iff_licensed
+
+/-! ## U7 surface: FiniteTRSReducts and DependencyPairEquivalence -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.eqOn_vars_of_apply_eq
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.rootReducts
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.reducts
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.reductsList
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.mem_rootReducts_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.mem_reductsList_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.mem_reducts_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.freshTRS_infinitely_branching
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.eqOn_vars_of_apply_eq
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.mem_rootReducts_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.mem_reductsList_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.mem_reducts_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.freshTRS_infinitely_branching
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.argSteps_stepStar
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.minChainStep_transGen
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.minChain_wf_of_terminating
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.terminating_iff_minChain_wf
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.wellFounded_flip_iff_no_infinite_chain
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.terminating_iff_no_infinite_minimalChain
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.NoRunOfLength
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.BoundedRunsAt
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.not_noRunOfLength_zero
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.NoRunOfLength.mono
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.NoRunOfLength.succ_inv
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.noRunOfLength_succ_of_forall
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.acc_of_boundedRunsAt
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.boundedRunsAt_of_acc
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.acc_iff_boundedRunsAt
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.decidableNoRunOfLength
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.sn_iff_boundedRunsAt
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.terminating_iff_boundedRuns
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.decidableNoRunOfLength_step
+#check @OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.freeRecursor_boundedRuns
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.argSteps_stepStar
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.minChainStep_transGen
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.minChain_wf_of_terminating
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.terminating_iff_minChain_wf
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.wellFounded_flip_iff_no_infinite_chain
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.terminating_iff_no_infinite_minimalChain
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.not_noRunOfLength_zero
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.NoRunOfLength.mono
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.NoRunOfLength.succ_inv
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.noRunOfLength_succ_of_forall
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.acc_of_boundedRunsAt
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.boundedRunsAt_of_acc
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.acc_iff_boundedRunsAt
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.sn_iff_boundedRunsAt
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.terminating_iff_boundedRuns
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DependencyPairEquivalence.freeRecursor_boundedRuns
+
+/-! ## U8 surface: SoundVerdictEntropy and RecursorRatioLimits -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.SoundVerdict
+#check @OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.SoundVerdict.eq_true
+#check @OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.outputLaw
+#check @OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.outputLaw_eq_pointMass
+#check @OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.outputLaw_entropy_zero
+#check @OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.recursor_soundVerdict_true
+#check @OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.recursor_outputLaw_entropy_zero
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.SoundVerdict.eq_true
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.outputLaw_eq_pointMass
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.outputLaw_entropy_zero
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.recursor_soundVerdict_true
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.SoundVerdictEntropy.recursor_outputLaw_entropy_zero
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.RecursorRatioLimits.two_mul_conMassR_one
+#check @OperatorKO7.Meta.OperationalInexpressibility.RecursorRatioLimits.conMassR_one_div_sq
+#check @OperatorKO7.Meta.OperationalInexpressibility.RecursorRatioLimits.tendsto_conMassR_one_div_sq
+#check @OperatorKO7.Meta.OperationalInexpressibility.RecursorRatioLimits.inefficiencyCoefficient_odd_index_ge
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RecursorRatioLimits.two_mul_conMassR_one
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RecursorRatioLimits.conMassR_one_div_sq
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RecursorRatioLimits.tendsto_conMassR_one_div_sq
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RecursorRatioLimits.inefficiencyCoefficient_odd_index_ge
+
+/-! ## U7.7 surface: finite predecessor arithmetic and sharpness -/
+
+#check @OperatorKO7.ReverseMath.numberPredecessorDescentMatrix
+#check @OperatorKO7.ReverseMath.numberPredecessorDescentSentence
+#check @OperatorKO7.ReverseMath.numberPredecessorDescentSentence_isPi02
+#check @OperatorKO7.ReverseMath.numberPredecessorDescentSentence_isPrenex
+#check @OperatorKO7.ReverseMath.ActualNumberPredecessorDescent
+#check @OperatorKO7.ReverseMath.numberPredecessorDescent_faithful
+#check @OperatorKO7.ReverseMath.actualNumberPredecessorDescent_holds
+#check @OperatorKO7.ReverseMath.stdModel_models_numberPredecessorDescent
+#check @OperatorKO7.ReverseMath.finitePredecessorArithmeticAxioms
+#check @OperatorKO7.ReverseMath.stdModel_models_finitePredecessorArithmeticAxioms
+#check @OperatorKO7.ReverseMath.numberPredecessorDescent_derivable_of_axZeroOrSucc
+#check @OperatorKO7.ReverseMath.simpsonArithmetic_derives_axLtSucc
+#check @OperatorKO7.ReverseMath.zeroOrSuccInductionFragment_derives_axZeroOrSucc
+#check @OperatorKO7.ReverseMath.numberPredecessorDescent_derivable_of_contains
+#check @OperatorKO7.ReverseMath.boundedInductionTheory_derives_numberPredecessorDescent
+#check @OperatorKO7.ReverseMath.twoInductionFragment_not_derives_axLtIrrefl
+#check @OperatorKO7.ReverseMath.simpsonArithmetic_not_derives_zeroOrSucc
+
+#print axioms OperatorKO7.ReverseMath.numberPredecessorDescentSentence_isPi02
+#print axioms OperatorKO7.ReverseMath.numberPredecessorDescentSentence_isPrenex
+#print axioms OperatorKO7.ReverseMath.numberPredecessorDescent_faithful
+#print axioms OperatorKO7.ReverseMath.actualNumberPredecessorDescent_holds
+#print axioms OperatorKO7.ReverseMath.stdModel_models_numberPredecessorDescent
+#print axioms OperatorKO7.ReverseMath.stdModel_models_finitePredecessorArithmeticAxioms
+#print axioms OperatorKO7.ReverseMath.numberPredecessorDescent_derivable_of_axZeroOrSucc
+#print axioms OperatorKO7.ReverseMath.simpsonArithmetic_derives_axLtSucc
+#print axioms OperatorKO7.ReverseMath.zeroOrSuccInductionFragment_derives_axZeroOrSucc
+#print axioms OperatorKO7.ReverseMath.numberPredecessorDescent_derivable_of_contains
+#print axioms OperatorKO7.ReverseMath.boundedInductionTheory_derives_numberPredecessorDescent
+#print axioms OperatorKO7.ReverseMath.twoInductionFragment_not_derives_axLtIrrefl
+#print axioms OperatorKO7.ReverseMath.simpsonArithmetic_not_derives_zeroOrSucc
+#print axioms OperatorKO7.ReverseMath.numberPredecessorDescentMatrix
+#print axioms OperatorKO7.ReverseMath.numberPredecessorDescentSentence
+#print axioms OperatorKO7.ReverseMath.ActualNumberPredecessorDescent
+#print axioms OperatorKO7.ReverseMath.finitePredecessorArithmeticAxioms
+
+/-! ## Reverse-mathematics closeout surface: semantic entailment, semantic refutations, the
+compatibility aliases, the five-sentence theory, and the first-order calculus -/
+
+#check @OperatorKO7.ReverseMath.finitePredecessorArithmetic_models_numberPredecessorDescent
+#check @OperatorKO7.ReverseMath.finitePredecessorArithmetic_entails_numberPredecessorDescent
+#check @OperatorKO7.ReverseMath.numberPredecessorDescentMatrix_isQF
+#check @OperatorKO7.ReverseMath.twoInductionFragment_not_entails_axLtIrrefl
+#check @OperatorKO7.ReverseMath.simpsonArithmetic_not_entails_zeroOrSucc
+#check @OperatorKO7.ReverseMath.sctMatrix
+#check @OperatorKO7.ReverseMath.ArtsGieslSctSoundnessFormula
+#check @OperatorKO7.ReverseMath.sctMatrix_isQF
+#check @OperatorKO7.ReverseMath.artsGieslSctSoundness_isPi02
+#check @OperatorKO7.ReverseMath.artsGieslSctSoundness_isPrenex
+#check @OperatorKO7.ReverseMath.ActualArtsGieslSctSoundness
+#check @OperatorKO7.ReverseMath.actualArtsGieslSctSoundness_holds
+#check @OperatorKO7.ReverseMath.artsGieslSctSoundness_faithful
+#check @OperatorKO7.ReverseMath.stdModel_models_artsGieslSctSoundness
+#check @OperatorKO7.ReverseMath.rca0_models_imp_sct
+#check @OperatorKO7.ReverseMath.rca0_modelsBoundedFormula_sct
+#check @OperatorKO7.ReverseMath.instTop_self_sctMatrix
+#check @OperatorKO7.ReverseMath.artsGiesl_syntactic_upper
+#check @OperatorKO7.ReverseMath.artsGieslOmega3Product_rca0
+#check @OperatorKO7.ReverseMath.axZeroOrSucc
+#check @OperatorKO7.ReverseMath.axLtSucc
+#check @OperatorKO7.ReverseMath.axSuccNeZero
+#check @OperatorKO7.ReverseMath.axAddZero
+#check @OperatorKO7.ReverseMath.axLtIrrefl
+#check @OperatorKO7.ReverseMath.rca0BasicAxioms
+#check @OperatorKO7.ReverseMath.stdModel_models_rca0BasicAxioms
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.hyp
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.mp
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.ax_k
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.ax_s
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.ax_dne
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.all_intro
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.all_elim
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.freeVarWeakening
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.spec
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.ex_intro
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.eq_refl
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.eq_leibniz
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.or_inl
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.or_inr
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.or_elim
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.and_intro
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.and_left
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.and_right
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.falsum_elim
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.em
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.ex_elim
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.ax_ex_intro
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.ax_ex_elim
+#check @OperatorKO7.ReverseMath.DeductionFO.DerivableFO.ex_mono
+#check @OperatorKO7.ReverseMath.DeductionFO.derivableFO_sound
+#check @OperatorKO7.ReverseMath.DeductionFO.derivableFO_sound_sentence
+
+#print axioms OperatorKO7.ReverseMath.finitePredecessorArithmetic_models_numberPredecessorDescent
+#print axioms OperatorKO7.ReverseMath.finitePredecessorArithmetic_entails_numberPredecessorDescent
+#print axioms OperatorKO7.ReverseMath.numberPredecessorDescentMatrix_isQF
+#print axioms OperatorKO7.ReverseMath.twoInductionFragment_not_entails_axLtIrrefl
+#print axioms OperatorKO7.ReverseMath.simpsonArithmetic_not_entails_zeroOrSucc
+#print axioms OperatorKO7.ReverseMath.sctMatrix
+#print axioms OperatorKO7.ReverseMath.ArtsGieslSctSoundnessFormula
+#print axioms OperatorKO7.ReverseMath.sctMatrix_isQF
+#print axioms OperatorKO7.ReverseMath.artsGieslSctSoundness_isPi02
+#print axioms OperatorKO7.ReverseMath.artsGieslSctSoundness_isPrenex
+#print axioms OperatorKO7.ReverseMath.ActualArtsGieslSctSoundness
+#print axioms OperatorKO7.ReverseMath.actualArtsGieslSctSoundness_holds
+#print axioms OperatorKO7.ReverseMath.artsGieslSctSoundness_faithful
+#print axioms OperatorKO7.ReverseMath.stdModel_models_artsGieslSctSoundness
+#print axioms OperatorKO7.ReverseMath.rca0_models_imp_sct
+#print axioms OperatorKO7.ReverseMath.rca0_modelsBoundedFormula_sct
+#print axioms OperatorKO7.ReverseMath.instTop_self_sctMatrix
+#print axioms OperatorKO7.ReverseMath.artsGiesl_syntactic_upper
+#print axioms OperatorKO7.ReverseMath.artsGieslOmega3Product_rca0
+#print axioms OperatorKO7.ReverseMath.axZeroOrSucc
+#print axioms OperatorKO7.ReverseMath.axLtSucc
+#print axioms OperatorKO7.ReverseMath.axSuccNeZero
+#print axioms OperatorKO7.ReverseMath.axAddZero
+#print axioms OperatorKO7.ReverseMath.axLtIrrefl
+#print axioms OperatorKO7.ReverseMath.rca0BasicAxioms
+#print axioms OperatorKO7.ReverseMath.stdModel_models_rca0BasicAxioms
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.hyp
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.mp
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.ax_k
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.ax_s
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.ax_dne
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.all_intro
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.all_elim
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.freeVarWeakening
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.spec
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.ex_intro
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.eq_refl
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.eq_leibniz
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.or_inl
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.or_inr
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.or_elim
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.and_intro
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.and_left
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.and_right
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.falsum_elim
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.em
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.ex_elim
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.ax_ex_intro
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.ax_ex_elim
+#print axioms OperatorKO7.ReverseMath.DeductionFO.DerivableFO.ex_mono
+#print axioms OperatorKO7.ReverseMath.DeductionFO.derivableFO_sound
+#print axioms OperatorKO7.ReverseMath.DeductionFO.derivableFO_sound_sentence

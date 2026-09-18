@@ -1,0 +1,115 @@
+import OperatorKO7.Meta.MatrixBarrierTropicalContextClosure_Schema
+
+/-!
+Permanent reach/axiom gate for the universal finite-coordinate tropical
+context-closure no-go.  Every public declaration introduced by the source
+module is named here; theorem declarations also expose their axiom closures.
+-/
+
+open OperatorKO7.StepDuplicating
+open OperatorKO7.StepDuplicating.StepDuplicatingSchema
+open OperatorKO7.StepDuplicating.StepDuplicatingSchema.TropicalContextClosure
+
+#check @TropicalDupStepCtx
+#print axioms TropicalDupStepCtx
+#check @tropicalWrapChain
+#print axioms tropicalWrapChain
+#check @tropicalWrapChain_zero
+#print axioms tropicalWrapChain_zero
+#check @tropicalWrapChain_succ
+#print axioms tropicalWrapChain_succ
+#check @tropicalWrapChain_push
+#print axioms tropicalWrapChain_push
+#check @TropicalDupStepCtx.wrapChain_right
+#print axioms TropicalDupStepCtx.wrapChain_right
+#check @tropicalCanonicalStage
+#print axioms tropicalCanonicalStage
+#check @tropicalCanonicalStage_step
+#print axioms tropicalCanonicalStage_step
+#check @tropicalLe_trans
+#print axioms tropicalLe_trans
+#check @tropicalNatValue
+#print axioms tropicalNatValue
+#check @tropicalLe_fin_value
+#print axioms tropicalLe_fin_value
+#check @eval_wrap_le_right
+#print axioms eval_wrap_le_right
+#check @eval_wrap_le_bias
+#print axioms eval_wrap_le_bias
+#check @eval_wrap_le_left
+#print axioms eval_wrap_le_left
+#check @eval_outer_wrapper_right_cap
+#print axioms eval_outer_wrapper_right_cap
+#check @outerWrapperValue
+#print axioms outerWrapperValue
+#check @outerWrapperValue_le_cap
+#print axioms outerWrapperValue_le_cap
+#check @outerWrapperValue_strict_of_orients
+#print axioms outerWrapperValue_strict_of_orients
+#check @nat_strict_chain_length_le_start
+#print axioms nat_strict_chain_length_le_start
+#check @no_tropical_context_orientation_of_uniform_context_cap
+#print axioms no_tropical_context_orientation_of_uniform_context_cap
+#check @tropicalMin_strict_right_target_finite
+#print axioms tropicalMin_strict_right_target_finite
+#check @no_tropical_context_orientation
+#print axioms no_tropical_context_orientation
+#check @no_tropical_orientation_of_context_inclusion
+#print axioms no_tropical_orientation_of_context_inclusion
+#check @no_freeDupStepCtx_tropical_orientation
+#print axioms no_freeDupStepCtx_tropical_orientation
+#check @no_ko7_stepCtxFull_tropical_orientation
+#print axioms no_ko7_stepCtxFull_tropical_orientation
+#check @tropical_root_context_classification
+#print axioms tropical_root_context_classification
+#check @no_tropical_context_orientation_of_finite_wrap_bias
+#print axioms no_tropical_context_orientation_of_finite_wrap_bias
+#check @no_tropical_context_orientation_of_finite_left_cap
+#print axioms no_tropical_context_orientation_of_finite_left_cap
+#check @no_tropical_context_orientation_of_finite_right_cap
+#print axioms no_tropical_context_orientation_of_finite_right_cap
+#check @tropicalDupStepCtx_to_free
+#print axioms tropicalDupStepCtx_to_free
+#check @free_to_tropicalDupStepCtx
+#print axioms free_to_tropicalDupStepCtx
+#check @tropicalDupStepCtx_iff_freeDupStepCtx
+#print axioms tropicalDupStepCtx_iff_freeDupStepCtx
+#check @no_freeDupStepCtx_orientation_of_finite_right_cap
+#print axioms no_freeDupStepCtx_orientation_of_finite_right_cap
+#check @no_freeDupStepCtx_orientation_of_finite_wrap_bias
+#print axioms no_freeDupStepCtx_orientation_of_finite_wrap_bias
+#check @tropicalDupStepCtx_ko7_to_stepCtxFull
+#print axioms tropicalDupStepCtx_ko7_to_stepCtxFull
+#check @no_ko7_stepCtxFull_tropical_orientation_of_finite_right_cap
+#print axioms no_ko7_stepCtxFull_tropical_orientation_of_finite_right_cap
+#check @no_ko7_stepCtxFull_tropical_orientation_of_finite_wrap_bias
+#print axioms no_ko7_stepCtxFull_tropical_orientation_of_finite_wrap_bias
+#check @tropicalEscapeMeasure_not_context_orienter_universal
+#print axioms tropicalEscapeMeasure_not_context_orienter_universal
+#check @tropical_root_context_split_exact
+#print axioms tropical_root_context_split_exact
+
+#check @WrapperPolicyStep
+#print axioms WrapperPolicyStep
+#check @wrapperPolicyStep_to_full
+#print axioms wrapperPolicyStep_to_full
+#check @full_to_wrapperPolicyStep
+#print axioms full_to_wrapperPolicyStep
+#check @wrapperPolicyStep_full_iff
+#print axioms wrapperPolicyStep_full_iff
+#check @oneSidedWeight
+#print axioms oneSidedWeight
+#check @oneSidedMeasure
+#print axioms oneSidedMeasure
+#check @oneSidedMeasure_coord_finite
+#print axioms oneSidedMeasure_coord_finite
+#check @oneSidedMeasure_nonconstant
+#print axioms oneSidedMeasure_nonconstant
+#check @oneSidedWeight_orients
+#check @wrapperPolicy_orients_of_projection_laws
+#print axioms wrapperPolicy_orients_of_projection_laws
+#print axioms oneSidedWeight_orients
+#check @oneSidedMeasure_orients
+#print axioms oneSidedMeasure_orients
+#check @tropical_wrapper_policy_classification
+#print axioms tropical_wrapper_policy_classification

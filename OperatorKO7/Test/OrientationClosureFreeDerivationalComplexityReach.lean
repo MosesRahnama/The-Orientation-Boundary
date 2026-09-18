@@ -1,0 +1,34 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.FreeDerivationalComplexity
+
+/-! # FreeDerivationalComplexity reach and axiom check -/
+
+#check @OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.termSize
+#print axioms OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.termSize
+#check @OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.relPow_le_qw
+#print axioms OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.relPow_le_qw
+#check @OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.qw_add_two_le_pow
+#print axioms OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.qw_add_two_le_pow
+#check @OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.derivation_lt_pow_size
+#print axioms OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.derivation_lt_pow_size
+#check @OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.sucOn
+#print axioms OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.sucOn
+#check @OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.wrapPow
+#print axioms OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.wrapPow
+#check @OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.relPow_plug
+#print axioms OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.relPow_plug
+#check @OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.unfold_steps
+#print axioms OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.unfold_steps
+#check @OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.reduce_copies
+#print axioms OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.reduce_copies
+#check @OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.nest
+#print axioms OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.nest
+#check @OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.termSize_sucOn
+#print axioms OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.termSize_sucOn
+#check @OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.termSize_nest
+#print axioms OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.termSize_nest
+#check @OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.nest_long_derivation
+#print axioms OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.nest_long_derivation
+#check @OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.exponential_sandwich
+#print axioms OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.exponential_sandwich
+#check @OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.callChain_length_eq
+#print axioms OperatorKO7.Methods.OrientationClosure.FreeDerivationalComplexity.callChain_length_eq
