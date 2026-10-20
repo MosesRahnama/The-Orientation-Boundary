@@ -1,0 +1,50 @@
+import OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair
+
+set_option autoImplicit false
+
+#check @OperatorKO7.Meta.UUET.TwoBranchWeight.swap
+#print axioms OperatorKO7.Meta.UUET.TwoBranchWeight.swap
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.amplitudeEntanglement_swap
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.amplitudeEntanglement_swap
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.amplitudeEntanglement_eq_quarter_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.amplitudeEntanglement_eq_quarter_iff
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.PairLaw
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.PairLaw
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.pairSupport
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.pairSupport
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.pairRecordMass
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.pairRecordMass
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.pairConditionalLaw
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.pairConditionalLaw
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.residualEntanglement
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.residualEntanglement
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.pairRecordMass_nonneg
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.pairRecordMass_nonneg
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.pairConditionalLaw_nonneg
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.pairConditionalLaw_nonneg
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.pairConditionalLaw_zero_mass
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.pairConditionalLaw_zero_mass
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.pairConditionalLaw_supported
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.pairConditionalLaw_supported
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.pairConditionalLaw_normalized
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.pairConditionalLaw_normalized
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.pairConditionalLaw_pair_total
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.pairConditionalLaw_pair_total
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.conditionalBranchWeight
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.conditionalBranchWeight
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.conditionalBranchWeight_amplitude
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.conditionalBranchWeight_amplitude
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.pairRecordMass_total
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.pairRecordMass_total
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.residualEntanglement_eq
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.residualEntanglement_eq
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.entangledUnder_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.entangledUnder_iff
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.residualEntanglement_zero_weight
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.residualEntanglement_zero_weight
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.fairBoolPairLaw
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.fairBoolPairLaw
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.fair_merged_residual
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.fair_merged_residual
+#check @OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.fair_separated_residual
+#print axioms OperatorKO7.Meta.BoundaryObserver.EntangledMergedPair.fair_separated_residual

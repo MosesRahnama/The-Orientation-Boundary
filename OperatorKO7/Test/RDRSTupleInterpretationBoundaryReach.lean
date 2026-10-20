@@ -1,0 +1,9 @@
+import OperatorKO7.Meta.RDRSTupleInterpretationBoundary
+
+namespace OperatorKO7.Test.RDRSTupleInterpretationBoundaryReach
+
+#check @OperatorKO7.RDRSTupleInterpretationBoundary.supersededBy
+#check @OperatorKO7.RDRSTupleInterpretationBoundary.rdrs_tuple_interpretation_boundary_shim_marker
+#check @OperatorKO7.RDRSAlgebraicInterpretationAtlas.rdrs_algebraic_interpretation_layer_closed
+
+end OperatorKO7.Test.RDRSTupleInterpretationBoundaryReach

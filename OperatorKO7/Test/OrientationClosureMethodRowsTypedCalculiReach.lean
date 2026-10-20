@@ -1,0 +1,450 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodRowsTypedCalculi
+
+/-! # MethodRowsTypedCalculi reach and axiom check -/
+
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.HTy
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.HTy
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.HTy.size
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.HTy.size
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.HTy.cod?
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.HTy.cod?
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.ASym
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.ASym
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TSig
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TSig
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tyOf
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tyOf
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tyOfAp
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tyOfAp
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tyOf_var
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tyOf_var
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tyOf_fn
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tyOf_fn
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tyOf_ap
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tyOf_ap
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.HasTy
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.HasTy
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.HasTy.tyOf_eq
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.HasTy.tyOf_eq
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TyEq
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TyEq
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.LeftFlat
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.LeftFlat
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.ARoot
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.ARoot
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.AStep
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.AStep
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.apPrec
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.apPrec
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.apPrec_wf
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.apPrec_wf
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.apPrec_trans
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.apPrec_trans
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.AStep.rpo
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.AStep.rpo
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.AStep.wf_of_rpo
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.AStep.wf_of_rpo
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.leftFlat_rpo
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.leftFlat_rpo
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.rpo_not_superterm
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.rpo_not_superterm
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TSort
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TSort
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TTy
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TTy
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.natTy
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.natTy
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TSym
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TSym
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tSig
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tSig
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TVar
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TVar
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TTerm
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TTerm
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.iterCtx
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.iterCtx
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.recCtx
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.recCtx
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tZero
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tZero
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tSucc
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tSucc
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tApp
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tApp
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tIter
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tIter
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tRec
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tRec
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.iterZeroL
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.iterZeroL
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.iterSuccL
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.iterSuccL
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.iterSuccR
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.iterSuccR
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.recZeroL
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.recZeroL
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.recSuccL
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.recSuccL
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.recCall
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.recCall
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.recSuccR
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.recSuccR
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.iterRules
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.iterRules
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.recRules
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.recRules
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.recRules_typed
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.recRules_typed
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.toA
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.toA
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.freeInst
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.freeInst
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.toA_root
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.toA_root
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.toA_plug
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.toA_plug
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.toA_contextStep
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.toA_contextStep
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.free_wf_of_iter
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.free_wf_of_iter
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TypedFreeTermination
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TypedFreeTermination
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tRank
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tRank
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tRank_wf
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tRank_wf
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.ne_arrow_of_size
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.ne_arrow_of_size
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.ty_ne_step
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.ty_ne_step
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.ty_ne_endo
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.ty_ne_endo
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.HStat
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.HStat
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.HStat.toArg
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.HStat.toArg
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.apStat
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.apStat
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.HMode
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.HMode
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.Horpo
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.Horpo
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.HMode.inRPO
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.HMode.inRPO
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.Horpo.toRPO
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.Horpo.toRPO
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.Horpo.gt_tyEq
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.Horpo.gt_tyEq
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpo_rules_wf
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpo_rules_wf
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpo_succ_var
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpo_succ_var
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpo_status_call
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpo_status_call
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpo_zero_rule
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpo_zero_rule
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpo_iter_succ
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpo_iter_succ
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpo_rec_succ
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpo_rec_succ
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpo_accepts_iter
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpo_accepts_iter
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpo_rejects_step_arg
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpo_rejects_step_arg
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpo_binary_flattening_blocked
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpo_binary_flattening_blocked
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpo_rejects_same_counter
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpo_rejects_same_counter
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittanceData
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittanceData
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittanceLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittanceLaws
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittanceAccepts
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittanceAccepts
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittanceResult
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittanceResult
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittance_sound
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittance_sound
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittanceWitness
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittanceWitness
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittanceWitness_laws
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittanceWitness_laws
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittanceWitness_result
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittanceWitness_result
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittanceWitness_feature
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittanceWitness_feature
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittance_mutation
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittance_mutation
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittance_scope
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittance_scope
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittance_admits_systemT
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittance_admits_systemT
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittance_systemT_terminates
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.horpoAdmittance_systemT_terminates
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.mem_of_getElem?_eq
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.mem_of_getElem?_eq
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.CpoIngr
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.CpoIngr
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TyLeft
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TyLeft
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TyDom
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TyDom
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.AdmissibleTyOrder
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.AdmissibleTyOrder
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.OnlyPolar
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.OnlyPolar
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.HTy.sorts
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.HTy.sorts
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.AccArgsOK
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.AccArgsOK
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.CMode
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.CMode
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.AccSub
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.AccSub
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.AccSub.rpo
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.AccSub.rpo
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TyGe
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.TyGe
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.Cpo
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.Cpo
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.CMode.inRPO
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.CMode.inRPO
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.Cpo.toRPO
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.Cpo.toRPO
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpo_rules_wf
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpo_rules_wf
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpo_arg
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpo_arg
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.RSpine
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.RSpine
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.RSpine.size_lt
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.RSpine.size_lt
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.RSpine.trans
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.RSpine.trans
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tyDom_size_lt
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tyDom_size_lt
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.rspine_admissible
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.rspine_admissible
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpo_succ_var
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpo_succ_var
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpo_counter
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpo_counter
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpo_status_call
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpo_status_call
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpo_iter_succ
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpo_iter_succ
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpo_rec_succ
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpo_rec_succ
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpo_zero_rule
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpo_zero_rule
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.ImmSub
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.ImmSub
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SubtermOnly
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SubtermOnly
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SubtermOnly.size_lt
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SubtermOnly.size_lt
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittanceData
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittanceData
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittanceLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittanceLaws
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittanceAccepts
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittanceAccepts
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittanceResult
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittanceResult
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittance_sound
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittance_sound
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittanceWitness
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittanceWitness
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittanceWitness_laws
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittanceWitness_laws
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittanceWitness_accepts
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittanceWitness_accepts
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittanceWitness_result
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittanceWitness_result
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittanceWitness_feature
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittanceWitness_feature
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittance_mutation
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittance_mutation
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittance_scope
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittance_scope
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittance_admits_systemT
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittance_admits_systemT
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittance_systemT_terminates
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.cpoAdmittance_systemT_terminates
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.InductiveDecl
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.InductiveDecl
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tInd
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.tInd
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.dm_mono
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.dm_mono
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.GAcc
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.GAcc
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.GAcc.sub
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.GAcc.sub
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.rtSub_rpo
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.rtSub_rpo
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.rpo_of_mem_rtSub
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.rpo_of_mem_rtSub
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.rtSub_size_le
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.rtSub_size_le
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.ArgGt
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.ArgGt
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.ArgGtT
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.ArgGtT
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.ArgGt.rpo
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.ArgGt.rpo
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.StatGt
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.StatGt
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.GSClosure
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.GSClosure
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.FollowsGS
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.FollowsGS
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.GSClosure.toRPO
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.GSClosure.toRPO
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.FollowsGS.toRPO
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.FollowsGS.toRPO
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_rules_wf
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_rules_wf
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_acc_counter
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_acc_counter
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_argGt_counter
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_argGt_counter
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_statGt_counter
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_statGt_counter
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_vars_accessible
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_vars_accessible
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_var_closure
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_var_closure
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_call_closure
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_call_closure
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_rec_succ
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_rec_succ
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_iter_succ
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_iter_succ
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_zero_rule
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_zero_rule
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.rpo_larger_call
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.rpo_larger_call
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_rejects_larger_counter
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_rejects_larger_counter
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.iterCallRhs
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.iterCallRhs
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gsRankIterLow
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gsRankIterLow
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_call_dependency
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.gs_call_dependency
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittanceData
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittanceData
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittanceLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittanceLaws
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittanceAccepts
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittanceAccepts
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittanceResult
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittanceResult
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittance_sound
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittance_sound
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittanceWitness
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittanceWitness
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittanceWitness_laws
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittanceWitness_laws
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittanceWitness_accepts
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittanceWitness_accepts
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittanceWitness_result
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittanceWitness_result
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittanceWitness_feature
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittanceWitness_feature
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittance_mutation
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittance_mutation
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittance_scope
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittance_scope
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittance_admits_systemT
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittance_admits_systemT
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittance_systemT_terminates
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.generalSchemaAdmittance_systemT_terminates
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.Stage
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.Stage
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SLe
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SLe
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzTy
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzTy
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzSub
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzSub
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.liftTy
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.liftTy
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.Stage.hasVar
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.Stage.hasVar
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzTy.hasVar
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzTy.hasVar
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.argTy
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.argTy
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzHas
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzHas
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.Stage.val
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.Stage.val
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SLe.val_le
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SLe.val_le
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzTy.posVal
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzTy.posVal
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzSub.posVal_le
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzSub.posVal_le
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzSub.snat_inv
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzSub.snat_inv
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.stageVal0
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.stageVal0
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.Stage.one_le_val
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.Stage.one_le_val
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzTy.one_le_posVal
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzTy.one_le_posVal
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.liftTy_noVar
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.liftTy_noVar
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzHas.counter_or_pos
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzHas.counter_or_pos
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzHas.counter_eq
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzHas.counter_eq
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.szStat
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.szStat
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.szPrec
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.szPrec
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzHas.toRPO_succ
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzHas.toRPO_succ
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzHas.toRPO_zero
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.SzHas.toRPO_zero
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedIterLabels
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedIterLabels
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedRecLabels
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedRecLabels
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittanceData
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittanceData
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittanceLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittanceLaws
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittanceAccepts
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittanceAccepts
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittanceResult
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittanceResult
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittance_sound
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittance_sound
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittanceWitness
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittanceWitness
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittanceWitness_laws
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittanceWitness_laws
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sized_iter_accepts
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sized_iter_accepts
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittanceWitness_result
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittanceWitness_result
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittance_admits_systemT
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittance_admits_systemT
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittance_systemT_terminates
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittance_systemT_terminates
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.badLabels
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.badLabels
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.loopRules
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.loopRules
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.loopRules_not_wf
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.loopRules_not_wf
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittanceWitness_feature
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittanceWitness_feature
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittance_mutation
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittance_mutation
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittance_scope
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsTypedCalculi.sizedTypesAdmittance_scope

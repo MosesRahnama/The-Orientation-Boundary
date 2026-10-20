@@ -1,0 +1,76 @@
+import OperatorKO7.Meta.BoundaryObserver.ObserverFoundations
+
+set_option autoImplicit false
+set_option pp.fullNames true
+set_option pp.universes true
+
+/-! Declaration and axiom checks for every theorem and definition of the module of foundational sentences of the Boundary-Observation Principle. -/
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.least_separating_set
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.least_separating_set
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.continuous_discrete_const
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.continuous_discrete_const
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.table_is_kernel_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.table_is_kernel_iff
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.table_kernel_of_quotient
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.table_kernel_of_quotient
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.DeterminesTarget
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.DeterminesTarget
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.determines_all_targets_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.determines_all_targets_iff
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.kernel_le_iff_tests
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.kernel_le_iff_tests
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.kernel_lt_iff_tests
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.kernel_lt_iff_tests
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.same_tests_iff_same_kernel
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.same_tests_iff_same_kernel
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.kernel_eq_determined_tests_agreement
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.kernel_eq_determined_tests_agreement
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.apartness_properties
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.apartness_properties
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.determined_tests_iff_closed
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.determined_tests_iff_closed
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.same_kernel_iff_unique_equiv_of_surjective
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.same_kernel_iff_unique_equiv_of_surjective
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.swap_invariant_relations_four
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.swap_invariant_relations_four
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.const_off_iff_factors
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.const_off_iff_factors
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.point_stabilizer_orbits
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.point_stabilizer_orbits
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.invariantTests
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.invariantTests
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.invariantTests_eq_range
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.invariantTests_eq_range
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.invariantTests_card_four
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.invariantTests_card_four
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.invariantTests_card_two
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.invariantTests_card_two
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.selfTestLaw
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.selfTestLaw
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.selfTest_pushforward
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.selfTest_pushforward
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.selfTest_entropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.selfTest_entropy
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.least_resolving_size
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.least_resolving_size
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.least_resolving_size_empty
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.least_resolving_size_empty
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.placeCoord_nonempty_iff_encard
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.placeCoord_nonempty_iff_encard
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.unequalFibers
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.unequalFibers
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.unequalFibers_resolving_card
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.unequalFibers_resolving_card
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.unequalFibers_stabilizer_fixes
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.unequalFibers_stabilizer_fixes
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.unequalFibers_swap_mem
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.unequalFibers_swap_mem
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.unequalFibers_orbits
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.unequalFibers_orbits
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.unequalFibers_two_orbits_nonempty
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.unequalFibers_two_orbits_nonempty
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.uniform_mutualInfo_eq
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.uniform_mutualInfo_eq
+#check @OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.pair_system_largest_entropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObserverFoundations.pair_system_largest_entropy

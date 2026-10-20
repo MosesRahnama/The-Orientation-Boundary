@@ -1,0 +1,11 @@
+TTT2 1.19 [hg: unknown] (hosted at http://138.232.18.220/tool/ttt2)
+Command: './ttt2' '-C' "\" '-cpf' '-t' 'input.trs'  (default FAST strategy)
+Input: Artifacts/ttt2/free_recursor.trs
+Date: 2026-09-16
+
+YES
+Time: 0.023
+
+Proof shape: dependency-pair transformation, then subterm criterion with argument
+filter collapsing recur# to argument 3 (the recursion counter), leaving an empty
+DP problem (pIsEmpty).

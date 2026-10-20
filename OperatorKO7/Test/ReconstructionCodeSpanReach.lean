@@ -1,0 +1,33 @@
+import OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan
+
+set_option autoImplicit false
+set_option pp.fullNames true
+set_option pp.universes true
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.Mat
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.Mat
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.knillLaflamme_all_code_matrices
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.knillLaflamme_all_code_matrices
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.zero_projector_all_code_matrices
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.zero_projector_all_code_matrices
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.knillLaflamme_all_code_matrices_necessity
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.knillLaflamme_all_code_matrices_necessity
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.knillLaflamme_all_code_matrices_equivalence
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.knillLaflamme_all_code_matrices_equivalence
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.CodeMatrixRecoveryGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.CodeMatrixRecoveryGoal
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.codeMatrixRecoveryGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.codeMatrixRecoveryGoal
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.amplify_code_recovery
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.amplify_code_recovery
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.AncillaryCodeRecoveryGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.AncillaryCodeRecoveryGoal
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.ancillaryCodeRecoveryGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.ancillaryCodeRecoveryGoal
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.CodeSpanFullGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.CodeSpanFullGoal
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.codeSpanFullGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionCodeSpan.codeSpanFullGoal

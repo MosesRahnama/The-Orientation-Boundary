@@ -1,0 +1,42 @@
+import OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair
+
+set_option autoImplicit false
+set_option pp.fullNames true
+set_option pp.universes true
+
+/-! Declaration and axiom checks for every theorem and definition of the module of quantum merged-pair sentences of the Boundary-Observation Principle. -/
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.overlap_sum
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.overlap_sum
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.sqrtAmplitude
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.sqrtAmplitude
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.sqrtAmplitude_label_form
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.sqrtAmplitude_label_form
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.sqrtAmplitude_swap_form
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.sqrtAmplitude_swap_form
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.halfTraceInner
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.halfTraceInner
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.label_swap_orthonormal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.label_swap_orthonormal
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.extremeU
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.extremeU
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.extremeV
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.extremeV
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.extreme_vectors_realize
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.extreme_vectors_realize
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.extremeTable_angles
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.extremeTable_angles
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.schmidt_bloch_components
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.schmidt_bloch_components
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.schmidt_score_forms
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.schmidt_score_forms
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.werner_interval
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.werner_interval
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.werner_half
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.werner_half
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.chsh_trace_real_bound
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.chsh_trace_real_bound
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.marginalRight_purifiedFiber
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.marginalRight_purifiedFiber
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.entropy_marginalRight_purifiedFiber_bits
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantumPair.entropy_marginalRight_purifiedFiber_bits

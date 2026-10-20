@@ -1,0 +1,69 @@
+import OperatorKO7.Meta.ReverseMath.RCA0DerivationSharpness
+
+/-! Full reach and axiom coverage for the finite sharpness models. Permanent. -/
+
+#check @OperatorKO7.ReverseMath.twoInductionFragment
+#check @OperatorKO7.ReverseMath.TwoInductionCountermodel.Carrier
+#check @OperatorKO7.ReverseMath.TwoInductionCountermodel.funMap
+#check @OperatorKO7.ReverseMath.TwoInductionCountermodel.relMap
+#check @OperatorKO7.ReverseMath.TwoInductionCountermodel.twoInductionStructure
+#check @OperatorKO7.ReverseMath.TwoInductionCountermodel.nonemptyCarrier
+#check @OperatorKO7.ReverseMath.TwoInductionCountermodel.false_is_number
+#check @OperatorKO7.ReverseMath.TwoInductionCountermodel.true_is_set
+#check @OperatorKO7.ReverseMath.TwoInductionCountermodel.zero_is_set
+#check @OperatorKO7.ReverseMath.TwoInductionCountermodel.lt_is_equality
+#check @OperatorKO7.ReverseMath.TwoInductionCountermodel.models_simpsonArithmetic
+#check @OperatorKO7.ReverseMath.TwoInductionCountermodel.models_indFormulaZeroOrSucc
+#check @OperatorKO7.ReverseMath.TwoInductionCountermodel.models_indFormulaLtIrrefl
+#check @OperatorKO7.ReverseMath.TwoInductionCountermodel.models_twoInductionFragment
+#check @OperatorKO7.ReverseMath.TwoInductionCountermodel.not_models_axLtIrrefl
+#check @OperatorKO7.ReverseMath.twoInductionFragment_not_entails_axLtIrrefl
+#check @OperatorKO7.ReverseMath.twoInductionFragment_not_derives_axLtIrrefl
+#check @OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.Carrier
+#check @OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.z
+#check @OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.n
+#check @OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.s
+#check @OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.succValue
+#check @OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.addValue
+#check @OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.mulValue
+#check @OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.funMap
+#check @OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.relMap
+#check @OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.baseInsufficiencyStructure
+#check @OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.nonemptyCarrier
+#check @OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.models_simpsonArithmetic
+#check @OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.not_models_axZeroOrSucc
+#check @OperatorKO7.ReverseMath.simpsonArithmetic_not_entails_zeroOrSucc
+#check @OperatorKO7.ReverseMath.simpsonArithmetic_not_derives_zeroOrSucc
+
+#print axioms OperatorKO7.ReverseMath.twoInductionFragment
+#print axioms OperatorKO7.ReverseMath.TwoInductionCountermodel.Carrier
+#print axioms OperatorKO7.ReverseMath.TwoInductionCountermodel.funMap
+#print axioms OperatorKO7.ReverseMath.TwoInductionCountermodel.relMap
+#print axioms OperatorKO7.ReverseMath.TwoInductionCountermodel.twoInductionStructure
+#print axioms OperatorKO7.ReverseMath.TwoInductionCountermodel.nonemptyCarrier
+#print axioms OperatorKO7.ReverseMath.TwoInductionCountermodel.false_is_number
+#print axioms OperatorKO7.ReverseMath.TwoInductionCountermodel.true_is_set
+#print axioms OperatorKO7.ReverseMath.TwoInductionCountermodel.zero_is_set
+#print axioms OperatorKO7.ReverseMath.TwoInductionCountermodel.lt_is_equality
+#print axioms OperatorKO7.ReverseMath.TwoInductionCountermodel.models_simpsonArithmetic
+#print axioms OperatorKO7.ReverseMath.TwoInductionCountermodel.models_indFormulaZeroOrSucc
+#print axioms OperatorKO7.ReverseMath.TwoInductionCountermodel.models_indFormulaLtIrrefl
+#print axioms OperatorKO7.ReverseMath.TwoInductionCountermodel.models_twoInductionFragment
+#print axioms OperatorKO7.ReverseMath.TwoInductionCountermodel.not_models_axLtIrrefl
+#print axioms OperatorKO7.ReverseMath.twoInductionFragment_not_entails_axLtIrrefl
+#print axioms OperatorKO7.ReverseMath.twoInductionFragment_not_derives_axLtIrrefl
+#print axioms OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.Carrier
+#print axioms OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.z
+#print axioms OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.n
+#print axioms OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.s
+#print axioms OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.succValue
+#print axioms OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.addValue
+#print axioms OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.mulValue
+#print axioms OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.funMap
+#print axioms OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.relMap
+#print axioms OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.baseInsufficiencyStructure
+#print axioms OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.nonemptyCarrier
+#print axioms OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.models_simpsonArithmetic
+#print axioms OperatorKO7.ReverseMath.BaseInsufficiencyCountermodel.not_models_axZeroOrSucc
+#print axioms OperatorKO7.ReverseMath.simpsonArithmetic_not_entails_zeroOrSucc
+#print axioms OperatorKO7.ReverseMath.simpsonArithmetic_not_derives_zeroOrSucc

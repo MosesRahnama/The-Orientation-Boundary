@@ -1,0 +1,7 @@
+name = "lemma64-counterexample"
+version = "1.0.0"
+defaultTargets = ["Lemma64"]
+
+[[lean_lib]]
+name = "Lemma64"
+roots = ["Lemma64"]

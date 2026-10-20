@@ -1,0 +1,26 @@
+import OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts
+
+/-! Full reach and axiom coverage for the `FiniteTRSReducts` module. Permanent. -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.eqOn_vars_of_apply_eq
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.rootReducts
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.reducts
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.reductsList
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.reducts_var
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.reducts_app
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.reductsList_nil
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.reductsList_cons
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.mem_rootReducts_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.mem_reductsList_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.mem_reducts_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.freshTRS_infinitely_branching
+
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.eqOn_vars_of_apply_eq
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.reducts_var
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.reducts_app
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.reductsList_nil
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.reductsList_cons
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.mem_rootReducts_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.mem_reductsList_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.mem_reducts_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteTRSReducts.freshTRS_infinitely_branching

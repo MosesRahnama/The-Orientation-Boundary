@@ -1,0 +1,16 @@
+import OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleDemand
+
+set_option autoImplicit false
+set_option pp.fullNames true
+set_option pp.universes true
+
+/-! Declaration and axiom checks for every theorem of the module of demand and annotation sentences of the Boundary-Observation Principle. -/
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleDemand.booleanFamily_nonempty_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleDemand.booleanFamily_nonempty_iff
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleDemand.licensed_selector_least_alphabet_of_finite
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleDemand.licensed_selector_least_alphabet_of_finite
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleDemand.annotatedPayload_relabel_comm
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleDemand.annotatedPayload_relabel_comm
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleDemand.no_morphism_trace_only_certificateFloor
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleDemand.no_morphism_trace_only_certificateFloor

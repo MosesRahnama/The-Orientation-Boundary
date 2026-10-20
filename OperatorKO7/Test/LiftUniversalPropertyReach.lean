@@ -1,0 +1,22 @@
+import OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty
+
+/-! Reach and axiom check for the `
+LiftUniversalProperty
+` module. Permanent. -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.jointPair_greatest_licensingRefinement
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.jointPair_greatest_licensingRefinement
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.observerKernel_eq_of_universal
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.observerKernel_eq_of_universal
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.no_greatest_licensedOn_of_collision
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.no_greatest_licensedOn_of_collision
+
+/-! ## Complete public-surface reach and axiom parity -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.licensingRefinement_iff_kernel_le
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.exists_greatest_licensedOn_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.twoVoids_no_greatest_refusal
+
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.licensingRefinement_iff_kernel_le
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.exists_greatest_licensedOn_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.LiftUniversalProperty.twoVoids_no_greatest_refusal

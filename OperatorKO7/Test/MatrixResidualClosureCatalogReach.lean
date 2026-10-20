@@ -1,0 +1,64 @@
+import OperatorKO7.Meta.MatrixResidualClosureCatalog
+
+namespace MatrixResidualClosureCatalogReach
+
+open OperatorKO7.MatrixResidualTaxonomy
+open OperatorKO7.ToolSearchFragmentCoverageStatus
+open OperatorKO7.MatrixResidualClosureCatalog
+
+#check MatrixResidualClosureCatalogRow
+#check matrixResidualClosureCatalogRows
+#check matrixResidualClosureCatalogRowFamily
+#check matrixResidualClosureCatalogRowStatus
+#check matrixResidualClosureCatalogRows_nodup
+#check matrixResidualClosureCatalogRows_length
+#check matrixResidualClosureCatalogRows_complete_exact
+#check matrixResidualClosureCatalogRowFamily_mem_inventory
+#check matrixResidualClosureCatalogRow_matches_taxonomy
+#check matrixResidualClosureCatalogRow_uses_honest_status
+#check MatrixResidualClosureSupportKind
+#check matrixResidualClosureCatalogRowSupportKind
+#check matrixResidualClosureCatalogRowSupport
+#check matrixResidualClosureCatalogRow_has_support
+#check matrixResidualClosureCatalogRowSupportKind_projects_status
+#check MatrixResidualClosureFinalCatalog
+#check matrixResidualClosureFinalCatalog_exact
+#check MatrixResidualClosureCertificate
+#check matrixResidualClosureCertificate
+#check matrixResidualClosureCertificate_projects_finalCatalog
+#check matrixResidualClosureCertificate_projects_rowSupport
+#check matrixResidualClosureCertificate_projects_statusCatalog
+
+example : MatrixResidualClosureCatalogRow.arcticFullLicensedEscape ∈
+    matrixResidualClosureCatalogRows := by
+  decide
+
+example : matrixResidualClosureCatalogRowStatus
+    MatrixResidualClosureCatalogRow.unconstrainedRelationLegacyScopeBoundary =
+    MatrixClosureStatus.closedByUnrestrictedSplitFinalCatalog := by
+  rfl
+
+example : MatrixResidualStatusCatalog := by
+  exact matrixResidualClosureCertificate_projects_statusCatalog
+
+example : matrixResidualClosureCatalogRowSupportKind
+    MatrixResidualClosureCatalogRow.scalarizableWeightReduction =
+      MatrixResidualClosureSupportKind.projectionScalarization := by
+  rfl
+
+example : matrixResidualClosureCatalogRowSupport
+    MatrixResidualClosureCatalogRow.scalarizableWeightReduction := by
+  exact matrixResidualClosureCatalogRow_has_support
+    MatrixResidualClosureCatalogRow.scalarizableWeightReduction
+
+example : matrixResidualClosureCatalogRowSupport
+    MatrixResidualClosureCatalogRow.arcticFullLicensedEscape := by
+  exact matrixResidualClosureCertificate_projects_rowSupport
+    MatrixResidualClosureCatalogRow.arcticFullLicensedEscape
+
+example : matrixResidualClosureCatalogRowSupport
+    MatrixResidualClosureCatalogRow.unconstrainedRelationLegacyScopeBoundary := by
+  exact matrixResidualClosureCatalogRow_has_support
+    MatrixResidualClosureCatalogRow.unconstrainedRelationLegacyScopeBoundary
+
+end MatrixResidualClosureCatalogReach
