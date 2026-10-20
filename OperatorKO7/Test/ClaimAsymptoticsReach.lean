@@ -1,0 +1,13 @@
+import OperatorKO7.Meta.OperationalInexpressibility.ClaimAsymptotics
+
+/-! Permanent reach and axiom audit for `ClaimAsymptotics`. -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ClaimAsymptotics.traceAction_div_sq_tendsto
+#check @OperatorKO7.Meta.OperationalInexpressibility.ClaimAsymptotics.proof_entropy_tendsto_ratio
+#check @OperatorKO7.Meta.OperationalInexpressibility.ClaimAsymptotics.conMassCell_div_traceAction_tendsto
+#check @OperatorKO7.Meta.OperationalInexpressibility.ClaimAsymptotics.istar_div_tendsto
+
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ClaimAsymptotics.traceAction_div_sq_tendsto
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ClaimAsymptotics.proof_entropy_tendsto_ratio
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ClaimAsymptotics.conMassCell_div_traceAction_tendsto
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ClaimAsymptotics.istar_div_tendsto

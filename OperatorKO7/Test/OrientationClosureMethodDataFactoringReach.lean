@@ -1,0 +1,20 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodDataFactoring
+
+/-! # MethodDataFactoring reach and axiom check -/
+
+#check @OperatorKO7.Methods.OrientationClosure.MethodDataFactoring.MethodData
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodDataFactoring.MethodData
+#check @OperatorKO7.Methods.OrientationClosure.MethodDataFactoring.MethodLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodDataFactoring.MethodLaws
+#check @OperatorKO7.Methods.OrientationClosure.MethodDataFactoring.MethodResult
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodDataFactoring.MethodResult
+#check @OperatorKO7.Methods.OrientationClosure.MethodDataFactoring.methodData_laws_result_factor
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodDataFactoring.methodData_laws_result_factor
+#check @OperatorKO7.Methods.OrientationClosure.MethodDataFactoring.methodData_factor_of_interpretation
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodDataFactoring.methodData_factor_of_interpretation
+#check @OperatorKO7.Methods.OrientationClosure.MethodDataFactoring.methodData_rows_have_factor
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodDataFactoring.methodData_rows_have_factor
+#check @OperatorKO7.Methods.OrientationClosure.MethodDataFactoring.methodData_coverage_count
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodDataFactoring.methodData_coverage_count
+#check @OperatorKO7.Methods.OrientationClosure.MethodDataFactoring.methodData_rows_eq
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodDataFactoring.methodData_rows_eq

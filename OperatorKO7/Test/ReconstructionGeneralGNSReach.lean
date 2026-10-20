@@ -1,0 +1,207 @@
+import OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS
+
+set_option autoImplicit false
+set_option pp.universes true
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.QSpace
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.QSpace
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.quotientAddCommGroup
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.quotientAddCommGroup
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.quotientModule
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.quotientModule
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.classOf
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.classOf
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.classOf_add
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.classOf_add
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.classOf_smul
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.classOf_smul
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.classOf_surjective
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.classOf_surjective
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.quotientForm
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.quotientForm
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.quotientForm_mk
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.quotientForm_mk
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.quotientInnerCore
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.quotientInnerCore
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.quotientNormedGroup
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.quotientNormedGroup
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.quotientNormedSpace
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.quotientNormedSpace
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.quotientInner
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.quotientInner
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.norm_quotient_mk
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.norm_quotient_mk
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.inner_quotient_mk
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.inner_quotient_mk
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.leftLinear
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.leftLinear
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.leftLinear_mk
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.leftLinear_mk
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.leftLinear_bound
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.leftLinear_bound
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.leftOperator
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.leftOperator
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.leftOperator_mk
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.leftOperator_mk
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.leftOperator_bound
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.leftOperator_bound
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.leftOperator_adjoint
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.leftOperator_adjoint
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.Hilbert
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.Hilbert
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.hilbertComplete
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.hilbertComplete
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.hilbertInner
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.hilbertInner
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.actionValue
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.actionValue
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.actionValue_continuous
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.actionValue_continuous
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.actionValue_coe
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.actionValue_coe
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.action
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.action
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.action_mk
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.action_mk
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.action_bound
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.action_bound
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.action_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.action_one
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.action_mul
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.action_mul
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.action_add
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.action_add
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.action_smul
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.action_smul
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.representation
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.representation
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.representation_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.representation_one
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.representation_mul
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.representation_mul
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.representation_adjoint
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.representation_adjoint
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.cyclicVector
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.cyclicVector
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.state_identity
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.state_identity
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.norm_cyclicVector
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.norm_cyclicVector
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.cyclic_dense
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.cyclic_dense
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.GeneralGNSGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.GeneralGNSGoal
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.generalGNSGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.generalGNSGoal
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.character_null_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.character_null_iff
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.characterQuotientLinear
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.characterQuotientLinear
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.characterQuotientLinear_mk
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.characterQuotientLinear_mk
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.characterQuotientLinear_bijective
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.characterQuotientLinear_bijective
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.characterQuotientEquiv
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.characterQuotientEquiv
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.characterQuotientLinear_inner
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.characterQuotientLinear_inner
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.DiagonalTwo
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.DiagonalTwo
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.diagonalTwoState
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.diagonalTwoState
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.diagonalTwoState_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.diagonalTwoState_one
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.diagonalTwoProjection
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.diagonalTwoProjection
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.diagonalTwoProjectionMatrix
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.diagonalTwoProjectionMatrix
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.diagonalTwoProjection_idempotent
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.diagonalTwoProjection_idempotent
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.diagonalTwoProjectionMatrix_idempotent
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.diagonalTwoProjectionMatrix_idempotent
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.diagonalTwoProjection_expectation
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.diagonalTwoProjection_expectation
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.diagonalTwoState_not_character
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.diagonalTwoState_not_character
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.diagonalTwoNoncharacterGNS
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.diagonalTwoNoncharacterGNS
+
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionLimitCompletion.PositiveFunctional.form_cauchySchwarz
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionLimitCompletion.PositiveFunctional.form_cauchySchwarz
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionLimitCompletion.PositiveFunctional.null_left_mul
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionLimitCompletion.PositiveFunctional.null_left_mul
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.compatibleStageGNSIdentity
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.compatibleStageGNSIdentity
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.compatibleGNSStateUnique
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.compatibleGNSStateUnique
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.compatibleGNSUnitVector
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.compatibleGNSUnitVector
+
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.diagonalTwoStarOrderedRing
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGeneralGNS.diagonalTwoStarOrderedRing

@@ -1,0 +1,71 @@
+import OperatorKO7.Meta.DependencyPairs_Normalization
+
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.projection_pair_rank
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.projection_pair_rank
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeDPPair_reverse_wellFounded
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeDPPair_reverse_wellFounded
+
+#check @OperatorKO7.MetaDependencyPairs.dpRank_not_dpLength
+#print axioms OperatorKO7.MetaDependencyPairs.dpRank_not_dpLength
+#check @OperatorKO7.MetaDependencyPairs.dpLength_counterEncoding
+#print axioms OperatorKO7.MetaDependencyPairs.dpLength_counterEncoding
+
+#check @OperatorKO7.MetaDependencyPairs.dpNext
+#print axioms OperatorKO7.MetaDependencyPairs.dpNext
+#check @OperatorKO7.MetaDependencyPairs.dpNext_iff
+#print axioms OperatorKO7.MetaDependencyPairs.dpNext_iff
+#check @OperatorKO7.MetaDependencyPairs.dpMachine
+#print axioms OperatorKO7.MetaDependencyPairs.dpMachine
+#check @OperatorKO7.MetaDependencyPairs.dpMachine_step_iff
+#print axioms OperatorKO7.MetaDependencyPairs.dpMachine_step_iff
+#check @OperatorKO7.MetaDependencyPairs.dpPair_deterministic
+#print axioms OperatorKO7.MetaDependencyPairs.dpPair_deterministic
+#check @OperatorKO7.MetaDependencyPairs.dpNormalize
+#print axioms OperatorKO7.MetaDependencyPairs.dpNormalize
+#check @OperatorKO7.MetaDependencyPairs.dpLength
+#print axioms OperatorKO7.MetaDependencyPairs.dpLength
+#check @OperatorKO7.MetaDependencyPairs.dpNormalize_reachable
+#print axioms OperatorKO7.MetaDependencyPairs.dpNormalize_reachable
+#check @OperatorKO7.MetaDependencyPairs.dpNormalize_normal
+#print axioms OperatorKO7.MetaDependencyPairs.dpNormalize_normal
+#check @OperatorKO7.MetaDependencyPairs.dpNormalize_step
+#print axioms OperatorKO7.MetaDependencyPairs.dpNormalize_step
+#check @OperatorKO7.MetaDependencyPairs.dpNormalize_star
+#print axioms OperatorKO7.MetaDependencyPairs.dpNormalize_star
+#check @OperatorKO7.MetaDependencyPairs.dpPair_confluent
+#print axioms OperatorKO7.MetaDependencyPairs.dpPair_confluent
+#check @OperatorKO7.MetaDependencyPairs.deltaPrefix
+#print axioms OperatorKO7.MetaDependencyPairs.deltaPrefix
+#check @OperatorKO7.MetaDependencyPairs.stripDelta
+#print axioms OperatorKO7.MetaDependencyPairs.stripDelta
+#check @OperatorKO7.MetaDependencyPairs.dpLength_rec
+#print axioms OperatorKO7.MetaDependencyPairs.dpLength_rec
+#check @OperatorKO7.MetaDependencyPairs.dpNormalize_rec
+#print axioms OperatorKO7.MetaDependencyPairs.dpNormalize_rec
+#check @OperatorKO7.MetaDependencyPairs.dpNormalize_idempotent
+#print axioms OperatorKO7.MetaDependencyPairs.dpNormalize_idempotent
+#check @OperatorKO7.MetaDependencyPairs.dp_normalization_certificate
+#print axioms OperatorKO7.MetaDependencyPairs.dp_normalization_certificate
+
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.FreeDPPair
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.FreeDPPair
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeDPNext
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeDPNext
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeDPNext_iff
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeDPNext_iff
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeDPMachine
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeDPMachine
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeDPPair_deterministic
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeDPPair_deterministic
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeDPPair_confluent
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeDPPair_confluent
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeSuccPrefix
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeSuccPrefix
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeStripSucc
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeStripSucc
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeDP_cost_recur
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeDP_cost_recur
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeDP_normalize_recur
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeDP_normalize_recur
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeDP_normalization_certificate
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.freeDP_normalization_certificate

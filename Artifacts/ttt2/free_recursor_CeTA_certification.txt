@@ -1,0 +1,17 @@
+CeTA Certification Log - Free Two-Rule Recursor TRS
+==================================================
+Date: 2026-09-16
+Tool: CeTA via web interface at http://138.232.18.220/tool/ceta (cetaEnabled=1 on the TTT2 form)
+Input TRS: free_recursor.trs (2 rules, 3 constructors, 1 defined symbol)
+Prover: TTT2 1.19 [hg: unknown] (hosted)
+
+Strategy            | TTT2 Result | CPF File                 | CeTA Verdict
+--------------------|-------------|--------------------------|-------------
+FAST (default)      | YES (0.023s)| free_recursor_FAST.cpf   | CERTIFIED
+
+Summary:
+- The hosted FAST run certified termination of the free two-rule recursor.
+- The certificate uses dependency pairs plus the subterm criterion, projecting
+  the marked recur symbol to its third argument; the same projection used in the
+  Lean-side proof freeRecursorTRS_terminating
+  (OperatorKO7/Meta/Methods/OrientationClosure/DependencyPairSoundness.lean).

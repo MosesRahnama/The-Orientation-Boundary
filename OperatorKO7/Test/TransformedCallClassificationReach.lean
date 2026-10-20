@@ -1,0 +1,33 @@
+import OperatorKO7.Meta.TransformedCallClassification
+
+namespace TransformedCallClassificationReach
+
+open OperatorKO7.TransformedCallClassification
+open OperatorKO7.BenchmarkedPRCFamily
+
+#check W2TransformClass
+#check W2TransformEvidence
+#check W2ConstructionSuccess
+#check PermittedW2Transform
+#check ko7_dp_projection_route_orients_rec_succ
+#check w2_success_requires_permitted_transform
+#check w2_success_requires_transformed_call_witness
+#check fullDuplicating_w2_success
+#check fullLinear_w2_success
+#check fullDuplicating_w2_success_requires_transformed_call_witness
+#check fullLinear_w2_success_requires_transformed_call_witness
+#check fullDuplicating_w2_separates_from_direct_search
+#check fullDuplicating_w2_success_projects_confession_route_evidence
+#check canonical_w2_witness_catalog
+
+example : HasTransformedCallWitness fullDuplicating := by
+  exact fullDuplicating_w2_success_requires_transformed_call_witness
+
+example : ¬ HasDirectWitness fullDuplicating := by
+  exact fullDuplicating_w2_separates_from_direct_search.2.2
+
+example : OperatorKO7.ConfessionMethodFamily.confessionRouteConvergencePackage.dpRouteEvidence
+    = OperatorKO7.ConfessionMethodFamily.confessionRouteConvergencePackage.commonRouteEvidence := by
+  exact fullDuplicating_w2_success_projects_confession_route_evidence.2.2.1
+
+end TransformedCallClassificationReach

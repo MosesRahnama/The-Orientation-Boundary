@@ -1,0 +1,237 @@
+import OperatorKO7.Meta.BoundaryObserver.FairReadingBound
+import OperatorKO7.Meta.BoundaryObserver.ErasureReading
+import OperatorKO7.Meta.BoundaryObserver.DeterministicConflictGraph
+import OperatorKO7.Meta.BoundaryObserver.DemandComplex
+import OperatorKO7.Meta.BoundaryObserver.RecordChoiceOrbit
+import OperatorKO7.Meta.BoundaryObserver.RiceBoundary
+import OperatorKO7.Meta.BoundaryObserver.RecursorDecidability
+import OperatorKO7.Meta.BoundaryObserver.KernelCases
+import OperatorKO7.Meta.BoundaryObserver.BoundaryPole
+import OperatorKO7.Meta.BoundaryObserver.Boundary
+import OperatorKO7.Meta.BoundaryObserver.CountedRecursionLaws
+import OperatorKO7.Meta.BoundaryObserver.BoundaryTheorem
+
+set_option autoImplicit false
+set_option pp.fullNames true
+set_option pp.universes true
+
+/-!
+# Mathematics-only Boundary Theorem reach
+V1 L1, L2, L3 (Gödel), L4 and L5 and the complete 24-conjunct core goal.
+No rewriting-instance, Kernel, physics, thermal or quantum imports are allowed in this reach.
+Each public math-core declaration is checked with an exactly paired axiom query.
+The full rewriting and quantum reach is kept in separate test modules.
+-/
+
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.selfLoop
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.selfLoop
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.selfLoop_return
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.selfLoop_return
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.selfLoop_infinite_seq
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.selfLoop_infinite_seq
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.constantRun
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.constantRun
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.constantRun_pass
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.constantRun_pass
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.constantRun_merged_pair
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.constantRun_merged_pair
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.constantRun_determines_only_constants
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.constantRun_determines_only_constants
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.constantRun_observed_not_determined
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.constantRun_observed_not_determined
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.content
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.content
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.counter
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.counter
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.observed
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.observed
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.Pass
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.Pass
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.decidablePass
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.decidablePass
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.counter_decreases
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.counter_decreases
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.pass_chain_counter
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.pass_chain_counter
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.pass_no_infinite_seq
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.pass_no_infinite_seq
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.pass_transGen_counter
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.pass_transGen_counter
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.pass_no_return
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.pass_no_return
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.pass_wellFounded
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.pass_wellFounded
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.content_constant_along_pass
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.content_constant_along_pass
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.content_measure_constant
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.content_measure_constant
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.counter_orients
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.counter_orients
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.orienting_measure_not_content_determined
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.orienting_measure_not_content_determined
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.counter_not_content_determined
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.counter_not_content_determined
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.observed_determined_by_counter
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.observed_determined_by_counter
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.observed_eq_iff_zero_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.observed_eq_iff_zero_iff
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.observed_not_content_determined
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.observed_not_content_determined
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.passes_reach_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.passes_reach_zero
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.run_length_eq_counter
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.run_length_eq_counter
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.counter_least_coordinate
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.counter_least_coordinate
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.counter_is_coordinate
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.counter_is_coordinate
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.leftEntropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.leftEntropy
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.leftEntropy_eq
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.leftEntropy_eq
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.content_leaves_log
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.content_leaves_log
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.counter_leaves_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.counter_leaves_zero
+#check @OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.one_pass_one_bit
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecursorDecidability.one_pass_one_bit
+#check @OperatorKO7.Meta.BoundaryObserver.KernelCases.formula_ne_not
+#print axioms OperatorKO7.Meta.BoundaryObserver.KernelCases.formula_ne_not
+#check @OperatorKO7.Meta.BoundaryObserver.KernelCases.godel_merged_pair
+#print axioms OperatorKO7.Meta.BoundaryObserver.KernelCases.godel_merged_pair
+#check @OperatorKO7.Meta.BoundaryObserver.KernelCases.godel_side_symbol_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.KernelCases.godel_side_symbol_iff
+#check @OperatorKO7.Meta.BoundaryObserver.KernelCases.godel_restriction
+#print axioms OperatorKO7.Meta.BoundaryObserver.KernelCases.godel_restriction
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.Reading
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.Reading
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.RecordDetermined
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.RecordDetermined
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.readingDiscrimination
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.readingDiscrimination
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.pairState
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.pairState
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.RecordPoleGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.RecordPoleGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.BoundaryZeroSetGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.BoundaryZeroSetGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.RecordProtocolPoleGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.RecordProtocolPoleGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.recordPoleGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.recordPoleGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.boundaryZeroSetGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.boundaryZeroSetGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.recordProtocolPoleGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.recordProtocolPoleGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.leastRepeatCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.leastRepeatCost
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.PoleOrderOneGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.PoleOrderOneGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.poleOrderOneGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.poleOrderOneGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.PoleResidueGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.PoleResidueGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.poleResidueGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.poleResidueGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.GodelPoleGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.GodelPoleGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.godelPoleGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.godelPoleGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.GodelSideSymbolGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.GodelSideSymbolGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.godelSideSymbolGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.godelSideSymbolGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.DiagonalWalkGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.DiagonalWalkGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.diagonalWalkGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.diagonalWalkGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.DiagonalUnionGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.DiagonalUnionGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.diagonalUnionGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.diagonalUnionGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.OrientationPoleGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.OrientationPoleGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.orientationPoleGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.orientationPoleGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.booleanTestRow
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.booleanTestRow
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.CounterSideSymbolGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.CounterSideSymbolGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.counterSideSymbolGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.counterSideSymbolGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.RecursionClauseGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.RecursionClauseGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.recursionClauseGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.recursionClauseGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.TwoPointGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.TwoPointGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryPole.twoPointGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryPole.twoPointGoal
+#check @OperatorKO7.Meta.BoundaryObserver.Boundary.FactorsThroughRecordRange
+#print axioms OperatorKO7.Meta.BoundaryObserver.Boundary.FactorsThroughRecordRange
+#check @OperatorKO7.Meta.BoundaryObserver.Boundary.recordDetermined_iff_range_factor
+#print axioms OperatorKO7.Meta.BoundaryObserver.Boundary.recordDetermined_iff_range_factor
+#check @OperatorKO7.Meta.BoundaryObserver.Boundary.boundary_three_descriptions
+#print axioms OperatorKO7.Meta.BoundaryObserver.Boundary.boundary_three_descriptions
+#check @OperatorKO7.Meta.BoundaryObserver.Boundary.same_record_nontrivial_control
+#print axioms OperatorKO7.Meta.BoundaryObserver.Boundary.same_record_nontrivial_control
+#check @OperatorKO7.Meta.BoundaryObserver.Boundary.unequal_record_separating_reading_control
+#print axioms OperatorKO7.Meta.BoundaryObserver.Boundary.unequal_record_separating_reading_control
+#check @OperatorKO7.Meta.BoundaryObserver.CountedRecursionLaws.countedRecursion_adaptive_zero_information
+#print axioms OperatorKO7.Meta.BoundaryObserver.CountedRecursionLaws.countedRecursion_adaptive_zero_information
+#check @OperatorKO7.Meta.BoundaryObserver.CountedRecursionLaws.countedRecursion_one_pass_bit
+#print axioms OperatorKO7.Meta.BoundaryObserver.CountedRecursionLaws.countedRecursion_one_pass_bit
+#check @OperatorKO7.Meta.BoundaryObserver.CountedRecursionLaws.countedRecursion_passes_logb_two
+#print axioms OperatorKO7.Meta.BoundaryObserver.CountedRecursionLaws.countedRecursion_passes_logb_two
+#check @OperatorKO7.Meta.BoundaryObserver.CountedRecursionLaws.Laws
+#print axioms OperatorKO7.Meta.BoundaryObserver.CountedRecursionLaws.Laws
+#check @OperatorKO7.Meta.BoundaryObserver.CountedRecursionLaws.countedRecursion_laws
+#print axioms OperatorKO7.Meta.BoundaryObserver.CountedRecursionLaws.countedRecursion_laws
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryTheorem.KinematicClauseGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryTheorem.KinematicClauseGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryTheorem.kinematicClause
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryTheorem.kinematicClause
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryTheorem.PlaceOrbitClauseGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryTheorem.PlaceOrbitClauseGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryTheorem.placeOrbitClause
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryTheorem.placeOrbitClause
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryTheorem.ApexCoreGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryTheorem.ApexCoreGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryTheorem.apexCoreGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryTheorem.apexCoreGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryTheorem.BoundaryTheoremCoreGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryTheorem.BoundaryTheoremCoreGoal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryTheorem.boundaryTheoremCoreGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryTheorem.boundaryTheoremCoreGoal
+
+/-! Fair-reading bounds and erasure-reading recovery results, with axiom footprints. -/
+#check @OperatorKO7.Meta.BoundaryObserver.FairReadingBound.sq_div_two_le_log_two_sub_binEntropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.FairReadingBound.sq_div_two_le_log_two_sub_binEntropy
+#check @OperatorKO7.Meta.BoundaryObserver.FairReadingBound.fair_reading_pinsker
+#print axioms OperatorKO7.Meta.BoundaryObserver.FairReadingBound.fair_reading_pinsker
+#check @OperatorKO7.Meta.BoundaryObserver.FairReadingBound.fair_information_pos_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.FairReadingBound.fair_information_pos_iff
+#check @OperatorKO7.Meta.BoundaryObserver.ErasureReading.exclusive_outputs_recovery
+#print axioms OperatorKO7.Meta.BoundaryObserver.ErasureReading.exclusive_outputs_recovery
+#check @OperatorKO7.Meta.BoundaryObserver.ErasureReading.nested_rows_no_zeroError_finite_cost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ErasureReading.nested_rows_no_zeroError_finite_cost
+#check @OperatorKO7.Meta.BoundaryObserver.ErasureReading.exists_zeroError_finite_cost_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.ErasureReading.exists_zeroError_finite_cost_iff
+#check @OperatorKO7.Meta.BoundaryObserver.DeterministicConflictGraph.fiberGraph_isCompleteMultipartite
+#print axioms OperatorKO7.Meta.BoundaryObserver.DeterministicConflictGraph.fiberGraph_isCompleteMultipartite
+#check @OperatorKO7.Meta.BoundaryObserver.DeterministicConflictGraph.deterministic_chromaticNumber_eq
+#print axioms OperatorKO7.Meta.BoundaryObserver.DeterministicConflictGraph.deterministic_chromaticNumber_eq
+#check @OperatorKO7.Meta.BoundaryObserver.DeterministicConflictGraph.deterministic_identity_place_bound
+#print axioms OperatorKO7.Meta.BoundaryObserver.DeterministicConflictGraph.deterministic_identity_place_bound
+#check @OperatorKO7.Meta.BoundaryObserver.RecordChoiceOrbit.recordChoice_conj
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecordChoiceOrbit.recordChoice_conj
+#check @OperatorKO7.Meta.BoundaryObserver.RecordChoiceOrbit.recordChoice_stabilizer_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.RecordChoiceOrbit.recordChoice_stabilizer_iff
+#check @OperatorKO7.Meta.BoundaryObserver.RiceBoundary.bounded_records_union_determines_eval
+#print axioms OperatorKO7.Meta.BoundaryObserver.RiceBoundary.bounded_records_union_determines_eval
+#check @OperatorKO7.Meta.BoundaryObserver.RiceBoundary.bounded_records_finer_than_eval
+#print axioms OperatorKO7.Meta.BoundaryObserver.RiceBoundary.bounded_records_finer_than_eval
+#check @UniversalObservation.Demand.licensed_selector_least_alphabet
+#print axioms UniversalObservation.Demand.licensed_selector_least_alphabet
+#check @UniversalObservation.Demand.maximal_licensed_iff_insert
+#print axioms UniversalObservation.Demand.maximal_licensed_iff_insert

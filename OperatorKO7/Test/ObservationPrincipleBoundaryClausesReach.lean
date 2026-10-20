@@ -1,0 +1,14 @@
+import OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleBoundaryClauses
+
+set_option autoImplicit false
+set_option pp.fullNames true
+set_option pp.universes true
+
+/-! Checks every declaration of ObservationPrincipleBoundaryClauses: the quotient-minimal bijection and the Bell table values and score. -/
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleBoundaryClauses.quotient_minimal_equiv
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleBoundaryClauses.quotient_minimal_equiv
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleBoundaryClauses.bell_table_correlations
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleBoundaryClauses.bell_table_correlations
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleBoundaryClauses.bell_table_score
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleBoundaryClauses.bell_table_score

@@ -1,0 +1,115 @@
+import OperatorKO7.Meta.OperationalInexpressibility.ConstructionConfessionModuli
+
+/-! Paired reach and trust-surface gate for the construction/confession moduli. -/
+
+set_option autoImplicit false
+
+namespace OperatorKO7.Test.ConstructionConfessionModuliReach
+
+open OperatorKO7.Meta.OperationalInexpressibility.ConstructionConfessionModuli
+
+#check @ConfessionRoute
+#check @ConfessionRoute.dependencyPairs
+#check @ConfessionRoute.directCounterProjection
+#check @ConfessionRoute.sizeChange
+#check @ConfessionRoute.argumentFiltering
+#check @ConfessionRoute.Evidence
+#check @confessionRouteEvidence
+#check @ConfessionRoute.toGenericRouteEvidence
+#check @canonicalGenericRouteEvidence
+#check @confessionRouteMethod
+#check @confessionRouteRank
+#check @confessionRouteEvidence_rank_eq_method
+#check @confessionRouteRank_eq_dpProjection
+#check @confessionRoute_card
+#check @confessionRouteLicense
+#check @confessionRouteLicenseEquiv
+#check @dp_sct_distinct_origin_same_rank
+#check @SameConfessionFullOrder
+#check @sameConfessionFullOrder_refl
+#check @sameConfessionFullOrder_symm
+#check @sameConfessionFullOrder_trans
+#check @confessionFullOrderSetoid
+#check @ConfessionFullOrderQuotient
+#check @confessionFullOrderClass
+#check @confessionFullOrderClass_eq_iff
+#check @all_confession_routes_same_full_order
+#check @confessionFullOrderQuotient_subsingleton
+#check @confessionFullOrderQuotient_nonempty
+#check @confessionFullOrderQuotientEquivPUnit
+#check @dp_sct_distinct_presentations_same_class
+#check @construction_infinite_confession_one_class
+#check @no_injective_construction_to_confession_quotient
+#check @ko7_dp_reduction_pair_nonunique_same_full_order
+#check @dpBaseProjection
+#check @baseSensitiveDPRank
+#check @baseSensitiveDPRank_decreases
+#check @baseSensitiveKO7DPReductionPair
+#check @baseSensitiveDPRank_full_order_separating_pair
+#check @SameDPReductionPairFullOrder
+#check @sameDPReductionPairFullOrder_refl
+#check @sameDPReductionPairFullOrder_symm
+#check @sameDPReductionPairFullOrder_trans
+#check @dpReductionPairFullOrderSetoid
+#check @DPReductionPairFullOrderQuotient
+#check @dpReductionPairFullOrderClass
+#check @dpReductionPairFullOrderClass_eq_iff
+#check @baseSensitiveDPFullOrderClass
+#check @baseSensitiveDPFullOrderClass_injective
+#check @dpReductionPairFullOrderQuotient_infinite
+#check @same_full_order_of_exact_counter_order
+#check @construction_confession_moduli_exact
+
+#print axioms ConfessionRoute
+#print axioms ConfessionRoute.dependencyPairs
+#print axioms ConfessionRoute.directCounterProjection
+#print axioms ConfessionRoute.sizeChange
+#print axioms ConfessionRoute.argumentFiltering
+#print axioms ConfessionRoute.Evidence
+#print axioms confessionRouteEvidence
+#print axioms ConfessionRoute.toGenericRouteEvidence
+#print axioms canonicalGenericRouteEvidence
+#print axioms confessionRouteMethod
+#print axioms confessionRouteRank
+#print axioms confessionRouteEvidence_rank_eq_method
+#print axioms confessionRouteRank_eq_dpProjection
+#print axioms confessionRoute_card
+#print axioms confessionRouteLicense
+#print axioms confessionRouteLicenseEquiv
+#print axioms dp_sct_distinct_origin_same_rank
+#print axioms SameConfessionFullOrder
+#print axioms sameConfessionFullOrder_refl
+#print axioms sameConfessionFullOrder_symm
+#print axioms sameConfessionFullOrder_trans
+#print axioms confessionFullOrderSetoid
+#print axioms ConfessionFullOrderQuotient
+#print axioms confessionFullOrderClass
+#print axioms confessionFullOrderClass_eq_iff
+#print axioms all_confession_routes_same_full_order
+#print axioms confessionFullOrderQuotient_subsingleton
+#print axioms confessionFullOrderQuotient_nonempty
+#print axioms confessionFullOrderQuotientEquivPUnit
+#print axioms dp_sct_distinct_presentations_same_class
+#print axioms construction_infinite_confession_one_class
+#print axioms no_injective_construction_to_confession_quotient
+#print axioms ko7_dp_reduction_pair_nonunique_same_full_order
+#print axioms dpBaseProjection
+#print axioms baseSensitiveDPRank
+#print axioms baseSensitiveDPRank_decreases
+#print axioms baseSensitiveKO7DPReductionPair
+#print axioms baseSensitiveDPRank_full_order_separating_pair
+#print axioms SameDPReductionPairFullOrder
+#print axioms sameDPReductionPairFullOrder_refl
+#print axioms sameDPReductionPairFullOrder_symm
+#print axioms sameDPReductionPairFullOrder_trans
+#print axioms dpReductionPairFullOrderSetoid
+#print axioms DPReductionPairFullOrderQuotient
+#print axioms dpReductionPairFullOrderClass
+#print axioms dpReductionPairFullOrderClass_eq_iff
+#print axioms baseSensitiveDPFullOrderClass
+#print axioms baseSensitiveDPFullOrderClass_injective
+#print axioms dpReductionPairFullOrderQuotient_infinite
+#print axioms same_full_order_of_exact_counter_order
+#print axioms construction_confession_moduli_exact
+
+end OperatorKO7.Test.ConstructionConfessionModuliReach

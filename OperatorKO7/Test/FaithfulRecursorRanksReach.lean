@@ -1,0 +1,102 @@
+import OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks
+
+/-! Complete named-declaration and axiom checks for FaithfulRecursorRanks. -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.traceEquiv
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.traceEquiv_apply
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.traceEquiv_symm_apply
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.RootState
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.DPState
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.rootState_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.dpState_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.rootRankFamily
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.dpRankFamily
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.rootRankFamily_same_order_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.dpRankFamily_same_order_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.rootRankOrderClass_injective
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.dpRankOrderClass_injective
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.rootRankOrderQuotient_infinite
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.dpRankOrderQuotient_infinite
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counter
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterState
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counter_counterState
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counter_surjective
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterState_succ_step
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterRank
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterSystem
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.CounterDetermined
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.CounterRank
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.canonicalCounterRank
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.rankRecoding
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.rankRecoding_strictMono
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterRank_factors
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterRank_same_order
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterDetermined_iff_same_order
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.StrictNatRecoding
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterRankOfRecoding
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterRanksEquivStrictNatRecoding
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterRankOrderSetoid
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.CounterRankOrderQuotient
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.all_counterRanks_same_order
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterRankOrderQuotient_subsingleton
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterRankOrderQuotientEquivPUnit
+#check @OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.faithful_rank_classification
+
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.traceEquiv
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.traceEquiv_apply
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.traceEquiv_symm_apply
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.RootState
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.DPState
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.rootState_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.dpState_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.rootRankFamily
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.dpRankFamily
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.rootRankFamily_same_order_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.dpRankFamily_same_order_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.rootRankOrderClass_injective
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.dpRankOrderClass_injective
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.rootRankOrderQuotient_infinite
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.dpRankOrderQuotient_infinite
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counter
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterState
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counter_counterState
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counter_surjective
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterState_succ_step
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterRank
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterSystem
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.CounterDetermined
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.CounterRank
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.canonicalCounterRank
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.rankRecoding
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.rankRecoding_strictMono
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterRank_factors
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterRank_same_order
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterDetermined_iff_same_order
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.StrictNatRecoding
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterRankOfRecoding
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterRanksEquivStrictNatRecoding
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterRankOrderSetoid
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.CounterRankOrderQuotient
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.all_counterRanks_same_order
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterRankOrderQuotient_subsingleton
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.counterRankOrderQuotientEquivPUnit
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks.faithful_rank_classification
+
+open OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRealization
+open OperatorKO7.Meta.OperationalInexpressibility.FaithfulRecursorRanks
+open OperatorKO7.Meta.Rewriting.RankOrderClassification
+
+example : Infinite (RankOrderQuotient (RootState ko7Realization)) :=
+  rootRankOrderQuotient_infinite ko7Realization
+
+example : Infinite (RankOrderQuotient (DPState ko7Realization)) :=
+  dpRankOrderQuotient_infinite ko7Realization
+
+example : Nonempty (CounterRankOrderQuotient ko7Realization ≃ PUnit) :=
+  ⟨counterRankOrderQuotientEquivPUnit ko7Realization⟩
+
+example : ¬ RankSameOrder (dpRankFamily ko7Realization 0)
+    (dpRankFamily ko7Realization 1) := by
+  intro h
+  have hh := (dpRankFamily_same_order_iff ko7Realization 0 1).mp h
+  omega

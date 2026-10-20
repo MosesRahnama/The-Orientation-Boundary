@@ -1,0 +1,1650 @@
+import OperatorKO7.Meta.BoundaryObserver.DemandComplex
+import OperatorKO7.Meta.BoundaryObserver.DemandTransport
+import OperatorKO7.Meta.BoundaryObserver.Instances.Recursor
+import OperatorKO7.Meta.BoundaryObserver.ProtocolResolution
+import OperatorKO7.Meta.BoundaryObserver.DemandCompletion
+import OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction
+import OperatorKO7.Meta.BoundaryObserver.ResourceFrontier
+
+set_option autoImplicit false
+
+/-! Paired checks for every public declaration of the five universal observation modules. -/
+
+#check @UniversalObservation.Demand.Problem
+#print axioms UniversalObservation.Demand.Problem
+#check @UniversalObservation.Demand.Witnesses
+#print axioms UniversalObservation.Demand.Witnesses
+#check @UniversalObservation.Demand.Good
+#print axioms UniversalObservation.Demand.Good
+#check @UniversalObservation.Demand.witnesses_antitone
+#print axioms UniversalObservation.Demand.witnesses_antitone
+#check @UniversalObservation.Demand.good_downward
+#print axioms UniversalObservation.Demand.good_downward
+#check @UniversalObservation.Demand.good_empty_iff
+#print axioms UniversalObservation.Demand.good_empty_iff
+#check @UniversalObservation.Demand.readoutProblem
+#print axioms UniversalObservation.Demand.readoutProblem
+#check @UniversalObservation.Demand.readout_global_iff
+#print axioms UniversalObservation.Demand.readout_global_iff
+#check @UniversalObservation.Demand.MinimalBad
+#print axioms UniversalObservation.Demand.MinimalBad
+#check @UniversalObservation.Demand.exists_minimal_bad
+#print axioms UniversalObservation.Demand.exists_minimal_bad
+#check @UniversalObservation.Demand.finite_obstruction_iff
+#print axioms UniversalObservation.Demand.finite_obstruction_iff
+#check @UniversalObservation.Demand.minimal_bad_nonempty
+#print axioms UniversalObservation.Demand.minimal_bad_nonempty
+#check @UniversalObservation.Demand.minimal_bad_antichain
+#print axioms UniversalObservation.Demand.minimal_bad_antichain
+#check @UniversalObservation.Demand.Downward
+#print axioms UniversalObservation.Demand.Downward
+#check @UniversalObservation.Demand.membershipProblem
+#print axioms UniversalObservation.Demand.membershipProblem
+#check @UniversalObservation.Demand.membership_realizes
+#print axioms UniversalObservation.Demand.membership_realizes
+#check @UniversalObservation.Demand.booleanFamily
+#print axioms UniversalObservation.Demand.booleanFamily
+#check @UniversalObservation.Demand.boolean_family_realizes
+#print axioms UniversalObservation.Demand.boolean_family_realizes
+#check @UniversalObservation.Demand.boolean_downset_realization
+#print axioms UniversalObservation.Demand.boolean_downset_realization
+#check @UniversalObservation.Demand.Selected
+#print axioms UniversalObservation.Demand.Selected
+#check @UniversalObservation.Demand.SelectedOn
+#print axioms UniversalObservation.Demand.SelectedOn
+#check @UniversalObservation.Demand.Colors
+#print axioms UniversalObservation.Demand.Colors
+#check @UniversalObservation.Demand.ColorsOn
+#print axioms UniversalObservation.Demand.ColorsOn
+#check @UniversalObservation.Demand.selectedOn_downward
+#print axioms UniversalObservation.Demand.selectedOn_downward
+#check @UniversalObservation.Demand.selectedOn_iff_colorsOn
+#print axioms UniversalObservation.Demand.selectedOn_iff_colorsOn
+#check @UniversalObservation.Demand.selected_iff_colors
+#print axioms UniversalObservation.Demand.selected_iff_colors
+#check @UniversalObservation.Demand.RepairMenu
+#print axioms UniversalObservation.Demand.RepairMenu
+#check @UniversalObservation.Demand.RepairFeasible
+#print axioms UniversalObservation.Demand.RepairFeasible
+#check @UniversalObservation.Demand.licensed_coloring_iff
+#print axioms UniversalObservation.Demand.licensed_coloring_iff
+#check @UniversalObservation.Demand.CombinerSound
+#print axioms UniversalObservation.Demand.CombinerSound
+#check @UniversalObservation.Demand.source_repair_sound
+#print axioms UniversalObservation.Demand.source_repair_sound
+#check @UniversalObservation.Demand.MaximalRetained
+#print axioms UniversalObservation.Demand.MaximalRetained
+#check @UniversalObservation.Demand.hereditary_maximal_iff_insert
+#print axioms UniversalObservation.Demand.hereditary_maximal_iff_insert
+#check @UniversalObservation.Demand.maximal_retained_iff_insert
+#print axioms UniversalObservation.Demand.maximal_retained_iff_insert
+#check @UniversalObservation.Demand.maximal_retained_iff_obstruction
+#print axioms UniversalObservation.Demand.maximal_retained_iff_obstruction
+#check @UniversalObservation.Demand.HereditaryMenu
+#print axioms UniversalObservation.Demand.HereditaryMenu
+#check @UniversalObservation.Demand.MaximalLicensedRetained
+#print axioms UniversalObservation.Demand.MaximalLicensedRetained
+#check @UniversalObservation.Demand.repair_feasible_downward
+#print axioms UniversalObservation.Demand.repair_feasible_downward
+#check @UniversalObservation.Demand.maximal_licensed_iff_insert
+#print axioms UniversalObservation.Demand.maximal_licensed_iff_insert
+#check @UniversalObservation.Demand.repair_feasible_menu_mono
+#print axioms UniversalObservation.Demand.repair_feasible_menu_mono
+#check @UniversalObservation.Demand.leastFinite
+#print axioms UniversalObservation.Demand.leastFinite
+#check @UniversalObservation.Demand.leastFinite_none_iff
+#print axioms UniversalObservation.Demand.leastFinite_none_iff
+#check @UniversalObservation.Demand.leastFinite_some_iff
+#print axioms UniversalObservation.Demand.leastFinite_some_iff
+#check @UniversalObservation.Demand.minimumAlphabet
+#print axioms UniversalObservation.Demand.minimumAlphabet
+#check @UniversalObservation.Demand.obstructionChromatic
+#print axioms UniversalObservation.Demand.obstructionChromatic
+#check @UniversalObservation.Demand.minimumAlphabet_eq_chromatic
+#print axioms UniversalObservation.Demand.minimumAlphabet_eq_chromatic
+#check @UniversalObservation.Demand.ParetoOptimal
+#print axioms UniversalObservation.Demand.ParetoOptimal
+#check @UniversalObservation.Demand.finite_pareto_attainment
+#print axioms UniversalObservation.Demand.finite_pareto_attainment
+#check @UniversalObservation.Demand.refusalMass
+#print axioms UniversalObservation.Demand.refusalMass
+#check @UniversalObservation.Demand.refusalMass_antitone
+#print axioms UniversalObservation.Demand.refusalMass_antitone
+#check @UniversalObservation.Demand.unrestricted_good_iff
+#print axioms UniversalObservation.Demand.unrestricted_good_iff
+#check @UniversalObservation.Demand.collision_pair_bad
+#print axioms UniversalObservation.Demand.collision_pair_bad
+#check @UniversalObservation.Demand.minimal_bad_unrestricted_iff_pair
+#print axioms UniversalObservation.Demand.minimal_bad_unrestricted_iff_pair
+#check @UniversalObservation.Demand.triple
+#print axioms UniversalObservation.Demand.triple
+#check @UniversalObservation.Demand.triple_global_failure
+#print axioms UniversalObservation.Demand.triple_global_failure
+#check @UniversalObservation.Demand.triple_every_pair
+#print axioms UniversalObservation.Demand.triple_every_pair
+#check @UniversalObservation.Demand.triple_minimal_obstruction
+#print axioms UniversalObservation.Demand.triple_minimal_obstruction
+#check @UniversalObservation.Demand.triple_two_selectors
+#print axioms UniversalObservation.Demand.triple_two_selectors
+#check @UniversalObservation.Demand.impossible_demand_blocks_selection
+#print axioms UniversalObservation.Demand.impossible_demand_blocks_selection
+#check @UniversalObservation.Demand.empty_candidates_empty_obstruction
+#print axioms UniversalObservation.Demand.empty_candidates_empty_obstruction
+#check @UniversalObservation.Demand.deniedMenu
+#print axioms UniversalObservation.Demand.deniedMenu
+#check @UniversalObservation.Demand.denied_menu_control
+#print axioms UniversalObservation.Demand.denied_menu_control
+#check @UniversalObservation.Demand.finiteCheck
+#print axioms UniversalObservation.Demand.finiteCheck
+#check @UniversalObservation.Demand.finiteCheck_correct
+#print axioms UniversalObservation.Demand.finiteCheck_correct
+#check @UniversalObservation.Demand.tableProblem
+#print axioms UniversalObservation.Demand.tableProblem
+#check @UniversalObservation.Demand.tableGood
+#print axioms UniversalObservation.Demand.tableGood
+#check @UniversalObservation.Demand.minimalObstructions
+#print axioms UniversalObservation.Demand.minimalObstructions
+#check @UniversalObservation.Demand.FiniteClaim
+#print axioms UniversalObservation.Demand.FiniteClaim
+#check @UniversalObservation.Demand.FiniteEnvelope
+#print axioms UniversalObservation.Demand.FiniteEnvelope
+#check @UniversalObservation.Demand.FiniteClaimValid
+#print axioms UniversalObservation.Demand.FiniteClaimValid
+#check @UniversalObservation.Demand.replayEnvelope
+#print axioms UniversalObservation.Demand.replayEnvelope
+#check @UniversalObservation.Demand.subsetCandidates
+#print axioms UniversalObservation.Demand.subsetCandidates
+#check @UniversalObservation.Demand.finiteSolve
+#print axioms UniversalObservation.Demand.finiteSolve
+#check @UniversalObservation.Demand.licensedSearch
+#print axioms UniversalObservation.Demand.licensedSearch
+#check @UniversalObservation.Demand.FiniteRepairEnvelope
+#print axioms UniversalObservation.Demand.FiniteRepairEnvelope
+#check @UniversalObservation.Demand.FiniteRepairClaimValid
+#print axioms UniversalObservation.Demand.FiniteRepairClaimValid
+#check @UniversalObservation.Demand.replayRepair
+#print axioms UniversalObservation.Demand.replayRepair
+#check @UniversalObservation.Demand.allAssignments
+#print axioms UniversalObservation.Demand.allAssignments
+#check @UniversalObservation.Demand.licensedSolve
+#print axioms UniversalObservation.Demand.licensedSolve
+#check @UniversalObservation.Demand.tableGood_true_iff
+#print axioms UniversalObservation.Demand.tableGood_true_iff
+#check @UniversalObservation.Demand.tableGood_false_iff
+#print axioms UniversalObservation.Demand.tableGood_false_iff
+#check @UniversalObservation.Demand.minimalObstructions_mem_iff
+#print axioms UniversalObservation.Demand.minimalObstructions_mem_iff
+#check @UniversalObservation.Demand.replayEnvelope_correct
+#print axioms UniversalObservation.Demand.replayEnvelope_correct
+#check @UniversalObservation.Demand.subsetCandidates_complete
+#print axioms UniversalObservation.Demand.subsetCandidates_complete
+#check @UniversalObservation.Demand.finite_solver_replays
+#print axioms UniversalObservation.Demand.finite_solver_replays
+#check @UniversalObservation.Demand.wrong_source_replay_rejected
+#print axioms UniversalObservation.Demand.wrong_source_replay_rejected
+#check @UniversalObservation.Demand.licensedSearch_mem_iff
+#print axioms UniversalObservation.Demand.licensedSearch_mem_iff
+#check @UniversalObservation.Demand.licensedSearch_empty_iff
+#print axioms UniversalObservation.Demand.licensedSearch_empty_iff
+#check @UniversalObservation.Demand.replayRepair_correct
+#print axioms UniversalObservation.Demand.replayRepair_correct
+#check @UniversalObservation.Demand.allAssignments_complete
+#print axioms UniversalObservation.Demand.allAssignments_complete
+#check @UniversalObservation.Demand.licensed_solver_replays
+#print axioms UniversalObservation.Demand.licensed_solver_replays
+#check @UniversalObservation.Demand.licensedSearch_nonempty_iff
+#print axioms UniversalObservation.Demand.licensedSearch_nonempty_iff
+#check @UniversalObservation.Demand.triple_table_certificate
+#print axioms UniversalObservation.Demand.triple_table_certificate
+#check @UniversalObservation.Demand.singleton_table_certificate
+#print axioms UniversalObservation.Demand.singleton_table_certificate
+#check @UniversalObservation.Demand.empty_witness_table_certificate
+#print axioms UniversalObservation.Demand.empty_witness_table_certificate
+#check @UniversalObservation.Demand.denied_combination_search_empty
+#print axioms UniversalObservation.Demand.denied_combination_search_empty
+#check @UniversalObservation.Transport.DemandIso
+#print axioms UniversalObservation.Transport.DemandIso
+#check @UniversalObservation.Transport.DemandIso.refl
+#print axioms UniversalObservation.Transport.DemandIso.refl
+#check @UniversalObservation.Transport.DemandIso.symm
+#print axioms UniversalObservation.Transport.DemandIso.symm
+#check @UniversalObservation.Transport.DemandIso.trans
+#print axioms UniversalObservation.Transport.DemandIso.trans
+#check @UniversalObservation.Transport.DemandIso.witness_iff
+#print axioms UniversalObservation.Transport.DemandIso.witness_iff
+#check @UniversalObservation.Transport.DemandIso.witnessEquiv
+#print axioms UniversalObservation.Transport.DemandIso.witnessEquiv
+#check @UniversalObservation.Transport.DemandIso.good_transport
+#print axioms UniversalObservation.Transport.DemandIso.good_transport
+#check @UniversalObservation.Transport.DemandIso.minimal_map
+#print axioms UniversalObservation.Transport.DemandIso.minimal_map
+#check @UniversalObservation.Transport.DemandIso.minimal_transport_iff
+#print axioms UniversalObservation.Transport.DemandIso.minimal_transport_iff
+#check @UniversalObservation.Transport.DemandIso.selector
+#print axioms UniversalObservation.Transport.DemandIso.selector
+#check @UniversalObservation.Transport.DemandIso.selector_inverse
+#print axioms UniversalObservation.Transport.DemandIso.selector_inverse
+#check @UniversalObservation.Transport.DemandIso.selectedOn_transport_iff
+#print axioms UniversalObservation.Transport.DemandIso.selectedOn_transport_iff
+#check @UniversalObservation.Transport.DemandIso.colorsOn_transport_iff
+#print axioms UniversalObservation.Transport.DemandIso.colorsOn_transport_iff
+#check @UniversalObservation.Transport.DemandIso.selected_transport_iff
+#print axioms UniversalObservation.Transport.DemandIso.selected_transport_iff
+#check @UniversalObservation.Transport.DemandIso.selector_existence_transport
+#print axioms UniversalObservation.Transport.DemandIso.selector_existence_transport
+#check @UniversalObservation.Transport.DemandIso.minimumAlphabet_transport
+#print axioms UniversalObservation.Transport.DemandIso.minimumAlphabet_transport
+#check @UniversalObservation.Transport.DemandIso.MenuCorrespondence
+#print axioms UniversalObservation.Transport.DemandIso.MenuCorrespondence
+#check @UniversalObservation.Transport.DemandIso.licensed_transport_iff
+#print axioms UniversalObservation.Transport.DemandIso.licensed_transport_iff
+#check @UniversalObservation.Transport.BudgetFeasible
+#print axioms UniversalObservation.Transport.BudgetFeasible
+#check @UniversalObservation.Transport.budget_transport_iff
+#print axioms UniversalObservation.Transport.budget_transport_iff
+#check @UniversalObservation.Transport.budget_mono
+#print axioms UniversalObservation.Transport.budget_mono
+#check @UniversalObservation.Transport.forward_budget_transport
+#print axioms UniversalObservation.Transport.forward_budget_transport
+#check @UniversalObservation.Transport.ConservativeEmbedding
+#print axioms UniversalObservation.Transport.ConservativeEmbedding
+#check @UniversalObservation.Transport.ConservativeEmbedding.refl
+#print axioms UniversalObservation.Transport.ConservativeEmbedding.refl
+#check @UniversalObservation.Transport.ConservativeEmbedding.trans
+#print axioms UniversalObservation.Transport.ConservativeEmbedding.trans
+#check @UniversalObservation.Transport.ConservativeEmbedding.old_good_lifts
+#print axioms UniversalObservation.Transport.ConservativeEmbedding.old_good_lifts
+#check @UniversalObservation.Transport.Reimport
+#print axioms UniversalObservation.Transport.Reimport
+#check @UniversalObservation.Transport.reimport_good
+#print axioms UniversalObservation.Transport.reimport_good
+#check @UniversalObservation.Transport.no_reimport_of_new_solution
+#print axioms UniversalObservation.Transport.no_reimport_of_new_solution
+#check @UniversalObservation.Transport.productProblem
+#print axioms UniversalObservation.Transport.productProblem
+#check @UniversalObservation.Transport.product_good_iff
+#print axioms UniversalObservation.Transport.product_good_iff
+#check @UniversalObservation.Transport.product_global_iff
+#print axioms UniversalObservation.Transport.product_global_iff
+#check @UniversalObservation.Transport.shared_witness_control
+#print axioms UniversalObservation.Transport.shared_witness_control
+#check @UniversalObservation.Transport.profile_not_witness_iso
+#print axioms UniversalObservation.Transport.profile_not_witness_iso
+#check @UniversalObservation.Transport.supportProblem
+#print axioms UniversalObservation.Transport.supportProblem
+#check @UniversalObservation.Transport.support_selector_iff
+#print axioms UniversalObservation.Transport.support_selector_iff
+#check @UniversalObservation.Transport.experimentProblem
+#print axioms UniversalObservation.Transport.experimentProblem
+#check @UniversalObservation.Transport.experimentDemandIso
+#print axioms UniversalObservation.Transport.experimentDemandIso
+#check @UniversalObservation.Transport.experiment_actual_trace_transport
+#print axioms UniversalObservation.Transport.experiment_actual_trace_transport
+#check @UniversalObservation.Transport.experiment_budget_transport
+#print axioms UniversalObservation.Transport.experiment_budget_transport
+#check @UniversalObservation.Transport.equationProblem
+#print axioms UniversalObservation.Transport.equationProblem
+#check @UniversalObservation.Transport.affineEquationProblem
+#print axioms UniversalObservation.Transport.affineEquationProblem
+#check @UniversalObservation.Transport.affine_equations_good_iff
+#print axioms UniversalObservation.Transport.affine_equations_good_iff
+#check @UniversalObservation.Transport.affine_equations_refutation_iff
+#print axioms UniversalObservation.Transport.affine_equations_refutation_iff
+#check @UniversalObservation.Transport.affine_source_certificate_trichotomy
+#print axioms UniversalObservation.Transport.affine_source_certificate_trichotomy
+#check @UniversalObservation.Transport.equation_vector_change_global
+#print axioms UniversalObservation.Transport.equation_vector_change_global
+#check @UniversalObservation.Transport.affine_invertible_rows_keep_solutions
+#print axioms UniversalObservation.Transport.affine_invertible_rows_keep_solutions
+#check @UniversalObservation.Transport.rowShear
+#print axioms UniversalObservation.Transport.rowShear
+#check @UniversalObservation.Transport.row_mixing_changes_restrictions
+#print axioms UniversalObservation.Transport.row_mixing_changes_restrictions
+#check @UniversalObservation.Transport.AssignmentLaw
+#print axioms UniversalObservation.Transport.AssignmentLaw
+#check @UniversalObservation.Transport.commonLawProblem
+#print axioms UniversalObservation.Transport.commonLawProblem
+#check @UniversalObservation.Transport.common_law_good_iff
+#print axioms UniversalObservation.Transport.common_law_good_iff
+#check @UniversalObservation.Transport.common_law_obstruction_iff
+#print axioms UniversalObservation.Transport.common_law_obstruction_iff
+#check @UniversalObservation.Transport.common_law_repair_bound
+#print axioms UniversalObservation.Transport.common_law_repair_bound
+#check @UniversalObservation.Transport.common_law_reindex_good
+#print axioms UniversalObservation.Transport.common_law_reindex_good
+#check @UniversalObservation.Transport.triangle_demand_obstruction
+#print axioms UniversalObservation.Transport.triangle_demand_obstruction
+#check @UniversalObservation.Transport.LicensedPlan
+#print axioms UniversalObservation.Transport.LicensedPlan
+#check @UniversalObservation.Transport.licensedPlan_nonempty_iff
+#print axioms UniversalObservation.Transport.licensedPlan_nonempty_iff
+#check @UniversalObservation.Transport.DemandIso.mapPlan
+#print axioms UniversalObservation.Transport.DemandIso.mapPlan
+#check @UniversalObservation.Transport.DemandIso.unmapPlan
+#print axioms UniversalObservation.Transport.DemandIso.unmapPlan
+#check @UniversalObservation.Transport.DemandIso.licensedPlanEquiv
+#print axioms UniversalObservation.Transport.DemandIso.licensedPlanEquiv
+#check @UniversalObservation.Transport.LicensedBudget
+#print axioms UniversalObservation.Transport.LicensedBudget
+#check @UniversalObservation.Transport.licensed_budget_transport_iff
+#print axioms UniversalObservation.Transport.licensed_budget_transport_iff
+#check @UniversalObservation.Transport.RecursorAdapter.contentProblem
+#print axioms UniversalObservation.Transport.RecursorAdapter.contentProblem
+#check @UniversalObservation.Transport.RecursorAdapter.content_zero_test_obstruction
+#print axioms UniversalObservation.Transport.RecursorAdapter.content_zero_test_obstruction
+#check @UniversalObservation.Transport.RecursorAdapter.counter_zero_test_witness
+#print axioms UniversalObservation.Transport.RecursorAdapter.counter_zero_test_witness
+#check @UniversalObservation.Transport.RecursorAdapter.termination_and_content_blindness
+#print axioms UniversalObservation.Transport.RecursorAdapter.termination_and_content_blindness
+#check @UniversalObservation.Transport.RecursorAdapter.contentOrientationProblem
+#print axioms UniversalObservation.Transport.RecursorAdapter.contentOrientationProblem
+#check @UniversalObservation.Transport.RecursorAdapter.content_orientation_obstruction
+#print axioms UniversalObservation.Transport.RecursorAdapter.content_orientation_obstruction
+#check @UniversalObservation.Transport.RecursorAdapter.native_one_step_return
+#print axioms UniversalObservation.Transport.RecursorAdapter.native_one_step_return
+#check @UniversalObservation.Transport.RecursorAdapter.depth_alphabet_minimum
+#print axioms UniversalObservation.Transport.RecursorAdapter.depth_alphabet_minimum
+#check @UniversalObservation.Transport.InstrumentAdapter.instrumentProblem
+#print axioms UniversalObservation.Transport.InstrumentAdapter.instrumentProblem
+#check @UniversalObservation.Transport.InstrumentAdapter.instrument_selected_iff
+#print axioms UniversalObservation.Transport.InstrumentAdapter.instrument_selected_iff
+#check @UniversalObservation.Transport.InstrumentAdapter.instrument_recovery_good_iff
+#print axioms UniversalObservation.Transport.InstrumentAdapter.instrument_recovery_good_iff
+#check @UniversalObservation.Transport.InstrumentAdapter.composed_kernel_source
+#print axioms UniversalObservation.Transport.InstrumentAdapter.composed_kernel_source
+#check @UniversalObservation.Transport.InstrumentAdapter.selected_before_of_after
+#print axioms UniversalObservation.Transport.InstrumentAdapter.selected_before_of_after
+#check @UniversalObservation.Transport.InstrumentAdapter.restoring_selected_iff
+#print axioms UniversalObservation.Transport.InstrumentAdapter.restoring_selected_iff
+#check @UniversalObservation.Transport.InstrumentAdapter.silent_keep_erase_incidence_control
+#print axioms UniversalObservation.Transport.InstrumentAdapter.silent_keep_erase_incidence_control
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteLaw
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteLaw
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropy
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.jointMI
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.jointMI
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropy_eq_HBits
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropy_eq_HBits
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropy_eq_source_formula
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropy_eq_source_formula
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.native_entropy_joint_kernel
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.native_entropy_joint_kernel
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropy_joint_kernel
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropy_joint_kernel
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryPrior
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryPrior
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryKernel
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryKernel
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryPrior_total
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryPrior_total
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryPrior_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryPrior_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryKernel_total
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryKernel_total
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryKernel_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryKernel_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryChannel
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryChannel
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryPriorLaw
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryPriorLaw
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_input_marginal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_input_marginal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_output_marginal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_output_marginal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_total
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_total
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJointLaw
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJointLaw
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJointLaw_source
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJointLaw_source
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_fair_source
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_fair_source
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryPrior_entropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryPrior_entropy
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryKernel_entropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryKernel_entropy
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_entropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_entropy
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_fair
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_fair
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_le_fair
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_le_fair
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_le_capacity
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_le_capacity
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_neg_bias
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_neg_bias
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_le_quadratic
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_le_quadratic
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_le_envelope
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_le_envelope
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJointLaw_information_le_envelope
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJointLaw_information_le_envelope
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_zero_bias
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_zero_bias
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_prior_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_prior_zero
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_prior_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_prior_one
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_positive_endpoint
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_positive_endpoint
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_negative_endpoint
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_information_negative_endpoint
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_upper_only_control
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryJoint_upper_only_control
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocol
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocol
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixStep
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixStep
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixState
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixState
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixMass
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixMass
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixMass_eq_source_fold
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixMass_eq_source_fold
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixState_fst
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixState_fst
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixMass_nil
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixMass_nil
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixMass_append
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixMass_append
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixMass_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixMass_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyMass
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyMass
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.posterior
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.posterior
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyMass_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyMass_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixMass_le_historyMass
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixMass_le_historyMass
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixMass_zero_of_historyMass_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixMass_zero_of_historyMass_zero
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.posterior_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.posterior_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.posterior_total
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.posterior_total
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyMass_mul_posterior
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyMass_mul_posterior
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixMass_children
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixMass_children
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedMass
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedMass
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedMass_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedMass_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySnoc
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySnoc
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySnoc_injective
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySnoc_injective
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySnoc_ne_nil
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySnoc_ne_nil
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySet
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySet
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.mem_historySet
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.mem_historySet
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySet_mono
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySet_mono
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.HistoryBank
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.HistoryBank
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyBank
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyBank
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyBank_complete
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyBank_complete
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.HistoryBank.sum_eq
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.HistoryBank.sum_eq
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySet_sum_succ
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySet_sum_succ
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySet_sum_restrict
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySet_sum_restrict
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.boundaryValue
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.boundaryValue
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.activeValue
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.activeValue
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySet_active_sum_succ
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySet_active_sum_succ
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySet_boundary_balance
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySet_boundary_balance
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySet_stoppedMass_target_marginal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySet_stoppedMass_target_marginal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedMass_target_marginal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedMass_target_marginal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedMass_total
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedMass_total
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropyTerm
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropyTerm
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropyTerm_eq_source
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropyTerm_eq_source
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropyTerm_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropyTerm_zero
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropyTerm_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropyTerm_one
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropyTerm_mul
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropyTerm_mul
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropy_eq_sum
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropy_eq_sum
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropy_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropy_zero
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropy_scale
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropy_scale
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.massUncertainty
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.massUncertainty
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.massUncertainty_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.massUncertainty_zero
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.massUncertainty_scale
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.massUncertainty_scale
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.massUncertainty_of_total_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.massUncertainty_of_total_one
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropy_joint_slices
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropy_joint_slices
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.jointMI_kernel
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.jointMI_kernel
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.massUncertainty_kernel_sum
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.massUncertainty_kernel_sum
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.jointMI_kernel_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.jointMI_kernel_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.jointMI_product_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.jointMI_product_zero
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.localGain
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.localGain
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.LocalCapacityBound
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.LocalCapacityBound
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixMass_action_marginal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.prefixMass_action_marginal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.policy_information_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.policy_information_zero
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.localGain_zero_of_historyMass_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.localGain_zero_of_historyMass_zero
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.localGain_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.localGain_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.massUncertainty_prefix
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.massUncertainty_prefix
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.massUncertainty_children
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.massUncertainty_children
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.finset_subtype_sum
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.finset_subtype_sum
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedJointLaw
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedJointLaw
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.terminalMI
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.terminalMI
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.expectedCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.expectedCost
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.terminalMI_eq_jointMI
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.terminalMI_eq_jointMI
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.terminalMI_eq_entropy_sub
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.terminalMI_eq_entropy_sub
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyUncertainty
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyUncertainty
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyUncertainty_nil
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyUncertainty_nil
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyUncertainty_after_stop
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyUncertainty_after_stop
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyUncertainty_drop
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyUncertainty_drop
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.massUncertainty_stopped
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.massUncertainty_stopped
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.terminalMI_eq_gain_sum
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.terminalMI_eq_gain_sum
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.terminalMI_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.terminalMI_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.expectedCost_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.expectedCost_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.weightedGain_le_cost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.weightedGain_le_cost
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.terminalMI_le_expectedCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.terminalMI_le_expectedCost
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ConditionalProtocol
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ConditionalProtocol
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalStoppedMass
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalStoppedMass
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalMI
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalMI
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalExpectedCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalExpectedCost
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalJointInfo
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalJointInfo
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalStoppedJointLaw
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalStoppedJointLaw
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalStoppedJointLaw_source
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalStoppedJointLaw_source
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalStoppedMass_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalStoppedMass_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalStoppedMass_target_marginal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalStoppedMass_target_marginal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalInitialRecord_marginal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalInitialRecord_marginal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalStoppedMass_record_marginal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalStoppedMass_record_marginal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalStoppedMass_total
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalStoppedMass_total
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditional_zero_record
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditional_zero_record
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalInitial_entropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalInitial_entropy
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalJointInfo_eq_entropy_sub
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalJointInfo_eq_entropy_sub
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalJointInfo_eq_conditionalMI
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalJointInfo_eq_conditionalMI
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalMI_eq_gain_sum
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalMI_eq_gain_sum
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalMI_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalMI_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalExpectedCost_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalExpectedCost_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalMI_le_expectedCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalMI_le_expectedCost
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalJointInfo_bounds
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalJointInfo_bounds
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalJointInfo_zero_capacity
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalJointInfo_zero_capacity
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.unitLaw
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.unitLaw
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedUnitProtocol
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedUnitProtocol
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedUnitProtocol_zero_information_cost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedUnitProtocol_zero_information_cost
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryMenu
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryMenu
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.posterior_eq_binaryPrior
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.posterior_eq_binaryPrior
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryMenu_localGain
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryMenu_localGain
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryMenu_capacity
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryMenu_capacity
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryMenu_information_bound
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryMenu_information_bound
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryMenu_cost_lower_bound
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryMenu_cost_lower_bound
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditional_binaryMenu_bound
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditional_binaryMenu_bound
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditional_binaryMenu_cost_lower_bound
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditional_binaryMenu_cost_lower_bound
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditional_binaryMenu_zero_signal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditional_binaryMenu_zero_signal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyEquiv
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyEquiv
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyEquiv_length
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyEquiv_length
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropy_reindex
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropy_reindex
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.jointMI_reindex
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.jointMI_reindex
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso.prefixMass_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso.prefixMass_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso.historyMass_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso.historyMass_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso.stoppedMass_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso.stoppedMass_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso.stoppedHistoryEquiv
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso.stoppedHistoryEquiv
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso.terminalMI_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso.terminalMI_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso.stoppedExpectation
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso.stoppedExpectation
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso.stoppedExpectation_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso.stoppedExpectation_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso.expectedCost_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso.expectedCost_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropy_nonnegative_of_bounds
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.entropy_nonnegative_of_bounds
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteLaw.mass_le_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteLaw.mass_le_one
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteLaw.entropy_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteLaw.entropy_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.posterior_le_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.posterior_le_one
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyUncertainty_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyUncertainty_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedUncertainty_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedUncertainty_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.terminalMI_le_prior_entropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.terminalMI_le_prior_entropy
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.activeValue_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.activeValue_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySet_active_sum_mono
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historySet_active_sum_mono
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.terminalMI_mono
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.terminalMI_mono
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.expectedCost_mono
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.expectedCost_mono
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.informationLimit
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.informationLimit
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.finiteInformation_bddAbove
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.finiteInformation_bddAbove
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.terminalMI_le_informationLimit
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.terminalMI_le_informationLimit
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.informationLimit_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.informationLimit_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.informationLimit_le_prior_entropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.informationLimit_le_prior_entropy
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.terminalMI_tendsto_informationLimit
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.terminalMI_tendsto_informationLimit
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.extendedCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.extendedCost
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.finiteCost_le_extendedCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.finiteCost_le_extendedCost
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.finiteCost_tendsto_extendedCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.finiteCost_tendsto_extendedCost
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.extendedCost_le_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.extendedCost_le_iff
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.informationLimit_le_extendedCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.informationLimit_le_extendedCost
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.informationLimit_le_budget
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.informationLimit_le_budget
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.informationLimit_zero_capacity
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.informationLimit_zero_capacity
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyCost
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyCost_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyCost_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.chargedHistorySet
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.chargedHistorySet
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.mem_chargedHistorySet
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.mem_chargedHistorySet
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.chargedHistorySet_cofinal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.chargedHistorySet_cofinal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.expectedCost_eq_historyCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.expectedCost_eq_historyCost
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.extendedCost_eq_tsum_historyCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.extendedCost_eq_tsum_historyCost
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalInformationLimit
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalInformationLimit
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalExtendedCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalExtendedCost
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalInformationLimit_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalInformationLimit_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalJointInfo_tendsto
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalJointInfo_tendsto
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalInformationLimit_le_initial_entropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalInformationLimit_le_initial_entropy
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalFiniteCost_le_extendedCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalFiniteCost_le_extendedCost
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalInformationLimit_le_extendedCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalInformationLimit_le_extendedCost
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalInformationLimit_le_budget
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalInformationLimit_le_budget
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalInformationLimit_zero_capacity
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalInformationLimit_zero_capacity
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalFiniteCost_eq_weighted
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalFiniteCost_eq_weighted
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalFiniteCost_tendsto
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalFiniteCost_tendsto
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalExtendedCost_eq_history_charges
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalExtendedCost_eq_history_charges
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditional_binaryMenu_limit_bound
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditional_binaryMenu_limit_bound
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditional_binaryMenu_limit_cost_lower
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditional_binaryMenu_limit_cost_lower
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditional_binaryMenu_limit_zero_signal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditional_binaryMenu_limit_zero_signal
+#check @UniversalObservation.Completion.compact_completion_iff
+#print axioms UniversalObservation.Completion.compact_completion_iff
+#check @UniversalObservation.Completion.compact_failure_has_finite_obstruction
+#print axioms UniversalObservation.Completion.compact_failure_has_finite_obstruction
+#check @UniversalObservation.Completion.thresholdProblem
+#print axioms UniversalObservation.Completion.thresholdProblem
+#check @UniversalObservation.Completion.threshold_finite_good
+#print axioms UniversalObservation.Completion.threshold_finite_good
+#check @UniversalObservation.Completion.threshold_global_bad
+#print axioms UniversalObservation.Completion.threshold_global_bad
+#check @UniversalObservation.Completion.threshold_no_finite_obstruction
+#print axioms UniversalObservation.Completion.threshold_no_finite_obstruction
+#check @UniversalObservation.Completion.mem_closure_iff_finite_agreement
+#print axioms UniversalObservation.Completion.mem_closure_iff_finite_agreement
+#check @UniversalObservation.Completion.closed_readouts_iff
+#print axioms UniversalObservation.Completion.closed_readouts_iff
+#check @UniversalObservation.Completion.nonclosed_readouts_have_missing_limit
+#print axioms UniversalObservation.Completion.nonclosed_readouts_have_missing_limit
+#check @UniversalObservation.Completion.attainedReadouts
+#print axioms UniversalObservation.Completion.attainedReadouts
+#check @UniversalObservation.Completion.attained_readout_global_iff
+#print axioms UniversalObservation.Completion.attained_readout_global_iff
+#check @UniversalObservation.Completion.unused_report_control
+#print axioms UniversalObservation.Completion.unused_report_control
+#check @UniversalObservation.Completion.extendEval
+#print axioms UniversalObservation.Completion.extendEval
+#check @UniversalObservation.Completion.extend_old_table
+#print axioms UniversalObservation.Completion.extend_old_table
+#check @UniversalObservation.Completion.extend_old_diagonal
+#print axioms UniversalObservation.Completion.extend_old_diagonal
+#check @UniversalObservation.Completion.transformed_diagonal_absent
+#print axioms UniversalObservation.Completion.transformed_diagonal_absent
+#check @UniversalObservation.Completion.conservative_diagonal_extension
+#print axioms UniversalObservation.Completion.conservative_diagonal_extension
+#check @UniversalObservation.Completion.diagonalProblem
+#print axioms UniversalObservation.Completion.diagonalProblem
+#check @UniversalObservation.Completion.extendedOldProblem
+#print axioms UniversalObservation.Completion.extendedOldProblem
+#check @UniversalObservation.Completion.diagonalEmbedding
+#print axioms UniversalObservation.Completion.diagonalEmbedding
+#check @UniversalObservation.Completion.old_diagonal_resolved
+#print axioms UniversalObservation.Completion.old_diagonal_resolved
+#check @UniversalObservation.Completion.diagonal_extension_no_reimport
+#print axioms UniversalObservation.Completion.diagonal_extension_no_reimport
+#check @UniversalObservation.Completion.Stage
+#print axioms UniversalObservation.Completion.Stage
+#check @UniversalObservation.Completion.stageEval
+#print axioms UniversalObservation.Completion.stageEval
+#check @UniversalObservation.Completion.stageInclude
+#print axioms UniversalObservation.Completion.stageInclude
+#check @UniversalObservation.Completion.stageInclude_injective
+#print axioms UniversalObservation.Completion.stageInclude_injective
+#check @UniversalObservation.Completion.stage_table_preserved
+#print axioms UniversalObservation.Completion.stage_table_preserved
+#check @UniversalObservation.Completion.stage_old_diagonal_represented
+#print axioms UniversalObservation.Completion.stage_old_diagonal_represented
+#check @UniversalObservation.Completion.every_stage_diagonal_absent
+#print axioms UniversalObservation.Completion.every_stage_diagonal_absent
+#check @UniversalObservation.Completion.stageFintype
+#print axioms UniversalObservation.Completion.stageFintype
+#check @UniversalObservation.Completion.stage_cardinality
+#print axioms UniversalObservation.Completion.stage_cardinality
+#check @UniversalObservation.Completion.Certificate
+#print axioms UniversalObservation.Completion.Certificate
+#check @UniversalObservation.Completion.witness_excludes_obstruction
+#print axioms UniversalObservation.Completion.witness_excludes_obstruction
+#check @UniversalObservation.Completion.resource_halt_has_both_source_statuses
+#print axioms UniversalObservation.Completion.resource_halt_has_both_source_statuses
+#check @UniversalObservation.Completion.SourceContract
+#print axioms UniversalObservation.Completion.SourceContract
+#check @UniversalObservation.Completion.SourceContract.problem
+#print axioms UniversalObservation.Completion.SourceContract.problem
+#check @UniversalObservation.Completion.SourceContract.nativeProblem
+#print axioms UniversalObservation.Completion.SourceContract.nativeProblem
+#check @UniversalObservation.Completion.SourceContract.menu
+#print axioms UniversalObservation.Completion.SourceContract.menu
+#check @UniversalObservation.Completion.SourceContract.combinerLaw
+#print axioms UniversalObservation.Completion.SourceContract.combinerLaw
+#check @UniversalObservation.Completion.assembled_source_correct
+#print axioms UniversalObservation.Completion.assembled_source_correct
+#check @UniversalObservation.Completion.source_repair_realized
+#print axioms UniversalObservation.Completion.source_repair_realized
+#check @UniversalObservation.Completion.source_diagonal_exclusion
+#print axioms UniversalObservation.Completion.source_diagonal_exclusion
+#check @UniversalObservation.Completion.CoreGoal
+#print axioms UniversalObservation.Completion.CoreGoal
+#check @UniversalObservation.Completion.source_observation_repair_core
+#print axioms UniversalObservation.Completion.source_observation_repair_core
+#check @UniversalObservation.Completion.readoutSource
+#print axioms UniversalObservation.Completion.readoutSource
+#check @UniversalObservation.Completion.readoutSource_problem
+#print axioms UniversalObservation.Completion.readoutSource_problem
+#check @UniversalObservation.Completion.readoutSource_combiner
+#print axioms UniversalObservation.Completion.readoutSource_combiner
+#check @UniversalObservation.Completion.readoutSource_core
+#print axioms UniversalObservation.Completion.readoutSource_core
+#check @UniversalObservation.Completion.stageEncode
+#print axioms UniversalObservation.Completion.stageEncode
+#check @UniversalObservation.Completion.stageEncode_tag_lt
+#print axioms UniversalObservation.Completion.stageEncode_tag_lt
+#check @UniversalObservation.Completion.stageEncode_injective
+#print axioms UniversalObservation.Completion.stageEncode_injective
+#check @UniversalObservation.Completion.stageEncode_include
+#print axioms UniversalObservation.Completion.stageEncode_include
+#check @UniversalObservation.Completion.stageEncode_jointly_surjective
+#print axioms UniversalObservation.Completion.stageEncode_jointly_surjective
+#check @UniversalObservation.Completion.limitEval
+#print axioms UniversalObservation.Completion.limitEval
+#check @UniversalObservation.Completion.limitEval_added_diagonal
+#print axioms UniversalObservation.Completion.limitEval_added_diagonal
+#check @UniversalObservation.Completion.stage_diagonal_eq_limit
+#print axioms UniversalObservation.Completion.stage_diagonal_eq_limit
+#check @UniversalObservation.Completion.limitEval_new_row
+#print axioms UniversalObservation.Completion.limitEval_new_row
+#check @UniversalObservation.Completion.limitEval_new_column
+#print axioms UniversalObservation.Completion.limitEval_new_column
+#check @UniversalObservation.Completion.stage_eval_eq_limit
+#print axioms UniversalObservation.Completion.stage_eval_eq_limit
+#check @UniversalObservation.Completion.stage_eval_independent_of_representatives
+#print axioms UniversalObservation.Completion.stage_eval_independent_of_representatives
+#check @UniversalObservation.Completion.limit_diagonal_absent
+#print axioms UniversalObservation.Completion.limit_diagonal_absent
+#check @UniversalObservation.Completion.extend_not_closed_under_change
+#print axioms UniversalObservation.Completion.extend_not_closed_under_change
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Mat
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Mat
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.unitEntry
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.unitEntry
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.unitEntry_apply
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.unitEntry_apply
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.permutationMat
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.permutationMat
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.dagger
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.dagger
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.tr
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.tr
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.dagger_entrywise
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.dagger_entrywise
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.tr_entrywise
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.tr_entrywise
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.matrix_unit_sandwich
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.matrix_unit_sandwich
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.unitEntry_mul
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.unitEntry_mul
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.unitEntry_mul_of_ne
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.unitEntry_mul_of_ne
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.unitEntry_adjoint
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.unitEntry_adjoint
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.FiberClosed
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.FiberClosed
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberClosed_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberClosed_zero
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberClosed_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberClosed_one
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberClosed_add
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberClosed_add
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberClosed_mul
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberClosed_mul
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberClosed_adjoint
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberClosed_adjoint
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberClosed_smul
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberClosed_smul
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiber_algebra_closed
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiber_algebra_closed
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberAlgebra
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberAlgebra
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberClosed_unitEntry
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberClosed_unitEntry
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberClosed_permutation
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberClosed_permutation
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.GeneratorClosed
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.GeneratorClosed
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Generated
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Generated
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiber_preserving_swap
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiber_preserving_swap
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.generatorClosed_contains_units
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.generatorClosed_contains_units
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberClosed_mem_generatorClosed
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberClosed_mem_generatorClosed
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.generated_iff_fiberClosed
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.generated_iff_fiberClosed
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberGenerators
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberGenerators
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.star_adjoin_fiberGenerators
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.star_adjoin_fiberGenerators
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Fiber
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Fiber
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.BlockFamily
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.BlockFamily
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockRestriction
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockRestriction
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockExtension
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockExtension
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockExtension_fiberClosed
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockExtension_fiberClosed
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockExtension_blockRestriction
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockExtension_blockRestriction
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockRestriction_blockExtension
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockRestriction_blockExtension
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.sum_over_fiber
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.sum_over_fiber
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockRestriction_mul
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockRestriction_mul
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberBlockEquiv
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.fiberBlockEquiv
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.block_decomposition
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.block_decomposition
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockEquiv_apply
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockEquiv_apply
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockEquiv_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockEquiv_one
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockExtension_add
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockExtension_add
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockExtension_mul
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockExtension_mul
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockExtension_adjoint
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockExtension_adjoint
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockExtension_smul
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockExtension_smul
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockExtension_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.blockExtension_one
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.empty_fiber_block_unique
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.empty_fiber_block_unique
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.zero_carrier_generated
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.zero_carrier_generated
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.injective_fibers_iff_diagonal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.injective_fibers_iff_diagonal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.constant_fiber_generates_all
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.constant_fiber_generates_all
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.permutationMat_mul_apply
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.permutationMat_mul_apply
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.mul_permutationMat_adjoint_apply
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.mul_permutationMat_adjoint_apply
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.permutation_conjugation_apply
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.permutation_conjugation_apply
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.gauge_conjugation_preserves_fibers
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.gauge_conjugation_preserves_fibers
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.EntrywisePSD
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.EntrywisePSD
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.form_eq_dotProduct
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.form_eq_dotProduct
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.hermitian_iff_reportHermitian
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.hermitian_iff_reportHermitian
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.hermitian_quadratic_im_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.hermitian_quadratic_im_zero
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.entrywisePSD_iff_posSemidef
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.entrywisePSD_iff_posSemidef
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Density
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Density
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Effect
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Effect
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.EntrywiseDensity
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.EntrywiseDensity
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.EntrywiseEffect
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.EntrywiseEffect
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.densityConventionEquiv
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.densityConventionEquiv
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.effectConventionEquiv
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.effectConventionEquiv
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.PositiveFunctional
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.PositiveFunctional
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.positiveFunctional_native
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.positiveFunctional_native
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.density_representation
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.density_representation
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.entrywise_density_representation
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.entrywise_density_representation
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.probability
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.probability
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.probability_mem_unitInterval
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.probability_mem_unitInterval
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.density_reconstruct_reports
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.density_reconstruct_reports
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.density_eq_iff_reports
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.density_eq_iff_reports
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.phaseDensity
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.phaseDensity
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.phase_population_collision
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.phase_population_collision
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.realDiagonal
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.realDiagonal
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.rotate
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.rotate
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.spectralLift
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.spectralLift
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.rotate_trace
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.rotate_trace
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.realDiagonal_hermitian
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.realDiagonal_hermitian
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.rotate_hermitian
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.rotate_hermitian
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.spectralLift_hermitian
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.spectralLift_hermitian
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.spectralLift_trace_re
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.spectralLift_trace_re
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.spectralLift_eigenvalues
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.spectralLift_eigenvalues
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.eigenvalues_sum_trace
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.eigenvalues_sum_trace
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.unitary_mul_adjoint
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.unitary_mul_adjoint
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.spectralFunction
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.spectralFunction
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.entropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.entropy
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.entropy_eq_eigenvalues
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.entropy_eq_eigenvalues
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.matrixLog
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.matrixLog
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.spectralLift_function_congr
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.spectralLift_function_congr
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.spectralFunction_spectralLift
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.spectralFunction_spectralLift
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.entropy_spectralLift
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.entropy_spectralLift
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.matrixLog_spectralLift
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.matrixLog_spectralLift
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.rotate_spectralLift
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.rotate_spectralLift
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.entropy_rotate
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.entropy_rotate
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.star_tensor
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.star_tensor
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.tensorUnitary
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.tensorUnitary
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.tensor_spectralLift
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.tensor_spectralLift
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.entropy_tensor_spectralLift
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.entropy_tensor_spectralLift
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.entropy_tensor
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.entropy_tensor
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.entropy_tensor_trace_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.entropy_tensor_trace_one
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.basisWeight
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.basisWeight
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.basisWeight_nonneg
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.basisWeight_nonneg
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.basisWeight_row_sum
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.basisWeight_row_sum
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.basisWeight_col_sum
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.basisWeight_col_sum
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.diagonalSandwich_trace_re
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.diagonalSandwich_trace_re
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.spectralLift_cross_trace_re
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.spectralLift_cross_trace_re
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.unitary_weighted_gibbs
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.unitary_weighted_gibbs
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.spectralLift_mul
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.spectralLift_mul
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.SupportLE
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.SupportLE
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.support_spectral_weights
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.support_spectral_weights
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.entropy_eq_neg_trace_mul_log
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.entropy_eq_neg_trace_mul_log
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.relativeEntropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.relativeEntropy
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.relativeEntropy_eq
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.relativeEntropy_eq
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.relativeEntropy_spectralLift
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.relativeEntropy_spectralLift
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.relativeEntropy_nonneg
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.relativeEntropy_nonneg
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.partition
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.partition
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.partition_pos
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.partition_pos
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsWeight
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsWeight
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsWeight_pos
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsWeight_pos
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsWeight_sum
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsWeight_sum
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.log_gibbsWeight
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.log_gibbsWeight
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsState
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsState
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsState_hermitian
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsState_hermitian
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsState_trace
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsState_trace
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsState_posDef
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsState_posDef
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsState_log
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsState_log
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.support_gibbsState
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.support_gibbsState
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.meanEnergy
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.meanEnergy
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.relativeEntropy_gibbs_eq
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.relativeEntropy_gibbs_eq
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsState_entropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsState_entropy
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.meanEnergy_sub
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.meanEnergy_sub
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbs_bath_balance
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbs_bath_balance
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.marginalLeft
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.marginalLeft
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.marginalRight
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.marginalRight
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.psd_sum
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.psd_sum
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.marginalLeft_posSemidef
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.marginalLeft_posSemidef
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.marginalRight_posSemidef
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.marginalRight_posSemidef
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.marginalLeft_trace
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.marginalLeft_trace
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.marginalRight_trace
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.marginalRight_trace
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.tensor_posSemidef
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.tensor_posSemidef
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.rotate_posSemidef
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.rotate_posSemidef
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.trace_tensor_left
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.trace_tensor_left
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.trace_tensor_right
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.trace_tensor_right
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.psd_kernel_of_quadratic_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.psd_kernel_of_quadratic_zero
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.psd_column_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.psd_column_zero
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.basisProjector
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.basisProjector
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.diagonalLaw
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.diagonalLaw
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.diagonalLaw_spectralLift
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.diagonalLaw_spectralLift
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.diagonalLaw_own_basis
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.diagonalLaw_own_basis
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.diagonalLaw_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.diagonalLaw_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.diagonalLaw_total
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.diagonalLaw_total
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.entropy_le_basis_entropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.entropy_le_basis_entropy
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.basisProjector_sum
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.basisProjector_sum
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.basisProjector_tensor
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.basisProjector_tensor
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.trace_expectation_sum
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.trace_expectation_sum
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.tensor_sum_right
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.tensor_sum_right
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.tensor_sum_left
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.tensor_sum_left
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.diagonalLaw_marginalLeft
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.diagonalLaw_marginalLeft
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.diagonalLaw_marginalRight
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.diagonalLaw_marginalRight
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.entropy_subadditive
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.entropy_subadditive
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.mutualInfo
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.mutualInfo
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.mutualInfo_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.mutualInfo_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.thermalJoint
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.thermalJoint
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.thermalJoint_density
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.thermalJoint_density
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.thermalJoint_entropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.thermalJoint_entropy
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.reservoirHeat
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.reservoirHeat
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.thermal_information_balance
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.thermal_information_balance
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.landauer_from_unitary
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.landauer_from_unitary
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsState_spectralLift
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsState_spectralLift
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsState_congr
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsState_congr
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsState_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.gibbsState_zero
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.bitBath
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.bitBath
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.controlledNotMatrix
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.controlledNotMatrix
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.controlledNotUnitary
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.controlledNotUnitary
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.bitDephase
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.bitDephase
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.controlledNot_realizes_dephasing
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.controlledNot_realizes_dephasing
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.controlledNot_reservoir
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.controlledNot_reservoir
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.bitProjector
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.bitProjector
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.bitBranch
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.bitBranch
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.bitBranch_total
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.bitBranch_total
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.controlledNot_recorded_branch
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.controlledNot_recorded_branch
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.thermalControlledNot_channel
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.thermalControlledNot_channel
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.thermalControlledNot_heat
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.thermalControlledNot_heat
+#check @OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.endpoint_agreement_does_not_identify_channel
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundaryReconstruction.Thermal.endpoint_agreement_does_not_identify_channel
+
+/-! ## ProtocolResolution: specification Goals of M3.1-M3.3 and the M3.5 frontier -/
+
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolInformationGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolInformationGoal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.finiteProtocolInformationGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.finiteProtocolInformationGoal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.StoppedNormalizationGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.StoppedNormalizationGoal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedNormalizationGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedNormalizationGoal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteCostGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteCostGoal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.finiteCostGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.finiteCostGoal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.StoppedCostGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.StoppedCostGoal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedCostGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedCostGoal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryCapacityGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryCapacityGoal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryCapacityGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryCapacityGoal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ConditionalInformationGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ConditionalInformationGoal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalInformationGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalInformationGoal
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteLaw.reindex
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteLaw.reindex
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteLaw.reindex_mass
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteLaw.reindex_mass
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyEquiv_refl
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyEquiv_refl
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyEquiv_trans
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyEquiv_trans
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyEquiv_apply_symm
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyEquiv_apply_symm
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyBank_map
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyBank_map
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.HistoryBank.sum_bank
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.HistoryBank.sum_bank
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.expectedCost_bank
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.expectedCost_bank
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedExpectation_bank
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedExpectation_bank
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyBank_zero_sum
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.historyBank_zero_sum
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedMass_zero_nil
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedMass_zero_nil
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedExpectation_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedExpectation_zero
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedExpectation_const_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedExpectation_const_zero
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedExpectation_const_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedExpectation_const_one
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.expectedCost_horizon_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.expectedCost_horizon_zero
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.mk
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.mk
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolStrategy
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolStrategy
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolStrategy.mk
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolStrategy.mk
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolRequirement
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolRequirement
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolRequirement.mk
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolRequirement.mk
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolRequirement.reindex
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolRequirement.reindex
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolRequirement.reindex_symm
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolRequirement.reindex_symm
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolRequirement.symm_reindex
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolRequirement.symm_reindex
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.errorLoss
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.errorLoss
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.refusalLoss
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.refusalLoss
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.errorLoss_map
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.errorLoss_map
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.refusalLoss_map
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.refusalLoss_map
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.option_map_refl
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.option_map_refl
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.option_map_symm_map
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.option_map_symm_map
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.initialJoint
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.initialJoint
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.protocol
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.protocol
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.conditional
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.conditional
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.lawConditional
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.lawConditional
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.costConditional
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.costConditional
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.information
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.information
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.expectedCostAt
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.expectedCostAt
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.errorMass
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.errorMass
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.refusalMass
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.refusalMass
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.Admissible
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.Admissible
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.Meets
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.Meets
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.Feasible
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.Feasible
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.frontier
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.frontier
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.Qualifies
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.Qualifies
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.minimumCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.minimumCost
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.minimumCost_eq_top_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.minimumCost_eq_top_iff
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.minimumCost_le_of_feasible
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.minimumCost_le_of_feasible
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.exists_lt_of_minimumCost_lt
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.exists_lt_of_minimumCost_lt
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.information_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.information_nonnegative
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.errorMass_eq_zero_of_refuses
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.errorMass_eq_zero_of_refuses
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.refusalMass_eq_one_of_refuses
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.refusalMass_eq_one_of_refuses
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.expectedCostAt_eq_zero_of_free
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.expectedCostAt_eq_zero_of_free
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.information_eq_cost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.information_eq_cost
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.informationLimitOf
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.informationLimitOf
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.extendedCostOf
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.extendedCostOf
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.informationLimitOf_eq_cost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.informationLimitOf_eq_cost
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.LimitFeasible
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.LimitFeasible
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.limitMinimumCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ProtocolTask.limitMinimumCost
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.mk
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.mk
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso.informationLimit_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso.informationLimit_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso.extendedCost_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolIso.extendedCost_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.mapStrategy
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.mapStrategy
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.mapStrategy_policy
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.mapStrategy_policy
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.mapStrategy_stop
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.mapStrategy_stop
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.protocolIso
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.protocolIso
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.lawIso
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.lawIso
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.costIso
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.costIso
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.information_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.information_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.expectedCostAt_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.expectedCostAt_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.errorMass_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.errorMass_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.refusalMass_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.refusalMass_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.admissible_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.admissible_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.meets_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.meets_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.qualifies_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.qualifies_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.feasible_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.feasible_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.informationLimitOf_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.informationLimitOf_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.extendedCostOf_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.extendedCostOf_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.limitFeasible_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.limitFeasible_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.refl
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.refl
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.symm
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.symm
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.trans
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.trans
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.feasible_transport_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.feasible_transport_iff
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.frontier_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.frontier_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.minimumCost_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.minimumCost_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.limitFeasible_transport_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.limitFeasible_transport_iff
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.limitMinimumCost_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskIso.limitMinimumCost_transport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskSimulation
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskSimulation
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskSimulation.mk
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskSimulation.mk
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskSimulation.feasible
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.TaskSimulation.feasible
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask.mk
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask.mk
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask.capacity
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask.capacity
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask.information_le_cost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask.information_le_cost
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask.frontier_lower
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask.frontier_lower
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask.minimumCost_lower
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask.minimumCost_lower
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask.informationLimit_le_budget
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask.informationLimit_le_budget
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask.limit_frontier_lower
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask.limit_frontier_lower
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask.limitMinimumCost_lower
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask.limitMinimumCost_lower
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask.zero_capacity
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask.zero_capacity
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask.limit_zero_capacity
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryTask.limit_zero_capacity
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryKernelLaw
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryKernelLaw
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryTask
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryTask
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryTask_binary
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryTask_binary
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.boolFlip
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.boolFlip
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryKernel_flip
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryKernel_flip
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryTaskFlip
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryTaskFlip
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryTaskFlip_frontier
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryTaskFlip_frontier
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryTask_error_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryTask_error_zero
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryTask_refusal_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryTask_refusal_zero
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryTask_cost_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryTask_cost_zero
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stopAndReport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stopAndReport
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.quarterErrorTarget
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.quarterErrorTarget
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.quarterPrior_feasible
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.quarterPrior_feasible
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.fairPrior_infeasible
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.fairPrior_infeasible
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.equalSupport_control
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.equalSupport_control
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.refusalTarget
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.refusalTarget
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.licensed_refusal_feasible
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.licensed_refusal_feasible
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.licenseLoss_control
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.licenseLoss_control
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.readOnce
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.readOnce
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.readOnce_information
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.readOnce_information
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.cost_control
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.cost_control
+#check @OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.outcomeRecord_not_injective
+#print axioms OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.outcomeRecord_not_injective
+
+/-! ## ResourceFrontier: SharpScalingGoal, the cost-confidence tradeoff and BudgetTransportGoal -/
+
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingBias
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingBias
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingBias_abs_le
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingBias_abs_le
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingBias_of_mem
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingBias_of_mem
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.resolutionTask
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.resolutionTask
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.resolutionTask_binary
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.resolutionTask_binary
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.informationRequirement
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.informationRequirement
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.resolutionMinimumCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.resolutionMinimumCost
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.resolutionLimitMinimumCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.resolutionLimitMinimumCost
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingStrategy
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingStrategy
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingStrategy_admissible
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingStrategy_admissible
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingIso
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingIso
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingStrategy_information
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingStrategy_information
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingStrategy_cost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingStrategy_cost
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.majority_expectedCost_of_le
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.majority_expectedCost_of_le
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.majority_extendedCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.majority_extendedCost
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingStrategy_informationLimit
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingStrategy_informationLimit
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingStrategy_extendedCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingStrategy_extendedCost
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.exists_error_level
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.exists_error_level
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.resolutionMinimumCost_bounds
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.resolutionMinimumCost_bounds
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.resolutionLimitMinimumCost_bounds
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.resolutionLimitMinimumCost_bounds
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.log_inv_two_mul_nonneg
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.log_inv_two_mul_nonneg
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.inverseSquare_of_bounds
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.inverseSquare_of_bounds
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.SharpScalingGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.SharpScalingGoal
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.sharpScaling_of_bounds
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.sharpScaling_of_bounds
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.sharpScalingGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.sharpScalingGoal
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.sharpScalingGoal_limit
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.sharpScalingGoal_limit
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.confidenceRequirement
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.confidenceRequirement
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.confidenceMinimumCost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.confidenceMinimumCost
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.majorityAnswer
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.majorityAnswer
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.resolutionTask_record
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.resolutionTask_record
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingStrategy_stoppedMass
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingStrategy_stoppedMass
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingStrategy_errorMass
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingStrategy_errorMass
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingStrategy_refusalMass
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.readingStrategy_refusalMass
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.confidenceMinimumCost_bounds
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.confidenceMinimumCost_bounds
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.confidence_sharpScaling
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.confidence_sharpScaling
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.BudgetTransportGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.BudgetTransportGoal
+#check @OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.budgetTransportGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.budgetTransportGoal
+
+/-! Goal examples of ProtocolResolution and ResourceFrontier. -/
+
+example : OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteProtocolInformationGoal := OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.finiteProtocolInformationGoal
+example : OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.StoppedNormalizationGoal := OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedNormalizationGoal
+example : OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.FiniteCostGoal := OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.finiteCostGoal
+example : OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.StoppedCostGoal := OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.stoppedCostGoal
+example : OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.BinaryCapacityGoal := OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.binaryCapacityGoal
+example : OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.ConditionalInformationGoal := OperatorKO7.Meta.BoundaryObserver.ProtocolResolution.conditionalInformationGoal
+example : OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.SharpScalingGoal OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.resolutionMinimumCost :=
+  OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.sharpScalingGoal
+example : OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.SharpScalingGoal OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.resolutionLimitMinimumCost :=
+  OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.sharpScalingGoal_limit
+example : OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.BudgetTransportGoal := OperatorKO7.Meta.BoundaryObserver.ResourceFrontier.budgetTransportGoal

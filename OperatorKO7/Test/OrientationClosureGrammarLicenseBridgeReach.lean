@@ -1,0 +1,24 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.GrammarLicenseBridge
+
+/-! # GrammarLicenseBridge reach and axiom check -/
+
+#check @OperatorKO7.Methods.OrientationClosure.GrammarLicenseBridge.payloadBlind_iff_not_usesPayload
+#print axioms OperatorKO7.Methods.OrientationClosure.GrammarLicenseBridge.payloadBlind_iff_not_usesPayload
+#check @OperatorKO7.Methods.OrientationClosure.GrammarLicenseBridge.adequate_iff_orients
+#print axioms OperatorKO7.Methods.OrientationClosure.GrammarLicenseBridge.adequate_iff_orients
+#check @OperatorKO7.Methods.OrientationClosure.GrammarLicenseBridge.license_criterion_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.GrammarLicenseBridge.license_criterion_iff
+#check @OperatorKO7.Methods.OrientationClosure.GrammarLicenseBridge.separation_iff_payload_half
+#print axioms OperatorKO7.Methods.OrientationClosure.GrammarLicenseBridge.separation_iff_payload_half
+#check @OperatorKO7.Methods.OrientationClosure.GrammarLicenseBridge.orientation_grammar_and_oi_license
+#print axioms OperatorKO7.Methods.OrientationClosure.GrammarLicenseBridge.orientation_grammar_and_oi_license
+#check @OperatorKO7.Methods.OrientationClosure.GrammarLicenseBridge.swapAdd
+#print axioms OperatorKO7.Methods.OrientationClosure.GrammarLicenseBridge.swapAdd
+#check @OperatorKO7.Methods.OrientationClosure.GrammarLicenseBridge.eval_swapAdd
+#print axioms OperatorKO7.Methods.OrientationClosure.GrammarLicenseBridge.eval_swapAdd
+#check @OperatorKO7.Methods.OrientationClosure.GrammarLicenseBridge.denotation_preserving_maps_preserve_predicates
+#print axioms OperatorKO7.Methods.OrientationClosure.GrammarLicenseBridge.denotation_preserving_maps_preserve_predicates
+#check @OperatorKO7.Methods.OrientationClosure.GrammarLicenseBridge.swapAdd_ne_id
+#print axioms OperatorKO7.Methods.OrientationClosure.GrammarLicenseBridge.swapAdd_ne_id
+#check @OperatorKO7.Methods.OrientationClosure.GrammarLicenseBridge.aggregation_orients_through_counter_projection
+#print axioms OperatorKO7.Methods.OrientationClosure.GrammarLicenseBridge.aggregation_orients_through_counter_projection

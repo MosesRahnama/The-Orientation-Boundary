@@ -1,0 +1,28 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.SeparableSlopes
+
+/-! # SeparableSlopes reach and axiom check -/
+
+#check @OperatorKO7.Methods.OrientationClosure.SeparableSlopes.sepDiff
+#print axioms OperatorKO7.Methods.OrientationClosure.SeparableSlopes.sepDiff
+#check @OperatorKO7.Methods.OrientationClosure.SeparableSlopes.sepDiff_eq_normal
+#print axioms OperatorKO7.Methods.OrientationClosure.SeparableSlopes.sepDiff_eq_normal
+#check @OperatorKO7.Methods.OrientationClosure.SeparableSlopes.orientsSucc_iff_sepDiff
+#print axioms OperatorKO7.Methods.OrientationClosure.SeparableSlopes.orientsSucc_iff_sepDiff
+#check @OperatorKO7.Methods.OrientationClosure.SeparableSlopes.orientsSucc_zero_step
+#print axioms OperatorKO7.Methods.OrientationClosure.SeparableSlopes.orientsSucc_zero_step
+#check @OperatorKO7.Methods.OrientationClosure.SeparableSlopes.orientsSucc_of_zero_and_step
+#print axioms OperatorKO7.Methods.OrientationClosure.SeparableSlopes.orientsSucc_of_zero_and_step
+#check @OperatorKO7.Methods.OrientationClosure.SeparableSlopes.monomialCounterPoly
+#print axioms OperatorKO7.Methods.OrientationClosure.SeparableSlopes.monomialCounterPoly
+#check @OperatorKO7.Methods.OrientationClosure.SeparableSlopes.separableSum
+#print axioms OperatorKO7.Methods.OrientationClosure.SeparableSlopes.separableSum
+#check @OperatorKO7.Methods.OrientationClosure.SeparableSlopes.separableSum_cons
+#print axioms OperatorKO7.Methods.OrientationClosure.SeparableSlopes.separableSum_cons
+#check @OperatorKO7.Methods.OrientationClosure.SeparableSlopes.separableSum_eq_sepDiff
+#print axioms OperatorKO7.Methods.OrientationClosure.SeparableSlopes.separableSum_eq_sepDiff
+#check @OperatorKO7.Methods.OrientationClosure.SeparableSlopes.residual_two_sided
+#print axioms OperatorKO7.Methods.OrientationClosure.SeparableSlopes.residual_two_sided
+#check @OperatorKO7.Methods.OrientationClosure.SeparableSlopes.ResidualGoal
+#print axioms OperatorKO7.Methods.OrientationClosure.SeparableSlopes.ResidualGoal
+#check @OperatorKO7.Methods.OrientationClosure.SeparableSlopes.residualGoal_iff_orientsSucc
+#print axioms OperatorKO7.Methods.OrientationClosure.SeparableSlopes.residualGoal_iff_orientsSucc

@@ -1,0 +1,227 @@
+import OperatorKO7.Meta.BoundaryObserver.PurifiedFiber
+
+set_option autoImplicit false
+
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.fiberWeight
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.fiberWeight
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.purifiedFiber
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.purifiedFiber
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.pureDensity
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.pureDensity
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.bornMass
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.bornMass
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.pureDensity_posSemidef
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.pureDensity_posSemidef
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.bornMass_eq_trace
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.bornMass_eq_trace
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.bornMass_nonneg
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.bornMass_nonneg
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.purifiedFiber_empty
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.purifiedFiber_empty
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.marginal_purifiedFiber
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.marginal_purifiedFiber
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.sum_fiberWeight
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.sum_fiberWeight
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.bornMass_purifiedFiber
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.bornMass_purifiedFiber
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.purifiedFiber_normalized
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.purifiedFiber_normalized
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.entropy_realDiagonal
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.entropy_realDiagonal
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.sum_negMulLog_fiberWeight
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.sum_negMulLog_fiberWeight
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.entropy_marginal_purifiedFiber_all
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.entropy_marginal_purifiedFiber_all
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.entropy_marginal_purifiedFiber
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.entropy_marginal_purifiedFiber
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.entropy_marginal_purifiedFiber_bits
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.entropy_marginal_purifiedFiber_bits
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.empty_fiber_quantum_data
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.empty_fiber_quantum_data
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.pureDensity_trace
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.pureDensity_trace
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.purifiedFiber_density
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.purifiedFiber_density
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.marginal_purifiedFiber_density
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.marginal_purifiedFiber_density
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.fiber
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.fiber
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.mem_fiber
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.mem_fiber
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.permMatrix
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.permMatrix
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.jointPerm
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.jointPerm
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.jointPerm_eq_matrix
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.jointPerm_eq_matrix
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.purifiedFiber_diag_ne_zero_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.purifiedFiber_diag_ne_zero_iff
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.purifiedFiber_injective
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.purifiedFiber_injective
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.jointPerm_purifiedFiber
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.jointPerm_purifiedFiber
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.jointPerm_fixes_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.jointPerm_fixes_iff
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.map_fiber_of_invisible
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.map_fiber_of_invisible
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.invisible_fixes_purifiedFiber
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.invisible_fixes_purifiedFiber
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.invisible_iff_joint_fixes_fibers
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.invisible_iff_joint_fixes_fibers
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.recordMatrix
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.recordMatrix
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.recordProjector
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.recordProjector
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.recordMatrix_hermitian
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.recordMatrix_hermitian
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.recordMatrix_idempotent
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.recordMatrix_idempotent
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.recordProjector_eq_matrix
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.recordProjector_eq_matrix
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.sqrt_fraction_mul_sqrt_inv
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.sqrt_fraction_mul_sqrt_inv
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.recordProjection_purifiedFiber
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.recordProjection_purifiedFiber
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.bornMass_smul
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.bornMass_smul
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.recordProjection_bornMass
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.recordProjection_bornMass
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.normalizeAmplitude
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.normalizeAmplitude
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.recordProjection_normalized
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.recordProjection_normalized
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.fiber_attained_eq
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.fiber_attained_eq
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.attainedRecordMass_eq_bornMass
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.attainedRecordMass_eq_bornMass
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.expectedFiberEntropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.expectedFiberEntropy
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.expectedFiberEntropy_eq_meanLog
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.expectedFiberEntropy_eq_meanLog
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.expectedFiberEntropy_eq_conditional
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.expectedFiberEntropy_eq_conditional
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.recordMutualInformation
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.recordMutualInformation
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.resolvedFiberEntropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.resolvedFiberEntropy
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.resolvedFiberEntropy_eq_mutualInformation
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.resolvedFiberEntropy_eq_mutualInformation
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.attained_fiber_nonempty
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.attained_fiber_nonempty
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.expectedFiberEntropy_nonneg
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.expectedFiberEntropy_nonneg
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.expectedFiberEntropy_eq_zero_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.expectedFiberEntropy_eq_zero_iff
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.residual_pos_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.residual_pos_iff
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.residual_pos_iff_mergedPair
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.residual_pos_iff_mergedPair
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.residual_pos_iff_nontrivial_orbit
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.residual_pos_iff_nontrivial_orbit
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.postMeasurementExpectedEntropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.postMeasurementExpectedEntropy
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.postMeasurementExpectedEntropy_eq_expected
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.postMeasurementExpectedEntropy_eq_expected
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.postMeasurementExpectedEntropy_eq_conditional
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.postMeasurementExpectedEntropy_eq_conditional
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.CountedPasses
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.CountedPasses
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPassEquiv
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPassEquiv
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPassesFintype
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPassesFintype
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPassesDecidableEq
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPassesDecidableEq
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPassesNonempty
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPassesNonempty
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedContent
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedContent
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedContent_eq
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedContent_eq
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPasses_card
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPasses_card
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedContent_fiber
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedContent_fiber
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedContent_fiber_card
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedContent_fiber_card
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedStabilizerAll
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedStabilizerAll
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPasses_groupEquiv
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPasses_groupEquiv
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPassLift
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPassLift
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPassLift_restrict
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPassLift_restrict
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPassLift_invisible
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPassLift_invisible
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPasses_entropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPasses_entropy
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPasses_entropy_eq_leftEntropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPasses_entropy_eq_leftEntropy
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPasses_entropy_bits
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPasses_entropy_bits
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPassInclusion
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPassInclusion
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedNewState
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedNewState
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedNewState_not_in_range
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedNewState_not_in_range
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPasses_successor_partition
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPasses_successor_partition
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPasses_card_successor
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPasses_card_successor
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedNewState_pass
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedNewState_pass
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPasses_entropy_successor
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPasses_entropy_successor
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPassRangeEquiv
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPassRangeEquiv
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPermEmbedding
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPermEmbedding
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPermEmbedding_apply_inclusion
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPermEmbedding_apply_inclusion
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPermEmbedding_fixes_new
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPermEmbedding_fixes_new
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPermEmbedding_injective
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPermEmbedding_injective
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedLastState
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedLastState
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedNewSwap
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedNewSwap
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedNewSwap_moves_new
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedNewSwap_moves_new
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedNewSwap_not_mem_range
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedNewSwap_not_mem_range
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPermEmbedding_range_lt_top
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPermEmbedding_range_lt_top
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPermEmbedding_not_surjective
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPermEmbedding_not_surjective
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedSymmetricEmbedding
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedSymmetricEmbedding
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedSymmetricEmbedding_injective
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedSymmetricEmbedding_injective
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedSymmetricEmbedding_not_surjective
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedSymmetricEmbedding_not_surjective
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.adjacentSwap_injective
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.adjacentSwap_injective
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedAdjacentGenerator
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedAdjacentGenerator
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedAdjacentGenerator_injective
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedAdjacentGenerator_injective
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedAdjacentGenerator_generates
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedAdjacentGenerator_generates
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedGenerators
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedGenerators
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedGenerators_card
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedGenerators_card
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedGenerators_card_successor
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedGenerators_card_successor
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPermEmbedding_map_swap
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPermEmbedding_map_swap
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPasses_one_new_generator
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.countedPasses_one_new_generator
+
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.EntangledMergedPairsGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.EntangledMergedPairsGoal
+#check @OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.entangledMergedPairs
+#print axioms OperatorKO7.Meta.BoundaryObserver.PurifiedFiber.entangledMergedPairs

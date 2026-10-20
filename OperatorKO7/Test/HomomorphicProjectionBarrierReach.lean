@@ -1,0 +1,30 @@
+import OperatorKO7.Meta.Recursor.HomomorphicProjectionBarrier
+
+/-! Paired reach and axiom gate for HomomorphicProjectionBarrier. -/
+
+set_option autoImplicit false
+
+namespace OperatorKO7.Test.HomomorphicProjectionBarrierReach
+
+open OperatorKO7.Meta.Recursor.HomomorphicProjectionBarrier
+
+#check @recursorTermAlgebra
+#check @algebraOfRecursorSigma
+#check @algebraHomOfSigmaHomomorphism
+#check @foldHom
+#check @foldHom_toFun
+#check @recursorCounterProjection
+#check @recursor_witnesses_distinct
+#check @recursorCounterProjection_separates_witnesses
+#check @sigmaHom_identifies_witnesses_of_recRConstantInThird
+#check @recursorCounterProjection_not_factorsThrough_sigmaHom
+#check @recursorCounterProjection_not_factorsThrough_fold
+
+#print axioms foldHom_toFun
+#print axioms recursor_witnesses_distinct
+#print axioms recursorCounterProjection_separates_witnesses
+#print axioms sigmaHom_identifies_witnesses_of_recRConstantInThird
+#print axioms recursorCounterProjection_not_factorsThrough_sigmaHom
+#print axioms recursorCounterProjection_not_factorsThrough_fold
+
+end OperatorKO7.Test.HomomorphicProjectionBarrierReach

@@ -1,0 +1,77 @@
+import OperatorKO7.Meta.RDRSSemanticProjectionTransactionAudit
+
+/-!
+# Reachability check for the projection-transaction hardening surface
+
+References each of the eight theorems plus the bridge,
+the concrete `counterFirstLex_R` payload-forgetting projection, and the
+identity-projection control, each with a paired `#print axioms`.
+Compilation of this file confirms the audit module resolves.
+
+The reachability checks use `#check` (no `example` or `theorem`
+declarations).
+-/
+
+set_option autoImplicit false
+
+namespace OperatorKO7.RDRSSemanticProjectionTransactionAuditReach
+
+open OperatorKO7.RDRSSemanticProjectionTransactionAudit
+
+/-! ### Eight theorems and definitions -/
+
+#check @semantic_projection_escape_factors_through_seed_collapse
+#print axioms OperatorKO7.RDRSSemanticProjectionTransactionAudit.semantic_projection_escape_factors_through_seed_collapse
+#check @semantic_projection_escape_retained_factors_through_counter
+#print axioms OperatorKO7.RDRSSemanticProjectionTransactionAudit.semantic_projection_escape_retained_factors_through_counter
+#check @semantic_projection_escape_has_witness_transport
+#print axioms OperatorKO7.RDRSSemanticProjectionTransactionAudit.semantic_projection_escape_has_witness_transport
+#check @semantic_dp_projection_transaction_canonical
+#print axioms OperatorKO7.RDRSSemanticProjectionTransactionAudit.semantic_dp_projection_transaction_canonical
+#check @semantic_projection_escape_extracts_sigma_seedCollapse_wf_orientation
+#print axioms OperatorKO7.RDRSSemanticProjectionTransactionAudit.semantic_projection_escape_extracts_sigma_seedCollapse_wf_orientation
+#check @semantic_projection_transaction_escape_sound_hardened
+#print axioms OperatorKO7.RDRSSemanticProjectionTransactionAudit.semantic_projection_transaction_escape_sound_hardened
+#check @semantic_boundary_bottleneck_w0_blocked_w2_succeeds
+#print axioms OperatorKO7.RDRSSemanticProjectionTransactionAudit.semantic_boundary_bottleneck_w0_blocked_w2_succeeds
+#check @semantic_search_budget_invariance
+#print axioms OperatorKO7.RDRSSemanticProjectionTransactionAudit.semantic_search_budget_invariance
+
+/-! ### Concrete payload-forgetting projection witnesses -/
+
+#check @counterFirstLex_seedCollapse
+#print axioms OperatorKO7.RDRSSemanticProjectionTransactionAudit.counterFirstLex_seedCollapse
+#check @counterFirstLex_Rproj
+#print axioms OperatorKO7.RDRSSemanticProjectionTransactionAudit.counterFirstLex_Rproj
+#check @counterFirstLex_semanticMeasure
+#print axioms OperatorKO7.RDRSSemanticProjectionTransactionAudit.counterFirstLex_semanticMeasure
+#check @counterFirstLex_dpSemanticTransaction
+#print axioms OperatorKO7.RDRSSemanticProjectionTransactionAudit.counterFirstLex_dpSemanticTransaction
+#check @counterFirstLex_dpSemanticTransaction_forgets_payload
+#print axioms OperatorKO7.RDRSSemanticProjectionTransactionAudit.counterFirstLex_dpSemanticTransaction_forgets_payload
+#check @counterFirstLex_pi_factors_seedCollapse
+#print axioms OperatorKO7.RDRSSemanticProjectionTransactionAudit.counterFirstLex_pi_factors_seedCollapse
+#check @counterFirstLex_dpSemanticTransactionEscape
+#print axioms OperatorKO7.RDRSSemanticProjectionTransactionAudit.counterFirstLex_dpSemanticTransactionEscape
+#check @counterFirstLex_dpProjectionEscape
+#print axioms OperatorKO7.RDRSSemanticProjectionTransactionAudit.counterFirstLex_dpProjectionEscape
+
+/-! ### Identity-projection control -/
+
+#check @counterFirstLex_identityProjectionEscape
+#print axioms OperatorKO7.RDRSSemanticProjectionTransactionAudit.counterFirstLex_identityProjectionEscape
+#check @counterFirstLex_identityProjection_keeps_payload
+#print axioms OperatorKO7.RDRSSemanticProjectionTransactionAudit.counterFirstLex_identityProjection_keeps_payload
+
+/-! ### Legacy bridge -/
+
+#check
+  @OperatorKO7.RDRSSemanticProjectionTransaction.SemanticProjectionTransactionEscape.toLegacy
+#print axioms OperatorKO7.RDRSSemanticProjectionTransaction.SemanticProjectionTransactionEscape.toLegacy
+
+/-! ### Anchor string constants -/
+
+#check @rdrs_semantic_projection_transaction_audit_anchor
+#print axioms OperatorKO7.RDRSSemanticProjectionTransactionAudit.rdrs_semantic_projection_transaction_audit_anchor
+
+end OperatorKO7.RDRSSemanticProjectionTransactionAuditReach
