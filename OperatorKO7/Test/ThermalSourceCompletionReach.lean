@@ -1,0 +1,46 @@
+import OperatorKO7.Meta.BoundaryObserver.ThermalSourceCompletion
+
+/-!
+# Thermal and same-source public reach
+Reachability check for the thermal and same-source surface.
+-/
+
+set_option autoImplicit false
+
+#check @OperatorKO7.Meta.BoundaryObserver.ThermalSourceCompletion.finiteFullRankResetBoundary
+#print axioms OperatorKO7.Meta.BoundaryObserver.ThermalSourceCompletion.finiteFullRankResetBoundary
+
+#check @OperatorKO7.Meta.BoundaryObserver.ThermalSourceCompletion.fairPairTwoThermalRegimes
+#print axioms OperatorKO7.Meta.BoundaryObserver.ThermalSourceCompletion.fairPairTwoThermalRegimes
+
+#check @OperatorKO7.Meta.BoundaryObserver.ThermalSourceCompletion.GuardedGeometricLimitGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ThermalSourceCompletion.GuardedGeometricLimitGoal
+#check @OperatorKO7.Meta.BoundaryObserver.ThermalSourceCompletion.guardedGeometricLimitGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ThermalSourceCompletion.guardedGeometricLimitGoal
+
+#check @OperatorKO7.Meta.BoundaryObserver.ThermalSourceCompletion.entropyTailNegativeControl
+#print axioms OperatorKO7.Meta.BoundaryObserver.ThermalSourceCompletion.entropyTailNegativeControl
+
+#check @OperatorKO7.Meta.BoundaryObserver.ThermalSourceCompletion.physicalHeatBoundsEntropyDrop
+#print axioms OperatorKO7.Meta.BoundaryObserver.ThermalSourceCompletion.physicalHeatBoundsEntropyDrop
+
+#check @UniversalObservation.Reconstruction.ThermalSourceCompletion.SameSourceCNOTGoal
+#print axioms UniversalObservation.Reconstruction.ThermalSourceCompletion.SameSourceCNOTGoal
+#check @UniversalObservation.Reconstruction.ThermalSourceCompletion.sameSourceCNOTGoal
+#print axioms UniversalObservation.Reconstruction.ThermalSourceCompletion.sameSourceCNOTGoal
+
+#check @UniversalObservation.Reconstruction.ThermalSourceCompletion.sameSourceNontrivialRecordedInstrument
+#print axioms UniversalObservation.Reconstruction.ThermalSourceCompletion.sameSourceNontrivialRecordedInstrument
+
+#check @UniversalObservation.Reconstruction.ThermalSourceCompletion.sameSourceMemoryEntropyBound
+#print axioms UniversalObservation.Reconstruction.ThermalSourceCompletion.sameSourceMemoryEntropyBound
+
+#check @OperatorKO7.Meta.BoundaryObserver.ThermalSourceCompletion.entropyEnergyJointLimit_of_uniformTails
+#print axioms OperatorKO7.Meta.BoundaryObserver.ThermalSourceCompletion.entropyEnergyJointLimit_of_uniformTails
+
+#check @OperatorKO7.Meta.BoundaryObserver.ThermalSourceCompletion.geometricJointEntropyEnergyTailLicense
+#print axioms OperatorKO7.Meta.BoundaryObserver.ThermalSourceCompletion.geometricJointEntropyEnergyTailLicense
+
+#check @OperatorKO7.Meta.BoundaryObserver.ThermalSourceCompletion.noUnlicensedEntropyLimit
+#print axioms OperatorKO7.Meta.BoundaryObserver.ThermalSourceCompletion.noUnlicensedEntropyLimit
+

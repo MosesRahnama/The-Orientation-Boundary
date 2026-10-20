@@ -1,0 +1,109 @@
+cff-version: 1.2.0
+message: "Every use authorized by LICENSE requires full citation of the relevant papers and artifacts used, including media and internal use; see LICENSE Section 5 for citation content and placement."
+title: "The Orientation Boundary: Lean Companion Artifact for the Orientation Boundary, Observer Determinacy, Confluence on the Normalizing Core, Entangled Merged Pairs, and Lemma 64 Counterexample Manuscripts"
+type: software
+authors:
+  - family-names: "Rahnama"
+    given-names: "Moses"
+    email: "info@minaanalytics.com"
+    affiliation: "Mina Analytics"
+    orcid: "https://orcid.org/0009-0009-0922-483X"
+repository-code: "https://github.com/MosesRahnama/The-Orientation-Boundary"
+url: "https://github.com/MosesRahnama/The-Orientation-Boundary"
+license-url: "https://github.com/MosesRahnama/The-Orientation-Boundary/blob/main/LICENSE"
+keywords:
+  - lean4
+  - formal-verification
+  - theorem-proving
+  - termination
+  - rewrite-systems
+  - term-rewriting
+  - proof-assistant
+  - orientation-boundary
+  - primitive-recursion
+  - dependency-pairs
+  - confluence
+  - critical-pairs
+  - observers
+  - information-theory
+  - merged-pairs
+abstract: |
+  This repository contains the source-available Lean 4 companion artifact for
+  five manuscripts by Moses Rahnama: "The Orientation Boundary for
+  Step-Duplicating Recursors: A Machine-Checked Structural Theory of Termination
+  Proofs," "Observer Determinacy of Termination Certificates: Sufficient
+  Statistics, Blackwell Comparison, and Simple Projections for Step-Duplicating
+  Recursion," "Confluence on the Normalizing Core: Normal Forms Without
+  Termination or Global Normalization," "Entangled Merged Pairs: The
+  Observation-Boundary Principle," and "A Counterexample to Lemma 64 of the Kahrs and Smith Proof for RTA-79."
+
+  This package contains the Lean 4 modules named by those manuscripts or
+  required to compile them, the TTT2 and CeTA artifacts, and the four
+  claim-to-code indexes.
+references:
+  - type: article
+    title: "The Orientation Boundary for Step-Duplicating Recursors: A Machine-Checked Structural Theory of Termination Proofs"
+    authors:
+      - family-names: "Rahnama"
+        given-names: "Moses"
+        orcid: "https://orcid.org/0009-0009-0922-483X"
+    year: 2026
+    url: "https://arxiv.org/abs/2512.00081"
+    doi: "10.48550/arXiv.2512.00081"
+    repository-code: "https://github.com/MosesRahnama/The-Orientation-Boundary"
+    notes: "Preprint"
+  - type: article
+    title: "Observer Determinacy of Termination Certificates: Sufficient Statistics, Blackwell Comparison, and Simple Projections for Step-Duplicating Recursion"
+    authors:
+      - family-names: "Rahnama"
+        given-names: "Moses"
+        orcid: "https://orcid.org/0009-0009-0922-483X"
+    year: 2026
+    url: "https://arxiv.org/abs/2604.22844"
+    doi: "10.48550/arXiv.2604.22844"
+    repository-code: "https://github.com/MosesRahnama/The-Orientation-Boundary"
+    notes: "Preprint"
+  - type: article
+    title: "Confluence on the Normalizing Core: Normal Forms Without Termination or Global Normalization"
+    authors:
+      - family-names: "Rahnama"
+        given-names: "Moses"
+        orcid: "https://orcid.org/0009-0009-0922-483X"
+    year: 2026
+    url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7037939"
+    doi: "10.2139/ssrn.7037939"
+    repository-code: "https://github.com/MosesRahnama/The-Orientation-Boundary"
+    notes: "Preprint"
+  - type: article
+    title: "Entangled Merged Pairs: The Observation-Boundary Principle"
+    authors:
+      - family-names: "Rahnama"
+        given-names: "Moses"
+        orcid: "https://orcid.org/0009-0009-0922-483X"
+    year: 2026
+    url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7640059"
+    doi: "10.2139/ssrn.7640059"
+    repository-code: "https://github.com/MosesRahnama/The-Orientation-Boundary"
+    notes: "Preprint; claim-to-code index 4.BOUNDARY_OBSERVATION_PRINCIPLE_CLAIM_INDEX.md"
+  - type: article
+    title: "A Counterexample to Lemma 64 of the Kahrs and Smith Proof for RTA-79"
+    authors:
+      - family-names: "Rahnama"
+        given-names: "Moses"
+        orcid: "https://orcid.org/0009-0009-0922-483X"
+    year: 2026
+    url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7659838"
+    repository-code: "https://github.com/MosesRahnama/The-Orientation-Boundary"
+    notes: "Preprint; SSRN 7659838; summary 5.LEMMA_64_COUNTEREXAMPLE.md"
+  - type: article
+    title: "The Primitive Recursor Test: Construction-Recognition Gap and Representation-Shift Failure in Formal Reasoning in Frontier LLMs"
+    authors:
+      - family-names: "Rahnama"
+        given-names: "Moses"
+        orcid: "https://orcid.org/0009-0009-0922-483X"
+    year: 2026
+    url: "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=7647678"
+    repository-code: "https://github.com/MosesRahnama/The-Primitive-Recursor-Test"
+    notes: "Preprint; SSRN 7647678"
+version: "2026.10.20"
+date-released: "2026-10-20"

@@ -1,0 +1,173 @@
+import OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence
+
+/-! Declaration, axiom, direction, and zero-length checks. -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.State
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.State
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.point
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.point
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.indexEquiv
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.indexEquiv
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.progressObservation
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.progressObservation
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.progressObservation_state
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.progressObservation_state
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.state_progressObservation
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.state_progressObservation
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.progressObservation_nonconstant
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.progressObservation_nonconstant
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.GeneratedStep
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.GeneratedStep
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.generatedStep_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.generatedStep_iff
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.indexRelationIso
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.indexRelationIso
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.generatedStep_iff_ambient
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.generatedStep_iff_ambient
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.ambientRelationIso
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.IndexedOrbitSystem.ambientRelationIso
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.indexedOrbitSystem_equiv_nat
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.indexedOrbitSystem_equiv_nat
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.indexed_orbit_system_isomorphism_of_injective
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.indexed_orbit_system_isomorphism_of_injective
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.commonProgress
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.commonProgress
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.progressSetoid
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.progressSetoid
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.progressLicensedQuotient
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.progressLicensedQuotient
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.progressQuotientEquiv
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.progressQuotientEquiv
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.progress_quotient_equal_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.progress_quotient_equal_iff
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.counter
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.counter
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.recursorState
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.recursorState
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.counter_prefix
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.counter_prefix
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.recursorState_rank
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.recursorState_rank
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.recursorState_injective
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.recursorState_injective
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.dp_recursorState_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.dp_recursorState_iff
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.recursorOrbit
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.recursorOrbit
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.circularState
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.circularState
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.circularState_weight
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.circularState_weight
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.circularState_injective
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.circularState_injective
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.circularOrbit
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.circularOrbit
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.WrapExpansion
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.WrapExpansion
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.wrap_circularState_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.wrap_circularState_iff
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.recursor_circular_reverse_dp_iso
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.recursor_circular_reverse_dp_iso
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.recursor_circular_progress_quotient_eq
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.recursor_circular_progress_quotient_eq
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.recursor_progress_nonconstant
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.recursor_progress_nonconstant
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.no_infinite_dp_execution
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.no_infinite_dp_execution
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.no_wrap_to_dp_simulation
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.no_wrap_to_dp_simulation
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.countdownOrbit
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.countdownOrbit
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.circularPrefix
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.circularPrefix
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.PrefixStep
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.PrefixStep
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.countdown_dp_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.countdown_dp_iff
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.circularPrefix_step_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.circularPrefix_step_iff
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.finite_countdown_circular_prefix_iso
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.finite_countdown_circular_prefix_iso
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.circular_prefix_not_outgoing_closed
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.circular_prefix_not_outgoing_closed
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.UnionStep
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.UnionStep
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.QuotientStep
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.QuotientStep
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.quotientStep_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.quotientStep_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.progressQuotientRelationIso
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.progressQuotientRelationIso
+
+open OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence
+open OperatorKO7.Meta.OperationalInexpressibility.FreeRecursorKernel
+
+example : FreeRecursorDPPair (recursorState .void .void 2) (recursorState .void .void 1) :=
+  (dp_recursorState_iff _ _ _ _).mpr rfl
+
+example : ¬ FreeRecursorDPPair (recursorState .void .void 1) (recursorState .void .void 2) := by
+  rw [dp_recursorState_iff]
+  decide
+
+example : WrapExpansion .void (circularState .void .void 1) (circularState .void .void 2) := rfl
+
+example : ¬ ∃ i j : Fin 1, PrefixStep 0 i j := by
+  simp only [PrefixStep]
+  decide
+
+example : (recursorOrbit .void .void).progressObservation
+    ((recursorOrbit .void .void).point 0) ≠
+    (recursorOrbit .void .void).progressObservation
+      ((recursorOrbit .void .void).point 1) := recursor_progress_nonconstant _ _
+
+example : Nonempty (OperatorKO7.Meta.DistinctionBoundary.MinimalFork.RelIso
+    (fun x y : (countdownOrbit .void .void 0).State => FreeRecursorDPPair x.val y.val)
+    (fun x y : (circularPrefix .void .void 0).State => WrapExpansion .void x.val y.val)) :=
+  ⟨finite_countdown_circular_prefix_iso .void .void .void .void 0⟩

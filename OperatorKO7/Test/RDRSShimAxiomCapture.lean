@@ -1,0 +1,15 @@
+import OperatorKO7.Meta.RDRSWPOTrichotomy
+import OperatorKO7.Meta.RDRSOrdinalScalarizationBoundary
+import OperatorKO7.Meta.RDRSArchimedeanProjectionBarrier
+import OperatorKO7.Meta.RDRSTupleInterpretationBoundary
+import OperatorKO7.Meta.RDRSTransformationMethodAtlas
+import OperatorKO7.Meta.RDRSTerminationMethodClassifier
+
+/-! Axiom-surface capture for the 6 shim marker theorems (Brief C-062). -/
+
+#print axioms OperatorKO7.RDRSWPOTrichotomy.rdrs_wpo_trichotomy_shim_marker
+#print axioms OperatorKO7.RDRSOrdinalScalarizationBoundary.rdrs_ordinal_scalarization_boundary_shim_marker
+#print axioms OperatorKO7.RDRSArchimedeanProjectionBarrier.rdrs_archimedean_projection_barrier_shim_marker
+#print axioms OperatorKO7.RDRSTupleInterpretationBoundary.rdrs_tuple_interpretation_boundary_shim_marker
+#print axioms OperatorKO7.RDRSTransformationMethodAtlas.rdrs_transformation_method_atlas_shim_marker
+#print axioms OperatorKO7.RDRSTerminationMethodClassifier.rdrs_termination_method_classifier_shim_marker

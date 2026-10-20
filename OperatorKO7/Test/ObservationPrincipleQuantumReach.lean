@@ -1,0 +1,38 @@
+import OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum
+
+set_option autoImplicit false
+set_option pp.fullNames true
+set_option pp.universes true
+
+/-! Declaration and axiom checks for every theorem of the module of quantum reconstruction, thermal and channel sentences of the Boundary-Observation Principle. -/
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.overlap_trace_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.overlap_trace_one
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.effect_probability_real
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.effect_probability_real
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.reference_entropy_values
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.reference_entropy_values
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.thermalSystem_posDef
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.thermalSystem_posDef
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.operation_output_entropy_pos
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.operation_output_entropy_pos
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.exists_minimizing_sequence
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.exists_minimizing_sequence
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.least_heat_limit
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.least_heat_limit
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.fair_pair_staircase
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.fair_pair_staircase
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.projective_outcome_probabilities
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.projective_outcome_probabilities
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.phaseCorrelation_diag
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.phaseCorrelation_diag
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.phaseEnsemble_removes_coherence_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.phaseEnsemble_removes_coherence_iff
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.diagonal_preserving_composes
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.diagonal_preserving_composes
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.class_compression_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.class_compression_iff
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.channel_dilation_nm
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.channel_dilation_nm
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.cnot_branch_all_matrices
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleQuantum.cnot_branch_all_matrices

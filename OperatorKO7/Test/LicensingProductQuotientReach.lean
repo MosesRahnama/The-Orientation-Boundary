@@ -1,0 +1,19 @@
+import OperatorKO7.Meta.LicensedBoundaryCalculus.LicensingProductQuotient
+
+open OperatorKO7.Meta.LicensedBoundaryCalculus.LicensingProductQuotient
+
+#check ProductStep
+#check productStep_star_left
+#check productStep_star_right
+#check productStep_star_components
+#check productStep_star_iff
+#check box_product_iff
+#check roleErasure_quotient_no_discriminator
+#check licensedPairSubrelation_box_iff_d1p
+#print axioms productStep_star_left
+#print axioms productStep_star_right
+#print axioms productStep_star_components
+#print axioms productStep_star_iff
+#print axioms box_product_iff
+#print axioms roleErasure_quotient_no_discriminator
+#print axioms licensedPairSubrelation_box_iff_d1p

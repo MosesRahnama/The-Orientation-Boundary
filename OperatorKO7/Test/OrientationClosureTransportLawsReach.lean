@@ -1,0 +1,84 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.TransportLaws
+
+/-! # TransportLaws reach and axiom check -/
+
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.OrientsRelation
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.OrientsRelation
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.no_orienter_of_subrelation
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.no_orienter_of_subrelation
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.wellFounded_of_subrelation
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.wellFounded_of_subrelation
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.renamedRelation
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.renamedRelation
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.renamedRelation_wellFounded
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.renamedRelation_wellFounded
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.originalRelation_wellFounded_of_renamed
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.originalRelation_wellFounded_of_renamed
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.renamedRelation_wellFounded_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.renamedRelation_wellFounded_iff
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.PositiveSimulation
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.PositiveSimulation
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.PositiveSimulation.mk
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.PositiveSimulation.mk
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.PositiveSimulation.encode
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.PositiveSimulation.encode
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.PositiveSimulation.forward
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.PositiveSimulation.forward
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.source_wellFounded_of_positiveSimulation
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.source_wellFounded_of_positiveSimulation
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.positiveSimulation_injectivity_not_required
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.positiveSimulation_injectivity_not_required
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.ReflexiveSimulation
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.ReflexiveSimulation
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.ReflexiveSimulation.mk
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.ReflexiveSimulation.mk
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.ReflexiveSimulation.encode
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.ReflexiveSimulation.encode
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.ReflexiveSimulation.forward
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.ReflexiveSimulation.forward
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.LoopSource
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.LoopSource
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.EmptyTarget
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.EmptyTarget
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.zeroStepLoopSimulation
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.zeroStepLoopSimulation
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.emptyTarget_wellFounded
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.emptyTarget_wellFounded
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.loopSource_not_wellFounded
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.loopSource_not_wellFounded
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.reflexiveSimulation_does_not_transfer_termination
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.reflexiveSimulation_does_not_transfer_termination
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.transportControlSize
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.transportControlSize
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.transportControlSize_plug_lt
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.transportControlSize_plug_lt
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.ZeroRuleContextStep
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.ZeroRuleContextStep
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.ZeroRuleContextStep.lift
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.ZeroRuleContextStep.lift
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.zeroRuleContextStep_contextStep
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.zeroRuleContextStep_contextStep
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.transportControlSize_orients_zeroRuleContextStep
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.transportControlSize_orients_zeroRuleContextStep
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.rootBarrier_transfer_fails_without_root_inclusion
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.rootBarrier_transfer_fails_without_root_inclusion
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.FourState
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.FourState
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.FourState.x
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.FourState.x
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.FourState.a
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.FourState.a
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.FourState.b
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.FourState.b
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.FourState.z
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.FourState.z
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.forkJoinSource
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.forkJoinSource
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.forkOnlyTarget
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.forkOnlyTarget
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.forkJoinSource_reaches_z
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.forkJoinSource_reaches_z
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.forkOnlyTarget_stuck
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.forkOnlyTarget_stuck
+#check @OperatorKO7.Methods.OrientationClosure.TransportLaws.reflection_without_preservation_breaks_confluence
+#print axioms OperatorKO7.Methods.OrientationClosure.TransportLaws.reflection_without_preservation_breaks_confluence

@@ -1,0 +1,5 @@
+(VAR b s n)
+(RULES
+  recur(b, s, zero) -> b
+  recur(b, s, succ(n)) -> wrap(s, recur(b, s, n))
+)

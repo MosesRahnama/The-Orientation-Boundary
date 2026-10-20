@@ -1,0 +1,45 @@
+import OperatorKO7.Meta.RDRSFreeRecursorErasure
+
+/-!
+# Reach file for the free-recursor payload erasure
+
+Paired `#check @` and `#print axioms` for every public declaration of
+`OperatorKO7.Meta.RDRSFreeRecursorErasure`.
+-/
+
+set_option autoImplicit false
+
+namespace OperatorKO7.RDRSFreeRecursorErasureReach
+
+open OperatorKO7.RDRSFreeRecursorErasure
+
+#check @freeRecursorSuccStep
+#print axioms OperatorKO7.RDRSFreeRecursorErasure.freeRecursorSuccStep
+#check @freeRecursorSuccStep_instance_iff
+#print axioms OperatorKO7.RDRSFreeRecursorErasure.freeRecursorSuccStep_instance_iff
+#check @freeRecursorErase
+#print axioms OperatorKO7.RDRSFreeRecursorErasure.freeRecursorErase
+#check @freeRecursorPayloadErasure
+#print axioms OperatorKO7.RDRSFreeRecursorErasure.freeRecursorPayloadErasure
+#check @freeRecursor_erased_measure_orients
+#print axioms OperatorKO7.RDRSFreeRecursorErasure.freeRecursor_erased_measure_orients
+#check @freeRecursor_orienting_measure_counter_dominated
+#print axioms OperatorKO7.RDRSFreeRecursorErasure.freeRecursor_orienting_measure_counter_dominated
+#check @freeRecursor_no_decisive_payload_sensitive
+#print axioms OperatorKO7.RDRSFreeRecursorErasure.freeRecursor_no_decisive_payload_sensitive
+#check @freeRecursor_no_direct_decisive_payload_sensitive
+#print axioms OperatorKO7.RDRSFreeRecursorErasure.freeRecursor_no_direct_decisive_payload_sensitive
+#check @freeSuccDepth
+#print axioms OperatorKO7.RDRSFreeRecursorErasure.freeSuccDepth
+#check @freeCounterPayloadWeight
+#print axioms OperatorKO7.RDRSFreeRecursorErasure.freeCounterPayloadWeight
+#check @freeCounterPayloadMeasure
+#print axioms OperatorKO7.RDRSFreeRecursorErasure.freeCounterPayloadMeasure
+#check @freeCounterPayloadMeasure_orients
+#print axioms OperatorKO7.RDRSFreeRecursorErasure.freeCounterPayloadMeasure_orients
+#check @freeCounterPayloadMeasure_payloadSensitiveRaw
+#print axioms OperatorKO7.RDRSFreeRecursorErasure.freeCounterPayloadMeasure_payloadSensitiveRaw
+#check @freeCounterPayloadMeasure_counter_dominated
+#print axioms OperatorKO7.RDRSFreeRecursorErasure.freeCounterPayloadMeasure_counter_dominated
+
+end OperatorKO7.RDRSFreeRecursorErasureReach

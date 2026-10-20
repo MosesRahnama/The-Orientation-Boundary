@@ -1,0 +1,123 @@
+import OperatorKO7.Meta.UniqueNormalization.HubVariableConditionBoundary
+
+/-!
+# Reach and axiom check for `Meta/UniqueNormalization/HubVariableConditionBoundary.lean`
+
+Pins every public declaration, structure constructor, field and parent projection, and
+inductive constructor of the paired module, each with a paired axiom query, followed by the
+package controls. Baseline axioms only. -/
+
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.apply_eq_of_varOccurs_agree
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.apply_eq_of_varOccurs_agree
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.updateAt
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.updateAt
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.updateAt_same
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.updateAt_same
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.updateAt_ne
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.updateAt_ne
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.FreshRootGoal
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.FreshRootGoal
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.fresh_rhs_root_universal
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.fresh_rhs_root_universal
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.fresh_rhs_conversion_universal
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.fresh_rhs_conversion_universal
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.varOccurs_var_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.varOccurs_var_iff
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.freshRhs_conversion_universal
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.freshRhs_conversion_universal
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.ForbiddenSourceOverlap
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.ForbiddenSourceOverlap
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.forbiddenSourceOverlap_iff_not_nonOmegaOverlapping
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.forbiddenSourceOverlap_iff_not_nonOmegaOverlapping
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.UnrestrictedReconstructOrForbid
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.UnrestrictedReconstructOrForbid
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.RestrictedReconstructOrForbid
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.RestrictedReconstructOrForbid
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.restricted_of_unrestricted
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.restricted_of_unrestricted
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.ruleD
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.ruleD
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.ruleFxx
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.ruleFxx
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.ruleFab
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.ruleFab
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_rules
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_rules
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_lhs_subterm_cases
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_lhs_subterm_cases
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_patterns_not_omegaUnifiable
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_patterns_not_omegaUnifiable
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_patterns_not_omegaUnifiable_symm
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_patterns_not_omegaUnifiable_symm
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_nonOmegaOverlapping
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_nonOmegaOverlapping
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_not_rhsDetermined
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_not_rhsDetermined
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_violates_variable_condition
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_violates_variable_condition
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_step_d
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_step_d
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_a_conv_b
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_a_conv_b
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_const_normalForm
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_const_normalForm
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_not_UNconv
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_not_UNconv
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_conversion_universal
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_conversion_universal
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.hubD
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.hubD
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.hubFxx
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.hubFxx
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.hubFab
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.hubFab
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.ruleFreshBase_ruleD
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.ruleFreshBase_ruleD
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.ruleFreshBase_ruleFxx
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.ruleFreshBase_ruleFxx
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.ruleFreshBase_ruleFab
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.ruleFreshBase_ruleFab
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.crule_ext
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.crule_ext
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.hubCRule_ruleD
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.hubCRule_ruleD
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.hubCRule_ruleFxx
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.hubCRule_ruleFxx
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.hubCRule_ruleFab
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.hubCRule_ruleFab
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_hub_rules_eq
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_hub_rules_eq
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.overlapSubst
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.overlapSubst
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_feasible_data
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_feasible_data
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.hubCRule_ruleFxx_mem
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.hubCRule_ruleFxx_mem
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.hubCRule_ruleFab_mem
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.hubCRule_ruleFab_mem
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_hub_feasible
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_hub_feasible
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_forbidden_overlap_absent
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_forbidden_overlap_absent
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.unrestricted_reconstruction_false
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.unrestricted_reconstruction_false
+#check @OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_counterexample_package
+#print axioms OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary.reconstruction_counterexample_package
+
+open OperatorKO7.Meta.Rewriting OperatorKO7.Meta.UniqueNormalization OperatorKO7.Meta.UniqueNormalization.FreshVariableBoundary
+
+/-! Controls: the unrestricted statement is refuted, the fixture converts its two normal
+constants, the generic theorem specializes to `FreshRhs`, and the restricted statement follows
+from the unrestricted one. -/
+
+example : ¬ UnrestrictedReconstructOrForbid := unrestricted_reconstruction_false
+
+example : conv reconstruction_rules (.app 2 []) (.app 3 []) := reconstruction_a_conv_b
+
+example (t₁ t₂ : Term Nat Nat) : conv FreshRhs.trs t₁ t₂ := freshRhs_conversion_universal t₁ t₂
+
+example : UnrestrictedReconstructOrForbid → RestrictedReconstructOrForbid :=
+  restricted_of_unrestricted
+
+example : NonOmegaOverlapping reconstruction_rules ∧ ¬ TRS.RhsDetermined reconstruction_rules :=
+  ⟨reconstruction_nonOmegaOverlapping, reconstruction_not_rhsDetermined⟩

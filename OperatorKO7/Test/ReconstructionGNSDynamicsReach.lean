@@ -1,0 +1,123 @@
+import OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics
+
+/-!
+# General positive-functional Hilbert dynamics public reach
+
+Reachability check for the Hilbert dynamics surface.
+-/
+
+set_option autoImplicit false
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.InvariantStarFlow
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.InvariantStarFlow
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.invariant_form
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.invariant_form
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.invariant_null_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.invariant_null_iff
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.quotientFlow
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.quotientFlow
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.quotientFlow_class
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.quotientFlow_class
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.quotientFlow_inner
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.quotientFlow_inner
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.quotientFlow_norm
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.quotientFlow_norm
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.quotientIsometry
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.quotientIsometry
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.quotientFlow_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.quotientFlow_zero
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.quotientFlow_add
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.quotientFlow_add
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.quotientFlow_inverse
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.quotientFlow_inverse
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_continuous
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_continuous
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_class
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_class
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_add
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_add
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_smul
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_smul
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertOperator
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertOperator
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_norm
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_norm
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertIsometry
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertIsometry
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_dist
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_dist
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_zero
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_group
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_group
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_inverse
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_inverse
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertUnitary
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertUnitary
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertUnitary_apply
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertUnitary_apply
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_inner
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_inner
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_cyclic
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_cyclic
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_covariant
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertValue_covariant
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.classLinear
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.classLinear
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.classOf_norm_le
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.classOf_norm_le
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.classContinuous
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.classContinuous
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.quotientOrbit_continuous
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.quotientOrbit_continuous
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertDenseOrbit_continuous
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertDenseOrbit_continuous
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertStrongContinuous
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.hilbertStrongContinuous
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.GeneralHilbertDynamicsGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.GeneralHilbertDynamicsGoal
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.generalHilbertDynamicsGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.generalHilbertDynamicsGoal
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.compatibleStageStateIdentity
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.compatibleStageStateIdentity
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.compatibleStageCyclicUnit
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.compatibleStageCyclicUnit
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.compatibleStateUnique
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.compatibleStateUnique
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.CompatibleGeneralGNSRecoveryGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.CompatibleGeneralGNSRecoveryGoal
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.compatibleGeneralGNSRecoveryGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionGNSDynamics.compatibleGeneralGNSRecoveryGoal

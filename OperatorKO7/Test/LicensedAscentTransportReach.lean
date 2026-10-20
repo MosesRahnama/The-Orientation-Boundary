@@ -1,0 +1,100 @@
+import OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport
+
+/-!
+# Reach gate: licensed-ascent objects and their transport table
+
+Pins every public declaration of the modules listed below with a paired
+`#check @name` and `#print axioms name`. Source-to-reach and reach-to-axiom
+differences are empty by construction: this file is generated from the
+namespace-aware declaration inventory of those sources. Every axiom closure must
+be a subset of `{propext, Classical.choice, Quot.sound}` and no closure may
+mention `sorryAx`. This gate is import-and-check only; it proves no new content.
+
+* `OperatorKO7/Meta/LicensedBoundaryCalculus/LicensedAscentObject.lean`: 12 public declarations
+* `OperatorKO7/Meta/LicensedBoundaryCalculus/LicensedAscentTransport.lean`: 12 public declarations
+* structure constructor and projections pinned explicitly: 12
+-/
+
+set_option autoImplicit false
+
+namespace OperatorKO7.Test.LicensedAscentTransportReach
+
+-- OperatorKO7/Meta/LicensedBoundaryCalculus/LicensedAscentObject.lean
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.LicensedAscentObject
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.LicensedAscentObject
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom.toExpiryHom
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom.toExpiryHom
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom.id
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom.id
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom.comp
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom.comp
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom.id_comp
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom.id_comp
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom.comp_id
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom.comp_id
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom.comp_assoc
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom.comp_assoc
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.licensedAscent_category_laws
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.licensedAscent_category_laws
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.toAscentProfile
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.toAscentProfile
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.toAscentProfile_realizes
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.toAscentProfile_realizes
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.toAscentProfile_compatible
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.toAscentProfile_compatible
+
+-- OperatorKO7/Meta/LicensedBoundaryCalculus/LicensedAscentTransport.lean
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.distinctionAscent
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.distinctionAscent
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.orientationAscent
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.orientationAscent
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.quotationAscent
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.quotationAscent
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.no_ascentHom_distinction_orientation
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.no_ascentHom_distinction_orientation
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.no_ascentHom_orientation_distinction
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.no_ascentHom_orientation_distinction
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.no_ascentHom_orientation_quotation
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.no_ascentHom_orientation_quotation
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.no_ascentHom_quotation_orientation
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.no_ascentHom_quotation_orientation
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.no_ascentHom_quotation_distinction
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.no_ascentHom_quotation_distinction
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.ascentHom_distinction_quotation
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.ascentHom_distinction_quotation
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.licensed_ascent_transport_table
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.licensed_ascent_transport_table
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.licensed_ascent_failing_laws
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.licensed_ascent_failing_laws
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.licensed_ascent_identity_split
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscentTransport.licensed_ascent_identity_split
+
+-- structure constructor and projections
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.LicensedAscentObject.mk
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.LicensedAscentObject.mk
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.LicensedAscentObject.toExpiryObject
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.LicensedAscentObject.toExpiryObject
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.LicensedAscentObject.obstruction
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.LicensedAscentObject.obstruction
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.LicensedAscentObject.obstruction_unlicensed
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.LicensedAscentObject.obstruction_unlicensed
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.LicensedAscentObject.repaired
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.LicensedAscentObject.repaired
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.LicensedAscentObject.repaired_sub
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.LicensedAscentObject.repaired_sub
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.LicensedAscentObject.repaired_licensed
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.LicensedAscentObject.repaired_licensed
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.LicensedAscentObject.repair_witness
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.LicensedAscentObject.repair_witness
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom.mk
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom.mk
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom.toHom
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom.toHom
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom.obstruction_map
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom.obstruction_map
+#check @OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom.repaired_preserve
+#print axioms OperatorKO7.Meta.LicensedBoundaryCalculus.LicensedAscent.AscentHom.repaired_preserve
+
+end OperatorKO7.Test.LicensedAscentTransportReach

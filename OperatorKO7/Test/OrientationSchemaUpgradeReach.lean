@@ -1,0 +1,55 @@
+import OperatorKO7.Meta.MatrixBarrierTropicalContextClosure_Schema
+import OperatorKO7.Meta.DependencyPairs_Normalization
+import OperatorKO7.Meta.ContextClosed_Nonconfluence
+import OperatorKO7.Meta.RootStrategyNormalization
+import OperatorKO7.Meta.RDRSCoverageEvidenceLedger
+
+open OperatorKO7.StepDuplicating.StepDuplicatingSchema
+open OperatorKO7.Methods.AlgebraicInterpretationRows
+
+#check @projection_orients_dup_step
+#print axioms projection_orients_dup_step
+#check @projection_violates_wrap_subterm1
+#print axioms projection_violates_wrap_subterm1
+#check @projection_violates_wrap_subterm2
+#print axioms projection_violates_wrap_subterm2
+#check @freeProjectionRank
+#print axioms freeProjectionRank
+#check @OperatorKO7.CompositionalImpossibility.dpProjectionRank
+#print axioms OperatorKO7.CompositionalImpossibility.dpProjectionRank
+#check @unitAffineNatEval
+#print axioms unitAffineNatEval
+#check @unitAffineNatMeasure
+#print axioms unitAffineNatMeasure
+#check @unitAffineNatMeasure_nonconstant
+#print axioms unitAffineNatMeasure_nonconstant
+#check @unitRationalAffine
+#print axioms unitRationalAffine
+#check @unitRealAffine
+#print axioms unitRealAffine
+#check @unitRationalAffine_nonconstant
+#print axioms unitRationalAffine_nonconstant
+#check @unitRealAffine_nonconstant
+#print axioms unitRealAffine_nonconstant
+#check @LinearPolyQRowClaim
+#print axioms LinearPolyQRowClaim
+#check @LinearPolyRRowClaim
+#print axioms LinearPolyRRowClaim
+#check @linearPolyQ_row_anchor
+#print axioms linearPolyQ_row_anchor
+#check @linearPolyR_row_anchor
+#print axioms linearPolyR_row_anchor
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.rationalAffineInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.rationalAffineInterpretation
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.realAffineInterpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.realAffineInterpretation
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.rowClaim_of_interpretation
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.rowClaim_of_interpretation
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.anchorInstance_of_rowClaim
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.anchorInstance_of_rowClaim
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows_count
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.theoremBackedRows_count
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.curatedRows_count
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.curatedRows_count
+#check @OperatorKO7.RDRSCoverageLedger.Evidence.rdrs_coverage_evidence_ledger_closed
+#print axioms OperatorKO7.RDRSCoverageLedger.Evidence.rdrs_coverage_evidence_ledger_closed

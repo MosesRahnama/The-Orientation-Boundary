@@ -1,0 +1,79 @@
+import OperatorKO7.Meta.BoundaryObserver.BoundarySingularity
+import OperatorKO7.Meta.BoundaryObserver.BoundarySingularityQuantum
+
+set_option autoImplicit false
+
+/-! Paired checks for every public declaration of BoundarySingularity. -/
+
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.discrimination
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.discrimination
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.discrimination_term_nonneg
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.discrimination_term_nonneg
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.discrimination_nonneg
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.discrimination_nonneg
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.discrimination_term_le_abs
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.discrimination_term_le_abs
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.discrimination_le_sum_abs
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.discrimination_le_sum_abs
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.discrimination_eq_zero_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.discrimination_eq_zero_iff
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.discrimination_deterministic
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.discrimination_deterministic
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.discrimination_binaryKernel
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.discrimination_binaryKernel
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.negMulLog_mix_le
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.negMulLog_mix_le
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.chi_term_le_discrimination_term
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.chi_term_le_discrimination_term
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.binary_information_le_discrimination
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.binary_information_le_discrimination
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.PairMenu
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.PairMenu
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.BinaryMenu.toPairMenu
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.BinaryMenu.toPairMenu
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.posterior_eq_binaryPrior_of_pos
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.posterior_eq_binaryPrior_of_pos
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.pairMenu_localGain_le
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.pairMenu_localGain_le
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.pairMenu_capacity
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.pairMenu_capacity
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.pairMenu_information_bound
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.pairMenu_information_bound
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.pairMenu_cost_lower_bound
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.pairMenu_cost_lower_bound
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.pairMenu_zero_discrimination
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.pairMenu_zero_discrimination
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.pairMenu_limit_cost_lower
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.pairMenu_limit_cost_lower
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.pairMenu_limit_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.pairMenu_limit_zero
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.boundary_singularity
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.boundary_singularity
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.embedAt
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.embedAt
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.embedAt_ne_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.embedAt_ne_zero
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.marginalLeft_quadratic
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.marginalLeft_quadratic
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.marginalLeft_posDef
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.marginalLeft_posDef
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.entropy_pos_of_posDef
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.entropy_pos_of_posDef
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.spectralLift_posDef
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.spectralLift_posDef
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.tensor_posDef
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.tensor_posDef
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.thermalJoint_posDef
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.thermalJoint_posDef
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.no_exact_thermal_erasure
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.no_exact_thermal_erasure
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.fairPair
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.fairPair
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.fairPair_posDef
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.fairPair_posDef
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.fairPair_trace
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.fairPair_trace
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.fairPair_entropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.fairPair_entropy
+#check @OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.fair_pair_not_erased
+#print axioms OperatorKO7.Meta.BoundaryObserver.BoundarySingularity.Thermal.fair_pair_not_erased

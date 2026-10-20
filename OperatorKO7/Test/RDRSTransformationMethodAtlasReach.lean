@@ -1,0 +1,10 @@
+import OperatorKO7.Meta.RDRSTransformationMethodAtlas
+
+namespace OperatorKO7.Test.RDRSTransformationMethodAtlasReach
+
+#check @OperatorKO7.RDRSTransformationMethodAtlas.supersededBy
+#check @OperatorKO7.RDRSTransformationMethodAtlas.rdrs_transformation_method_atlas_shim_marker
+#check @OperatorKO7.RDRSConditionalTypedAtlas.conditionalTypedRows_length
+#check @OperatorKO7.RDRSConditionalTypedAtlas.conditionalTypedRows_nodup
+
+end OperatorKO7.Test.RDRSTransformationMethodAtlasReach

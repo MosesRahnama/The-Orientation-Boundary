@@ -1,0 +1,84 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.InterpretationLaws
+
+/-!
+# InterpretationLaws reach and axiom check
+
+Paired declaration reach and axiom checks for `InterpretationLaws.lean`.
+-/
+
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.eval
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.eval
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.eval_var
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.eval_var
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.eval_zero
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.eval_zero
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.eval_succ
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.eval_succ
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.eval_wrap
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.eval_wrap
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.eval_recur
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.eval_recur
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.eval_subst
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.eval_subst
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.StrictContextLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.StrictContextLaws
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.WeakContextLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.WeakContextLaws
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.RootRuleOrients
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.RootRuleOrients
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.eval_rootStep_decreases
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.eval_rootStep_decreases
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.eval_plug_strict
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.eval_plug_strict
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.eval_contextStep_decreases
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.eval_contextStep_decreases
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.contextStep_reverse_wellFounded
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.contextStep_reverse_wellFounded
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.substituted_rootStep_decreases
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.substituted_rootStep_decreases
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.mk
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.mk
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.zero
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.zero
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.succ
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.succ
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.wrap
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.wrap
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.recur
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.Interpretation.recur
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.StrictContextLaws.mk
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.StrictContextLaws.mk
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.StrictContextLaws.succ
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.StrictContextLaws.succ
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.StrictContextLaws.wrapLeft
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.StrictContextLaws.wrapLeft
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.StrictContextLaws.wrapRight
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.StrictContextLaws.wrapRight
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.StrictContextLaws.recurBase
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.StrictContextLaws.recurBase
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.StrictContextLaws.recurStep
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.StrictContextLaws.recurStep
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.StrictContextLaws.recurCounter
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.StrictContextLaws.recurCounter
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.WeakContextLaws.mk
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.WeakContextLaws.mk
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.WeakContextLaws.succ
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.WeakContextLaws.succ
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.WeakContextLaws.wrapLeft
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.WeakContextLaws.wrapLeft
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.WeakContextLaws.wrapRight
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.WeakContextLaws.wrapRight
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.WeakContextLaws.recurBase
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.WeakContextLaws.recurBase
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.WeakContextLaws.recurStep
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.WeakContextLaws.recurStep
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.WeakContextLaws.recurCounter
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.WeakContextLaws.recurCounter
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.RootRuleOrients.mk
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.RootRuleOrients.mk
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.RootRuleOrients.recurZero
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.RootRuleOrients.recurZero
+#check @OperatorKO7.Methods.OrientationClosure.InterpretationLaws.RootRuleOrients.recurSucc
+#print axioms OperatorKO7.Methods.OrientationClosure.InterpretationLaws.RootRuleOrients.recurSucc

@@ -1,0 +1,174 @@
+import OperatorKO7.Meta.HigherOrderRewriting_FinalCatalog
+
+namespace HigherOrderRewritingFinalCatalogReach
+
+open OperatorKO7
+
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.HigherOrderRewritingCatalog
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.higher_order_rewriting_final_catalog
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_restricted_fragment_transport
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_no_sharing_boundary_transport
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_shared_policy_orients_step
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_explicit_sharing_policy_orients_step
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_shared_counterexample
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_explicit_sharing_counterexample
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_tree_binder_free_substitution_closed
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_shared_binder_free_substitution_closed
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_explicit_sharing_binder_free_substitution_closed
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_tree_binder_free_context_closed
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_shared_binder_free_context_closed
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_explicit_sharing_binder_free_context_closed
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_beta_step_transport
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_beta_contextual_closure
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_binder_aware_freshness_obligation
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_beta_compatible_counterexample
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_beta_compatible_not_oriented
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_policy_branch_split
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_policy_subfamilies
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_capture_subfamily_catalog
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_decidable_classifier_catalog
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_capture_decidable_catalog
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_policy_audit_catalog
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_full_capture_boundary_catalog
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_closeout_catalog
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_isLam_classifier_eq_true_iff
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_binderFree_classifier_eq_true_iff
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_shareFree_classifier_eq_true_iff
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_betaFree_classifier_eq_true_iff
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_linear_classifier_eq_true_iff
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_dagShared_classifier_eq_true_iff
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_binderFreeContext_classifier_eq_true_iff
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_betaFreeContext_classifier_eq_true_iff
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_closedFragment_implies_betaFree_classifier_true
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_closedFragment_implies_binderFree_classifier_true
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_shareFree_closedFragment_implies_linear_classifier_true
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_embedSharedTerm_implies_dagShared_classifier_true
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_binderFreeContext_classifier_true_implies_plug_preserves_binderFree
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_betaFreeContext_classifier_true_implies_plug_preserves_betaFree
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_closed_fragment_beta_free
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_closed_fragment_binder_free
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_binder_free_term_context_closure
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_beta_free_term_context_closure
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_share_free_fragment_old_boundary_embedding
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_beta_counterexample_package
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_capture_safe_freshness
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_capture_safe_binder_free_closure
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_capture_safe_share_free_closure
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_tree_binder_free_branch
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_shared_dag_branch
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_explicit_sharing_branch
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_beta_compatible_branch
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_context_safe_binder_free_closure
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_context_safe_beta_free_closure
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_full_capture_semantics_exact_boundary
+#check OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_unqualified_lift_blocker
+
+example : OperatorKO7.HigherOrderRewritingFinalCatalog.HigherOrderRewritingCatalog :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.higher_order_rewriting_final_catalog
+
+example : OperatorKO7.HigherOrderNoSharingBoundary.NoSharingBoundaryStatus :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_no_sharing_boundary_transport
+
+example {t : OperatorKO7.HigherOrderRewritingSyntax.HOTerm}
+    (ht : OperatorKO7.HigherOrderRewritingSyntax.ClosedFragment t) :
+    OperatorKO7.HigherOrderRewritingSyntax.ClosedFragment
+      (OperatorKO7.HigherOrderRewritingBetaBinder.binderFreeSubstitute 0
+        OperatorKO7.HigherOrderRewritingSyntax.HOTerm.atom t) :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_tree_binder_free_substitution_closed ht
+
+example : OperatorKO7.HigherOrderRewritingBoundary.PolicySubfamilyStatus :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_policy_subfamilies
+
+example : OperatorKO7.HigherOrderRewritingCaptureSubfamilies.HigherOrderCaptureSubfamilyCatalog :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_capture_subfamily_catalog
+
+example : OperatorKO7.HigherOrderRewritingDecidableClassifiers.HigherOrderDecidableClassifierCatalog :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_decidable_classifier_catalog
+
+example : OperatorKO7.HigherOrderRewritingCaptureDecidable.HigherOrderCaptureDecidableCatalog :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_capture_decidable_catalog
+
+example : OperatorKO7.HigherOrderRewritingPolicyAudit.HigherOrderPolicyAuditCatalog :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_policy_audit_catalog
+
+example : OperatorKO7.HigherOrderRewritingFullCaptureBoundary.HigherOrderFullCaptureBoundaryCatalog :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_full_capture_boundary_catalog
+
+example : OperatorKO7.HigherOrderRewritingCloseout.HigherOrderRewritingCloseoutCatalog :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_closeout_catalog
+
+example {t : OperatorKO7.HigherOrderRewritingSyntax.HOTerm} :
+    OperatorKO7.HigherOrderRewritingDecidableClassifiers.binderFree? t = true ↔
+      OperatorKO7.HigherOrderRewritingCaptureSubfamilies.BinderFreeHOTerm t :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_binderFree_classifier_eq_true_iff
+
+example {t : OperatorKO7.HigherOrderRewritingSyntax.HOTerm}
+    (ht : OperatorKO7.HigherOrderRewritingSyntax.ClosedFragment t) :
+    OperatorKO7.HigherOrderRewritingDecidableClassifiers.betaFree? t = true :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_closedFragment_implies_betaFree_classifier_true ht
+
+example {t : OperatorKO7.HigherOrderRewritingSyntax.HOTerm}
+    (ht : OperatorKO7.HigherOrderRewritingSyntax.ClosedFragment t) :
+    OperatorKO7.HigherOrderRewritingCaptureSubfamilies.BetaFreeHOTerm t :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_closed_fragment_beta_free ht
+
+example {t : OperatorKO7.HigherOrderRewritingSyntax.HOTerm}
+    (ht : OperatorKO7.HigherOrderRewritingSyntax.ClosedFragment t)
+    (hs : OperatorKO7.HigherOrderRewritingCaptureSubfamilies.ShareFreeHOTerm t) :
+    OperatorKO7.HigherOrderRewritingCaptureSubfamilies.LinearHOTerm t /\
+      OperatorKO7.HigherOrderRewritingCaptureSubfamilies.ShareFreeBoundaryEmbedding t :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_tree_binder_free_branch ht hs
+
+example : OperatorKO7.HigherOrderRewritingCaptureSubfamilies.BetaCounterexamplePackage :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_beta_counterexample_package
+
+example : OperatorKO7.HigherOrderRewritingCaptureSubfamilies.FullCaptureSemanticsStatus :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_full_capture_semantics_exact_boundary
+
+example : OperatorKO7.HigherOrderRewritingBetaBinder.PolicyBranchSplitStatus :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_policy_branch_split
+
+example : ¬ OperatorKO7.HigherOrderRewritingBetaBinder.BetaStepOrientsPolicyCounter
+    OperatorKO7.HigherOrderRewritingSyntax.betaCompatiblePolicy :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_beta_compatible_not_oriented
+
+example : ¬ OperatorKO7.HigherOrderRewritingBoundary.UnqualifiedHigherOrderRewritingLiftClaim :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_unqualified_lift_blocker
+
+example : ∃ a b : OperatorKO7.HigherOrderRewritingSyntax.HOTerm,
+    OperatorKO7.HigherOrderRewritingBetaBinder.BetaStep a b ∧
+      ¬ OperatorKO7.HigherOrderRewritingBoundary.PolicyCounter
+          OperatorKO7.HigherOrderRewritingSyntax.betaCompatiblePolicy b <
+        OperatorKO7.HigherOrderRewritingBoundary.PolicyCounter
+          OperatorKO7.HigherOrderRewritingSyntax.betaCompatiblePolicy a :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_beta_compatible_counterexample
+
+example (b s n : OperatorKO7.SharingBarrierLift.SharedTerm) :
+    OperatorKO7.HigherOrderRewritingBoundary.PolicyCounter
+      OperatorKO7.HigherOrderRewritingSyntax.sharedPolicy
+      (OperatorKO7.HigherOrderRewritingSyntax.embedBoundaryHOTerm
+        (OperatorKO7.HigherOrderSharingBoundary.embedSharedTerm
+          (OperatorKO7.SharingBarrierLift.SharedTerm.shareApp s
+            (OperatorKO7.SharingBarrierLift.SharedTerm.recur b s n)))) <
+    OperatorKO7.HigherOrderRewritingBoundary.PolicyCounter
+      OperatorKO7.HigherOrderRewritingSyntax.sharedPolicy
+      (OperatorKO7.HigherOrderRewritingSyntax.embedBoundaryHOTerm
+        (OperatorKO7.HigherOrderSharingBoundary.embedSharedTerm
+          (OperatorKO7.SharingBarrierLift.SharedTerm.recur b s
+            (OperatorKO7.SharingBarrierLift.SharedTerm.succ n)))) :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_shared_counterexample b s n
+
+example (b s n : OperatorKO7.SharingBarrierLift.SharedTerm) :
+    OperatorKO7.HigherOrderRewritingBoundary.PolicyCounter
+      OperatorKO7.HigherOrderRewritingSyntax.explicitSharingPolicy
+      (OperatorKO7.HigherOrderRewritingSyntax.embedSharedTerm
+        (OperatorKO7.SharingBarrierLift.SharedTerm.shareApp s
+          (OperatorKO7.SharingBarrierLift.SharedTerm.recur b s n))) <
+    OperatorKO7.HigherOrderRewritingBoundary.PolicyCounter
+      OperatorKO7.HigherOrderRewritingSyntax.explicitSharingPolicy
+      (OperatorKO7.HigherOrderRewritingSyntax.embedSharedTerm
+        (OperatorKO7.SharingBarrierLift.SharedTerm.recur b s
+          (OperatorKO7.SharingBarrierLift.SharedTerm.succ n))) :=
+  OperatorKO7.HigherOrderRewritingFinalCatalog.final_catalog_projects_explicit_sharing_counterexample b s n
+
+end HigherOrderRewritingFinalCatalogReach

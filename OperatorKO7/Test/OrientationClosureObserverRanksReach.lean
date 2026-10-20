@@ -1,0 +1,100 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.ObserverRanks
+
+/-!
+# ObserverRanks reach and axiom check
+
+Paired declaration reach and axiom checks for `ObserverRanks.lean`.
+-/
+
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.ObservedStep
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.ObservedStep
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.ObservedRev
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.ObservedRev
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.FactoredRank
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.FactoredRank
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.factoredRank_observed
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.factoredRank_observed
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.observedRev_wellFounded_of_factoredRank
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.observedRev_wellFounded_of_factoredRank
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.identity_factoredRank_of_observedRev_wellFounded
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.identity_factoredRank_of_observedRev_wellFounded
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.observedRev_wellFounded_iff_identity_rank
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.observedRev_wellFounded_iff_identity_rank
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.factoredRank_refines
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.factoredRank_refines
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.Steps
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.Steps
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.NatRank
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.NatRank
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.NatFactoredRank
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.NatFactoredRank
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.natFactoredRank_bounds_observed_paths
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.natFactoredRank_bounds_observed_paths
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.pullbackNatRank
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.pullbackNatRank
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.TopCountdown
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.TopCountdown
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.TopCountdownStep
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.TopCountdownStep
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.topCountdown_node_acc
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.topCountdown_node_acc
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.topCountdown_top_acc
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.topCountdown_top_acc
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.topCountdown_reverse_wellFounded
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.topCountdown_reverse_wellFounded
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.topCountdown_node_steps_zero
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.topCountdown_node_steps_zero
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.topCountdown_top_steps_zero
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.topCountdown_top_steps_zero
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.topCountdown_no_natRank
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.topCountdown_no_natRank
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.observedStep_id_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.observedStep_id_iff
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.observed_wellFounded_does_not_imply_nat_height
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.observed_wellFounded_does_not_imply_nat_height
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.Steps.refl
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.Steps.refl
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.Steps.cons
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.Steps.cons
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.NatRank.mk
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.NatRank.mk
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.NatRank.rank
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.NatRank.rank
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.NatRank.decreases
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.NatRank.decreases
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.TopCountdown.top
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.TopCountdown.top
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.TopCountdown.node
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.TopCountdown.node
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.TopCountdownStep.fromTop
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.TopCountdownStep.fromTop
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.TopCountdownStep.down
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.TopCountdownStep.down
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.NatRank.bounds_steps
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.NatRank.bounds_steps
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.BoundedHeights
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.BoundedHeights
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.natRank_iff_boundedHeights
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.natRank_iff_boundedHeights
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.natFactoredRank_iff_boundedHeights
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.natFactoredRank_iff_boundedHeights
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.NatRank.scale
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.NatRank.scale
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.NatRank.scale_same_order
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.NatRank.scale_same_order
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.countdownNatRank
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.countdownNatRank
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.rescaled_rank_control
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.rescaled_rank_control
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.TwoChainStep
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.TwoChainStep
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.twoChainObserver
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.twoChainObserver
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.twoChainStep_reverse_wellFounded
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.twoChainStep_reverse_wellFounded
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.twoChain_observation_cycle
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.twoChain_observation_cycle
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.twoChain_no_factoredRank
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.twoChain_no_factoredRank
+#check @OperatorKO7.Methods.OrientationClosure.ObserverRanks.collapsed_observer_self_loop
+#print axioms OperatorKO7.Methods.OrientationClosure.ObserverRanks.collapsed_observer_self_loop

@@ -1,0 +1,110 @@
+import OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions
+
+/-!
+# Explicit divergence and source-control reach checks
+
+Every public definition and theorem has an adjacent type check and axiom check.
+The compiler receipt determines the status of these checks.
+-/
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.uniformRelativeEntropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.uniformRelativeEntropy
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.uniformRelativeEntropy_eq_envelope_sub_entropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.uniformRelativeEntropy_eq_envelope_sub_entropy
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.uniformRelativeEntropy_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.uniformRelativeEntropy_nonnegative
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.uniformRelativeEntropy_eq_zero_iff_uniform
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.uniformRelativeEntropy_eq_zero_iff_uniform
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.priorSlack_eq_weighted_uniformRelativeEntropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.priorSlack_eq_weighted_uniformRelativeEntropy
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.terminalGap_eq_weighted_uniformRelativeEntropy_add_residual
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.terminalGap_eq_weighted_uniformRelativeEntropy_add_residual
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.terminalGap_zero_iff_uniform_and_zero_residual
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.terminalGap_zero_iff_uniform_and_zero_residual
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.unitRecordProtocol
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.unitRecordProtocol
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.unitRecordProtocol_information
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.unitRecordProtocol_information
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.unitRecordProtocol_cost
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.unitRecordProtocol_cost
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.historyMass_nil_eq_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.historyMass_nil_eq_one
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.historySet_active_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.historySet_active_one
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.terminalMI_horizon_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.terminalMI_horizon_one
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.expectedCost_horizon_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.expectedCost_horizon_one
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.terminalEnvelope_bool
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.terminalEnvelope_bool
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.binaryReadingProtocol
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.binaryReadingProtocol
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.binaryReadingMenu
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.binaryReadingMenu
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.binaryReadingConditional
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.binaryReadingConditional
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.binaryReading_prior_uniform
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.binaryReading_prior_uniform
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.binaryReading_slack_zero
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.binaryReading_slack_zero
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.binaryReading_initial_active
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.binaryReading_initial_active
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.binaryReading_cost_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.binaryReading_cost_one
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.binaryReading_information_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.binaryReading_information_one
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.zeroSignalConditional
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.zeroSignalConditional
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.zeroSignalConditional_capacity
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.zeroSignalConditional_capacity
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.zeroSignalConditional_gap
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.zeroSignalConditional_gap
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.zeroSignalConditional_control
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.zeroSignalConditional_control
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.perfectReadingConditional
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.perfectReadingConditional
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.perfectReadingConditional_capacity
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.perfectReadingConditional_capacity
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.perfectReadingConditional_information_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.perfectReadingConditional_information_one
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.perfectReadingConditional_gap_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.perfectReadingConditional_gap_one
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.perfectReadingConditional_control
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.perfectReadingConditional_control
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.biasedBinaryPrior
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.biasedBinaryPrior
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.biasedBinaryPrior_control
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCostExtensions.biasedBinaryPrior_control

@@ -1,0 +1,143 @@
+import OperatorKO7.Meta.BoundaryObserver.TerminalGapCost
+
+/-!
+# Terminal-gap declaration and axiom reach checks
+
+Every public definition and theorem has an adjacent type check and axiom check.
+The compiler receipt determines the status of these checks.
+-/
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalEnvelope
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalEnvelope
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.priorEntropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.priorEntropy
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.priorSlack
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.priorSlack
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.residualEntropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.residualEntropy
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.priorEntropy_eq_joint_sub
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.priorEntropy_eq_joint_sub
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap_eq_priorSlack_add_residual
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap_eq_priorSlack_add_residual
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.residualEntropy_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.residualEntropy_nonnegative
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.priorEntropy_le_envelope
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.priorEntropy_le_envelope
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.priorSlack_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.priorSlack_nonnegative
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.priorSlack_le_terminalGap
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.priorSlack_le_terminalGap
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap_nonnegative
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.conditionalInformation_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.conditionalInformation_nonnegative
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap_le_envelope
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap_le_envelope
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap_eq_priorSlack_of_zero_residual
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap_eq_priorSlack_of_zero_residual
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap_not_le_of_lt_priorSlack
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap_not_le_of_lt_priorSlack
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.priorSlack_zero_of_uniform
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.priorSlack_zero_of_uniform
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.entropy_eq_envelope_iff_uniform
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.entropy_eq_envelope_iff_uniform
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.priorSlack_eq_weighted_deficits
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.priorSlack_eq_weighted_deficits
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.priorSlack_zero_iff_uniform
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.priorSlack_zero_iff_uniform
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap_lower_of_localCapacity
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap_lower_of_localCapacity
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.cost_lower_of_terminalGap_le
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.cost_lower_of_terminalGap_le
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap_zero_capacity
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap_zero_capacity
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.protocolCapacitySlack_mono
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.protocolCapacitySlack_mono
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.protocolInformation_increase_le_costIncrease
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.protocolInformation_increase_le_costIncrease
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.conditionalInformation_mono
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.conditionalInformation_mono
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.conditionalCost_mono
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.conditionalCost_mono
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.conditionalInformation_increase_le_costIncrease
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.conditionalInformation_increase_le_costIncrease
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap_antitone
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap_antitone
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap_drop_bounds
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap_drop_bounds
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.continuation_cost_lower_of_terminalGap_le
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.continuation_cost_lower_of_terminalGap_le
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGapLimit
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGapLimit
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.residualEntropyLimit
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.residualEntropyLimit
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap_tendsto
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGap_tendsto
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGapLimit_eq_priorSlack_add_residual
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGapLimit_eq_priorSlack_add_residual
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.residualEntropyLimit_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.residualEntropyLimit_nonnegative
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.residualEntropy_tendsto
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.residualEntropy_tendsto
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.priorSlack_le_terminalGapLimit
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.priorSlack_le_terminalGapLimit
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGapLimit_le_terminalGap
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGapLimit_le_terminalGap
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGapLimit_nonnegative
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGapLimit_nonnegative
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGapLimit_le_envelope
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGapLimit_le_envelope
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGapLimit_extendedCost_bound
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGapLimit_extendedCost_bound
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.extendedCost_bound_of_terminalGapLimit_le
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.extendedCost_bound_of_terminalGapLimit_le
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.budget_lower_of_terminalGapLimit_le
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.budget_lower_of_terminalGapLimit_le
+
+#check @OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGapLimit_zero_capacity
+#print axioms OperatorKO7.Meta.BoundaryObserver.TerminalGapCost.terminalGapLimit_zero_capacity

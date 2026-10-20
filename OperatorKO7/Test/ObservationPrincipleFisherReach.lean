@@ -1,0 +1,30 @@
+import OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher
+
+set_option autoImplicit false
+set_option pp.fullNames true
+set_option pp.universes true
+
+/-! Declaration and axiom checks for every theorem and definition of the module of the Fisher remark of the Boundary-Observation Principle. -/
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.discriminationGenerator
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.discriminationGenerator
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.discrimination_eq_fDivergence
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.discrimination_eq_fDivergence
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.hasDerivAt_discriminationGenerator
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.hasDerivAt_discriminationGenerator
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.discriminationGenerator_second_derivative
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.discriminationGenerator_second_derivative
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.quadraticLaw_discrimination_closed
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.quadraticLaw_discrimination_closed
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.quadraticLaw_not_littleO
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.quadraticLaw_not_littleO
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.fisher_cost_value_forms
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.fisher_cost_value_forms
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.zero_fisher_cost_exceeds_every_multiple
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.zero_fisher_cost_exceeds_every_multiple
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.lawAt
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.lawAt
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.fisher_repetition_attains
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.fisher_repetition_attains
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.fDivergence_quadratic_fisher
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationPrincipleFisher.fDivergence_quadratic_fisher

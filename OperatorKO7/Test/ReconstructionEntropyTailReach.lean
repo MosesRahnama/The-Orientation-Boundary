@@ -1,0 +1,45 @@
+import OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail
+
+/-!
+# Entropy and energy tail reach
+
+Candidate declarations for the entropy and energy tail.
+-/
+
+set_option autoImplicit false
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.JointUniformTailLicense
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.JointUniformTailLicense
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.jointEntropyEnergyLimit
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.jointEntropyEnergyLimit
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.geometricJointUniformTailLicense
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.geometricJointUniformTailLicense
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.geometricFiniteDensity
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.geometricFiniteDensity
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.GeometricPhysicalTailGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.GeometricPhysicalTailGoal
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.geometricPhysicalTailGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.geometricPhysicalTailGoal
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.SelectedThermodynamicRecoveryGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.SelectedThermodynamicRecoveryGoal
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.selectedThermodynamicRecoveryGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.selectedThermodynamicRecoveryGoal
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.LogarithmicEntropyNegativeControl
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.LogarithmicEntropyNegativeControl
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.logarithmicEntropyNegativeControl
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.logarithmicEntropyNegativeControl
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.GuardedTailAndCountercontrolGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.GuardedTailAndCountercontrolGoal
+
+#check @OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.guardedTailAndCountercontrolGoal
+#print axioms OperatorKO7.Meta.BoundaryObserver.ReconstructionEntropyTail.guardedTailAndCountercontrolGoal

@@ -1,0 +1,572 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.MethodRowsPathOrders
+
+/-! # MethodRowsPathOrders reach and axiom check -/
+
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.getElem_append_cons_of_ne
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.getElem_append_cons_of_ne
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.getElem_append_cons_self
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.getElem_append_cons_self
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.coe_append_cons
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.coe_append_cons
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.DM
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.DM
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.DM.trans_local
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.DM.trans_local
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.DM.add_left
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.DM.add_left
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ArgStatus
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ArgStatus
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ArgStatus.lex_inj
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ArgStatus.lex_inj
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPORev
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPORev
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.HeadGt
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.HeadGt
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.not_var_left
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.not_var_left
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.dom
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.dom
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.of_DM
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.of_DM
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.app_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.app_iff
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.HeadGt.trans
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.HeadGt.trans
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.trans_aux
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.trans_aux
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.trans
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.trans
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.DMOne
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.DMOne
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.dmOne_cons_inv
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.dmOne_cons_inv
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acc_dmOne_cons
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acc_dmOne_cons
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acc_dmOne
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acc_dmOne
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.transGen_dmOne_aux
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.transGen_dmOne_aux
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.transGen_dmOne_of_dm
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.transGen_dmOne_of_dm
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acc_dm
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acc_dm
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ArgLex
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ArgLex
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ArgLexAcc
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ArgLexAcc
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.consTup
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.consTup
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.tailTup
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.tailTup
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.consTup_self_tail
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.consTup_self_tail
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acc_argLexAcc_cons
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acc_argLexAcc_cons
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acc_argLexAcc
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acc_argLexAcc
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.acc_rhs
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.acc_rhs
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.acc_app_of_lower
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.acc_app_of_lower
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.acc_app
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.acc_app
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.acc_term
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.acc_term
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.wf
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.wf
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.irrefl
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.irrefl
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.tbind
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.tbind
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.tbindList
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.tbindList
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.tbindList_eq_map
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.tbindList_eq_map
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.tbind_var
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.tbind_var
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.tbind_app
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.tbind_app
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.tbind_eq_apply
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.tbind_eq_apply
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.bind
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.bind
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.mono_arg
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.mono_arg
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.Occurs
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.Occurs
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.occurs
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.occurs
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.of_step
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.of_step
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.step_wf
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.step_wf
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.tbind_var_self
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.tbind_var_self
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.termLinearOrder
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.termLinearOrder
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.sortTerms
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.sortTerms
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.coe_sortTerms
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.coe_sortTerms
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.canonArgs
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.canonArgs
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.canonArgs_of_mul
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.canonArgs_of_mul
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.canonArgs_of_lex
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.canonArgs_of_lex
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.canonArgs_coe
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.canonArgs_coe
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.canonArgs_mem
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.canonArgs_mem
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.canonArgs_map
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.canonArgs_map
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappa
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappa
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappaList
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappaList
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappaList_eq_map
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappaList_eq_map
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappa_var
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappa_var
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappa_app
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappa_app
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappa_bind
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappa_bind
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappa_idem
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappa_idem
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.kappa_bind
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPO.kappa_bind
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.PermEq
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.PermEq
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.PermStep
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.PermStep
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappa_app_arg
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappa_app_arg
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.permEq_of_permStep
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.permEq_of_permStep
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.eqvGen_permStep_app
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.eqvGen_permStep_app
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.eqvGen_permStep_kappa
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.eqvGen_permStep_kappa
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.permEq_iff_eqvGen
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.permEq_iff_eqvGen
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.compat
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.compat
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.wf
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.wf
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.irrefl
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.irrefl
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.trans
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.trans
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.bind
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.bind
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.mono_arg
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.mono_arg
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.sub
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.sub
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.subGt
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.subGt
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.prec
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.prec
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.mul
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.mul
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.lex
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.lex
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.of_step
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.of_step
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.step_wf
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.step_wf
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.Sym
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.Sym
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.toTerm
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.toTerm
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RuleVar
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RuleVar
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ruleLhsZero
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ruleLhsZero
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ruleRhsZero
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ruleRhsZero
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ruleLhsSucc
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ruleLhsSucc
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ruleRhsSucc
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ruleRhsSucc
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ruleInst
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ruleInst
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ruleInst_zero
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ruleInst_zero
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ruleInst_succ
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ruleInst_succ
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.toTerm_contextStep
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.toTerm_contextStep
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.freeContext_wf_of
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.freeContext_wf_of
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpom_rootStep
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpom_rootStep
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpom_contextStep
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpom_contextStep
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpom_zero_rule
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpom_zero_rule
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpom_succ_rule
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpom_succ_rule
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpom_succ_rule_prec
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpom_succ_rule_prec
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpom_succ_rule_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpom_succ_rule_iff
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutationData
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutationData
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutationLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutationLaws
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutationAccepts
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutationAccepts
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutationResult
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutationResult
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutation_sound
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutation_sound
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.symRank
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.symRank
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.revStatus
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.revStatus
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutationWitness
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutationWitness
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutationWitness_laws
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutationWitness_laws
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutationWitness_accepts
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutationWitness_accepts
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutationWitness_result
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutationWitness_result
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.permProbeA
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.permProbeA
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.permProbeB
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.permProbeB
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.idStatus
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.idStatus
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutationWitness_feature
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutationWitness_feature
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutation_mutation
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpoModuloPermutation_mutation
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.sortTerms_zero
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.sortTerms_zero
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.sortTerms_singleton
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.sortTerms_singleton
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.PopData
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.PopData
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.canonPop
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.canonPop
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.canonPop_coe
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.canonPop_coe
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.canonPop_mem
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.canonPop_mem
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.canonPop_singleton
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.canonPop_singleton
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappaP
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappaP
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappaPList
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappaPList
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappaPList_eq_map
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappaPList_eq_map
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappaP_var
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappaP_var
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappaP_app
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappaP_app
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.mulSt
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.mulSt
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappaM_kappaP
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappaM_kappaP
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.BelowF
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.BelowF
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.PopAux
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.PopAux
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.Pop
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.Pop
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.permEq_mul_of_kappaP
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.permEq_mul_of_kappaP
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.PopAux.toMPO
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.PopAux.toMPO
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.Pop.toMPO
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.Pop.toMPO
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.Pop.irrefl
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.Pop.irrefl
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.Pop.wf
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.Pop.wf
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.Pop.step_wf
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.Pop.step_wf
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.occurs_app_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.occurs_app_iff
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.occurs_kappa
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.occurs_kappa
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.occurs
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.RPOm.occurs
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamilyData
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamilyData
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurNormals
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurNormals
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurSafes
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurSafes
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurArgs
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurArgs
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurNrm
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurNrm
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.length_recurNormals
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.length_recurNormals
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.take_recurArgs
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.take_recurArgs
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.drop_recurArgs
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.drop_recurArgs
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurArgs_perm
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurArgs_perm
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.mem_recurArgs
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.mem_recurArgs
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.mem_recurNormals_true
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.mem_recurNormals_true
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurNormals_false
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurNormals_false
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurNormals_true_indep
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurNormals_true_indep
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurSafes_false
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurSafes_false
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popDataOf
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popDataOf
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popLhsZero
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popLhsZero
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popLhsSucc
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popLhsSucc
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popRecCall
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popRecCall
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popRhsSucc
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popRhsSucc
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappaM_recurArgs
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappaM_recurArgs
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamilyLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamilyLaws
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamily_prec_wf
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamily_prec_wf
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamilyAccepts
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamilyAccepts
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamilyResult
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamilyResult
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamily_sound
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamily_sound
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pop_succ_not
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pop_succ_not
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pop_recCall_forces
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pop_recCall_forces
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamily_accepts_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamily_accepts_iff
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamilyWitness
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamilyWitness
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamilyWitness_laws
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamilyWitness_laws
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamilyWitness_accepts
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamilyWitness_accepts
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamilyWitness_result
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamilyWitness_result
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamilyWitness_feature
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamilyWitness_feature
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamily_mutation
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamily_mutation
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.CtxPow
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.CtxPow
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.CtxPow.trans
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.CtxPow.trans
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.CtxPow.plug
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.CtxPow.plug
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.wVal
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.wVal
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.wVal_step
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.wVal_step
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ctxPow_le_wVal
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ctxPow_le_wVal
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurFree
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurFree
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.tame
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.tame
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.succDepth
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.succDepth
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pot
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pot
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurFree_tame
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurFree_tame
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurFree_plug
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.recurFree_plug
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rootStep_tame
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rootStep_tame
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.plug_tame
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.plug_tame
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ctxPow_tame_bound
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ctxPow_tame_bound
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.expFam
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.expFam
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.expLen
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.expLen
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.expFam_deriv
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.expFam_deriv
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.expLen_ge
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.expLen_ge
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.freeSize
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.freeSize
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.freeSize_expFam
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.freeSize_expFam
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamily_complexity_scope
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamily_complexity_scope
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamily_derivational_outside_scope
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStarFamily_derivational_outside_scope
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.PSym
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.PSym
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.PVar
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.PVar
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pPrec
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pPrec
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pData
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pData
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pRank
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pRank
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pPrec_wf
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pPrec_wf
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pPrec_irrefl
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pPrec_irrefl
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pPrec_trans
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pPrec_trans
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pop_var_left
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pop_var_left
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popAux_var_left
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popAux_var_left
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cxS
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cxS
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cxT
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cxT
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cxU
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cxU
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappaP_unary
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.kappaP_unary
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pop_cxS_cxT
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pop_cxS_cxT
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pop_cxT_cxU
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.pop_cxT_cxU
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.not_pop_GSy_HGy
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.not_pop_GSy_HGy
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.not_popAux_cxS_Gy
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.not_popAux_cxS_Gy
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.not_pop_cxS_cxU
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.not_pop_cxS_cxU
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStar_not_transitive
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStar_not_transitive
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStar_not_context_closed
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStar_not_context_closed
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cxSubst
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cxSubst
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStar_not_subst_closed
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.popStar_not_subst_closed
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOData
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOData
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOLaws
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOFlat
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOFlat
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOFlatArgs
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOFlatArgs
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOFlat_ruleLhsZero
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOFlat_ruleLhsZero
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOFlat_ruleRhsZero
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOFlat_ruleRhsZero
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOFlat_ruleLhsSucc
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOFlat_ruleLhsSucc
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOFlat_ruleRhsSucc
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOFlat_ruleRhsSucc
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPO
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPO
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPO_wf
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPO_wf
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpo_zero_rule
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpo_zero_rule
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpo_succ_rule
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpo_succ_rule
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.occurs_succ_var
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.occurs_succ_var
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpo_succ_rule_prec
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpo_succ_rule_prec
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpo_rootStep
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.rpo_rootStep
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOAccepts
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOAccepts
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOResult
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOResult
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPO_sound
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPO_sound
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPO_accepts_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPO_accepts_iff
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOWitness
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOWitness
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOWitness_laws
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOWitness_laws
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOWitness_accepts
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOWitness_accepts
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOWitness_result
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOWitness_result
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOFlatArgs_eq_map_of_not_ac
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOFlatArgs_eq_map_of_not_ac
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOFlat_app_of_not_ac
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOFlat_app_of_not_ac
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPO_context_succ
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPO_context_succ
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOWitness_feature
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPOWitness_feature
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPO_mutation
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.acRPO_mutation
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderTypeData
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderTypeData
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderTypeLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderTypeLaws
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderTypeAccepts
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderTypeAccepts
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderTypeResult
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderTypeResult
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderType_sound
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderType_sound
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderTypeWitness
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderTypeWitness
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderTypeWitness_laws
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderTypeWitness_laws
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderTypeWitness_accepts
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderTypeWitness_accepts
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderTypeWitness_result
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderTypeWitness_result
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderTypeWitness_feature
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderTypeWitness_feature
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderType_mutation
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderType_mutation
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderType_scope
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderType_scope
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ordinalFundamentalSequence_ofNat_succ
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ordinalFundamentalSequence_ofNat_succ
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ordinalSlowGrowing_ofNat
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.ordinalSlowGrowing_ofNat
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowingData
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowingData
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowingLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowingLaws
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowingAccepts
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowingAccepts
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowingResult
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowingResult
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowing_sound
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowing_sound
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowingWitness
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowingWitness
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowingWitness_laws
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowingWitness_laws
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowingWitness_accepts
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowingWitness_accepts
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowingWitness_result
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowingWitness_result
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowingWitness_feature
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowingWitness_feature
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowing_mutation
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.cichonSlowGrowing_mutation
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderType_scope_proven
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderType_scope_proven
+#check @OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderType_methodIdentity
+#print axioms OperatorKO7.Methods.OrientationClosure.MethodRowsPathOrders.simpleTerminationOrderType_methodIdentity

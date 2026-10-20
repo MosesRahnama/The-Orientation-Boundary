@@ -1,0 +1,9 @@
+import OperatorKO7.Meta.RDRSArchimedeanProjectionBarrier
+
+namespace OperatorKO7.Test.RDRSArchimedeanProjectionBarrierReach
+
+#check @OperatorKO7.RDRSArchimedeanProjectionBarrier.supersededBy
+#check @OperatorKO7.RDRSArchimedeanProjectionBarrier.rdrs_archimedean_projection_barrier_shim_marker
+#check @OperatorKO7.RDRSAlgebraicInterpretationAtlas.rdrs_algebraic_interpretation_layer_closed
+
+end OperatorKO7.Test.RDRSArchimedeanProjectionBarrierReach

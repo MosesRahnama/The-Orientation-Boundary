@@ -1,0 +1,294 @@
+import OperatorKO7.Meta.ContextualCopyBudget
+import OperatorKO7.Meta.ContextualCopyBudget_NoGo
+import OperatorKO7.Meta.DM_OrderType
+import OperatorKO7.Meta.DM_OrderType_LowerBound
+import OperatorKO7.Meta.DP_BaseOrder_Boundary
+import OperatorKO7.Meta.DependencyPairs_CallGraph
+import OperatorKO7.Meta.DependencyPairs_ExtractedCallGraph
+import OperatorKO7.Meta.DependencyPairs_FiniteCarrierView
+import OperatorKO7.Meta.DependencyPairs_FiniteGraph
+import OperatorKO7.Meta.DependencyPairs_FirstOrderEngine
+import OperatorKO7.Meta.DependencyPairs_FirstOrderExtraction
+import OperatorKO7.Meta.DependencyPairs_FirstOrderFrontend
+import OperatorKO7.Meta.DependencyPairs_Fragment
+import OperatorKO7.Meta.DependencyPairs_HeadView
+import OperatorKO7.Meta.DependencyPairs_KernelFirstOrder
+import OperatorKO7.Meta.DependencyPairs_TPDBExtraction
+import OperatorKO7.Meta.DependencyPairs_Works
+import OperatorKO7.Meta.DepthBarrier
+import OperatorKO7.Meta.DuplicatingRecursiveFamily
+import OperatorKO7.Meta.EscapeTrichotomy
+import OperatorKO7.Meta.ExternalizedTraceStorage
+import OperatorKO7.Meta.FBI_Method
+import OperatorKO7.Meta.FiniteGraphReachability
+import OperatorKO7.Meta.FiniteGraphSCC
+import OperatorKO7.Meta.GenericDPMethodBoundary
+import OperatorKO7.Meta.GraphPathExtraction
+import OperatorKO7.Meta.HigherOrderNoSharingBoundary
+import OperatorKO7.Meta.HigherOrderSharingBoundary
+import OperatorKO7.Meta.Impossibility_Lemmas
+import OperatorKO7.Meta.InformationalIncompleteness.RecursorPayloadErasure
+import OperatorKO7.Meta.KBO_Impossible_Schema
+import OperatorKO7.Meta.LawvereYanofskySeparation
+import OperatorKO7.Meta.LinearRec_Ablation
+import OperatorKO7.Meta.MPO_FullStep
+import OperatorKO7.Meta.MPO_Precedence_Barrier
+import OperatorKO7.Meta.MPO_ProofTheoreticBound
+import OperatorKO7.Meta.ManySortedBarrierSurvival
+import OperatorKO7.Meta.MatrixBarrier2_Schema
+import OperatorKO7.Meta.MatrixBarrierArbitrary_Schema
+import OperatorKO7.Meta.MatrixBarrierD
+import OperatorKO7.Meta.MatrixBarrierD_Schema
+import OperatorKO7.Meta.MatrixBarrierFunctional
+import OperatorKO7.Meta.MatrixBarrierFunctional_Schema
+import OperatorKO7.Meta.MatrixBarrierLex
+
+/-!
+# Full-anchor check 2 for the PA paper
+
+Pins 120 declarations cited by the paper that no other check covers.
+Each carries a paired `#check @` and `#print axioms`. The file proves no new content.
+-/
+
+set_option maxHeartbeats 1000000
+
+#check @MetaSN_KO7.ctxDupPotential
+#print axioms MetaSN_KO7.ctxDupPotential
+#check @MetaSN_KO7.ctxDupPotential_decreases_ctx
+#print axioms MetaSN_KO7.ctxDupPotential_decreases_ctx
+#check @MetaSN_KO7.safeStepCtx_length_le_two_pow_double_termSize
+#print axioms MetaSN_KO7.safeStepCtx_length_le_two_pow_double_termSize
+#check @MetaSN_KO7.coordExpr_payloadFamily_nondec
+#print axioms MetaSN_KO7.coordExpr_payloadFamily_nondec
+#check @MetaSN_KO7.not_coordExprStackCertifies_payloadFamily
+#print axioms MetaSN_KO7.not_coordExprStackCertifies_payloadFamily
+#check @OperatorKO7.MetaDM.dmOrdEmbed_lt_opow_omega
+#print axioms OperatorKO7.MetaDM.dmOrdEmbed_lt_opow_omega
+#check @OperatorKO7.MetaDM.safeMeasure_below_epsilon0
+#print axioms OperatorKO7.MetaDM.safeMeasure_below_epsilon0
+#check @OperatorKO7.MetaDM.safeMeasure_strictMono_explicit
+#print axioms OperatorKO7.MetaDM.safeMeasure_strictMono_explicit
+#check @OperatorKO7.MetaDM.CNFωω.dmOrdEmbed_eq_dmRankOrd
+#print axioms OperatorKO7.MetaDM.CNFωω.dmOrdEmbed_eq_dmRankOrd
+#check @OperatorKO7.MetaDM.dm_order_type_omega_omega
+#print axioms OperatorKO7.MetaDM.dm_order_type_omega_omega
+#check @OperatorKO7.MetaDM.lex3c_order_type_bound
+#print axioms OperatorKO7.MetaDM.lex3c_order_type_bound
+#check @OperatorKO7.MetaDM.phaseB_cnf_scaffold_cofinal
+#print axioms OperatorKO7.MetaDM.phaseB_cnf_scaffold_cofinal
+#check @OperatorKO7.MetaDM.phaseB_cnf_scaffold_exact_order_type
+#print axioms OperatorKO7.MetaDM.phaseB_cnf_scaffold_exact_order_type
+#check @OperatorKO7.DPBaseOrderBoundary.counterHeight_orients_dpPair
+#print axioms OperatorKO7.DPBaseOrderBoundary.counterHeight_orients_dpPair
+#check @OperatorKO7.DPBaseOrderBoundary.extracted_dp_problem_has_linear_base_order
+#print axioms OperatorKO7.DPBaseOrderBoundary.extracted_dp_problem_has_linear_base_order
+#check @OperatorKO7.DPBaseOrderBoundary.no_blanket_dp_poly_base_barrier
+#print axioms OperatorKO7.DPBaseOrderBoundary.no_blanket_dp_poly_base_barrier
+#check @OperatorKO7.DependencyPairsFragment.FiniteCallGraph
+#print axioms OperatorKO7.DependencyPairsFragment.FiniteCallGraph
+#check @OperatorKO7.DependencyPairsFragment.FiniteCallGraph.HasNontrivialSCC
+#print axioms OperatorKO7.DependencyPairsFragment.FiniteCallGraph.HasNontrivialSCC
+#check @OperatorKO7.DependencyPairsFragment.FiniteCallGraph.toSCCCycle
+#print axioms OperatorKO7.DependencyPairsFragment.FiniteCallGraph.toSCCCycle
+#check @OperatorKO7.DependencyPairsFragment.FiniteExtractedCallGraph
+#print axioms OperatorKO7.DependencyPairsFragment.FiniteExtractedCallGraph
+#check @OperatorKO7.DependencyPairsFragment.FiniteExtractedCallGraph.ofArrayMap
+#print axioms OperatorKO7.DependencyPairsFragment.FiniteExtractedCallGraph.ofArrayMap
+#check @OperatorKO7.DependencyPairsFragment.FiniteCarrierExtractedEngine
+#print axioms OperatorKO7.DependencyPairsFragment.FiniteCarrierExtractedEngine
+#check @OperatorKO7.DependencyPairsFragment.FiniteCarrierFirstOrderEngine
+#print axioms OperatorKO7.DependencyPairsFragment.FiniteCarrierFirstOrderEngine
+#check @OperatorKO7.DependencyPairsFragment.FiniteCarrierFirstOrderEngine.extractedCallGraph
+#print axioms OperatorKO7.DependencyPairsFragment.FiniteCarrierFirstOrderEngine.extractedCallGraph
+#check @OperatorKO7.DependencyPairsFragment.FiniteCarrierHeadEngine
+#print axioms OperatorKO7.DependencyPairsFragment.FiniteCarrierHeadEngine
+#check @OperatorKO7.DependencyPairsFragment.HasFiniteCarrierFirstOrderView
+#print axioms OperatorKO7.DependencyPairsFragment.HasFiniteCarrierFirstOrderView
+#check @OperatorKO7.DependencyPairsFragment.HasFiniteCarrierHeadView
+#print axioms OperatorKO7.DependencyPairsFragment.HasFiniteCarrierHeadView
+#check @OperatorKO7.DependencyPairsFragment.HasFiniteCarrierRawFirstOrderView
+#print axioms OperatorKO7.DependencyPairsFragment.HasFiniteCarrierRawFirstOrderView
+#check @OperatorKO7.DependencyPairsFragment.finiteCarrierExtractedViewOfHeadCarrier
+#print axioms OperatorKO7.DependencyPairsFragment.finiteCarrierExtractedViewOfHeadCarrier
+#check @OperatorKO7.DependencyPairsFragment.FiniteDPGraph
+#print axioms OperatorKO7.DependencyPairsFragment.FiniteDPGraph
+#check @OperatorKO7.DependencyPairsFragment.FiniteFirstOrderEngine
+#print axioms OperatorKO7.DependencyPairsFragment.FiniteFirstOrderEngine
+#check @OperatorKO7.DependencyPairsFragment.HasFiniteFirstOrderView
+#print axioms OperatorKO7.DependencyPairsFragment.HasFiniteFirstOrderView
+#check @OperatorKO7.DependencyPairsFragment.HasFiniteRawFirstOrderView
+#print axioms OperatorKO7.DependencyPairsFragment.HasFiniteRawFirstOrderView
+#check @OperatorKO7.DependencyPairsFragment.HasFirstOrderTermView
+#print axioms OperatorKO7.DependencyPairsFragment.HasFirstOrderTermView
+#check @OperatorKO7.DependencyPairsFragment.FORule
+#print axioms OperatorKO7.DependencyPairsFragment.FORule
+#check @OperatorKO7.DependencyPairsFragment.KO7FirstOrder.ko7FullStepExtractedCallGraph
+#print axioms OperatorKO7.DependencyPairsFragment.KO7FirstOrder.ko7FullStepExtractedCallGraph
+#check @OperatorKO7.DependencyPairsFragment.foDefinedHeads
+#print axioms OperatorKO7.DependencyPairsFragment.foDefinedHeads
+#check @OperatorKO7.DependencyPairsFragment.foExtractedCallGraph
+#print axioms OperatorKO7.DependencyPairsFragment.foExtractedCallGraph
+#check @OperatorKO7.DependencyPairsFragment.HasNontrivialSCCOf
+#print axioms OperatorKO7.DependencyPairsFragment.HasNontrivialSCCOf
+#check @OperatorKO7.DependencyPairsFragment.extractRuleFrontendNodes
+#print axioms OperatorKO7.DependencyPairsFragment.extractRuleFrontendNodes
+#check @OperatorKO7.DependencyPairsFragment.foExtractedCallGraphOf
+#print axioms OperatorKO7.DependencyPairsFragment.foExtractedCallGraphOf
+#check @OperatorKO7.DependencyPairsFragment.DPProjection
+#print axioms OperatorKO7.DependencyPairsFragment.DPProjection
+#check @OperatorKO7.DependencyPairsFragment.DPProjection.wfRev
+#print axioms OperatorKO7.DependencyPairsFragment.DPProjection.wfRev
+#check @OperatorKO7.DependencyPairsFragment.SCCCycle
+#print axioms OperatorKO7.DependencyPairsFragment.SCCCycle
+#check @OperatorKO7.DependencyPairsFragment.SCCCycle.target_lt_source
+#print axioms OperatorKO7.DependencyPairsFragment.SCCCycle.target_lt_source
+#check @OperatorKO7.DependencyPairsFragment.FiniteHeadRuleEngine
+#print axioms OperatorKO7.DependencyPairsFragment.FiniteHeadRuleEngine
+#check @OperatorKO7.DependencyPairsFragment.HasCallHeadView
+#print axioms OperatorKO7.DependencyPairsFragment.HasCallHeadView
+#check @OperatorKO7.DependencyPairsFragment.HasFiniteHeadRuleView
+#print axioms OperatorKO7.DependencyPairsFragment.HasFiniteHeadRuleView
+#check @OperatorKO7.DependencyPairsFragment.finiteHeadRuleViewOfRaw
+#print axioms OperatorKO7.DependencyPairsFragment.finiteHeadRuleViewOfRaw
+#check @OperatorKO7.DependencyPairsFragment.KernelFirstOrder.EngineTag
+#print axioms OperatorKO7.DependencyPairsFragment.KernelFirstOrder.EngineTag
+#check @OperatorKO7.DependencyPairsFragment.KernelFirstOrder.RuleId
+#print axioms OperatorKO7.DependencyPairsFragment.KernelFirstOrder.RuleId
+#check @OperatorKO7.DependencyPairsFragment.KernelFirstOrder.Symbol
+#print axioms OperatorKO7.DependencyPairsFragment.KernelFirstOrder.Symbol
+#check @OperatorKO7.DependencyPairsFragment.KernelFirstOrder.ko7CarrierExtractedGraph
+#print axioms OperatorKO7.DependencyPairsFragment.KernelFirstOrder.ko7CarrierExtractedGraph
+#check @OperatorKO7.DependencyPairsFragment.KernelFirstOrder.ko7CarrierFirstOrderEngine
+#print axioms OperatorKO7.DependencyPairsFragment.KernelFirstOrder.ko7CarrierFirstOrderEngine
+#check @OperatorKO7.DependencyPairsFragment.KernelFirstOrder.ko7CarrierHeadOnlyEngine
+#print axioms OperatorKO7.DependencyPairsFragment.KernelFirstOrder.ko7CarrierHeadOnlyEngine
+#check @OperatorKO7.DependencyPairsFragment.KernelFirstOrder.ko7Engine
+#print axioms OperatorKO7.DependencyPairsFragment.KernelFirstOrder.ko7Engine
+#check @OperatorKO7.DependencyPairsFragment.KernelFirstOrder.ko7HeadEngine
+#print axioms OperatorKO7.DependencyPairsFragment.KernelFirstOrder.ko7HeadEngine
+#check @OperatorKO7.DependencyPairsFragment.extractTpdbNodes
+#print axioms OperatorKO7.DependencyPairsFragment.extractTpdbNodes
+#check @OperatorKO7.DependencyPairsFragment.tpdbDefinedHeads
+#print axioms OperatorKO7.DependencyPairsFragment.tpdbDefinedHeads
+#check @OperatorKO7.DependencyPairsFragment.tpdbExtractedCallGraph
+#print axioms OperatorKO7.DependencyPairsFragment.tpdbExtractedCallGraph
+#check @OperatorKO7.MetaDependencyPairs.DPPair
+#print axioms OperatorKO7.MetaDependencyPairs.DPPair
+#check @OperatorKO7.MetaDependencyPairs.dpRank
+#print axioms OperatorKO7.MetaDependencyPairs.dpRank
+#check @OperatorKO7.MetaDependencyPairs.wf_DPPairRev
+#print axioms OperatorKO7.MetaDependencyPairs.wf_DPPairRev
+#check @OperatorKO7.DepthBarrier.MaxDepthMeasure
+#print axioms OperatorKO7.DepthBarrier.MaxDepthMeasure
+#check @OperatorKO7.DepthBarrier.no_global_step_orientation_maxDepth
+#print axioms OperatorKO7.DepthBarrier.no_global_step_orientation_maxDepth
+#check @OperatorKO7.StepDuplicating.DuplicatingRecursiveFamily
+#print axioms OperatorKO7.StepDuplicating.DuplicatingRecursiveFamily
+#check @OperatorKO7.StepDuplicating.DuplicatingRecursiveFamily.distinguished_payload_count_strict
+#print axioms OperatorKO7.StepDuplicating.DuplicatingRecursiveFamily.distinguished_payload_count_strict
+#check @OperatorKO7.EscapeTrichotomy.ko7_direct_escape_trichotomy_extended
+#print axioms OperatorKO7.EscapeTrichotomy.ko7_direct_escape_trichotomy_extended
+#check @OperatorKO7.EscapeTrichotomy.ko7_projection_escape_trichotomy
+#print axioms OperatorKO7.EscapeTrichotomy.ko7_projection_escape_trichotomy
+#check @OperatorKO7.EscapeTrichotomy.matrixFunctional_projection_representable
+#print axioms OperatorKO7.EscapeTrichotomy.matrixFunctional_projection_representable
+#check @OperatorKO7.EscapeTrichotomy.matrixMix2_sum_projection_representable
+#print axioms OperatorKO7.EscapeTrichotomy.matrixMix2_sum_projection_representable
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.ExternalizedTraceStorage
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.ExternalizedTraceStorage
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.ExternalizedTraceStorage.ContentSummary
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.ExternalizedTraceStorage.ContentSummary
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.ExternalizedTraceStorage.index_image_equiv
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.ExternalizedTraceStorage.index_image_equiv
+#check @OperatorKO7.FBIInstantiation.directions
+#print axioms OperatorKO7.FBIInstantiation.directions
+#check @OperatorKO7.FBIInstantiation.matchesDirection
+#print axioms OperatorKO7.FBIInstantiation.matchesDirection
+#check @OperatorKO7.FiniteGraphReachability.Reachable
+#print axioms OperatorKO7.FiniteGraphReachability.Reachable
+#check @OperatorKO7.FiniteGraphReachability.reachable_iff_reflTransGen
+#print axioms OperatorKO7.FiniteGraphReachability.reachable_iff_reflTransGen
+#check @OperatorKO7.FiniteGraphReachability.transGen_of_reachable_of_ne
+#print axioms OperatorKO7.FiniteGraphReachability.transGen_of_reachable_of_ne
+#check @OperatorKO7.FiniteGraphSCC.reachable_witnessSrc_witnessDst
+#print axioms OperatorKO7.FiniteGraphSCC.reachable_witnessSrc_witnessDst
+#check @OperatorKO7.FiniteGraphSCC.sccPairs
+#print axioms OperatorKO7.FiniteGraphSCC.sccPairs
+#check @OperatorKO7.FiniteGraphSCC.witnessPair
+#print axioms OperatorKO7.FiniteGraphSCC.witnessPair
+#check @OperatorKO7.GenericDPMethodBoundary.genericDPBoundaryCertificate_exact
+#print axioms OperatorKO7.GenericDPMethodBoundary.genericDPBoundaryCertificate_exact
+#check @OperatorKO7.GraphPathExtraction.EdgePath
+#print axioms OperatorKO7.GraphPathExtraction.EdgePath
+#check @OperatorKO7.GraphPathExtraction.EdgePath.ofRoundTrip
+#print axioms OperatorKO7.GraphPathExtraction.EdgePath.ofRoundTrip
+#check @OperatorKO7.GraphPathExtraction.EdgePath.ofTransGen
+#print axioms OperatorKO7.GraphPathExtraction.EdgePath.ofTransGen
+#check @OperatorKO7.HigherOrderNoSharingBoundary.NoSharingBoundaryStatus
+#print axioms OperatorKO7.HigherOrderNoSharingBoundary.NoSharingBoundaryStatus
+#check @OperatorKO7.HigherOrderNoSharingBoundary.noSharingBoundaryStatus
+#print axioms OperatorKO7.HigherOrderNoSharingBoundary.noSharingBoundaryStatus
+#check @OperatorKO7.HigherOrderSharingBoundary.SharingPolicy
+#print axioms OperatorKO7.HigherOrderSharingBoundary.SharingPolicy
+#check @OperatorKO7.Impossibility.FailedMeasures.kappa
+#print axioms OperatorKO7.Impossibility.FailedMeasures.kappa
+#check @OperatorKO7.Impossibility.FailedMeasures.kappa_plus_k_fails
+#print axioms OperatorKO7.Impossibility.FailedMeasures.kappa_plus_k_fails
+#check @OperatorKO7.Impossibility.FailedMeasures.simple_lex_fails
+#print axioms OperatorKO7.Impossibility.FailedMeasures.simple_lex_fails
+#check @OperatorKO7.Impossibility.UncheckedRecursionFailure.simpleSize
+#print axioms OperatorKO7.Impossibility.UncheckedRecursionFailure.simpleSize
+#check @OperatorKO7.Meta.InformationalIncompleteness.RecursorPayloadErasure.iiRecursor
+#print axioms OperatorKO7.Meta.InformationalIncompleteness.RecursorPayloadErasure.iiRecursor
+#check @OperatorKO7.KBOImpossible.no_kbo_orients_ko7_rec_succ
+#print axioms OperatorKO7.KBOImpossible.no_kbo_orients_ko7_rec_succ
+#check @OperatorKO7.LawvereYanofskySeparation.primitive_duplicator_dp_confession_semantic_profile
+#print axioms OperatorKO7.LawvereYanofskySeparation.primitive_duplicator_dp_confession_semantic_profile
+#check @OperatorKO7.LawvereYanofskySeparation.primitive_duplicator_dp_confession_semantically_separated_from_lawvere_yanofsky
+#print axioms OperatorKO7.LawvereYanofskySeparation.primitive_duplicator_dp_confession_semantically_separated_from_lawvere_yanofsky
+#check @OperatorKO7.wf_linearStep
+#print axioms OperatorKO7.wf_linearStep
+#check @OperatorKO7.MetaMPO.wf_StepRev_mpo
+#print axioms OperatorKO7.MetaMPO.wf_StepRev_mpo
+#check @OperatorKO7.MPOPrecedenceBarrier.no_global_step_orientation_mpo_bad_prec
+#print axioms OperatorKO7.MPOPrecedenceBarrier.no_global_step_orientation_mpo_bad_prec
+#check @OperatorKO7.MPOProofTheoreticBound.mpoOrd_lt_mpoVeblenBound
+#print axioms OperatorKO7.MPOProofTheoreticBound.mpoOrd_lt_mpoVeblenBound
+#check @OperatorKO7.MPOProofTheoreticBound.wf_StepRev_mpo_below_veblen7
+#print axioms OperatorKO7.MPOProofTheoreticBound.wf_StepRev_mpo_below_veblen7
+#check @OperatorKO7.ManySortedBarrierSurvival.AdditiveMeasure
+#print axioms OperatorKO7.ManySortedBarrierSurvival.AdditiveMeasure
+#check @OperatorKO7.ManySortedBarrierSurvival.AffineMeasure
+#print axioms OperatorKO7.ManySortedBarrierSurvival.AffineMeasure
+#check @OperatorKO7.ManySortedBarrierSurvival.no_additive_orients_manySorted_recSucc
+#print axioms OperatorKO7.ManySortedBarrierSurvival.no_additive_orients_manySorted_recSucc
+#check @OperatorKO7.ManySortedBarrierSurvival.no_affine_orients_manySorted_recSucc_of_stepPump
+#print axioms OperatorKO7.ManySortedBarrierSurvival.no_affine_orients_manySorted_recSucc_of_stepPump
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.MatrixMeasure2
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.MatrixMeasure2
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.no_matrix2_orients_dup_step_of_componentwise_pump
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.no_matrix2_orients_dup_step_of_componentwise_pump
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.no_matrix2_orients_dup_step_of_componentwise_pump_snd
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.no_matrix2_orients_dup_step_of_componentwise_pump_snd
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.MatrixVec
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.MatrixVec
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.MixedMatrix
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.MixedMatrix
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.MixedMatrix.scalarize_act_eq_of_respectsWeight
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.MixedMatrix.scalarize_act_eq_of_respectsWeight
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.matrixScalarize
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.matrixScalarize
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.matrixScalarize_vecAdd
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.matrixScalarize_vecAdd
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.vecAdd
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.vecAdd
+#check @OperatorKO7.MatrixBarrierD.no_global_step_orientation_matrixD_of_componentwise_pump
+#print axioms OperatorKO7.MatrixBarrierD.no_global_step_orientation_matrixD_of_componentwise_pump
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.no_matrixD_orients_dup_step_of_componentwise_pump
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.no_matrixD_orients_dup_step_of_componentwise_pump
+#check @OperatorKO7.MatrixBarrierFunctional.no_global_step_orientation_matrixFunctional_of_componentwise_pump
+#print axioms OperatorKO7.MatrixBarrierFunctional.no_global_step_orientation_matrixFunctional_of_componentwise_pump
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.no_matrixFunctional_orients_dup_step_of_componentwise_pump
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.no_matrixFunctional_orients_dup_step_of_componentwise_pump
+#check @OperatorKO7.MatrixBarrierLex.no_global_step_orientation_matrix2_lex_of_componentwise_pump
+#print axioms OperatorKO7.MatrixBarrierLex.no_global_step_orientation_matrix2_lex_of_componentwise_pump

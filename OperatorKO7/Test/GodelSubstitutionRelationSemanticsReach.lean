@@ -1,0 +1,29 @@
+import OperatorKO7.Meta.DistinctionBoundary.GodelSubstitutionRelationSemantics
+
+set_option autoImplicit false
+
+#check @OperatorKO7.Meta.DistinctionBoundary.GodelArith.FormSubstTrace
+#check @OperatorKO7.Meta.DistinctionBoundary.GodelArith.formSubstTrace_entry_sound
+#check @OperatorKO7.Meta.DistinctionBoundary.GodelArith.formSubstTrace_complete
+#check @OperatorKO7.Meta.DistinctionBoundary.GodelArith.formSubstClosed_sound
+#check @OperatorKO7.Meta.DistinctionBoundary.GodelArith.formSubstClosed_complete
+#check @OperatorKO7.Meta.DistinctionBoundary.GodelArith.eval_substRel_formulaCode
+#check @OperatorKO7.Meta.DistinctionBoundary.GodelArith.eval_substRel_codeSubstNat
+#check @OperatorKO7.Meta.DistinctionBoundary.GodelArith.substRel_result_decodes
+#check @OperatorKO7.Meta.DistinctionBoundary.GodelArith.substRel_result_unique
+#check @OperatorKO7.Meta.DistinctionBoundary.GodelArith.substRel_godel_diagonal
+#check @OperatorKO7.Meta.DistinctionBoundary.GodelArith.eval_substRel_godel_open
+#check @OperatorKO7.Meta.DistinctionBoundary.GodelArith.eval_formSubstClosed_var0_var2_var210
+
+#print axioms OperatorKO7.Meta.DistinctionBoundary.GodelArith.FormSubstTrace
+#print axioms OperatorKO7.Meta.DistinctionBoundary.GodelArith.formSubstTrace_entry_sound
+#print axioms OperatorKO7.Meta.DistinctionBoundary.GodelArith.formSubstTrace_complete
+#print axioms OperatorKO7.Meta.DistinctionBoundary.GodelArith.formSubstClosed_sound
+#print axioms OperatorKO7.Meta.DistinctionBoundary.GodelArith.formSubstClosed_complete
+#print axioms OperatorKO7.Meta.DistinctionBoundary.GodelArith.eval_substRel_formulaCode
+#print axioms OperatorKO7.Meta.DistinctionBoundary.GodelArith.eval_substRel_codeSubstNat
+#print axioms OperatorKO7.Meta.DistinctionBoundary.GodelArith.substRel_result_decodes
+#print axioms OperatorKO7.Meta.DistinctionBoundary.GodelArith.substRel_result_unique
+#print axioms OperatorKO7.Meta.DistinctionBoundary.GodelArith.substRel_godel_diagonal
+#print axioms OperatorKO7.Meta.DistinctionBoundary.GodelArith.eval_substRel_godel_open
+#print axioms OperatorKO7.Meta.DistinctionBoundary.GodelArith.eval_formSubstClosed_var0_var2_var210
