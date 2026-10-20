@@ -1,0 +1,78 @@
+import OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment
+
+set_option autoImplicit false
+
+/-! Paired checks for every public declaration of ResolutionAttainment. -/
+
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.historySet_level_prod
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.historySet_level_prod
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.historySet_below_eq_levels
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.historySet_below_eq_levels
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.levelMass_eq_one
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.levelMass_eq_one
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.fairLaw
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.fairLaw
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.fairLaw_entropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.fairLaw_entropy
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.readingLaw
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.readingLaw
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majorityProtocol
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majorityProtocol
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majorityProtocol_binaryMenu
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majorityProtocol_binaryMenu
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majorityProtocol_pairMenu
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majorityProtocol_pairMenu
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majorityProtocol_stop
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majorityProtocol_stop
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majorityProtocol_stop_false
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majorityProtocol_stop_false
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.likelihood
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.likelihood
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.likelihood_nil
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.likelihood_nil
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.likelihood_cons
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.likelihood_cons
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.likelihood_append
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.likelihood_append
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.prefixMass_majority
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.prefixMass_majority
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.stoppedMass_majority
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.stoppedMass_majority
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majority_cost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majority_cost
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.agree
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.agree
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.agree_nil
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.agree_nil
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.agree_cons
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.agree_cons
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.agree_le_length
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.agree_le_length
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.agree_true_add_false
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.agree_true_add_false
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.likelihood_eq_pow
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.likelihood_eq_pow
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majority
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majority
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.agree_not_majority_le
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.agree_not_majority_le
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.likelihood_wrong_le
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.likelihood_wrong_le
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.wrong_mass_le
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.wrong_mass_le
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majority_error_le
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majority_error_le
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majority_error_le_exp
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majority_error_le_exp
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.massUncertainty_bool
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.massUncertainty_bool
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.sum_massUncertainty_le_binEntropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.sum_massUncertainty_le_binEntropy
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majority_information
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majority_information
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majority_target
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.majority_target
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.resolution_cost_two_sided
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.resolution_cost_two_sided
+#check @OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.resolution_cost_two_sided_discrimination
+#print axioms OperatorKO7.Meta.BoundaryObserver.ResolutionAttainment.resolution_cost_two_sided_discrimination

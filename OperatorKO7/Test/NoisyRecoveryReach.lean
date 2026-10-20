@@ -1,0 +1,208 @@
+import OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery
+
+set_option autoImplicit false
+
+namespace OperatorKO7.Test.NoisyRecoveryReach
+
+/-! Current public source surface, including generated structure projections and inductive constructors, for supervisor validation. -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalObservationModel
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalObservationModel.mk
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalObservationModel.prior
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalObservationModel.kernel
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalObservationModel.prior_nonneg
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalObservationModel.prior_sum_one
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalObservationModel.kernel_nonneg
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalObservationModel.kernel_sum_one
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.joint
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.observationMass
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.posterior?
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.joint_nonneg
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.sum_joint_eq_observationMass
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.sum_observationMass_eq_one
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.posterior?_sum_one
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.posterior?_nonneg
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.joint_le_observationMass
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.posterior?_eq_none_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argmaxBy
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argminBy
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argminBy?
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argmaxBy_mem_default_cons
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.le_argmaxBy_of_mem
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argminBy_mem_default_cons
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argminBy_le_of_mem
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argmaxBy?
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argmaxBy?_eq_none_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argminBy?_eq_none_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argmaxBy?_maximal
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.targetEnumeration_nonempty
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.maxTarget
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesTarget
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.joint_le_bayesTarget
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.correctMass
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.risk
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesDecoder
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_eq_one_sub_sum_max
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_nonneg
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_le_one
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_mem_unitInterval
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_le_risk
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RandomDecoder
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RandomDecoder.mk
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RandomDecoder.weight
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RandomDecoder.nonneg
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RandomDecoder.sum_one
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.randomizedCorrectMass
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.randomizedRisk
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_le_randomizedRisk
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.TargetPureOnSupport
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.cellErrorMass
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.cellErrorMass_nonneg
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_eq_sum_cellErrorMass
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_eq_zero_iff_targetPure
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.LicensedOnJointSupport
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.targetPure_iff_licensedOnJointSupport
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_eq_zero_iff_licensedOnJointSupport
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.FullCarrierDeterministic
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.deterministicModel
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.deterministic_joint_pos_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.deterministic_fullSupport_licensed_iff_fullCarrier
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.binaryTargetEnumeration
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.zeroMassCollisionModel
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.zeroMassCollision_support_pure
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.zeroMassCollision_not_fullCarrier
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.postJoint
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.postBayesTarget
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.postProcessedRisk
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.postProcessedRisk_eq_composed_risk
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_le_postProcessedRisk
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalPostProcessing
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalPostProcessing.mk
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalPostProcessing.kernel
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalPostProcessing.nonneg
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalPostProcessing.sum_one
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.randomizedPostJoint
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.randomizedPostBayesTarget
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.randomizedPostProcessedRisk
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.randomizedPostJoint_bayes_le
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_le_randomizedPostProcessedRisk
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argminBy?_minimal
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.sideJoint
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.sideBayesTarget
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.sideRisk
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.tableLists
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.tableLists_length
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.mapped_function_table_mem
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.encoderOfTable
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.encoderOfMappedFunction_eq
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.sideEncoderCandidates
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.sideEncoderCandidates_complete
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bestSideEncoder?
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bestSideEncoder?_minimal
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bestSideEncoder?_eq_none_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bestSideEncoder
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bestSideEncoder_minimal
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.fullyNoisyBinary
+#check @OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.fullyNoisyBinary_risk_half
+
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalObservationModel
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalObservationModel.mk
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalObservationModel.prior
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalObservationModel.kernel
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalObservationModel.prior_nonneg
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalObservationModel.prior_sum_one
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalObservationModel.kernel_nonneg
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalObservationModel.kernel_sum_one
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.joint
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.observationMass
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.posterior?
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.joint_nonneg
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.sum_joint_eq_observationMass
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.sum_observationMass_eq_one
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.posterior?_sum_one
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.posterior?_nonneg
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.joint_le_observationMass
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.posterior?_eq_none_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argmaxBy
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argminBy
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argminBy?
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argmaxBy_mem_default_cons
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.le_argmaxBy_of_mem
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argminBy_mem_default_cons
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argminBy_le_of_mem
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argmaxBy?
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argmaxBy?_eq_none_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argminBy?_eq_none_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argmaxBy?_maximal
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.targetEnumeration_nonempty
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.maxTarget
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesTarget
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.joint_le_bayesTarget
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.correctMass
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.risk
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesDecoder
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_eq_one_sub_sum_max
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_nonneg
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_le_one
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_mem_unitInterval
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_le_risk
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RandomDecoder
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RandomDecoder.mk
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RandomDecoder.weight
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RandomDecoder.nonneg
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RandomDecoder.sum_one
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.randomizedCorrectMass
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.randomizedRisk
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_le_randomizedRisk
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.TargetPureOnSupport
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.cellErrorMass
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.cellErrorMass_nonneg
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_eq_sum_cellErrorMass
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_eq_zero_iff_targetPure
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.LicensedOnJointSupport
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.targetPure_iff_licensedOnJointSupport
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_eq_zero_iff_licensedOnJointSupport
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.FullCarrierDeterministic
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.deterministicModel
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.deterministic_joint_pos_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.deterministic_fullSupport_licensed_iff_fullCarrier
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.binaryTargetEnumeration
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.zeroMassCollisionModel
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.zeroMassCollision_support_pure
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.zeroMassCollision_not_fullCarrier
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.postJoint
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.postBayesTarget
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.postProcessedRisk
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.postProcessedRisk_eq_composed_risk
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_le_postProcessedRisk
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalPostProcessing
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalPostProcessing.mk
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalPostProcessing.kernel
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalPostProcessing.nonneg
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.RationalPostProcessing.sum_one
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.randomizedPostJoint
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.randomizedPostBayesTarget
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.randomizedPostProcessedRisk
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.randomizedPostJoint_bayes_le
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bayesRisk_le_randomizedPostProcessedRisk
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.argminBy?_minimal
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.sideJoint
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.sideBayesTarget
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.sideRisk
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.tableLists
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.tableLists_length
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.mapped_function_table_mem
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.encoderOfTable
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.encoderOfMappedFunction_eq
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.sideEncoderCandidates
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.sideEncoderCandidates_complete
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bestSideEncoder?
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bestSideEncoder?_minimal
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bestSideEncoder?_eq_none_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bestSideEncoder
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.bestSideEncoder_minimal
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.fullyNoisyBinary
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.NoisyRecovery.fullyNoisyBinary_risk_half
+end OperatorKO7.Test.NoisyRecoveryReach

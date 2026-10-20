@@ -1,0 +1,42 @@
+import OperatorKO7.Meta.BoundaryGeneral.OverproductionGapSchedulerChannel
+
+namespace OperatorKO7.Test.OverproductionGapSchedulerChannelReach
+
+open OperatorKO7.Meta.BoundaryGeneral.OverproductionGapSchedulerChannel
+
+#check @schedulerUnitMass
+#print axioms schedulerUnitMass
+#check @schedulerEchoWeight
+#print axioms schedulerEchoWeight
+#check @schedulerEchoConditional
+#print axioms schedulerEchoConditional
+#check @schedulerEcho_condEntropyDirect
+#print axioms schedulerEcho_condEntropyDirect
+#check @schedulerEcho_condEntropyLicensed
+#print axioms schedulerEcho_condEntropyLicensed
+#check @schedulerEcho_deficit_eq_zero
+#print axioms schedulerEcho_deficit_eq_zero
+#check @schedulerEcho_shannonGap_eq_entropyBits
+#print axioms schedulerEcho_shannonGap_eq_entropyBits
+#check @schedulerResolvingWeight
+#print axioms schedulerResolvingWeight
+#check @schedulerResolvingConditional
+#print axioms schedulerResolvingConditional
+#check @schedulerResolving_mixture
+#print axioms schedulerResolving_mixture
+#check @schedulerResolving_condEntropyDirect
+#print axioms schedulerResolving_condEntropyDirect
+#check @schedulerResolving_conditional_entropy_zero
+#print axioms schedulerResolving_conditional_entropy_zero
+#check @schedulerResolving_condEntropyLicensed_eq_zero
+#print axioms schedulerResolving_condEntropyLicensed_eq_zero
+#check @schedulerResolving_deficit_eq_entropy
+#print axioms schedulerResolving_deficit_eq_entropy
+#check @schedulerResolving_shannonGap_eq_zero
+#print axioms schedulerResolving_shannonGap_eq_zero
+#check @scheduler_channel_endpoint_difference
+#print axioms scheduler_channel_endpoint_difference
+#check @scheduler_channel_law
+#print axioms scheduler_channel_law
+
+end OperatorKO7.Test.OverproductionGapSchedulerChannelReach

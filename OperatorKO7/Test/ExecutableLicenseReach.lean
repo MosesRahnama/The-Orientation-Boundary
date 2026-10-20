@@ -1,0 +1,39 @@
+import OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense
+
+/-! Permanent reach and axiom audit for `ExecutableLicense`. -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.licensedB
+#check @OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.licensedB_eq_true_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.licensedB_eq_false_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.observerRefinesB
+#check @OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.observerRefinesB_eq_true_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.unlicensedWitness?
+#check @OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.unlicensedWitness?_sound
+#check @OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.unlicensedWitness?_eq_none_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.targetKernelClasses
+#check @OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.targetKernelClasses_spec
+#check @OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.emptyEnumeration
+#check @OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.licensedB_emptyEnumeration
+#check @OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.unitEnumeration
+#check @OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.licensedB_unitEnumeration
+#check @OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.boolPairEnumeration
+#check @OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.parityTarget
+#check @OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.parity_fixture
+
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.licensedB
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.licensedB_eq_true_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.licensedB_eq_false_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.observerRefinesB
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.observerRefinesB_eq_true_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.unlicensedWitness?
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.unlicensedWitness?_sound
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.unlicensedWitness?_eq_none_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.targetKernelClasses
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.targetKernelClasses_spec
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.emptyEnumeration
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.licensedB_emptyEnumeration
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.unitEnumeration
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.licensedB_unitEnumeration
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.boolPairEnumeration
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.parityTarget
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ExecutableLicense.parity_fixture

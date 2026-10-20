@@ -1,0 +1,233 @@
+import OperatorKO7.Meta.BoundaryOperator.TransportCeiling
+
+/-!
+# Full reach and axiom gate for `OperatorKO7/Meta/BoundaryOperator/TransportCeiling.lean`
+
+Pins every explicit public declaration plus structure constructors/projections
+and inductive constructors/recursors.  Each `#check` is paired with
+`#print axioms` so source-to-reach and reach-to-axiom set differences are empty
+under the BCS-S3 parity manifest.
+-/
+
+set_option autoImplicit false
+
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportDatum
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportDatum
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportDatum.mk
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportDatum.mk
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportDatum.source
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportDatum.source
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportDatum.target
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportDatum.target
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportDatum.map
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportDatum.map
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.forwardStep
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.forwardStep
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.forwardReach
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.forwardReach
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.stepReflection
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.stepReflection
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.stepLifting
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.stepLifting
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.terminalExactness
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.terminalExactness
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.bisimulationOnImage
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.bisimulationOnImage
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.reductionEquivalence
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.reductionEquivalence
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.arsIsomorphism
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.arsIsomorphism
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.rec
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.rec
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.casesOn
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.casesOn
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.noConfusion
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.TransportProperty.noConfusion
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.Statement
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.Statement
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.Supported
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.Supported
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.refl
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.refl
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.forwardStep_to_forwardReach
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.forwardStep_to_forwardReach
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.bisimulation_to_forwardStep
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.bisimulation_to_forwardStep
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.bisimulation_to_stepLifting
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.bisimulation_to_stepLifting
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.bisimulation_to_terminalExactness
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.bisimulation_to_terminalExactness
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.reductionEquivalence_to_forwardReach
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.reductionEquivalence_to_forwardReach
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.arsIsomorphism_to_forwardStep
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.arsIsomorphism_to_forwardStep
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.arsIsomorphism_to_forwardReach
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.arsIsomorphism_to_forwardReach
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.arsIsomorphism_to_stepReflection
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.arsIsomorphism_to_stepReflection
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.arsIsomorphism_to_stepLifting
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.arsIsomorphism_to_stepLifting
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.arsIsomorphism_to_terminalExactness
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.arsIsomorphism_to_terminalExactness
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.arsIsomorphism_to_bisimulationOnImage
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.arsIsomorphism_to_bisimulationOnImage
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.arsIsomorphism_to_reductionEquivalence
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.arsIsomorphism_to_reductionEquivalence
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.trans
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.trans
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.rec
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.rec
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.casesOn
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.casesOn
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.noConfusion
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.noConfusion
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.isomorphismStatement_forwardStep
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.isomorphismStatement_forwardStep
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.isomorphismStatement_stepReflection
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.isomorphismStatement_stepReflection
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.isomorphismStatement_stepLifting
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.isomorphismStatement_stepLifting
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.isomorphismStatement_bisimulationOnImage
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.isomorphismStatement_bisimulationOnImage
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.isomorphismStatement_forwardReach
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.isomorphismStatement_forwardReach
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.isomorphismStatement_reachReflection
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.isomorphismStatement_reachReflection
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.isomorphismStatement_reductionEquivalence
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.isomorphismStatement_reductionEquivalence
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.apply
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.apply
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.GenericallyImplies
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.GenericallyImplies
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.implicationRank
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.implicationRank
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.rank_nonincrease
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.ImplicationRule.rank_nonincrease
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.forwardStep_strictly_implies_forwardReach
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.forwardStep_strictly_implies_forwardReach
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.NonImplicationWitness
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.NonImplicationWitness
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.NonImplicationWitness.mk
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.NonImplicationWitness.mk
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.NonImplicationWitness.datum
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.NonImplicationWitness.datum
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.NonImplicationWitness.premiseEvidence
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.NonImplicationWitness.premiseEvidence
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.NonImplicationWitness.conclusionFails
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.NonImplicationWitness.conclusionFails
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.SemanticAntichain
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.SemanticAntichain
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.SemanticAntichain.mk
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.SemanticAntichain.mk
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.SemanticAntichain.leftNotRight
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.SemanticAntichain.leftNotRight
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.SemanticAntichain.rightNotLeft
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.SemanticAntichain.rightNotLeft
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.collapseDatum
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.collapseDatum
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.forwardStep_not_stepReflection
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.forwardStep_not_stepReflection
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.forwardStep_not_stepLifting
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.forwardStep_not_stepLifting
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.forwardStep_not_bisimulationOnImage
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.forwardStep_not_bisimulationOnImage
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.AntichainNode
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.AntichainNode
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.AntichainNode.source
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.AntichainNode.source
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.AntichainNode.target
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.AntichainNode.target
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.AntichainNode.extra
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.AntichainNode.extra
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.AntichainNode.rec
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.AntichainNode.rec
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.AntichainNode.casesOn
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.AntichainNode.casesOn
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.AntichainNode.noConfusion
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.AntichainNode.noConfusion
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.antichainSourceStep
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.antichainSourceStep
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.antichainTargetStep
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.antichainTargetStep
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.antichainSourceARS
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.antichainSourceARS
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.antichainTargetARS
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.antichainTargetARS
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.reflectionDatum
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.reflectionDatum
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.reflectionDatum_stepReflection
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.reflectionDatum_stepReflection
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.reflectionDatum_not_forwardStep
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.reflectionDatum_not_forwardStep
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.stepReflection_not_forwardStep
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.stepReflection_not_forwardStep
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.forwardStep_stepReflection_antichain
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.forwardStep_stepReflection_antichain
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.forwardBoolStep
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.forwardBoolStep
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.reverseBoolStep
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.reverseBoolStep
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.forwardBoolARS
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.forwardBoolARS
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.reverseBoolARS
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.reverseBoolARS
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.emptySupportDatum
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.emptySupportDatum
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.reverseSteps_from_false
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.reverseSteps_from_false
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.emptySupport_not_forwardStep
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.emptySupport_not_forwardStep
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.emptySupport_not_forwardReach
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.emptySupport_not_forwardReach
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.emptySupport_not_stepReflection
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.emptySupport_not_stepReflection
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.emptySupport_not_stepLifting
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.emptySupport_not_stepLifting
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.emptySupport_not_terminalExactness
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.emptySupport_not_terminalExactness
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.emptySupport_not_bisimulationOnImage
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.emptySupport_not_bisimulationOnImage
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.emptySupport_not_reductionEquivalence
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.emptySupport_not_reductionEquivalence
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.emptySupport_not_arsIsomorphism
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.emptySupport_not_arsIsomorphism
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.emptySupportDatum_support_empty
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.emptySupportDatum_support_empty
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.Ceiling
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.Ceiling
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.Ceiling.mk
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.Ceiling.mk
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.Ceiling.members
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.Ceiling.members
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.Ceiling.supported
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.Ceiling.supported
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.Ceiling.antichain
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.Ceiling.antichain
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.Ceiling.dominates
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.Ceiling.dominates
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.identityIsomorphism
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.identityIsomorphism
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.identityDatum
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.identityDatum
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.identityDatum_isomorphism
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.identityDatum_isomorphism
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.arsIsomorphism_dominates
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.arsIsomorphism_dominates
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.identityTransportCeiling
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.identityTransportCeiling
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.PromotionFailure
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.PromotionFailure
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.PromotionFailure.mk
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.PromotionFailure.mk
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.PromotionFailure.sourceEvidence
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.PromotionFailure.sourceEvidence
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.PromotionFailure.targetUnavailable
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.PromotionFailure.targetUnavailable
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.PromotionFailure.genericImplicationUnavailable
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.PromotionFailure.genericImplicationUnavailable
+#check @OperatorKO7.Meta.BoundaryOperator.TransportCeiling.collapsePromotionFailure
+#print axioms OperatorKO7.Meta.BoundaryOperator.TransportCeiling.collapsePromotionFailure

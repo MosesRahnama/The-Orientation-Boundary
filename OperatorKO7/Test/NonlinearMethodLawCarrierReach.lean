@@ -1,0 +1,76 @@
+import OperatorKO7.Meta.NonlinearMethodLawCarrier
+import OperatorKO7.Meta.NonlinearUnconstrainedSplit
+
+namespace NonlinearMethodLawCarrierReach
+
+open OperatorKO7.Trace
+open OperatorKO7.ConstructionMethodClassification
+open OperatorKO7.NonlinearMethodLawCarrier
+open OperatorKO7.NonlinearUnconstrainedSplit
+
+#check NonlinearRelation
+#check NonlinearMethodLaw
+#check nonlinearMethodLawRoute
+#check nonlinearMethodLawRoute_exact
+#check NonlinearMethodLawLicensedEscape
+#check NonlinearMethodLawCarrier
+#check directWholeTerm_supported
+#check importedWholeLicensedEscape_supported
+#check directWholeTermCarrier
+#check importedWholeLicensedEscapeCarrier
+#check nonlinearMethodLawCarrier_relation_eq_step
+#check relation_has_licensed_escape
+#check relation_has_direct_first_order_method
+#check importedWholeLicensedEscapeCarrier_projects_escape
+#check arbitrary_relation_law_dichotomy
+#check arbitrary_relation_law_no_first_order_method_or_licensed_escape
+#check arbitrary_relation_law_supported_unconditional
+#check directWholeTerm_is_w0
+#check importedWholeLicensedEscape_is_w1
+#check arbitrary_relation_law_boundary
+#check ArbitraryRelationLawExactBoundary
+#check arbitrary_relation_law_exact_boundary
+
+example : nonlinearMethodLawRoute .directWholeTerm = .W0 := by
+  exact directWholeTerm_is_w0
+
+example : nonlinearMethodLawRoute .importedWholeLicensedEscape = .W1 := by
+  exact importedWholeLicensedEscape_is_w1
+
+example : relation_has_licensed_escape OperatorKO7.Step .W1 := by
+  exact importedWholeLicensedEscapeCarrier_projects_escape
+
+example :
+    arbitrary_relation_law_boundary OperatorKO7.Step := by
+  exact arbitrary_relation_law_no_first_order_method_or_licensed_escape OperatorKO7.Step
+
+example : NonlinearUnconstrainedRowSupported .arbitraryRelationLawBoundary := by
+  exact arbitrary_relation_law_supported_unconditional
+
+
+/-! Axiom closure of every pinned declaration (LASOT gate Q24). -/
+
+#print axioms NonlinearRelation
+#print axioms NonlinearMethodLaw
+#print axioms nonlinearMethodLawRoute
+#print axioms nonlinearMethodLawRoute_exact
+#print axioms NonlinearMethodLawLicensedEscape
+#print axioms NonlinearMethodLawCarrier
+#print axioms directWholeTerm_supported
+#print axioms importedWholeLicensedEscape_supported
+#print axioms directWholeTermCarrier
+#print axioms importedWholeLicensedEscapeCarrier
+#print axioms nonlinearMethodLawCarrier_relation_eq_step
+#print axioms relation_has_licensed_escape
+#print axioms relation_has_direct_first_order_method
+#print axioms importedWholeLicensedEscapeCarrier_projects_escape
+#print axioms arbitrary_relation_law_dichotomy
+#print axioms arbitrary_relation_law_no_first_order_method_or_licensed_escape
+#print axioms arbitrary_relation_law_supported_unconditional
+#print axioms directWholeTerm_is_w0
+#print axioms importedWholeLicensedEscape_is_w1
+#print axioms arbitrary_relation_law_boundary
+#print axioms ArbitraryRelationLawExactBoundary
+#print axioms arbitrary_relation_law_exact_boundary
+
+end NonlinearMethodLawCarrierReach

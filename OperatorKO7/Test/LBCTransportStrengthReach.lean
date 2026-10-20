@@ -1,0 +1,31 @@
+import OperatorKO7.Meta.LicensedBoundaryCalculus.Transport.Counterexamples
+import OperatorKO7.Meta.LicensedBoundaryCalculus.Transport.StepLifting
+
+/-!
+# Reach gate for transport strength
+
+Pins the implication ladder, the finite invalid-converse fixtures, and the
+step-lifting criterion for quotient-image exactness.
+-/
+
+set_option autoImplicit false
+
+open OperatorKO7.Meta.LicensedBoundaryCalculus
+open OperatorKO7.Meta.LicensedBoundaryCalculus.TransportStrength
+open OperatorKO7.Meta.LicensedBoundaryCalculus.PartialLicensedReductionMorphism
+
+#check @forwardStep_implies_forwardReach
+#check @bisimulationOnImage_implies_terminalExactness
+#check @arsIsomorphism_reductionEquivalence
+#check carrierMap_not_forwardStep_fixture
+#check pureStateCollapse_not_bisimulationOnImage_fixture
+#check @quotientImageExact_iff_stepLifting
+#check combinedPartialEdgeCollapse_not_quotientImageExact_fixture
+
+#print axioms forwardStep_implies_forwardReach
+#print axioms bisimulationOnImage_implies_terminalExactness
+#print axioms arsIsomorphism_reductionEquivalence
+#print axioms carrierMap_not_forwardStep_fixture
+#print axioms pureStateCollapse_not_bisimulationOnImage_fixture
+#print axioms quotientImageExact_iff_stepLifting
+#print axioms combinedPartialEdgeCollapse_not_quotientImageExact_fixture

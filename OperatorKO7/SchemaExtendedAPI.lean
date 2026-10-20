@@ -1,0 +1,74 @@
+import OperatorKO7.PrimitiveSchemaAPI
+
+-- Broader reusable barrier and tooling layer
+import OperatorKO7.Meta.QuadraticBarrier_Schema
+import OperatorKO7.Meta.QuadraticCrossTermBarrier_Schema
+import OperatorKO7.Meta.MultilinearBarrier_Schema
+import OperatorKO7.Meta.PolynomialBarrierGeneral_Schema
+import OperatorKO7.Meta.WPO_PolynomialBarrier_Schema
+import OperatorKO7.Meta.MaxBarrier_Schema
+import OperatorKO7.Meta.ArcticBarrier_Schema
+import OperatorKO7.Meta.TropicalBarrier_Schema
+import OperatorKO7.Meta.DepthBarrier_Schema
+import OperatorKO7.Meta.AffineThresholdSharpness
+import OperatorKO7.Meta.MatrixBarrier2_Schema
+import OperatorKO7.Meta.MatrixBarrierD_Schema
+import OperatorKO7.Meta.MatrixBarrierLex_Schema
+import OperatorKO7.Meta.MatrixBarrierLexD_Schema
+import OperatorKO7.Meta.MatrixBarrierLexPermD_Schema
+import OperatorKO7.Meta.MatrixBarrierMix2_Schema
+import OperatorKO7.Meta.MatrixBarrierFunctional_Schema
+import OperatorKO7.Meta.MatrixBarrierArbitrary_Schema
+import OperatorKO7.Meta.MatrixBarrierArcticTropical_Schema
+import OperatorKO7.Meta.ScalarProjectionBarrier
+import OperatorKO7.Meta.ProjectedPrimaryBarrier
+import OperatorKO7.Meta.MatrixProjectionCoverage_Schema
+import OperatorKO7.Meta.SymbolicComparatorBarrier_Schema
+import OperatorKO7.Meta.SymbolicComparatorBarrier_Weighted_Schema
+import OperatorKO7.Meta.KBO_Impossible_Schema
+import OperatorKO7.Meta.PumpedBarrierClasses_Schema
+import OperatorKO7.Meta.BarrierPumpDischarge_Schema
+import OperatorKO7.Meta.MatrixBarrierNatural_Schema
+import OperatorKO7.Meta.AffineBarrierOrderedField_Schema
+import OperatorKO7.Meta.MatrixBarrierOrderedField_Schema
+import OperatorKO7.Meta.SchemaBarrier_OrderedCarrier
+import OperatorKO7.Meta.LPO_Schema
+import OperatorKO7.Meta.LPO_KO7
+import OperatorKO7.Meta.Methods.UnarySignatureInapplicability
+import OperatorKO7.Meta.MatrixBarrierArcticNatural_Schema
+import OperatorKO7.Meta.StandardPumpLemmas
+import OperatorKO7.Meta.BarrierWitness
+import OperatorKO7.Meta.BarrierWitness_Extended
+import OperatorKO7.Meta.BarrierWitness_Budgets
+import OperatorKO7.Meta.SynthesisOracle
+import OperatorKO7.Meta.BarrierClass_Classifier
+import OperatorKO7.Meta.MutualDuplication_Schema
+import OperatorKO7.Meta.MutualDuplication_SchemaBarrier
+import OperatorKO7.Meta.MutualDuplication_FiniteSchema
+import OperatorKO7.Meta.MutualDuplication_SchemaProjection
+import OperatorKO7.Meta.MutualDuplication_General
+import OperatorKO7.Meta.MutualDuplication_CycleFlow
+import OperatorKO7.Meta.MutualDuplication_KNode
+import OperatorKO7.Meta.MutualDuplication_KNode_Abstract
+import OperatorKO7.Meta.MutualDuplication_GraphCycle
+import OperatorKO7.Meta.MutualDuplication_Transparent
+import OperatorKO7.Meta.MutualDuplication_RelationalGraph
+import OperatorKO7.Meta.MutualDuplication_CallGraph
+import OperatorKO7.Meta.MutualDuplication_ExtractedCallGraph
+import OperatorKO7.Meta.MutualDuplication_PayloadFlow
+import OperatorKO7.Meta.MutualDuplication_Preserving
+import OperatorKO7.Meta.MutualDuplication_Preserving_KNode
+import OperatorKO7.Meta.MutualDuplication_Preserving_Abstract
+import OperatorKO7.Meta.MutualDuplication_Preserving_Transparent
+import OperatorKO7.Meta.MutualDuplication_PacketGraph
+import OperatorKO7.Meta.MutualDuplication_FiniteSchema_API
+import OperatorKO7.Meta.HigherOrderSharingBoundary_API
+import OperatorKO7.Meta.EscapeTrichotomy_Schema
+
+/-!
+# Schema Extended API
+
+This import-only root extends `PrimitiveSchemaAPI` with the barrier, matrix, mutual-duplication,
+higher-order sharing, and escape-trichotomy schema modules listed above. Import-closure audit
+receipts belong in the external Lean ledger rather than this source comment.
+-/

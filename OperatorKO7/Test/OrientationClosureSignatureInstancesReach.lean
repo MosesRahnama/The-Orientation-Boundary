@@ -1,0 +1,76 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.SignatureInstances
+
+/-! # SignatureInstances reach and axiom check -/
+
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.SchemaIso
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.SchemaIso
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.SchemaIso.orients_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.SchemaIso.orients_iff
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.unembed
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.unembed
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.unembed_embed
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.unembed_embed
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.embed_unembed
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.embed_unembed
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.freeSigIso
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.freeSigIso
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.KO7Inert
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.KO7Inert
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.ko7InertArity
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.ko7InertArity
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.KO7SigTerm
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.KO7SigTerm
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.toSig
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.toSig
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.ofSig
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.ofSig
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.ofSig_toSig
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.ofSig_toSig
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.fin2_eta
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.fin2_eta
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.toSig_ofSig
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.toSig_ofSig
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.ko7SigIso
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.ko7SigIso
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.ko7_recursor_rules_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.ko7_recursor_rules_iff
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.step_of_sigRootStep
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.step_of_sigRootStep
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.ko7_orients_iff_sig
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.ko7_orients_iff_sig
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.InertFree
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.InertFree
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.mem_range_embed_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.mem_range_embed_iff
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.SchemaIso.trans
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.SchemaIso.trans
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.SchemaGenerated
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.SchemaGenerated
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.SchemaIso.eq_on_generated
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.SchemaIso.eq_on_generated
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.free_generated_empty
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.free_generated_empty
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.freeSigIso_unique
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.freeSigIso_unique
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.renameVars
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.renameVars
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.renameVars_renameVars
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.renameVars_renameVars
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.renameIso
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.renameIso
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.freeSigIso_not_unique
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.freeSigIso_not_unique
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.inertFree_toSig_of_generated
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.inertFree_toSig_of_generated
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.ko7_generated_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.ko7_generated_iff
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.swapInert
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.swapInert
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.swapInert_swapInert
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.swapInert_swapInert
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.swapIso
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.swapIso
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.swapInert_moves_merge
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.swapInert_moves_merge
+#check @OperatorKO7.Methods.OrientationClosure.SignatureInstances.ko7SigIso_not_unique
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureInstances.ko7SigIso_not_unique

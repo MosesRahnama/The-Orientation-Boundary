@@ -1,0 +1,121 @@
+import OperatorKO7.Meta.SafeTrace_RoadmapCloseout
+
+namespace SafeTraceRoadmapCloseoutReach
+
+open OperatorKO7.Trace
+open OperatorKO7.SafeTraceCertificateAudit
+open OperatorKO7.SafeTraceCertificateBridge
+open OperatorKO7.SafeTraceComplexityBridge
+open OperatorKO7.SafeTraceRoadmapCloseout
+open OperatorKO7.SafeTraceTripleLexExactness
+open OperatorKO7.StepDuplicating.StepDuplicatingSchema
+open OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem
+open MetaSN_KO7
+
+#check SafeTraceRootEndpointBoundsEvidence
+#check SafeTraceContextExactDropEvidence
+#check SafeTraceMWCtxBoundEvidence
+#check SafeTraceFGEnvelopeBoundEvidence
+#check SafeTraceRootAPIExportBundle
+#check safe_trace_root_api_export_bundle
+#check SafeTraceRoadmapCloseoutRow
+#check SafeTraceRoadmapCloseoutStatus
+#check safeTraceRoadmapCloseoutRows
+#check SafeTraceRoadmapCloseoutRowEvidence
+#check safeTraceRoadmapCloseoutRows_length
+#check safeTraceRoadmapCloseoutRows_nodup
+#check safeTraceRoadmapCloseoutRows_mem_iff
+#check safeTraceRoadmapCloseoutRows_complete
+#check safeTraceRoadmapCloseout_row_status
+#check safeTraceRoadmapCloseout_row_projects_evidence
+#check SafeTraceRoadmapCloseoutCatalog
+#check safe_trace_roadmap_closeout_catalog
+#check safeTraceRoadmapCloseout_catalog_projects_row_status
+#check safeTraceRoadmapCloseout_catalog_projects_row_evidence
+#check safeTraceRoadmapCloseout_catalog_projects_image_subtype_status
+#check safeTraceRoadmapCloseout_catalog_projects_image_subtype_exactness
+#check safeTraceRoadmapCloseout_catalog_projects_full_carrier_obstruction
+#check safeTraceRoadmapCloseout_catalog_projects_certificate_bridge_catalog
+#check safeTraceRoadmapCloseout_catalog_projects_complexity_bridge_catalog
+#check safeTraceRoadmapCloseout_catalog_projects_root_endpoint_bounds
+#check safeTraceRoadmapCloseout_catalog_projects_context_exact_drop
+#check safeTraceRoadmapCloseout_catalog_projects_mw_ctx_bound
+#check safeTraceRoadmapCloseout_catalog_projects_fg_envelope_bound
+#check safeTraceRoadmapCloseout_catalog_projects_externalized_image_recovery
+#check safeTraceRoadmapCloseout_catalog_projects_certificate_audit_catalog
+#check safeTraceRoadmapCloseout_catalog_projects_root_api_export
+#check safeTraceRoadmapCloseout_catalog_projects_root_api_image_subtype_status
+#check safeTraceRoadmapCloseout_catalog_projects_root_api_full_carrier_obstruction
+#check safeTraceRoadmapCloseout_catalog_projects_root_api_certificate_bridge_catalog
+#check safeTraceRoadmapCloseout_catalog_projects_root_api_complexity_bridge_catalog
+#check safeTraceRoadmapCloseout_catalog_projects_root_api_certificate_audit_catalog
+
+example : safeTraceRoadmapCloseoutRows.length = 10 :=
+  safeTraceRoadmapCloseoutRows_length
+
+example : safeTraceRoadmapCloseoutRows.Nodup :=
+  safeTraceRoadmapCloseoutRows_nodup
+
+example (row : SafeTraceRoadmapCloseoutRow) :
+    row ∈ safeTraceRoadmapCloseoutRows :=
+  safeTraceRoadmapCloseoutRows_complete row
+
+example (row : SafeTraceRoadmapCloseoutRow) :
+    SafeTraceRoadmapCloseoutStatus :=
+  safeTraceRoadmapCloseout_catalog_projects_row_status
+    safe_trace_roadmap_closeout_catalog row
+
+example (row : SafeTraceRoadmapCloseoutRow) :
+    SafeTraceRoadmapCloseoutRowEvidence row :=
+  safeTraceRoadmapCloseout_catalog_projects_row_evidence
+    safe_trace_roadmap_closeout_catalog row
+
+example : TraceImageSubtypeStatus :=
+  safeTraceRoadmapCloseout_catalog_projects_image_subtype_status
+    safe_trace_roadmap_closeout_catalog
+
+example : TraceRealizableCarrierExactnessPackage :=
+  safeTraceRoadmapCloseout_catalog_projects_image_subtype_exactness
+    safe_trace_roadmap_closeout_catalog
+
+example : ¬ Function.Surjective traceToFullTripleLexCarrier :=
+  safeTraceRoadmapCloseout_catalog_projects_full_carrier_obstruction
+    safe_trace_roadmap_closeout_catalog
+
+example : SafeTraceCertificateBridgeCatalog :=
+  safeTraceRoadmapCloseout_catalog_projects_certificate_bridge_catalog
+    safe_trace_roadmap_closeout_catalog
+
+example : SafeTraceComplexityBridgeCatalog :=
+  safeTraceRoadmapCloseout_catalog_projects_complexity_bridge_catalog
+    safe_trace_roadmap_closeout_catalog
+
+example : SafeTraceRootEndpointBoundsEvidence :=
+  safeTraceRoadmapCloseout_catalog_projects_root_endpoint_bounds
+    safe_trace_roadmap_closeout_catalog
+
+example : SafeTraceContextExactDropEvidence :=
+  safeTraceRoadmapCloseout_catalog_projects_context_exact_drop
+    safe_trace_roadmap_closeout_catalog
+
+example : SafeTraceMWCtxBoundEvidence :=
+  safeTraceRoadmapCloseout_catalog_projects_mw_ctx_bound
+    safe_trace_roadmap_closeout_catalog
+
+example : SafeTraceFGEnvelopeBoundEvidence :=
+  safeTraceRoadmapCloseout_catalog_projects_fg_envelope_bound
+    safe_trace_roadmap_closeout_catalog
+
+example : SafeTraceExternalizedRecoveryEvidence :=
+  safeTraceRoadmapCloseout_catalog_projects_externalized_image_recovery
+    safe_trace_roadmap_closeout_catalog
+
+example : SafeTraceCertificateAuditCatalog :=
+  safeTraceRoadmapCloseout_catalog_projects_certificate_audit_catalog
+    safe_trace_roadmap_closeout_catalog
+
+example : SafeTraceRootAPIExportBundle :=
+  safeTraceRoadmapCloseout_catalog_projects_root_api_export
+    safe_trace_roadmap_closeout_catalog
+
+end SafeTraceRoadmapCloseoutReach

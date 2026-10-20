@@ -1,0 +1,218 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.CertificateLanguage
+
+/-! # CertificateLanguage reach and axiom check -/
+
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.MatrixCert
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.MatrixCert
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.MatrixCert.mk
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.MatrixCert.mk
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.MatrixCert.const
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.MatrixCert.const
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.MatrixCert.mat
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.MatrixCert.mat
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.KBOCert
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.KBOCert
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.KBOCert.mk
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.KBOCert.mk
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.KBOCert.weight
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.KBOCert.weight
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.KBOCert.varWeight
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.KBOCert.varWeight
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.KBOCert.prec
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.KBOCert.prec
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.Certificate
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.Certificate
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.Certificate.poly
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.Certificate.poly
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.Certificate.matrix
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.Certificate.matrix
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.Certificate.kbo
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.Certificate.kbo
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.Certificate.dpSubterm
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.Certificate.dpSubterm
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.linearMonomials
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.linearMonomials
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkPoly
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkPoly
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.wEval_mono
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.wEval_mono
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.wEval_strict_s
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.wEval_strict_s
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.wEval_strict_y
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.wEval_strict_y
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.rEval_strict_b
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.rEval_strict_b
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.rEval_strict_s
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.rEval_strict_s
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.rEval_strict_n
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.rEval_strict_n
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.poly_strictContextLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.poly_strictContextLaws
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkPoly_sound
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkPoly_sound
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkPoly_complete
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkPoly_complete
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.Multilinear
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.Multilinear
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.multilinearB
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.multilinearB
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.multilinearB_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.multilinearB_iff
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.wEval_flat_s
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.wEval_flat_s
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.wEval_flat_y
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.wEval_flat_y
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.rEval_flat_b
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.rEval_flat_b
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.rEval_flat_s
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.rEval_flat_s
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.rEval_flat_n
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.rEval_flat_n
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.linearMonomials_of_strictContextLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.linearMonomials_of_strictContextLaws
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.linearMonomials_iff_strictContextLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.linearMonomials_iff_strictContextLaws
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkPoly_orients_strictContextLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkPoly_orients_strictContextLaws
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkPoly_iff_orients_strictContextLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkPoly_iff_orients_strictContextLaws
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.multilinearControlR
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.multilinearControlR
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.multilinearControl_multilinear
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.multilinearControl_multilinear
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.multilinearControl_orients
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.multilinearControl_orients
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.multilinearControl_rejected
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.multilinearControl_rejected
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.multilinearControl_step_flat
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.multilinearControl_step_flat
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.multilinearControl_not_strictContextLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.multilinearControl_not_strictContextLaws
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.orients_not_iff_checkPoly_on_multilinear
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.orients_not_iff_checkPoly_on_multilinear
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.squareWrapperW
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.squareWrapperW
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.squareWrapperR
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.squareWrapperR
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.squareWrapper_orients
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.squareWrapper_orients
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.squareWrapper_strictContextLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.squareWrapper_strictContextLaws
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.squareWrapper_not_linearMonomials
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.squareWrapper_not_linearMonomials
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.squareWrapper_not_multilinear
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.squareWrapper_not_multilinear
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.squareWrapper_rejected
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.squareWrapper_rejected
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkPoly_iff_needs_multilinear
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkPoly_iff_needs_multilinear
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.valueSchema
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.valueSchema
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.affine_certificate_rejected
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.affine_certificate_rejected
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.region_certificate_accepted
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.region_certificate_accepted
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.matGe
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.matGe
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkMatrix
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkMatrix
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.matrix_certificate_rejected
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.matrix_certificate_rejected
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.varCount
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.varCount
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.varCountList
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.varCountList
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.varCondition
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.varCondition
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.succRule_varCondition_fails
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.succRule_varCondition_fails
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboCore
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboCore
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.termVars
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.termVars
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.termVarsList
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.termVarsList
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.cnt_eq_varCount
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.cnt_eq_varCount
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.varCount_eq_zero_of_not_mem
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.varCount_eq_zero_of_not_mem
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboVCB
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboVCB
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboVCB_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboVCB_iff
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboGtB
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboGtB
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboLexB
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboLexB
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboLexB_sound
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboLexB_sound
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboGtB_sound
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboGtB_sound
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboLexB_complete
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboLexB_complete
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboGtB_complete
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboGtB_complete
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboGtB_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboGtB_iff
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboAdmissibleB
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboAdmissibleB
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.eq_zero_of_freeArity_eq_zero
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.eq_zero_of_freeArity_eq_zero
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.eq_succ_of_freeArity_eq_one
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.eq_succ_of_freeArity_eq_one
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboAdmissibleB_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboAdmissibleB_iff
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkKBO
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkKBO
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkKBO_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkKBO_iff
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.succRule_not_kboGt
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.succRule_not_kboGt
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kbo_certificate_rejected
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kbo_certificate_rejected
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboWitness
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboWitness
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboWitness_admissible
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboWitness_admissible
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboWitness_orients_zeroRule
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboWitness_orients_zeroRule
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboWitness_rejects_succRule
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboWitness_rejects_succRule
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboLexLeft
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboLexLeft
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboLexRight
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboLexRight
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboWitness_lex
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboWitness_lex
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboWitness_lex_reverse
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboWitness_lex_reverse
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboPrecLeft
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboPrecLeft
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboPrecRight
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboPrecRight
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboPrecHigh
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboPrecHigh
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboPrecLow
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboPrecLow
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboPrecHigh_orients
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboPrecHigh_orients
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboPrecLow_rejects
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.kboPrecLow_rejects
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkDP
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkDP
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.subtermCriterion_of_proj
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.subtermCriterion_of_proj
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkDP_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkDP_iff
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkDP_sound
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.checkDP_sound
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.counter_certificate_accepted
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.counter_certificate_accepted
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.check
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.check
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.Proves
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.Proves
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.check_sound
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.check_sound
+#check @OperatorKO7.Methods.OrientationClosure.CertificateLanguage.certificate_boundary
+#print axioms OperatorKO7.Methods.OrientationClosure.CertificateLanguage.certificate_boundary

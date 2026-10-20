@@ -1,0 +1,27 @@
+import OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry
+
+/-! Permanent reach and axiom audit for `RecursorTraceAsymmetry`. -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.stepRule_countG
+#check @OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.stepRule_ctr
+#check @OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.baseRule_countG
+#check @OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.congG_countG_sub
+#check @OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.orbit_countG_succ
+#check @OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.orbit_ctr_succ
+#check @OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.orbit_countG_mono
+#check @OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.orbit_frames_and_counter
+#check @OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.orbit_payload_mass_ge
+#check @OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.orbit_counter_drop_payload_rise
+#check @OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.baseRule_erases_payload_frames
+
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.stepRule_countG
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.stepRule_ctr
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.baseRule_countG
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.congG_countG_sub
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.orbit_countG_succ
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.orbit_ctr_succ
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.orbit_countG_mono
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.orbit_frames_and_counter
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.orbit_payload_mass_ge
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.orbit_counter_drop_payload_rise
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.RecursorTraceAsymmetry.baseRule_erases_payload_frames

@@ -1,0 +1,249 @@
+import OperatorKO7.Meta.HigherOrderSharingBoundary_API
+
+namespace HigherOrderSharingBoundaryAPIReach
+
+open OperatorKO7
+
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.FinalCatalog
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.FullHigherOrderOutsideCatalog
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.final_catalog
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.shared_policy_counterexample
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.unqualified_lift_blocker
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.no_sharing_requirement
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.full_higher_order_outside_catalog
+
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingPolicyClass
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingTerm
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingContext
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingClosedFragment
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingStep
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingCounter
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingOrientsStep
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingBetaStep
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingContextualBetaStep
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingBinderFreeContext
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingBetaStepOrientsCounter
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingFreshFor
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingBinderAwareSubstitutionObligation
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingLinearTerm
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingBetaFreeTerm
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingBinderFreeTerm
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingShareFreeTerm
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingDAGSharedTerm
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingBetaFreeContext
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingCaptureSafeSubstitutionObligation
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingContextSafeSubstitutionObligation
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingShareFreeBoundaryEmbedding
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingBetaCounterexamplePackage
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingCaptureSubfamilyCatalog
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingDecidableClassifierCatalog
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingCaptureDecidableCatalog
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingPolicyAuditCatalog
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingFullCaptureBoundaryCatalog
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingCloseoutCatalog
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingFullCaptureSemanticsStatus
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.is_lam_classifier
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.binder_free_classifier
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.share_free_classifier
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.beta_free_classifier
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.linear_classifier
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.dag_shared_classifier
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.binder_free_context_classifier
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.beta_free_context_classifier
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingFinalCatalog
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingPolicyBranchSplit
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingPolicySubfamilies
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.UnqualifiedRewritingLiftClaim
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.tree_policy
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.shared_policy
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.explicit_sharing_policy
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.beta_compatible_policy
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.rewriting_final_catalog
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.rewriting_restricted_fragment_transport
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.no_sharing_boundary_transport
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.shared_policy_orients_step
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.explicit_sharing_policy_orients_step
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.shared_surrogate_counterexample
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.explicit_sharing_counterexample
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.rewriting_capture_subfamily_catalog
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.rewriting_decidable_classifier_catalog
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.rewriting_capture_decidable_catalog
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.rewriting_policy_audit_catalog
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.rewriting_full_capture_boundary_catalog
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.rewriting_closeout_catalog
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.is_lam_classifier_eq_true_iff
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.binder_free_classifier_eq_true_iff
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.share_free_classifier_eq_true_iff
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.beta_free_classifier_eq_true_iff
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.linear_classifier_eq_true_iff
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.dag_shared_classifier_eq_true_iff
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.binder_free_context_classifier_eq_true_iff
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.beta_free_context_classifier_eq_true_iff
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.closed_fragment_implies_beta_free_classifier_true
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.closed_fragment_implies_binder_free_classifier_true
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.share_free_closed_fragment_implies_linear_classifier_true
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.embed_shared_term_implies_dag_shared_classifier_true
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.binder_free_context_classifier_true_implies_plug_preserves_binder_free
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.beta_free_context_classifier_true_implies_plug_preserves_beta_free
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.closed_fragment_beta_free
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.closed_fragment_binder_free
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.binder_free_context_term_closure
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.beta_free_context_term_closure
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.share_free_fragment_old_boundary_embedding
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.beta_counterexample_package
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.capture_safe_freshness
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.capture_safe_binder_free_closure
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.capture_safe_share_free_closure
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.capture_safe_under_binder
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.tree_binder_free_branch
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.shared_dag_branch
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.explicit_sharing_branch
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.beta_compatible_branch
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.context_safe_binder_free_closure
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.context_safe_beta_free_closure
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.full_capture_semantics_exact_boundary
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.rewriting_policy_subfamilies
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.tree_subfamily
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.shared_subfamily
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.explicit_sharing_subfamily
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.shared_sharing_aware_status
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.explicit_sharing_aware_status
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.tree_substitution_closed_status
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.shared_substitution_closed_status
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.explicit_sharing_substitution_closed_status
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.beta_compatible_status
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.binder_status
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.tree_context_closed_status
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.shared_context_closed_status
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.explicit_sharing_context_closed_status
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.beta_compatible_context_closed_status
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.unqualified_rewriting_lift_blocker
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.tree_binder_free_substitution_closed
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.shared_binder_free_substitution_closed
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.explicit_sharing_binder_free_substitution_closed
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.tree_binder_free_context_closed
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.shared_binder_free_context_closed
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.explicit_sharing_binder_free_context_closed
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.beta_step_transport
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.beta_step_contextual_closure
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.binder_aware_freshness_obligation
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.beta_compatible_counterexample
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.beta_compatible_beta_step_blocker
+#check OperatorKO7.HigherOrderSharingBoundaryAPI.beta_binder_branch_split
+
+example : OperatorKO7.HigherOrderSharingBoundaryAPI.FinalCatalog :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.final_catalog
+
+example : ¬ OperatorKO7.HigherOrderSharingBoundary.UnqualifiedHigherOrderLiftClaim :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.unqualified_lift_blocker
+
+example : OperatorKO7.HigherOrderNoSharingBoundary.NoSharingBoundaryStatus :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.no_sharing_requirement
+
+example (b s n : OperatorKO7.SharingBarrierLift.SharedTerm) :
+    OperatorKO7.HigherOrderSharingBoundary.HOPolicyCounter .shared
+      (OperatorKO7.HigherOrderSharingBoundary.embedSharedTerm
+        (OperatorKO7.SharingBarrierLift.SharedTerm.shareApp s
+          (OperatorKO7.SharingBarrierLift.SharedTerm.recur b s n))) <
+    OperatorKO7.HigherOrderSharingBoundary.HOPolicyCounter .shared
+      (OperatorKO7.HigherOrderSharingBoundary.embedSharedTerm
+        (OperatorKO7.SharingBarrierLift.SharedTerm.recur b s
+          (OperatorKO7.SharingBarrierLift.SharedTerm.succ n))) := by
+  exact OperatorKO7.HigherOrderSharingBoundaryAPI.shared_policy_counterexample.2 b s n
+
+example : OperatorKO7.HigherOrderSharingBoundaryAPI.FullHigherOrderOutsideCatalog :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.full_higher_order_outside_catalog
+
+example : OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingFinalCatalog :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.rewriting_final_catalog
+
+example : OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingCaptureSubfamilyCatalog :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.rewriting_capture_subfamily_catalog
+
+example : OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingDecidableClassifierCatalog :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.rewriting_decidable_classifier_catalog
+
+example : OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingCaptureDecidableCatalog :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.rewriting_capture_decidable_catalog
+
+example : OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingPolicyAuditCatalog :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.rewriting_policy_audit_catalog
+
+example : OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingFullCaptureBoundaryCatalog :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.rewriting_full_capture_boundary_catalog
+
+example : OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingCloseoutCatalog :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.rewriting_closeout_catalog
+
+example {t : OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingTerm} :
+    OperatorKO7.HigherOrderSharingBoundaryAPI.binder_free_classifier t = true ↔
+      OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingBinderFreeTerm t :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.binder_free_classifier_eq_true_iff
+
+example {t : OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingTerm}
+    (ht : OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingClosedFragment t) :
+    OperatorKO7.HigherOrderSharingBoundaryAPI.beta_free_classifier t = true :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.closed_fragment_implies_beta_free_classifier_true ht
+
+example {t : OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingTerm}
+    (ht : OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingClosedFragment t) :
+    OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingBetaFreeTerm t :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.closed_fragment_beta_free ht
+
+example {t : OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingTerm}
+    (ht : OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingClosedFragment t)
+    (hs : OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingShareFreeTerm t) :
+    OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingLinearTerm t /\
+      OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingShareFreeBoundaryEmbedding t :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.tree_binder_free_branch ht hs
+
+example : OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingBetaCounterexamplePackage :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.beta_counterexample_package
+
+example : OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingFullCaptureSemanticsStatus :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.full_capture_semantics_exact_boundary
+
+example : ¬ OperatorKO7.HigherOrderSharingBoundaryAPI.UnqualifiedRewritingLiftClaim :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.unqualified_rewriting_lift_blocker
+
+example : OperatorKO7.HigherOrderSharingBoundaryAPI.TreeHigherOrder
+    OperatorKO7.HigherOrderSharingBoundaryAPI.tree_policy :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.tree_subfamily
+
+example : OperatorKO7.HigherOrderSharingBoundaryAPI.SharedHigherOrder
+    OperatorKO7.HigherOrderSharingBoundaryAPI.shared_policy :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.shared_subfamily
+
+example : OperatorKO7.HigherOrderSharingBoundaryAPI.ExplicitSharingHigherOrder
+    OperatorKO7.HigherOrderSharingBoundaryAPI.explicit_sharing_policy :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.explicit_sharing_subfamily
+
+example : OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingPolicyBranchSplit :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.beta_binder_branch_split
+
+example : ¬ OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingBetaStepOrientsCounter
+    OperatorKO7.HigherOrderSharingBoundaryAPI.beta_compatible_policy :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.beta_compatible_beta_step_blocker
+
+example : ∃ a b : OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingTerm,
+    OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingBetaStep a b ∧
+      ¬ OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingCounter
+          OperatorKO7.HigherOrderSharingBoundaryAPI.beta_compatible_policy b <
+        OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingCounter
+          OperatorKO7.HigherOrderSharingBoundaryAPI.beta_compatible_policy a :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.beta_compatible_counterexample
+
+example (t : OperatorKO7.SharingBarrierLift.SharedTerm) :
+    OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingClosedFragment
+      (OperatorKO7.HigherOrderRewritingSyntax.embedBoundaryHOTerm
+        (OperatorKO7.HigherOrderSharingBoundary.embedSharedTerm t)) :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.rewriting_restricted_fragment_transport t
+
+example {u : OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingTerm}
+    (hu : OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingClosedFragment u) :
+    OperatorKO7.HigherOrderSharingBoundaryAPI.RewritingClosedFragment
+      (OperatorKO7.HigherOrderRewritingBetaBinder.binderFreeSubstitute 0
+        OperatorKO7.HigherOrderRewritingSyntax.HOTerm.atom u) :=
+  OperatorKO7.HigherOrderSharingBoundaryAPI.tree_binder_free_substitution_closed hu
+
+end HigherOrderSharingBoundaryAPIReach

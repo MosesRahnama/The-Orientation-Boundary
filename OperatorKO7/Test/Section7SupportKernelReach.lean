@@ -1,0 +1,44 @@
+import OperatorKO7.Meta.UniqueNormalization.Section7SupportKernel
+
+/-!
+# Reach gate for the Section 7 diagonal support kernel
+-/
+
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.diagonalSupportSeed
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.diagonalSupportSeed
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.mem_diagonalSupportSeed_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.mem_diagonalSupportSeed_iff
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.diagonalSupportSeed_subset_pairUniverse
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.diagonalSupportSeed_subset_pairUniverse
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.supportClosure_seed
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.supportClosure_seed
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.pairSetRel_supportSuccSet_symm
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.pairSetRel_supportSuccSet_symm
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.pairSetRel_supportIter_symm
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.pairSetRel_supportIter_symm
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_mem
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_mem
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_sound
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_sound
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_refl
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_refl
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_symm
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_symm
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_context_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_context_iff
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_rootPeeled_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_rootPeeled_iff
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_of_rootStep
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_of_rootStep
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_rootComp
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_rootComp
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_of_tildeAll
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_of_tildeAll
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.Section7SupportKernelBarAbsorbs
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.Section7SupportKernelBarAbsorbs
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.downOn_le_section7SupportKernel_of_barAbsorbs
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.downOn_le_section7SupportKernel_of_barAbsorbs
+#check @OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_iff_downOn_of_barAbsorbs
+#print axioms OperatorKO7.Meta.UniqueNormalization.PGraph.section7SupportKernel_iff_downOn_of_barAbsorbs

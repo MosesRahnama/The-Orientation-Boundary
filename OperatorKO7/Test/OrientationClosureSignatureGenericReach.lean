@@ -1,0 +1,80 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.SignatureGeneric
+
+/-! # SignatureGeneric reach and axiom check -/
+
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigTerm
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigTerm
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigTerm.subst
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigTerm.subst
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigContext
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigContext
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigContext.plug
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigContext.plug
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigRootStep
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigRootStep
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigContextStep
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigContextStep
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigRootStep.subst
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigRootStep.subst
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.sigSchema
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.sigSchema
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embedCtx
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embedCtx
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_eq_zero
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_eq_zero
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_eq_succ
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_eq_succ
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_eq_wrap
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_eq_wrap
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_eq_recur
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_eq_recur
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_ne_inert
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_ne_inert
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_injective
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_injective
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_plug
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_plug
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_subst
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_subst
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_rootStep
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_rootStep
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.rootStep_of_embed
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.rootStep_of_embed
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_contextStep
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_contextStep
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.plug_eq_embed
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.plug_eq_embed
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.contextStep_of_embed
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.contextStep_of_embed
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_contextStep_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.embed_contextStep_iff
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.sig_barrier_cell_excludes_orientation
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.sig_barrier_cell_excludes_orientation
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.sig_barrier_cell_excludes_context_orientation
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.sig_barrier_cell_excludes_context_orientation
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.sig_retained_wrapper_forces_payload_coupled_gain
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.sig_retained_wrapper_forces_payload_coupled_gain
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigInterpretation
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigInterpretation
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigInterpretation.eval
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigInterpretation.eval
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigInterpretation.eval_embed
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigInterpretation.eval_embed
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.sig_eval_rootStep_decreases
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.sig_eval_rootStep_decreases
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigStrictContextLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.SigStrictContextLaws
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.sig_eval_plug_strict
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.sig_eval_plug_strict
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.sig_eval_contextStep_decreases
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.sig_eval_contextStep_decreases
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.sig_contextStep_reverse_wellFounded
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.sig_contextStep_reverse_wellFounded
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.coupledSigInterpretation
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.coupledSigInterpretation
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.coupledSig_strictContextLaws
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.coupledSig_strictContextLaws
+#check @OperatorKO7.Methods.OrientationClosure.SignatureGeneric.sig_free_contextual_termination
+#print axioms OperatorKO7.Methods.OrientationClosure.SignatureGeneric.sig_free_contextual_termination

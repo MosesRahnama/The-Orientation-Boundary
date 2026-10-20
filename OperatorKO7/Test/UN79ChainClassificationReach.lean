@@ -1,0 +1,275 @@
+import OperatorKO7.Meta.UniqueNormalization.Section7ChainClassification
+
+open OperatorKO7.Meta.UniqueNormalization.ChainClassification
+
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.CT
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.CT
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.wrap
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.wrap
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.tower
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.tower
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.carrier
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.carrier
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.eraseRule
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.eraseRule
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.eraseRules
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.eraseRules
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.wrap_injective
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.wrap_injective
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.tower_zero
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.tower_zero
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.tower_succ
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.tower_succ
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.tower_injective
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.tower_injective
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.tower_eq_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.tower_eq_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.tower_zero_conTopped
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.tower_zero_conTopped
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.tower_succ_not_conTopped
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.tower_succ_not_conTopped
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.mem_carrier_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.mem_carrier_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.tower_mem_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.tower_mem_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.carrier_length
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.carrier_length
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.carrier_nodup
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.carrier_nodup
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.subterm_tower_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.subterm_tower_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.carrier_coalgebra
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.carrier_coalgebra
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.eraseRules_constructor
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.eraseRules_constructor
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.eraseRule_rhsDetermined
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.eraseRule_rhsDetermined
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.eraseRules_strong
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.eraseRules_strong
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.rootStep_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.rootStep_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.rootStep_tower_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.rootStep_tower_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.down_tower_zero
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.down_tower_zero
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.down_tower_pair
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.down_tower_pair
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.down_all
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.down_all
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.barStep_tower_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.barStep_tower_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.barReach_tower_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.barReach_tower_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.grey_zero_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.grey_zero_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.grey_to_zero_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.grey_to_zero_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.zero_nf
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.zero_nf
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.nf_eqv_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.nf_eqv_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_nf_grey_eqv
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_nf_grey_eqv
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.quotientTarget
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.quotientTarget
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.quotientTarget_pick
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.quotientTarget_pick
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.quotientGraph
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.quotientGraph
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.quotientGraph_graph
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.quotientGraph_graph
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.quotientGraph_universal_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.quotientGraph_universal_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.positive_reach_zero_forces_one_parent
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.positive_reach_zero_forces_one_parent
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.universal_one_parent
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.universal_one_parent
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_one_parent_reach_zero
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_one_parent_reach_zero
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_graph_universal_iff_parent
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_graph_universal_iff_parent
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.target_zero
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.target_zero
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.target_index_exists_unique
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.target_index_exists_unique
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.target_positive
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.target_positive
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.selected_high_nf
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.selected_high_nf
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.selected_high_not_universal
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.selected_high_not_universal
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_low_parent
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_low_parent
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_low_positive_not_nf
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_low_positive_not_nf
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_low_reach
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_low_reach
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_high_positive_reach
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_high_positive_reach
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_target_universal_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_target_universal_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_target_eqv_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_target_eqv_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_target_nf_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_target_nf_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.quotient_complete_target_universal_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.quotient_complete_target_universal_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.towerTest
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.towerTest
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.towerIndex?
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.towerIndex?
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.ValidTarget
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.ValidTarget
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.validTargetDecidable
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.validTargetDecidable
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.parentIndex
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.parentIndex
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.parent
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.parent
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.pick
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.pick
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.indexRank
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.indexRank
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.rank
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.rank
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.towerTest_true_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.towerTest_true_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.towerIndex_some_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.towerIndex_some_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.towerIndex_none_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.towerIndex_none_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.parent_tower
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.parent_tower
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.parent_outside
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.parent_outside
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.parentIndex_mem
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.parentIndex_mem
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.parentIndex_decreases
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.parentIndex_decreases
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.parent_mem
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.parent_mem
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.parent_decreases
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.parent_decreases
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.parent_terminating
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.parent_terminating
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.parent_grey
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.parent_grey
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.graph
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.graph
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.graph_par
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.graph_par
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.pick_tower_zero
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.pick_tower_zero
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.pick_tower_positive
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.pick_tower_positive
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.target
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.target
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.target_pick
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.target_pick
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.graph_guided
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.graph_guided
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.graph_target_exit
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.graph_target_exit
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.targeted
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.targeted
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.targeted_graph
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.targeted_graph
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.graph_complete
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.graph_complete
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.targeted_universal_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.targeted_universal_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_nonuniversal_no_edge_extension
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_nonuniversal_no_edge_extension
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_nonuniversal_changed_edge
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.complete_nonuniversal_changed_edge
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.repairTarget
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.repairTarget
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.repairTarget_zero
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.repairTarget_zero
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.repairTarget_pos
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.repairTarget_pos
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.repairTarget_eq
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.repairTarget_eq
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.repairTarget_valid
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.repairTarget_valid
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.repaired
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.repaired
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.repaired_complete
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.repaired_complete
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.repaired_universal
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.repaired_universal
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.repaired_target_pick
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.repaired_target_pick
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.repaired_reaches_zero
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.repaired_reaches_zero
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.repaired_nf_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.repaired_nf_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.repaired_preserves_eqv
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.repaired_preserves_eqv
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.repaired_rootStepsRepresented
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.repaired_rootStepsRepresented
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.repair_must_change_edge
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.repair_must_change_edge
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.exists_complete_universal_repair
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.exists_complete_universal_repair
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.exists_complete_nonuniversal
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.exists_complete_nonuniversal
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.exists_quotient_complete_nonuniversal
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.exists_quotient_complete_nonuniversal
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.chain_counterexample_and_repair
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.chain_counterexample_and_repair
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.depth_zero_universal
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.depth_zero_universal
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.depth_one_complete_universal
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.depth_one_complete_universal
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.depth_zero_targeted_universal
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.depth_zero_targeted_universal
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.chain_bad_graph_exists_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.chain_bad_graph_exists_iff
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.emptyGraph
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.emptyGraph
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.emptyGraph_par
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.emptyGraph_par
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.emptyGraph_par_apply
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.emptyGraph_par_apply
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.emptyGraph_not_universal
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.emptyGraph_not_universal
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.emptyValid
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.emptyValid
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.emptyTargeted
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.emptyTargeted
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.emptyTargeted_pick
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.emptyTargeted_pick
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.emptyTargeted_not_universal
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.emptyTargeted_not_universal
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.emptyGraph_not_complete
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.emptyGraph_not_complete
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.completeness_premise_necessary
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.completeness_premise_necessary
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.depth_two_carrier_membership
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.depth_two_carrier_membership
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.depth_two_bad_parent
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.depth_two_bad_parent
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.depth_two_good_parent
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.depth_two_good_parent
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.towerTest_var_false
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.towerTest_var_false
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.towerTest_binary_false
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.towerTest_binary_false
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.towerTest_constructor_arg_false
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.towerTest_constructor_arg_false
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.depth_four_good_parent
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.depth_four_good_parent
+#check @OperatorKO7.Meta.UniqueNormalization.ChainClassification.depth_four_bad_parent
+#print axioms OperatorKO7.Meta.UniqueNormalization.ChainClassification.depth_four_bad_parent
+
+example : parentIndex 1 1 = some 0 := by decide
+example : parentIndex 1 4 = some 1 := by decide
+example : parentIndex 2 1 = some 2 := by decide
+example : parentIndex 2 2 = none := by decide
+example : parentIndex 4 3 = some 4 := by decide
+example : parentIndex 4 4 = none := by decide
+example : ¬ ValidTarget 0 1 := by decide
+example : ¬ ValidTarget 1 0 := by decide
+example : ¬ ValidTarget 2 3 := by decide
+

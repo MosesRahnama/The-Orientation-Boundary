@@ -1,0 +1,217 @@
+import OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.rule_eq_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.rule_eq_iff
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.ruleDecidableEq
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.ruleDecidableEq
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.overlapCandidates
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.overlapCandidates
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.mem_overlapCandidates_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.mem_overlapCandidates_iff
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.ForbiddenOmegaOverlap
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.ForbiddenOmegaOverlap
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.forbiddenOverlapDecision
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.forbiddenOverlapDecision
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.forbiddenOverlapDecision_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.forbiddenOverlapDecision_iff
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.exists_forbidden_overlap_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.exists_forbidden_overlap_iff
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findForbiddenOverlap
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findForbiddenOverlap
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findForbiddenOverlap_spec
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findForbiddenOverlap_spec
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findForbiddenOverlap_isSome_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findForbiddenOverlap_isSome_iff
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findForbiddenOverlap_none_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findForbiddenOverlap_none_iff
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.nonOmegaDecision
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.nonOmegaDecision
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.nonOmegaDecision_true_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.nonOmegaDecision_true_iff
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.nonOmegaDecision_false_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.nonOmegaDecision_false_iff
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.nonOmegaOverlappingDecidable
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.nonOmegaOverlappingDecidable
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findForbiddenOverlap_infinite
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findForbiddenOverlap_infinite
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findForbiddenOverlap_certificate
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findForbiddenOverlap_certificate
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.nonOmegaDecision_nil
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.nonOmegaDecision_nil
+
+open OperatorKO7.Meta.Rewriting OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification in
+example : nonOmegaDecision ([{ lhs := .app 0 [], rhs := .app 0 [], lhs_isApp := rfl }] : TRS Nat Nat) = true := by decide
+
+open OperatorKO7.Meta.Rewriting OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification in
+example : nonOmegaDecision ([{ lhs := .app 0 [], rhs := .app 1 [], lhs_isApp := rfl }, { lhs := .app 0 [], rhs := .app 2 [], lhs_isApp := rfl }] : TRS Nat Nat) = false := by decide
+
+/-! Finite decision: every explicit declaration and its foundational axioms. -/
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.tuples
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.tuples
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.mem_tuples_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.mem_tuples_iff
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.support
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.support
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.mem_support_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.mem_support_iff
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.left_mem_support
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.left_mem_support
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.right_mem_support
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.right_mem_support
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.arg_mem_support
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.arg_mem_support
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.candidates
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.candidates
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.forall₂Decision
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.forall₂Decision
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.forall₂Decidable
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.forall₂Decidable
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.classesRelDecidable
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.classesRelDecidable
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.AppCompatible
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.AppCompatible
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.appCompatibleDecidable
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.appCompatibleDecidable
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.Valid
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.Valid
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.validDecidable
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.validDecidable
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.Valid.unifClosure
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.Valid.unifClosure
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.sharedDecision
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.sharedDecision
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.sharedDecision_sound
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.sharedDecision_sound
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.classOf
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.classOf
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.mem_classOf_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.mem_classOf_iff
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.restrictedClasses
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.restrictedClasses
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.classOf_mem_restrictedClasses
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.classOf_mem_restrictedClasses
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.restrictedClasses_rel_of
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.restrictedClasses_rel_of
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.restrictedClasses_rel_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.restrictedClasses_rel_iff
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.forall₂_map_on_members
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.forall₂_map_on_members
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.restrictedClasses_valid
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.restrictedClasses_valid
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.restrictedClasses_mem_candidates
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.restrictedClasses_mem_candidates
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.finite_certificate_complete
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.finite_certificate_complete
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.sharedDecision_complete
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.sharedDecision_complete
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.sharedDecision_true_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.sharedDecision_true_iff
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.sharedDecision_infinite_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.sharedDecision_infinite_iff
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.decision
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.decision
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.decision_true_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.decision_true_iff
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.decision_infinite_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.decision_infinite_iff
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.sharedDecision_false_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.sharedDecision_false_iff
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.decision_false_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.decision_false_iff
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.occursCheck_accepted
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.occursCheck_accepted
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.occursCheck_separates_finite_unification
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.occursCheck_separates_finite_unification
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.length_flatMap_of_constant
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.length_flatMap_of_constant
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.length_tuples
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.length_tuples
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.candidates_length
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.candidates_length
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findCertificate
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findCertificate
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findCertificate_spec
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findCertificate_spec
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findCertificate_isSome_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findCertificate_isSome_iff
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findCertificate_none_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findCertificate_none_iff
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findCertificate_none_iff_no_infinite
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findCertificate_none_iff_no_infinite
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findCertificate_sizes
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findCertificate_sizes
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.certificateSubst
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.certificateSubst
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findCertificate_subst_solves
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.findCertificate_subst_solves
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.omegaSharedDecidable
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.omegaSharedDecidable
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.omegaDecidable
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.omegaDecidable
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.sharedDecision_symbol_clash
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.sharedDecision_symbol_clash
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.sharedDecision_arity_clash
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.sharedDecision_arity_clash
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.occursCheck_certificate_exists
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.occursCheck_certificate_exists
+
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.FiniteState
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.FiniteState
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.stateOf
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.stateOf
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.finiteStateFinite
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.finiteStateFinite
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.application_representative_mem
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.application_representative_mem
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.closureViewQ_children_supported
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.closureViewQ_children_supported
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.finiteView
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.finiteView
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.finiteView_corec_eq
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.finiteView_corec_eq
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.finiteAssignment
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.finiteAssignment
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.finiteAssignment_of_mem
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.finiteAssignment_of_mem
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.finiteAssignment_applies
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.finiteAssignment_applies
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.RationalOmegaUnifiableShared
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.RationalOmegaUnifiableShared
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.rationalOmegaUnifiableShared_of_omega
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.rationalOmegaUnifiableShared_of_omega
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.rationalOmegaUnifiableShared_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.rationalOmegaUnifiableShared_iff
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.rational_iff_infinite
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.rational_iff_infinite
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.sharedDecision_rational_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.sharedDecision_rational_iff
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.decision_rational_iff
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.decision_rational_iff
+#check @OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.occursCheck_rational_witness
+#print axioms OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.occursCheck_rational_witness
+
+example : OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.sharedDecision
+    (.var (0 : Nat) : OperatorKO7.Meta.Rewriting.Term Nat Nat) (.var 0) = true := by decide
+
+example : OperatorKO7.Meta.UniqueNormalization.FiniteRationalUnification.sharedDecision
+    (.app (0 : Nat) [] : OperatorKO7.Meta.Rewriting.Term Nat Nat) (.app 1 []) = false := by decide

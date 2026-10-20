@@ -1,0 +1,215 @@
+import Mathlib
+set_option autoImplicit false
+
+/-!
+# Finite-dimensional Busch-Gleason: the general trace rule (mixed states / POVMs)
+
+This module proves the GENERAL (mixed-state / POVM) trace rule on the finite-dimensional
+matrix effect algebra, generalizing the pure-state projective result
+`OperatorKO7.Meta.Physics.BornRuleUniqueness.bornRule_unique` (which is explicitly
+pure-state-only). It is the finite-dimensional case named as open in
+`OperatorKO7.Meta.ReverseBridge.QMLaw_WignerGleasonFinite` ("the finite-dimensional
+effect-algebra (Busch-Gleason) derivation is a named open target for a future wave").
+
+## What is proved (PROVEN-IN-LEAN, baseline axioms only)
+
+Representation and uniqueness of the trace functional:
+* `busch_gleason_representation`: every `ℂ`-linear functional `μ` on `d x d` matrices is the
+  trace rule against a UNIQUE operator `ρ`, i.e. `∃! ρ, ∀ A, (ρ * A).trace = μ A`. The
+  representer is explicit: `ρ i j = μ (single j i 1)`.
+* `trace_rule_unique`: an operator is determined by the trace functional it induces (states
+  are distinguishable by their statistics).
+
+The trace rule really is a probability rule (the positivity layer):
+* `diag_nonneg`, `psd_trace_nonneg`, `psd_mul_trace_nonneg`: diagonal entries and the trace
+  of a positive-semidefinite matrix are nonnegative, and `Tr(ρE) ≥ 0` for PSD `ρ, E` (via
+  `Tr(ρE) = Tr(√ρ E √ρ)` with `√ρ E √ρ` positive-semidefinite by conjugation).
+* `bornMeasure_mem_unitInterval`: for a density operator `ρ` (`IsDensity`) and an effect `E`
+  (`IsEffect`, i.e. `0 ≤ E ≤ 1`), the Born value `Tr(ρE)` lies in `[0,1]`. Together with
+  `bornMeasure_add` and `bornMeasure_one`, a density operator induces a genuine generalized
+  probability measure on the effect algebra.
+* Non-vacuity: the maximally mixed qubit `(1/2) I` has trace `1`, and its Born value on the
+  `|0>` projector computes to `1/2`.
+
+## Honest scope (what is NOT claimed)
+
+This is the general trace rule for mixed states and POVMs, conditional on the finite Hilbert
+space. It is NOT a solution of the measurement problem and NOT a presupposition-free
+derivation of Born. Two Busch-Gleason reductions remain and are flagged, not faked:
+(1) the reduction from mere additivity on effects to `ℂ`-linearity (Busch's extension lemma);
+the representation and uniqueness here take a `ℂ`-linear functional, and the physical effect
+measure reduces to this by the standard extension; and (2) the converse density
+characterization (a positive normalized functional's representer is a density operator),
+which is a follow-on. Tiers: PROVEN-IN-LEAN for every statement below.
+-/
+
+namespace OperatorKO7.Meta.Physics.BuschGleasonFinite
+
+open Matrix BigOperators
+
+variable {d : ℕ}
+
+/-- The trace / Born functional induced by an operator `ρ` on an operator `E`. -/
+noncomputable def bornMeasure (ρ E : Matrix (Fin d) (Fin d) ℂ) : ℂ := (ρ * E).trace
+
+/-- Representer of a `ℂ`-linear functional on matrices: `ρ i j = μ (single j i 1)`. -/
+noncomputable def traceDual (μ : Matrix (Fin d) (Fin d) ℂ →ₗ[ℂ] ℂ) :
+    Matrix (Fin d) (Fin d) ℂ :=
+  Matrix.of fun i j => μ (Matrix.single j i (1 : ℂ))
+
+/-- `single i j c = c • single i j 1`. -/
+theorem single_eq_smul (i j : Fin d) (c : ℂ) :
+    Matrix.single i j c = c • Matrix.single i j (1 : ℂ) := by
+  ext i' j'
+  simp only [Matrix.single, Matrix.of_apply, Matrix.smul_apply, smul_eq_mul, mul_ite,
+    mul_one, mul_zero]
+
+/-- Entry extraction: `Tr (M * single j i 1) = M i j`. -/
+theorem trace_mul_single (M : Matrix (Fin d) (Fin d) ℂ) (i j : Fin d) :
+    (M * Matrix.single j i (1 : ℂ)).trace = M i j := by
+  rw [Matrix.trace]
+  rw [Finset.sum_eq_single i]
+  · rw [Matrix.diag_apply, Matrix.mul_apply, Finset.sum_eq_single j]
+    · simp [Matrix.single]
+    · intro b _ hb
+      simp only [Matrix.single, Matrix.of_apply]
+      rw [if_neg (by rintro ⟨h, _⟩; exact hb h.symm), mul_zero]
+    · intro h; exact absurd (Finset.mem_univ j) h
+  · intro x _ hx
+    rw [Matrix.diag_apply, Matrix.mul_apply]
+    apply Finset.sum_eq_zero
+    intro k _
+    simp only [Matrix.single, Matrix.of_apply]
+    rw [if_neg (by rintro ⟨_, h⟩; exact hx h.symm), mul_zero]
+  · intro h; exact absurd (Finset.mem_univ i) h
+
+/-- Representation: the trace rule against `traceDual μ` reproduces `μ`. -/
+theorem traceDual_represents (μ : Matrix (Fin d) (Fin d) ℂ →ₗ[ℂ] ℂ)
+    (A : Matrix (Fin d) (Fin d) ℂ) :
+    (traceDual μ * A).trace = μ A := by
+  conv_rhs => rw [Matrix.matrix_eq_sum_single A]
+  rw [map_sum]
+  have hrhs : ∀ p, μ (∑ q, Matrix.single p q (A p q))
+      = ∑ q, A p q * μ (Matrix.single p q 1) := by
+    intro p
+    rw [map_sum]
+    refine Finset.sum_congr rfl (fun q _ => ?_)
+    rw [single_eq_smul, map_smul, smul_eq_mul]
+  simp_rw [hrhs]
+  rw [Matrix.trace]
+  have hlhs : ∀ i, (traceDual μ * A).diag i = ∑ q, A q i * μ (Matrix.single q i 1) := by
+    intro i
+    rw [Matrix.diag_apply, Matrix.mul_apply]
+    refine Finset.sum_congr rfl (fun q _ => ?_)
+    rw [traceDual, Matrix.of_apply, mul_comm]
+  simp_rw [hlhs]
+  rw [Finset.sum_comm]
+
+/-- Uniqueness / faithfulness: an operator is determined by the trace-rule functional it
+induces. Two operators with the same effect statistics are equal. -/
+theorem trace_rule_unique (ρ σ : Matrix (Fin d) (Fin d) ℂ)
+    (h : ∀ A, (ρ * A).trace = (σ * A).trace) : ρ = σ := by
+  ext i j
+  have := h (Matrix.single j i (1 : ℂ))
+  rwa [trace_mul_single, trace_mul_single] at this
+
+/-- **Existence and uniqueness** of the trace representer for a `ℂ`-linear functional:
+every functional is the trace rule against a unique operator. This is the finite-dimensional
+operator backbone of the general (mixed-state / POVM) trace rule. -/
+theorem busch_gleason_representation (μ : Matrix (Fin d) (Fin d) ℂ →ₗ[ℂ] ℂ) :
+    ∃! ρ : Matrix (Fin d) (Fin d) ℂ, ∀ A, (ρ * A).trace = μ A := by
+  refine ⟨traceDual μ, traceDual_represents μ, ?_⟩
+  intro ρ hρ
+  apply trace_rule_unique
+  intro A
+  rw [hρ A, traceDual_represents μ A]
+
+/-- Forward direction (additivity): the induced measure is additive in the effect. -/
+theorem bornMeasure_add (ρ E F : Matrix (Fin d) (Fin d) ℂ) :
+    bornMeasure ρ (E + F) = bornMeasure ρ E + bornMeasure ρ F := by
+  simp [bornMeasure, mul_add, Matrix.trace_add]
+
+/-- Forward direction (normalization): a unit-trace operator sends the identity effect to
+one. -/
+theorem bornMeasure_one (ρ : Matrix (Fin d) (Fin d) ℂ) (h : ρ.trace = 1) :
+    bornMeasure ρ 1 = 1 := by
+  simp [bornMeasure, h]
+
+/-! ## Positivity layer: a density operator induces probabilities in `[0,1]` -/
+
+open scoped ComplexOrder
+
+/-- Diagonal entries of a positive-semidefinite matrix are nonnegative. -/
+theorem diag_nonneg {A : Matrix (Fin d) (Fin d) ℂ} (h : A.PosSemidef) (i : Fin d) :
+    0 ≤ A i i := by
+  have h2 := h.2 (Pi.single i 1)
+  rw [show star (Pi.single i (1 : ℂ)) = (Pi.single i 1 : Fin d → ℂ) by
+        ext k; simp [Pi.single_apply, Pi.star_apply, apply_ite]] at h2
+  rw [Matrix.mulVec_single, MulOpposite.op_one, one_smul, single_one_dotProduct] at h2
+  simpa using h2
+
+/-- The trace of a positive-semidefinite matrix is nonnegative. -/
+theorem psd_trace_nonneg {A : Matrix (Fin d) (Fin d) ℂ} (h : A.PosSemidef) :
+    0 ≤ A.trace := by
+  rw [Matrix.trace]
+  apply Finset.sum_nonneg
+  intro i _
+  rw [Matrix.diag_apply]
+  exact diag_nonneg h i
+
+/-- The trace of a product of two PSD matrices is nonnegative (`Tr(ρE) = Tr(√ρ E √ρ)`, and
+`√ρ E √ρ` is positive-semidefinite by conjugation). -/
+theorem psd_mul_trace_nonneg {ρ E : Matrix (Fin d) (Fin d) ℂ}
+    (hρ : ρ.PosSemidef) (hE : E.PosSemidef) : 0 ≤ (ρ * E).trace := by
+  have hHerm : (hρ.sqrt)ᴴ = hρ.sqrt := hρ.posSemidef_sqrt.1.eq
+  have hcyc : (ρ * E).trace = (hρ.sqrt * E * hρ.sqrt).trace := by
+    conv_lhs => rw [← hρ.sqrt_mul_self]
+    rw [mul_assoc, Matrix.trace_mul_comm]
+  have hpsd : (hρ.sqrt * E * hρ.sqrt).PosSemidef := by
+    have := hE.mul_mul_conjTranspose_same hρ.sqrt
+    rwa [hHerm] at this
+  rw [hcyc]
+  exact psd_trace_nonneg hpsd
+
+/-- An effect: a positive-semidefinite operator dominated by the identity (`0 ≤ E ≤ 1`). -/
+def IsEffect (E : Matrix (Fin d) (Fin d) ℂ) : Prop := E.PosSemidef ∧ (1 - E).PosSemidef
+
+/-- A density operator: positive-semidefinite with unit trace. -/
+def IsDensity (ρ : Matrix (Fin d) (Fin d) ℂ) : Prop := ρ.PosSemidef ∧ ρ.trace = 1
+
+/-- **Born values are probabilities.** For a density operator `ρ` and an effect `E`,
+`0 ≤ Tr(ρE) ≤ 1`. -/
+theorem bornMeasure_mem_unitInterval {ρ E : Matrix (Fin d) (Fin d) ℂ}
+    (hρ : IsDensity ρ) (hE : IsEffect E) :
+    0 ≤ bornMeasure ρ E ∧ bornMeasure ρ E ≤ 1 := by
+  refine ⟨psd_mul_trace_nonneg hρ.1 hE.1, ?_⟩
+  have hcompl : 0 ≤ (ρ * (1 - E)).trace := psd_mul_trace_nonneg hρ.1 hE.2
+  have hsplit : (ρ * (1 - E)).trace = ρ.trace - bornMeasure ρ E := by
+    rw [bornMeasure, mul_sub, mul_one, Matrix.trace_sub]
+  rw [hsplit, hρ.2] at hcompl
+  exact sub_nonneg.mp hcompl
+
+/-! ## Non-vacuity witnesses (concrete qubit) -/
+
+/-- The maximally mixed qubit state `(1/2) I`. -/
+noncomputable def mixedQubit : Matrix (Fin 2) (Fin 2) ℂ :=
+  (1 / 2 : ℂ) • (1 : Matrix (Fin 2) (Fin 2) ℂ)
+
+theorem mixedQubit_trace : mixedQubit.trace = 1 := by
+  simp only [mixedQubit, Matrix.trace_smul, Matrix.trace_one, Fintype.card_fin, smul_eq_mul]
+  norm_num
+
+/-- A concrete effect: the diagonal projector onto `|0>`. -/
+def proj0 : Matrix (Fin 2) (Fin 2) ℂ := Matrix.diagonal ![1, 0]
+
+/-- The Born value of the mixed qubit on the `|0>` projector is `1/2`, a concrete probability
+in `[0,1]`. -/
+theorem bornMeasure_mixed_proj0 : bornMeasure mixedQubit proj0 = 1 / 2 := by
+  have hp : proj0.trace = 1 := by
+    simp only [proj0, Matrix.trace_diagonal]
+    simp [Fin.sum_univ_two]
+  simp only [bornMeasure, mixedQubit, Matrix.smul_mul, Matrix.one_mul, Matrix.trace_smul,
+    smul_eq_mul, hp]
+  norm_num
+
+end OperatorKO7.Meta.Physics.BuschGleasonFinite

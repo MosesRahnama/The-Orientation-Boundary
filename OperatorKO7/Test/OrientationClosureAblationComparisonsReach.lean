@@ -1,0 +1,32 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.AblationComparisons
+
+/-!
+# AblationComparisons reach and axiom check
+
+Paired declaration reach and axiom checks for `AblationComparisons.lean`.
+-/
+
+#check @OperatorKO7.Methods.OrientationClosure.AblationComparisons.treeSize
+#print axioms OperatorKO7.Methods.OrientationClosure.AblationComparisons.treeSize
+#check @OperatorKO7.Methods.OrientationClosure.AblationComparisons.NonDuplicatingStep
+#print axioms OperatorKO7.Methods.OrientationClosure.AblationComparisons.NonDuplicatingStep
+#check @OperatorKO7.Methods.OrientationClosure.AblationComparisons.treeSize_decreases_nonDuplicatingStep
+#print axioms OperatorKO7.Methods.OrientationClosure.AblationComparisons.treeSize_decreases_nonDuplicatingStep
+#check @OperatorKO7.Methods.OrientationClosure.AblationComparisons.nonDuplicatingStep_reverse_wellFounded
+#print axioms OperatorKO7.Methods.OrientationClosure.AblationComparisons.nonDuplicatingStep_reverse_wellFounded
+#check @OperatorKO7.Methods.OrientationClosure.AblationComparisons.treeSize_original_duplication_control
+#print axioms OperatorKO7.Methods.OrientationClosure.AblationComparisons.treeSize_original_duplication_control
+#check @OperatorKO7.Methods.OrientationClosure.AblationComparisons.counterRank
+#print axioms OperatorKO7.Methods.OrientationClosure.AblationComparisons.counterRank
+#check @OperatorKO7.Methods.OrientationClosure.AblationComparisons.counterRank_wrap_payload_blind
+#print axioms OperatorKO7.Methods.OrientationClosure.AblationComparisons.counterRank_wrap_payload_blind
+#check @OperatorKO7.Methods.OrientationClosure.AblationComparisons.counterRank_orients_original_successor
+#print axioms OperatorKO7.Methods.OrientationClosure.AblationComparisons.counterRank_orients_original_successor
+#check @OperatorKO7.Methods.OrientationClosure.AblationComparisons.counterRank_not_wrapper_left_sensitive
+#print axioms OperatorKO7.Methods.OrientationClosure.AblationComparisons.counterRank_not_wrapper_left_sensitive
+#check @OperatorKO7.Methods.OrientationClosure.AblationComparisons.duplication_and_payload_sensitivity_are_independent_obligations
+#print axioms OperatorKO7.Methods.OrientationClosure.AblationComparisons.duplication_and_payload_sensitivity_are_independent_obligations
+#check @OperatorKO7.Methods.OrientationClosure.AblationComparisons.NonDuplicatingStep.recurZero
+#print axioms OperatorKO7.Methods.OrientationClosure.AblationComparisons.NonDuplicatingStep.recurZero
+#check @OperatorKO7.Methods.OrientationClosure.AblationComparisons.NonDuplicatingStep.recurSucc
+#print axioms OperatorKO7.Methods.OrientationClosure.AblationComparisons.NonDuplicatingStep.recurSucc

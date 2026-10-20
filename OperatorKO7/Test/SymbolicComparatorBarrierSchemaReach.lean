@@ -1,0 +1,68 @@
+import OperatorKO7.Meta.SymbolicComparatorBarrier_Schema
+
+/-! # SymbolicComparatorBarrier_Schema reach and axiom check -/
+
+#check @OperatorKO7.SymbolicComparatorBarrier.SchemaVar
+#print axioms OperatorKO7.SymbolicComparatorBarrier.SchemaVar
+#check @OperatorKO7.SymbolicComparatorBarrier.SchemaVar.b
+#print axioms OperatorKO7.SymbolicComparatorBarrier.SchemaVar.b
+#check @OperatorKO7.SymbolicComparatorBarrier.SchemaVar.s
+#print axioms OperatorKO7.SymbolicComparatorBarrier.SchemaVar.s
+#check @OperatorKO7.SymbolicComparatorBarrier.SchemaVar.n
+#print axioms OperatorKO7.SymbolicComparatorBarrier.SchemaVar.n
+#check @OperatorKO7.SymbolicComparatorBarrier.STerm
+#print axioms OperatorKO7.SymbolicComparatorBarrier.STerm
+#check @OperatorKO7.SymbolicComparatorBarrier.STerm.var
+#print axioms OperatorKO7.SymbolicComparatorBarrier.STerm.var
+#check @OperatorKO7.SymbolicComparatorBarrier.STerm.base
+#print axioms OperatorKO7.SymbolicComparatorBarrier.STerm.base
+#check @OperatorKO7.SymbolicComparatorBarrier.STerm.succ
+#print axioms OperatorKO7.SymbolicComparatorBarrier.STerm.succ
+#check @OperatorKO7.SymbolicComparatorBarrier.STerm.wrap
+#print axioms OperatorKO7.SymbolicComparatorBarrier.STerm.wrap
+#check @OperatorKO7.SymbolicComparatorBarrier.STerm.recur
+#print axioms OperatorKO7.SymbolicComparatorBarrier.STerm.recur
+#check @OperatorKO7.SymbolicComparatorBarrier.countVar
+#print axioms OperatorKO7.SymbolicComparatorBarrier.countVar
+#check @OperatorKO7.SymbolicComparatorBarrier.dupSrc
+#print axioms OperatorKO7.SymbolicComparatorBarrier.dupSrc
+#check @OperatorKO7.SymbolicComparatorBarrier.dupTgt
+#print axioms OperatorKO7.SymbolicComparatorBarrier.dupTgt
+#check @OperatorKO7.SymbolicComparatorBarrier.countVar_dupSrc_b
+#print axioms OperatorKO7.SymbolicComparatorBarrier.countVar_dupSrc_b
+#check @OperatorKO7.SymbolicComparatorBarrier.countVar_dupSrc_s
+#print axioms OperatorKO7.SymbolicComparatorBarrier.countVar_dupSrc_s
+#check @OperatorKO7.SymbolicComparatorBarrier.countVar_dupSrc_n
+#print axioms OperatorKO7.SymbolicComparatorBarrier.countVar_dupSrc_n
+#check @OperatorKO7.SymbolicComparatorBarrier.countVar_dupTgt_b
+#print axioms OperatorKO7.SymbolicComparatorBarrier.countVar_dupTgt_b
+#check @OperatorKO7.SymbolicComparatorBarrier.countVar_dupTgt_s
+#print axioms OperatorKO7.SymbolicComparatorBarrier.countVar_dupTgt_s
+#check @OperatorKO7.SymbolicComparatorBarrier.countVar_dupTgt_n
+#print axioms OperatorKO7.SymbolicComparatorBarrier.countVar_dupTgt_n
+#check @OperatorKO7.SymbolicComparatorBarrier.VariableConditionOrder
+#print axioms OperatorKO7.SymbolicComparatorBarrier.VariableConditionOrder
+#check @OperatorKO7.SymbolicComparatorBarrier.VariableConditionOrder.mk
+#print axioms OperatorKO7.SymbolicComparatorBarrier.VariableConditionOrder.mk
+#check @OperatorKO7.SymbolicComparatorBarrier.VariableConditionOrder.gt
+#print axioms OperatorKO7.SymbolicComparatorBarrier.VariableConditionOrder.gt
+#check @OperatorKO7.SymbolicComparatorBarrier.VariableConditionOrder.variable_condition
+#print axioms OperatorKO7.SymbolicComparatorBarrier.VariableConditionOrder.variable_condition
+#check @OperatorKO7.SymbolicComparatorBarrier.not_orients_dup_rule
+#print axioms OperatorKO7.SymbolicComparatorBarrier.not_orients_dup_rule
+#check @OperatorKO7.SymbolicComparatorBarrier.no_symbolic_variable_condition_orients_dup_step
+#print axioms OperatorKO7.SymbolicComparatorBarrier.no_symbolic_variable_condition_orients_dup_step
+#check @OperatorKO7.SymbolicComparatorBarrier.STerm.size
+#print axioms OperatorKO7.SymbolicComparatorBarrier.STerm.size
+#check @OperatorKO7.SymbolicComparatorBarrier.sizeVariableConditionOrder
+#print axioms OperatorKO7.SymbolicComparatorBarrier.sizeVariableConditionOrder
+#check @OperatorKO7.SymbolicComparatorBarrier.sizeVariableConditionOrder_orients_succ_peel
+#print axioms OperatorKO7.SymbolicComparatorBarrier.sizeVariableConditionOrder_orients_succ_peel
+#check @OperatorKO7.SymbolicComparatorBarrier.sizeVariableConditionOrder_orients_zero_rule
+#print axioms OperatorKO7.SymbolicComparatorBarrier.sizeVariableConditionOrder_orients_zero_rule
+#check @OperatorKO7.SymbolicComparatorBarrier.sizeVariableConditionOrder_wellFounded
+#print axioms OperatorKO7.SymbolicComparatorBarrier.sizeVariableConditionOrder_wellFounded
+#check @OperatorKO7.SymbolicComparatorBarrier.sizeVariableConditionOrder_rejects_dup_rule
+#print axioms OperatorKO7.SymbolicComparatorBarrier.sizeVariableConditionOrder_rejects_dup_rule
+#check @OperatorKO7.SymbolicComparatorBarrier.variableConditionOrder_nonempty
+#print axioms OperatorKO7.SymbolicComparatorBarrier.variableConditionOrder_nonempty

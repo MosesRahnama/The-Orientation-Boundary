@@ -1,0 +1,219 @@
+import OperatorKO7.Meta.FiniteGraphReachability
+import OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary
+import OperatorKO7.Meta.ReverseMath.SizeChangeSoundness
+import OperatorKO7.Meta.InformationAccess
+import OperatorKO7.Meta.ProofTheoreticRegister.GodelDPAscentComparison
+
+/-!
+# Reach gate: Operational Inexpressibility wave 1
+
+Pins every declaration added for lanes OI-3, OI-7, OI-8, and OI-9, each with a paired
+`#check @` and `#print axioms`. Import-and-check only; this file proves no new content.
+-/
+
+set_option maxHeartbeats 1000000
+
+namespace OperatorKO7.Test.OperationalInexpressibilityWave1Reach
+
+-- Universe-polymorphic access layer
+#check @OperatorKO7.InformationAccess.AccessibleFrom
+#print axioms OperatorKO7.InformationAccess.AccessibleFrom
+#check @OperatorKO7.InformationAccess.MetaAccessModel
+#print axioms OperatorKO7.InformationAccess.MetaAccessModel
+#check @OperatorKO7.InformationAccess.MetaAccessModel.sequential_resolution_requires_hidden_state
+#print axioms OperatorKO7.InformationAccess.MetaAccessModel.sequential_resolution_requires_hidden_state
+
+-- OI-9: transfer of the direct-grammar boundary
+#check @OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.verdictDeterminedBy_of_factorsThrough_of_surjective
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.verdictDeterminedBy_of_factorsThrough_of_surjective
+#check @OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.verdictDeterminedBy_iff_factorsThrough_of_surjective
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.verdictDeterminedBy_iff_factorsThrough_of_surjective
+#check @OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.payloadSensitiveOrienter
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.payloadSensitiveOrienter
+#check @OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.payloadSensitiveOrienter_orients
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.payloadSensitiveOrienter_orients
+#check @OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.payloadSensitiveOrienter_not_payloadBlind
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.payloadSensitiveOrienter_not_payloadBlind
+#check @OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.payloadSensitiveOrienter_not_grammar_denotable
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.payloadSensitiveOrienter_not_grammar_denotable
+#check @OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.no_payload_orientation_of_denotational_subgrammar
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.no_payload_orientation_of_denotational_subgrammar
+#check @OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.denotational_subgrammar_premise_necessary
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.denotational_subgrammar_premise_necessary
+#check @OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.no_payload_orientation_of_same_grammar
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.DirectGrammarBoundary.no_payload_orientation_of_same_grammar
+
+-- OI-8: order type of the residual measure
+#check @OperatorKO7.ReverseMath.SizeChangeSoundness.dupDP_measure_orderType_omega
+#print axioms OperatorKO7.ReverseMath.SizeChangeSoundness.dupDP_measure_orderType_omega
+#check @OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPStep_from_zero_false
+#print axioms OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPStep_from_zero_false
+#check @OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPStep_from_succ_iff
+#print axioms OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPStep_from_succ_iff
+#check @OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPStepRank
+#print axioms OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPStepRank
+#check @OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPStepRank_eq_counter
+#print axioms OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPStepRank_eq_counter
+#check @OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPStepHeight
+#print axioms OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPStepHeight
+#check @OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPStepHeight_eq_omega
+#print axioms OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPStepHeight_eq_omega
+#check @OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPStep_exact_ordinal_height
+#print axioms OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPStep_exact_ordinal_height
+
+-- OI-3: the declared expressions are entropies of named distributions
+#check @OperatorKO7.InformationAccess.progressEntropyBits_eq_HBits_uniform
+#print axioms OperatorKO7.InformationAccess.progressEntropyBits_eq_HBits_uniform
+#check @OperatorKO7.InformationAccess.optimalRecoveryBits_least
+#print axioms OperatorKO7.InformationAccess.optimalRecoveryBits_least
+#check @OperatorKO7.InformationAccess.ExactProgressCode
+#print axioms OperatorKO7.InformationAccess.ExactProgressCode
+#check @OperatorKO7.InformationAccess.exactProgressCode_width_lower
+#print axioms OperatorKO7.InformationAccess.exactProgressCode_width_lower
+#check @OperatorKO7.InformationAccess.exactProgressCodeOfInjective
+#print axioms OperatorKO7.InformationAccess.exactProgressCodeOfInjective
+#check @OperatorKO7.InformationAccess.structuralCountingExactCode
+#print axioms OperatorKO7.InformationAccess.structuralCountingExactCode
+#check @OperatorKO7.InformationAccess.originComparisonExactCode
+#print axioms OperatorKO7.InformationAccess.originComparisonExactCode
+#check @OperatorKO7.InformationAccess.parallelClockExactCode
+#print axioms OperatorKO7.InformationAccess.parallelClockExactCode
+#check @OperatorKO7.InformationAccess.named_channels_attain_universal_exact_code_minimum
+#print axioms OperatorKO7.InformationAccess.named_channels_attain_universal_exact_code_minimum
+#check @OperatorKO7.InformationAccess.named_channel_costs_are_optimal
+#print axioms OperatorKO7.InformationAccess.named_channel_costs_are_optimal
+#check @OperatorKO7.InformationAccess.PrimitiveDuplicatorTerm.counterHeight?
+#print axioms OperatorKO7.InformationAccess.PrimitiveDuplicatorTerm.counterHeight?
+#check @OperatorKO7.InformationAccess.PrimitiveDuplicatorTerm.counterHeight?_counter
+#print axioms OperatorKO7.InformationAccess.PrimitiveDuplicatorTerm.counterHeight?_counter
+#check @OperatorKO7.InformationAccess.PrimitiveDuplicatorTerm.activeCounterHeight?
+#print axioms OperatorKO7.InformationAccess.PrimitiveDuplicatorTerm.activeCounterHeight?
+#check @OperatorKO7.InformationAccess.PrimitiveDuplicatorTerm.activeCounterHeight?_gChain
+#print axioms OperatorKO7.InformationAccess.PrimitiveDuplicatorTerm.activeCounterHeight?_gChain
+#check @OperatorKO7.InformationAccess.PrimitiveDuplicatorTerm.activeCounterHeight?_stage
+#print axioms OperatorKO7.InformationAccess.PrimitiveDuplicatorTerm.activeCounterHeight?_stage
+#check @OperatorKO7.InformationAccess.structuralCountingChannel_eq
+#print axioms OperatorKO7.InformationAccess.structuralCountingChannel_eq
+#check @OperatorKO7.InformationAccess.originComparisonChannel
+#print axioms OperatorKO7.InformationAccess.originComparisonChannel
+#check @OperatorKO7.InformationAccess.originComparisonChannel_eq
+#print axioms OperatorKO7.InformationAccess.originComparisonChannel_eq
+#check @OperatorKO7.InformationAccess.ParallelClockState
+#print axioms OperatorKO7.InformationAccess.ParallelClockState
+#check @OperatorKO7.InformationAccess.parallelClockAt
+#print axioms OperatorKO7.InformationAccess.parallelClockAt
+#check @OperatorKO7.InformationAccess.parallelClockChannel
+#print axioms OperatorKO7.InformationAccess.parallelClockChannel
+#check @OperatorKO7.InformationAccess.parallelClockChannel_eq
+#print axioms OperatorKO7.InformationAccess.parallelClockChannel_eq
+#check @OperatorKO7.InformationAccess.terminalPosteriorMass
+#print axioms OperatorKO7.InformationAccess.terminalPosteriorMass
+#check @OperatorKO7.InformationAccess.terminalPriorMass
+#print axioms OperatorKO7.InformationAccess.terminalPriorMass
+#check @OperatorKO7.InformationAccess.terminalPosteriorGiven
+#print axioms OperatorKO7.InformationAccess.terminalPosteriorGiven
+#check @OperatorKO7.InformationAccess.terminalLikelihood
+#print axioms OperatorKO7.InformationAccess.terminalLikelihood
+#check @OperatorKO7.InformationAccess.terminalJointMass
+#print axioms OperatorKO7.InformationAccess.terminalJointMass
+#check @OperatorKO7.InformationAccess.terminalEvidenceMass
+#print axioms OperatorKO7.InformationAccess.terminalEvidenceMass
+#check @OperatorKO7.InformationAccess.terminalBayesPosterior
+#print axioms OperatorKO7.InformationAccess.terminalBayesPosterior
+#check @OperatorKO7.InformationAccess.terminalEvidenceMass_eq_uniform
+#print axioms OperatorKO7.InformationAccess.terminalEvidenceMass_eq_uniform
+#check @OperatorKO7.InformationAccess.terminalBayesPosterior_eq_declared
+#print axioms OperatorKO7.InformationAccess.terminalBayesPosterior_eq_declared
+#check @OperatorKO7.InformationAccess.positiveTerminalCountingChannel
+#print axioms OperatorKO7.InformationAccess.positiveTerminalCountingChannel
+#check @OperatorKO7.InformationAccess.positiveTerminalCountingChannel_eq
+#print axioms OperatorKO7.InformationAccess.positiveTerminalCountingChannel_eq
+#check @OperatorKO7.InformationAccess.positiveTerminalPriorMass
+#print axioms OperatorKO7.InformationAccess.positiveTerminalPriorMass
+#check @OperatorKO7.InformationAccess.positiveTerminalPosteriorGiven
+#print axioms OperatorKO7.InformationAccess.positiveTerminalPosteriorGiven
+#check @OperatorKO7.InformationAccess.positiveTerminalBayesPosterior
+#print axioms OperatorKO7.InformationAccess.positiveTerminalBayesPosterior
+#check @OperatorKO7.InformationAccess.positiveTerminalEvidenceMass_eq_uniform
+#print axioms OperatorKO7.InformationAccess.positiveTerminalEvidenceMass_eq_uniform
+#check @OperatorKO7.InformationAccess.positiveTerminalBayesPosterior_eq_declared
+#print axioms OperatorKO7.InformationAccess.positiveTerminalBayesPosterior_eq_declared
+#check @OperatorKO7.InformationAccess.positiveTerminalPosteriorGiven_HBits_zero
+#print axioms OperatorKO7.InformationAccess.positiveTerminalPosteriorGiven_HBits_zero
+#check @OperatorKO7.InformationAccess.positiveTerminalConditionalEntropyBits_eq_zero
+#print axioms OperatorKO7.InformationAccess.positiveTerminalConditionalEntropyBits_eq_zero
+#check @OperatorKO7.InformationAccess.positiveTerminalMutualInformationBits
+#print axioms OperatorKO7.InformationAccess.positiveTerminalMutualInformationBits
+#check @OperatorKO7.InformationAccess.positive_terminal_mutual_information_exact
+#print axioms OperatorKO7.InformationAccess.positive_terminal_mutual_information_exact
+#check @OperatorKO7.InformationAccess.terminalPosteriorGiven_sum_one
+#print axioms OperatorKO7.InformationAccess.terminalPosteriorGiven_sum_one
+#check @OperatorKO7.InformationAccess.terminalPosteriorGiven_HBits_zero
+#print axioms OperatorKO7.InformationAccess.terminalPosteriorGiven_HBits_zero
+#check @OperatorKO7.InformationAccess.terminalConditionalEntropyBits
+#print axioms OperatorKO7.InformationAccess.terminalConditionalEntropyBits
+#check @OperatorKO7.InformationAccess.terminalConditionalEntropyBits_eq_zero
+#print axioms OperatorKO7.InformationAccess.terminalConditionalEntropyBits_eq_zero
+#check @OperatorKO7.InformationAccess.terminalChannelMutualInformationBits
+#print axioms OperatorKO7.InformationAccess.terminalChannelMutualInformationBits
+#check @OperatorKO7.InformationAccess.terminalPosteriorGiven_calibrated
+#print axioms OperatorKO7.InformationAccess.terminalPosteriorGiven_calibrated
+#check @OperatorKO7.InformationAccess.terminalChannelMutualInformationBits_eq_progress
+#print axioms OperatorKO7.InformationAccess.terminalChannelMutualInformationBits_eq_progress
+#check @OperatorKO7.InformationAccess.terminalPosteriorEntropyBits_eq_H_dirac
+#print axioms OperatorKO7.InformationAccess.terminalPosteriorEntropyBits_eq_H_dirac
+#check @OperatorKO7.InformationAccess.terminalPosteriorEntropyBits_zero
+#print axioms OperatorKO7.InformationAccess.terminalPosteriorEntropyBits_zero
+#check @OperatorKO7.InformationAccess.terminalPosteriorEntropyBits_eq_model
+#print axioms OperatorKO7.InformationAccess.terminalPosteriorEntropyBits_eq_model
+#check @OperatorKO7.InformationAccess.terminalPosteriorMass_at_recovered
+#print axioms OperatorKO7.InformationAccess.terminalPosteriorMass_at_recovered
+#check @OperatorKO7.InformationAccess.meta_trace_mutual_information_at_terminal_derived
+#print axioms OperatorKO7.InformationAccess.meta_trace_mutual_information_at_terminal_derived
+
+-- OI-7: the Godel and dependency-pair ascents
+#check @OperatorKO7.Meta.ProofTheoreticRegister.GodelDPAscentComparison.dp_and_godel_realize_six_step_shape
+#print axioms OperatorKO7.Meta.ProofTheoreticRegister.GodelDPAscentComparison.dp_and_godel_realize_six_step_shape
+#check @OperatorKO7.Meta.ProofTheoreticRegister.GodelDPAscentComparison.six_step_comparison_degenerate
+#print axioms OperatorKO7.Meta.ProofTheoreticRegister.GodelDPAscentComparison.six_step_comparison_degenerate
+#check @OperatorKO7.Meta.ProofTheoreticRegister.GodelDPAscentComparison.shape_transports_witness_does_not
+#print axioms OperatorKO7.Meta.ProofTheoreticRegister.GodelDPAscentComparison.shape_transports_witness_does_not
+#check @OperatorKO7.Meta.ProofTheoreticRegister.GodelDPAscentComparison.three_ascents_compare_at_shape_layer
+#print axioms OperatorKO7.Meta.ProofTheoreticRegister.GodelDPAscentComparison.three_ascents_compare_at_shape_layer
+
+/-! ## Names added by the OI manuscript pass -/
+
+#check @OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPProjection_ignores_step_argument
+#print axioms OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPProjection_ignores_step_argument
+#check @OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPStep_chain_of_every_length
+#print axioms OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPStep_chain_of_every_length
+#check @OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPBoundMatrix
+#print axioms OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPBoundMatrix
+#check @OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPBoundMatrix_isQF
+#print axioms OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPBoundMatrix_isQF
+#check @OperatorKO7.ReverseMath.SizeChangeSoundness.DupDPBoundedSNSentence
+#print axioms OperatorKO7.ReverseMath.SizeChangeSoundness.DupDPBoundedSNSentence
+#check @OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPBoundedSNSentence_isPi02
+#print axioms OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPBoundedSNSentence_isPi02
+#check @OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPBoundedSNSentence_isPrenex
+#print axioms OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPBoundedSNSentence_isPrenex
+#check @OperatorKO7.ReverseMath.SizeChangeSoundness.DupDPCounterBound
+#print axioms OperatorKO7.ReverseMath.SizeChangeSoundness.DupDPCounterBound
+#check @OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPCounterBound_holds
+#print axioms OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPCounterBound_holds
+#check @OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPBoundedSNSentence_faithful
+#print axioms OperatorKO7.ReverseMath.SizeChangeSoundness.dupDPBoundedSNSentence_faithful
+#check @OperatorKO7.ReverseMath.SizeChangeSoundness.dupDP_noChain_iff_counter_lt
+#print axioms OperatorKO7.ReverseMath.SizeChangeSoundness.dupDP_noChain_iff_counter_lt
+#check @OperatorKO7.ReverseMath.SizeChangeSoundness.dupDP_boundedSN_iff_counterBound
+#print axioms OperatorKO7.ReverseMath.SizeChangeSoundness.dupDP_boundedSN_iff_counterBound
+#check @OperatorKO7.ReverseMath.SizeChangeSoundness.dupDP_boundedSN_iff_stdModel_formula
+#print axioms OperatorKO7.ReverseMath.SizeChangeSoundness.dupDP_boundedSN_iff_stdModel_formula
+#check @OperatorKO7.InformationAccess.history_observation_quadratic_overcost
+#print axioms OperatorKO7.InformationAccess.history_observation_quadratic_overcost
+#check @OperatorKO7.FiniteGraphReachability.mem_reachIter_card_of_reflTransGen
+#print axioms OperatorKO7.FiniteGraphReachability.mem_reachIter_card_of_reflTransGen
+#check @OperatorKO7.FiniteGraphReachability.reachIter_card_eq_succ
+#print axioms OperatorKO7.FiniteGraphReachability.reachIter_card_eq_succ
+
+end OperatorKO7.Test.OperationalInexpressibilityWave1Reach

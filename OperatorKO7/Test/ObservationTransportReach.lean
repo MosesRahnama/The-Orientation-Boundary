@@ -1,0 +1,221 @@
+import OperatorKO7.Meta.BoundaryObserver.ObservationTransport
+
+set_option autoImplicit false
+
+/-! Complete explicit declaration and structure-interface checks.
+Proof graph: Audit/ledgers/operational-inexpressibility/OBSERVATION-TRANSPORT-PROOF-GRAPH.md.
+-/
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.refl
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.refl
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.symm
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.symm
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.trans
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.trans
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.run_map
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.run_map
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.observation_run
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.observation_run
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.futureEq_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.futureEq_iff
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.minimalEquiv
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.minimalEquiv
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.minimalEquiv_record
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.minimalEquiv_record
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.minimalEquiv_read
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.minimalEquiv_read
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.minimalEquiv_step
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.minimalEquiv_step
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.translate
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.translate
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.translate_inverse
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.translate_inverse
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.experimentEquiv
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.experimentEquiv
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.evaluate_translate
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.evaluate_translate
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.executedTrace_translate
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.executedTrace_translate
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.action_count_preserved
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.action_count_preserved
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.action_cost_preserved
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.action_cost_preserved
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.action_and_record_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.action_and_record_transport
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.SeparatesWithin
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.SeparatesWithin
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.separatesWithin_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.separatesWithin_transport
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.SolvesWithin
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.SolvesWithin
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.transport_solver
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.transport_solver
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.solvesWithin_transport_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.solvesWithin_transport_iff
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.FirstDistinction
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.FirstDistinction
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.firstDistinction_unique
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.firstDistinction_unique
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.firstDistinction_existsUnique
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.firstDistinction_existsUnique
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.firstDistinction_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.firstDistinction_transport
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.Projection.run_map
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.Projection.run_map
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.Projection.observation_run
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.Projection.observation_run
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.Projection.futureEq_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.Projection.futureEq_iff
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.Projection.quotientEquiv
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.Projection.quotientEquiv
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.Projection.quotientEquiv_record
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.Projection.quotientEquiv_record
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.Projection.quotientEquiv_read
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.Projection.quotientEquiv_read
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.Projection.quotientEquiv_step
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.Projection.quotientEquiv_step
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.Projection.minimalSystemIso
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.Projection.minimalSystemIso
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.countdownRead
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.countdownRead
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.countdownStep
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.countdownStep
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.countdown_run
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.countdown_run
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.countdown_le_of_futureEq
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.countdown_le_of_futureEq
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.countdown_futureEq_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.countdown_futureEq_iff
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.countdown_exact_budget
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.countdown_exact_budget
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.bounded_wait_still_merges
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.bounded_wait_still_merges
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.countdownMinimalEquiv
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.countdownMinimalEquiv
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.payloadRead
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.payloadRead
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.payloadStep
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.payloadStep
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.payload_counter_commutes
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.payload_counter_commutes
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.payload_futureEq_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.payload_futureEq_iff
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.payloadMinimalEquiv
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.payloadMinimalEquiv
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.payloadMinimalEquiv_record
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.payloadMinimalEquiv_record
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.no_raw_payload_iso
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.no_raw_payload_iso
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.taggedCountdownIso
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.taggedCountdownIso
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.same_record_different_future
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.same_record_different_future
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.separatesWithin_mono
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.separatesWithin_mono
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.adaptive_distinction_has_bounded_word
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.adaptive_distinction_has_bounded_word
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.solvesWithin_separates_targets
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.solvesWithin_separates_targets
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ResolutionSingularity
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ResolutionSingularity
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.UniformBudgetObstruction
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.UniformBudgetObstruction
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.resolutionSingularity_blocks_adaptive
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.resolutionSingularity_blocks_adaptive
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.resolutionSingularity_transport_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.resolutionSingularity_transport_iff
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.uniformBudgetObstruction_transport_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.uniformBudgetObstruction_transport_iff
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.current_record_solver
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.current_record_solver
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.countdown_resolution_singularity
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.countdown_resolution_singularity
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.countdown_no_uniform_solver
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.countdown_no_uniform_solver
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.countdown_singularity_transport
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.countdown_singularity_transport
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.mk
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.mk
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.state
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.state
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.action
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.action
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.record
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.record
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.observation
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.observation
+
+#check @OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.transition
+#print axioms OperatorKO7.Meta.BoundaryObserver.ObservationTransport.ObservationIso.transition
+

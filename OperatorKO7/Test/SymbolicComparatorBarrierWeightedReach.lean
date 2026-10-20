@@ -1,0 +1,101 @@
+import OperatorKO7.Meta.SymbolicComparatorBarrier_Weighted_Schema
+
+/-!
+# Reach gate: coefficient-weighted variable-condition barrier (schema layer)
+
+Pins every public declaration of the modules listed below with a paired
+`#check @name` and `#print axioms name`. Source-to-reach and reach-to-axiom
+differences are empty by construction: this file is generated from the
+namespace-aware declaration inventory of those sources. Every axiom closure must
+be a subset of `{propext, Classical.choice, Quot.sound}` and no closure may
+mention `sorryAx`. This gate is import-and-check only; it proves no new content.
+
+* `OperatorKO7/Meta/SymbolicComparatorBarrier_Weighted_Schema.lean`: 20 public declarations
+* structure constructor and projections pinned explicitly: 18
+-/
+
+set_option autoImplicit false
+
+namespace OperatorKO7.Test.SymbolicComparatorBarrierWeightedReach
+
+-- OperatorKO7/Meta/SymbolicComparatorBarrier_Weighted_Schema.lean
+#check @OperatorKO7.SymbolicComparatorBarrier.CoefficientAssignment
+#print axioms OperatorKO7.SymbolicComparatorBarrier.CoefficientAssignment
+#check @OperatorKO7.SymbolicComparatorBarrier.weightedCount
+#print axioms OperatorKO7.SymbolicComparatorBarrier.weightedCount
+#check @OperatorKO7.SymbolicComparatorBarrier.SubtermCoefficients
+#print axioms OperatorKO7.SymbolicComparatorBarrier.SubtermCoefficients
+#check @OperatorKO7.SymbolicComparatorBarrier.weightedCount_dupSrc_b
+#print axioms OperatorKO7.SymbolicComparatorBarrier.weightedCount_dupSrc_b
+#check @OperatorKO7.SymbolicComparatorBarrier.weightedCount_dupSrc_s
+#print axioms OperatorKO7.SymbolicComparatorBarrier.weightedCount_dupSrc_s
+#check @OperatorKO7.SymbolicComparatorBarrier.weightedCount_dupSrc_n
+#print axioms OperatorKO7.SymbolicComparatorBarrier.weightedCount_dupSrc_n
+#check @OperatorKO7.SymbolicComparatorBarrier.weightedCount_dupTgt_b
+#print axioms OperatorKO7.SymbolicComparatorBarrier.weightedCount_dupTgt_b
+#check @OperatorKO7.SymbolicComparatorBarrier.weightedCount_dupTgt_s
+#print axioms OperatorKO7.SymbolicComparatorBarrier.weightedCount_dupTgt_s
+#check @OperatorKO7.SymbolicComparatorBarrier.weightedCount_dupTgt_n
+#print axioms OperatorKO7.SymbolicComparatorBarrier.weightedCount_dupTgt_n
+#check @OperatorKO7.SymbolicComparatorBarrier.WeightedVariableConditionOrder
+#print axioms OperatorKO7.SymbolicComparatorBarrier.WeightedVariableConditionOrder
+#check @OperatorKO7.SymbolicComparatorBarrier.weightedCount_dup_payload_strict
+#print axioms OperatorKO7.SymbolicComparatorBarrier.weightedCount_dup_payload_strict
+#check @OperatorKO7.SymbolicComparatorBarrier.not_orients_dup_rule_weighted
+#print axioms OperatorKO7.SymbolicComparatorBarrier.not_orients_dup_rule_weighted
+#check @OperatorKO7.SymbolicComparatorBarrier.no_subtermCoefficient_variable_condition_orients_dup_step
+#print axioms OperatorKO7.SymbolicComparatorBarrier.no_subtermCoefficient_variable_condition_orients_dup_step
+#check @OperatorKO7.SymbolicComparatorBarrier.wrapFirstDegenerate
+#print axioms OperatorKO7.SymbolicComparatorBarrier.wrapFirstDegenerate
+#check @OperatorKO7.SymbolicComparatorBarrier.wrapSecondDegenerate
+#print axioms OperatorKO7.SymbolicComparatorBarrier.wrapSecondDegenerate
+#check @OperatorKO7.SymbolicComparatorBarrier.wrapFirst_positivity_necessary
+#print axioms OperatorKO7.SymbolicComparatorBarrier.wrapFirst_positivity_necessary
+#check @OperatorKO7.SymbolicComparatorBarrier.wrapSecond_positivity_necessary
+#print axioms OperatorKO7.SymbolicComparatorBarrier.wrapSecond_positivity_necessary
+#check @OperatorKO7.SymbolicComparatorBarrier.unitCoefficients
+#print axioms OperatorKO7.SymbolicComparatorBarrier.unitCoefficients
+#check @OperatorKO7.SymbolicComparatorBarrier.weightedCount_of_all_one
+#print axioms OperatorKO7.SymbolicComparatorBarrier.weightedCount_of_all_one
+#check @OperatorKO7.SymbolicComparatorBarrier.weightedCount_unitCoefficients
+#print axioms OperatorKO7.SymbolicComparatorBarrier.weightedCount_unitCoefficients
+
+-- structure constructor and projections
+#check @OperatorKO7.SymbolicComparatorBarrier.CoefficientAssignment.mk
+#print axioms OperatorKO7.SymbolicComparatorBarrier.CoefficientAssignment.mk
+#check @OperatorKO7.SymbolicComparatorBarrier.CoefficientAssignment.succ
+#print axioms OperatorKO7.SymbolicComparatorBarrier.CoefficientAssignment.succ
+#check @OperatorKO7.SymbolicComparatorBarrier.CoefficientAssignment.wrap₁
+#print axioms OperatorKO7.SymbolicComparatorBarrier.CoefficientAssignment.wrap₁
+#check @OperatorKO7.SymbolicComparatorBarrier.CoefficientAssignment.wrap₂
+#print axioms OperatorKO7.SymbolicComparatorBarrier.CoefficientAssignment.wrap₂
+#check @OperatorKO7.SymbolicComparatorBarrier.CoefficientAssignment.recur₁
+#print axioms OperatorKO7.SymbolicComparatorBarrier.CoefficientAssignment.recur₁
+#check @OperatorKO7.SymbolicComparatorBarrier.CoefficientAssignment.recur₂
+#print axioms OperatorKO7.SymbolicComparatorBarrier.CoefficientAssignment.recur₂
+#check @OperatorKO7.SymbolicComparatorBarrier.CoefficientAssignment.recur₃
+#print axioms OperatorKO7.SymbolicComparatorBarrier.CoefficientAssignment.recur₃
+#check @OperatorKO7.SymbolicComparatorBarrier.SubtermCoefficients.mk
+#print axioms OperatorKO7.SymbolicComparatorBarrier.SubtermCoefficients.mk
+#check @OperatorKO7.SymbolicComparatorBarrier.SubtermCoefficients.toCoefficientAssignment
+#print axioms OperatorKO7.SymbolicComparatorBarrier.SubtermCoefficients.toCoefficientAssignment
+#check @OperatorKO7.SymbolicComparatorBarrier.SubtermCoefficients.succ_pos
+#print axioms OperatorKO7.SymbolicComparatorBarrier.SubtermCoefficients.succ_pos
+#check @OperatorKO7.SymbolicComparatorBarrier.SubtermCoefficients.wrap₁_pos
+#print axioms OperatorKO7.SymbolicComparatorBarrier.SubtermCoefficients.wrap₁_pos
+#check @OperatorKO7.SymbolicComparatorBarrier.SubtermCoefficients.wrap₂_pos
+#print axioms OperatorKO7.SymbolicComparatorBarrier.SubtermCoefficients.wrap₂_pos
+#check @OperatorKO7.SymbolicComparatorBarrier.SubtermCoefficients.recur₁_pos
+#print axioms OperatorKO7.SymbolicComparatorBarrier.SubtermCoefficients.recur₁_pos
+#check @OperatorKO7.SymbolicComparatorBarrier.SubtermCoefficients.recur₂_pos
+#print axioms OperatorKO7.SymbolicComparatorBarrier.SubtermCoefficients.recur₂_pos
+#check @OperatorKO7.SymbolicComparatorBarrier.SubtermCoefficients.recur₃_pos
+#print axioms OperatorKO7.SymbolicComparatorBarrier.SubtermCoefficients.recur₃_pos
+#check @OperatorKO7.SymbolicComparatorBarrier.WeightedVariableConditionOrder.mk
+#print axioms OperatorKO7.SymbolicComparatorBarrier.WeightedVariableConditionOrder.mk
+#check @OperatorKO7.SymbolicComparatorBarrier.WeightedVariableConditionOrder.gt
+#print axioms OperatorKO7.SymbolicComparatorBarrier.WeightedVariableConditionOrder.gt
+#check @OperatorKO7.SymbolicComparatorBarrier.WeightedVariableConditionOrder.variable_condition
+#print axioms OperatorKO7.SymbolicComparatorBarrier.WeightedVariableConditionOrder.variable_condition
+
+end OperatorKO7.Test.SymbolicComparatorBarrierWeightedReach
