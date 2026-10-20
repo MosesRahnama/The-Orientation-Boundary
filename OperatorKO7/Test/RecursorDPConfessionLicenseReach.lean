@@ -1,0 +1,23 @@
+import OperatorKO7.Meta.Recursor.DPConfessionLicense
+
+namespace RecursorDPConfessionLicenseReach
+
+open OperatorKO7 Trace
+open OperatorKO7.Meta.Recursor.DPConfessionLicense
+
+#check @RecursorTerm
+#print axioms RecursorTerm
+#check @dpCollapseToVoid
+#print axioms dpCollapseToVoid
+#check @DP_projection_is_not_substitution_invariant
+#print axioms DP_projection_is_not_substitution_invariant
+#check @PartialProgressClaim
+#print axioms PartialProgressClaim
+#check @dp_projection_not_in_recursor_signature
+#print axioms dp_projection_not_in_recursor_signature
+#check @arts_giesl_soundness_requires_external_observer
+#print axioms arts_giesl_soundness_requires_external_observer
+#check @recursor_termination_provable_iff_external_DP_license_accepted
+#print axioms recursor_termination_provable_iff_external_DP_license_accepted
+
+end RecursorDPConfessionLicenseReach

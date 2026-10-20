@@ -1,0 +1,36 @@
+import OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement
+
+/-! Reach and axiom check for the `AumannAgreement` module. Permanent. -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.commonKnowledgeAt_iff_meetCell
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.commonKnowledgeAt_iff_meetCell
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.massOf_eq_mul_of_saturated
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.massOf_eq_mul_of_saturated
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.agreement_of_commonKnowledge
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.agreement_of_commonKnowledge
+
+/-! ## Complete public-surface reach and axiom parity -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.massOf
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.AssignsFiberRatio
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.AssignsProbability
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.assignsFiberRatio_iff_assignsProbability
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.MeetCell
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.CommonKnowledgeAt
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.meetCell_saturated_left
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.meetCell_saturated_right
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.agreement_of_commonKnowledge_fiberRatio
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.agreement_positive_mass_is_required
+#check @OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.agreement_commonKnowledge_is_required
+
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.massOf
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.AssignsFiberRatio
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.AssignsProbability
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.assignsFiberRatio_iff_assignsProbability
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.MeetCell
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.CommonKnowledgeAt
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.meetCell_saturated_left
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.meetCell_saturated_right
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.agreement_of_commonKnowledge_fiberRatio
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.agreement_positive_mass_is_required
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.AumannAgreement.agreement_commonKnowledge_is_required

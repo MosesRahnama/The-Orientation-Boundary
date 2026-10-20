@@ -1,0 +1,37 @@
+import OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder
+
+/-! Permanent reach and axiom audit for `BlackwellOrder`. -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.correctMass_deterministicModel
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.simulatingDecoder
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.simulatingDecoder_apply
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.bayesRisk_le_of_refines
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.halfHalfPrior
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.halfHalfPrior_nonneg
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.halfHalfPrior_sum_one
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.refines_of_bayesRisk_le_twoPoint
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.refines_of_bayesRisk_le_self
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.refines_iff_bayesRisk_le
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.unitTargetEnumeration
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.bayesRisk_constant_target_eq_zero
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.single_target_does_not_determine_refinement
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.garble
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.joint_garble
+#check @OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.bayesRisk_le_of_garbling
+
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.correctMass_deterministicModel
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.simulatingDecoder
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.simulatingDecoder_apply
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.bayesRisk_le_of_refines
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.halfHalfPrior
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.halfHalfPrior_nonneg
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.halfHalfPrior_sum_one
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.refines_of_bayesRisk_le_twoPoint
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.refines_of_bayesRisk_le_self
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.refines_iff_bayesRisk_le
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.unitTargetEnumeration
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.bayesRisk_constant_target_eq_zero
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.single_target_does_not_determine_refinement
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.garble
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.joint_garble
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.BlackwellOrder.bayesRisk_le_of_garbling

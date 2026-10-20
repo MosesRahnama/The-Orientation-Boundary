@@ -1,0 +1,80 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.ProcessorSemantics
+
+/-! # ProcessorSemantics reach and axiom check -/
+
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.Call
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.Call
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.ChainP
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.ChainP
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.FiniteDP
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.FiniteDP
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.dpPairs
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.dpPairs
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.chainP_dpPairs_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.chainP_dpPairs_iff
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.terminating_of_finiteDP
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.terminating_of_finiteDP
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.finiteDP_mono
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.finiteDP_mono
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.neutral_processor_iff
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.neutral_processor_iff
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.argSteps_sn
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.argSteps_sn
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.wf_of_strict_or_weak
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.wf_of_strict_or_weak
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.CallReductionTriple
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.CallReductionTriple
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.triple_reach
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.triple_reach
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.reductionTriple_processor_sound
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.reductionTriple_processor_sound
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.tripleOfPair
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.tripleOfPair
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.swapped_weak_roles_break_composition
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.swapped_weak_roles_break_composition
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.emptyTRS
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.emptyTRS
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.emptyTRS_no_step
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.emptyTRS_no_step
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.emptyTRS_sn
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.emptyTRS_sn
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.selfLoop
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.selfLoop
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.deleting_live_pair_unsound
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.deleting_live_pair_unsound
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.filterArgs
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.filterArgs
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.filterCall
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.filterCall
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.filterArgs_step_outside
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.filterArgs_step_outside
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.filteredPair
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.filteredPair
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.emptyFilter_no_strict_self_call
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.emptyFilter_no_strict_self_call
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.QuotStep
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.QuotStep
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.wf_of_quotStep_wf
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.wf_of_quotStep_wf
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.trivialSetoid
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.trivialSetoid
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.trueToFalse
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.trueToFalse
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.quotient_self_loop_control
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.quotient_self_loop_control
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.quotient_merges_normal_forms
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.quotient_merges_normal_forms
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.Simulates
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.Simulates
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.wf_of_simulates
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.wf_of_simulates
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.RelPow
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.RelPow
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.RelPow.append
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.RelPow.append
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.transGen_relPow
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.transGen_relPow
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.simulates_relPow
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.simulates_relPow
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.sharing_same_readback_self_loop
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorSemantics.sharing_same_readback_self_loop

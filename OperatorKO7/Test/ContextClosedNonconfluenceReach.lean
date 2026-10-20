@@ -1,0 +1,14 @@
+import OperatorKO7.Meta.ContextClosed_Nonconfluence
+
+open MetaSN_KO7
+
+#check @stepCtxFull_not_locally_confluent
+#print axioms stepCtxFull_not_locally_confluent
+#check @stepCtxFull_not_confluent
+#print axioms stepCtxFull_not_confluent
+#check @integrate_void_ctx_normal
+#print axioms integrate_void_ctx_normal
+#check @stepCtxFull_two_normal_forms
+#print axioms stepCtxFull_two_normal_forms
+#check @stepCtxFull_no_invariant_normalizer
+#print axioms stepCtxFull_no_invariant_normalizer

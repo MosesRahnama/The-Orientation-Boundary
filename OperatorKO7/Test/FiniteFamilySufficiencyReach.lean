@@ -1,0 +1,40 @@
+import OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency
+
+/-! Reach and axiom check for the `
+FiniteFamilySufficiency
+` module. Permanent. -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.posterior?_familyModel_eq_iff
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.posterior?_familyModel_eq_iff
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.sufficient_familyModel_iff_factorization
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.sufficient_familyModel_iff_factorization
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.posterior_minimalSufficient
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.posterior_minimalSufficient
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.fullSupport_is_required
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.fullSupport_is_required
+
+/-! ## Complete public-surface reach and axiom parity -/
+
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.FiniteFamily
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.familyModel
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.joint_familyModel
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.observationMass_familyModel
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.FactorizationSufficient
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.LikelihoodProportional
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.p_eq_zero_of_observationMass_eq_zero
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.FiniteFamily.mk
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.FiniteFamily.p
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.FiniteFamily.nonneg
+#check @OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.FiniteFamily.sum_one
+
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.FiniteFamily
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.familyModel
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.joint_familyModel
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.observationMass_familyModel
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.FactorizationSufficient
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.LikelihoodProportional
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.p_eq_zero_of_observationMass_eq_zero
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.FiniteFamily.mk
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.FiniteFamily.p
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.FiniteFamily.nonneg
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.FiniteFamilySufficiency.FiniteFamily.sum_one

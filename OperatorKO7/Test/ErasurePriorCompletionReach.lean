@@ -1,0 +1,24 @@
+import OperatorKO7.Meta.BoundaryObserver.ErasurePriorCompletion
+
+set_option autoImplicit false
+set_option pp.fullNames true
+set_option pp.universes true
+
+/-! SBC1 arbitrary-prior source reach. Each public theorem has a full-type and axiom gate. -/
+
+#check @OperatorKO7.Meta.BoundaryObserver.ErasurePriorCompletion.exists_zeroError_finite_cost_arbitrary_prior_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.ErasurePriorCompletion.exists_zeroError_finite_cost_arbitrary_prior_iff
+#check @OperatorKO7.Meta.BoundaryObserver.ErasurePriorCompletion.firstExclusiveWith_survival_law
+#print axioms OperatorKO7.Meta.BoundaryObserver.ErasurePriorCompletion.firstExclusiveWith_survival_law
+#check @OperatorKO7.Meta.BoundaryObserver.ErasurePriorCompletion.firstExclusiveWith_stopped_law_normalized
+#print axioms OperatorKO7.Meta.BoundaryObserver.ErasurePriorCompletion.firstExclusiveWith_stopped_law_normalized
+#check @OperatorKO7.Meta.BoundaryObserver.ErasurePriorCompletion.firstExclusiveWith_stopped_law_information
+#print axioms OperatorKO7.Meta.BoundaryObserver.ErasurePriorCompletion.firstExclusiveWith_stopped_law_information
+#check @OperatorKO7.Meta.BoundaryObserver.ErasurePriorCompletion.firstExclusiveWith_weighted_cost
+#print axioms OperatorKO7.Meta.BoundaryObserver.ErasurePriorCompletion.firstExclusiveWith_weighted_cost
+#check @OperatorKO7.Meta.BoundaryObserver.ErasurePriorCompletion.firstExclusiveWith_weighted_cost_le_max
+#print axioms OperatorKO7.Meta.BoundaryObserver.ErasurePriorCompletion.firstExclusiveWith_weighted_cost_le_max
+#check @OperatorKO7.Meta.BoundaryObserver.ErasurePriorCompletion.firstExclusiveWith_zero_prior_active
+#print axioms OperatorKO7.Meta.BoundaryObserver.ErasurePriorCompletion.firstExclusiveWith_zero_prior_active
+#check @OperatorKO7.Meta.BoundaryObserver.ErasurePriorCompletion.firstExclusiveWith_positive_prior_recovery
+#print axioms OperatorKO7.Meta.BoundaryObserver.ErasurePriorCompletion.firstExclusiveWith_positive_prior_recovery

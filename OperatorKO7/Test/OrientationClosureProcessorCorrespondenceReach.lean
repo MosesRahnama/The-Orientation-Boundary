@@ -1,0 +1,32 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.ProcessorCorrespondence
+
+/-!
+# ProcessorCorrespondence reach and axiom check
+
+Paired declaration reach and axiom checks for `ProcessorCorrespondence.lean`.
+-/
+
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.toChainReductionPair
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.toChainReductionPair
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.nativeReductionPair_chain_strict
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.nativeReductionPair_chain_strict
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.nativeReductionPair_chain_wellFounded
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.nativeReductionPair_chain_wellFounded
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.polynomial_chain_wellFounded
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.polynomial_chain_wellFounded
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.gapTwo_chain_wellFounded
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.gapTwo_chain_wellFounded
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.chain_processors_relation_distinct
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.chain_processors_relation_distinct
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.ResetPair
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.ResetPair
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.ResetConnector
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.ResetConnector
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.resetPair_wellFounded
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.resetPair_wellFounded
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.reset_chain_self_loop
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.reset_chain_self_loop
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.reset_chain_not_wellFounded
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.reset_chain_not_wellFounded
+#check @OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.connector_compatibility_is_necessary_control
+#print axioms OperatorKO7.Methods.OrientationClosure.ProcessorCorrespondence.connector_compatibility_is_necessary_control

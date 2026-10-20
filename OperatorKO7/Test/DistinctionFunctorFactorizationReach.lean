@@ -1,0 +1,35 @@
+import OperatorKO7.Meta.BoundaryObserver.DistinctionFunctorFactorization
+
+/-!
+Type and axiom queries for `Meta/BoundaryObserver/DistinctionFunctorFactorization.lean`. Every public declaration
+of the module has one `#check` and one `#print axioms`.
+-/
+
+open OperatorKO7.Meta.BoundaryObserver
+
+#check @DistinctionFunctorFactorization.verdictARS
+#print axioms DistinctionFunctorFactorization.verdictARS
+#check @DistinctionFunctorFactorization.distinctionVerdict
+#print axioms DistinctionFunctorFactorization.distinctionVerdict
+#check @DistinctionFunctorFactorization.distinctionVerdict_eq_void
+#print axioms DistinctionFunctorFactorization.distinctionVerdict_eq_void
+#check @DistinctionFunctorFactorization.distinctionVerdictMorphism
+#print axioms DistinctionFunctorFactorization.distinctionVerdictMorphism
+#check @DistinctionFunctorFactorization.distinctionPartial
+#print axioms DistinctionFunctorFactorization.distinctionPartial
+#check @DistinctionFunctorFactorization.distinction_canonical_factorization
+#print axioms DistinctionFunctorFactorization.distinction_canonical_factorization
+#check @DistinctionFunctorFactorization.distinction_kernel_total
+#print axioms DistinctionFunctorFactorization.distinction_kernel_total
+#check @DistinctionFunctorFactorization.distinction_kernel_merges_void_deltaVoid
+#print axioms DistinctionFunctorFactorization.distinction_kernel_merges_void_deltaVoid
+#check @DistinctionFunctorFactorization.distinction_kernelQuotient_subsingleton
+#print axioms DistinctionFunctorFactorization.distinction_kernelQuotient_subsingleton
+#check @DistinctionFunctorFactorization.distinction_image_eq
+#print axioms DistinctionFunctorFactorization.distinction_image_eq
+#check @DistinctionFunctorFactorization.distinctionVerdict_not_injective
+#print axioms DistinctionFunctorFactorization.distinctionVerdict_not_injective
+#check @DistinctionFunctorFactorization.distinctionQuotientImageIso
+#print axioms DistinctionFunctorFactorization.distinctionQuotientImageIso
+#check @DistinctionFunctorFactorization.distinctionQuotientImageIso_apply
+#print axioms DistinctionFunctorFactorization.distinctionQuotientImageIso_apply

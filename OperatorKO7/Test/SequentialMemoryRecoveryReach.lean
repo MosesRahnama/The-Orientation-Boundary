@@ -1,0 +1,27 @@
+import OperatorKO7.Meta.OperationalInexpressibility.SequentialMemoryRecovery
+
+set_option autoImplicit false
+
+open OperatorKO7.Meta.OperationalInexpressibility.SequentialMemoryRecovery
+
+#check @historyObserver
+#check @historyObserver_refines_stage
+#check @historyObserver_refines_previous
+#check @licensed_stage_implies_licensed_history
+#check @licensed_history_monotone
+#check @forgettingObserver
+#check forgettingObserver_stage0_licenses_identity
+#check forgettingObserver_stage1_not_licensed
+#check forgettingObserver_history1_licenses_identity
+#check current_observation_can_forget_while_history_retains
+
+#print axioms historyObserver
+#print axioms historyObserver_refines_stage
+#print axioms historyObserver_refines_previous
+#print axioms licensed_stage_implies_licensed_history
+#print axioms licensed_history_monotone
+#print axioms forgettingObserver
+#print axioms forgettingObserver_stage0_licenses_identity
+#print axioms forgettingObserver_stage1_not_licensed
+#print axioms forgettingObserver_history1_licenses_identity
+#print axioms current_observation_can_forget_while_history_retains

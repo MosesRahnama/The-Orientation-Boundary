@@ -1,0 +1,39 @@
+import OperatorKO7.Meta.BoundaryObserver.OrientationOrders
+
+/-!
+Type and axiom queries for `Meta/BoundaryObserver/OrientationOrders.lean`. Every public declaration
+of the module has one `#check` and one `#print axioms`.
+-/
+
+open OperatorKO7.Meta.BoundaryObserver
+
+#check @OrientationOrders.OrientationOrdersGoal
+#print axioms OrientationOrders.OrientationOrdersGoal
+#check @OrientationOrders.no_content_orientation_of_irrefl
+#print axioms OrientationOrders.no_content_orientation_of_irrefl
+#check @OrientationOrders.orientationOrdersGoal
+#print axioms OrientationOrders.orientationOrdersGoal
+#check @OrientationOrders.natural_orientation_exists
+#print axioms OrientationOrders.natural_orientation_exists
+#check @OrientationOrders.PassDecreases
+#print axioms OrientationOrders.PassDecreases
+#check @OrientationOrders.adjacent_values_ne
+#print axioms OrientationOrders.adjacent_values_ne
+#check @OrientationOrders.irreflexive_measure_not_content_determined
+#print axioms OrientationOrders.irreflexive_measure_not_content_determined
+#check @OrientationOrders.content_determined_decreasing_exists_iff
+#print axioms OrientationOrders.content_determined_decreasing_exists_iff
+#check @OrientationOrders.measure_obstruction_iff_irreflexive
+#print axioms OrientationOrders.measure_obstruction_iff_irreflexive
+#check @OrientationOrders.wellFounded_measure_not_content_determined
+#print axioms OrientationOrders.wellFounded_measure_not_content_determined
+#check @OrientationOrders.strictOrder_measure_not_content_determined
+#print axioms OrientationOrders.strictOrder_measure_not_content_determined
+#check @OrientationOrders.OrientationOrdersFullGoal
+#print axioms OrientationOrders.OrientationOrdersFullGoal
+#check @OrientationOrders.orientationOrdersFullGoal
+#print axioms OrientationOrders.orientationOrdersFullGoal
+#check @OrientationOrders.counter_strictOrder_control
+#print axioms OrientationOrders.counter_strictOrder_control
+#check @OrientationOrders.reflexive_relation_control
+#print axioms OrientationOrders.reflexive_relation_control

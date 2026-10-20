@@ -1,0 +1,28 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.CouplingControls
+
+/-! # CouplingControls reach and axiom check -/
+
+#check @OperatorKO7.Methods.OrientationClosure.CouplingControls.retentive_orienter_unbounded_unbounded
+#print axioms OperatorKO7.Methods.OrientationClosure.CouplingControls.retentive_orienter_unbounded_unbounded
+#check @OperatorKO7.Methods.OrientationClosure.CouplingControls.counterRank_wrapperCost_eq_zero
+#print axioms OperatorKO7.Methods.OrientationClosure.CouplingControls.counterRank_wrapperCost_eq_zero
+#check @OperatorKO7.Methods.OrientationClosure.CouplingControls.counterRank_counterGain_eq_one
+#print axioms OperatorKO7.Methods.OrientationClosure.CouplingControls.counterRank_counterGain_eq_one
+#check @OperatorKO7.Methods.OrientationClosure.CouplingControls.counterRank_not_retentive
+#print axioms OperatorKO7.Methods.OrientationClosure.CouplingControls.counterRank_not_retentive
+#check @OperatorKO7.Methods.OrientationClosure.CouplingControls.counterRank_nonretentive_control
+#print axioms OperatorKO7.Methods.OrientationClosure.CouplingControls.counterRank_nonretentive_control
+#check @OperatorKO7.Methods.OrientationClosure.CouplingControls.recursiveDropMeasure
+#print axioms OperatorKO7.Methods.OrientationClosure.CouplingControls.recursiveDropMeasure
+#check @OperatorKO7.Methods.OrientationClosure.CouplingControls.recursiveDropMeasure_affine_laws
+#print axioms OperatorKO7.Methods.OrientationClosure.CouplingControls.recursiveDropMeasure_affine_laws
+#check @OperatorKO7.Methods.OrientationClosure.CouplingControls.recursiveDrop_wrapperCost_eq
+#print axioms OperatorKO7.Methods.OrientationClosure.CouplingControls.recursiveDrop_wrapperCost_eq
+#check @OperatorKO7.Methods.OrientationClosure.CouplingControls.recursiveDrop_counterGain_eq_one
+#print axioms OperatorKO7.Methods.OrientationClosure.CouplingControls.recursiveDrop_counterGain_eq_one
+#check @OperatorKO7.Methods.OrientationClosure.CouplingControls.recursiveDrop_orients
+#print axioms OperatorKO7.Methods.OrientationClosure.CouplingControls.recursiveDrop_orients
+#check @OperatorKO7.Methods.OrientationClosure.CouplingControls.recursiveDrop_not_retentive
+#print axioms OperatorKO7.Methods.OrientationClosure.CouplingControls.recursiveDrop_not_retentive
+#check @OperatorKO7.Methods.OrientationClosure.CouplingControls.recursiveDrop_nonretentive_control
+#print axioms OperatorKO7.Methods.OrientationClosure.CouplingControls.recursiveDrop_nonretentive_control

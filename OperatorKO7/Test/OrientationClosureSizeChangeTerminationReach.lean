@@ -1,0 +1,64 @@
+import OperatorKO7.Meta.Methods.OrientationClosure.SizeChangeTermination
+
+/-! # SizeChangeTermination reach and axiom check -/
+
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.ramsey_pairs
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.ramsey_pairs
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.SCGraph
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.SCGraph
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.SCGraph.comp
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.SCGraph.comp
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.SCGraph.mem_comp
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.SCGraph.mem_comp
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.SCGraph.comp_assoc
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.SCGraph.comp_assoc
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.ArcLabel
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.ArcLabel
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.pairGraph
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.pairGraph
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.mem_pairGraph
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.mem_pairGraph
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.Descends
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.Descends
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.GraphSound
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.GraphSound
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.GraphSound.comp
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.GraphSound.comp
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.pairGraph_sound
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.pairGraph_sound
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.IsDepPair
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.IsDepPair
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.minChainStep_depPair
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.minChainStep_depPair
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.minChainStep_arc_sound
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.minChainStep_arc_sound
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.SCClosure
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.SCClosure
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.SCClosure.trans
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.SCClosure.trans
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.SCTCriterion
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.SCTCriterion
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.minChain_wf_of_sct
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.minChain_wf_of_sct
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.terminating_of_sct
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.terminating_of_sct
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.LoopSym
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.LoopSym
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.loopRule
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.loopRule
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.loopTRS
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.loopTRS
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.loopArgs
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.loopArgs
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.loopCall
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.loopCall
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.strictArc_control
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.strictArc_control
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.loop_control
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.loop_control
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.freeRecursorTRS_sctCriterion
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.freeRecursorTRS_sctCriterion
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.freeRecursorTRS_minChain_wf_bySCT
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.freeRecursorTRS_minChain_wf_bySCT
+#check @OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.freeRecursorTRS_terminating_bySCT
+#print axioms OperatorKO7.Methods.OrientationClosure.SizeChangeTermination.freeRecursorTRS_terminating_bySCT

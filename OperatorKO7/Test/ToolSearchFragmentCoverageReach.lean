@@ -1,0 +1,19 @@
+import OperatorKO7.Meta.ToolSearchFragmentCoverage
+
+namespace ToolSearchFragmentCoverageReach
+
+#check OperatorKO7.ToolSearchFragmentCoverage.ToolSearchFragmentFamily
+#check OperatorKO7.ToolSearchFragmentCoverage.ToolSearchFragmentFamily.directAdditive
+#check OperatorKO7.ToolSearchFragmentCoverage.ToolSearchFragmentFamily.matrixTropicalRowSum
+#check OperatorKO7.ToolSearchFragmentCoverage.direct_scalar_fragment_coverage_catalog
+#check OperatorKO7.ToolSearchFragmentCoverage.extended_direct_fragment_coverage_catalog
+#check OperatorKO7.ToolSearchFragmentCoverage.matrix_projection_fragment_coverage_catalog
+#check OperatorKO7.ToolSearchFragmentCoverage.tool_search_fragment_coverage_catalog
+
+open OperatorKO7.ToolSearchFragmentCoverage
+
+example : ToolSearchFragmentFamily := .extendedMaxPlus
+
+example : ToolSearchFragmentFamily := .matrixArcticRowSum
+
+end ToolSearchFragmentCoverageReach

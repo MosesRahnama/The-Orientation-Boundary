@@ -1,0 +1,22 @@
+import OperatorKO7.Meta.OperationalInexpressibility.PaperClauseCompletions
+
+/-! Type and axiom checks of the four completed clauses of the Operational Inexpressibility paper. -/
+
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.retained_coordinate_unique
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.retained_coordinate_unique
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.coordinateValue_gaugeInvariant
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.BaseDuplicatingSystem.coordinateValue_gaugeInvariant
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.RecordTerm.shared_generator_bridge
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.RecordTerm.shared_generator_bridge
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.RecordTerm.frame_slot_unique
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.RecordTerm.frame_slot_unique
+#check @OperatorKO7.StepDuplicating.StepDuplicatingSchema.RecordTerm.active_slot_unique
+#print axioms OperatorKO7.StepDuplicating.StepDuplicatingSchema.RecordTerm.active_slot_unique
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.progressLicensedQuotient_two_points
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.progressLicensedQuotient_two_points
+#check @OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.progressLicensedQuotient_nontrivial
+#print axioms OperatorKO7.Meta.OperationalInexpressibility.ProgressOrbitEquivalence.progressLicensedQuotient_nontrivial
+#check @MetaSN_KO7.safeStep_eqW_void_void_unique
+#print axioms MetaSN_KO7.safeStep_eqW_void_void_unique
+#check @MetaSN_KO7.localJoin_eqW_void_void_safe
+#print axioms MetaSN_KO7.localJoin_eqW_void_void_safe

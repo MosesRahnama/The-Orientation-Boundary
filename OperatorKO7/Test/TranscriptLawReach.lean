@@ -1,0 +1,82 @@
+import OperatorKO7.Meta.BoundaryObserver.TranscriptLaw
+
+set_option autoImplicit false
+
+/-! Paired checks for every public declaration of TranscriptLaw. -/
+
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptMass
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptMass
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptMass_nonneg
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptMass_nonneg
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.activeMass
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.activeMass
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.activeMass_nonneg
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.activeMass_nonneg
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.stoppedMass_eq_transcript_add_active
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.stoppedMass_eq_transcript_add_active
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcript_add_active_eq_prior
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcript_add_active_eq_prior
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.historySet_tendsto_atTop
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.historySet_tendsto_atTop
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcript_sum_le_prior
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcript_sum_le_prior
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptMass_summable
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptMass_summable
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptTotal
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptTotal
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcript_sum_tendsto
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcript_sum_tendsto
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptTotal_le_prior
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptTotal_le_prior
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.activeMass_eq
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.activeMass_eq
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.activeMass_antitone
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.activeMass_antitone
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.activeMass_tendsto
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.activeMass_tendsto
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptTotal_eq_prior_of_stops
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptTotal_eq_prior_of_stops
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptUncertainty
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptUncertainty
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.activeUncertainty
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.activeUncertainty
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.massUncertainty_transcript
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.massUncertainty_transcript
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptUncertainty_term_nonneg
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptUncertainty_term_nonneg
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.activeUncertainty_nonneg
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.activeUncertainty_nonneg
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.massUncertainty_stopped_split
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.massUncertainty_stopped_split
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptUncertainty_sum_le
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptUncertainty_sum_le
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptUncertainty_summable
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptUncertainty_summable
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptUncertainty_tendsto
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptUncertainty_tendsto
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptUncertainty_le_entropy
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptUncertainty_le_entropy
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.terminalMI_eq_transcript_sub_active
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.terminalMI_eq_transcript_sub_active
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.tailUncertainty
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.tailUncertainty
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.activeUncertainty_tendsto
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.activeUncertainty_tendsto
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.tail_nonneg
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.tail_nonneg
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.informationLimit_eq_transcript
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.informationLimit_eq_transcript
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.entropy_le_logb_card
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.entropy_le_logb_card
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.historyUncertainty_le
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.historyUncertainty_le
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.activeUncertainty_le_activeMass
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.activeUncertainty_le_activeMass
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.tail_eq_zero_of_stops
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.tail_eq_zero_of_stops
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptInformation
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.transcriptInformation
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.informationLimit_eq_transcriptInformation
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.informationLimit_eq_transcriptInformation
+#check @OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.conditionalInformationLimit_eq_transcript
+#print axioms OperatorKO7.Meta.BoundaryObserver.TranscriptLaw.conditionalInformationLimit_eq_transcript

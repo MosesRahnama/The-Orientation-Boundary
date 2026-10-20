@@ -1,0 +1,35 @@
+import OperatorKO7.Meta.ToolSearchFragmentCoverage_Status
+
+namespace ToolSearchFragmentCoverageStatusReach
+
+#check OperatorKO7.ToolSearchFragmentCoverageStatus.CoverageStatus
+#check OperatorKO7.ToolSearchFragmentCoverageStatus.ResidualFragmentFamily
+#check OperatorKO7.ToolSearchFragmentCoverageStatus.ToolSearchCoverageCertificate
+#check OperatorKO7.ToolSearchFragmentCoverageStatus.MatrixResidualStatusCatalog
+#check OperatorKO7.ToolSearchFragmentCoverageStatus.tool_search_coverage_certificate
+#check OperatorKO7.ToolSearchFragmentCoverageStatus.tool_search_coverage_certificate_projects_direct
+#check OperatorKO7.ToolSearchFragmentCoverageStatus.tool_search_coverage_certificate_projects_extended
+#check OperatorKO7.ToolSearchFragmentCoverageStatus.tool_search_coverage_certificate_projects_matrix
+#check OperatorKO7.ToolSearchFragmentCoverageStatus.tool_search_coverage_certificate_projects_matrixResidual
+#check OperatorKO7.ToolSearchFragmentCoverageStatus.covered_fragment_family_status_catalog
+#check OperatorKO7.ToolSearchFragmentCoverageStatus.residual_fragment_family_status_catalog
+#check OperatorKO7.ToolSearchFragmentCoverageStatus.matrix_residual_status_catalog
+#check OperatorKO7.ToolSearchFragmentCoverageStatus.unrestricted_matrix_residual_refines_exact_catalog
+
+open OperatorKO7.ToolSearchFragmentCoverage
+open OperatorKO7.ToolSearchFragmentCoverageStatus
+
+example : coveredFragmentFamilyStatus ToolSearchFragmentFamily.extendedMaxPlus = CoverageStatus.covered := by
+  exact covered_fragment_family_status_catalog _
+
+example : residualFragmentFamilyStatus ResidualFragmentFamily.unrestrictedMatrixClasses
+    = CoverageStatus.residualExclusion := by
+  exact residual_fragment_family_status_catalog _
+
+example : MatrixResidualStatusCatalog := by
+  exact matrix_residual_status_catalog
+
+example : MatrixResidualStatusCatalog := by
+  exact unrestricted_matrix_residual_refines_exact_catalog.2
+
+end ToolSearchFragmentCoverageStatusReach

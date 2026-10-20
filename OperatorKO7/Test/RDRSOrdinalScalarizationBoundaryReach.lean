@@ -1,0 +1,10 @@
+import OperatorKO7.Meta.RDRSOrdinalScalarizationBoundary
+
+namespace OperatorKO7.Test.RDRSOrdinalScalarizationBoundaryReach
+
+#check @OperatorKO7.RDRSOrdinalScalarizationBoundary.supersededBy
+#check @OperatorKO7.RDRSOrdinalScalarizationBoundary.rdrs_ordinal_scalarization_boundary_shim_marker
+#check @OperatorKO7.RDRSPathOrderDichotomy.pathOrderAtlasRows_length
+#check @OperatorKO7.RDRSAlgebraicInterpretationAtlas.rdrs_algebraic_interpretation_layer_closed
+
+end OperatorKO7.Test.RDRSOrdinalScalarizationBoundaryReach

@@ -1,0 +1,82 @@
+import OperatorKO7.Meta.HigherOrderRewriting_Boundary
+
+namespace HigherOrderRewritingBoundaryReach
+
+open OperatorKO7
+
+#check OperatorKO7.HigherOrderRewritingSyntax.SharingMode
+#check OperatorKO7.HigherOrderRewritingSyntax.BetaMode
+#check OperatorKO7.HigherOrderRewritingSyntax.BinderMode
+#check OperatorKO7.HigherOrderRewritingSyntax.PolicyClass
+#check OperatorKO7.HigherOrderRewritingSyntax.TreeHO
+#check OperatorKO7.HigherOrderRewritingSyntax.SharedHO
+#check OperatorKO7.HigherOrderRewritingSyntax.ExplicitSharingHO
+#check OperatorKO7.HigherOrderRewritingSyntax.BetaFreeHO
+#check OperatorKO7.HigherOrderRewritingSyntax.BetaCompatibleStatus
+#check OperatorKO7.HigherOrderRewritingSyntax.BinderFreeStatus
+#check OperatorKO7.HigherOrderRewritingSyntax.BinderStatus
+#check OperatorKO7.HigherOrderRewritingSyntax.treePolicy
+#check OperatorKO7.HigherOrderRewritingSyntax.sharedPolicy
+#check OperatorKO7.HigherOrderRewritingSyntax.explicitSharingPolicy
+#check OperatorKO7.HigherOrderRewritingSyntax.betaCompatiblePolicy
+#check OperatorKO7.HigherOrderRewritingSyntax.HOTerm
+#check OperatorKO7.HigherOrderRewritingSyntax.ClosedFragment
+#check OperatorKO7.HigherOrderRewritingSyntax.substitute
+#check OperatorKO7.HigherOrderRewritingSyntax.Context
+#check OperatorKO7.HigherOrderRewritingSyntax.Context.plug
+#check OperatorKO7.HigherOrderRewritingSyntax.embedBoundaryHOTerm
+#check OperatorKO7.HigherOrderRewritingSyntax.embedBoundaryHOTerm_closed
+#check OperatorKO7.HigherOrderRewritingSyntax.embedSharedTerm
+#check OperatorKO7.HigherOrderRewritingSyntax.embedSharedTerm_closed
+#check OperatorKO7.HigherOrderRewritingSyntax.shared_recursor_shape_closed_fragment
+
+#check OperatorKO7.HigherOrderRewritingBoundary.SharingAwareHO
+#check OperatorKO7.HigherOrderRewritingBoundary.SubstitutionClosedHO
+#check OperatorKO7.HigherOrderRewritingBoundary.ContextClosedHO
+#check OperatorKO7.HigherOrderRewritingBoundary.RewriteStep
+#check OperatorKO7.HigherOrderRewritingBoundary.PolicyCounter
+#check OperatorKO7.HigherOrderRewritingBoundary.PolicyOrientsStep
+#check OperatorKO7.HigherOrderRewritingBoundary.UnqualifiedHigherOrderRewritingLiftClaim
+#check OperatorKO7.HigherOrderRewritingBoundary.PolicySubfamilyStatus
+#check OperatorKO7.HigherOrderRewritingBoundary.policySubfamilyStatus
+#check OperatorKO7.HigherOrderRewritingBoundary.boundary_policy_counter_embed
+#check OperatorKO7.HigherOrderRewritingBoundary.explicit_policy_counter_embedSharedTerm
+#check OperatorKO7.HigherOrderRewritingBoundary.boundary_step_embeds
+#check OperatorKO7.HigherOrderRewritingBoundary.shared_step_embeds_explicit
+#check OperatorKO7.HigherOrderRewritingBoundary.shared_policy_counter_orients_step
+#check OperatorKO7.HigherOrderRewritingBoundary.explicit_sharing_counter_orients_step
+#check OperatorKO7.HigherOrderRewritingBoundary.explicit_policy_counter_orients_embedded_step
+#check OperatorKO7.HigherOrderRewritingBoundary.catalog_transports_restricted_fragment
+#check OperatorKO7.HigherOrderRewritingBoundary.catalog_transports_shared_counterexample
+#check OperatorKO7.HigherOrderRewritingBoundary.catalog_transports_no_sharing_boundary
+#check OperatorKO7.HigherOrderRewritingBoundary.explicit_sharing_fragment_recovers_counterexample
+#check OperatorKO7.HigherOrderRewritingBoundary.shared_policy_blocks_unqualified_higher_order_rewriting_lift
+
+example : OperatorKO7.HigherOrderRewritingBoundary.PolicySubfamilyStatus :=
+  OperatorKO7.HigherOrderRewritingBoundary.policySubfamilyStatus
+
+example : OperatorKO7.HigherOrderRewritingSyntax.TreeHO
+    OperatorKO7.HigherOrderRewritingSyntax.treePolicy :=
+  OperatorKO7.HigherOrderRewritingBoundary.policySubfamilyStatus.treeSubfamily
+
+example : OperatorKO7.HigherOrderRewritingBoundary.SharingAwareHO
+    OperatorKO7.HigherOrderRewritingSyntax.sharedPolicy :=
+  OperatorKO7.HigherOrderRewritingBoundary.policySubfamilyStatus.sharedSharingAware
+
+example (b s n : OperatorKO7.SharingBarrierLift.SharedTerm) :
+    OperatorKO7.HigherOrderRewritingBoundary.PolicyCounter
+      OperatorKO7.HigherOrderRewritingSyntax.explicitSharingPolicy
+      (OperatorKO7.HigherOrderRewritingSyntax.embedSharedTerm
+        (OperatorKO7.SharingBarrierLift.SharedTerm.shareApp s
+          (OperatorKO7.SharingBarrierLift.SharedTerm.recur b s n))) <
+    OperatorKO7.HigherOrderRewritingBoundary.PolicyCounter
+      OperatorKO7.HigherOrderRewritingSyntax.explicitSharingPolicy
+      (OperatorKO7.HigherOrderRewritingSyntax.embedSharedTerm
+        (OperatorKO7.SharingBarrierLift.SharedTerm.recur b s
+          (OperatorKO7.SharingBarrierLift.SharedTerm.succ n))) :=
+  OperatorKO7.HigherOrderRewritingBoundary.explicit_sharing_fragment_recovers_counterexample b s n
+
+example : ¬ OperatorKO7.HigherOrderRewritingBoundary.UnqualifiedHigherOrderRewritingLiftClaim :=
+  OperatorKO7.HigherOrderRewritingBoundary.shared_policy_blocks_unqualified_higher_order_rewriting_lift
+
+end HigherOrderRewritingBoundaryReach

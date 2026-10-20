@@ -1,0 +1,43 @@
+import OperatorKO7.Meta.BoundaryObserver.RecordChoiceRealization
+
+/-!
+Type and axiom queries for `Meta/BoundaryObserver/RecordChoiceRealization.lean`. Every public declaration
+of the module has one `#check` and one `#print axioms`.
+-/
+
+open OperatorKO7.Meta.BoundaryObserver
+
+#check @RecordChoiceRealization.recordChoice_idem
+#print axioms RecordChoiceRealization.recordChoice_idem
+#check @RecordChoiceRealization.maxRel_recordChoice_iff
+#print axioms RecordChoiceRealization.maxRel_recordChoice_iff
+#check @RecordChoiceRealization.realizes_recordChoice_iff
+#print axioms RecordChoiceRealization.realizes_recordChoice_iff
+#check @RecordChoiceRealization.realizes_recordChoice_conv_iff
+#print axioms RecordChoiceRealization.realizes_recordChoice_conv_iff
+#check @RecordChoiceRealization.maxRel_recordChoice_realizes
+#print axioms RecordChoiceRealization.maxRel_recordChoice_realizes
+#check @RecordChoiceRealization.realizes_recordChoice_subrel_maxRel
+#print axioms RecordChoiceRealization.realizes_recordChoice_subrel_maxRel
+#check @RecordChoiceRealization.fibersAtMostTwo_recordChoice_iff_unchosen
+#print axioms RecordChoiceRealization.fibersAtMostTwo_recordChoice_iff_unchosen
+#check @RecordChoiceRealization.fibersAtMostTwo_recordChoice_iff_three
+#print axioms RecordChoiceRealization.fibersAtMostTwo_recordChoice_iff_three
+#check @RecordChoiceRealization.leastRealization_iff_conjugation_free
+#print axioms RecordChoiceRealization.leastRealization_iff_conjugation_free
+#check @RecordChoiceRealization.leastRealization_eq_rootStar
+#print axioms RecordChoiceRealization.leastRealization_eq_rootStar
+#check @RecordChoiceRealization.no_leastRealization_of_two_unchosen
+#print axioms RecordChoiceRealization.no_leastRealization_of_two_unchosen
+#check @RecordChoiceRealization.boolChoice
+#print axioms RecordChoiceRealization.boolChoice
+#check @RecordChoiceRealization.boolChoice_section
+#print axioms RecordChoiceRealization.boolChoice_section
+#check @RecordChoiceRealization.bool_leastRealization
+#print axioms RecordChoiceRealization.bool_leastRealization
+#check @RecordChoiceRealization.fin3Choice
+#print axioms RecordChoiceRealization.fin3Choice
+#check @RecordChoiceRealization.fin3Choice_section
+#print axioms RecordChoiceRealization.fin3Choice_section
+#check @RecordChoiceRealization.fin3_no_leastRealization
+#print axioms RecordChoiceRealization.fin3_no_leastRealization

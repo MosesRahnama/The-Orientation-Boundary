@@ -1,0 +1,50 @@
+import OperatorKO7.Meta.BoundaryGeneral.OverproductionGapShannon
+
+namespace OperatorKO7.Test.OverproductionGapShannonReach
+
+open OperatorKO7.Meta.BoundaryGeneral.OverproductionGapShannon
+
+#check @TerminalPoint
+#print axioms TerminalPoint
+#check @TerminalScheduler
+#print axioms TerminalScheduler
+#check @TerminalScheduler.mk
+#print axioms TerminalScheduler.mk
+#check @TerminalScheduler.mass
+#print axioms TerminalScheduler.mass
+#check @TerminalScheduler.mass_nonneg
+#print axioms TerminalScheduler.mass_nonneg
+#check @TerminalScheduler.mass_sum_one
+#print axioms TerminalScheduler.mass_sum_one
+#check @terminalPoint_card
+#print axioms terminalPoint_card
+#check @terminalPoint_nonempty_of_normalizingAt
+#print axioms terminalPoint_nonempty_of_normalizingAt
+#check @scheduler_cannot_assign_outside_terminalSupport
+#print axioms scheduler_cannot_assign_outside_terminalSupport
+#check @schedulerEntropyBits
+#print axioms schedulerEntropyBits
+#check @shannonOverproductionGap
+#print axioms shannonOverproductionGap
+#check @shannon_overproduction_le_hartley
+#print axioms shannon_overproduction_le_hartley
+#check @uniformTerminalScheduler
+#print axioms uniformTerminalScheduler
+#check @uniform_scheduler_entropy_eq_hartley
+#print axioms uniform_scheduler_entropy_eq_hartley
+#check @uniform_shannonGap_eq_hartleyGap
+#print axioms uniform_shannonGap_eq_hartleyGap
+#check @condEntropyLicensedBits
+#print axioms condEntropyLicensedBits
+#check @shannonGap_eq_condEntropyLicensedBits_of_entropy_alignment
+#print axioms shannonGap_eq_condEntropyLicensedBits_of_entropy_alignment
+#check @shannonGap_eq_zero_of_aligned_zero_residual
+#print axioms shannonGap_eq_zero_of_aligned_zero_residual
+#check @fork3_uniform_shannon_gap_eq_one
+#print axioms fork3_uniform_shannon_gap_eq_one
+#check @fork3_uniform_shannon_gap_resolving_eq_zero
+#print axioms fork3_uniform_shannon_gap_resolving_eq_zero
+#check @shannon_overproduction_law
+#print axioms shannon_overproduction_law
+
+end OperatorKO7.Test.OverproductionGapShannonReach

@@ -1,0 +1,47 @@
+import OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord
+
+set_option autoImplicit false
+set_option pp.fullNames true
+set_option pp.universes true
+
+/-! Declaration and axiom checks for every public theorem of the linear-system side-record module and for the two
+unobservable-subspace theorems its example statement cites. -/
+
+#check @OperatorKO7.Meta.BoundaryObserver.KalmanObservability.unobservable_eq_finite
+#print axioms OperatorKO7.Meta.BoundaryObserver.KalmanObservability.unobservable_eq_finite
+#check @OperatorKO7.Meta.BoundaryObserver.KalmanObservability.ker_stackedObservability
+#print axioms OperatorKO7.Meta.BoundaryObserver.KalmanObservability.ker_stackedObservability
+#check @OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.behavioralRecord_eq_iff_sub_mem_unobservable
+#print axioms OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.behavioralRecord_eq_iff_sub_mem_unobservable
+#check @OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.behavioralRecord_eq_iff_sub_mem_ker_stacked
+#print axioms OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.behavioralRecord_eq_iff_sub_mem_ker_stacked
+#check @OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.isMergedPair_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.isMergedPair_iff
+#check @OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.isMergedPair_iff_ker_stacked
+#print axioms OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.isMergedPair_iff_ker_stacked
+#check @OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.addRight_mem_licenseStabilizer_iff
+#print axioms OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.addRight_mem_licenseStabilizer_iff
+#check @OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.addRight_mem_licenseStabilizer_iff_ker_stacked
+#print axioms OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.addRight_mem_licenseStabilizer_iff_ker_stacked
+#check @OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.mergedPair_translation
+#print axioms OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.mergedPair_translation
+#check @OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.boundary_eq_empty_iff_finrank_range
+#print axioms OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.boundary_eq_empty_iff_finrank_range
+#check @OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.same_record_same_value
+#print axioms OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.same_record_same_value
+#check @OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.projection_record_injective
+#print axioms OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.projection_record_injective
+#check @OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.projection_separates_mergedPair
+#print axioms OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.projection_separates_mergedPair
+#check @OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.projection_resolvingSideChannel
+#print axioms OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.projection_resolvingSideChannel
+#check @OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.projection_determines_state
+#print axioms OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.projection_determines_state
+#check @OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.exists_isProj_unobservable
+#print axioms OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.exists_isProj_unobservable
+#check @OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.projection_ker_stacked
+#print axioms OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.projection_ker_stacked
+#check @OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.identity_firstCoordinate_mergedPair
+#print axioms OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.identity_firstCoordinate_mergedPair
+#check @OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.kalman_example
+#print axioms OperatorKO7.Meta.BoundaryObserver.KalmanSideRecord.kalman_example
