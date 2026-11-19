@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<script src="./static-api.js"></script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#142c35">
+  <meta name="description" content="Papers, theories and Lean declarations of the public OperatorKO7 Lean repository.">
+  <title>The Boundary Atlas</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="lean-highlight.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <button id="sidebar-toggle" class="text-button mobile-only" aria-label="Show paper selection" aria-expanded="false">Papers</button>
+    <a class="brand" href="./">The Boundary Atlas</a>
+    <div class="topbar-end"><button id="help-button" class="text-button">Reading guide</button><button id="share-button" class="text-button" aria-label="Copy current view link">Copy link</button></div>
+  </header>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Paper selection">
+      <div class="sidebar-heading"><span class="eyebrow">PAPERS</span><span class="small-count" id="paper-count">…</span></div>
+            <p class="sidebar-intro">A selection limits every view to the results and Lean declarations of the chosen papers.</p>
+      <label class="search-input paper-search"><span class="icon" data-icon="search"></span><input id="paper-search" type="search" placeholder="Find a paper" aria-label="Find a paper"></label>
+      <div class="selection-actions"><button class="text-button" id="select-all">All papers</button><button class="text-button" id="clear-papers">Clear</button><span id="selection-count"></span></div>
+      <div class="paper-list" id="paper-list" aria-live="polite"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>
+      <div class="selection-mode"><label for="match-mode">Selected paper scope</label><select id="match-mode"><option value="any">Any selected paper</option><option value="all">Shared by all selected papers</option></select></div>
+      <section class="bookmark-section"><button id="bookmark-toggle" class="section-toggle" aria-expanded="false"><span><span class="icon" data-icon="bookmark"></span> Saved nodes</span><span id="bookmark-count">0</span></button><div id="bookmark-list" hidden></div></section>
+      <div class="sidebar-footer"><span class="status-dot"></span><span id="snapshot-status">Source data loading</span><button class="icon-button" id="reload-button" aria-label="Reload source data"><span class="icon" data-icon="refresh"></span></button></div>
+    </aside>
+    <main id="main" tabindex="-1">
+      <p class="source-note" id="profile-note" role="status">Reading the selected source profile.</p>
+      <div class="page-header"><div><h1 id="view-title">Theory map</h1><p id="view-description"></p></div><button id="export-button" class="button secondary">Export selection</button></div>
+      <section class="metrics" id="metrics" aria-label="Collection counts"></section>
+      <div class="workspace-nav"><nav class="tabs" aria-label="Explorer views"><button class="tab active" data-view="theories" aria-current="page">Theory map</button><button class="tab" data-view="graph">Proof graph</button><button class="tab" data-view="outline">Paper walkthrough</button><button class="tab" data-view="results">Results & declarations</button><button class="tab" data-view="files">Source files</button><button class="tab" data-view="coverage">Coverage & evidence</button></nav><label class="search-input global-search"><span class="icon" data-icon="search"></span><input id="global-search" type="search" placeholder="Search names, statements, paths" aria-label="Search names, statements, paths"><kbd>/</kbd></label></div>
+      <div id="error-banner" class="error-banner" role="alert" hidden></div>
+      <section id="graph-view" class="workspace-card">
+        <div class="graph-toolbar"><div class="segmented" aria-label="Graph level"><button data-level="paper" class="active" aria-pressed="true">Papers</button><button data-level="module" aria-pressed="false">Lean files</button><button data-level="declaration" aria-pressed="false">Declarations</button></div><div class="graph-toolbar-end"><label class="inline-select"><span class="icon" data-icon="layout"></span><select id="graph-layout" aria-label="Graph layout"><option value="force">Network</option><option value="hierarchical">Hierarchy</option><option value="radial">Radial</option></select></label><button id="edge-filter-toggle" class="button quiet" aria-expanded="false"><span class="icon" data-icon="filter"></span> Links <span id="edge-filter-count"></span></button><button id="graph-list-toggle" class="icon-button" aria-label="Show graph as a list" aria-pressed="false"><span class="icon" data-icon="list"></span></button></div></div>
+        <div id="edge-filter-panel" class="edge-filter-panel" hidden></div>
+        <div id="focus-bar" class="focus-bar" hidden><span>Focused on <strong id="focus-name"></strong></span><label>Reach <select id="graph-depth"><option value="1">1 step</option><option value="2">2 steps</option><option value="3">3 steps</option></select></label><select id="graph-direction" aria-label="Focus direction"><option value="both">Both directions</option><option value="out">Dependencies</option><option value="in">Dependents</option></select><button id="clear-focus" class="text-button">Clear focus <span aria-hidden="true">×</span></button></div>
+        <div class="graph-stage" id="graph-stage"><canvas id="proof-canvas" tabindex="0" aria-describedby="graph-summary" aria-label="Proof graph. Tab reaches the node list; arrow keys pan and plus or minus zoom."></canvas><div class="graph-stage-label"><span class="eyebrow" id="graph-stage-title">PAPER CONNECTIONS</span><span id="graph-stage-subtitle">Shared source records</span></div><div class="graph-empty" id="graph-empty" hidden></div><div class="graph-loading" id="graph-loading"><span class="loader"></span><span>Drawing the source connections</span></div><div id="graph-tooltip" class="graph-tooltip" hidden></div><div class="graph-controls"><button id="zoom-in" class="icon-button" aria-label="Zoom in"><span class="icon" data-icon="plus"></span></button><button id="zoom-out" class="icon-button" aria-label="Zoom out"><span class="icon" data-icon="minus"></span></button><span class="control-divider"></span><button id="fit-graph" class="icon-button" aria-label="Fit graph to view"><span class="icon" data-icon="fit"></span></button><button id="fullscreen-graph" class="icon-button" aria-label="Expand graph"><span class="icon" data-icon="expand"></span></button></div><div class="graph-caption">Drag to pan · Scroll to zoom · Select a node to inspect</div></div>
+        <div id="graph-node-list" class="graph-node-list" hidden></div>
+        <div class="graph-footer"><div class="legend"><span><i class="legend-dot paper-dot"></i> Paper</span><span><i class="legend-dot lean-dot"></i> Lean declaration</span><span><i class="legend-dot" style="background:#4e8290"></i> Source file</span><span><i class="legend-dot result-dot"></i> Paper result</span><span><i class="legend-line"></i> Source or dependency link</span></div><label class="inline-select">Visible limit <select id="graph-limit" aria-label="Visible node limit"><option>120</option><option selected>240</option><option>600</option><option>1200</option><option>3000</option></select></label></div>
+        <div id="graph-summary" class="graph-summary" role="status"></div>
+      </section>
+      <section id="theories-view" class="workspace-card"></section><section id="outline-view" class="workspace-card" hidden></section>
+      <section id="results-view" class="workspace-card" hidden><div class="table-toolbar"><div><h2>Results & declarations</h2><p>Paper results and Lean declarations of the index.</p></div><div class="table-filters"><select id="result-kind" aria-label="Record kind"><option value="">All kinds</option><option value="theorem">Theorems</option><option value="lemma">Lemmas</option><option value="def">Definitions</option><option value="paper_result">Paper results</option><option value="structure">Structures</option><option value="instance">Instances</option></select><select id="result-status" aria-label="Proof evidence"><option value="">All evidence</option><option value="lean-baseline">Lean: baseline axioms only</option><option value="lean-flagged">Lean: axioms beyond the baseline</option><option value="recorded-baseline">Recorded baseline axioms</option><option value="recorded-flagged">Recorded flagged axioms</option><option value="source-only">Source only</option><option value="stale-compiled">Stale compiled evidence</option><option value="has-hole">Proof hole</option><option value="index-record-only">Claim index only</option></select><label class="checkbox-label"><input id="exact-search" type="checkbox"> Exact name</label></div></div><div class="table-scroll"><table id="results-table"><thead><tr><th><button data-sort="name">Statement / declaration <span>↕</span></button></th><th><button data-sort="kind">Kind <span>↕</span></button></th><th><button data-sort="status">Evidence <span>↕</span></button></th><th>Source</th><th></th></tr></thead><tbody></tbody></table></div><div class="pagination" id="results-pagination"></div></section>
+      <section id="files-view" class="workspace-card" hidden><div class="table-toolbar"><div><h2>Source files</h2><p>Lean files, paper sources and claim indexes of the index.</p></div><span id="file-list-count" class="count-label"></span></div><div class="table-scroll"><table id="files-table"><thead><tr><th><button data-file-sort="path">File / module <span>↕</span></button></th><th>Kind</th><th><button data-file-sort="declarationCount">Declarations <span>↕</span></button></th><th>Lines</th><th></th></tr></thead><tbody></tbody></table></div><div class="pagination" id="files-pagination"></div></section>
+      <section id="coverage-view" hidden></section>
+      <section class="evidence-strip"><div><strong id="evidence-label">Proof status</strong><p id="evidence-description">A source link identifies a record. A proof status rests on the Lean axiom run and its stated assumptions.</p></div><button id="evidence-view-button" class="text-button">Coverage and evidence</button></section>
+      <footer class="main-footer"><span>The Boundary Atlas</span><span id="build-date">Generated from repository sources</span></footer>
+    </main>
+  </div>
+  <div id="detail-backdrop" class="detail-backdrop" hidden></div><aside id="detail-panel" class="detail-panel" aria-label="Selected record" aria-modal="true" role="dialog" hidden></aside>
+  <dialog id="guide-dialog"><div class="dialog-header"><span></span><button class="icon-button" id="close-guide" aria-label="Close reading guide"><span class="icon" data-icon="close"></span></button></div><h2>Reading guide</h2><p>The graph joins papers, source files, and statements. Each link carries its own kind of evidence.</p><div class="guide-grid"><section><h3>Paper selection</h3><p>The left column selects one paper or any group. “Shared by all” shows the overlap of the selected scopes.</p></section><section><h3>Links</h3><p>A dependency arrow points from a declaration to the declaration it uses. A paper link can report a source citation, a shared scope, or a recorded claim.</p></section><section><h3>Records</h3><p>The detail panel shows exact source text, recorded types and axioms, and any source drift. Recorded evidence is distinct from a fresh proof check.</p></section><section><h3>Visible limit</h3><p>The graph limits the number of visible nodes for speed. Search, source files, and exported records retain the full selected collection.</p></section></div><div class="guide-keys"><span><kbd>/</kbd> Search</span><span><kbd>Esc</kbd> Close details</span><span><kbd>+</kbd> / <kbd>−</kbd> Zoom</span><span><kbd>F</kbd> Fit graph</span></div></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>

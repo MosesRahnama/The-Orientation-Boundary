@@ -1,5 +1,7 @@
 # The Orientation Boundary
 
+**Interactive Proof Explorer.** The research program's Interactive Proof Explorer can be found here, at [mosesrahnama.github.io/The-Orientation-Boundary](https://mosesrahnama.github.io/The-Orientation-Boundary/).
+
 Research papers by Moses Rahnama, with Lean 4 proofs and benchmark sessions, data and code.
 
 ## Papers
